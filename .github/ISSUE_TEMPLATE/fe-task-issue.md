@@ -1,7 +1,7 @@
 ---
 name: FE Task Issue
 about: Task Issue
-title: "[FE/Task] "
+title: "[FE/TASK] "
 labels: ''
 assignees: ''
 
