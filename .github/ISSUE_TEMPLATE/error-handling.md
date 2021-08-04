@@ -2,7 +2,7 @@
 name: Error Handling
 about: Error Handling
 title: "[ERROR LOG] "
-labels: ''
+labels: Error
 assignees: ''
 
 ---

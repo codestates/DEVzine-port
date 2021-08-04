@@ -2,7 +2,7 @@
 name: KPT
 about: 'Keep(잘한 점), Problem(개선할 점), Try(앞으로 진행할 점) '
 title: "[KPT] n주차 n요일"
-labels: ''
+labels: KPT
 assignees: ''
 
 ---

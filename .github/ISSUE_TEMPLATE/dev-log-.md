@@ -2,7 +2,7 @@
 name: 'DEV LOG '
 about: DEV LOG
 title: "[DEV LOG] "
-labels: ''
+labels: Dev-log
 assignees: ''
 
 ---
