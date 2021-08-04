@@ -1,6 +1,8 @@
 # 📰 DEVzine:port
 > 개발하는 당신을 위한 얕고 넓은 지식, DEVzine:port 입니다.
 
+>client : https://www.devzine-port.com/  
+>server : https://devzine-port-server.com/
 # 👤 Team
 <table>
     <tr>
