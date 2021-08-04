@@ -1,0 +1,11 @@
+.container {
+  color: black;
+
+  @include responsive(T) {
+    color: red;
+    font-size: 16px;
+  }
+  @include responsive(D) {
+    color: white;
+  }
+}
