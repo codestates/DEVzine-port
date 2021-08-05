@@ -12,21 +12,19 @@ module.exports = {
 			if (err) return res.status(500).send(err);
 			return res.status(200).send(testInfo);
 		});
-		// Test.create(
-		// 	{ name: 'test name', nickname: 'test nickname' },
-		// 	(err, test) => {
-		// 		if (err) {
-		// 			return res.status(500).send(err)
-		// 		} else {
-		// 			return res.status(200).send('yes ok!')
-		// 		}
-		// 	}
-		// )
-
-
-	// 	res.status(200).json({
-	// 		message: 'Hell Ogu!'
-	// 	});
-
+		
+		// TODO: 등록된 회원수와 구독자수를 가져온다. 
+		// status 200: 
+		// {
+		// 	"data": 
+		// 		{
+		// 			"total_subscribers" : number,
+		// 		},
+		// 	"message" : "Subscribers successfully found"
+		// }
+		// status 404:
+		// {
+		// 	"message": "Not Found"
+		// } 
 	}
 };

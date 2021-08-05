@@ -1,19 +1,35 @@
+const { stream } = require('./config/winston');
 const fs = require('fs');
 const https = require('https');
+const mongoose = require("mongoose");
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const morgan = require('morgan');
-const { stream } = require('./config/winston');
-const mongoose = require("mongoose");
-
 const app = express();
-
-const testRouter = require('./router/testRouter');
-
 require('dotenv').config();
 
+const testRouter = require('./router/testRouter');
+const articleListRouter = require('./router/articleListRouter');
+const articleRouter = require('./router/articleRouter');
+const contributionRouter = require('./router/testRouter');
+const myPageRouter = require('./router/myPageRouter');
+const signInRouter = require('./router/signInRouter');
+const signOutRouter = require('./router/signOutRouter');
+const signUpRouter = require('./router/signUpRouter');
+const subscribeRouter = require('./router/subscribeRouter');
+const visualRouter = require('./router/visualRouter');
+
 app.use('/', testRouter);
+app.use('/articlelist', articleListRouter);
+app.use('/article', articleRouter);
+app.use('/contribution', contributionRouter);
+app.use('/mypage', myPageRouter);
+app.use('/signin', signInRouter);
+app.use('/signout', signOutRouter);
+app.use('/signup', signUpRouter);
+app.use('/subscribe', subscribeRouter);
+app.use('/visual', visualRouter);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -39,9 +55,7 @@ mongoose
   .catch((err) => console.error(err));
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 80;
-
 let server;
-
 if (fs.existsSync('./key.pem') && fs.existsSync('./cert.pem')) {
   const privateKey = fs.readFileSync(__dirname + '/key.pem', 'utf8');
   const certificate = fs.readFileSync(__dirname + '/cert.pem', 'utf8');
