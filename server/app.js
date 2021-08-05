@@ -6,6 +6,9 @@ const express = require('express');
 const morgan = require('morgan');
 const { stream } = require('./config/winston');
 const mongoose = require("mongoose");
+const session = require('express-session');
+const passport = require('passport');
+const passportConfig = require('./config/passport');
 
 const app = express();
 
@@ -14,6 +17,11 @@ const testRouter = require('./router/testRouter');
 require('dotenv').config();
 
 app.use('/', testRouter);
+
+app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+passportConfig();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
