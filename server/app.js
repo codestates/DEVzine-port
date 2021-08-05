@@ -64,6 +64,14 @@ mongoose
   .then(() => console.log(`mongoDB connected`))
   .catch((err) => console.error(err));
 
+// test zone
+app.post('/testlogin', passport.authenticate('local', {
+  failureRedirect: '/'
+}), (req, res) => {
+  res.send({ message: "success" });
+});
+// test zone
+
 const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 let server;
 if (fs.existsSync('./key.pem') && fs.existsSync('./cert.pem')) {
