@@ -7,6 +7,9 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
+const session = require('express-session');
+const passport = require('passport');
+const passportConfig = require('./config/passport');
 require('dotenv').config();
 
 const testRouter = require('./router/server_test/testRouter');
@@ -33,6 +36,10 @@ app.use('/signup', signUpRouter);
 app.use('/subscribe', subscribeRouter);
 app.use('/visual', visualRouter);
 
+app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: false }));
+app.use(passport.initialize()); // passport 미들웨어
+app.use(passport.session()); // session 사용할 수 있도록 하는 미들웨어
+passportConfig();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -56,6 +63,14 @@ mongoose
   })
   .then(() => console.log(`mongoDB connected`))
   .catch((err) => console.error(err));
+
+// test zone
+app.post('/testlogin', passport.authenticate('local', {
+  failureRedirect: '/'
+}), (req, res) => {
+  res.send({ message: "success" });
+});
+// test zone
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 let server;
