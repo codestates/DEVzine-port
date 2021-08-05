@@ -51,11 +51,5 @@ module.exports = {
 			console.log(err);
 			return res.status(500).send(err);
 		}
-		
-		// test.save((err, testInfo) => {
-		// 	if (err) return res.status(500).send(err);
-		// 	return res.status(200).json({"data": testInfo, "message": ""});
-		// });
-		
 	}
 };

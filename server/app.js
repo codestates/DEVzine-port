@@ -10,6 +10,10 @@ const app = express();
 require('dotenv').config();
 
 const testRouter = require('./router/server_test/testRouter');
+const { insertSeedData } = require('./seed/insertSeedData');
+app.use('/', testRouter);
+app.use('/seed', insertSeedData);
+
 const articleListRouter = require('./router/articleListRouter');
 const articleRouter = require('./router/articleRouter');
 const contributionRouter = require('./router/contributionRouter');
@@ -20,8 +24,6 @@ const signOutRouter = require('./router/signOutRouter');
 const signUpRouter = require('./router/signUpRouter');
 const subscribeRouter = require('./router/subscribeRouter');
 const visualRouter = require('./router/visualRouter');
-
-app.use('/', testRouter);
 app.use('/articlelist', articleListRouter);
 app.use('/article', articleRouter);
 app.use('/contribution', contributionRouter);
