@@ -43,6 +43,7 @@ articleSchema.plugin(
     {
         model : 'articles',
         field : 'article_id',
+        startAt: 1,
         increment : 1 
     });
 const Article = mongoose.model("articles", articleSchema);
