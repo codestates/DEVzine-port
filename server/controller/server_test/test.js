@@ -45,7 +45,7 @@ module.exports = {
 			// await newArticle.save();
 			// await newTest.save();
 
-			await Article.create(seedArticles)
+			// await Article.create(seedArticles)
 
 			return res.status(200).send('please')
 			// return res.status(200).json({"message": "db successfully connected!", "data" : {
