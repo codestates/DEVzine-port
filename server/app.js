@@ -9,7 +9,6 @@ const morgan = require('morgan');
 const app = express();
 require('dotenv').config();
 
-app.get('/', (req, res) => res.send('ok'));
 const testRouter = require('./router/server_test/testRouter');
 const { insertSeedData } = require('./seed/insertSeedData');
 app.use('/test', testRouter);

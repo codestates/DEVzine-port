@@ -1,5 +1,5 @@
-// const { Article } = require('../models/Articles');
-// const { seedArticles } = require('./seed-articles');
+const { Article } = require('../models/Articles');
+const { seedArticles } = require('./seed-articles');
 const { Contribution } = require('../models/Contributions');
 const { seedContributions } = require('./seed-contributions');
 const { Subscriber } = require('../models/Subscribers');
@@ -11,7 +11,7 @@ module.exports = {
 
     insertSeedData :  async (req, res) => {
         try{
-            // await Article.create(seedArticles);
+            await Article.create(seedArticles);
             await Contribution.create(seedContributions);
             await Subscriber.create(seedSubscribers);
             await User.create(seedUsers);
