@@ -9,11 +9,6 @@ const morgan = require('morgan');
 const app = express();
 require('dotenv').config();
 
-<<<<<<< HEAD
-const testRouter = require('./router/server_test/testRouter');
-const { insertSeedData } = require('./seed/insertSeedData');
-app.use('/test', testRouter);
-=======
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -31,7 +26,6 @@ app.get('/', (req, res) => {
 });
 
 const { insertSeedData } = require('./seeds/insertSeedData');
->>>>>>> a24ac6ad04013defd1a1934ff0deebf78d3983c6
 app.use('/seed', insertSeedData);
 
 const articleListRouter = require('./router/articleListRouter');
