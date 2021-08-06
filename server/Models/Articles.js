@@ -1,16 +1,52 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
+// let autoIncrement = require('mongoose-auto-increment');
+// autoIncrement.initialize(mongoose.connection);
 
-const articleSchema = mongoose.Schema({
-    // article_id
-    // article_title
-    // article_content
-    // article_date
-    // article_keyword
-    // article_url
-    // publishment
-    // hit
-});
+// const articleSchema = mongoose.Schema({
+//     article_id : {
+//         type: Number
+//     },
+//     article_title : {
+//         type: String,
+//         required: true,
+//         unique: true,
+//         trim: true
+//     },
+//     article_content : {
+//         type: String,
+//         required: true,
+//         trim: true
+//     },
+//     article_date : {
+//         type: Date,
+//         required: true,
+//         default: Date.now()
+//     },
+//     article_keyword : {
+//         type: String,
+//         required: true
+//     },
+//     article_url : {
+//         type: String,
+//         required: true,
+//         unique: true
+//     },
+//     hit : {
+//         type: Number,
+//         default: 0
+//     }
+    
+// });
 
-const Articles = mongoose.model("articles", articleSchema);
+// articleSchema.plugin(
+//     autoIncrement.plugin,
+//     {
+//         model : 'articles',
+//         field : 'article_id',
+//         startAt: 1,
+//         increment : 1 
+//     });
+// const Article = mongoose.model("articles", articleSchema);
 
-module.exports = { Articles };
+// module.exports = { Article };
+
