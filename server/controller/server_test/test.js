@@ -9,47 +9,53 @@ module.exports = {
 	test: async (req, res) => {
 
 		try {
+			return res.send('ok')
+			// const randomText = 'Random text ' + Math.random();
+			// let newContribution = new Contribution({
+			// 	contribution_keyword: 'test',
+			// 	contribution_title: randomText,
+			// 	contribution_url: randomText,
+			// 	contribution_content: 'test'
+			// })
+			// let newSubscriber = new Subscriber({
+			// 	subscriber_email: randomText,
+			// })
+			// let newUser = new User({
+			// 	user_email: randomText,
+			// 	user_password: 'password',
+			// 	user_name: randomText,
+			// 	user_gender: 'Female',
+			// 	user_age: 26,
+			// 	user_position: 'Backend',
+			// 	user_language: ['Nodejs', 'Python']
+			// })
+			// let newArticle = new Article({
+			// 	article_title: randomText,
+			// 	article_content: 'test',
+			// 	article_date: Date.now(),
+			// 	article_keyword: 'coding',
+			// 	article_url: randomText
+			// });
+			// let newTest = new Test();
 
-			const randomText = 'Random text ' + Math.random();
-			let newContribution = new Contribution({
-				contribution_keyword: 'test',
-				contribution_title: randomText,
-				contribution_url: randomText,
-				contribution_content: 'test'
-			})
-			let newSubscriber = new Subscriber({
-				subscriber_email: randomText,
-			})
-			let newUser = new User({
-				user_email: randomText,
-				user_password: 'password',
-				user_name: randomText,
-				user_gender: 'Female',
-				user_age: 26,
-				user_position: 'Backend',
-				user_language: ['Nodejs', 'Python']
-			})
-			let newArticle = new Article({
-				article_title: randomText,
-				article_content: 'test',
-				article_date: Date.now(),
-				article_keyword: 'coding',
-				article_url: randomText
-			});
-			let newTest = new Test();
+			// await newContribution.save();
+			// await newSubscriber.save();
+			// await newUser.save();
+			// await newArticle.save();
+			// await newTest.save();
 
-			await newContribution.save();
-			await newSubscriber.save();
-			await newUser.save();
-			await newArticle.save();
-			await newTest.save();
-
-			return res.status(200).json({"message": "db successfully connected!", "data" : {
-				newTest, newArticle, newUser, newSubscriber, newContribution
-			}});
+			// return res.status(200).json({"message": "db successfully connected!", "data" : {
+			// 	newTest, newArticle, newUser, newSubscriber, newContribution
+			// }});
 		} catch (err) {
 			console.log(err);
 			return res.status(500).send(err);
 		}
+		
+		// test.save((err, testInfo) => {
+		// 	if (err) return res.status(500).send(err);
+		// 	return res.status(200).json({"data": testInfo, "message": ""});
+		// });
+		
 	}
 };

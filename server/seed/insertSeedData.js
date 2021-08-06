@@ -11,10 +11,10 @@ module.exports = {
 
     insertSeedData :  async (req, res) => {
         try{
-            await Article.create(seedArticles);
-            await Contribution.create(seedContributions);
-            await Subscriber.create(seedSubscribers);
-            await User.create(seedUsers);
+            // await Article.create(seedArticles);
+            // await Contribution.create(seedContributions);
+            // await Subscriber.create(seedSubscribers);
+            // await User.create(seedUsers);
             res.json({"message" : "Seed success"});
         } catch(err){
             res.json(err);
