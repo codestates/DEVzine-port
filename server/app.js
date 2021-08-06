@@ -9,9 +9,29 @@ const morgan = require('morgan');
 const app = express();
 require('dotenv').config();
 
+<<<<<<< HEAD
 const testRouter = require('./router/server_test/testRouter');
 const { insertSeedData } = require('./seed/insertSeedData');
 app.use('/test', testRouter);
+=======
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(morgan('combined', { stream }));
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+    methods: ['GET', 'POST', 'PATCH', 'OPTIONS'],
+  })
+);
+
+app.get('/', (req, res) => {
+  res.status(200).json({"message": "server & db connected"})
+});
+
+const { insertSeedData } = require('./seeds/insertSeedData');
+>>>>>>> a24ac6ad04013defd1a1934ff0deebf78d3983c6
 app.use('/seed', insertSeedData);
 
 const articleListRouter = require('./router/articleListRouter');
@@ -34,18 +54,6 @@ app.use('/signout', signOutRouter);
 app.use('/signup', signUpRouter);
 app.use('/subscribe', subscribeRouter);
 app.use('/visual', visualRouter);
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(morgan('combined', { stream }));
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-    methods: ['GET', 'POST', 'PATCH', 'OPTIONS'],
-  })
-);
 
 mongoose
   .connect(process.env.MONGO_STRING, {
