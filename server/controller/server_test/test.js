@@ -36,13 +36,13 @@ module.exports = {
 			// 	article_keyword: 'coding',
 			// 	article_url: randomText
 			// });
-			let newTest = new Test();
+			// let newTest = new Test();
 
 			// await newContribution.save();
 			// await newSubscriber.save();
 			// await newUser.save();
 			// await newArticle.save();
-			await newTest.save();
+			// await newTest.save();
 			return res.send('ok')
 			// return res.status(200).json({"message": "db successfully connected!", "data" : {
 			// 	newTest, newArticle, newUser, newSubscriber, newContribution
