@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
 // const subscriberSchema = mongoose.Schema({
 //     subscriber_email : {

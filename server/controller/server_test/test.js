@@ -1,15 +1,15 @@
 const { Test } = require('../../models/db_test/Test')
-const { Contribution } = require('../../models/Contributions')
-const { Subscriber } = require('../../models/Subscribers')
-const { User } = require('../../models/Users')
-const { Article } = require('../../models/Articles')
+// const { Contribution } = require('../../models/Contributions')
+// const { Subscriber } = require('../../models/Subscribers')
+// const { User } = require('../../models/Users')
+// const { Article } = require('../../models/Articles')
 
 module.exports = {
 
 	test: async (req, res) => {
 
 		try {
-			return res.send('ok')
+
 			// const randomText = 'Random text ' + Math.random();
 			// let newContribution = new Contribution({
 			// 	contribution_keyword: 'test',
@@ -36,26 +36,20 @@ module.exports = {
 			// 	article_keyword: 'coding',
 			// 	article_url: randomText
 			// });
-			// let newTest = new Test();
+			let newTest = new Test();
 
 			// await newContribution.save();
 			// await newSubscriber.save();
 			// await newUser.save();
 			// await newArticle.save();
-			// await newTest.save();
-
+			await newTest.save();
+			return res.send('ok')
 			// return res.status(200).json({"message": "db successfully connected!", "data" : {
 			// 	newTest, newArticle, newUser, newSubscriber, newContribution
 			// }});
 		} catch (err) {
 			console.log(err);
 			return res.status(500).send(err);
-		}
-		
-		// test.save((err, testInfo) => {
-		// 	if (err) return res.status(500).send(err);
-		// 	return res.status(200).json({"data": testInfo, "message": ""});
-		// });
-		
+		}	
 	}
 };

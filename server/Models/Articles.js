@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-let autoIncrement = require('mongoose-auto-increment');
+// const mongoose = require("mongoose");
+// let autoIncrement = require('mongoose-auto-increment');
 // autoIncrement.initialize(mongoose.connection);
 
 // const articleSchema = mongoose.Schema({
