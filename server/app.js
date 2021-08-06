@@ -36,7 +36,12 @@ app.use('/signup', signUpRouter);
 app.use('/subscribe', subscribeRouter);
 app.use('/visual', visualRouter);
 
-app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: false }));
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  // store: ?
+}));
 app.use(passport.initialize()); // passport 미들웨어
 app.use(passport.session()); // session 사용할 수 있도록 하는 미들웨어
 passportConfig();
@@ -65,10 +70,46 @@ mongoose
   .catch((err) => console.error(err));
 
 // test zone
-app.post('/testlogin', passport.authenticate('local', {
-  failureRedirect: '/'
-}), (req, res) => {
-  res.send({ message: "success" });
+// app.post('/testlogin',
+//   passport.authenticate('local', {
+//     successRedirect: '/',
+//     failureRedirect: '/testlogin'
+// }));
+app.post('/testlogin', passport.authenticate('local'), function(req, res) {
+  res.status(200).send('success');
+});
+
+app.get('/testauth', isAuthenticated, function(req, res) {
+	// let user = req.user;
+	// if (user) {
+		res.send(`user: ${req.user}`);
+	// }
+	// else {
+	// 	res.send('not authenticated');
+	// }
+});
+
+// 인증 확인 미들웨어
+function isAuthenticated(req, res, next) {
+  // req.isAuthenticated()
+  // 서버에 요청을 보낸 사용자가 인증이 되어있는 상태인지 확인하여 boolean 값 반환
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  return res.send('fail');
+}
+
+app.get('/testlogout', function(req, res) {
+  req.logout();
+  // 1. 로그 아웃 후 현재 세션을 삭제한 뒤 비동기 처리
+  // req.session.destroy(function(err) {
+  //   res.send('log out');
+  // });
+  // 2. 로그 아웃 후 현재 세션을 저장한 뒤 비동기 처리
+  // req.session.save(function () {
+  //   res.send('log out');
+  // });
+  res.send('log out');
 });
 // test zone
 
