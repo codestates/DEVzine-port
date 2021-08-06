@@ -10,7 +10,7 @@ module.exports = {
 
 		try {
 
-			// const randomText = 'Random text ' + Math.random();
+			const randomText = 'Random text ' + Math.random();
 			// let newContribution = new Contribution({
 			// 	contribution_keyword: 'test',
 			// 	contribution_title: randomText,
@@ -43,6 +43,13 @@ module.exports = {
 			// await newUser.save();
 			await newArticle.save();
 			// await newTest.save();
+			// await Article.create({
+			// 		article_title: randomText,
+			// 		article_content: 'test',
+			// 		article_date: Date.now(),
+			// 		article_keyword: 'coding',
+			// 		article_url: randomText
+			// 	}
 			return res.status(200).send('please')
 			// return res.status(200).json({"message": "db successfully connected!", "data" : {
 			// 	newTest, newArticle, newUser, newSubscriber, newContribution
