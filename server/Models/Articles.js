@@ -4,8 +4,7 @@ autoIncrement.initialize(mongoose.connection);
 
 const articleSchema = mongoose.Schema({
     article_id : {
-        type: Number,
-        default: 0
+        type: Number
     },
     article_title : {
         type: String,
@@ -20,7 +19,8 @@ const articleSchema = mongoose.Schema({
     },
     article_date : {
         type: Date,
-        required: true
+        required: true,
+        default: Date.now()
     },
     article_keyword : {
         type: String,
@@ -43,7 +43,7 @@ articleSchema.plugin(
     {
         model : 'articles',
         field : 'article_id',
-        startAt : 0, 
+        startAt: 1,
         increment : 1 
     });
 const Article = mongoose.model("articles", articleSchema);
