@@ -3,6 +3,7 @@
 // const { Subscriber } = require('../../models/Subscribers')
 // const { User } = require('../../models/Users')
 const { Article } = require('../../models/Articles')
+const { seedArticles } = require('../../seed/seed-articles')
 
 module.exports = {
 
@@ -43,20 +44,8 @@ module.exports = {
 			// await newUser.save();
 			// await newArticle.save();
 			// await newTest.save();
-			const dummy = [{
-				article_title: randomText,
-				article_content: 'test',
-				article_date: Date.now(),
-				article_keyword: 'coding',
-				article_url: randomText
-			}, {
-				article_title: 'please',
-				article_content: 'test',
-				article_date: Date.now(),
-				article_keyword: 'coding',
-				article_url: 'please'
-			}]
-			await Article.create(dummy)
+
+			await Article.create(seedArticles)
 
 			return res.status(200).send('please')
 			// return res.status(200).json({"message": "db successfully connected!", "data" : {
