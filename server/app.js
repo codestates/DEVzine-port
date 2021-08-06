@@ -9,9 +9,10 @@ const morgan = require('morgan');
 const app = express();
 require('dotenv').config();
 
+app.get('/', (req, res) => res.send('ok'));
 const testRouter = require('./router/server_test/testRouter');
 const { insertSeedData } = require('./seed/insertSeedData');
-app.use('/', testRouter);
+app.use('/test', testRouter);
 app.use('/seed', insertSeedData);
 
 const articleListRouter = require('./router/articleListRouter');
