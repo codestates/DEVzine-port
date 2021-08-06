@@ -43,7 +43,7 @@ module.exports = {
 			// await newUser.save();
 			// await newArticle.save();
 			// await newTest.save();
-			return res.status(200).send('ok2')
+			return res.status(200).send('ok3')
 			// return res.status(200).json({"message": "db successfully connected!", "data" : {
 			// 	newTest, newArticle, newUser, newSubscriber, newContribution
 			// }});
