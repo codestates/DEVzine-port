@@ -10,7 +10,7 @@ const dummyUser = {
 
 module.exports = () => {
 
-	// 로그인을 성공했을 때 딱 한 번 callback 함수가 실행
+	// 로그인을 성공했을 때 x딱 한 번 callback 함수가 실행
 	// 앞서 로그인 성공한 경우에 전달 받은 done 객체를 받아 세션(req.session.passport.user)에 id만 저장(세션 용량 조절)
 	passport.serializeUser((user, done) => {
 		done(null, user._id);
