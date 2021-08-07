@@ -7,6 +7,9 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
+const session = require('express-session');
+const passport = require('passport');
+const passportConfig = require('./config/passport');
 require('dotenv').config();
 
 app.use(express.json());
