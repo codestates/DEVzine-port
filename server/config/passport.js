@@ -2,12 +2,6 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const { User } = require('../models/Users');
 
-const dummyUser = {
-	user_name: 'test',
-	user_password: 'qwer1234',
-	user_email: 'test@test.com'
-}
-
 module.exports = () => {
 
 	// 로그인을 성공했을 때 x딱 한 번 callback 함수가 실행
