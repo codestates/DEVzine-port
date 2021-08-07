@@ -22,7 +22,7 @@ app.use(
 );
 
 app.get('/', (req, res) => {
-  res.status(200).json({"message": "server & db connected"})
+  res.status(200).json({"message": "server & db connected!"})
 });
 
 const { insertSeedData } = require('./seeds/insertSeedData');
