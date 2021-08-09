@@ -46,20 +46,16 @@ const articleRouter = require('./router/articleRouter');
 const contributionRouter = require('./router/contributionRouter');
 const landingRouter = require('./router/landingRouter');
 const myPageRouter = require('./router/myPageRouter');
-const signInRouter = require('./router/signInRouter');
-const signOutRouter = require('./router/signOutRouter');
-const signUpRouter = require('./router/signUpRouter');
 const subscribeRouter = require('./router/subscribeRouter');
+const usersRouter = require('./router/usersRouter');
 const visualRouter = require('./router/visualRouter');
 app.use('/articlelist', articleListRouter);
 app.use('/article', articleRouter);
 app.use('/contribution', contributionRouter);
 app.use('/landing', landingRouter);
 app.use('/mypage', myPageRouter);
-app.use('/signin', signInRouter);
-app.use('/signout', signOutRouter);
-app.use('/signup', signUpRouter);
 app.use('/subscribe', subscribeRouter);
+app.use('/users', usersRouter);
 app.use('/visual', visualRouter);
 
 mongoose
