@@ -81,5 +81,24 @@ module.exports = {
         
         return res.send('signIn');
 
-	}
+	},
+
+    deleteUser: async (req, res) => {
+        // TODO: 사용자가 회원 탈퇴한다. 
+        // status: 204
+        // {
+        //     "message": "User deleted"
+        // }
+        // status:400
+        // {
+        //     "message": "Invalid user"
+        // }
+        // status:404
+        // {
+        //     "message": "Not found"
+        // 
+        // status:500
+
+        return res.send('delete user');
+    }
 };
