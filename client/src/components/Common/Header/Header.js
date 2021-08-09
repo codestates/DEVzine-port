@@ -9,7 +9,7 @@ function Header() {
   const [signIn, setSignIn] = useState(false);
 
   useEffect(() => {
-    if (store.getState().user.signinSuccess !== undefined) {
+    if (store.getState().user.signinSuccess === 'Login success') {
       setSignIn(true);
     } else return setSignIn(false);
   });
