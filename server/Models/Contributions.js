@@ -54,4 +54,3 @@ contributionSchema.plugin(
 const Contribution = mongoose.model("contributions", contributionSchema);
 
 module.exports = { Contribution };
-

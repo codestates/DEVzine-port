@@ -21,4 +21,3 @@ const emailSchema = mongoose.Schema({
 const Email = mongoose.model("emails", emailSchema);
 
 module.exports = { Email };
-

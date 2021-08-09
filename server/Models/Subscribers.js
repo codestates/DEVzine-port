@@ -11,4 +11,3 @@ const subscriberSchema = mongoose.Schema({
 const Subscriber = mongoose.model("subscribers", subscriberSchema);
 
 module.exports = { Subscriber };
-

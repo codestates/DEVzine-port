@@ -51,4 +51,3 @@ articleSchema.plugin(
 const Article = mongoose.model("articles", articleSchema);
 
 module.exports = { Article };
-
