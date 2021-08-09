@@ -9,4 +9,8 @@
 
 @import './layouts/grids';
 
-@import '../components/Landing/style';
+@import '../components/Landing/landingwrapper';
+@import '../components/Common/Header/header';
+@import '../components/Common/SignInModal/signinmodal';
+@import '../components/SignUp/signupwrapper';
+@import '../components/ArticleList/articlelistwrapper';

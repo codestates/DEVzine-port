@@ -12,6 +12,17 @@ const { VerifiedEmail } = require('../Models/VerifiedEmails');
 const { seedVerifiedEmails } = require('./seed-verifiedemails');
 
 module.exports = {
+<<<<<<< HEAD
+  insertSeedData: async (req, res) => {
+    try {
+      await Article.create(seedArticles);
+      await Contribution.create(seedContributions);
+      await Subscriber.create(seedSubscribers);
+      await User.create(seedUsers);
+      res.json({ message: 'Seed success' });
+    } catch (err) {
+      res.json(err);
+=======
 
     insertSeedData :  async (req, res) => {
         try{
@@ -26,6 +37,7 @@ module.exports = {
             res.json(err);
         }
 
+>>>>>>> 3204520c0db42c2af99f746dc938be5f93ffbac7
     }
-
-}
+  },
+};
