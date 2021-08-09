@@ -31,6 +31,9 @@ const articleSchema = mongoose.Schema({
         required: true,
         unique: true
     },
+    article_publisher : {
+        type: String,
+    },
     hit : {
         type: Number,
         default: 0

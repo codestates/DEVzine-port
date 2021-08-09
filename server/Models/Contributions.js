@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
+let autoIncrement = require('mongoose-auto-increment');
+autoIncrement.initialize(mongoose.connection);
 
 const contributionSchema = mongoose.Schema({
+    contribution_id : {
+        type: Number
+    },
     contribution_keyword : {
         type: String,
         required: true,
@@ -20,12 +25,32 @@ const contributionSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    contribution_date : {
+        type: Date,
+        required: true,
+    },
     status : {
         type: String,
         default: 'pending'
+    },
+    hit : {
+        type: Number,
+        default: 0
+    },
+    user_id : {
+        type: mongoose.Schema.Types.ObjectId
     }
+
 });
 
+contributionSchema.plugin(
+    autoIncrement.plugin,
+    {
+        model : 'contributions',
+        field : 'contribution_id',
+        startAt: 1,
+        increment : 1 
+    });
 const Contribution = mongoose.model("contributions", contributionSchema);
 
 module.exports = { Contribution };
