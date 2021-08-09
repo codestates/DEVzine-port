@@ -1,10 +1,10 @@
 import React from 'react';
-import LandingContent from '../components/Landing';
+import LandingWrapper from '../components/Landing/LandingWrapper';
 
 function Landing() {
   return (
     <>
-      <LandingContent />
+      <LandingWrapper />
     </>
   );
 }

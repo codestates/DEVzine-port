@@ -19,7 +19,6 @@ const articleSchema = mongoose.Schema({
     },
     article_date : {
         type: Date,
-        required: true,
         default: Date.now()
     },
     article_keyword : {
@@ -30,6 +29,9 @@ const articleSchema = mongoose.Schema({
         type: String,
         required: true,
         unique: true
+    },
+    article_publisher : {
+        type: String,
     },
     hit : {
         type: Number,

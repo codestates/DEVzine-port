@@ -419,13 +419,62 @@ ol {
         width: 1140px; } }
 
 .container {
-  color: black; }
+  color: BLACK; }
   @media screen and (min-width: 768px) {
     .container {
-      color: red;
+      color: RED;
       font-size: 16px; } }
   @media screen and (min-width: 1200px) {
     .container {
-      color: white; } }
+      color: WHITE; } }
+
+.landingbackground {
+  background-color: GREEN;
+  border-radius: 20px;
+  height: 315px;
+  margin-bottom: 36px;
+  overflow: hidden;
+  position: relative; }
+  @media screen and (min-width: 768px) {
+    .landingbackground {
+      margin-bottom: 56px; } }
+  @media screen and (min-width: 1200px) {
+    .landingbackground {
+      margin-bottom: 98px; } }
+  .landingbackground img {
+    bottom: 0;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%); }
+
+.headerlogo {
+  cursor: pointer; }
+
+.headerbutton {
+  color: RED;
+  width: 100px; }
+
+button {
+  font-weight: bold; }
+
+.signinform input {
+  border: 1px solid BLACK; }
+
+.signinform button {
+  border: 1px solid BLACK; }
+
+.signupform input {
+  border: 1px solid BLACK; }
+
+.signupform button {
+  border: 1px solid BLACK;
+  font-size: bold; }
+
+.article {
+  background-color: YELLOW;
+  border: 1px solid BLACK;
+  cursor: pointer;
+  height: 100px;
+  width: 100px; }
 
 /*# sourceMappingURL=style.css.map */
