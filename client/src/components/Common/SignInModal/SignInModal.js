@@ -27,7 +27,7 @@ function SigninModal() {
     console.log('SignInModal :', body);
 
     dispatch(signinUser(body)).then(res => {
-      if (res.payload[0] === 'Login success') {
+      if (res.payload === 'Login success') {
         window.location.href = '/';
         // history.go(-1);
       } else {
