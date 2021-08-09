@@ -27,7 +27,7 @@ const contributionSchema = mongoose.Schema({
     },
     contribution_date : {
         type: Date,
-        required: true,
+        default: Date.now()
     },
     status : {
         type: String,

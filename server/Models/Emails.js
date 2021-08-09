@@ -6,7 +6,6 @@ const emailSchema = mongoose.Schema({
     },
     email_date : {
         type: Date,
-        required: true,
         default: Date.now()
     },
     email_content : {
@@ -16,7 +15,7 @@ const emailSchema = mongoose.Schema({
         type: Number,
         default: 0
     }
-    
+
 });
 
 const Email = mongoose.model("emails", emailSchema);
