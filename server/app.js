@@ -12,9 +12,33 @@ const passport = require('passport');
 const passportConfig = require('./config/passport');
 require('dotenv').config();
 
-const testRouter = require('./router/server_test/testRouter');
-const { insertSeedData } = require('./seed/insertSeedData');
-app.use('/', testRouter);
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  // store: ?
+}));
+app.use(passport.initialize()); // passport 미들웨어
+app.use(passport.session()); // session 사용할 수 있도록 하는 미들웨어
+passportConfig();
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(morgan('combined', { stream }));
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+    methods: ['GET', 'POST', 'PATCH', 'OPTIONS'],
+  })
+);
+
+app.get('/', (req, res) => {
+  res.status(200).json({"message": "server & db connected!"})
+});
+
+const { insertSeedData } = require('./seeds/insertSeedData');
 app.use('/seed', insertSeedData);
 
 const articleListRouter = require('./router/articleListRouter');
@@ -38,27 +62,6 @@ app.use('/signup', signUpRouter);
 app.use('/subscribe', subscribeRouter);
 app.use('/visual', visualRouter);
 
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: true,
-  // store: ?
-}));
-app.use(passport.initialize()); // passport 미들웨어
-app.use(passport.session()); // session 사용할 수 있도록 하는 미들웨어
-passportConfig();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(morgan('combined', { stream }));
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-    methods: ['GET', 'POST', 'PATCH', 'OPTIONS'],
-  })
-);
-
 mongoose
   .connect(process.env.MONGO_STRING, {
     useNewUrlParser: true, // 버전 5 이상부터 적용되는 새로운 url parser 사용
@@ -66,7 +69,6 @@ mongoose
     useCreateIndex: true, // deprecated 된 ensureIndex 대신 createIndex 사용 
     useFindAndModify: false, // findOneAndRemove() 과 findOneAndUpdate() 를 분리해서 사용 
     dbName: process.env.MONGO_DATABASE, // connection string 에 있는 db 대신 다른 디폴트 db 지정 
-    autoIndex: true // 어플리케이션이 커지면 성능 저하 불러올 수 있음 
   })
   .then(() => console.log(`mongoDB connected`))
   .catch((err) => console.error(err));
