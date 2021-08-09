@@ -1,6 +1,4 @@
-const { signUp } = require('../controller/users');
-const { signOut } = require('../controller/users');
-const { signIn } = require('../controller/users');
+const { signUp, signIn, signOut } = require('../controller/user');
 const express = require('express');
 const router = express.Router();
 

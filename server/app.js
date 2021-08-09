@@ -46,14 +46,14 @@ const landingRouter = require('./router/landingRouter');
 const magazineRouter = require('./router/magazineRouter')
 const myPageRouter = require('./router/myPageRouter');
 const subscribeRouter = require('./router/subscribeRouter');
-const usersRouter = require('./router/usersRouter');
+const userRouter = require('./router/userRouter');
 const visualRouter = require('./router/visualRouter');
 app.use('/contribution', contributionRouter);
 app.use('/landing', landingRouter);
 app.use('/magazine', magazineRouter);
 app.use('/mypage', myPageRouter);
 app.use('/subscribe', subscribeRouter);
-app.use('/users', usersRouter);
+app.use('/user', userRouter);
 app.use('/visual', visualRouter);
 
 mongoose
