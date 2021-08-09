@@ -41,6 +41,7 @@ app.get('/', (req, res) => {
 const { insertSeedData } = require('./seeds/insertSeedData');
 app.use('/seed', insertSeedData);
 
+const adminRouter = require('./router/adminRouter');
 const contributionRouter = require('./router/contributionRouter');
 const landingRouter = require('./router/landingRouter');
 const magazineRouter = require('./router/magazineRouter')
@@ -48,6 +49,7 @@ const myPageRouter = require('./router/myPageRouter');
 const subscribeRouter = require('./router/subscribeRouter');
 const userRouter = require('./router/userRouter');
 const visualRouter = require('./router/visualRouter');
+app.use('/admin', adminRouter);
 app.use('/contribution', contributionRouter);
 app.use('/landing', landingRouter);
 app.use('/magazine', magazineRouter);
