@@ -8,36 +8,21 @@ const { User } = require('../Models/Users');
 const { seedUsers } = require('./seed-users');
 const { Email } = require('../Models/Emails');
 const { seedEmails } = require('./seed-emails.js');
-const { VerifiedEmail } = require('../Models/VerifiedEmails');
+const { VerifiedEmail } = require('../Models/Verifiedemails');
 const { seedVerifiedEmails } = require('./seed-verifiedemails');
 
 module.exports = {
-<<<<<<< HEAD
-  insertSeedData: async (req, res) => {
+insertSeedData: async (req, res) => {
     try {
-      await Article.create(seedArticles);
-      await Contribution.create(seedContributions);
-      await Subscriber.create(seedSubscribers);
-      await User.create(seedUsers);
-      res.json({ message: 'Seed success' });
+        await Article.create(seedArticles);
+        await Contribution.create(seedContributions);
+        await Subscriber.create(seedSubscribers);
+        await User.create(seedUsers);
+        await Email.create(seedEmails);
+        await VerifiedEmail.create(seedVerifiedEmails);
+        res.json({ message: 'Seed success' });
     } catch (err) {
-      res.json(err);
-=======
-
-    insertSeedData :  async (req, res) => {
-        try{
-            await Article.create(seedArticles);
-            await Contribution.create(seedContributions);
-            await Subscriber.create(seedSubscribers);
-            await User.create(seedUsers);
-            await Email.create(seedEmails);
-            await VerifiedEmail.create(seedVerifiedEmails);
-            res.json({"message" : "Seed success"});
-        } catch(err){
-            res.json(err);
+        res.json(err);
         }
-
->>>>>>> 3204520c0db42c2af99f746dc938be5f93ffbac7
-    }
-  },
+    },
 };
