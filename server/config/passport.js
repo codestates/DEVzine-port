@@ -1,6 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const { User } = require('../models/Users');
+const { User } = require('../Models/Users');
 
 module.exports = () => {
 
@@ -26,7 +26,6 @@ module.exports = () => {
 		passReqToCallback: false // callback req off
 	}, (username, password, done) => {
 		User.findOne({ user_email: username }, (err, user) => {
-			// console.log(user);
 			if (err) { // 에러가 발생하면 에러를 반환
 				return done(err);
 			}
@@ -34,7 +33,8 @@ module.exports = () => {
 				return done(null, false, { message: 'Incorrect username.' });
 			}
 			// ! 패스워드 비교 함수 작성 필요 지금처럼 단순 비교x
-			if (user.password !== password) { // 유저의 패스워드가 일치하지 않으면 에러를 반환
+			// console.log(user.password);
+			if (user.user_password !== password) { // 유저의 패스워드가 일치하지 않으면 에러를 반환
 				return done(null, false, { message: 'Incorrect password.' });
 			}
 			return done(null, user); // 정상적으로 세션에 저장된 유저의 정보를 반환
