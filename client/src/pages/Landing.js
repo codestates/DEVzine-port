@@ -4,10 +4,10 @@ import LandingWrapper from '../components/Landing/LandingWrapper';
 
 function Landing() {
   return (
-    <>
+    <div style={{ overflow: 'hidden' }}>
       <LandingInteraction />
       <LandingWrapper />
-    </>
+    </div>
   );
 }
 

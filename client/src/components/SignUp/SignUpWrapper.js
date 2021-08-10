@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { signupUser } from '../../_actions/user_actions';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import { checkEmail, checkPassword } from '../../utils/validation';
+
 function SignUpWrapper() {
   const dispatch = useDispatch();
 

@@ -18,7 +18,7 @@ function SubscriptionWrapper() {
     } else {
       setSignIn(false);
     }
-  });
+  }, []);
 
   function onEmailHandler(e) {
     setEmail(e.currentTarget.value);

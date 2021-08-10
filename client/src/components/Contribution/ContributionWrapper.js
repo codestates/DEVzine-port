@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import store from '../../store/store';
+import Auth from '../../hoc/auth';
 
 function ContributionWrapper() {
   const [keyword, setKeyword] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+
+  useEffect(() => {
+    Auth(true);
+  });
 
   let user_name = store.getState().user.signinSuccess[1];
 
