@@ -1,10 +1,23 @@
-.headerlogo {
-  cursor: pointer;
+.headertime {
+  background-color: BLACK;
+  color: YELLOW;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
 }
 
-.headerbutton {
-  color: RED;
-  width: 100px;
+.headernav {
+  height: 70px;
+  line-height: 70px;
+
+  .headerlogo {
+    cursor: pointer;
+  }
+
+  .headerbutton {
+    color: RED;
+    width: 100px;
+  }
 }
 
 // 버튼 확인용

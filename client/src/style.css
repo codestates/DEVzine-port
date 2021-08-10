@@ -418,23 +418,27 @@ ol {
       .container .col-lg-12 {
         width: 1140px; } }
 
+.contextarea {
+  border: 1px solid BLACK; }
+
 .container {
-  color: BLACK; }
+  color: BLACK;
+  padding-top: 120px;
+  padding-bottom: 84px; }
   @media screen and (min-width: 768px) {
     .container {
-      color: RED;
-      font-size: 16px; } }
+      margin-bottom: 64px; } }
   @media screen and (min-width: 1200px) {
     .container {
-      color: WHITE; } }
+      margin-bottom: 22px; } }
 
 .landingbackground {
   background-color: GREEN;
   border-radius: 20px;
   height: 315px;
-  margin-bottom: 36px;
   overflow: hidden;
-  position: relative; }
+  position: relative;
+  margin-bottom: 36px; }
   @media screen and (min-width: 768px) {
     .landingbackground {
       margin-bottom: 56px; } }
@@ -447,12 +451,45 @@ ol {
     position: absolute;
     transform: translateX(-50%); }
 
-.headerlogo {
-  cursor: pointer; }
+.landingContent {
+  margin-bottom: 30px;
+  text-align: center; }
+  @media screen and (min-width: 768px) {
+    .landingContent {
+      margin-bottom: 0px;
+      text-align: left; } }
+  @media screen and (min-width: 1200px) {
+    .landingContent {
+      margin-bottom: 0px;
+      text-align: left; } }
 
-.headerbutton {
-  color: RED;
-  width: 100px; }
+.withUsContainer {
+  background-color: BLACK;
+  color: WHITE;
+  width: 100vw;
+  text-align: center;
+  height: 502px;
+  padding: 120px; }
+  .withUsContainer button {
+    background-color: yellow;
+    margin-left: 20px;
+    display: inline-block; }
+
+.headertime {
+  background-color: BLACK;
+  color: YELLOW;
+  text-align: center;
+  height: 50px;
+  line-height: 50px; }
+
+.headernav {
+  height: 70px;
+  line-height: 70px; }
+  .headernav .headerlogo {
+    cursor: pointer; }
+  .headernav .headerbutton {
+    color: RED;
+    width: 100px; }
 
 button {
   font-weight: bold; }
