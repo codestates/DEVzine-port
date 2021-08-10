@@ -3,6 +3,7 @@ import axios from 'axios';
 import store from '../../store/store';
 import { checkEmail } from '../../utils/validation';
 import AlertModal from '../Common/AlertModal/AlertModal';
+import Button from '../Common/Button/Button';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
@@ -93,9 +94,15 @@ function SubscriptionWrapper() {
           </form>
           <div>Tip.</div>
           <div>회원가입하면 구독 관리가 편리해요.</div>
-          <button onClick={() => (window.location.href = '/signup')}>
+          {/* <button onClick={() => (window.location.href = '/signup')}>
             회원가입 하기
-          </button>
+          </button> */}
+          <Button
+            subject="회원가입하기"
+            color="#fff"
+            backgroundColor="black"
+            onClickHandle={() => (window.location.href = '/signup')}
+          />
         </div>
       )}
       <div className="alermodalbox">
