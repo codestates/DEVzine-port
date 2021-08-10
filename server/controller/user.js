@@ -1,7 +1,88 @@
+const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer');
+const smtpTransport = require('nodemailer-smtp-transport');
+const ejs = require('ejs');
+require('dotenv').config();
+const { VerifiedEmail } = require('../Models/Verifiedemails');
+
+const transporter = nodemailer.createTransport(smtpTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    auth: {
+        user: process.env.NODEMAIL_EMAIL,
+        pass: process.env.NODEMAIL_PWD
+    }
+}));
+
 module.exports = {
 
+    reqEmail: async (req, res) => {
+        const { temp_email } = req.body;
+        const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+        if (!emailRegex.test(temp_email)) {
+            return res.status(400).send({ "message": "Invalild email" });
+        }
+
+        let authMailForm;
+        ejs.renderFile(__dirname + '../ejs/authMail.ejs', { temp_email }, (err, data) => {
+            if (err) console.log(err);
+            authMailForm = data;
+        })
+
+        transporter.sendMail({
+            from: 'DEVzine:port <devzineport@gmail.com>',
+            to: temp_email,
+            subject: '회원가입 수락하삼[nodemailer]',
+            html: authMailForm
+        }, (err, info) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('Email sent: ' + info.response);
+                transporter.close();
+            }
+        });
+    
+        res.status(200).send({ message: 'plz accept mail' });
+    },
+
+    verifyEmail: async (req, res) => {
+        const { temp_email } = req.body;
+
+        console.log(temp_email);
+        const tempEmail = new VerifiedEmail({
+            temp_email
+        });
+        await tempEmail.save((err) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            return res.status(200).send({ "message": "Success" });
+        });
+
+        setTimeout(() => {
+            tempEmail.remove();
+        }, 30 * 60 * 1000);
+    },
+
 	signUp: async (req, res) => {
-        
+        const { user_email, user_name } = req.body;
+        const user_info = JSON.parse(req.body.user_info);
+
+        const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+        if (!emailRegex.test(user_email)) {
+            return res.status(400).send({ "message": "Invalild email" });
+        }
+
+        try {
+            // 
+        } catch (err) {
+            if (err.code === 11000) {
+                return res.status(409).send({ "message": `${user_email} already exists` });
+            }
+        }
+        return res.status(500).send(err);
+    },
         // TODO: 사용자의 email, password를 입력 받아 유효성 검사를 하고, 회원가입 요청을 한다. 
         // req.body
         // {
@@ -19,24 +100,11 @@ module.exports = {
         // {
         //     "message": "User created"
         // }
-        // status:400
-        // {
-        //     "message": "Invalild email"
-        // }
+
         // status:404
         // {
         //     "message": "Not found"
         // }
-        // status:409
-        // {
-        // "message": "${email} already exists"
-        // }
-        // status:500
-        // err
-        
-        return res.send('signUp');
-
-	},
 
     signOut: async (req, res) => {
         
