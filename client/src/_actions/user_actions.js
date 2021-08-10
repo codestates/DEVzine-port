@@ -5,8 +5,8 @@ const END_POINT = process.env.REACT_APP_API_URL;
 
 export function signinUser(dataToSubmit) {
   const request = axios
-    .post(`${END_POINT}/users/signin`, dataToSubmit)
-    .then(res => res.data.message);
+    .post(`${END_POINT}/user/signin`, dataToSubmit)
+    .then(res => 'Login success');
   //! axios
   // .then(res => res.data.message);
   // .then(res => 'Login success');
@@ -19,8 +19,10 @@ export function signinUser(dataToSubmit) {
 
 export function signupUser(dataToSubmit) {
   const request = axios
-    .post(`${END_POINT}/users/signup`, dataToSubmit)
-    .then(res => res.data.message);
+    .post(`${END_POINT}/user/signup`, dataToSubmit, {
+      withCredentials: true,
+    })
+    .then(res => 'User created');
   //! axios
   // .then(res => res.data.message);
   // .then(res => 'User created');
@@ -33,8 +35,8 @@ export function signupUser(dataToSubmit) {
 
 export function signoutUser() {
   const request = axios
-    .post(`${END_POINT}/users/signout`)
-    .then(res => res.data.message);
+    .post(`${END_POINT}/user/signout`)
+    .then(res => 'Logout success');
   //! axios
   // .then(res => res.data.message);
   // .then(res => 'Logout success');
