@@ -1,1 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+* {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+// font-weight: normal | bold | bolder | lighter | number | initial | inherit
+// normal : 보통 굵기입니다. 숫자 400과 같습니다.
+// bold : 굵은 굵기입니다. 숫자 700과 같습니다.
+// bolder : 상속된 값보다 굵은 굵기입니다.
+// lighter : 상속된 값보다 얇은 굵기입니다.
+// number : 100, 200, 300, 400, 500, 600, 700, 800, 900
+// initial : 기본값으로 설정합니다.
+// inherit : 부모 요소의 속성값을 상속받습니다.
