@@ -75,9 +75,9 @@ function LandingInteraction() {
       <div className="landinginteractioncontainer">
         <div className="textwrapper">
           <div className="description">
-            개발하는 당신을 위한 얕고 넓은 지식,
+            개발하는 당신을 위한 얕고 넓은 지식 담은 매거진
           </div>
-          <div className="subject">DEVzine:port</div>
+          <div className="subject">DEVzine</div>
         </div>
         <BlinkText />
         <Canvas>

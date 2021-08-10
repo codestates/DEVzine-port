@@ -3,9 +3,15 @@ import store from '../../../store/store';
 
 function Footer() {
   function contributionHandler() {
-    if (store.getState().user.signinSuccess !== undefined)
-      window.location.href = '/contribution';
-    else window.location.href = '/signin';
+    if (store.getState().user.signinSuccess) {
+      if (store.getState().user.signinSuccess[0] === 'Login success') {
+        window.location.href = '/contribution';
+      } else {
+        window.location.href = '/signin';
+      }
+    } else {
+      window.location.href = '/signin';
+    }
   }
 
   return (
