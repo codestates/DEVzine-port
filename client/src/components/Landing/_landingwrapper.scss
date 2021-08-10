@@ -1,13 +1,14 @@
 .container {
   color: BLACK;
+  padding-top: 120px;
+  padding-bottom: 84px;
 
   @include responsive(T) {
-    color: RED;
-    font-size: 16px;
+    margin-bottom: 64px;
   }
 
   @include responsive(D) {
-    color: WHITE;
+    margin-bottom: 22px;
   }
 }
 
@@ -15,9 +16,9 @@
   background-color: GREEN;
   border-radius: 20px;
   height: 315px;
-  margin-bottom: 36px;
   overflow: hidden;
   position: relative;
+  margin-bottom: 36px;
 
   @include responsive(T) {
     margin-bottom: 56px;
@@ -32,5 +33,35 @@
     left: 50%;
     position: absolute;
     transform: translateX(-50%);
+  }
+}
+
+.landingContent {
+  margin-bottom: 30px;
+  text-align: center;
+
+  @include responsive(T) {
+    margin-bottom: 0px;
+    text-align: left;
+  }
+
+  @include responsive(D) {
+    margin-bottom: 0px;
+    text-align: left;
+  }
+}
+
+.withUsContainer {
+  background-color: BLACK;
+  color: WHITE;
+  width: 100vw;
+  text-align: center;
+  height: 502px;
+  padding: 120px;
+
+  button {
+    background-color: yellow;
+    margin-left: 20px;
+    display: inline-block;
   }
 }

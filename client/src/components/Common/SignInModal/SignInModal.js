@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { signinUser } from '../../../_actions/user_actions';
 
@@ -27,9 +27,8 @@ function SigninModal() {
     console.log('SignInModal :', body);
 
     dispatch(signinUser(body)).then(res => {
-      if (res.payload === 'Login success') {
+      if (res.payload[0] === 'Login success') {
         window.location.href = '/';
-        // history.go(-1);
       } else {
         alert('로그인 실패하였습니다.');
       }

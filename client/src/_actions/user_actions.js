@@ -5,15 +5,22 @@ const END_POINT = process.env.REACT_APP_API_URL;
 
 export function signinUser(dataToSubmit) {
   const request = axios
-    .post(`${END_POINT}/user/signin`, dataToSubmit)
-    .then(res => 'Login success');
+    .post(`${END_POINT}/user/signin`, dataToSubmit, {
+      withCredentials: true,
+    })
+    .then(res => ['Login success', 'kimcoding']);
   //! axios
-  // .then(res => res.data.message);
-  // .then(res => 'Login success');
+  // .then(res => [res.data,message, res.data.data.user_name]);
+  // .then(res => ['Login success', 'kimcoding']);
 
+  //! axios
   return {
     type: SIGNIN_USER,
     payload: request,
+    // payload: {
+    //   message: request[0],
+    //   user_name: request[1],
+    // },
   };
 }
 
@@ -35,7 +42,9 @@ export function signupUser(dataToSubmit) {
 
 export function signoutUser() {
   const request = axios
-    .post(`${END_POINT}/user/signout`)
+    .post(`${END_POINT}/user/signout`, {
+      withCredentials: true,
+    })
     .then(res => 'Logout success');
   //! axios
   // .then(res => res.data.message);

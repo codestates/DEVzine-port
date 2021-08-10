@@ -26,7 +26,7 @@ function App() {
             <Route path="/signin" component={SignIn} />
             <Route path="/articlelist" component={ArticleList} />
             <Route path="/article" component={ArticleView} />
-            <Route path="/contribution/update" component={ContributionUpdate} />
+            <Route path="/contributionupdate" component={ContributionUpdate} />
             <Route path="/contribution" component={Contribution} />
             <Route path="/mypage" component={MyPage} />
             <Route path="/subscribe" component={Subscription} />
