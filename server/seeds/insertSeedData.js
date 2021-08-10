@@ -10,6 +10,8 @@ const { Email } = require('../Models/Emails');
 const { seedEmails } = require('./seed-emails.js');
 const { VerifiedEmail } = require('../Models/Verifiedemails');
 const { seedVerifiedEmails } = require('./seed-verifiedemails');
+const { Admin } = require('../Models/Admins');
+const { seedAdmins } = require('./seed-admins');
 
 module.exports = {
 insertSeedData: async (req, res) => {
@@ -20,6 +22,7 @@ insertSeedData: async (req, res) => {
         await User.create(seedUsers);
         await Email.create(seedEmails);
         await VerifiedEmail.create(seedVerifiedEmails);
+        await Admin.create(seedAdmins);
         res.json({ message: 'Seed success' });
     } catch (err) {
         res.json(err);
