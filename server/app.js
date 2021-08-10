@@ -39,6 +39,17 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: 'server & db connected!' });
 });
 
+const { isAuthenticated } = require('./controller/middleware/isAuthenticated');
+app.get('/testauth', isAuthenticated, (req, res) => {
+	// let user = req.user;
+	// if (user) {
+		res.send(`user: ${req.user}`);
+	// }
+	// else {
+	// 	res.send('not authenticated');
+	// }
+});
+
 const { insertSeedData } = require('./seeds/insertSeedData');
 app.use('/seed', insertSeedData);
 
@@ -71,19 +82,6 @@ mongoose
   })
   .then(() => console.log(`mongoDB connected`))
   .catch((err) => console.error(err));
-
-
-const { isAuthenticated } = require('./controller/middleware/isAuthenticated');
-app.get('/testauth', isAuthenticated, (req, res) => {
-	// let user = req.user;
-	// if (user) {
-		res.send(`user: ${req.user}`);
-	// }
-	// else {
-	// 	res.send('not authenticated');
-	// }
-});
-
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 let server;
