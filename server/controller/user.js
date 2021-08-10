@@ -37,24 +37,29 @@ module.exports = {
         return res.send('signUp');
 
 	},
-    
+
     signOut: async (req, res) => {
         
         // TODO: 로그아웃을 하고 세션을 종료한다.
-        // status: 200
-        // {
-        //     "message": "Logout success"
-        // }
         // status:401
         // {
         //     "message": "Unauthorized user"
         // }
-        // status:404
-        // {
-        // "message": "Not found"
-        // }
-        
-        return res.send('signOut');
+
+        try {
+            req.logout();
+            // 1. 로그 아웃 후 현재 세션을 삭제한 뒤 비동기 처리
+            // req.session.destroy(function(err) {
+            //   res.send('log out');
+            // });
+            // 2. 로그 아웃 후 현재 세션을 저장한 뒤 비동기 처리
+            req.session.save(function () {
+                res.send('log out');
+            });
+            res.status(200).send({ "message": "Logout success" });
+        } catch (err) {
+            res.status(404).send({ "message": "Logout error" });
+        }
 
 	},
 
@@ -79,7 +84,7 @@ module.exports = {
         //     "message": "Invalid user"
         // }
         
-        return res.send('signIn');
+        res.status(200).send({"message": "Login success" });
 
 	},
 
