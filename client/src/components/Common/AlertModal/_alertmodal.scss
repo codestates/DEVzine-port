@@ -1,4 +1,4 @@
-.ModalBackdrop {
+.modalbackdrop {
   background-color: rgba(0, 0, 0, 0.4);
   place-items: center;
   display: grid;
@@ -10,32 +10,23 @@
   z-index: 900;
 }
 
-.ModalContainer {
+.modalcontainer {
   height: 15rem;
   margin: 120px auto;
   text-align: center;
 }
 
-.ModalBtn {
-  background-color: #4000c7;
-  padding: 20px;
-  color: WHITE;
-  cursor: grab;
-  text-decoration: none;
-  border-radius: 30px;
-  border: none;
-}
-
-.ModalView {
+.modalview {
   width: 360px;
   height: 241px;
   background-color: WHITE;
-  border-radius: 10px;
+  border-radius: 20px;
   position: relative;
 
   .desc {
     color: #191a20;
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: bold;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -43,12 +34,20 @@
   }
 }
 
-.closeBtn {
+.closebtn {
   color: #191a20;
-  background-color: #e0e2e7;
-  width: 296px;
+  background-color: #d9d9d9;
+  width: 265px;
   height: 55px;
   cursor: pointer;
   font-size: 18px;
   margin-top: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.alermodalbox {
+  border: 1px solid red;
+  width: 0px;
+  height: 0px;
 }
