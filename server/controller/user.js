@@ -53,9 +53,9 @@ module.exports = {
             //   res.send('log out');
             // });
             // 2. 로그 아웃 후 현재 세션을 저장한 뒤 비동기 처리
-            req.session.save(function () {
-                res.send('log out');
-            });
+            // req.session.save(function () {
+            //     res.send('log out');
+            // });
             res.status(200).send({ "message": "Logout success" });
         } catch (err) {
             res.status(404).send({ "message": "Logout error" });
@@ -64,17 +64,6 @@ module.exports = {
 	},
 
     signIn: async (req, res) => {
-        
-        // TODO: 사용자의 email, password를 조회해 로그인한다. 
-        // req.body
-        // {
-        //     "user_email": "example@gmail.com",
-        //     "user_password": "string",
-        // }
-        // status: 200
-        // {
-        //     "message": "Login success"
-        // }
         // status:401
         // {
         //     "message": "Invalid password"
@@ -83,8 +72,8 @@ module.exports = {
         // {
         //     "message": "Invalid user"
         // }
-        
-        res.status(200).send({"message": "Login success" });
+        // invalid user / passwd 경우 passport.js에서 처리하는데 좀 더 찾아봐야함
+        res.status(200).send({ "message": "Login success" });
 
 	},
 

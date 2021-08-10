@@ -1,7 +1,7 @@
 const { stream } = require('./config/winston');
 const fs = require('fs');
 const https = require('https');
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const express = require('express');
@@ -12,12 +12,14 @@ const passport = require('passport');
 const passportConfig = require('./config/passport');
 require('dotenv').config();
 
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: true,
-  // store: ?
-}));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true,
+    // store: ?
+  })
+);
 app.use(passport.initialize()); // passport 미들웨어
 app.use(passport.session()); // session 사용할 수 있도록 하는 미들웨어
 passportConfig();
@@ -34,7 +36,7 @@ app.use(
 );
 
 app.get('/', (req, res) => {
-  res.status(200).json({"message": "server & db connected!"})
+  res.status(200).json({ message: 'server & db connected!' });
 });
 
 const { insertSeedData } = require('./seeds/insertSeedData');
@@ -42,14 +44,16 @@ app.use('/seed', insertSeedData);
 
 const adminRouter = require('./router/adminRouter');
 const contributionRouter = require('./router/contributionRouter');
+const emailRouter = require('./router/emailRouter');
 const landingRouter = require('./router/landingRouter');
-const magazineRouter = require('./router/magazineRouter')
+const magazineRouter = require('./router/magazineRouter');
 const myPageRouter = require('./router/myPageRouter');
 const subscribeRouter = require('./router/subscribeRouter');
 const userRouter = require('./router/userRouter');
 const visualRouter = require('./router/visualRouter');
 app.use('/admin', adminRouter);
 app.use('/contribution', contributionRouter);
+app.use('/email', emailRouter);
 app.use('/landing', landingRouter);
 app.use('/magazine', magazineRouter);
 app.use('/mypage', myPageRouter);
@@ -61,9 +65,9 @@ mongoose
   .connect(process.env.MONGO_STRING, {
     useNewUrlParser: true, // 버전 5 이상부터 적용되는 새로운 url parser 사용
     useUnifiedTopology: true, // shard 와 replica set 에 접근
-    useCreateIndex: true, // deprecated 된 ensureIndex 대신 createIndex 사용 
-    useFindAndModify: false, // findOneAndRemove() 과 findOneAndUpdate() 를 분리해서 사용 
-    dbName: process.env.MONGO_DATABASE, // connection string 에 있는 db 대신 다른 디폴트 db 지정 
+    useCreateIndex: true, // deprecated 된 ensureIndex 대신 createIndex 사용
+    useFindAndModify: false, // findOneAndRemove() 과 findOneAndUpdate() 를 분리해서 사용
+    dbName: process.env.MONGO_DATABASE, // connection string 에 있는 db 대신 다른 디폴트 db 지정
   })
   .then(() => console.log(`mongoDB connected`))
   .catch((err) => console.error(err));

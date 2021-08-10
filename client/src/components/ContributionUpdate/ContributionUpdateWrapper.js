@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import Auth from '../../hoc/auth';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
@@ -26,6 +27,10 @@ function ContributionUpdateWrapper() {
     };
     getData();
   }, []);
+
+  useEffect(() => {
+    Auth(true);
+  });
 
   function onKeywordHandler(e) {
     setKeyword(e.currentTarget.value);

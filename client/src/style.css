@@ -500,12 +500,67 @@ button {
 .signinform button {
   border: 1px solid BLACK; }
 
-.signupform input {
-  border: 1px solid BLACK; }
-
-.signupform button {
-  border: 1px solid BLACK;
-  font-size: bold; }
+.signupcontainer {
+  position: relative;
+  width: 100vw;
+  height: 832px;
+  background: #f2f2f2;
+  display: flex;
+  justify-content: center; }
+  .signupcontainer .signupwrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+    padding-top: 72px; }
+    .signupcontainer .signupwrapper .inputsmallcontainer {
+      display: flex;
+      flex-direction: column;
+      align-items: inherit;
+      width: 360px;
+      height: 72px;
+      margin-bottom: 24px; }
+      .signupcontainer .signupwrapper .inputsmallcontainer .subjectwrapper {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        color: #191a20;
+        margin-bottom: 8px; }
+      .signupcontainer .signupwrapper .inputsmallcontainer .inputsmall {
+        width: 360px;
+        height: 40px;
+        background: #ffffff;
+        border: 1px solid #d9d9d9;
+        border-radius: 8px; }
+      .signupcontainer .signupwrapper .inputsmallcontainer .inputsmall::placeholder {
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+        padding-top: 8px;
+        padding-left: 16px;
+        color: #d9d9d9; }
+      .signupcontainer .signupwrapper .inputsmallcontainer .isvalidindicator {
+        color: red;
+        position: absolute;
+        margin-top: 80px;
+        font-size: 12px; }
+    .signupcontainer .signupwrapper .signupbtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 264px;
+      height: 54px;
+      background: #191a20;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 28px;
+      color: #ffffff;
+      cursor: pointer;
+      margin-left: 48px; }
 
 .article {
   background-color: YELLOW;
