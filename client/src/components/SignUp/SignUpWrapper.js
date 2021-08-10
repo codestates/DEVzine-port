@@ -1,38 +1,74 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { signupUser } from '../../_actions/user_actions';
-
+import TextInputGenderRequired from './TextInputGenderRequired';
+import { checkEmail, checkPassword } from '../../utils/validation';
 function SignUpWrapper() {
   const dispatch = useDispatch();
+
+  const [email_isValid, setEmail_isValid] = useState(false);
+  const [pw_isValid, setPw_isValid] = useState(false);
+  const [pw_confirm, setPw_confirm] = useState(false);
 
   const [Email, setEmail] = useState('');
   const [Name, setName] = useState('');
   const [Password, setPassword] = useState('');
   const [ConfirmPassword, setConfirmPassword] = useState('');
 
-  function onEmailHandler(e) {
-    setEmail(e.currentTarget.value);
-  }
-
-  function onNameHandler(e) {
-    setName(e.currentTarget.value);
-  }
-
-  function onPasswordHandler(e) {
-    setPassword(e.currentTarget.value);
-  }
-
-  function onConfirmPasswordHandler(e) {
-    setConfirmPassword(e.currentTarget.value);
-  }
-
-  function onSubmitHandler(e) {
-    e.preventDefault();
-
-    if (Password !== ConfirmPassword) {
-      return alert('비밀번호와 비밀번호 확인은 같아야 합니다.');
+  useEffect(() => {
+    if (checkEmail(Email)) {
+      setEmail_isValid(true);
+    } else {
+      setEmail_isValid(false);
     }
 
+    if (checkPassword(Password)) {
+      setPw_isValid(true);
+    } else {
+      setPw_isValid(false);
+    }
+    if (Password === ConfirmPassword) {
+      setPw_confirm(true);
+    } else {
+      setPw_confirm(false);
+    }
+  }, [Email, Password, ConfirmPassword]);
+
+  const requiredTextInputData = [
+    [
+      '이메일',
+      'user_email',
+      Email,
+      setEmail,
+      '이메일',
+      'email',
+      email_isValid,
+      '30',
+    ],
+    [
+      '비밀번호',
+      'user_password',
+      Password,
+      setPassword,
+      '8자 이상 입력해주세요',
+      'password',
+      pw_isValid,
+      '20',
+    ],
+    [
+      '비밀번호 확인',
+      'password_confirm',
+      ConfirmPassword,
+      setConfirmPassword,
+      '비밀번호 확인',
+      'password',
+      pw_confirm,
+      '20',
+    ],
+    ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '20'],
+  ];
+
+  function postHandler(e) {
     let body = {
       user_email: Email,
       user_password: Password,
@@ -57,51 +93,41 @@ function SignUpWrapper() {
   }
 
   return (
-    <>
-      <form onSubmit={e => onSubmitHandler(e)} className="signupform">
-        <label htmlFor="email">이메일</label>
-        <input
-          type="email"
-          id="email"
-          value={Email}
-          onChange={e => onEmailHandler(e)}
-          placeholder="이메일"
-        />
-
-        <br />
-        <label htmlFor="password">비밀번호</label>
-        <input
-          type="password"
-          id="password"
-          value={Password}
-          onChange={e => onPasswordHandler(e)}
-          placeholder="비밀번호"
-        />
-
-        <br />
-        <label htmlFor="confirmpassword">비밀번호 확인</label>
-        <input
-          type="password"
-          id="confirmpassword"
-          value={ConfirmPassword}
-          onChange={e => onConfirmPasswordHandler(e)}
-          placeholder="비밀번호 확인"
-        />
-
-        <br />
-        <label htmlFor="username">닉네임</label>
-        <input
-          type="text"
-          id="username"
-          value={Name}
-          onChange={e => onNameHandler(e)}
-          placeholder="닉네임"
-        />
-
-        <br />
-        <button type="submit">회원가입</button>
-      </form>
-    </>
+    <div className="signupcontainer">
+      <div className="signupwrapper">
+        {requiredTextInputData.map((el, idx) => {
+          return (
+            <TextInputGenderRequired
+              key={`TextInputGenderRequired${idx}`}
+              inputname={el[0]}
+              detailString={el[1]}
+              stateName={el[2]}
+              stateFunc={el[3]}
+              placeholder={el[4]}
+              type={el[5]}
+              isValid={el[6]}
+              maxLength={el[7]}
+            />
+          );
+        })}
+        <div
+          className="signupbtn"
+          onClick={e =>
+            Email &&
+            Password &&
+            ConfirmPassword &&
+            Name &&
+            email_isValid &&
+            pw_isValid &&
+            pw_confirm
+              ? postHandler(e)
+              : alert('모든 것을 만족해야 합니다.')
+          }
+        >
+          회원가입
+        </div>
+      </div>
+    </div>
   );
 }
 
