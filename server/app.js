@@ -12,7 +12,6 @@ const passport = require('passport');
 const passportConfig = require('./config/passport');
 require('dotenv').config();
 
-
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
@@ -69,17 +68,9 @@ mongoose
   .then(() => console.log(`mongoDB connected`))
   .catch((err) => console.error(err));
 
-// test zone
-// app.post('/testlogin',
-//   passport.authenticate('local', {
-//     successRedirect: '/',
-//     failureRedirect: '/testlogin'
-// }));
-app.post('/testlogin', passport.authenticate('local'), function(req, res) {
-  res.status(200).send('success');
-});
 
-app.get('/testauth', isAuthenticated, function(req, res) {
+const { isAuthenticated } = require('./controller/middleware/isAuthenticated');
+app.get('/testauth', isAuthenticated, (req, res) => {
 	// let user = req.user;
 	// if (user) {
 		res.send(`user: ${req.user}`);
@@ -89,29 +80,6 @@ app.get('/testauth', isAuthenticated, function(req, res) {
 	// }
 });
 
-// 인증 확인 미들웨어
-function isAuthenticated(req, res, next) {
-  // req.isAuthenticated()
-  // 서버에 요청을 보낸 사용자가 인증이 되어있는 상태인지 확인하여 boolean 값 반환
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  return res.send('fail');
-}
-
-app.get('/testlogout', function(req, res) {
-  req.logout();
-  // 1. 로그 아웃 후 현재 세션을 삭제한 뒤 비동기 처리
-  // req.session.destroy(function(err) {
-  //   res.send('log out');
-  // });
-  // 2. 로그 아웃 후 현재 세션을 저장한 뒤 비동기 처리
-  // req.session.save(function () {
-  //   res.send('log out');
-  // });
-  res.send('log out');
-});
-// test zone
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 let server;
