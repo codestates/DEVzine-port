@@ -20,7 +20,7 @@ function Header() {
     } else {
       setSignIn(false);
     }
-  });
+  }, []);
 
   function signInHandler() {
     window.location.href = '/signin';
@@ -29,16 +29,11 @@ function Header() {
     dispatch(signoutUser()).then(res => {
       if (res.payload === 'Logout success') {
         setSignIn(false);
-        history.go(0);
+        window.location.reload();
       } else {
         alert('로그아웃 실패하였습니다.');
       }
     });
-  }
-
-  function mypageHandler() {
-    if (signIn) window.location.href = '/mypage';
-    else window.location.href = '/signin';
   }
 
   return (
@@ -54,13 +49,15 @@ function Header() {
         >
           로고
         </button>
-        <button onClick={() => (window.location.href = '/magazine')}>
+        <button onClick={() => (window.location.href = '/articlelist')}>
           매거진 보기
         </button>
         <button onClick={() => (window.location.href = '/subscribe')}>
           구독하기
         </button>
-        <button onClick={mypageHandler}>마이페이지</button>
+        <button onClick={() => (window.location.href = '/mypage')}>
+          마이페이지
+        </button>
         {signIn ? (
           <button onClick={signOutHandler} className="headerbutton">
             로그아웃

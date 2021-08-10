@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { mypageUser } from '../../_actions/user_actions';
+import Auth from '../../hoc/auth';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
@@ -26,6 +27,10 @@ function MyPageWrapper() {
     };
     getData();
   }, []);
+
+  useEffect(() => {
+    Auth(true);
+  });
 
   function onUserNameHandler(e) {
     setUserName(e.currentTarget.value);
