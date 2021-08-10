@@ -5,7 +5,7 @@ function MyPageWrapper() {
     <>
       MyPageWrapper
       <br />
-      <button onClick={() => (window.location.href = '/contribution/update')}>
+      <button onClick={() => (window.location.href = '/contributionupdate')}>
         기고 수정하기
       </button>
     </>
