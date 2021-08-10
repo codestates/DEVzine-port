@@ -43,6 +43,7 @@ app.use('/seed', insertSeedData);
 
 const adminRouter = require('./router/adminRouter');
 const contributionRouter = require('./router/contributionRouter');
+const emailRouter = require('./router/emailRouter');
 const landingRouter = require('./router/landingRouter');
 const magazineRouter = require('./router/magazineRouter')
 const myPageRouter = require('./router/myPageRouter');
@@ -51,6 +52,7 @@ const userRouter = require('./router/userRouter');
 const visualRouter = require('./router/visualRouter');
 app.use('/admin', adminRouter);
 app.use('/contribution', contributionRouter);
+app.use('/email', emailRouter);
 app.use('/landing', landingRouter);
 app.use('/magazine', magazineRouter);
 app.use('/mypage', myPageRouter);

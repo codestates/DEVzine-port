@@ -35,12 +35,45 @@ module.exports = {
 
 	},
 
-    temp: async (req, res) => {
+    rejectContribRequest: async (req, res) => {
         
-        // FE 와 추가 논의 예정
-
-        return res.send('contribution fix');
+        
+        //TODO: 사용자의 기고글 게시/수정/삭제 요청을 거부한다. 
+        // body parameters
+        // { 
+        //     "contribution_id" : "string",
+        //     "status" : "number"
+        // }
+        // status:200
+        // {
+        //     "message" : "Update rejected"
+        // }
+        // status:404
+        // {   
+        //     "message": "Not found"
+        // }  
+        return res.send('contribution request rejected');
 
 	},
+
+    acceptContribRequest: async (req, res) => {
+
+        //TODO: 사용자의 기고글 게시/수정/삭제 요청을 수락한다. 
+        // body parameters
+        // { 
+        //     "contribution_id" : "string",
+        //     "status" : "number"
+        // }
+        // status:200
+        // {
+        //     "message" : "Update success"
+        // }
+        // status:404
+        // {   
+        //     "message": "Not found"
+        // }  
+        return res.send('contribution request accepted');
+
+    }   
 
 };
