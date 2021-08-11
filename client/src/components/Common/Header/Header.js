@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { signoutUser } from '../../../_actions/user_actions';
 import store from '../../../store/store';
-import { remainTime } from './TopTime';
+// import { remainTime } from './TopTime';
 
 function Header() {
   const dispatch = useDispatch();
 
-  console.log(remainTime);
+  // console.log(remainTime);
 
   const [signIn, setSignIn] = useState(false);
   const [userName, setUserName] = useState('nothing');
@@ -44,7 +44,7 @@ function Header() {
       <div className="headertime">
         {signIn ? `${userName}님` : '여러분'}께 새로운 소식을 전하기까지 남은
         시간
-        <span className="timer">{remainTime}</span>
+        {/* <span className="timer">{remainTime}</span> */}
       </div>
       <div className="headernav">
         <button

@@ -4,7 +4,8 @@ import { customAxios } from '../utils/customAxios';
 export async function signinUser(dataToSubmit) {
   const request = await customAxios
     .post(`/user/signin`, dataToSubmit)
-    .then(res => [res.data.message, 'kimcoding']);
+    .then(res => console.log(res.data));
+  // .then(res => [res.data.message, 'kimcoding']);
   //! axios
   // .then(res => [res.data.message, res.data.data.user_name]);
   // .then(res => [res.data.message, 'kimcoding']);
@@ -18,7 +19,8 @@ export async function signinUser(dataToSubmit) {
 export async function signupUser(dataToSubmit) {
   const request = await customAxios
     .post(`/user/signup`, dataToSubmit)
-    .then(res => res.data.message);
+    .then(res => console.log(res.data));
+  // .then(res => res.data.message);
   //! axios
   // .then(res => res.data.message);
   // .then(res => 'User created');
