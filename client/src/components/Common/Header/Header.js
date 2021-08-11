@@ -3,12 +3,17 @@ import { useDispatch } from 'react-redux';
 import { signoutUser } from '../../../_actions/user_actions';
 import store from '../../../store/store';
 import TopTime from './TopTime';
+import logo from '../../../assets/images/DEVzine.svg';
+import menu from '../../../assets/images/menu_b.svg';
 
 function Header() {
   const dispatch = useDispatch();
 
   const [signIn, setSignIn] = useState(false);
   const [userName, setUserName] = useState('nothing');
+  const [ScrollY, setScrollY] = useState(0);
+  const [ScrollActive, setScrollActive] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     if (store.getState().user.signinSuccess) {
@@ -37,43 +42,80 @@ function Header() {
     });
   }
 
+  useEffect(() => {
+    function scrollListener() {
+      window.addEventListener('scroll', handleScroll);
+    } //  window 에서 스크롤을 감시 시작
+    scrollListener(); // window 에서 스크롤을 감시
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    }; //  window 에서 스크롤을 감시를 종료
+  });
+
+  useEffect(() => {
+    function reportWindowSize() {
+      setWindowWidth(window.innerWidth);
+      // console.log(window.innerHeight, window.innerWidth);
+    }
+    window.addEventListener('resize', reportWindowSize);
+    return () => window.removeEventListener('resize', reportWindowSize);
+  }, []);
+
+  function handleScroll() {
+    if (ScrollY > 5) {
+      setScrollY(window.pageYOffset);
+      setScrollActive(true);
+    } else {
+      setScrollY(window.pageYOffset);
+      setScrollActive(false);
+    }
+  }
+
   return (
-    <div className="headerfix">
+    <div className={ScrollActive ? 'headerfix' : ''}>
       <div className="headertime">
-        {signIn ? `${userName}님` : '여러분'}께 새로운 소식을 전하기까지 남은
-        시간
+        {windowWidth < 768 ? '' : signIn ? `${userName}님께 ` : '여러분께 '}
+        새로운 소식을 전하기까지 남은 시간
         <span className="timer">
           <TopTime />
         </span>
       </div>
-      <div className="row">
-        <div className="col-sm-6 col-md-12 col-lg-12">
-          <div className="headernav">
-            <button
-              onClick={() => (window.location.href = '/')}
-              className="headerlogo"
-            >
-              로고
-            </button>
-            <button onClick={() => (window.location.href = '/articlelist')}>
-              매거진 보기
-            </button>
-            <button onClick={() => (window.location.href = '/subscribe')}>
-              구독하기
-            </button>
-            <button onClick={() => (window.location.href = '/mypage')}>
-              마이페이지
-            </button>
-            {signIn ? (
-              <button onClick={signOutHandler} className="headerbutton">
-                로그아웃
-              </button>
-            ) : (
-              <button onClick={signInHandler} className="headerbutton">
-                로그인
-              </button>
-            )}
-          </div>
+      <div className="headernavwrapper">
+        <div className="headernav">
+          <button
+            onClick={() => (window.location.href = '/')}
+            className="headerlogo"
+          >
+            <img src={logo} alt="logo" />
+          </button>
+          {windowWidth < 768 ? (
+            <span className="headermenu">
+              <img src={menu} alt={menu} />
+            </span>
+          ) : (
+            <div className="leftbox">
+              <span onClick={() => (window.location.href = '/articlelist')}>
+                매거진 보기
+              </span>
+              |
+              <span onClick={() => (window.location.href = '/subscribe')}>
+                구독하기
+              </span>
+              |
+              <span onClick={() => (window.location.href = '/mypage')}>
+                마이페이지
+              </span>
+              {signIn ? (
+                <button onClick={signOutHandler} className="headerbutton">
+                  로그아웃
+                </button>
+              ) : (
+                <button onClick={signInHandler} className="headerbutton">
+                  로그인
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
