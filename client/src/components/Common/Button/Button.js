@@ -9,7 +9,7 @@ function Button(props) {
         color,
         backgroundColor,
       }}
-      className="commonButton"
+      className="commonbutton"
       onClick={onClickHandle}
     >
       {subject}
