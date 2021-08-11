@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { customAxios } from '../../utils/customAixos';
 import landing01 from '../../assets/images/landing01.svg';
 import landing02 from '../../assets/images/landing02.svg';
 import landing03 from '../../assets/images/landing03.svg';
@@ -18,6 +19,11 @@ function LandingWrapper() {
         alert('회원 수 정보를 받아오는데 실패하였습니다.');
       });
   }, []);
+
+  // const requestGet = async () => {
+  //   await customAxios.get('/landing');
+  // };
+  // setSubscribers(requestGet);
 
   return (
     <>
