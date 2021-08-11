@@ -1,0 +1,96 @@
+.footercontainer {
+  height: 220px;
+  width: 100%;
+  color: #191a20;
+
+  .footerinner {
+    width: 98%;
+    margin: 0 auto;
+    position: relative;
+    padding-top: 36px;
+
+    @include responsive(D) {
+      width: 1120px;
+    }
+  }
+}
+
+.footerright {
+  width: 98%;
+  text-align: center;
+
+  @include responsive(T) {
+    text-align: left;
+    width: 510px;
+    position: absolute;
+    left: 0;
+  }
+
+  .cstitle {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 6px;
+
+    img {
+      margin-left: 2px;
+    }
+  }
+
+  .cscontact {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .csworktime {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .okteam1 {
+    color: #8c8d96;
+    font-size: 14px;
+    padding-top: 24px;
+
+    a {
+      margin: 3px;
+    }
+
+    span {
+      cursor: pointer;
+      margin: 3px;
+    }
+  }
+
+  .okteam2 {
+    color: #8c8d96;
+    font-size: 14px;
+    padding-top: 6px;
+
+    a {
+      margin: 3px;
+    }
+  }
+}
+
+.footerleft {
+  width: 265px;
+
+  position: absolute;
+  right: 0;
+  font-weight: 700;
+  font-size: 18px;
+
+  div {
+    cursor: pointer;
+    position: relative;
+    height: 35px;
+    margin-bottom: 12px;
+  }
+
+  div img {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}
