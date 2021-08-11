@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 const ejs = require('ejs');
+const { User } = require('../Models/Users');
 const { VerifiedEmail } = require('../Models/Verifiedemails');
 require('dotenv').config();
 
@@ -20,6 +21,11 @@ module.exports = {
         const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
         if (!emailRegex.test(user_email)) {
             return res.status(400).send({ "message": "Invalild email" });
+        }
+
+        const user = await User.findOne({ user_email });
+        if (user) {
+            return res.status(400).send({ "message": "Email already exists" });
         }
 
         let authMailForm;
