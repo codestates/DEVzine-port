@@ -22,10 +22,10 @@ module.exports = {
         // {
         //     "message": "Not found"
         // } 
-        
-        return res.send('magazine list');
-
-	},
+        setTimeout(() => {
+            return res.send('no cache, get magazine list from DB');
+        }, 500);
+    },
 
     getArticle: async (req, res) => {
         
