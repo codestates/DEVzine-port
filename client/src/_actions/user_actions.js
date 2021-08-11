@@ -1,35 +1,24 @@
-import axios from 'axios';
 import { SIGNIN_USER, SIGNUP_USER, SIGNOUT_USER, MYPAGE_USER } from './types';
+import { customAxios } from '../utils/customAxios';
 
-const END_POINT = process.env.REACT_APP_API_URL;
-
-export function signinUser(dataToSubmit) {
-  const request = axios
-    .post(`${END_POINT}/user/signin`, dataToSubmit, {
-      withCredentials: true,
-    })
-    .then(res => ['Login success', 'kimcoding']);
+export async function signinUser(dataToSubmit) {
+  const request = await customAxios
+    .post(`/user/signin`, dataToSubmit)
+    .then(res => [res.data.message, 'kimcoding']);
   //! axios
-  // .then(res => [res.data,message, res.data.data.user_name]);
-  // .then(res => ['Login success', 'kimcoding']);
+  // .then(res => [res.data.message, res.data.data.user_name]);
+  // .then(res => [res.data.message, 'kimcoding']);
 
-  //! axios
   return {
     type: SIGNIN_USER,
     payload: request,
-    // payload: {
-    //   message: request[0],
-    //   user_name: request[1],
-    // },
   };
 }
 
-export function signupUser(dataToSubmit) {
-  const request = axios
-    .post(`${END_POINT}/user/signup`, dataToSubmit, {
-      withCredentials: true,
-    })
-    .then(res => 'User created');
+export async function signupUser(dataToSubmit) {
+  const request = await customAxios
+    .post(`/user/signup`, dataToSubmit)
+    .then(res => res.data.message);
   //! axios
   // .then(res => res.data.message);
   // .then(res => 'User created');
@@ -40,12 +29,10 @@ export function signupUser(dataToSubmit) {
   };
 }
 
-export function signoutUser() {
-  const request = axios
-    .post(`${END_POINT}/user/signout`, {
-      withCredentials: true,
-    })
-    .then(res => 'Logout success');
+export async function signoutUser() {
+  const request = await customAxios
+    .post(`/user/signout`)
+    .then(res => res.data.message);
   //! axios
   // .then(res => res.data.message);
   // .then(res => 'Logout success');
@@ -56,23 +43,17 @@ export function signoutUser() {
   };
 }
 
-export function mypageUser(dataToSubmit) {
-  const request = axios
-    .patch(`${END_POINT}/mypage`, dataToSubmit, {
-      withCredentials: true,
-    })
+export async function mypageUser(dataToSubmit) {
+  const request = await customAxios
+    .patch(`/mypage`, dataToSubmit)
     .then(res => ['Login success', 'parkcoding', 'Patch Success']);
   //! axios
-  // .then(res => [res.data,message, res.data.data.user_name]);
-  // .then(res => ['Login success', 'parkcoding']);
+  // .then(res => ['Login success', res.data.data.user_name, res.data.message]);
+  // .then(res => ['Login success', 'parkcoding','Patch Success']);
 
   //! axios
   return {
     type: SIGNIN_USER,
     payload: request,
-    // payload: {
-    //   message: request[0],
-    //   user_name: request[1],
-    // },
   };
 }
