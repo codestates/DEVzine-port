@@ -17,6 +17,7 @@ module.exports = {
         }
         
         try {
+            // need hashing password
             const newUser = new User({
                 user_email,
                 user_password,
@@ -28,25 +29,21 @@ module.exports = {
                     return res.status(409).send({ "message": `${user_email} already exists` });
                 }
             });
+            VerifiedEmail.deleteOne({ temp_email: user_email }, (err) => {
+                if (err) {
+                    return res.status(404).send({ "message": "Not found" });
+                }
+            });
             res.status(201).send({ "message": "User created" });
         } catch (err) {
             res.status(500).send(err);
         }
     },
-        // TODO: 사용자의 email, password를 입력 받아 유효성 검사를 하고, 회원가입 요청을 한다. 
-
-        // status:404
-        // {
-        //     "message": "Not found"
-        // }
 
     signOut: async (req, res) => {
-        
-        // TODO: 로그아웃을 하고 세션을 종료한다.
-        // status:401
-        // {
-        //     "message": "Unauthorized user"
-        // }
+        if (!req.user) {
+            return res.status(401).send({ "message": "Unauthorized user" });
+        }
 
         try {
             req.logout();
@@ -73,21 +70,20 @@ module.exports = {
 	},
 
     deleteUser: async (req, res) => {
-        // TODO: 사용자가 회원 탈퇴한다. 
-        // status: 204
-        // {
-        //     "message": "User deleted"
-        // }
-        // status:400
-        // {
-        //     "message": "Invalid user"
-        // }
-        // status:404
-        // {
-        //     "message": "Not found"
-        // 
-        // status:500
-
-        return res.send('delete user');
+        if (!req.user) {
+            return res.status(400).send({ "message": "Invalid user" });
+        }
+        const { _id } = req.user;
+        try {
+            User.deleteOne({ _id }, (err) => {
+                if (err) {
+                    return res.status(404).send({ "message": "Not found" });
+                }
+            });
+            req.logout();
+            res.status(204).send({ "message": "User deleted" });
+        } catch (err) {
+            res.status(500).send(err);
+        }
     }
 };
