@@ -24,10 +24,6 @@ function SignUpWrapper() {
   const [Language, setLanguage] = useState([]);
 
   useEffect(() => {
-    Auth(false);
-  }, []);
-
-  useEffect(() => {
     if (checkEmail(Email)) {
       setEmail_isValid(true);
     } else {
@@ -46,6 +42,11 @@ function SignUpWrapper() {
     }
   }, [Email, Password, ConfirmPassword]);
 
+  useEffect(() => {
+    Auth(false);
+    setEmail_isValid(true);
+    setPw_isValid(true);
+  }, []);
   const requiredTextInputData = [
     [
       '이메일',
