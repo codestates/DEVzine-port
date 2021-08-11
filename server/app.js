@@ -10,6 +10,7 @@ const app = express();
 const session = require('express-session');
 const passport = require('passport');
 const passportConfig = require('./config/passport');
+const schedule = require('node-schedule');
 require('dotenv').config();
 
 app.use(
@@ -71,6 +72,17 @@ app.use('/mypage', myPageRouter);
 app.use('/subscribe', subscribeRouter);
 app.use('/user', userRouter);
 app.use('/visual', visualRouter);
+
+// test for automation
+// const testJob = schedule.scheduleJob('*/10 * * * * *', function(){
+//   console.log('10초마다 작동하는 코드입니다.');
+// });
+
+const { getRecentArticles } = require('./controller/crawler/article-crawler');
+const automatedCrawler = schedule.scheduleJob('30 06 * * 1-6', function(){
+  getRecentArticles();
+});
+
 
 mongoose
   .connect(process.env.MONGO_STRING, {
