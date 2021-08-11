@@ -1,3 +1,5 @@
+const redisClient = require('../config/redis')
+
 module.exports = {
 
 	getStatisticsForVisual: async (req, res) => {
@@ -47,8 +49,8 @@ module.exports = {
         // {
         //     "message": "Not found"
         // }
-
-        return res.send('visual statistics');
+        redisClient.setex('visualsActivated', 10, 'some statistics');
+        return res.send('no cache, new cache added! visual statistics');
 
 	}
 };
