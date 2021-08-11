@@ -24,20 +24,18 @@ module.exports = {
         user_name,
         ...user_info,
       });
-      console.log(newUser);
       await newUser.save((err) => {
         if (err) {
-          console.log('여긴가1');
           return res
             .status(409)
             .send({ message: `${user_email} already exists` });
         }
       });
-      //   VerifiedEmail.deleteOne({ temp_email: user_email }, (err) => {
-      //     if (err) {
-      //       return res.status(404).send({ message: 'Not found' });
-      //     }
-      //   });
+        VerifiedEmail.deleteOne({ temp_email: user_email }, (err) => {
+            if (err) {
+            return res.status(404).send({ message: 'Not found' });
+            }
+        });
       res.status(201).send({ message: 'User created' });
     } catch (err) {
       res.status(500).send(err);
@@ -58,7 +56,7 @@ module.exports = {
   },
 
   signIn: async (req, res) => {
-    const { user_email } = req.body;
+    const { user_name } = req.body;
     // status:401
     // {
     //     "message": "Invalid password"
@@ -70,7 +68,7 @@ module.exports = {
     // invalid user / passwd 경우 passport.js에서 처리하는데 좀 더 찾아봐야함
     res
       .status(200)
-      .send({ data: { user_name: user_email }, message: 'Login success' });
+      .send({ data: { user_name }, message: 'Login success' });
   },
 
   deleteUser: async (req, res) => {
