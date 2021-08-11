@@ -488,9 +488,12 @@ ol {
 .headertime {
   background-color: BLACK;
   color: YELLOW;
-  text-align: center;
   height: 50px;
-  line-height: 50px; }
+  line-height: 50px;
+  text-align: center; }
+  .headertime .timer {
+    font-weight: bold;
+    margin-left: 5px; }
 
 .headernav {
   height: 70px;
