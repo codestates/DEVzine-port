@@ -21,7 +21,7 @@ function SignUpWrapper() {
   const [Gender, setGender] = useState('');
   const [Age, setAge] = useState('');
   const [Position, setPosition] = useState('');
-  const [Language, setLanguage] = useState('');
+  const [Language, setLanguage] = useState([]);
 
   useEffect(() => {
     Auth(false);
@@ -80,24 +80,35 @@ function SignUpWrapper() {
     ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '20'],
   ];
 
-  const ageage = 20;
+  function postHandler() {
+    selectInputHandler(); //회원가입 시 화면에 있는 선택사항들을 body에 저장하기 위함
 
-  function postHandler(e) {
-    let body3 = {
+    let multiArr = [];
+
+    let multiValues = document.querySelectorAll('.basicmulti div:nth-child(3)');
+    if (multiValues.length - 1 !== 0 && multiValues[multiValues.length - 1]) {
+      for (let el of multiValues[multiValues.length - 1].childNodes) {
+        multiArr.push(el.attributes[2].value);
+      }
+      setLanguage(multiArr);
+    } else {
+      setLanguage([]);
+    }
+    let body = {
       user_email: Email,
       user_password: Password,
       user_name: Name,
       user_info: {
-        user_gender: 'male',
-        user_age: ageage,
-        user_position: '프론트엔드',
-        user_language: ['javascript'],
+        user_gender: Gender,
+        user_age: Age,
+        user_position: Position,
+        user_language: Language,
       },
     };
 
-    console.log('SignUpWrapper :', body3);
+    console.log('SignUpWrapper :', body);
 
-    dispatch(signupUser(body3)).then(res => {
+    dispatch(signupUser(body)).then(res => {
       console.log(res.payload);
       if (res.payload === 'User created') {
         window.location.href = '/signin';
@@ -106,6 +117,7 @@ function SignUpWrapper() {
       }
     });
   }
+
   function radioInputHandler() {
     let checkGender = document.querySelectorAll('.radioinput');
     for (let el of checkGender) {
@@ -119,22 +131,20 @@ function SignUpWrapper() {
     let singleValues = document.querySelectorAll(
       '.basicsingle input:nth-child(3)',
     );
-    let multiValues = document.querySelectorAll('.basicmulti div:nth-child(3)');
     let singleArr = [];
+
     for (let el of singleValues) {
       singleArr.push(el.value);
     }
-    console.log(multiValues);
-    // console.log(singleArr);
+
+    setAge(singleArr[0]);
+    setPosition(singleArr[1]);
   }
 
   async function emailVerify() {
-    // const formData = new FormData();
-    // formData.append('user_email', Email);
     let body = {
       user_email: Email,
     };
-    console.log(body);
     const request = await customAxios.post(`/email/req`, body).then(res => {
       console.log(res);
       return res;
@@ -166,18 +176,19 @@ function SignUpWrapper() {
         />
         <div
           className="signupbtn"
-          onClick={postHandler}
-          // onClick={e =>
-          //   Email &&
-          //   Password &&
-          //   ConfirmPassword &&
-          //   Name &&
-          //   email_isValid &&
-          //   pw_isValid &&
-          //   pw_confirm
-          //     ? postHandler(e)
-          //     : alert('모든 것을 만족해야 합니다.')
-          // }
+          onClick={
+            e =>
+              Email &&
+              Password &&
+              ConfirmPassword &&
+              Name &&
+              email_isValid &&
+              pw_isValid &&
+              pw_confirm
+                ? postHandler()
+                : alert('모든 것을 만족해야 합니다.')
+            // postHandler()
+          }
         >
           회원가입
         </div>

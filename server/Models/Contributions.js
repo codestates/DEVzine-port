@@ -14,7 +14,6 @@ const contributionSchema = mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        unique: true
     },
     contribution_url : {
         type: String,
@@ -27,18 +26,17 @@ const contributionSchema = mongoose.Schema({
     },
     contribution_date : {
         type: Date,
-        default: Date.now()
     },
     status : {
-        type: String,
-        default: 'pending'
+        type: Number,
+        default: 00
     },
     hit : {
         type: Number,
         default: 0
     },
-    user_id : {
-        type: mongoose.Schema.Types.ObjectId
+    user_email : {
+        type: String
     }
 
 });

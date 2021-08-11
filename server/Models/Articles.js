@@ -9,7 +9,6 @@ const articleSchema = mongoose.Schema({
     article_title : {
         type: String,
         required: true,
-        unique: true,
         trim: true
     },
     article_content : {
@@ -19,7 +18,6 @@ const articleSchema = mongoose.Schema({
     },
     article_date : {
         type: Date,
-        default: Date.now()
     },
     article_keyword : {
         type: String,
