@@ -3,7 +3,7 @@ import RadioInputGender from './RadioInputGender';
 import SingleSelect from './SingleSelect';
 import MultiSelect from './MultiSelect';
 
-function Accordion({ radioInputHandler }) {
+function Accordion({ radioInputHandler, selectInputHandler }) {
   const [isOn, setIsOn] = useState(false);
   const radioInputData = [
     ['남성', 'gender', '60px', 0],
@@ -96,7 +96,14 @@ function Accordion({ radioInputHandler }) {
         >
           <div className="singleselectcontents">
             {singleSelectData.map((el, i) => {
-              return <SingleSelect key={i} options={el[0]} name={el[1]} />;
+              return (
+                <SingleSelect
+                  key={i}
+                  options={el[0]}
+                  name={el[1]}
+                  selectInputHandler={selectInputHandler}
+                />
+              );
             })}
           </div>
         </div>
@@ -110,6 +117,7 @@ function Accordion({ radioInputHandler }) {
             <MultiSelect
               options={multiSelectData[0]}
               name={multiSelectData[1]}
+              selectInputHandler={selectInputHandler}
             />
           </div>
         </div>
