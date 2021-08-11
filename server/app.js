@@ -72,6 +72,10 @@ app.use('/subscribe', subscribeRouter);
 app.use('/user', userRouter);
 app.use('/visual', visualRouter);
 
+// crawling test
+const { getAllRecentArticles } = require('./controller/crawler/article-crawler')
+app.get('/crawlingtest', getAllRecentArticles);
+
 mongoose
   .connect(process.env.MONGO_STRING, {
     useNewUrlParser: true, // 버전 5 이상부터 적용되는 새로운 url parser 사용
