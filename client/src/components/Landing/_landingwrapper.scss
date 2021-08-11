@@ -1,7 +1,7 @@
 .container {
   color: BLACK;
-  padding-top: 120px;
   padding-bottom: 84px;
+  padding-top: 240px; //header 포함
 
   @include responsive(T) {
     margin-bottom: 64px;
@@ -16,9 +16,9 @@
   background-color: GREEN;
   border-radius: 20px;
   height: 315px;
+  margin-bottom: 36px;
   overflow: hidden;
   position: relative;
-  margin-bottom: 36px;
 
   @include responsive(T) {
     margin-bottom: 56px;
@@ -36,32 +36,41 @@
   }
 }
 
-.landingContent {
+.landingcontent {
   margin-bottom: 30px;
   text-align: center;
 
   @include responsive(T) {
-    margin-bottom: 0px;
+    margin-bottom: 0;
     text-align: left;
   }
 
   @include responsive(D) {
-    margin-bottom: 0px;
+    margin-bottom: 0;
     text-align: left;
   }
 }
 
-.withUsContainer {
+.withuscontainer {
   background-color: BLACK;
   color: WHITE;
-  width: 100vw;
-  text-align: center;
   height: 502px;
   padding: 120px;
+  text-align: center;
+  width: 100vw;
+}
 
-  button {
-    background-color: yellow;
-    margin-left: 20px;
-    display: inline-block;
+.landingbottombtn {
+  display: block;
+  height: 55px;
+  margin: 0 auto;
+  margin-top: 16px;
+  position: relative;
+  width: 550px;
+
+  div:nth-child(2) {
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 }

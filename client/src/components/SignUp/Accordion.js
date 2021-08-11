@@ -6,15 +6,15 @@ import MultiSelect from './MultiSelect';
 function Accordion({ radioInputHandler, selectInputHandler }) {
   const [isOn, setIsOn] = useState(false);
   const radioInputData = [
-    ['남성', 'gender', '60px', 0],
-    ['여성', 'gender', '60px', 0],
-    ['선택안함', 'gender', '91px', 1],
+    ['male', 'gender', '60px', 0],
+    ['female', 'gender', '60px', 0],
+    ['none', 'gender', '91px', 1],
   ];
   const singleSelectData = [
     [
       [
         { value: '10대', label: '10대' },
-        { value: '20대', label: '20대' },
+        { value: '20', label: '20' },
         { value: '30대', label: '30대' },
         { value: '40대', label: '40대' },
         { value: '50대', label: '50대' },
