@@ -1,26 +1,41 @@
+.headerfix {
+  position: fixed;
+  width: 100vw;
+  z-index: 1001;
+}
+
 .headertime {
   background-color: BLACK;
   color: YELLOW;
+  font-weight: 500;
   height: 50px;
   line-height: 50px;
   text-align: center;
+  font-size: 16px;
 
   .timer {
-    font-weight: bold;
+    font-weight: 900;
     margin-left: 5px;
   }
 }
 
 .headernav {
+  background-color: WHITE;
+  border-bottom: 1px solid #f2f2f2;
   height: 70px;
   line-height: 70px;
+  // border: 1px solid red;
 
   .headerlogo {
     cursor: pointer;
   }
 
   .headerbutton {
-    color: RED;
-    width: 100px;
+    color: WHITE;
+    width: 110px;
+    height: 40px;
+    background-color: #191a20;
+    border-radius: 6px;
+    font-weight: 700;
   }
 }

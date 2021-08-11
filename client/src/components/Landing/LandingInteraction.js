@@ -71,19 +71,17 @@ function Images() {
 
 function LandingInteraction() {
   return (
-    <div>
-      <div className="landinginteractioncontainer">
-        <div className="textwrapper stopdragging">
-          <div className="description">
-            개발하는 당신을 위한 얕고 넓은 지식을 담은 매거진
-          </div>
-          <div className="subject">DEVzine</div>
+    <div className="landinginteractioncontainer">
+      <div className="textwrapper stopdragging">
+        <div className="description">
+          개발하는 당신을 위한 얕고 넓은 지식을 담은 매거진
         </div>
-        <BlinkText />
-        <Canvas>
-          <Images />
-        </Canvas>
+        <div className="subject">DEVzine</div>
       </div>
+      <BlinkText />
+      <Canvas>
+        <Images />
+      </Canvas>
     </div>
   );
 }
