@@ -115,7 +115,7 @@ function LandingWrapper() {
                 <h2>
                   자신의 IT 글을
                   <br />
-                  DEVzine에 기고한다.
+                  DEVzine에 기고한다
                 </h2>
                 <p>하단 기고 신청하기에서 기고 신청할 수 있습니다.</p>
               </div>
