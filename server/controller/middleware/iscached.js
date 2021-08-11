@@ -1,4 +1,5 @@
 const redisClient = require('../../config/redis')
+const { Article } = require('../../Models/Articles')
 const { getRecentArticles } = require('../crawler/article-crawler')
 
 module.exports = {
@@ -13,8 +14,9 @@ module.exports = {
             if (data) {
                 return res.status(200).send(JSON.parse(data));
             }
-            // const result = await getRecentArticles();
-            const result = 'test';
+            const result = await getRecentArticles();
+            // await Article.create(result);
+            
             redisClient.setex('crawlerActivated', 10, JSON.stringify(result)); // TODO: 최종 세팅 때는 24시간으로 설정
             return next();
         })
