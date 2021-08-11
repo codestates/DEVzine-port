@@ -494,7 +494,6 @@ ol {
     top: 0; }
 
 .headerfix {
-  position: fixed;
   width: 100vw;
   z-index: 1001; }
 

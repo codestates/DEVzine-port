@@ -80,22 +80,25 @@ function SignUpWrapper() {
     ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '20'],
   ];
 
+  const ageage = 20;
+
   function postHandler(e) {
-    let body = {
+    let body3 = {
       user_email: Email,
       user_password: Password,
       user_name: Name,
       user_info: {
-        user_gender: Gender,
-        user_age: '20대',
+        user_gender: 'male',
+        user_age: ageage,
         user_position: '프론트엔드',
-        user_language: 'javascript',
+        user_language: ['javascript'],
       },
     };
 
-    console.log('SignUpWrapper :', body);
+    console.log('SignUpWrapper :', body3);
 
-    dispatch(signupUser(body)).then(res => {
+    dispatch(signupUser(body3)).then(res => {
+      console.log(res.payload);
       if (res.payload === 'User created') {
         window.location.href = '/signin';
       } else {
@@ -126,9 +129,13 @@ function SignUpWrapper() {
   }
 
   async function emailVerify() {
-    const formData = new FormData();
-    formData.append('user_email', Email);
-    const request = await customAxios.post(`/email/req`, formData).then(res => {
+    // const formData = new FormData();
+    // formData.append('user_email', Email);
+    let body = {
+      user_email: Email,
+    };
+    console.log(body);
+    const request = await customAxios.post(`/email/req`, body).then(res => {
       console.log(res);
       return res;
     });
@@ -159,17 +166,18 @@ function SignUpWrapper() {
         />
         <div
           className="signupbtn"
-          onClick={e =>
-            Email &&
-            Password &&
-            ConfirmPassword &&
-            Name &&
-            email_isValid &&
-            pw_isValid &&
-            pw_confirm
-              ? postHandler(e)
-              : alert('모든 것을 만족해야 합니다.')
-          }
+          onClick={postHandler}
+          // onClick={e =>
+          //   Email &&
+          //   Password &&
+          //   ConfirmPassword &&
+          //   Name &&
+          //   email_isValid &&
+          //   pw_isValid &&
+          //   pw_confirm
+          //     ? postHandler(e)
+          //     : alert('모든 것을 만족해야 합니다.')
+          // }
         >
           회원가입
         </div>
