@@ -55,7 +55,7 @@ module.exports = {
 	},
 
     signIn: async (req, res) => {
-        const { user_email } = req.body;
+        const { user_name } = req.body;
         // status:401
         // {
         //     "message": "Invalid password"
@@ -65,7 +65,7 @@ module.exports = {
         //     "message": "Invalid user"
         // }
         // invalid user / passwd 경우 passport.js에서 처리하는데 좀 더 찾아봐야함
-        res.status(200).send({ "data": { "user_name": user_email }, "message": "Login success" });
+        res.status(200).send({ "data": { "user_name": user_name }, "message": "Login success" });
 
 	},
 
