@@ -1,0 +1,27 @@
+.singleselectwrapper,
+.multiselectwrapper {
+  transition: opacity 0.7s cubic-bezier(0.42, 0, 0.84, 0.26);
+  .singleselectcontents,
+  .multiselectcontents {
+    .singleselectcontent,
+    .multiselectcontent {
+      width: 350px;
+      height: 36px;
+      margin-top: 24px;
+      display: flex;
+
+      justify-content: space-between;
+      align-items: center;
+      .subjectwrapper {
+        width: 32px;
+        margin-right: 64px;
+        font-weight: bold;
+        color: #191a20;
+      }
+      .basicsingle,
+      .basicmulti {
+        width: 254.97px;
+      }
+    }
+  }
+}

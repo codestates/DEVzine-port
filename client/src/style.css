@@ -513,7 +513,8 @@ ol {
 .signupcontainer {
   position: relative;
   width: 100vw;
-  height: 832px;
+  min-height: 832px;
+  height: auto;
   background: #f2f2f2;
   display: flex;
   justify-content: center; }
@@ -523,40 +524,7 @@ ol {
     flex-direction: column;
     justify-content: start;
     align-items: flex-start;
-    padding-top: 72px; }
-    .signupcontainer .signupwrapper .inputsmallcontainer {
-      display: flex;
-      flex-direction: column;
-      align-items: inherit;
-      width: 360px;
-      height: 72px;
-      margin-bottom: 24px; }
-      .signupcontainer .signupwrapper .inputsmallcontainer .subjectwrapper {
-        display: flex;
-        align-items: center;
-        font-weight: bold;
-        font-size: 16px;
-        line-height: 24px;
-        color: #191a20;
-        margin-bottom: 8px; }
-      .signupcontainer .signupwrapper .inputsmallcontainer .inputsmall {
-        width: 360px;
-        height: 40px;
-        background: #ffffff;
-        border: 1px solid #d9d9d9;
-        border-radius: 8px; }
-      .signupcontainer .signupwrapper .inputsmallcontainer .inputsmall::placeholder {
-        font-weight: normal;
-        font-size: 16px;
-        line-height: 24px;
-        padding-top: 8px;
-        padding-left: 16px;
-        color: #d9d9d9; }
-      .signupcontainer .signupwrapper .inputsmallcontainer .isvalidindicator {
-        color: red;
-        position: absolute;
-        margin-top: 80px;
-        font-size: 12px; }
+    padding: 72px 0; }
     .signupcontainer .signupwrapper .signupbtn {
       display: flex;
       align-items: center;
@@ -571,6 +539,139 @@ ol {
       color: #ffffff;
       cursor: pointer;
       margin-left: 48px; }
+
+.inputsmallcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: inherit;
+  width: 360px;
+  height: 72px;
+  margin-bottom: 24px; }
+  .inputsmallcontainer .subjectwrapper {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    color: #191a20;
+    margin-bottom: 8px; }
+  .inputsmallcontainer .inputsmall {
+    width: 360px;
+    height: 40px;
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px; }
+  .inputsmallcontainer .inputsmall::placeholder {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    padding-top: 8px;
+    padding-left: 16px;
+    color: #d9d9d9; }
+  .inputsmallcontainer .isvalidindicator {
+    color: red;
+    position: absolute;
+    margin-top: 80px;
+    font-size: 12px; }
+
+.accordioncontainer {
+  width: 360px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  z-index: 2000;
+  margin-bottom: 24px;
+  padding-left: 8px; }
+  .accordioncontainer .header {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    color: #191a20; }
+    .accordioncontainer .header .btn {
+      right: 8px;
+      font-size: 14px;
+      position: absolute;
+      cursor: pointer; }
+  .accordioncontainer .contentswrapper {
+    width: 100%;
+    overflow: hidden;
+    transition: height 0.7s cubic-bezier(0.42, 0, 0.84, 0.26); }
+
+.radiowrapper {
+  display: flex;
+  transition: opacity 0.7s;
+  margin-top: 24px;
+  transition: opacity 0.7s cubic-bezier(0.42, 0, 0.84, 0.26); }
+  .radiowrapper .subjectwrapper {
+    width: 32px;
+    margin-right: 64px;
+    font-weight: bold;
+    color: #191a20; }
+  .radiowrapper .radiocontents {
+    width: 263px;
+    display: flex;
+    justify-content: space-between; }
+    .radiowrapper .radiocontents .radiocontent .radioinput {
+      margin-right: 6px; }
+    .radiowrapper .radiocontents .radiocontent .radioinput:checked + label {
+      font-weight: bold;
+      color: #191a20; }
+    .radiowrapper .radiocontents .radiocontent .radiorabel {
+      font-weight: bold;
+      color: #9b9b9c; }
+
+.singleselectwrapper,
+.multiselectwrapper {
+  transition: opacity 0.7s cubic-bezier(0.42, 0, 0.84, 0.26); }
+  .singleselectwrapper .singleselectcontents .singleselectcontent,
+  .singleselectwrapper .singleselectcontents .multiselectcontent,
+  .singleselectwrapper .multiselectcontents .singleselectcontent,
+  .singleselectwrapper .multiselectcontents .multiselectcontent,
+  .multiselectwrapper .singleselectcontents .singleselectcontent,
+  .multiselectwrapper .singleselectcontents .multiselectcontent,
+  .multiselectwrapper .multiselectcontents .singleselectcontent,
+  .multiselectwrapper .multiselectcontents .multiselectcontent {
+    width: 350px;
+    height: 36px;
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+    .singleselectwrapper .singleselectcontents .singleselectcontent .subjectwrapper,
+    .singleselectwrapper .singleselectcontents .multiselectcontent .subjectwrapper,
+    .singleselectwrapper .multiselectcontents .singleselectcontent .subjectwrapper,
+    .singleselectwrapper .multiselectcontents .multiselectcontent .subjectwrapper,
+    .multiselectwrapper .singleselectcontents .singleselectcontent .subjectwrapper,
+    .multiselectwrapper .singleselectcontents .multiselectcontent .subjectwrapper,
+    .multiselectwrapper .multiselectcontents .singleselectcontent .subjectwrapper,
+    .multiselectwrapper .multiselectcontents .multiselectcontent .subjectwrapper {
+      width: 32px;
+      margin-right: 64px;
+      font-weight: bold;
+      color: #191a20; }
+    .singleselectwrapper .singleselectcontents .singleselectcontent .basicsingle,
+    .singleselectwrapper .singleselectcontents .singleselectcontent .basicmulti,
+    .singleselectwrapper .singleselectcontents .multiselectcontent .basicsingle,
+    .singleselectwrapper .singleselectcontents .multiselectcontent .basicmulti,
+    .singleselectwrapper .multiselectcontents .singleselectcontent .basicsingle,
+    .singleselectwrapper .multiselectcontents .singleselectcontent .basicmulti,
+    .singleselectwrapper .multiselectcontents .multiselectcontent .basicsingle,
+    .singleselectwrapper .multiselectcontents .multiselectcontent .basicmulti,
+    .multiselectwrapper .singleselectcontents .singleselectcontent .basicsingle,
+    .multiselectwrapper .singleselectcontents .singleselectcontent .basicmulti,
+    .multiselectwrapper .singleselectcontents .multiselectcontent .basicsingle,
+    .multiselectwrapper .singleselectcontents .multiselectcontent .basicmulti,
+    .multiselectwrapper .multiselectcontents .singleselectcontent .basicsingle,
+    .multiselectwrapper .multiselectcontents .singleselectcontent .basicmulti,
+    .multiselectwrapper .multiselectcontents .multiselectcontent .basicsingle,
+    .multiselectwrapper .multiselectcontents .multiselectcontent .basicmulti {
+      width: 254.97px; }
 
 .article {
   background-color: YELLOW;

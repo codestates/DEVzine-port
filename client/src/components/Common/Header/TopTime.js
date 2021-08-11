@@ -1,5 +1,5 @@
 export function remainTime() {
-  function TopTime() {
+  function getTime() {
     let fixDate = new Date().setHours(7, 0, 0);
     let currDate = new Date();
 
