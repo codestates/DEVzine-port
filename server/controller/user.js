@@ -4,6 +4,7 @@ const smtpTransport = require('nodemailer-smtp-transport');
 const ejs = require('ejs');
 require('dotenv').config();
 const { VerifiedEmail } = require('../Models/Verifiedemails');
+const { User } = require('../Models/Users');
 
 const transporter = nodemailer.createTransport(smtpTransport({
     service: 'gmail',
@@ -24,7 +25,7 @@ module.exports = {
         }
 
         let authMailForm;
-        ejs.renderFile(__dirname + '../ejs/authMail.ejs', { temp_email }, (err, data) => {
+        ejs.renderFile('../form/authMail.ejs', { temp_email }, (err, data) => {
             if (err) console.log(err);
             authMailForm = data;
         })
@@ -66,16 +67,31 @@ module.exports = {
     },
 
 	signUp: async (req, res) => {
-        const { user_email, user_name } = req.body;
-        const user_info = JSON.parse(req.body.user_info);
-
+        const { user_email, user_password, user_name, user_info } = req.body;
+        // const user_info = JSON.parse(req.body.user_info);
+        
         const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
         if (!emailRegex.test(user_email)) {
             return res.status(400).send({ "message": "Invalild email" });
         }
 
         try {
-            // 
+            const tempUser = await VerifiedEmail.findOne({ temp_email: user_email });
+            if (!tempUser) {
+                return res.status(400).send({ "message": "Not verified email" });
+            }
+            const newUser = new User({
+                user_email,
+                user_password,
+                user_name,
+                user_info
+            });
+            await newUser.save((err) => {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+            });
+            res.status(201).send({ "message": "User created" });
         } catch (err) {
             if (err.code === 11000) {
                 return res.status(409).send({ "message": `${user_email} already exists` });
@@ -84,22 +100,6 @@ module.exports = {
         return res.status(500).send(err);
     },
         // TODO: 사용자의 email, password를 입력 받아 유효성 검사를 하고, 회원가입 요청을 한다. 
-        // req.body
-        // {
-        //     "user_email": "example@gmail.com",
-        //     "user_password": "string",
-        //     "user_name": "string",
-        //     "user_info": {
-        //         "user_gender": "string",
-        //         "user_age": number,
-        //         "user_position": "string",
-        //         "user_language": [],
-        //     }	
-        // }
-        // status: 201
-        // {
-        //     "message": "User created"
-        // }
 
         // status:404
         // {
