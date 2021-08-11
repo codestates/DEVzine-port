@@ -2,7 +2,8 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 module.exports = {
-    scrapeITWorld = async () => {
+
+    scrapeITWorld : async () => {
         
         let articles = [];
         const html = await axios.get(url);
@@ -51,4 +52,5 @@ module.exports = {
         return articles;
         
     }
+    
 }
