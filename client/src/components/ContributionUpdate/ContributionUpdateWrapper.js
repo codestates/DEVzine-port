@@ -1,9 +1,7 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Auth from '../../hoc/auth';
 import AlertModal from '../Common/AlertModal/AlertModal';
-
-const END_POINT = process.env.REACT_APP_API_URL;
+import { customAxios } from '../../utils/customAxios';
 
 function ContributionUpdateWrapper() {
   const [keyword, setKeyword] = useState('게임');
@@ -22,22 +20,16 @@ function ContributionUpdateWrapper() {
     'AI/로봇',
   ];
 
-  useEffect(() => {
-    const getData = () => {
-      axios
-        .get(`${END_POINT}/magazine/contribution`, {
-          withCredentials: true,
-        })
-        .then(res => {
-          setKeyword(res.data.data.contribution_keyword);
-          setTitle(res.data.data.contribution_title);
-          setContent(res.data.data.contribution_content);
-        })
-        .catch(err => {
-          alert('기고 정보를 받아오는데 실패하였습니다.');
-        });
-    };
-    getData();
+  useEffect(async () => {
+    const requestGet = await customAxios
+      .get('/magazine/contribution')
+      .then(res => res.data.data.contribution_keyword)
+      .catch(err => alert('기고 정보를 받아오는데 실패하였습니다.'));
+
+    setKeyword(requestGet);
+    // setKeyword(requestGet.contribution_keyword);
+    // setTitle(requestGet.contribution_title);
+    // setContent(requestGet.contribution_content);
   }, []);
 
   useEffect(() => {
@@ -69,14 +61,12 @@ function ContributionUpdateWrapper() {
       contibution_keyword: keyword,
     };
 
-    return axios
-      .post(`${END_POINT}/contribution`, body, { withCredentials: true })
-      .then(res => {
-        if (res.status === 200) {
-          alert('기고수정요청이 완료되었습니다.');
-          // window.location.href = '/mypage';
-        } else alert('기고수정요청이 실패하였습니다.');
-      });
+    return customAxios.post('/contribution', body).then(res => {
+      if (res.status === 200) {
+        alert('기고수정요청이 완료되었습니다.');
+        // window.location.href = '/mypage';
+      } else alert('기고수정요청이 실패하였습니다.');
+    });
   }
 
   const closeModal = () => {
