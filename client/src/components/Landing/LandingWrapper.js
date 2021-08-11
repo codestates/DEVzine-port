@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { customAxios } from '../../utils/customAxios';
 import landing01 from '../../assets/images/landing01.svg';
 import landing02 from '../../assets/images/landing02.svg';
 import landing03 from '../../assets/images/landing03.svg';
 import landing04 from '../../assets/images/landing04.svg';
 
-const END_POINT = process.env.REACT_APP_API_URL;
-
 function LandingWrapper() {
-  const [subscribers, setSubscribers] = useState('0');
+  const [subscribers, setSubscribers] = useState('');
 
-  useEffect(() => {
-    axios
-      .get(`${END_POINT}/landing`, { withCredentials: true })
-      .then(res => setSubscribers(res.data.data.total_subscribers))
-      .catch(err => {
-        alert('회원 수 정보를 받아오는데 실패하였습니다.');
-      });
+  useEffect(async () => {
+    const requestGet = await customAxios
+      .get('/landing')
+      .then(res => res.data.data.setSubscribers)
+      .catch(err => alert('회원 수 정보를 받아오는데 실패하였습니다.'));
+
+    setSubscribers(requestGet);
   }, []);
 
   return (
