@@ -4,6 +4,8 @@ import { signupUser } from '../../_actions/user_actions';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import Accordion from './Accordion';
 import { checkEmail, checkPassword } from '../../utils/validation';
+import Auth from '../../hoc/auth';
+import { customAxios } from '../../utils/customAxios';
 
 function SignUpWrapper() {
   const dispatch = useDispatch();
@@ -17,6 +19,13 @@ function SignUpWrapper() {
   const [Password, setPassword] = useState('');
   const [ConfirmPassword, setConfirmPassword] = useState('');
   const [Gender, setGender] = useState('');
+  const [Age, setAge] = useState('');
+  const [Position, setPosition] = useState('');
+  const [Language, setLanguage] = useState('');
+
+  useEffect(() => {
+    Auth(false);
+  }, []);
 
   useEffect(() => {
     if (checkEmail(Email)) {
@@ -102,6 +111,29 @@ function SignUpWrapper() {
       }
     }
   }
+
+  function selectInputHandler() {
+    let singleValues = document.querySelectorAll(
+      '.basicsingle input:nth-child(3)',
+    );
+    let multiValues = document.querySelectorAll('.basicmulti div:nth-child(3)');
+    let singleArr = [];
+    for (let el of singleValues) {
+      singleArr.push(el.value);
+    }
+    console.log(multiValues);
+    // console.log(singleArr);
+  }
+
+  async function emailVerify() {
+    const formData = new FormData();
+    formData.append('user_email', Email);
+    const request = await customAxios.post(`/email/req`, formData).then(res => {
+      console.log(res);
+      return res;
+    });
+    return request;
+  }
   return (
     <div className="signupcontainer">
       <div className="signupwrapper">
@@ -117,10 +149,14 @@ function SignUpWrapper() {
               type={el[5]}
               isValid={el[6]}
               maxLength={el[7]}
+              emailVerify={emailVerify}
             />
           );
         })}
-        <Accordion radioInputHandler={radioInputHandler} />
+        <Accordion
+          radioInputHandler={radioInputHandler}
+          selectInputHandler={selectInputHandler}
+        />
         <div
           className="signupbtn"
           onClick={e =>
