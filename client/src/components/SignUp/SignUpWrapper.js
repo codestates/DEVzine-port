@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { signupUser } from '../../_actions/user_actions';
 import TextInputGenderRequired from './TextInputGenderRequired';
+import Accordion from './Accordion';
 import { checkEmail, checkPassword } from '../../utils/validation';
 
 function SignUpWrapper() {
@@ -15,6 +16,7 @@ function SignUpWrapper() {
   const [Name, setName] = useState('');
   const [Password, setPassword] = useState('');
   const [ConfirmPassword, setConfirmPassword] = useState('');
+  const [Gender, setGender] = useState('');
 
   useEffect(() => {
     if (checkEmail(Email)) {
@@ -75,7 +77,7 @@ function SignUpWrapper() {
       user_password: Password,
       user_name: Name,
       user_info: {
-        user_gender: 'female',
+        user_gender: Gender,
         user_age: '20대',
         user_position: '프론트엔드',
         user_language: 'javascript',
@@ -92,7 +94,14 @@ function SignUpWrapper() {
       }
     });
   }
-
+  function radioInputHandler() {
+    let checkGender = document.querySelectorAll('.radioinput');
+    for (let el of checkGender) {
+      if (el.checked === true) {
+        setGender(el.value);
+      }
+    }
+  }
   return (
     <div className="signupcontainer">
       <div className="signupwrapper">
@@ -111,6 +120,7 @@ function SignUpWrapper() {
             />
           );
         })}
+        <Accordion radioInputHandler={radioInputHandler} />
         <div
           className="signupbtn"
           onClick={e =>
