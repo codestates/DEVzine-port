@@ -33,7 +33,6 @@ module.exports = () => {
 				return done(null, false, { "message": "Invalid user" });
 			}
 			// ! 패스워드 비교 함수 작성 필요 지금처럼 단순 비교x
-			// console.log(user.password);
 			if (user.user_password !== password) { // 유저의 패스워드가 일치하지 않으면 에러를 반환
 				return done(null, false, { "message": "Invalid password" });
 			}
