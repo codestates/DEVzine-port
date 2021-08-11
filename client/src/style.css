@@ -1,4 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
+* {
+  font-family: 'Noto Sans KR', sans-serif; }
+
+.stopdragging {
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none; }
+
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -491,9 +501,6 @@ ol {
     color: RED;
     width: 100px; }
 
-button {
-  font-weight: bold; }
-
 .signinform input {
   border: 1px solid BLACK; }
 
@@ -569,6 +576,53 @@ button {
   height: 100px;
   width: 100px; }
 
+.modalbackdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+  place-items: center;
+  display: grid;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 900; }
+
+.modalcontainer {
+  height: 15rem;
+  margin: 120px auto;
+  text-align: center; }
+
+.modalview {
+  width: 360px;
+  height: 241px;
+  background-color: WHITE;
+  border-radius: 20px;
+  position: relative; }
+  .modalview .desc {
+    color: #191a20;
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+
+.closebtn {
+  color: #191a20;
+  background-color: #d9d9d9;
+  width: 265px;
+  height: 55px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 16px;
+  font-weight: bold;
+  border-radius: 8px; }
+
+.alermodalbox {
+  border: 1px solid red;
+  width: 0px;
+  height: 0px; }
+
 .landinginteractioncontainer {
   background: #191a20;
   width: 100vw;
@@ -603,5 +657,16 @@ button {
       margin-top: 12px;
       font-weight: bold;
       font-size: 80px; }
+
+.emailalerttext {
+  height: 20px; }
+
+.commonButton {
+  border-radius: 8px;
+  width: 265px;
+  height: 55px;
+  line-height: 55px;
+  text-align: center;
+  font-weight: bold; }
 
 /*# sourceMappingURL=style.css.map */

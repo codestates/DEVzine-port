@@ -1,13 +1,26 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Auth from '../../hoc/auth';
+import AlertModal from '../Common/AlertModal/AlertModal';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
 function ContributionUpdateWrapper() {
-  const [keyword, setKeyword] = useState('');
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [keyword, setKeyword] = useState('게임');
+  const [title, setTitle] = useState('nothing');
+  const [content, setContent] = useState('nothing');
+  const [modalOpen, setModalOpen] = useState(false);
+  let selectOptions = [
+    '게임',
+    '모바일',
+    '보안',
+    '블록체인',
+    '빅데이터',
+    '코딩',
+    '클라우드',
+    '퍼스널 컴퓨팅',
+    'AI/로봇',
+  ];
 
   useEffect(() => {
     const getData = () => {
@@ -16,8 +29,7 @@ function ContributionUpdateWrapper() {
           withCredentials: true,
         })
         .then(res => {
-          // setKeyword(res.data.data.contribution_keyword);
-          setKeyword('test');
+          setKeyword(res.data.data.contribution_keyword);
           setTitle(res.data.data.contribution_title);
           setContent(res.data.data.contribution_content);
         })
@@ -47,6 +59,10 @@ function ContributionUpdateWrapper() {
   function onSubmitHandler(e) {
     e.preventDefault();
 
+    if (title === '' || content === '' || keyword === '') {
+      return setModalOpen(true);
+    }
+
     let body = {
       contribution_title: title,
       contribution_content: content,
@@ -56,20 +72,26 @@ function ContributionUpdateWrapper() {
     return axios
       .post(`${END_POINT}/contribution`, body, { withCredentials: true })
       .then(res => {
-        if (res.status === 200) alert('기고수정요청이 완료되었습니다.');
-        else alert('기고수정요청이 실패하였습니다.');
+        if (res.status === 200) {
+          alert('기고수정요청이 완료되었습니다.');
+          // window.location.href = '/mypage';
+        } else alert('기고수정요청이 실패하였습니다.');
       });
   }
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <>
       <form onSubmit={e => onSubmitHandler(e)} className="signinform">
-        <input
-          type="text"
-          onChange={e => onKeywordHandler(e)}
-          placeholder="키워드"
-          defaultValue={keyword}
-        />
+        <select onChange={e => onKeywordHandler(e)} value={keyword}>
+          <option value="">키워드 선택</option>
+          {selectOptions.map(option => (
+            <option value={option}>{option}</option>
+          ))}
+        </select>
 
         <br />
         <input
@@ -96,6 +118,14 @@ function ContributionUpdateWrapper() {
         </button>
       </form>
       <div>수정 완료 후엔 심사가 다시 시작해요.</div>
+      <div className="alermodalbox">
+        <AlertModal
+          open={modalOpen}
+          close={closeModal}
+          alertString={'모두 입력해야 합니다.'}
+          alertBtn="확인"
+        />
+      </div>
     </>
   );
 }
