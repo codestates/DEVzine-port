@@ -4,7 +4,7 @@ const { scrapeCodingWorld } = require('./scrape-codingworld')
 
 module.exports = {
 
-    getAllRecentArticles : async (req, res) => {
+    getRecentArticles : async (req, res) => {
 
         let boanNewsData= await scrapeBoanNews()
         let ITWorldData = await scrapeITWorld()
