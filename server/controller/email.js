@@ -18,7 +18,6 @@ const transporter = nodemailer.createTransport(
 
 module.exports = {
   reqUserEmail: async (req, res) => {
-    console.log(req.body);
     const { user_email } = req.body;
     const emailRegex =
       /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -50,10 +49,9 @@ module.exports = {
       },
       (err, info) => {
         if (err) {
-          console.log('Email sent2: ' + info.response);
           return res.status(404).send({ message: 'Not found' });
         } else {
-          console.log('Email sent1: ' + info.response);
+          console.log('Email sent: ' + info.response);
           transporter.close();
         }
       }
