@@ -11,8 +11,7 @@ module.exports = {
         let codingWorldData = await scrapeCodingWorld()
 
         let data = [ ...boanNewsData, ...ITWorldData, ...codingWorldData ]
-
-        return res.json({"count": data.length, "data": data});
+        return data
 
     }
     
