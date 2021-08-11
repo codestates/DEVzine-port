@@ -434,7 +434,7 @@ ol {
 .container {
   color: BLACK;
   padding-bottom: 84px;
-  padding-top: 240px; }
+  padding-top: 120px; }
   @media screen and (min-width: 768px) {
     .container {
       margin-bottom: 64px; } }
@@ -443,7 +443,7 @@ ol {
       margin-bottom: 22px; } }
 
 .landingbackground {
-  background-color: GREEN;
+  background-color: #f2f2f2;
   border-radius: 20px;
   height: 315px;
   margin-bottom: 36px;
@@ -466,26 +466,41 @@ ol {
   text-align: center; }
   @media screen and (min-width: 768px) {
     .landingcontent {
-      margin-bottom: 0;
-      text-align: left; } }
-  @media screen and (min-width: 1200px) {
-    .landingcontent {
-      margin-bottom: 0;
-      text-align: left; } }
+      text-align: left;
+      align-items: center;
+      margin-top: 88px; } }
+  .landingcontent h2 {
+    font-size: 30px;
+    margin-bottom: 20px; }
+    @media screen and (min-width: 1200px) {
+      .landingcontent h2 {
+        font-size: 36px; } }
+  .landingcontent p {
+    color: #3f4150;
+    font-size: 18px; }
 
 .withuscontainer {
-  background-color: BLACK;
+  background-color: #191a20;
   color: WHITE;
-  height: 502px;
-  padding: 120px;
+  height: 500px;
+  padding-top: 105px;
   text-align: center;
-  width: 100vw; }
+  width: 100vw;
+  font-size: 24px;
+  font-weight: 500; }
+  .withuscontainer h2 {
+    font-size: 60px;
+    margin-bottom: 16px;
+    color: WHITE; }
+  .withuscontainer p {
+    margin-top: 50px;
+    color: WHITE; }
 
 .landingbottombtn {
   display: block;
   height: 55px;
   margin: 0 auto;
-  margin-top: 16px;
+  margin-top: 20px;
   position: relative;
   width: 550px; }
   .landingbottombtn div:nth-child(2) {
@@ -494,7 +509,8 @@ ol {
     top: 0; }
 
 .headerfix {
-  width: 100vw;
+  position: fixed;
+  width: 100%;
   z-index: 1001; }
 
 .headertime {
@@ -504,17 +520,47 @@ ol {
   height: 50px;
   line-height: 50px;
   text-align: center;
-  font-size: 16px; }
+  font-size: 16px;
+  overflow: hidden; }
   .headertime .timer {
     font-weight: 900;
     margin-left: 5px; }
 
+.headernavwrapper {
+  width: 100%;
+  background-color: WHITE; }
+
 .headernav {
-  background-color: WHITE;
   border-bottom: 1px solid #f2f2f2;
   height: 70px;
-  line-height: 70px; }
+  line-height: 70px;
+  width: 98%;
+  margin: 0 auto;
+  position: relative; }
+  @media screen and (min-width: 1200px) {
+    .headernav {
+      width: 1120px; } }
   .headernav .headerlogo {
+    cursor: pointer;
+    padding-top: 22px; }
+  .headernav .leftbox {
+    width: 449.5px;
+    font-size: 16px;
+    font-weight: 700;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%); }
+    .headernav .leftbox span {
+      margin: 20px;
+      cursor: pointer; }
+  .headernav .headermenu {
+    height: 70px;
+    padding-top: 10px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
     cursor: pointer; }
   .headernav .headerbutton {
     color: WHITE;
@@ -529,6 +575,73 @@ ol {
 
 .signinform button {
   border: 1px solid BLACK; }
+
+.footercontainer {
+  height: 220px;
+  width: 100%;
+  color: #191a20; }
+  .footercontainer .footerinner {
+    width: 98%;
+    margin: 0 auto;
+    position: relative;
+    padding-top: 36px; }
+    @media screen and (min-width: 1200px) {
+      .footercontainer .footerinner {
+        width: 1120px; } }
+
+.footerright {
+  width: 98%;
+  text-align: center; }
+  @media screen and (min-width: 768px) {
+    .footerright {
+      text-align: left;
+      width: 510px;
+      position: absolute;
+      left: 0; } }
+  .footerright .cstitle {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 6px; }
+    .footerright .cstitle img {
+      margin-left: 2px; }
+  .footerright .cscontact {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 6px; }
+  .footerright .csworktime {
+    font-size: 14px;
+    font-weight: 400; }
+  .footerright .okteam1 {
+    color: #8c8d96;
+    font-size: 14px;
+    padding-top: 24px; }
+    .footerright .okteam1 a {
+      margin: 3px; }
+    .footerright .okteam1 span {
+      cursor: pointer;
+      margin: 3px; }
+  .footerright .okteam2 {
+    color: #8c8d96;
+    font-size: 14px;
+    padding-top: 6px; }
+    .footerright .okteam2 a {
+      margin: 3px; }
+
+.footerleft {
+  width: 265px;
+  position: absolute;
+  right: 0;
+  font-weight: 700;
+  font-size: 18px; }
+  .footerleft div {
+    cursor: pointer;
+    position: relative;
+    height: 35px;
+    margin-bottom: 12px; }
+  .footerleft div img {
+    position: absolute;
+    bottom: 0;
+    left: 0; }
 
 .signupcontainer {
   position: relative;
@@ -752,7 +865,7 @@ ol {
   width: 100vw;
   height: 700px;
   position: relative;
-  top: 120px;
+  top: 0px;
   display: flex;
   justify-content: center; }
   .landinginteractioncontainer .textwrapper {
@@ -763,8 +876,7 @@ ol {
     height: 166px;
     position: absolute;
     left: 0;
-    top: 103px;
-    color: #fff; }
+    top: 103px; }
     .landinginteractioncontainer .textwrapper .description {
       display: flex;
       align-items: center;
@@ -772,7 +884,9 @@ ol {
       width: 100vw;
       height: 26px;
       font-weight: bold;
-      font-size: 24px; }
+      font-size: 24px;
+      color: #fff;
+      text-align: center; }
     .landinginteractioncontainer .textwrapper .subject {
       display: flex;
       align-items: center;
@@ -781,7 +895,8 @@ ol {
       height: 75px;
       margin-top: 12px;
       font-weight: bold;
-      font-size: 80px; }
+      font-size: 80px;
+      color: #fff; }
 
 .emailalerttext {
   height: 20px; }
@@ -793,6 +908,7 @@ ol {
   height: 55px;
   line-height: 55px;
   text-align: center;
-  width: 265px; }
+  width: 265px;
+  font-size: 18px; }
 
 /*# sourceMappingURL=style.css.map */
