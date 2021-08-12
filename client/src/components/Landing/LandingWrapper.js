@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { customAxios } from '../../utils/customAxios';
 import Button from '../Common/Button/Button';
 import landing01 from '../../assets/images/landing01.svg';
@@ -128,19 +129,25 @@ function LandingWrapper() {
         구독하고 있어요.
         <p>많은 분들이 찾는 DEVzine과 함께 해요!</p>
         <div className="landingbottombtn">
-          <Button
-            subject="구독하기"
-            color="#191A20"
-            backgroundColor="#FFDD14"
-            className="btn1"
-            onClickHandle={() => (window.location.href = '/subscribe')}
-          />
-          <Button
-            subject="매거진 보기"
-            color="#191A20"
-            backgroundColor="#FFDD14"
-            onClickHandle={() => (window.location.href = '/articlelist')}
-          />
+          <div>
+            <Link to="/subscribe">
+              <Button
+                subject="구독하기"
+                color="#191A20"
+                backgroundColor="#FFDD14"
+                className="btn1"
+              />
+            </Link>
+          </div>
+          <div>
+            <Link to="/articlelist">
+              <Button
+                subject="매거진 보기"
+                color="#191A20"
+                backgroundColor="#FFDD14"
+              />
+            </Link>
+          </div>
         </div>
       </div>
     </>
