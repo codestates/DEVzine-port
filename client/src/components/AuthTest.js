@@ -4,7 +4,7 @@ import { customAxios } from '../utils/customAxios';
 function AuthTest({ }) {
   const [state, setState] = useState('');
   useEffect(() => {
-    customAxios.get('/testauth').then(res => {
+    customAxios.get('/authtest').then(res => {
       console.log(res);
 			setState(res.data);
       return res;
