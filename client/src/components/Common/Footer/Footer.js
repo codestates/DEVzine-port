@@ -25,7 +25,7 @@ function Footer() {
             </p>
             <p className="cscontact">02-1004-1004</p>
             <p className="csworktime">
-              평일 09:00 ~ 18:00 (주말 & 공휴일 제외)
+              평일 및 토요일 09:00 ~ 18:00 (일요일 & 공휴일 제외)
             </p>
             <div className="okteam1">
               회사명 : 200ok | 서비스 소개 :
