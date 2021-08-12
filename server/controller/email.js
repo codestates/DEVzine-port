@@ -5,6 +5,8 @@ const { User } = require('../Models/Users');
 const { VerifiedEmail } = require('../Models/Verifiedemails');
 require('dotenv').config();
 
+const CLIENT_ENDPOINT=process.env.DEVZINE_CLIENT_ENDPOINT;
+
 const transporter = nodemailer.createTransport(
   smtpTransport({
     service: 'gmail',
@@ -33,7 +35,7 @@ module.exports = {
     let authMailForm;
     ejs.renderFile(
       __dirname + '/ejsform/authMail.ejs',
-      { user_email },
+      { CLIENT_ENDPOINT, user_email },
       (err, data) => {
         if (err) console.log(err);
         authMailForm = data;
