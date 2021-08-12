@@ -13,6 +13,9 @@ const passportConfig = require('./config/passport');
 const schedule = require('node-schedule');
 require('dotenv').config();
 
+const robots = require('express-robots-txt')
+app.use(robots({UserAgent: '*', Disallow: '/'}))
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -41,7 +44,7 @@ app.get('/', (req, res) => {
 });
 
 const { isAuthenticated } = require('./controller/middleware/isAuthenticated');
-app.get('/authtest', isAuthenticated, (req, res) => {
+app.get('/testauth', isAuthenticated, (req, res) => {
 	// let user = req.user;
 	// if (user) {
 		res.send(`user: ${req.user}`);
