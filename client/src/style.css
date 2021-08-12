@@ -482,12 +482,15 @@ ol {
 .withuscontainer {
   background-color: #191a20;
   color: WHITE;
-  height: 500px;
+  height: 570px;
   padding-top: 105px;
   text-align: center;
   width: 100vw;
   font-size: 24px;
   font-weight: 500; }
+  @media screen and (min-width: 768px) {
+    .withuscontainer {
+      height: 500px; } }
   .withuscontainer h2 {
     font-size: 60px;
     margin-bottom: 16px;
@@ -497,16 +500,32 @@ ol {
     color: WHITE; }
 
 .landingbottombtn {
-  display: block;
-  height: 55px;
+  width: 80%;
   margin: 0 auto;
-  margin-top: 20px;
   position: relative;
-  width: 550px; }
-  .landingbottombtn div:nth-child(2) {
-    position: absolute;
-    right: 0;
-    top: 0; }
+  display: block; }
+  @media screen and (min-width: 768px) {
+    .landingbottombtn {
+      width: 550px;
+      height: 55px;
+      position: relative;
+      display: block;
+      height: 110px; }
+      .landingbottombtn div {
+        width: 265px; }
+      .landingbottombtn div:nth-child(1) {
+        width: 265px;
+        position: absolute;
+        top: 0;
+        left: 0; }
+      .landingbottombtn div:nth-child(2) {
+        width: 265px;
+        position: absolute;
+        top: 0;
+        right: 0; } }
+  .landingbottombtn div {
+    margin: 0 auto;
+    margin-top: 20px; }
 
 .headerfix {
   position: fixed;
@@ -910,5 +929,12 @@ ol {
   text-align: center;
   width: 265px;
   font-size: 18px; }
+
+.navbarbox {
+  height: 600px;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid red;
+  z-index: 1002; }
 
 /*# sourceMappingURL=style.css.map */
