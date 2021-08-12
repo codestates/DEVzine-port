@@ -4,7 +4,7 @@
   height: 700px;
   // position: fixed;
   position: relative;
-  top: 120px;
+  top: 0px;
   display: flex;
   justify-content: center;
 
@@ -17,7 +17,6 @@
     position: absolute;
     left: 0;
     top: 103px;
-    color: #fff;
 
     .description {
       display: flex;
@@ -27,6 +26,8 @@
       height: 26px;
       font-weight: bold;
       font-size: 24px;
+      color: #fff;
+      text-align: center;
     }
 
     .subject {
@@ -38,6 +39,7 @@
       margin-top: 12px;
       font-weight: bold;
       font-size: 80px;
+      color: #fff;
     }
   }
 }

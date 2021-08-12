@@ -16,14 +16,14 @@ const userSchema = mongoose.Schema({
         unique: true
     },
     user_gender: String,
-    user_age: Number,
+    user_age: String,
     user_position: String,
     user_language: Array,
     subscribed: {
         type: Boolean,
         default: false
     },
-    contribution_id: [{type: mongoose.Schema.Types.ObjectId, ref: 'contributions'}]
+    contribution_id: Array
 });
 
 const User = mongoose.model("users", userSchema);

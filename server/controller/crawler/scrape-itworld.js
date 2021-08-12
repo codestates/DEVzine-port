@@ -4,7 +4,7 @@ const { getSupportInfo } = require('prettier');
 
 module.exports = {
 
-    scrapeITWorld : async () => {
+    scrapeITWorld : async (compareDate = null) => {
         
         const getArticlesFromURL = async (url) => {
 
@@ -25,6 +25,10 @@ module.exports = {
                     date = new Date(Date.now());
                     date.setHours(date.getHours() + 9); // 한국 표준시간으로 변환
                     date.setDate(date.getDate() - 1);
+                } else if (compareDate && date.includes(compareDate)) {
+                    date = new Date(Date.now());
+                    date.setHours(date.getHours() + 9); // 한국 표준시간으로 변환
+                    date.setDate(date.getDate() - 2);
                 } else {
                     continue;
                 }
@@ -43,7 +47,7 @@ module.exports = {
                     "article_title": title,
                     "article_content": content,
                     "article_date": date,
-                    "article_url": 'https://www.itworld.co.kr/' + url, 
+                    "article_url": 'https://www.itworld.co.kr' + url, 
                     "article_keyword": keyword,
                     "article_publisher": "It World Korea"
                 }

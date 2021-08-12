@@ -13,6 +13,9 @@ const passportConfig = require('./config/passport');
 const schedule = require('node-schedule');
 require('dotenv').config();
 
+const robots = require('express-robots-txt')
+app.use(robots({UserAgent: '*', Disallow: '/'}))
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -73,16 +76,16 @@ app.use('/subscribe', subscribeRouter);
 app.use('/user', userRouter);
 app.use('/visual', visualRouter);
 
-// test for automation
-// const testJob = schedule.scheduleJob('*/10 * * * * *', function(){
-//   console.log('10초마다 작동하는 코드입니다.');
-// });
-
-const { getRecentArticles } = require('./controller/crawler/article-crawler');
-const automatedCrawler = schedule.scheduleJob('30 06 * * 1-6', function(){
-  getRecentArticles();
+const { Article } = require('./Models/Articles')
+const { getRecentArticlesFrom24H, getRecentArticlesFrom48H } = require('./controller/crawler/article-crawler');
+const automatedCrawlerForWeekday = schedule.scheduleJob('00 21 * * 1-5', async () => { // 화-토 오전 6시 크롤링 (24시간 이내 업데이트)
+  const data = await getRecentArticlesFrom24H();
+  // await Article.create(data);
 });
-
+const automatedCrawlerForWeekend = schedule.scheduleJob('00 21 * * 7', async () => { // 월요일 오전 6시 크롤링 (48시간 이내 업데이트) 
+  const data = await getRecentArticlesFrom48H();
+  // await Article.create(data);
+});
 
 mongoose
   .connect(process.env.MONGO_STRING, {

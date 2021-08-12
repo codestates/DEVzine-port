@@ -1,6 +1,6 @@
 .headerfix {
-  // position: fixed;
-  width: 100vw;
+  position: fixed;
+  width: 100%;
   z-index: 1001;
 }
 
@@ -12,21 +12,56 @@
   line-height: 50px;
   text-align: center;
   font-size: 16px;
+  overflow: hidden;
 
   .timer {
     font-weight: 900;
     margin-left: 5px;
   }
 }
-
-.headernav {
+.headernavwrapper {
+  width: 100%;
   background-color: WHITE;
+}
+.headernav {
   border-bottom: 1px solid #f2f2f2;
   height: 70px;
   line-height: 70px;
-  // border: 1px solid red;
+  width: 98%;
+  margin: 0 auto;
+  position: relative;
+
+  @include responsive(D) {
+    width: 1120px;
+  }
 
   .headerlogo {
+    cursor: pointer;
+    padding-top: 22px;
+  }
+
+  .leftbox {
+    width: 449.5px;
+    font-size: 16px;
+    font-weight: 700;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+    span {
+      margin: 20px;
+      cursor: pointer;
+    }
+  }
+
+  .headermenu {
+    height: 70px;
+    padding-top: 10px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
     cursor: pointer;
   }
 

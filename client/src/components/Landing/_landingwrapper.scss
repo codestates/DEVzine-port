@@ -1,7 +1,7 @@
 .container {
   color: BLACK;
   padding-bottom: 84px;
-  padding-top: 240px; //header 포함
+  padding-top: 120px;
 
   @include responsive(T) {
     margin-bottom: 64px;
@@ -13,7 +13,7 @@
 }
 
 .landingbackground {
-  background-color: GREEN;
+  background-color: #f2f2f2;
   border-radius: 20px;
   height: 315px;
   margin-bottom: 36px;
@@ -41,36 +41,86 @@
   text-align: center;
 
   @include responsive(T) {
-    margin-bottom: 0;
     text-align: left;
+    align-items: center;
+    margin-top: 88px;
   }
 
-  @include responsive(D) {
-    margin-bottom: 0;
-    text-align: left;
+  h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+
+    @include responsive(D) {
+      font-size: 36px;
+    }
+  }
+
+  p {
+    color: #3f4150;
+    font-size: 18px;
   }
 }
 
 .withuscontainer {
-  background-color: BLACK;
+  background-color: #191a20;
   color: WHITE;
-  height: 502px;
-  padding: 120px;
+  height: 570px;
+  padding-top: 105px;
   text-align: center;
   width: 100vw;
+  font-size: 24px;
+  font-weight: 500;
+
+  @include responsive(T) {
+    height: 500px;
+  }
+
+  h2 {
+    font-size: 60px;
+    margin-bottom: 16px;
+    color: WHITE;
+  }
+
+  p {
+    margin-top: 50px;
+    color: WHITE;
+  }
 }
 
 .landingbottombtn {
-  display: block;
-  height: 55px;
+  width: 80%;
   margin: 0 auto;
-  margin-top: 16px;
   position: relative;
-  width: 550px;
+  display: block;
 
-  div:nth-child(2) {
-    position: absolute;
-    right: 0;
-    top: 0;
+  @include responsive(T) {
+    width: 550px;
+    height: 55px;
+    position: relative;
+    display: block;
+    height: 110px;
+
+    div {
+      width: 265px;
+    }
+
+    div:nth-child(1) {
+      width: 265px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    div:nth-child(2) {
+      width: 265px;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  div {
+    margin: 0 auto;
+    margin-top: 20px;
   }
 }
