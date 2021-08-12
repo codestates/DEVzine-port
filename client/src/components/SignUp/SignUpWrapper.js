@@ -113,6 +113,7 @@ function SignUpWrapper() {
     dispatch(signupUser(body)).then(res => {
       console.log(res.payload);
       if (res.payload === 'User created') {
+        console.log(res.payload)
         setModalOpen(true)
       } else {
         alert('회원가입 실패하였습니다.');
