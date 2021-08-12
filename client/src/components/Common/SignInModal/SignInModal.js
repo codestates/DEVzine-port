@@ -3,29 +3,17 @@ import { useDispatch } from 'react-redux';
 import { signinUser } from '../../../_actions/user_actions';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import Button from '../Button/Button';
-import Union from '../../../assets/images/Union.png'
+import Union from '../../../assets/images/Union.png';
 import { Link } from 'react-router-dom';
-function SigninModal({modalOpen, setModalOpen}) {
+function SigninModal({ modalOpen, setModalOpen }) {
   const dispatch = useDispatch();
 
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
 
   const requiredTextInputData = [
-    [
-      Email,
-      setEmail,
-      '이메일 입력',
-      'email',
-      '30',
-    ],
-    [
-      Password,
-      setPassword,
-      '비밀번호 입력',
-      'password',
-      '20',
-    ],
+    [Email, setEmail, '이메일 입력', 'email', '30'],
+    [Password, setPassword, '비밀번호 입력', 'password', '20'],
   ];
 
   function postHandler(e) {
@@ -38,20 +26,23 @@ function SigninModal({modalOpen, setModalOpen}) {
 
     dispatch(signinUser(body)).then(res => {
       if (res.payload[0] === 'Login success') {
-        setModalOpen(false)
+        // setModalOpen(false);
+        window.location.reload();
       } else {
         alert('로그인 실패하였습니다.');
       }
     });
-
   }
 
-  return(
-    modalOpen ? (
-      <div className="signincontainer">
+  return modalOpen ? (
+    <div className="signincontainer">
       <div className="signinwrapper">
         <div className="signinheader">DEVzine:port</div>
-        <div className="backbtn" onClick={()=>setModalOpen(false)} style={{backgroundImage: `url(${Union})`}}></div>
+        <div
+          className="backbtn"
+          onClick={() => setModalOpen(false)}
+          style={{ backgroundImage: `url(${Union})` }}
+        ></div>
         {requiredTextInputData.map((el, idx) => {
           return (
             <TextInputGenderRequired
@@ -62,15 +53,26 @@ function SigninModal({modalOpen, setModalOpen}) {
               type={el[3]}
               maxLength={el[4]}
             />
-          )
+          );
         })}
-        <Button subject={`로그인`} color={`#ffffff`} backgroundColor={`#191A20`} onClickHandle={postHandler} />
+        <Button
+          subject={`로그인`}
+          color={`#ffffff`}
+          backgroundColor={`#191A20`}
+          onClickHandle={postHandler}
+        />
         <div className="leadsignup">아직 회원이 아니신가요?</div>
-        <Link to="/signup"><Button subject={`회원가입`} color={`#191A20`} backgroundColor={`#FFDD14`} onClickHandle={() => setModalOpen(false)}/></Link>
+        <Link to="/signup">
+          <Button
+            subject={`회원가입`}
+            color={`#191A20`}
+            backgroundColor={`#FFDD14`}
+            onClickHandle={() => setModalOpen(false)}
+          />
+        </Link>
       </div>
     </div>
-    ) : (null)
-  )
+  ) : null;
 }
 
 export default SigninModal;
