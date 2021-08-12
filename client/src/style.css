@@ -1031,7 +1031,8 @@ ol {
   border: 1px solid #d9d9d9;
   margin-bottom: 8px;
   text-align: center;
-  color: #191a20; }
+  color: #191a20;
+  background-color: #fff; }
 
 .nonesubinner input::placeholder {
   color: #d9d9d9; }

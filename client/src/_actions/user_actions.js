@@ -50,9 +50,7 @@ export async function signoutUser() {
 }
 
 export async function mypageUser(dataToSubmit) {
-  const request = await customAxios
-    .patch(`/mypage`, dataToSubmit)
-    .then(res => ['Login success', 'parkcoding', 'Patch Success']);
+  const request = 'false';
   //! axios
   // .then(res => ['Login success', res.data.data.user_name, res.data.message]);
   // .then(res => ['Login success', 'parkcoding','Patch Success']);
