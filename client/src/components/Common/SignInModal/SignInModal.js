@@ -10,16 +10,19 @@ function SigninModal({ modalOpen, setModalOpen }) {
 
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
-
+  const bcrypt = require('bcryptjs');
   const requiredTextInputData = [
     [Email, setEmail, '이메일 입력', 'email', '30'],
     [Password, setPassword, '비밀번호 입력', 'password', '20'],
   ];
 
-  function postHandler(e) {
-    let body = {
+  async function postHandler(e) {
+
+    const user_password = await bcrypt.hashSync(Password, 10);
+    
+      let body = {
       user_email: Email,
-      user_password: Password,
+      user_password: user_password,
     };
 
     console.log('SignInModal :', body);
