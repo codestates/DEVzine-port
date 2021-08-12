@@ -25,6 +25,8 @@ function SignUpWrapper() {
   const [Language, setLanguage] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
 
+  const bcrypt = require('bcryptjs');
+  
   useEffect(() => {
     if (checkEmail(Email)) {
       setEmail_isValid(true);
@@ -83,7 +85,7 @@ function SignUpWrapper() {
     ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '20'],
   ];
 
-  function postHandler() {
+  async function postHandler() {
     selectInputHandler(); //회원가입 시 화면에 있는 선택사항들을 body에 저장하기 위함
 
     let multiArr = [];
@@ -97,9 +99,12 @@ function SignUpWrapper() {
     } else {
       setLanguage([]);
     }
+
+    const user_password = await bcrypt.hashSync(Password, 10);
+
     let body = {
       user_email: Email,
-      user_password: Password,
+      user_password: user_password,
       user_name: Name,
       user_info: {
         user_gender: Gender,

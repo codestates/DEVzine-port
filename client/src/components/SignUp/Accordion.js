@@ -63,7 +63,7 @@ function Accordion({ radioInputHandler, selectInputHandler }) {
       <div
         className="contentswrapper"
         style={{
-          height: isOn ? '500px' : '0',
+          height: isOn ? '260px' : '0',
         }}
       >
         <div
