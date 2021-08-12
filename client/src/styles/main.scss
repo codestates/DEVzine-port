@@ -10,6 +10,7 @@
 @import './layouts/grids';
 
 @import '../components/Common/Button/button';
+@import '../components/Common/AlertModal/alertmodal';
 @import '../components/Contribution/contributionsWrapper';
 @import '../components/Landing/landingwrapper';
 @import '../components/Common/Header/header';
@@ -21,7 +22,6 @@
 @import '../components/SignUp/radioinputgender';
 @import '../components/SignUp/select';
 @import '../components/ArticleList/articlelistwrapper';
-@import '../components/Common/AlertModal/alertmodal';
 @import '../components/Landing/landinginteraction';
 @import '../components/Subscription/subscriptionswrapper';
 @import '../components/Common/Header/navbar';
