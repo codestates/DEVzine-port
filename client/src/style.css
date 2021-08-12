@@ -435,7 +435,55 @@ ol {
   height: 55px;
   line-height: 55px;
   text-align: center;
-  width: 265px; }
+  width: 265px;
+  font-size: 18px; }
+
+.modalbackdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+  place-items: center;
+  display: grid;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 900; }
+
+.modalcontainer {
+  height: 15rem;
+  margin: 120px auto;
+  text-align: center; }
+
+.modalview {
+  width: 360px;
+  height: 241px;
+  background-color: WHITE;
+  border-radius: 20px;
+  position: relative; }
+  .modalview .desc {
+    color: #191a20;
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+
+.closebtn {
+  color: #191a20;
+  background-color: #d9d9d9;
+  width: 265px;
+  height: 55px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 16px;
+  font-weight: bold;
+  border-radius: 8px; }
+
+.alermodalbox {
+  border: 1px solid red;
+  width: 0px;
+  height: 0px; }
 
 .contextarea {
   border: 1px solid BLACK; }
@@ -443,7 +491,7 @@ ol {
 .container {
   color: BLACK;
   padding-bottom: 84px;
-  padding-top: 240px; }
+  padding-top: 120px; }
   @media screen and (min-width: 768px) {
     .container {
       margin-bottom: 64px; } }
@@ -452,7 +500,7 @@ ol {
       margin-bottom: 22px; } }
 
 .landingbackground {
-  background-color: GREEN;
+  background-color: #f2f2f2;
   border-radius: 20px;
   height: 315px;
   margin-bottom: 36px;
@@ -475,35 +523,70 @@ ol {
   text-align: center; }
   @media screen and (min-width: 768px) {
     .landingcontent {
-      margin-bottom: 0;
-      text-align: left; } }
-  @media screen and (min-width: 1200px) {
-    .landingcontent {
-      margin-bottom: 0;
-      text-align: left; } }
+      text-align: left;
+      align-items: center;
+      margin-top: 88px; } }
+  .landingcontent h2 {
+    font-size: 30px;
+    margin-bottom: 20px; }
+    @media screen and (min-width: 1200px) {
+      .landingcontent h2 {
+        font-size: 36px; } }
+  .landingcontent p {
+    color: #3f4150;
+    font-size: 18px; }
 
 .withuscontainer {
-  background-color: BLACK;
+  background-color: #191a20;
   color: WHITE;
-  height: 502px;
-  padding: 120px;
+  height: 570px;
+  padding-top: 105px;
   text-align: center;
-  width: 100vw; }
+  width: 100vw;
+  font-size: 24px;
+  font-weight: 500; }
+  @media screen and (min-width: 768px) {
+    .withuscontainer {
+      height: 500px; } }
+  .withuscontainer h2 {
+    font-size: 60px;
+    margin-bottom: 16px;
+    color: WHITE; }
+  .withuscontainer p {
+    margin-top: 50px;
+    color: WHITE; }
 
 .landingbottombtn {
-  display: block;
-  height: 55px;
+  width: 80%;
   margin: 0 auto;
-  margin-top: 16px;
   position: relative;
-  width: 550px; }
-  .landingbottombtn div:nth-child(2) {
-    position: absolute;
-    right: 0;
-    top: 0; }
+  display: block; }
+  @media screen and (min-width: 768px) {
+    .landingbottombtn {
+      width: 550px;
+      height: 55px;
+      position: relative;
+      display: block;
+      height: 110px; }
+      .landingbottombtn div {
+        width: 265px; }
+      .landingbottombtn div:nth-child(1) {
+        width: 265px;
+        position: absolute;
+        top: 0;
+        left: 0; }
+      .landingbottombtn div:nth-child(2) {
+        width: 265px;
+        position: absolute;
+        top: 0;
+        right: 0; } }
+  .landingbottombtn div {
+    margin: 0 auto;
+    margin-top: 20px; }
 
 .headerfix {
-  width: 100vw;
+  position: fixed;
+  width: 100%;
   z-index: 1001; }
 
 .headertime {
@@ -513,17 +596,47 @@ ol {
   height: 50px;
   line-height: 50px;
   text-align: center;
-  font-size: 16px; }
+  font-size: 16px;
+  overflow: hidden; }
   .headertime .timer {
     font-weight: 900;
     margin-left: 5px; }
 
+.headernavwrapper {
+  width: 100%;
+  background-color: WHITE; }
+
 .headernav {
-  background-color: WHITE;
   border-bottom: 1px solid #f2f2f2;
   height: 70px;
-  line-height: 70px; }
+  line-height: 70px;
+  width: 98%;
+  margin: 0 auto;
+  position: relative; }
+  @media screen and (min-width: 1200px) {
+    .headernav {
+      width: 1120px; } }
   .headernav .headerlogo {
+    cursor: pointer;
+    padding-top: 22px; }
+  .headernav .leftbox {
+    width: 449.5px;
+    font-size: 16px;
+    font-weight: 700;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%); }
+    .headernav .leftbox span {
+      margin: 20px;
+      cursor: pointer; }
+  .headernav .headermenu {
+    height: 70px;
+    padding-top: 10px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
     cursor: pointer; }
   .headernav .headerbutton {
     color: WHITE;
@@ -607,6 +720,74 @@ ol {
   line-height: 24px;
   text-align: center;
   color: #D9D9D9; }
+
+.footercontainer {
+  height: 220px;
+  width: 100%;
+  color: #191a20;
+  background-color: white; }
+  .footercontainer .footerinner {
+    width: 98%;
+    margin: 0 auto;
+    position: relative;
+    padding-top: 36px; }
+    @media screen and (min-width: 1200px) {
+      .footercontainer .footerinner {
+        width: 1120px; } }
+
+.footerright {
+  width: 98%;
+  text-align: center; }
+  @media screen and (min-width: 768px) {
+    .footerright {
+      text-align: left;
+      width: 510px;
+      position: absolute;
+      left: 0; } }
+  .footerright .cstitle {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 6px; }
+    .footerright .cstitle img {
+      margin-left: 2px; }
+  .footerright .cscontact {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 6px; }
+  .footerright .csworktime {
+    font-size: 14px;
+    font-weight: 400; }
+  .footerright .okteam1 {
+    color: #8c8d96;
+    font-size: 14px;
+    padding-top: 24px; }
+    .footerright .okteam1 a {
+      margin: 3px; }
+    .footerright .okteam1 span {
+      cursor: pointer;
+      margin: 3px; }
+  .footerright .okteam2 {
+    color: #8c8d96;
+    font-size: 14px;
+    padding-top: 6px; }
+    .footerright .okteam2 a {
+      margin: 3px; }
+
+.footerleft {
+  width: 265px;
+  position: absolute;
+  right: 0;
+  font-weight: 700;
+  font-size: 18px; }
+  .footerleft div {
+    cursor: pointer;
+    position: relative;
+    height: 35px;
+    margin-bottom: 12px; }
+  .footerleft div img {
+    position: absolute;
+    bottom: 0;
+    left: 0; }
 
 .signupcontainer {
   position: relative;
@@ -778,59 +959,12 @@ ol {
   height: 100px;
   width: 100px; }
 
-.modalbackdrop {
-  background-color: rgba(0, 0, 0, 0.4);
-  place-items: center;
-  display: grid;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 900; }
-
-.modalcontainer {
-  height: 15rem;
-  margin: 120px auto;
-  text-align: center; }
-
-.modalview {
-  width: 360px;
-  height: 241px;
-  background-color: WHITE;
-  border-radius: 20px;
-  position: relative; }
-  .modalview .desc {
-    color: #191a20;
-    font-size: 18px;
-    font-weight: bold;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); }
-
-.closebtn {
-  color: #191a20;
-  background-color: #d9d9d9;
-  width: 265px;
-  height: 55px;
-  cursor: pointer;
-  font-size: 18px;
-  margin-top: 16px;
-  font-weight: bold;
-  border-radius: 8px; }
-
-.alermodalbox {
-  border: 1px solid red;
-  width: 0px;
-  height: 0px; }
-
 .landinginteractioncontainer {
   background: #191a20;
   width: 100vw;
   height: 700px;
   position: relative;
-  top: 120px;
+  top: 0px;
   display: flex;
   justify-content: center; }
   .landinginteractioncontainer .textwrapper {
@@ -841,8 +975,7 @@ ol {
     height: 166px;
     position: absolute;
     left: 0;
-    top: 103px;
-    color: #fff; }
+    top: 103px; }
     .landinginteractioncontainer .textwrapper .description {
       display: flex;
       align-items: center;
@@ -850,7 +983,9 @@ ol {
       width: 100vw;
       height: 26px;
       font-weight: bold;
-      font-size: 24px; }
+      font-size: 24px;
+      color: #fff;
+      text-align: center; }
     .landinginteractioncontainer .textwrapper .subject {
       display: flex;
       align-items: center;
@@ -859,9 +994,86 @@ ol {
       height: 75px;
       margin-top: 12px;
       font-weight: bold;
-      font-size: 80px; }
+      font-size: 80px;
+      color: #fff; }
 
-.emailalerttext {
-  height: 20px; }
+.subscriptioncontainer {
+  width: 100%;
+  height: 71.4vh;
+  background-color: #f2f2f2;
+  position: relative;
+  text-align: center; }
+  .subscriptioncontainer .subinnner {
+    width: 98%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+  .subscriptioncontainer .subtext {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 36px;
+    margin-bottom: 6px;
+    color: #191a20; }
+  .subscriptioncontainer .subtextsmall {
+    margin-bottom: 28px;
+    font-size: 16px;
+    color: #9e9e9e; }
+  .subscriptioncontainer .subtextsmall2 {
+    margin-top: 120px;
+    font-size: 16px;
+    color: #9e9e9e; }
+
+.nonesubinner .emailinput {
+  width: 296px;
+  height: 55px;
+  border-radius: 8px;
+  border: 1px solid #d9d9d9;
+  margin-bottom: 8px;
+  text-align: center;
+  color: #191a20; }
+
+.nonesubinner input::placeholder {
+  color: #d9d9d9; }
+
+.nonesubinner .subemailbtn {
+  border: none; }
+
+.nonesubinner .emailalerttext {
+  height: 20px;
+  margin-bottom: 5px;
+  color: #9e9e9e; }
+
+.nonesubinner .commonbutton {
+  width: 296px; }
+
+.nonesubinner .subjoinbox {
+  margin-top: 48px;
+  position: relative; }
+  .nonesubinner .subjoinbox .subjoinbtn {
+    position: absolute;
+    left: 50%;
+    top: 50px;
+    transform: translateX(-50%); }
+  .nonesubinner .subjoinbox .subtextsmall1 {
+    font-weight: 700;
+    color: #191a19; }
+  .nonesubinner .subjoinbox .subtextsmall2 {
+    margin-top: 5px;
+    padding-bottom: 70px;
+    color: #191a19; }
+
+.subpostbtn {
+  position: absolute;
+  left: 50%;
+  top: 148px;
+  transform: translateX(-50%); }
+
+.navbarbox {
+  height: 600px;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid red;
+  z-index: 1002; }
 
 /*# sourceMappingURL=style.css.map */
