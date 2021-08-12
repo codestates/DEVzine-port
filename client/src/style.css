@@ -428,6 +428,15 @@ ol {
       .container .col-lg-12 {
         width: 1140px; } }
 
+.commonbutton {
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  height: 55px;
+  line-height: 55px;
+  text-align: center;
+  width: 265px; }
+
 .contextarea {
   border: 1px solid BLACK; }
 
@@ -524,11 +533,80 @@ ol {
     border-radius: 6px;
     font-weight: 700; }
 
-.signinform input {
-  border: 1px solid BLACK; }
+.signincontainer {
+  z-index: 10000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(63, 65, 80, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .signincontainer .signinwrapper {
+    z-index: 11000;
+    position: relative;
+    width: 550px;
+    height: 566px;
+    background: #ffffff;
+    box-shadow: 0px 4px 20px rgba(63, 65, 80, 0.3);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+    .signincontainer .signinwrapper .signinheader {
+      position: absolute;
+      width: 550px;
+      height: 69px;
+      left: 0;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 800;
+      font-size: 24px;
+      line-height: 33px;
+      color: #191A20; }
+    .signincontainer .signinwrapper .backbtn {
+      width: 22.75px;
+      height: 22.75px;
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      cursor: pointer; }
+    .signincontainer .signinwrapper .leadsignup {
+      z-index: 11000;
+      width: 296px;
+      height: 24px;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      color: #191A20;
+      margin-top: 48px;
+      margin-bottom: 16px; }
+    .signincontainer .signinwrapper .commonbutton {
+      z-index: 11000;
+      width: 296px; }
 
-.signinform button {
-  border: 1px solid BLACK; }
+.inputlarge {
+  width: 296px;
+  height: 55px;
+  background: #ffffff;
+  border: 1px solid #D9D9D9;
+  border-radius: 8px;
+  margin-bottom: 8px; }
+
+.inputlarge::placeholder {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #D9D9D9; }
 
 .signupcontainer {
   position: relative;
@@ -785,14 +863,5 @@ ol {
 
 .emailalerttext {
   height: 20px; }
-
-.commonbutton {
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  height: 55px;
-  line-height: 55px;
-  text-align: center;
-  width: 265px; }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,24 +1,34 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { signinUser } from '../../../_actions/user_actions';
-
-function SigninModal() {
+import TextInputGenderRequired from './TextInputGenderRequired';
+import Button from '../Button/Button';
+import Union from '../../../assets/images/Union.png'
+import { Link } from 'react-router-dom';
+function SigninModal({modalOpen, setModalOpen}) {
   const dispatch = useDispatch();
 
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
 
-  function onEmailHandler(e) {
-    setEmail(e.currentTarget.value);
-  }
+  const requiredTextInputData = [
+    [
+      Email,
+      setEmail,
+      '이메일 입력',
+      'email',
+      '30',
+    ],
+    [
+      Password,
+      setPassword,
+      '비밀번호 입력',
+      'password',
+      '20',
+    ],
+  ];
 
-  function onPasswordHandler(e) {
-    setPassword(e.currentTarget.value);
-  }
-
-  function onSubmitHandler(e) {
-    e.preventDefault();
-
+  function postHandler(e) {
     let body = {
       user_email: Email,
       user_password: Password,
@@ -28,37 +38,39 @@ function SigninModal() {
 
     dispatch(signinUser(body)).then(res => {
       if (res.payload[0] === 'Login success') {
-        window.history.back();
+        setModalOpen(false)
       } else {
         alert('로그인 실패하였습니다.');
       }
     });
+
   }
 
-  return (
-    <>
-      <form onSubmit={e => onSubmitHandler(e)} className="signinform">
-        <input
-          type="email"
-          onChange={e => onEmailHandler(e)}
-          placeholder="이메일"
-        />
-
-        <br />
-        <input
-          type="password"
-          onChange={e => onPasswordHandler(e)}
-          placeholder="비밀번호"
-        />
-
-        <br />
-        <button type="submit">로그인</button>
-      </form>
-      <button onClick={() => (window.location.href = '/signup')}>
-        회원가입
-      </button>
-    </>
-  );
+  return(
+    modalOpen ? (
+      <div className="signincontainer">
+      <div className="signinwrapper">
+        <div className="signinheader">DEVzine:port</div>
+        <div className="backbtn" onClick={()=>setModalOpen(false)} style={{backgroundImage: `url(${Union})`}}></div>
+        {requiredTextInputData.map((el, idx) => {
+          return (
+            <TextInputGenderRequired
+              key={`SignInTextInputGender${idx}`}
+              stateName={el[0]}
+              stateFunc={el[1]}
+              placeholder={el[2]}
+              type={el[3]}
+              maxLength={el[4]}
+            />
+          )
+        })}
+        <Button subject={`로그인`} color={`#ffffff`} backgroundColor={`#191A20`} onClickHandle={postHandler} />
+        <div className="leadsignup">아직 회원이 아니신가요?</div>
+        <Link to="/signup"><Button subject={`회원가입`} color={`#191A20`} backgroundColor={`#FFDD14`} onClickHandle={() => setModalOpen(false)}/></Link>
+      </div>
+    </div>
+    ) : (null)
+  )
 }
 
 export default SigninModal;
