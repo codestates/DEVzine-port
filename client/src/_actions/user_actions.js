@@ -35,6 +35,7 @@ export async function signupUser(dataToSubmit) {
 }
 
 export async function signoutUser() {
+  // const request = 'Logout success';
   const request = await customAxios
     .post(`/user/signout`)
     .then(res => res.data.message);

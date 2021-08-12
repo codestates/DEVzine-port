@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 function TopTime() {
-  const [time, setTime] = useState('');
+  const [time, setTime] = useState('00:00');
 
   useEffect(() => {
-    setInterval(getTime, 1000);
+    setInterval(getTime, 100);
     return () => {
-      setInterval(getTime, 1000);
+      setInterval(getTime, 100);
     };
   }, []);
 
