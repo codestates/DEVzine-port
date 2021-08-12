@@ -17,10 +17,9 @@ function SigninModal({ modalOpen, setModalOpen }) {
   ];
 
   async function postHandler(e) {
-
     const user_password = await bcrypt.hashSync(Password, 10);
-    
-      let body = {
+
+    let body = {
       user_email: Email,
       user_password: user_password,
     };
@@ -47,7 +46,7 @@ function SigninModal({ modalOpen, setModalOpen }) {
   return modalOpen ? (
     <div className="signincontainer">
       <div className="signinwrapper">
-        <div className="signinheader">DEVzine:port</div>
+        <div className="signinheader">DEVzine</div>
         <div
           className="backbtn"
           onClick={backbtnHandler}
