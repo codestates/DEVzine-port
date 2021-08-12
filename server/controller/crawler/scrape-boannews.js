@@ -5,7 +5,7 @@ iconv.skipDecodeWarning = true
 
 module.exports = {
     
-    scrapeBoanNews: async() => {
+    scrapeBoanNews: async(compareDate = 86400000) => {
 
         const parseDate = (date) => { // 입력 형식: 2021년 08월 10일 12:23
             const year = date.substring(0, 4);
@@ -34,7 +34,7 @@ module.exports = {
             let date = $(article).find('.news_writer').text();
             date = parseDate(date.split('| ')[1]); // Date 객체로 변환
 
-            if (Date.now() - date > 86400000) { // 1일 이상 차이날 경우, skip
+            if (Date.now() - date > compareDate) { // 1일 이상 차이날 경우, skip
                 continue;
             }
 
@@ -44,7 +44,7 @@ module.exports = {
                 "article_title": title,
                 "article_content": content,
                 "article_date": date,
-                "article_url": 'https://www.boannews.com/' + url, 
+                "article_url": 'https://www.boannews.com' + url, 
                 "article_keyword": "보안",
                 "article_publisher": "보안뉴스"
             }
