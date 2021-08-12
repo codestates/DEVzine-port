@@ -17,10 +17,9 @@ function SigninModal({ modalOpen, setModalOpen }) {
   ];
 
   async function postHandler(e) {
-
     const user_password = await bcrypt.hashSync(Password, 10);
-    
-      let body = {
+
+    let body = {
       user_email: Email,
       user_password: user_password,
     };
@@ -29,7 +28,6 @@ function SigninModal({ modalOpen, setModalOpen }) {
 
     dispatch(signinUser(body)).then(res => {
       if (res.payload[0] === 'Login success') {
-        // setModalOpen(false);
         window.location.reload();
       } else {
         alert('로그인 실패하였습니다.');
@@ -37,13 +35,21 @@ function SigninModal({ modalOpen, setModalOpen }) {
     });
   }
 
+  function backbtnHandler() {
+    if (Email === '' && Password === '') {
+      window.history.back();
+    }
+
+    setModalOpen(false);
+  }
+
   return modalOpen ? (
     <div className="signincontainer">
       <div className="signinwrapper">
-        <div className="signinheader">DEVzine:port</div>
+        <div className="signinheader">DEVzine</div>
         <div
           className="backbtn"
-          onClick={() => setModalOpen(false)}
+          onClick={backbtnHandler}
           style={{ backgroundImage: `url(${Union})` }}
         ></div>
         {requiredTextInputData.map((el, idx) => {

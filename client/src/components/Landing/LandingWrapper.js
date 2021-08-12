@@ -140,13 +140,12 @@ function LandingWrapper() {
             </Link>
           </div>
           <div>
-            <Link to="/articlelist">
-              <Button
-                subject="매거진 보기"
-                color="#191A20"
-                backgroundColor="#FFDD14"
-              />
-            </Link>
+            <Button
+              subject="매거진 보기"
+              color="#191A20"
+              backgroundColor="#FFDD14"
+              onClickHandle={() => (window.location.href = '/articlelist')}
+            />
           </div>
         </div>
       </div>
