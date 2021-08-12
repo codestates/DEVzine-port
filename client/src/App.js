@@ -14,6 +14,7 @@ import MyPage from './pages/MyPage';
 import Subscription from './pages/Subscription';
 import Visual from './pages/Visual';
 import AuthMail from './components/AuthMail';
+import AuthTest from './components/AuthTest';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="/subscribe" component={Subscription} />
             <Route path="/visual" component={Visual} />
             <Route path="/authmail/:email" component={AuthMail} />
+            <Route path="/authtest" component={AuthTest} />
           </Switch>
         </div>
         <Footer />
