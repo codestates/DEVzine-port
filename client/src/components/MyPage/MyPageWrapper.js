@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { mypageUser } from '../../_actions/user_actions';
 import Auth from '../../hoc/auth';
+import SigninModal from '../Common/SignInModal/SignInModal';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
@@ -10,6 +11,7 @@ function MyPageWrapper() {
   const dispatch = useDispatch();
 
   const [userName, setUserName] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const getData = () => {
@@ -29,7 +31,11 @@ function MyPageWrapper() {
   }, []);
 
   useEffect(() => {
-    Auth(true);
+    const requrest = Auth(true);
+
+    if (requrest === 'Login need') {
+      setModalOpen(true);
+    }
   });
 
   function onUserNameHandler(e) {
@@ -72,6 +78,9 @@ function MyPageWrapper() {
       <button onClick={() => (window.location.href = '/contributionupdate')}>
         기고 수정하기
       </button>
+      {modalOpen ? (
+        <SigninModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      ) : null}
     </>
   );
 }

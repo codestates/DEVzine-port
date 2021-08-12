@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import store from '../store/store';
 
 export default function (option) {
@@ -8,7 +7,7 @@ export default function (option) {
   if (store.getState().user.signinSuccess === undefined) {
     // 로그인 하지 않은 상태
     if (option) {
-      window.location.href = '/signin';
+      return 'Login need';
     }
   } else {
     // 로그인 한 상태
