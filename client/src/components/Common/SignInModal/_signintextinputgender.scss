@@ -1,0 +1,15 @@
+.inputlarge{
+    width: 296px;
+    height: 55px;
+    background: #ffffff;
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.inputlarge::placeholder{
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #D9D9D9;
+}

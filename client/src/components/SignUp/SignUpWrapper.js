@@ -6,6 +6,7 @@ import Accordion from './Accordion';
 import { checkEmail, checkPassword } from '../../utils/validation';
 import Auth from '../../hoc/auth';
 import { customAxios } from '../../utils/customAxios';
+import SigninModal from '../Common/SignInModal/SignInModal';
 
 function SignUpWrapper() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function SignUpWrapper() {
   const [Age, setAge] = useState('');
   const [Position, setPosition] = useState('');
   const [Language, setLanguage] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     Auth(false);
@@ -111,7 +113,8 @@ function SignUpWrapper() {
     dispatch(signupUser(body)).then(res => {
       console.log(res.payload);
       if (res.payload === 'User created') {
-        window.location.href = '/signin';
+        console.log(res.payload)
+        setModalOpen(true)
       } else {
         alert('회원가입 실패하였습니다.');
       }
@@ -193,6 +196,7 @@ function SignUpWrapper() {
           회원가입
         </div>
       </div>
+      {modalOpen ? <SigninModal/> : null}
     </div>
   );
 }
