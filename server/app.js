@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
 });
 
 const { isAuthenticated } = require('./controller/middleware/isAuthenticated');
-app.get('/testauth', isAuthenticated, (req, res) => {
+app.get('/authtest', isAuthenticated, (req, res) => {
 	// let user = req.user;
 	// if (user) {
 		res.send(`user: ${req.user}`);
