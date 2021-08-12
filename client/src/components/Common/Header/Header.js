@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { signoutUser } from '../../../_actions/user_actions';
 import store from '../../../store/store';
 import TopTime from './TopTime';
+import SignInModal from '../SignInModal/SignInModal'
 import logo from '../../../assets/images/DEVzine.svg';
 import menu from '../../../assets/images/menu_b.svg';
 import Navbar from './Navbar';
@@ -12,6 +13,7 @@ function Header() {
 
   const [signIn, setSignIn] = useState(false);
   const [userName, setUserName] = useState('nothing');
+  const [modalOpen, setModalOpen] = useState(false);
   const [ScrollY, setScrollY] = useState(0);
   const [ScrollActive, setScrollActive] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -31,7 +33,7 @@ function Header() {
   }, []);
 
   function signInHandler() {
-    window.location.href = '/signin';
+    setModalOpen(true)
   }
   function signOutHandler() {
     dispatch(signoutUser()).then(res => {
@@ -124,6 +126,7 @@ function Header() {
           )}
         </div>
       </div>
+      {modalOpen ? <SignInModal modalOpen={ modalOpen} setModalOpen={setModalOpen} /> : null}
     </div>
   );
 }

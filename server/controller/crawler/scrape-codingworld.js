@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 
 module.exports = {
 
-    scrapeCodingWorld : async () => {
+    scrapeCodingWorld : async (compareDate = 86400000) => {
         
         const getArticlesFromURL = async (url) => {
         
@@ -24,7 +24,7 @@ module.exports = {
                 let date = $(spanData).find('em')[2].children[0].data;
                 date = new Date(date)
 
-                if (Date.now() - date > 86400000) { // 1일 이상 차이날 경우, skip
+                if (Date.now() - date > compareDate) { // 1일 이상 차이날 경우, skip
                     continue;
                 }
                 
