@@ -3,6 +3,7 @@ import axios from 'axios';
 import store from '../../store/store';
 import Auth from '../../hoc/auth';
 import AlertModal from '../Common/AlertModal/AlertModal';
+import SigninModal from '../Common/SignInModal/SignInModal';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
@@ -12,6 +13,7 @@ function ContributionWrapper() {
   const [content, setContent] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
   const [userName, setUserName] = useState('');
+  const [alertOpen, setAlertOpen] = useState(false);
 
   let selectOptions = [
     '게임',
@@ -26,9 +28,13 @@ function ContributionWrapper() {
   ];
 
   useEffect(() => {
-    Auth(true);
+    const requrest = Auth(true);
 
-    setUserName(store.getState().user.signinSuccess[1]);
+    if (requrest === 'Login need') {
+      setModalOpen(true);
+    } else {
+      setUserName(store.getState().user.signinSuccess[1]);
+    }
   });
 
   function onKeywordHandler(e) {
@@ -47,7 +53,7 @@ function ContributionWrapper() {
     e.preventDefault();
 
     if (title === '' || content === '' || keyword === '') {
-      return setModalOpen(true);
+      return setAlertOpen(true);
     }
 
     let body = {
@@ -67,7 +73,7 @@ function ContributionWrapper() {
   }
 
   const closeModal = () => {
-    setModalOpen(false);
+    setAlertOpen(false);
   };
 
   return (
@@ -107,12 +113,15 @@ function ContributionWrapper() {
       </form>
       <div className="alermodalbox">
         <AlertModal
-          open={modalOpen}
+          open={alertOpen}
           close={closeModal}
           alertString={'모두 입력해야 합니다.'}
           alertBtn="확인"
         />
       </div>
+      {modalOpen ? (
+        <SigninModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      ) : null}
     </>
   );
 }

@@ -9,7 +9,7 @@ function SubscriptionWrapper() {
   const [signIn, setSignIn] = useState(false);
   const [Email, setEmail] = useState('');
   const [email_isValid, setEmail_isValid] = useState(true);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
   const [blackInput, setBlackInput] = useState(false);
   const [emailSubSuc, setEmailSubSuc] = useState(false);
 
@@ -40,7 +40,7 @@ function SubscriptionWrapper() {
 
     if (Email === '' || !checkEmail(Email)) {
       setBlackInput(true);
-      return setModalOpen(true);
+      return setAlertOpen(true);
     }
 
     setBlackInput(false);
@@ -50,10 +50,10 @@ function SubscriptionWrapper() {
     return customAxios.post('/subscribe', body).then(res => {
       if (res.status === 200) {
         setEmailSubSuc(true);
-        setModalOpen(true);
+        setAlertOpen(true);
       } else {
         setEmailSubSuc(false);
-        setModalOpen(true);
+        setAlertOpen(true);
       }
     });
   }
@@ -62,16 +62,16 @@ function SubscriptionWrapper() {
     return customAxios.post('/subscribe').then(res => {
       if (res.status === 200) {
         setEmailSubSuc(true);
-        setModalOpen(true);
+        setAlertOpen(true);
       } else {
         setEmailSubSuc(false);
-        setModalOpen(true);
+        setAlertOpen(true);
       }
     });
   }
 
   const closeModal = () => {
-    setModalOpen(false);
+    setAlertOpen(false);
   };
 
   return (
@@ -141,7 +141,7 @@ function SubscriptionWrapper() {
       </div>
       <div className="alermodalbox">
         <AlertModal
-          open={modalOpen}
+          open={alertOpen}
           close={closeModal}
           alertString={
             blackInput

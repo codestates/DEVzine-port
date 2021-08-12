@@ -26,12 +26,19 @@ function SigninModal({ modalOpen, setModalOpen }) {
 
     dispatch(signinUser(body)).then(res => {
       if (res.payload[0] === 'Login success') {
-        // setModalOpen(false);
         window.location.reload();
       } else {
         alert('로그인 실패하였습니다.');
       }
     });
+  }
+
+  function backbtnHandler() {
+    if (Email === '' && Password === '') {
+      window.history.back();
+    }
+
+    setModalOpen(false);
   }
 
   return modalOpen ? (
@@ -40,7 +47,7 @@ function SigninModal({ modalOpen, setModalOpen }) {
         <div className="signinheader">DEVzine:port</div>
         <div
           className="backbtn"
-          onClick={() => setModalOpen(false)}
+          onClick={backbtnHandler}
           style={{ backgroundImage: `url(${Union})` }}
         ></div>
         {requiredTextInputData.map((el, idx) => {
