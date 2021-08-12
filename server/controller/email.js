@@ -28,9 +28,9 @@ module.exports = {
     }
 
     const user = await User.findOne({ user_email });
-    // if (user) {
-    //   return res.status(400).send({ message: 'Email already exists' });
-    // }
+    if (user) {
+      return res.status(400).send({ message: 'Email already exists' });
+    }
 
     let authMailForm;
     ejs.renderFile(
