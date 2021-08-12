@@ -5,6 +5,7 @@ import store from '../../../store/store';
 import TopTime from './TopTime';
 import logo from '../../../assets/images/DEVzine.svg';
 import menu from '../../../assets/images/menu_b.svg';
+import Navbar from './Navbar';
 
 function Header() {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function Header() {
   const [ScrollY, setScrollY] = useState(0);
   const [ScrollActive, setScrollActive] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [Open, setOpen] = useState(false);
 
   useEffect(() => {
     if (store.getState().user.signinSuccess) {
@@ -89,9 +91,13 @@ function Header() {
             <img src={logo} alt="logo" />
           </button>
           {windowWidth < 768 ? (
-            <span className="headermenu">
-              <img src={menu} alt={menu} />
-            </span>
+            Open ? (
+              <Navbar />
+            ) : (
+              <span className="headermenu" onclick={() => setOpen(true)}>
+                <img src={menu} alt={menu} />
+              </span>
+            )
           ) : (
             <div className="leftbox">
               <span onClick={() => (window.location.href = '/articlelist')}>
