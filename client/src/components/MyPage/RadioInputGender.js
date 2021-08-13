@@ -1,15 +1,9 @@
 import React from 'react';
 
-function RadioInputGender({
-  value,
-  name,
-  width,
-  isChecked,
-  radioInputHandler,
-}) {
+function RadioInputGender({ value, name, width, radioInputHandler, Gender }) {
   return (
     <div className="radiocontent" style={{ width: width }}>
-      {isChecked ? (
+      {value === Gender ? (
         <input
           type="radio"
           className="radioinput"

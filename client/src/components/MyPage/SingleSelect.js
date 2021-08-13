@@ -1,7 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
 
-function SingleSelect({ options, name, selectInputHandler }) {
+function SingleSelect({ options, name, selectInputHandler, defaultValue }) {
+  console.log(defaultValue);
   return (
     <div className="singleselectcontent">
       <div className="subjectwrapper">{name}</div>
@@ -11,6 +12,7 @@ function SingleSelect({ options, name, selectInputHandler }) {
         name={name}
         options={options}
         onChange={selectInputHandler}
+        defaultValue={defaultValue}
       />
     </div>
   );
