@@ -1,9 +1,9 @@
-// const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
-// export function checkHashedPassword(password, originalPassword) {
-//   const result = bcrypt.compareSync(password, originalPassword);
-//   return result;
-// }
+export function checkHashedPassword(password, originalPassword) {
+  const result = bcrypt.compareSync(password, originalPassword);
+  return result;
+}
 
 export function checkPassword(password) {
   if (!/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/.test(password)) {
