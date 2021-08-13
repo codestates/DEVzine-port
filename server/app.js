@@ -7,7 +7,6 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
-const session = require('express-session');
 const passport = require('passport');
 const passportConfig = require('./config/passport');
 const schedule = require('node-schedule');
@@ -16,14 +15,6 @@ require('dotenv').config();
 const robots = require('express-robots-txt')
 app.use(robots({UserAgent: '*', Disallow: '/'}))
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true,
-    // store: ?
-  })
-);
 app.use(passport.initialize()); // passport 미들웨어
 app.use(passport.session()); // session 사용할 수 있도록 하는 미들웨어
 passportConfig();
