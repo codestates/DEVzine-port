@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Switch, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { mypageUser } from '../../_actions/user_actions';
@@ -7,6 +8,7 @@ import Auth from '../../hoc/auth';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import Accordion from './Accordion';
+import ContributionUpdateWrapper from '../ContributionUpdate/ContributionUpdateWrapper';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
@@ -48,9 +50,8 @@ function MyPageWrapper() {
       setPw_confirm(false);
     }
   }, [Email, Password, ConfirmPassword]);
-  
-  useEffect(() => {
 
+  useEffect(() => {
     const getUserData = () => {
       setEmail_isValid(true);
       setPw_isValid(true);
@@ -59,14 +60,14 @@ function MyPageWrapper() {
           withCredentials: true,
         })
         .then(res => {
-          setEmail(res.data.data.user)
-          setName(res.data.data.user)
-          setPassword(res.data.data.user)
-          setConfirmPassword(res.data.data.user)
-          setGender(res.data.data.user_info.user_gender)
-          setAge(res.data.data.user_info.user_age)
-          setPosition(res.data.data.user_info.user_position)
-          setLanguage(res.data.data.user_info.user_language)
+          setEmail(res.data.data.user);
+          setName(res.data.data.user);
+          setPassword(res.data.data.user);
+          setConfirmPassword(res.data.data.user);
+          setGender(res.data.data.user_info.user_gender);
+          setAge(res.data.data.user_info.user_age);
+          setPosition(res.data.data.user_info.user_position);
+          setLanguage(res.data.data.user_info.user_language);
         })
         .catch(err => {
           alert('회원 정보를 받아오는데 실패하였습니다.');
@@ -181,7 +182,7 @@ function MyPageWrapper() {
     setPosition(singleArr[1]);
   }
 
-   return (
+  return (
     <div className="signupcontainer">
       <div className="signupwrapper">
         {requiredTextInputData.map((el, idx) => {
@@ -222,7 +223,12 @@ function MyPageWrapper() {
           정보수정
         </div>
       </div>
-      {modalOpen ? <SigninModal/> : null}
+      {modalOpen ? <SigninModal /> : null}
+      <Switch>
+        <Link to="/contributionupdate/1" children={<contributionupdate />}>
+          기고수정
+        </Link>
+      </Switch>
     </div>
   );
 }

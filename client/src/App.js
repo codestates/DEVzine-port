@@ -1,5 +1,5 @@
-import React, { Suspense } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 import Header from './components/Common/Header/Header';
 import Footer from './components/Common/Footer/Footer';
@@ -20,30 +20,26 @@ import Error from './pages/Error';
 
 function App() {
   return (
-    <Router>
-      {/* <Suspense fallback={<div>Loading...</div>}> */}
+    <>
       <Header />
-      <div>
-        <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/signin" component={SignIn} />
-          <Route path="/articlelist" component={ArticleList} />
-          <Route path="/article" component={ArticleView} />
-          <Route path="/contributionupdate" component={ContributionUpdate} />
-          <Route path="/contribution" component={Contribution} />
-          <Route path="/mypage" component={MyPage} />
-          <Route path="/subscribe" component={Subscription} />
-          <Route path="/visual" component={Visual} />
-          <Route path="/authmail/:email" component={AuthMail} />
-          <Route path="/authtest" component={AuthTest} />
-          <Route path="/loading" component={Loading} />
-          <Route path="/error" component={Error} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path="/" component={Landing} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/articlelist" component={ArticleList} />
+        <Route path="/article" component={ArticleView} />
+        <Route path="/contributionupdate/:id" component={ContributionUpdate} />
+        <Route path="/contribution" component={Contribution} />
+        <Route path="/mypage" component={MyPage} />
+        <Route path="/subscribe" component={Subscription} />
+        <Route path="/visual" component={Visual} />
+        <Route path="/authmail/:email" component={AuthMail} />
+        <Route path="/authtest" component={AuthTest} />
+        <Route path="/loading" component={Loading} />
+        <Route path="/error" component={Error} />
+      </Switch>
       <Footer />
-      {/* </Suspense> */}
-    </Router>
+    </>
   );
 }
 

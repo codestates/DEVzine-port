@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Auth from '../../hoc/auth';
 import AlertModal from '../Common/AlertModal/AlertModal';
 import { customAxios } from '../../utils/customAxios';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import Button from '../Common/Button/Button';
 
-function ContributionUpdateWrapper() {
+function ContributionUpdateWrapper({ id }) {
   const [keyword, setKeyword] = useState('게임');
   const [title, setTitle] = useState('nothing');
   const [content, setContent] = useState('nothing');
@@ -26,9 +26,11 @@ function ContributionUpdateWrapper() {
     'AI/로봇',
   ];
 
+  console.log('ContributionUpdateWrapper :', id);
+
   useEffect(async () => {
     const requestGet = await customAxios
-      .get('/magazine/contribution')
+      .get(`/magazine/contribution/${id}`)
       .then(res => res.data.data.contribution_keyword)
       .catch(err => alert('기고 정보를 받아오는데 실패하였습니다.'));
 
