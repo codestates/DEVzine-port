@@ -25,8 +25,6 @@ function SignUpWrapper() {
   const [Language, setLanguage] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const bcrypt = require('bcryptjs');
-  
   useEffect(() => {
     if (checkEmail(Email)) {
       setEmail_isValid(true);
@@ -100,11 +98,9 @@ function SignUpWrapper() {
       setLanguage([]);
     }
 
-    const user_password = await bcrypt.hashSync(Password, 10);
-
     let body = {
       user_email: Email,
-      user_password: user_password,
+      user_password: Password,
       user_name: Name,
       user_info: {
         user_gender: Gender,
@@ -119,8 +115,8 @@ function SignUpWrapper() {
     dispatch(signupUser(body)).then(res => {
       console.log(res.payload);
       if (res.payload === 'User created') {
-        console.log(res.payload)
-        setModalOpen(true)
+        console.log(res.payload);
+        setModalOpen(true);
       } else {
         alert('회원가입 실패하였습니다.');
       }
@@ -202,7 +198,7 @@ function SignUpWrapper() {
           회원가입
         </div>
       </div>
-      {modalOpen ? <SigninModal/> : null}
+      {modalOpen ? <SigninModal /> : null}
     </div>
   );
 }
