@@ -16,6 +16,7 @@ function ContributionUpdateWrapper({ id }) {
 
   let selectOptions = [
     '게임',
+    '머신러닝',
     '모바일',
     '보안',
     '블록체인',
@@ -24,9 +25,8 @@ function ContributionUpdateWrapper({ id }) {
     '클라우드',
     '퍼스널 컴퓨팅',
     'AI/로봇',
+    '기타',
   ];
-
-  console.log('ContributionUpdateWrapper :', id);
 
   useEffect(async () => {
     const requestGet = await customAxios

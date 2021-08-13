@@ -17,6 +17,7 @@ function ContributionWrapper() {
 
   let selectOptions = [
     '게임',
+    '머신러닝',
     '모바일',
     '보안',
     '블록체인',
@@ -25,6 +26,7 @@ function ContributionWrapper() {
     '클라우드',
     '퍼스널 컴퓨팅',
     'AI/로봇',
+    '기타',
   ];
 
   useEffect(() => {
