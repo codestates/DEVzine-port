@@ -10,7 +10,6 @@ function TextInputGenderRequired({
   isValid,
   maxLength,
   isMutable,
-  defaultValue,
 }) {
   //inputname은 이메일 같은거, detailString은 state에 문자열한거, stateName은 state, stateFunc은 set함수
   return (
@@ -26,7 +25,6 @@ function TextInputGenderRequired({
         value={stateName}
         onChange={e => stateFunc(isMutable ? e.target.value : stateName)}
         maxLength={maxLength}
-        defaultValue={defaultValue}
       />
 
       {isValid !== false || isValid === '' ? null : detailString ===
