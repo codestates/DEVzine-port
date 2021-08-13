@@ -37,7 +37,7 @@ function SigninModal({ modalOpen, setModalOpen }) {
 
   function backbtnHandler() {
     if (Email === '' && Password === '') {
-      window.history.back();
+      window.location.href = '/';
     }
 
     setModalOpen(false);
