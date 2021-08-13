@@ -1,10 +1,10 @@
 import React from 'react';
-import LoadingWrapper from '../components/Loading/LoadingWrapper';
 
 function Loading() {
   return (
     <>
-      <LoadingWrapper />
+      <div className="loadingbox" />
+      <div className="loadingwrapper" />
     </>
   );
 }

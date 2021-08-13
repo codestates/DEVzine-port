@@ -15,12 +15,14 @@ import Subscription from './pages/Subscription';
 import Visual from './pages/Visual';
 import AuthMail from './components/AuthMail';
 import AuthTest from './components/AuthTest';
-import Loading from './pages/Loading';
-import Error from './pages/Error';
+import Error from './components/Common/Error/Error';
 
 function App() {
   return (
     <>
+      <Switch>
+        <Route path="/error" component={Error} />
+      </Switch>
       <Header />
       <Switch>
         <Route exact path="/" component={Landing} />
@@ -35,8 +37,6 @@ function App() {
         <Route path="/visual" component={Visual} />
         <Route path="/authmail/:email" component={AuthMail} />
         <Route path="/authtest" component={AuthTest} />
-        <Route path="/loading" component={Loading} />
-        <Route path="/error" component={Error} />
       </Switch>
       <Footer />
     </>

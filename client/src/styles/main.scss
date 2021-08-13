@@ -1,13 +1,11 @@
+@import './constants/breakpoints';
+@import './constants/grids';
+
 @import './base/fonts';
 @import './base/normalize';
 @import './base/reset';
 
-@import './constants/breakpoints';
-@import './constants/grids';
-
 @import './mixins/responsive';
-
-@import './layouts/grids';
 
 @import '../components/Common/Button/button';
 @import '../components/Common/AlertModal/alertmodal';
@@ -26,3 +24,7 @@
 @import '../components/Landing/landinginteraction';
 @import '../components/Subscription/subscriptionswrapper';
 @import '../components/Common/Header/navbar';
+@import '../components/Common/Loading/loading';
+@import '../components/Common/Error/error';
+
+@import './layouts/grids';

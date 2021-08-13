@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { customAxios } from '../../utils/customAxios';
+import Loading from '../Common/Loading/Loading';
 import Button from '../Common/Button/Button';
 import landing01 from '../../assets/images/landing01.svg';
 import landing02 from '../../assets/images/landing02.svg';
@@ -12,6 +13,7 @@ function LandingWrapper() {
   const [count, setCount] = useState('0');
   const [ScrollY, setScrollY] = useState(0);
   const [ScrollActive, setScrollActive] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // useEffect(async () => {
   //   const requestGet = await customAxios
@@ -20,6 +22,14 @@ function LandingWrapper() {
   //   .catch(err => alert('회원 수 정보를 받아오는데 실패하였습니다.'));
   //   setSubscribers(requestGet);
   // }, []);
+
+  useEffect(() => {
+    if (loading) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 3000);
+    }
+  }, [loading]);
 
   useEffect(() => {
     let start = 0;
@@ -58,6 +68,7 @@ function LandingWrapper() {
 
   return (
     <>
+      {loading ? <Loading /> : null}
       <div className="container">
         <div className="landingimg">
           <div className="row">
