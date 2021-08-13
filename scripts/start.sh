@@ -8,4 +8,4 @@ export NODEMAIL_EMAIL=$(aws ssm get-parameters --region ap-northeast-2 --names N
 export NODEMAIL_PWD=$(aws ssm get-parameters --region ap-northeast-2 --names NODEMAIL_PWD --query Parameters[0].Value | sed 's/"//g')
 export DEVZINE_CLIENT_ENDPOINT=$(aws ssm get-parameters --region ap-northeast-2 --names DEVZINE_CLIENT_ENDPOINT --query Parameters[0].Value | sed 's/"//g')
 
-authbind --deep pm2 start app.js
+authbind --deep pm2 start app.js 
