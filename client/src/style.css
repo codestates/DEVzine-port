@@ -485,8 +485,99 @@ ol {
   width: 0px;
   height: 0px; }
 
+.contributioncontainer {
+  width: 100%;
+  height: 71.4vh;
+  background-color: #f2f2f2;
+  position: relative;
+  text-align: center; }
+  .contributioncontainer .continner {
+    width: 360px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+  .contributioncontainer .context {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 36px;
+    color: #191a20; }
+  .contributioncontainer .contextsmall {
+    margin-top: 6px;
+    margin-bottom: 28px;
+    font-size: 16px;
+    color: #9e9e9e;
+    line-height: 24px; }
+  .contributioncontainer label {
+    display: block;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    margin-top: 24px;
+    color: #191a20; }
+    .contributioncontainer label span {
+      color: #ffc803; }
+  .contributioncontainer select {
+    background-color: #fff; }
+  .contributioncontainer select::-ms-expand {
+    display: none; }
+
+.conselect {
+  width: 360px;
+  height: 40px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding-left: 14px;
+  background-color: #fff;
+  color: #999;
+  background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.64645 4.14645C2.84171 3.95118 3.15829 3.95118 3.35355 4.14645L6 6.79289L8.64645 4.14645C8.84171 3.95118 9.15829 3.95118 9.35355 4.14645C9.54882 4.34171 9.54882 4.65829 9.35355 4.85355L6.35355 7.85355C6.15829 8.04882 5.84171 8.04882 5.64645 7.85355L2.64645 4.85355C2.45118 4.65829 2.45118 4.34171 2.64645 4.14645Z' fill='%23d9d9d9'/%3E%3C/svg%3E%0A") no-repeat 97% 50%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
+  .conselect option {
+    color: #191a20; }
+
+.contitle {
+  width: 360px;
+  height: 40px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding-left: 14px;
+  background-color: #fff;
+  color: #999; }
+
+input::placeholder {
+  color: #999; }
+
 .contextarea {
-  border: 1px solid BLACK; }
+  border: 1px solid #d9d9d9;
+  width: 360px;
+  border-radius: 8px;
+  padding: 14px;
+  background-color: #fff;
+  margin-bottom: 24px;
+  resize: none;
+  line-height: 20px;
+  color: #999;
+  font-size: 16px;
+  height: 200px; }
+
+textarea::placeholder {
+  color: #999; }
+
+.textlength {
+  float: right;
+  text-align: right;
+  color: #d9d9d9; }
+
+.active {
+  color: #ffc803; }
+
+.updatecancelbtn {
+  margin: 0 auto;
+  width: 265px; }
 
 .container {
   color: BLACK;
@@ -591,7 +682,7 @@ ol {
 
 .headertime {
   background-color: BLACK;
-  color: YELLOW;
+  color: #ffdd14;
   font-weight: 500;
   height: 50px;
   line-height: 50px;
