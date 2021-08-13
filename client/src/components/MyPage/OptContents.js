@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import RadioInputGender from './RadioInputGender';
 import SingleSelect from './SingleSelect';
 import MultiSelect from './MultiSelect';
@@ -18,6 +18,7 @@ function OptContents({
 }) {
   let ageIdx;
   let positionIdx;
+  let languageIdxArr = [];
 
   singleSelectData[0][0].forEach((el, idx) => {
     if (el.value === Age) {
@@ -29,12 +30,14 @@ function OptContents({
       positionIdx = idx;
     }
   });
+  multiSelectData[0].forEach((el, idx) => {
+    if (Language.includes(el.value)) {
+      languageIdxArr.push(multiSelectData[0][idx]);
+    }
+  });
   singleSelectData[0][2] = ageIdx;
   singleSelectData[1][2] = positionIdx;
-  // singleSelectData[0].push(ageIdx);
-  // singleSelectData[1].push(positionIdx);
-  // console.log('ageIdx', ageIdx, 'positionIdx', positionIdx);
-  // console.log('singleSelectData[0][3]', singleSelectData[0][3]);
+
   return (
     <div className="optcontentswrapper">
       <div className="radiowrapper">
@@ -63,7 +66,6 @@ function OptContents({
                 options={el[0]}
                 name={el[1]}
                 defaultValue={el[0][el[2]]}
-                // defaultValue={el[2]}
                 selectInputHandler={selectInputHandler}
               />
             );
@@ -76,6 +78,7 @@ function OptContents({
             options={multiSelectData[0]}
             name={multiSelectData[1]}
             selectInputHandler={selectInputHandler}
+            defaultValue={languageIdxArr}
           />
         </div>
       </div>

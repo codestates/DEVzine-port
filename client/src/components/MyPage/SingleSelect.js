@@ -2,7 +2,6 @@ import React from 'react';
 import Select from 'react-select';
 
 function SingleSelect({ options, name, selectInputHandler, defaultValue }) {
-  console.log(defaultValue);
   return (
     <div className="singleselectcontent">
       <div className="subjectwrapper">{name}</div>
