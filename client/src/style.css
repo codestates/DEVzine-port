@@ -959,6 +959,9 @@ ol {
     .multiselectwrapper .multiselectcontents .multiselectcontent .basicmulti {
       width: 254.97px; }
 
+.optcontentswrapper .radiowrapper {
+  margin-top: 0px; }
+
 .article {
   background-color: YELLOW;
   border: 1px solid BLACK;
