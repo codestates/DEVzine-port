@@ -86,13 +86,6 @@ const automatedCrawlerForWeekend = schedule.scheduleJob('00 21 * * 7', async () 
   const data = await getRecentArticlesFrom48H();
   await Article.create(data);
 });
-const { Stat } = require('./Models/Stats')
-const automationTestForDeployment = schedule.scheduleJob('20 01 * * *', async () => { // 배포 환경 test 
-  await Stat.create({
-    stat_datetime: new Date(Date.now()),
-    stat_content: {"dummy": "data"}
-  });
-});
 
 mongoose
   .connect(process.env.MONGO_STRING, {
