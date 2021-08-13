@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { signoutUser } from '../../../_actions/user_actions';
 import store from '../../../store/store';
 import TopTime from './TopTime';
-import SignInModal from '../SignInModal/SignInModal'
+import SignInModal from '../SignInModal/SignInModal';
 import logo from '../../../assets/images/DEVzine.svg';
 import menu from '../../../assets/images/menu_b.svg';
 import Navbar from './Navbar';
@@ -33,7 +33,7 @@ function Header() {
   }, []);
 
   function signInHandler() {
-    setModalOpen(true)
+    setModalOpen(true);
   }
   function signOutHandler() {
     dispatch(signoutUser()).then(res => {
@@ -96,7 +96,7 @@ function Header() {
             Open ? (
               <Navbar />
             ) : (
-              <span className="headermenu" onclick={() => setOpen(true)}>
+              <span className="headermenu" onClick={() => setOpen(true)}>
                 <img src={menu} alt={menu} />
               </span>
             )
@@ -126,7 +126,9 @@ function Header() {
           )}
         </div>
       </div>
-      {modalOpen ? <SignInModal modalOpen={ modalOpen} setModalOpen={setModalOpen} /> : null}
+      {modalOpen ? (
+        <SignInModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      ) : null}
     </div>
   );
 }

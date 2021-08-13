@@ -6,10 +6,6 @@ export async function signinUser(dataToSubmit) {
   const request = await customAxios
     .post(`/user/signin`, dataToSubmit)
     .then(res => [res.data.message, res.data.data.user_name]);
-  // .then(res => console.log(res.data));
-  //! axios
-  // .then(res => [res.data.message, res.data.data.user_name]);
-  // .then(res => [res.data.message, 'kimcoding']);
 
   return {
     type: SIGNIN_USER,
@@ -18,14 +14,10 @@ export async function signinUser(dataToSubmit) {
 }
 
 export async function signupUser(dataToSubmit) {
-  // const request = 'User created'
+  // const request = 'User created';
   const request = await customAxios
     .post(`/user/signup`, dataToSubmit)
     .then(res => res.data.message);
-  // .then(res => console.log(res.data));
-  //! axios
-  // .then(res => res.data.message);
-  // .then(res => 'User created');
 
   return {
     type: SIGNUP_USER,
@@ -38,9 +30,6 @@ export async function signoutUser() {
   const request = await customAxios
     .post(`/user/signout`)
     .then(res => res.data.message);
-  //! axios
-  // .then(res => res.data.message);
-  // .then(res => 'Logout success');
 
   return {
     type: SIGNOUT_USER,
