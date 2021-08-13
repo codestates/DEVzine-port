@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Auth from '../../hoc/auth';
 import AlertModal from '../Common/AlertModal/AlertModal';
 import { customAxios } from '../../utils/customAxios';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import Button from '../Common/Button/Button';
+import Error from '../Common/Error/Error';
 
 function ContributionUpdateWrapper({ id }) {
   const [keyword, setKeyword] = useState('게임');
@@ -13,6 +14,7 @@ function ContributionUpdateWrapper({ id }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
   const [colorChange, setcolorChange] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   let selectOptions = [
     '게임',
@@ -32,7 +34,11 @@ function ContributionUpdateWrapper({ id }) {
     const requestGet = await customAxios
       .get(`/magazine/contribution/${id}`)
       .then(res => res.data.data.contribution_keyword)
-      .catch(err => alert('기고 정보를 받아오는데 실패하였습니다.'));
+      .catch(err => {
+        setHasError(true);
+        alert('기고 정보를 받아오는데 실패하였습니다.');
+        window.location.href = '/error';
+      });
 
     setKeyword(requestGet);
     // setKeyword(requestGet.contribution_keyword);
