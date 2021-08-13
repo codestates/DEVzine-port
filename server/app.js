@@ -80,11 +80,18 @@ const { Article } = require('./Models/Articles')
 const { getRecentArticlesFrom24H, getRecentArticlesFrom48H } = require('./controller/crawler/article-crawler');
 const automatedCrawlerForWeekday = schedule.scheduleJob('00 21 * * 1-5', async () => { // 화-토 오전 6시 크롤링 (24시간 이내 업데이트)
   const data = await getRecentArticlesFrom24H();
-  // await Article.create(data);
+  await Article.create(data);
 });
 const automatedCrawlerForWeekend = schedule.scheduleJob('00 21 * * 7', async () => { // 월요일 오전 6시 크롤링 (48시간 이내 업데이트) 
   const data = await getRecentArticlesFrom48H();
-  // await Article.create(data);
+  await Article.create(data);
+});
+const { Stat } = require('./Models/Stats')
+const automationTestForDeployment = schedule.scheduleJob('20 01 * * *', async () => { // 배포 환경 test 
+  await Stat.create({
+    stat_datetime: new Date(Date.now()),
+    stat_content: {"dummy": "data"}
+  });
 });
 
 mongoose
