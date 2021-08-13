@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Switch, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { mypageUser } from '../../_actions/user_actions';
@@ -12,6 +13,7 @@ import { debounce } from 'lodash';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import OptContents from './OptContents';
+import ContributionUpdateWrapper from '../ContributionUpdate/ContributionUpdateWrapper';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
@@ -255,6 +257,11 @@ function MyPageWrapper() {
         </div>
       </div>
       {modalOpen ? <SigninModal /> : null}
+      <Switch>
+        <Link to="/contributionupdate/1" children={<contributionupdate />}>
+          기고수정
+        </Link>
+      </Switch>
     </div>
   );
 }
