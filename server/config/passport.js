@@ -18,27 +18,45 @@ module.exports = () => {
 			done(err, user);
 		});
 	});
-	
+
 	passport.use(new LocalStrategy({
-		usernameField: 'user_email', // id set
-		passwordField: 'user_password', // password set
-		session: true, // session set
-		passReqToCallback: false // callback req off
-	}, (username, password, done) => {
-		User.findOne({ user_email: username }, (err, user) => {
-			if (err) { // 에러가 발생하면 에러를 반환
+		usernameField: 'user_email',
+		passwordField: 'user_password'
+	}, (email, password, done) => {
+		User.findOne({ user_email: email }, (err, user) => {
+			if (err) {
 				return done(err);
 			}
-			if (!user) { // 유저가 없으면 에러를 반환
-				return done(null, false, { "message": "Invalid user" });
+			if (!user) {
+				return done(null, false, { message: 'Invalid user' });
 			}
-			// ! 패스워드 비교 함수 작성 필요 지금처럼 단순 비교x
-			if (user.user_password !== password) { // 유저의 패스워드가 일치하지 않으면 에러를 반환
-				return done(null, false, { "message": "Invalid password" });
+			if (!user.authenicate(password)) {
+				return done(null, false, { message: 'Invalid password' });
 			}
-			return done(null, user); // 정상적으로 세션에 저장된 유저의 정보를 반환
-			// 인증이성공하면 passport에 사용자의 정보를 전달
+			return done(null, user);
 		});
 	}));
+	
+	// passport.use(new LocalStrategy({
+	// 	usernameField: 'user_email', // id set
+	// 	passwordField: 'user_password', // password set
+	// 	session: true, // session set
+	// 	passReqToCallback: false // callback req off
+	// }, (username, password, done) => {
+	// 	User.findOne({ user_email: username }, (err, user) => {
+	// 		if (err) { // 에러가 발생하면 에러를 반환
+	// 			return done(err);
+	// 		}
+	// 		if (!user) { // 유저가 없으면 에러를 반환
+	// 			return done(null, false, { "message": "Invalid user" });
+	// 		}
+	// 		// ! 패스워드 비교 함수 작성 필요 지금처럼 단순 비교x
+	// 		if (user.user_password !== password) { // 유저의 패스워드가 일치하지 않으면 에러를 반환
+	// 			return done(null, false, { "message": "Invalid password" });
+	// 		}
+	// 		return done(null, user); // 정상적으로 세션에 저장된 유저의 정보를 반환
+	// 		// 인증이성공하면 passport에 사용자의 정보를 전달
+	// 	});
+	// }));
 
 };
