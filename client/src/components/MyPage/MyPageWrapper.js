@@ -3,11 +3,16 @@ import { Switch, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { mypageUser } from '../../_actions/user_actions';
-import { checkEmail, checkPassword } from '../../utils/validation';
+import {
+  checkEmail,
+  checkPassword,
+  checkHashedPassword,
+} from '../../utils/validation';
 import Auth from '../../hoc/auth';
+import { debounce } from 'lodash';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import TextInputGenderRequired from './TextInputGenderRequired';
-import Accordion from './Accordion';
+import OptContents from './OptContents';
 import ContributionUpdateWrapper from '../ContributionUpdate/ContributionUpdateWrapper';
 
 const END_POINT = process.env.REACT_APP_API_URL;
@@ -21,16 +26,15 @@ function MyPageWrapper() {
 
   const [Email, setEmail] = useState('');
   const [Name, setName] = useState('');
-  const [Password, setPassword] = useState('');
+  const [Password, setPassword] = useState(null);
   const [ConfirmPassword, setConfirmPassword] = useState('');
-  const [Gender, setGender] = useState('');
+  const [hashedPassword, setHashedPassword] = useState('');
+  const [Gender, setGender] = useState('선택안함');
   const [Age, setAge] = useState('');
   const [Position, setPosition] = useState('');
   const [Language, setLanguage] = useState([]);
 
   const [modalOpen, setModalOpen] = useState(false);
-
-  const bcrypt = require('bcryptjs');
 
   useEffect(() => {
     if (checkEmail(Email)) {
@@ -38,36 +42,55 @@ function MyPageWrapper() {
     } else {
       setEmail_isValid(false);
     }
-
-    if (checkPassword(Password)) {
-      setPw_isValid(true);
-    } else {
-      setPw_isValid(false);
-    }
-    if (Password === ConfirmPassword) {
-      setPw_confirm(true);
-    } else {
-      setPw_confirm(false);
-    }
+    debouncePasswordValidation();
   }, [Email, Password, ConfirmPassword]);
+
+  const debouncePasswordValidation = debounce(() => {
+    if (Password) {
+      // 유저가 비밀번호를 변경할 경우
+      if (checkPassword(Password)) {
+        setPw_isValid(true);
+      } else {
+        setPw_isValid(false);
+      }
+      if (Password === ConfirmPassword) {
+        setPw_confirm(true);
+      } else {
+        setPw_confirm(false);
+      }
+    } else {
+      if (checkHashedPassword(ConfirmPassword, hashedPassword)) {
+        setPw_isValid(true);
+        setPw_confirm(true);
+      } else {
+        setPw_isValid(true);
+        setPw_confirm(false);
+      }
+    }
+  }, 800);
 
   useEffect(() => {
     const getUserData = () => {
       setEmail_isValid(true);
       setPw_isValid(true);
+      ///////////////////////////////실험용//////////////////////////////////////
+      setGender('남자');
+      setAge('20대');
+      setPosition('프론트엔드');
+      setLanguage(['JavaScript', '기타']);
+      ///////////////////////////////실험용//////////////////////////////////////
       axios
         .get(`${END_POINT}/mypage/`, {
           withCredentials: true,
         })
         .then(res => {
-          setEmail(res.data.data.user);
-          setName(res.data.data.user);
-          setPassword(res.data.data.user);
-          setConfirmPassword(res.data.data.user);
-          setGender(res.data.data.user_info.user_gender);
-          setAge(res.data.data.user_info.user_age);
-          setPosition(res.data.data.user_info.user_position);
-          setLanguage(res.data.data.user_info.user_language);
+          setEmail(res.data.data.user.user_email);
+          setName(res.data.data.user.user_name);
+          setHashedPassword(res.data.data.user.user_password);
+          setGender(res.data.data.user.user_info.user_gender);
+          setAge(res.data.data.user.user_info.user_age);
+          setPosition(res.data.data.user.user_info.user_position);
+          setLanguage(res.data.data.user.user_info.user_language);
         })
         .catch(err => {
           alert('회원 정보를 받아오는데 실패하였습니다.');
@@ -94,6 +117,8 @@ function MyPageWrapper() {
       'email',
       email_isValid,
       '30',
+      false,
+      null,
     ],
     [
       '비밀번호',
@@ -104,6 +129,8 @@ function MyPageWrapper() {
       'password',
       pw_isValid,
       '20',
+      true,
+      'defaultpassword',
     ],
     [
       '비밀번호 확인',
@@ -114,6 +141,8 @@ function MyPageWrapper() {
       'password',
       pw_confirm,
       '20',
+      true,
+      null,
     ],
     ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '20'],
   ];
@@ -133,11 +162,11 @@ function MyPageWrapper() {
       setLanguage([]);
     }
 
-    const user_password = await bcrypt.hashSync(Password, 10);
+    // const user_password = await bcrypt.hashSync(Password, 10);
 
     let body = {
       user_email: Email,
-      user_password: user_password,
+      user_password: Password,
       user_name: Name,
       user_info: {
         user_gender: Gender,
@@ -197,27 +226,31 @@ function MyPageWrapper() {
               type={el[5]}
               isValid={el[6]}
               maxLength={el[7]}
+              isMutable={el[8]}
+              defaultValue={el[9]}
             />
           );
         })}
-        <Accordion
+        <OptContents
+          Gender={Gender}
+          Age={Age}
+          Position={Position}
+          Language={Language}
           radioInputHandler={radioInputHandler}
           selectInputHandler={selectInputHandler}
         />
         <div
           className="signupbtn"
-          onClick={
-            e =>
-              Email &&
-              Password &&
-              ConfirmPassword &&
-              Name &&
-              email_isValid &&
-              pw_isValid &&
-              pw_confirm
-                ? patchHandler()
-                : alert('모든 것을 만족해야 합니다.')
-            // postHandler()
+          onClick={e =>
+            Email &&
+            Password &&
+            ConfirmPassword &&
+            Name &&
+            email_isValid &&
+            pw_isValid &&
+            pw_confirm
+              ? patchHandler()
+              : alert('모든 것을 만족해야 합니다.')
           }
         >
           정보수정
