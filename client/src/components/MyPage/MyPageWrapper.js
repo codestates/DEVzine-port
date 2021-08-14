@@ -30,6 +30,7 @@ function MyPageWrapper() {
   const [ConfirmPassword, setConfirmPassword] = useState('');
   const [hashedPassword, setHashedPassword] = useState('');
   const [Gender, setGender] = useState('선택안함');
+  const [Scribed, setScribed] = useState('');
   const [Age, setAge] = useState('');
   const [Position, setPosition] = useState('');
   const [Language, setLanguage] = useState([]);
@@ -81,6 +82,7 @@ function MyPageWrapper() {
       // setPosition('풀스택');
       // setLanguage(['JavaScript', '기타']);
       // setPassword('defaultpassword');
+      // setScribed('구독');
       ///////////////////////////////실험용//////////////////////////////////////
       axios
         .get(`${END_POINT}/mypage/`, {
@@ -95,6 +97,12 @@ function MyPageWrapper() {
           setAge(res.data.data.user.user_info.user_age);
           setPosition(res.data.data.user.user_info.user_position);
           setLanguage(res.data.data.user.user_info.user_language);
+          setScribed(
+            res.data.data.user.subscribed === true ? '구독' : '구독안함',
+          ); //아래것과 위에것 어떠한 것이 작동하는지 알아보기
+          // res.data.data.user.subscribed === true
+          //   ? setScribed('구독')
+          //   : setScribed('구독안함');
         })
         .catch(err => {
           alert('회원 정보를 받아오는데 실패하였습니다.');
@@ -176,6 +184,7 @@ function MyPageWrapper() {
         user_position: Position,
         user_language: Language,
       },
+      subscribed: Scribed,
     };
 
     console.log('MyPageWrapper :', body);
@@ -193,8 +202,10 @@ function MyPageWrapper() {
   function radioInputHandler() {
     let checkGender = document.querySelectorAll('.radioinput');
     for (let el of checkGender) {
-      if (el.checked === true) {
-        setGender(el.value);
+      if (el.name === 'gender') {
+        el.checked === true ? setGender(el.value) : null;
+      } else if (el.name === 'subscribed') {
+        el.checked === true ? setScribed(el.value) : null;
       }
     }
   }
@@ -233,6 +244,7 @@ function MyPageWrapper() {
         })}
         <OptContents
           Gender={Gender}
+          Scribed={Scribed}
           Age={Age}
           Position={Position}
           Language={Language}

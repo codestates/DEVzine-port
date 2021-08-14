@@ -1,7 +1,12 @@
-export const radioInputData = [
+export const radioInputGenderData = [
   ['남자', 'gender', '60px'],
   ['여자', 'gender', '60px'],
   ['선택안함', 'gender', '91px'],
+];
+
+export const radioInputSubscribedData = [
+  ['구독', 'subscribed', '84px'],
+  ['구독안함', 'subscribed', '91px'],
 ];
 
 export const singleSelectData = [
