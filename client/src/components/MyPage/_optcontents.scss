@@ -1,0 +1,43 @@
+.optcontentswrapper {
+  .radiowrapper {
+    margin-top: 0px;
+  }
+
+  .contributionstatuscontainer {
+    margin: 24px 0;
+    width: 360px;
+    height: auto;
+    min-height: 115px;
+    .subjectwrapper {
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      width: 100%;
+      margin-bottom: 8px;
+    }
+    .contributionstatustable {
+      width: 360px;
+      height: auto;
+      min-height: 83px;
+      background: #ffffff;
+      border: 1px solid #d9d9d9;
+      border-radius: 8px;
+      // overflow: hidden;
+      display: flex;
+      .tableheader {
+        padding-top: 8px;
+        padding-left: 16px;
+        flex-grow: 1;
+        height: 40px;
+        border-right: 1px solid #d9d9d9;
+        border-bottom: 1px solid #d9d9d9;
+      }
+      .tableheader.first {
+        flex-grow: 8;
+      }
+      .tableheader.last {
+        border-right: 0px solid;
+      }
+    }
+  }
+}

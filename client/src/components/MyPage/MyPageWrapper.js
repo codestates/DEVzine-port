@@ -3,11 +3,16 @@ import { Switch, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { mypageUser } from '../../_actions/user_actions';
-import { checkEmail, checkPassword } from '../../utils/validation';
+import {
+  checkEmail,
+  checkPassword,
+  checkHashedPassword,
+} from '../../utils/validation';
 import Auth from '../../hoc/auth';
+import { debounce } from 'lodash';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import TextInputGenderRequired from './TextInputGenderRequired';
-import Accordion from './Accordion';
+import OptContents from './OptContents';
 import ContributionUpdateWrapper from '../ContributionUpdate/ContributionUpdateWrapper';
 
 const END_POINT = process.env.REACT_APP_API_URL;
@@ -21,16 +26,17 @@ function MyPageWrapper() {
 
   const [Email, setEmail] = useState('');
   const [Name, setName] = useState('');
-  const [Password, setPassword] = useState('');
+  const [Password, setPassword] = useState(undefined);
   const [ConfirmPassword, setConfirmPassword] = useState('');
-  const [Gender, setGender] = useState('');
+  const [hashedPassword, setHashedPassword] = useState('');
+  const [Gender, setGender] = useState('선택안함');
+  const [Scribed, setScribed] = useState('');
   const [Age, setAge] = useState('');
   const [Position, setPosition] = useState('');
   const [Language, setLanguage] = useState([]);
 
   const [modalOpen, setModalOpen] = useState(false);
-
-  const bcrypt = require('bcryptjs');
+  const [allData, setAllData] = useState(false);
 
   useEffect(() => {
     if (checkEmail(Email)) {
@@ -38,42 +44,72 @@ function MyPageWrapper() {
     } else {
       setEmail_isValid(false);
     }
-
-    if (checkPassword(Password)) {
-      setPw_isValid(true);
-    } else {
-      setPw_isValid(false);
-    }
-    if (Password === ConfirmPassword) {
-      setPw_confirm(true);
-    } else {
-      setPw_confirm(false);
-    }
+    debouncePasswordValidation();
   }, [Email, Password, ConfirmPassword]);
+
+  const debouncePasswordValidation = debounce(() => {
+    if (Password !== 'defaultpassword') {
+      // 유저가 비밀번호를 변경할 경우
+      if (checkPassword(Password)) {
+        setPw_isValid(true);
+      } else {
+        setPw_isValid(false);
+      }
+      if (Password === ConfirmPassword) {
+        setPw_confirm(true);
+      } else {
+        setPw_confirm(false);
+      }
+    } else {
+      if (checkHashedPassword(ConfirmPassword, hashedPassword)) {
+        setPw_isValid(true);
+        setPw_confirm(true);
+      } else {
+        setPw_isValid(true);
+        setPw_confirm(false);
+      }
+    }
+  }, 800);
 
   useEffect(() => {
     const getUserData = () => {
       setEmail_isValid(true);
       setPw_isValid(true);
+      ///////////////////////////////실험용//////////////////////////////////////
+      // setEmail('bmanerdaniel@gmail.com');
+      // setGender('남자');
+      // setAge('60대 이상');
+      // setPosition('풀스택');
+      // setLanguage(['JavaScript', '기타']);
+      // setPassword('defaultpassword');
+      // setScribed('구독');
+      ///////////////////////////////실험용//////////////////////////////////////
       axios
         .get(`${END_POINT}/mypage/`, {
           withCredentials: true,
         })
         .then(res => {
-          setEmail(res.data.data.user);
-          setName(res.data.data.user);
-          setPassword(res.data.data.user);
-          setConfirmPassword(res.data.data.user);
-          setGender(res.data.data.user_info.user_gender);
-          setAge(res.data.data.user_info.user_age);
-          setPosition(res.data.data.user_info.user_position);
-          setLanguage(res.data.data.user_info.user_language);
+          setEmail(res.data.data.user.user_email);
+          setPassword('defaultpassword');
+          setName(res.data.data.user.user_name);
+          setHashedPassword(res.data.data.user.user_password);
+          setGender(res.data.data.user.user_info.user_gender);
+          setAge(res.data.data.user.user_info.user_age);
+          setPosition(res.data.data.user.user_info.user_position);
+          setLanguage(res.data.data.user.user_info.user_language);
+          setScribed(
+            res.data.data.user.subscribed === true ? '구독' : '구독안함',
+          ); //아래것과 위에것 어떠한 것이 작동하는지 알아보기
+          // res.data.data.user.subscribed === true
+          //   ? setScribed('구독')
+          //   : setScribed('구독안함');
         })
         .catch(err => {
           alert('회원 정보를 받아오는데 실패하였습니다.');
         });
     };
     getUserData();
+    setAllData(true);
   }, []);
 
   useEffect(() => {
@@ -94,6 +130,7 @@ function MyPageWrapper() {
       'email',
       email_isValid,
       '30',
+      false,
     ],
     [
       '비밀번호',
@@ -104,6 +141,7 @@ function MyPageWrapper() {
       'password',
       pw_isValid,
       '20',
+      true,
     ],
     [
       '비밀번호 확인',
@@ -114,8 +152,9 @@ function MyPageWrapper() {
       'password',
       pw_confirm,
       '20',
+      true,
     ],
-    ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '20'],
+    ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '20', true],
   ];
 
   async function patchHandler() {
@@ -133,11 +172,11 @@ function MyPageWrapper() {
       setLanguage([]);
     }
 
-    const user_password = await bcrypt.hashSync(Password, 10);
+    // const user_password = await bcrypt.hashSync(Password, 10);
 
     let body = {
       user_email: Email,
-      user_password: user_password,
+      user_password: Password,
       user_name: Name,
       user_info: {
         user_gender: Gender,
@@ -145,6 +184,7 @@ function MyPageWrapper() {
         user_position: Position,
         user_language: Language,
       },
+      subscribed: Scribed,
     };
 
     console.log('MyPageWrapper :', body);
@@ -162,8 +202,10 @@ function MyPageWrapper() {
   function radioInputHandler() {
     let checkGender = document.querySelectorAll('.radioinput');
     for (let el of checkGender) {
-      if (el.checked === true) {
-        setGender(el.value);
+      if (el.name === 'gender') {
+        el.checked === true ? setGender(el.value) : null;
+      } else if (el.name === 'subscribed') {
+        el.checked === true ? setScribed(el.value) : null;
       }
     }
   }
@@ -177,12 +219,11 @@ function MyPageWrapper() {
     for (let el of singleValues) {
       singleArr.push(el.value);
     }
-
     setAge(singleArr[0]);
     setPosition(singleArr[1]);
   }
 
-  return (
+  return allData ? (
     <div className="signupcontainer">
       <div className="signupwrapper">
         {requiredTextInputData.map((el, idx) => {
@@ -197,27 +238,31 @@ function MyPageWrapper() {
               type={el[5]}
               isValid={el[6]}
               maxLength={el[7]}
+              isMutable={el[8]}
             />
           );
         })}
-        <Accordion
+        <OptContents
+          Gender={Gender}
+          Scribed={Scribed}
+          Age={Age}
+          Position={Position}
+          Language={Language}
           radioInputHandler={radioInputHandler}
           selectInputHandler={selectInputHandler}
         />
         <div
           className="signupbtn"
-          onClick={
-            e =>
-              Email &&
-              Password &&
-              ConfirmPassword &&
-              Name &&
-              email_isValid &&
-              pw_isValid &&
-              pw_confirm
-                ? patchHandler()
-                : alert('모든 것을 만족해야 합니다.')
-            // postHandler()
+          onClick={e =>
+            Email &&
+            Password &&
+            ConfirmPassword &&
+            Name &&
+            email_isValid &&
+            pw_isValid &&
+            pw_confirm
+              ? patchHandler()
+              : alert('모든 것을 만족해야 합니다.')
           }
         >
           정보수정
@@ -230,7 +275,7 @@ function MyPageWrapper() {
         </Link>
       </Switch>
     </div>
-  );
+  ) : null;
 }
 
 export default MyPageWrapper;
