@@ -26,7 +26,7 @@ function MyPageWrapper() {
 
   const [Email, setEmail] = useState('');
   const [Name, setName] = useState('');
-  const [Password, setPassword] = useState(null);
+  const [Password, setPassword] = useState(undefined);
   const [ConfirmPassword, setConfirmPassword] = useState('');
   const [hashedPassword, setHashedPassword] = useState('');
   const [Gender, setGender] = useState('선택안함');
@@ -35,6 +35,7 @@ function MyPageWrapper() {
   const [Language, setLanguage] = useState([]);
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [allData, setAllData] = useState(false);
 
   useEffect(() => {
     if (checkEmail(Email)) {
@@ -46,7 +47,7 @@ function MyPageWrapper() {
   }, [Email, Password, ConfirmPassword]);
 
   const debouncePasswordValidation = debounce(() => {
-    if (Password) {
+    if (Password !== 'defaultpassword') {
       // 유저가 비밀번호를 변경할 경우
       if (checkPassword(Password)) {
         setPw_isValid(true);
@@ -74,10 +75,12 @@ function MyPageWrapper() {
       setEmail_isValid(true);
       setPw_isValid(true);
       ///////////////////////////////실험용//////////////////////////////////////
-      setGender('남자');
-      setAge('20대');
-      setPosition('프론트엔드');
-      setLanguage(['JavaScript', '기타']);
+      // setEmail('bmanerdaniel@gmail.com');
+      // setGender('남자');
+      // setAge('60대 이상');
+      // setPosition('풀스택');
+      // setLanguage(['JavaScript', '기타']);
+      // setPassword('defaultpassword');
       ///////////////////////////////실험용//////////////////////////////////////
       axios
         .get(`${END_POINT}/mypage/`, {
@@ -85,6 +88,7 @@ function MyPageWrapper() {
         })
         .then(res => {
           setEmail(res.data.data.user.user_email);
+          setPassword('defaultpassword');
           setName(res.data.data.user.user_name);
           setHashedPassword(res.data.data.user.user_password);
           setGender(res.data.data.user.user_info.user_gender);
@@ -97,6 +101,7 @@ function MyPageWrapper() {
         });
     };
     getUserData();
+    setAllData(true);
   }, []);
 
   useEffect(() => {
@@ -118,7 +123,6 @@ function MyPageWrapper() {
       email_isValid,
       '30',
       false,
-      null,
     ],
     [
       '비밀번호',
@@ -130,7 +134,6 @@ function MyPageWrapper() {
       pw_isValid,
       '20',
       true,
-      'defaultpassword',
     ],
     [
       '비밀번호 확인',
@@ -142,9 +145,8 @@ function MyPageWrapper() {
       pw_confirm,
       '20',
       true,
-      null,
     ],
-    ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '20'],
+    ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '20', true],
   ];
 
   async function patchHandler() {
@@ -206,12 +208,11 @@ function MyPageWrapper() {
     for (let el of singleValues) {
       singleArr.push(el.value);
     }
-
     setAge(singleArr[0]);
     setPosition(singleArr[1]);
   }
 
-  return (
+  return allData ? (
     <div className="signupcontainer">
       <div className="signupwrapper">
         {requiredTextInputData.map((el, idx) => {
@@ -227,7 +228,6 @@ function MyPageWrapper() {
               isValid={el[6]}
               maxLength={el[7]}
               isMutable={el[8]}
-              defaultValue={el[9]}
             />
           );
         })}
@@ -263,7 +263,7 @@ function MyPageWrapper() {
         </Link>
       </Switch>
     </div>
-  );
+  ) : null;
 }
 
 export default MyPageWrapper;
