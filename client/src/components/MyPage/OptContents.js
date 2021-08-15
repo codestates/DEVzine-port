@@ -2,16 +2,19 @@ import React from 'react';
 import RadioInputGender from './RadioInputGender';
 import SingleSelect from './SingleSelect';
 import MultiSelect from './MultiSelect';
+import ContributionStatus from './ContributionStatus';
 import {
-  radioInputData,
+  radioInputGenderData,
   multiSelectData,
   singleSelectData,
+  radioInputSubscribedData,
 } from '../../assets/datas/MyPageData/data';
 
 function OptContents({
   radioInputHandler,
   selectInputHandler,
   Gender,
+  Scribed,
   Age,
   Position,
   Language,
@@ -43,7 +46,7 @@ function OptContents({
       <div className="radiowrapper">
         <div className="subjectwrapper">성별</div>
         <div className="radiocontents">
-          {radioInputData.map((el, i) => {
+          {radioInputGenderData.map((el, i) => {
             return (
               <RadioInputGender
                 key={i}
@@ -51,7 +54,7 @@ function OptContents({
                 name={el[1]}
                 width={el[2]}
                 radioInputHandler={radioInputHandler}
-                Gender={Gender}
+                stateName={Gender}
               />
             );
           })}
@@ -82,6 +85,24 @@ function OptContents({
           />
         </div>
       </div>
+      <div className="radiowrapper" style={{ marginTop: '24px' }}>
+        <div className="subjectwrapper">구독</div>
+        <div className="radiocontents">
+          {radioInputSubscribedData.map((el, i) => {
+            return (
+              <RadioInputGender
+                key={i}
+                value={el[0]}
+                name={el[1]}
+                width={el[2]}
+                radioInputHandler={radioInputHandler}
+                stateName={Scribed}
+              />
+            );
+          })}
+        </div>
+      </div>
+      <ContributionStatus />
     </div>
   );
 }
