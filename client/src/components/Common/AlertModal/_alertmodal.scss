@@ -1,53 +1,48 @@
-.modalbackdrop {
-  background-color: rgba(0, 0, 0, 0.4);
-  place-items: center;
-  display: grid;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 900;
-}
-
 .modalcontainer {
   height: 15rem;
   margin: 120px auto;
   text-align: center;
-}
 
-.modalview {
-  width: 360px;
-  height: 241px;
-  background-color: WHITE;
-  border-radius: 20px;
-  position: relative;
+  .modalbackdrop {
+    @include flexbox;
+    background-color: rgba(0, 0, 0, 0.4);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 900;
+
+    .modalview {
+      background-color: $white;
+      border-radius: 20px;
+      height: 241px;
+      position: relative;
+      width: 360px;
+    }
+  }
 
   .desc {
-    color: #191a20;
+    @include pos-center;
+    color: $dark;
     font-size: 18px;
-    font-weight: bold;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    font-weight: $bold;
+
+    .closebtn {
+      background-color: $border;
+      border-radius: 8px;
+      color: $dark;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: $bold;
+      height: 55px;
+      margin-top: 16px;
+      width: 265px;
+    }
   }
 }
 
-.closebtn {
-  color: #191a20;
-  background-color: #d9d9d9;
-  width: 265px;
-  height: 55px;
-  cursor: pointer;
-  font-size: 18px;
-  margin-top: 16px;
-  font-weight: bold;
-  border-radius: 8px;
-}
-
 .alermodalbox {
-  border: 1px solid red;
-  width: 0px;
-  height: 0px;
+  height: 0;
+  width: 0;
 }
