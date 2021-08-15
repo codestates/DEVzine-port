@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import arrow from '../../../assets/images/arrow_right_b.svg';
 import footerArrow from '../../../assets/images/footerArrow.svg';
 
@@ -83,19 +84,17 @@ function Footer() {
                     </div>
                   </div>
                   <div className="footerleft sm-hidden">
-                    <div
-                      onClick={() => (window.location.href = '/contribution')}
-                      className="footerctbbtn"
-                    >
-                      DEVzine 기고 신청하기
-                      <img src={footerArrow} alt="footerArrow" />
+                    <div className="footerctbbtn">
+                      <Link to="/contribution">
+                        DEVzine 기고 신청하기
+                        <img src={footerArrow} alt="footerArrow" />
+                      </Link>
                     </div>
-                    <div
-                      onClick={() => (window.location.href = '/visual')}
-                      className="footervslbtn"
-                    >
-                      핵심 데이터 한 눈에 보기
-                      <img src={footerArrow} alt="footerArrow" />
+                    <div className="footervslbtn">
+                      <Link to="/visual">
+                        핵심 데이터 한 눈에 보기
+                        <img src={footerArrow} alt="footerArrow" />
+                      </Link>
                     </div>
                   </div>
                 </div>

@@ -13,11 +13,9 @@ function Header() {
   const dispatch = useDispatch();
 
   const [signIn, setSignIn] = useState(false);
-  const [userName, setUserName] = useState('nothing');
+  const [userName, setUserName] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
-  // const [ScrollY, setScrollY] = useState(0);
-  // const [ScrollActive, setScrollActive] = useState(false);
-  const [Open, setOpen] = useState(false);
+  const [openSidebar, setOpenSidebar] = useState(false);
 
   useEffect(() => {
     if (store.getState().user.signinSuccess) {
@@ -47,26 +45,6 @@ function Header() {
     });
   }
 
-  // useEffect(() => {
-  //   function scrollListener() {
-  //     window.addEventListener('scroll', handleScroll);
-  //   } //  window 에서 스크롤을 감시 시작
-  //   scrollListener(); // window 에서 스크롤을 감시
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   }; //  window 에서 스크롤을 감시를 종료
-  // });
-
-  // function handleScroll() {
-  //   if (ScrollY > 5) {
-  //     setScrollY(window.pageYOffset);
-  //     setScrollActive(true);
-  //   } else {
-  //     setScrollY(window.pageYOffset);
-  //     setScrollActive(false);
-  //   }
-  // }
-
   return (
     <>
       <header className="headerfix">
@@ -89,12 +67,18 @@ function Header() {
                     <img src={logo} alt="DEVzine" className="headernav-logo" />
                   </Link>
                   <div className="sm-only">
-                    {Open ? (
-                      <SideBar />
+                    {openSidebar ? (
+                      <SideBar
+                        setOpenSidebar={setOpenSidebar}
+                        signIn={signIn}
+                        userName={userName}
+                        setSignIn={setSignIn}
+                        setUserName={setUserName}
+                      />
                     ) : (
                       <span
                         className="headernav-menu"
-                        onClick={() => setOpen(true)}
+                        onClick={() => setOpenSidebar(true)}
                       >
                         <img src={menu} alt="menu" />
                       </span>
