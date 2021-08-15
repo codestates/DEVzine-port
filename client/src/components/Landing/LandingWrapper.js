@@ -1,76 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { customAxios } from '../../utils/customAxios';
-import Loading from '../Common/Loading/Loading';
-import Button from '../Common/Button/Button';
+import React from 'react';
 import landing01 from '../../assets/images/landing01.svg';
 import landing02 from '../../assets/images/landing02.svg';
 import landing03 from '../../assets/images/landing03.svg';
 import landing04 from '../../assets/images/landing04.svg';
 
 function LandingWrapper() {
-  const [subscribers, setSubscribers] = useState('200000');
-  const [count, setCount] = useState('0');
-  const [ScrollY, setScrollY] = useState(0);
-  const [ScrollActive, setScrollActive] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  // useEffect(async () => {
-  //   const requestGet = await customAxios
-  //     .get('/landing')
-  //     .then(res => res.data.data.setSubscribers);
-  //   .catch(err => alert('회원 수 정보를 받아오는데 실패하였습니다.'));
-  //   setSubscribers(requestGet);
-  // }, []);
-
-  useEffect(() => {
-    if (loading) {
-      setTimeout(() => {
-        setLoading(false);
-      }, 3000);
-    }
-  }, [loading]);
-
-  useEffect(() => {
-    let start = 0;
-    const end = parseInt(subscribers.substring(0, 3));
-    if (start === end) return;
-
-    let totalMilSecDur = parseInt(1);
-    let incrementTime = (totalMilSecDur / end) * 3500;
-
-    let timer = setInterval(() => {
-      start += 1;
-      setCount(String(start) + ',' + subscribers.substring(3));
-      if (start === end) clearInterval(timer);
-    }, incrementTime);
-  }, [ScrollActive]);
-
-  useEffect(() => {
-    function scrollListener() {
-      window.addEventListener('scroll', handleScroll);
-    } //  window 에서 스크롤을 감시 시작
-    scrollListener(); // window 에서 스크롤을 감시
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    }; //  window 에서 스크롤을 감시를 종료
-  });
-
-  function handleScroll() {
-    if (ScrollY > window.innerHeight) {
-      setScrollY(window.pageYOffset);
-      setScrollActive(true);
-    } else {
-      setScrollY(window.pageYOffset);
-      setScrollActive(false);
-    }
-  }
-
   return (
     <>
-      {loading ? <Loading /> : null}
-      <div className="container">
-        <div className="landingimg">
+      <div className="landingimg">
+        <div className="container">
           <div className="row">
             <div className="col-sm-4 col-md-8 col-lg-7">
               <div className="landingbackground">
@@ -99,7 +37,14 @@ function LandingWrapper() {
                   <br />
                   빠르게 확인한다
                 </h2>
-                <p>하단 핵심 데이터 한 눈에 보기에서 확인할 수 있습니다.</p>
+                <p className="sm-hidden">
+                  하단 핵심 데이터 한 눈에 보기에서 확인할 수 있습니다.
+                </p>
+                <p className="sm-only">
+                  하단 핵심 데이터 한 눈에 보기에서
+                  <br />
+                  확인할 수 있습니다.
+                </p>
               </div>
             </div>
             <div className="col-sm-4 col-md-8 col-lg-7">
@@ -118,12 +63,12 @@ function LandingWrapper() {
               </div>
             </div>
             <div className="col-sm-4 col-md-8 col-lg-7">
-              <div className="landingbackground">
+              <div className="landingbackground last">
                 <img src={landing04} alt="landing04" />
               </div>
             </div>
             <div className="col-sm-4 col-md-4 col-lg-5">
-              <div className="landingcontent">
+              <div className="landingcontent last">
                 <h2>
                   자신의 IT 글을
                   <br />
@@ -132,31 +77,6 @@ function LandingWrapper() {
                 <p>하단 기고 신청하기에서 기고 신청할 수 있습니다.</p>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div className="withuscontainer">
-        <h2>{count}명</h2>
-        구독하고 있어요.
-        <p>많은 분들이 찾는 DEVzine과 함께 해요!</p>
-        <div className="landingbottombtn">
-          <div>
-            <Link to="/subscribe">
-              <Button
-                subject="구독하기"
-                color="#191A20"
-                backgroundColor="#FFDD14"
-                className="btn1"
-              />
-            </Link>
-          </div>
-          <div>
-            <Button
-              subject="매거진 보기"
-              color="#191A20"
-              backgroundColor="#FFDD14"
-              onClickHandle={() => (window.location.href = '/articlelist')}
-            />
           </div>
         </div>
       </div>
