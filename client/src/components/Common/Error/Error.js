@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 function ErrorText() {
   const [errorSecs, setErrorSecs] = useState(3);
@@ -13,8 +13,8 @@ function ErrorText() {
 
   return (
     <div className="errorbox">
-      <div className="errorText">
-        <div className="errorTitle stop-dragging">
+      <div className="errortext">
+        <div className="errortitle stop-dragging">
           페이지가 존재하지 않습니다.
           <p>{errorSecs}초 후에 메인으로 이동합니다.</p>
         </div>

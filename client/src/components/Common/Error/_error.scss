@@ -1,28 +1,42 @@
 .errorbox {
-  width: 100%;
-  height: 100vh;
-  z-index: 20000;
-  background-color: #fff;
+  background-color: $background;
+  min-height: 100vh;
   position: relative;
-  top: 0;
+  width: 100%;
 }
 
-.errorText {
-  position: absolute;
-  top: 43%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #191a20;
+.errortext {
+  @include pos-center;
   text-align: center;
-}
+  top: 45%;
+  width: 100%;
 
-.errorTitle {
-  font-size: 48px;
-  font-weight: 800;
-}
+  .errortitle {
+    color: $dark;
+    font-size: 24px;
+    font-weight: $bold;
 
-.errorTitle p {
-  font-size: 24px;
-  font-weight: 400;
-  padding-top: 10px;
+    @include responsive(T) {
+      font-size: 36px;
+    }
+
+    @include responsive(D) {
+      font-size: 48px;
+    }
+
+    p {
+      color: $primary;
+      font-size: 18px;
+      font-weight: $normal;
+      padding-top: 10px;
+
+      @include responsive(T) {
+        font-size: 20px;
+      }
+
+      @include responsive(D) {
+        font-size: 24px;
+      }
+    }
+  }
 }
