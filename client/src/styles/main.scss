@@ -27,7 +27,6 @@
 @import '../components/Landing/landingwrapper';
 @import '../components/Landing/landinginteraction';
 @import '../components/Landing/LandingSub';
-@import '../components/ArticleList/articlelistwrapper';
 @import '../components/Contribution/contributionsWrapper';
 @import '../components/Subscription/subscriptionswrapper';
 @import '../components/SignUp/signupwrapper';
@@ -36,5 +35,8 @@
 @import '../components/SignUp/radioinputgender';
 @import '../components/SignUp/select';
 @import '../components/MyPage/optcontents';
+@import '../components/ArticleList/articlelistwrapper';
+@import '../components/ArticleView/ArticleViewWrapper';
+@import '../components/Visual/VisualWrapper';
 
 @import './layouts/grids';
