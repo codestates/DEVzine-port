@@ -1,0 +1,44 @@
+.sidebar {
+  background-color: rgba(0, 0, 0, 0.4);
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+
+  &-nav {
+    background-color: $white;
+    height: 100vh;
+    min-width: 200px;
+    padding-left: 15px;
+    padding-top: 35px;
+    position: absolute;
+    right: 0;
+    width: 50%;
+
+    .closebtn {
+      cursor: pointer;
+      position: fixed;
+      right: 10px;
+      top: 10px;
+    }
+
+    li {
+      font-weight: $bold;
+      cursor: pointer;
+
+      &:first-child {
+        border-bottom: 1px solid $border;
+      }
+    }
+
+    .usename {
+      cursor: none;
+    }
+
+    .signout {
+      border-top: 1px solid $border;
+      color: $border;
+    }
+  }
+}

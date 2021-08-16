@@ -1,10 +1,10 @@
 .commonbutton {
+  @include inline-flexbox;
   border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
-  height: 55px;
-  line-height: 55px;
-  text-align: center;
-  width: 265px;
   font-size: 18px;
+  font-weight: $bold;
+  height: 55px;
+  padding: 8px;
+  width: 265px;
 }

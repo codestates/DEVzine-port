@@ -129,3 +129,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Etc.
+style.css.map
