@@ -1,45 +1,54 @@
 .landinginteractioncontainer {
-  background: #191a20;
-  width: 100vw;
+  @include flexbox;
+  background: $dark;
   height: 700px;
-  // position: fixed;
-  position: relative;
-  top: 0px;
-  display: flex;
-  justify-content: center;
+  margin-top: 120px;
+  position: fixed;
+  width: 100%;
+
+  @include mobile-only() {
+    height: 400px;
+    margin-top: 90px;
+  }
 
   .textwrapper {
-    z-index: 1000;
     display: flex;
     flex-direction: column;
-    width: 100vw;
     height: 166px;
-    position: absolute;
     left: 0;
+    position: absolute;
     top: 103px;
+    width: 100%;
+
+    @include mobile-only() {
+      top: 53px;
+    }
 
     .description {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100vw;
-      height: 26px;
-      font-weight: bold;
+      @include flexbox;
+      color: $white;
       font-size: 24px;
-      color: #fff;
+      font-weight: bold;
+      height: 26px;
       text-align: center;
+
+      @include mobile-only() {
+        @include text-style(14, $white);
+      }
     }
 
     .subject {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100vw;
+      @include flexbox;
+      color: $white;
+      font-size: 80px;
+      font-weight: $bold;
       height: 75px;
       margin-top: 12px;
-      font-weight: bold;
-      font-size: 80px;
-      color: #fff;
+
+      @include mobile-only() {
+        font-size: 40px;
+        margin-top: 0;
+      }
     }
   }
 }

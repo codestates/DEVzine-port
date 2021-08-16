@@ -4,12 +4,12 @@ function RadioInputGender({
   value,
   name,
   width,
-  isChecked,
   radioInputHandler,
+  stateName,
 }) {
   return (
     <div className="radiocontent" style={{ width: width }}>
-      {isChecked ? (
+      {value === stateName ? (
         <input
           type="radio"
           className="radioinput"

@@ -1,76 +1,124 @@
 .headerfix {
+  height: 120px;
   position: fixed;
   width: 100%;
-  z-index: 1001;
+  z-index: 10;
+
+  @include mobile-only() {
+    height: 100px;
+  }
+
+  .headertime,
+  .headernavwrapper {
+    left: 0;
+    position: fixed;
+    width: 100%;
+  }
+
+  .headertime {
+    top: 0;
+    z-index: 10;
+  }
+
+  .headernavwrapper {
+    top: 50px;
+    z-index: 10;
+
+    @include mobile-only() {
+      top: 40px;
+    }
+  }
 }
 
 .headertime {
-  background-color: BLACK;
-  color: #ffdd14;
-  font-weight: 500;
+  @include text-style(16, $yellow);
+  background-color: $dark;
   height: 50px;
   line-height: 50px;
+  margin-bottom: 0;
   text-align: center;
-  font-size: 16px;
-  overflow: hidden;
+
+  @include mobile-only() {
+    @include text-style(14, $yellow);
+    height: 40px;
+    line-height: 40px;
+  }
 
   .timer {
-    font-weight: 900;
+    font-weight: $bold;
     margin-left: 5px;
   }
 }
+
 .headernavwrapper {
-  width: 100%;
-  background-color: WHITE;
-}
-.headernav {
-  border-bottom: 1px solid #f2f2f2;
+  background-color: $white;
+  border-bottom: 1px solid $background;
   height: 70px;
   line-height: 70px;
-  width: 98%;
-  margin: 0 auto;
   position: relative;
 
-  @include responsive(D) {
-    width: 1120px;
+  @include mobile-only() {
+    height: 50px;
+    line-height: 50px;
   }
+}
 
-  .headerlogo {
+.headernav {
+  &-logo {
+    @include pos-center-y;
     cursor: pointer;
-    padding-top: 22px;
-  }
+    height: 30px;
+    width: auto;
 
-  .leftbox {
-    width: 449.5px;
-    font-size: 16px;
-    font-weight: 700;
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-
-    span {
-      margin: 20px;
-      cursor: pointer;
+    @include mobile-only() {
+      height: 20px;
     }
   }
 
-  .headermenu {
+  &-menu {
+    @include flexbox(end);
     height: 70px;
-    padding-top: 10px;
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-  }
 
-  .headerbutton {
-    color: WHITE;
-    width: 110px;
-    height: 40px;
-    background-color: #191a20;
+    @include mobile-only() {
+      height: 50px;
+    }
+  }
+}
+
+.rightbox {
+  @include flexbox(end);
+  @include text-style(16, $dark);
+  font-weight: $bold;
+  height: 70px;
+
+  &-button {
+    background-color: $dark;
     border-radius: 6px;
-    font-weight: 700;
+    color: $white;
+    cursor: pointer;
+    font-weight: $bold;
+    height: 40px;
+    width: 110px;
+  }
+}
+
+.navlist {
+  @include flexbox(end);
+  cursor: pointer;
+
+  li {
+    margin-right: 24px;
+
+    &::after {
+      content: '|';
+      margin-left: 24px;
+    }
+
+    &:last-child {
+      &::after {
+        content: '';
+        margin-left: 0;
+      }
+    }
   }
 }
