@@ -2,7 +2,7 @@ const { User } = require('../../Models/Users')
 
 module.exports = {
 
-    getUserStats: async () => {
+        getUserStats: async () => {
 
         let users = {};
 
@@ -73,7 +73,7 @@ module.exports = {
         });
 
         return users;
-    
-    }
+
+        }       
 
 }

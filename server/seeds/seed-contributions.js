@@ -28,7 +28,7 @@ module.exports = {
                 `,
             "contribution_date": new Date('2021-08-02'),
             "user_email": "jonga6431@gmail.com",
-            "status": 10
+            "status": 100
         },
         {
             "contribution_keyword": "코딩",
@@ -42,7 +42,7 @@ module.exports = {
                 `,
             "contribution_date": new Date('2021-07-18'),
             "user_email": "haeun.yah@gmail.com",
-            "status": 10
+            "status": 100
         },
         {
             "contribution_keyword": "코딩",
@@ -94,7 +94,7 @@ module.exports = {
                 `,
             "contribution_date": new Date('2021-07-15'),
             "user_email": "jonga6431@gmail.com",
-            "status": 10
+            "status": 100
         },
         {
             "contribution_keyword": "코딩",
@@ -132,7 +132,7 @@ module.exports = {
                 `,
             "contribution_date": new Date('2021-08-10'),
             "user_email": "haeun.yah@gmail.com",
-            "status": 10
+            "status": 100
         },
         {
             "contribution_keyword": "코딩",
@@ -156,7 +156,7 @@ module.exports = {
                 `,
             "contribution_date": new Date('2021-06-05'),
             "user_email": "haeun.yah@gmail.com",
-            "status": 10
+            "status": 100
         },
         
     ]
