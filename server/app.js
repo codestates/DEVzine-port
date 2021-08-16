@@ -86,6 +86,10 @@ const automatedCrawlerForWeekend = schedule.scheduleJob('00 21 * * 7', async () 
   const data = await getRecentArticlesFrom48H();
   await Article.create(data);
 });
+// const test = schedule.scheduleJob('31 13 * * *', async () => { // 크롤링 자동화 test 용 코드, 최종 배포 전에 삭제해야 함 
+//   const data = await getRecentArticlesFrom24H();
+//   console.log(data)
+// });
 
 mongoose
   .connect(process.env.MONGO_STRING, {
