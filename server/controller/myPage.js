@@ -18,7 +18,9 @@ module.exports = {
             });
 
             if (!user) {
-                return res.status(404).json({"message": "Invalid user"});
+                return res.status(404).json({
+                    "message": "Invalid user"
+                });
             }
 
             const { user_email, 
