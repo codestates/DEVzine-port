@@ -22,8 +22,12 @@ module.exports = {
                                 stat_content: data
                         });
 
-                        redisClient.setex('visualsActivated', 10, JSON.stringify(data));
-                        return res.status(200).json({data, "message": "success", "source": "DB"});
+                        redisClient.setex('visualsActivated', 10, JSON.stringify(data)); //TODO: 배포 직전에 유효시간 12시간으로 수정
+                        return res.status(200).json({
+                                data, 
+                                "message": "success", 
+                                "source": "DB"
+                        });
                         
                 } catch (err) {
                         console.log(err);
