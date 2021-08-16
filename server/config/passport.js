@@ -1,12 +1,12 @@
 const passport = require('passport');
-const { ExtractJwt, Strategy: JWTStrategy } = require('passport-jwt');
+const { Strategy: JWTStrategy } = require('passport-jwt');
 const { Strategy: LocalStrategy } = require('passport-local');
 
 const { User } = require('../Models/Users');
 
 require('dotenv').config();
 
-const passportConfig = { usernameField: 'user_email', passwordField: 'user_password' };
+const passportConfig = { usernameField: 'user_email', passwordField: 'user_password', session: false };
 
 const passportVerify = async (user_email, user_password, done) => {
 	User.findOne({ user_email }, (err, user) => {
@@ -23,15 +23,23 @@ const passportVerify = async (user_email, user_password, done) => {
 	});
 };
 
+const cookieExtractor = function(req) {
+	var token = null;
+	if (req && req.cookies)
+	{
+			token = req.cookies['jwt'];
+	}
+	return token;
+};
+
 const JWTConfig = {
-	// jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-	jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+	jwtFromRequest: cookieExtractor,
 	secretOrKey: process.env.JWT_SECRET,
 };
 
 const JWTVerify = async (jwtPayload, done) => {
   try {
-    const user = await User.findOne({ _id: jwtPayload.id });
+    const user = await User.findOne({ _id: jwtPayload.user._id });
     if (user) {
       return done(null, user);
     }
