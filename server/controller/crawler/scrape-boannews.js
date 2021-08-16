@@ -34,17 +34,18 @@ module.exports = {
             let date = $(article).find('.news_writer').text();
             date = parseDate(date.split('| ')[1]); // Date 객체로 변환
 
-            if (Date.now() - date > compareDate) { // 1일 이상 차이날 경우, skip
+            let curDate = new Date(Date.now());
+            curDate.setHours(curDate.getHours() + 9); // 한국 시간으로 변환
+
+            if (curDate - date > compareDate) { // 1일 이상 차이날 경우, skip
                 continue;
             }
-
-            date.setHours(date.getHours() + 9); // 한국 시간으로 변환
 
             let DATA = {
                 "article_title": title,
                 "article_content": content,
                 "article_date": date,
-                "article_url": 'https://www.boannews.com' + url, 
+                "article_url": `https://www.boannews.com${url}`, 
                 "article_keyword": "보안",
                 "article_publisher": "보안뉴스"
             }

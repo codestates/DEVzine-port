@@ -1,6 +1,5 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { getSupportInfo } = require('prettier');
 
 module.exports = {
 
@@ -47,7 +46,7 @@ module.exports = {
                     "article_title": title,
                     "article_content": content,
                     "article_date": date,
-                    "article_url": 'https://www.itworld.co.kr' + url, 
+                    "article_url": `https://www.itworld.co.kr${url}`, 
                     "article_keyword": keyword,
                     "article_publisher": "It World Korea"
                 }
@@ -68,7 +67,7 @@ module.exports = {
         const ITWorldPersonalComputing = await getArticlesFromURL(ITWorldPersonalComputingURL);
         const ITWorldBigData = await getArticlesFromURL(ITWorldBigDataURL);
 
-        return [...ITWorldCloud, ...ITWorldPersonalComputing, ...ITWorldBigData];
+        return [ ...ITWorldCloud, ...ITWorldPersonalComputing, ...ITWorldBigData ];
 
     }
 
