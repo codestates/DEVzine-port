@@ -15,8 +15,8 @@ require('dotenv').config();
 const robots = require('express-robots-txt')
 app.use(robots({UserAgent: '*', Disallow: '/'}))
 
-app.use(passport.initialize()); // passport 미들웨어
-app.use(passport.session()); // session 사용할 수 있도록 하는 미들웨어
+// passport 미들웨어
+app.use(passport.initialize());
 passportConfig();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -34,16 +34,25 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: 'server & db connected!' });
 });
 
-const { isAuthenticated } = require('./controller/middleware/isAuthenticated');
-app.get('/testauth', isAuthenticated, (req, res) => {
-	// let user = req.user;
-	// if (user) {
-		res.send(`user: ${req.user}`);
-	// }
-	// else {
-	// 	res.send('not authenticated');
-	// }
+app.get('/testauth', passport.authenticate('jwt', { session: false }), (req, res) => {
+  try {
+    console.log(req.user);
+    res.status(200).json({ message: 'authenticated!' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
+
+// const { isAuthenticated } = require('./controller/middleware/isAuthenticated');
+// app.get('/testauth', isAuthenticated, (req, res) => {
+// 	// let user = req.user;
+// 	// if (user) {
+// 		res.send(`user: ${req.user}`);
+// 	// }
+// 	// else {
+// 	// 	res.send('not authenticated');
+// 	// }
+// });
 
 const { insertSeedData } = require('./seeds/insertSeedData');
 app.use('/seed', insertSeedData);
