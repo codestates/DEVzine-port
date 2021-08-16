@@ -46,13 +46,12 @@ module.exports = {
   },
 
   signOut: async (req, res) => {
-    // if (!req.user) {
-    //   return res.status(401).send({ message: 'Unauthorized user' });
-    // }
     try {
-      // console.log(req);
-      console.log(req.headers.authorization);
-      req.logout();
+      res.clearCookie('jwt', {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None'
+      });
       res.status(200).send({ message: 'Logout success' });
     } catch (err) {
       res.status(404).send({ message: 'Not found' });
@@ -60,43 +59,48 @@ module.exports = {
   },
 
   signIn: async (req, res) => {
-    try {
-      passport.authenticate('local', (passportError, user, info) => {
-        if (passportError || !user) {
-          return res.status(400).json({ message: info.message });
+    jwt.sign(
+      { user: req.user },
+      process.env.JWT_SECRET,
+      { expiresIn: '30m' },
+      (err, token) => {
+        if (err) {
+          return res.status(500).send(err);
         }
-        req.login(user, { session: false }, (loginError) => {
-          if (loginError) {
-            return res.status(500).send(loginError);
-          }
-          const token = jwt.sign(
-            { id: user._id, user_name: user.user_name },
-            process.env.JWT_SECRET,
-            { expiresIn: '30m' }
-            );
-          res.status(200).send({ data: { user_name: user.user_name, token}, message: 'Login success' });
+        res.cookie('jwt', token, {
+          httpOnly: true,
+          sameSite: 'None',
+          secure: true,
         });
-      })(req, res);
-    } catch (err) {
-      res.status(500).send(err);
-    }
+        res.status(200).send({ data: { user_name: req.user.user_name }, message: 'Login success' });
+      }
+    );
   },
-
-  // signIn: async (req, res) => {
-  //   const { user_name } = req.body;
-  //   // status:401
-  //   // {
-  //   //     "message": "Invalid password"
-  //   // }
-  //   // status:404
-  //   // {
-  //   //     "message": "Invalid user"
-  //   // }
-  //   // invalid user / passwd 경우 passport.js에서 처리하는데 좀 더 찾아봐야함
-  //   res
-  //     .status(200)
-  //     .send({ data: { user_name }, message: 'Login success' });
-  // },
+    // try {
+    //   passport.authenticate('local', (passportError, user, info) => {
+    //     if (passportError || !user) {
+    //       return res.status(400).json({ message: info.message });
+    //     }
+    //     req.login(user, { session: false }, (loginError) => {
+    //       if (loginError) {
+    //         return res.status(500).send(loginError);
+    //       }
+    //       const token = jwt.sign(
+    //         { id: user._id, user_name: user.user_name },
+    //         process.env.JWT_SECRET,
+    //         { expiresIn: '30m' }
+    //         );
+    //       res.cookie("token", token, {
+    //         httpOnly: true,
+    //         secure: true,
+    //         sameSite: 'None'
+    //       });
+    //       res.status(200).send({ data: { user_name: user.user_name }, message: 'Login success' });
+    //     });
+    //   })(req, res);
+    // } catch (err) {
+    //   res.status(500).send(err);
+    // }
 
   deleteUser: async (req, res) => {
     if (!req.user) {
