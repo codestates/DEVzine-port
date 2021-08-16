@@ -2,7 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 
 function SingleSelect({ options, name, selectInputHandler, defaultValue }) {
-  return (
+  return defaultValue ? (
     <div className="singleselectcontent">
       <div className="subjectwrapper">{name}</div>
       <Select
@@ -14,7 +14,7 @@ function SingleSelect({ options, name, selectInputHandler, defaultValue }) {
         defaultValue={defaultValue}
       />
     </div>
-  );
+  ) : null;
 }
 
 export default SingleSelect;

@@ -14,9 +14,11 @@
   .radiocontents {
     width: 263px;
     display: flex;
-    justify-content: space-between;
     .radiocontent {
       display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 26px;
       .radioinput {
         margin-right: 6px;
       }

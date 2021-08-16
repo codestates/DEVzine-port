@@ -25,7 +25,7 @@ function MyPageWrapper() {
 
   const [Email, setEmail] = useState('');
   const [Name, setName] = useState('');
-  const [Password, setPassword] = useState(undefined);
+  const [Password, setPassword] = useState(null);
   const [ConfirmPassword, setConfirmPassword] = useState('');
   const [hashedPassword, setHashedPassword] = useState('');
   const [Gender, setGender] = useState('선택안함');
@@ -71,7 +71,7 @@ function MyPageWrapper() {
     }
   }, 800);
 
-  useEffect(() => {
+  useEffect(async () => {
     const getUserData = () => {
       setEmail_isValid(true);
       setPw_isValid(true);
@@ -110,7 +110,7 @@ function MyPageWrapper() {
           alert('회원 정보를 받아오는데 실패하였습니다.');
         });
     };
-    getUserData();
+    await getUserData();
     setAllData(true);
   }, []);
 
