@@ -1,4 +1,4 @@
-const contributions = {
+export const contributions = {
   contribution_keyword: '코딩',
   contribution_title: 'Full IM 29기 17주 회고록',
   contribution_url:
