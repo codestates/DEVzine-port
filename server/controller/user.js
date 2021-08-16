@@ -51,6 +51,7 @@ module.exports = {
     // }
     try {
       // console.log(req);
+      console.log(req.headers.authorization);
       req.logout();
       res.status(200).send({ message: 'Logout success' });
     } catch (err) {
@@ -58,8 +59,7 @@ module.exports = {
     }
   },
 
-  signIn: async (req, res, next) => {
-    console.log(req.user);
+  signIn: async (req, res) => {
     try {
       passport.authenticate('local', (passportError, user, info) => {
         if (passportError || !user) {
@@ -71,13 +71,14 @@ module.exports = {
           }
           const token = jwt.sign(
             { id: user._id, user_name: user.user_name },
-            process.env.JWT_SECRET
+            process.env.JWT_SECRET,
+            { expiresIn: '30m' }
             );
           res.status(200).send({ data: { user_name: user.user_name, token}, message: 'Login success' });
         });
       })(req, res);
-    } catch (error) {
-      next(error);
+    } catch (err) {
+      res.status(500).send(err);
     }
   },
 
