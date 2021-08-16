@@ -1,0 +1,11 @@
+.visualwrapper {
+  background-color: $background;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+}
+
+.visualtest {
+  border: 1px solid red;
+  padding-top: 300px;
+}

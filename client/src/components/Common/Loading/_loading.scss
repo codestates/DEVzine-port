@@ -1,0 +1,43 @@
+.loadingbox {
+  @include pos-center;
+  animation: gradient 5s ease infinite;
+  background: linear-gradient(-45deg, #ffe33e, #ff9411, #ffe33e);
+  background-size: 400% 400%;
+  border-radius: 50px;
+  box-shadow: 0 0 100px $white;
+  height: 85px;
+  top: 45%;
+  width: 85px;
+  z-index: 9000;
+
+  @include responsive(T) {
+    width: 40%;
+  }
+
+  @include responsive(D) {
+    width: 550px;
+  }
+}
+
+.loadingwrapper {
+  background-color: rgba(255, 255, 255, 0.9);
+  bottom: 0;
+  display: grid;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

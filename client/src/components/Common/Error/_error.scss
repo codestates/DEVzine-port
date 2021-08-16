@@ -1,0 +1,42 @@
+.errorbox {
+  background-color: $background;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+}
+
+.errortext {
+  @include pos-center;
+  text-align: center;
+  top: 45%;
+  width: 100%;
+
+  .errortitle {
+    color: $dark;
+    font-size: 24px;
+    font-weight: $bold;
+
+    @include responsive(T) {
+      font-size: 36px;
+    }
+
+    @include responsive(D) {
+      font-size: 48px;
+    }
+
+    p {
+      color: $primary;
+      font-size: 18px;
+      font-weight: $normal;
+      padding-top: 10px;
+
+      @include responsive(T) {
+        font-size: 20px;
+      }
+
+      @include responsive(D) {
+        font-size: 24px;
+      }
+    }
+  }
+}
