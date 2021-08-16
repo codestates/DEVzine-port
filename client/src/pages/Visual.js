@@ -1,7 +1,12 @@
 import React from 'react';
+import VisualWrapper from '../components/Visual/VisualWrapper';
 
 function Visual() {
-  return <>Visual</>;
+  return (
+    <>
+      <VisualWrapper />
+    </>
+  );
 }
 
 export default Visual;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { mypageUser } from '../../_actions/user_actions';
@@ -13,7 +12,7 @@ import { debounce } from 'lodash';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import OptContents from './OptContents';
-import ContributionUpdateWrapper from '../ContributionUpdate/ContributionUpdateWrapper';
+// import { contributions } from '../../assets/datas/MyPageData/data'; // 없애야 할 부분
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
@@ -34,6 +33,7 @@ function MyPageWrapper() {
   const [Age, setAge] = useState('');
   const [Position, setPosition] = useState('');
   const [Language, setLanguage] = useState([]);
+  const [Contribution, setContribution] = useState([]);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [allData, setAllData] = useState(false);
@@ -83,6 +83,7 @@ function MyPageWrapper() {
       // setLanguage(['JavaScript', '기타']);
       // setPassword('defaultpassword');
       // setScribed('구독');
+      // setContribution(contributions);
       ///////////////////////////////실험용//////////////////////////////////////
       axios
         .get(`${END_POINT}/mypage/`, {
@@ -103,6 +104,7 @@ function MyPageWrapper() {
           // res.data.data.user.subscribed === true
           //   ? setScribed('구독')
           //   : setScribed('구독안함');
+          setContribution(res.data.data.contributions);
         })
         .catch(err => {
           alert('회원 정보를 받아오는데 실패하였습니다.');
@@ -154,7 +156,7 @@ function MyPageWrapper() {
       '20',
       true,
     ],
-    ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '20', true],
+    ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '10', true],
   ];
 
   async function patchHandler() {
@@ -171,8 +173,6 @@ function MyPageWrapper() {
     } else {
       setLanguage([]);
     }
-
-    // const user_password = await bcrypt.hashSync(Password, 10);
 
     let body = {
       user_email: Email,
@@ -250,6 +250,7 @@ function MyPageWrapper() {
           Language={Language}
           radioInputHandler={radioInputHandler}
           selectInputHandler={selectInputHandler}
+          Contribution={Contribution}
         />
         <div
           className="signupbtn"
@@ -269,11 +270,6 @@ function MyPageWrapper() {
         </div>
       </div>
       {modalOpen ? <SigninModal /> : null}
-      <Switch>
-        <Link to="/contributionupdate/1" children={<contributionupdate />}>
-          기고수정
-        </Link>
-      </Switch>
     </div>
   ) : null;
 }

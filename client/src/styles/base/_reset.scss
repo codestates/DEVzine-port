@@ -1,16 +1,20 @@
 // scss-lint:disable all
 * {
   margin: 0;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: $font-main;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
 }
 
 html {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: $font-main;
+  font-size: $font-size-16;
 }
 
 body {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: $font-main;
+  color: $primary;
 }
 
 h1 {
@@ -26,7 +30,7 @@ button,
 input,
 select,
 textarea {
-  background-color: transparent;
+  background-color: $white;
   border: 0;
 
   &:focus {

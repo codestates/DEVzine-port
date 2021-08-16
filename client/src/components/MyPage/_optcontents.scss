@@ -14,29 +14,100 @@
       line-height: 24px;
       width: 100%;
       margin-bottom: 8px;
+      color: #191a20;
     }
     .contributionstatustable {
       width: 360px;
+      overflow: hidden;
       height: auto;
-      min-height: 83px;
       background: #ffffff;
       border: 1px solid #d9d9d9;
+      border-right: 1px solid #d9d9d9;
       border-radius: 8px;
-      // overflow: hidden;
       display: flex;
-      .tableheader {
-        padding-top: 8px;
-        padding-left: 16px;
-        flex-grow: 1;
-        height: 40px;
-        border-right: 1px solid #d9d9d9;
-        border-bottom: 1px solid #d9d9d9;
+      flex-direction: column;
+      .contributionstatuslist {
+        width: 360px;
+        height: auto;
+        background: #ffffff;
+        display: flex;
+        .tableheader {
+          padding-top: 8px;
+          padding-left: 16px;
+          width: 60px;
+          height: 40px;
+          border-right: 1px solid #d9d9d9;
+          border-bottom: 1px solid #d9d9d9;
+
+          .updatebtn {
+            width: 20px;
+            height: 20px;
+          }
+          .deletebtn {
+            width: 20px;
+            height: 20px;
+          }
+        }
+        .tableheader.first {
+          width: 180px;
+        }
+        .tableheader.last {
+          border-right: 0px solid;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .tablecontent {
+          padding-top: 8px;
+          padding-left: 16px;
+          width: 60px;
+          height: 40px;
+          border-right: 1px solid #d9d9d9;
+          border-bottom: 1px solid #d9d9d9;
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 24px;
+          color: #191a20;
+
+          .updatebtn {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+          }
+          .deletebtn {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+          }
+        }
+        .tablecontent.first {
+          width: 180px;
+        }
+        .tablecontent.last {
+          border-right: 0px solid;
+          padding: 4px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          font-size: 10px;
+          line-height: 14px;
+
+          a {
+            width: 40px;
+            height: 15px;
+            background: #c4c4c4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
       }
-      .tableheader.first {
-        flex-grow: 8;
-      }
-      .tableheader.last {
-        border-right: 0px solid;
+    }
+    .contributionstatustable > li:last-child {
+      .tablecontent {
+        border-bottom: 0px solid;
       }
     }
   }

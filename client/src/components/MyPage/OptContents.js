@@ -18,6 +18,7 @@ function OptContents({
   Age,
   Position,
   Language,
+  Contribution,
 }) {
   let ageIdx;
   let positionIdx;
@@ -91,7 +92,7 @@ function OptContents({
           {radioInputSubscribedData.map((el, i) => {
             return (
               <RadioInputGender
-                key={i}
+                key={`Scribed${i}`}
                 value={el[0]}
                 name={el[1]}
                 width={el[2]}
@@ -102,7 +103,7 @@ function OptContents({
           })}
         </div>
       </div>
-      <ContributionStatus />
+      <ContributionStatus Contribution={Contribution} />
     </div>
   );
 }

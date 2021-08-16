@@ -1,0 +1,10 @@
+.articlewrapper {
+  background-color: $background;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+
+  button {
+    border: 1px solid red;
+  }
+}

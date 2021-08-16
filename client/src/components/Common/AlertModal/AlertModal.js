@@ -4,9 +4,9 @@ function AlertModal(props) {
   const { open, close, alertString, alertBtn } = props;
 
   return (
-    <div className={open ? 'openmodal modal' : 'modal'}>
+    <div>
       <div className="modalcontainer">
-        {open === true ? (
+        {open ? (
           <div className="modalbackdrop">
             <div className="modalview">
               <div className="desc">

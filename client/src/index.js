@@ -10,12 +10,14 @@ import { Provider } from 'react-redux';
 const persistor = persistStore(store);
 
 ReactDOM.render(
-  <Router>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <App />
-      </PersistGate>
-    </Provider>
-  </Router>,
+  <React.StrictMode>
+    <Router>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
+      </Provider>
+    </Router>
+  </React.StrictMode>,
   document.getElementById('root'),
 );
