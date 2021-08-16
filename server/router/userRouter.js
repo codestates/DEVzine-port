@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/signup', signUp);
-router.post('/signout', signOut);
+router.post('/signout', passport.authenticate('jwt', { session: false }), signOut);
 router.post('/signin', signIn);
 router.delete('/delete', deleteUser);
 
