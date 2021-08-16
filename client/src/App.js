@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Header from './components/Common/Header/Header';
 import Footer from './components/Common/Footer/Footer';
-import Landing from './pages/Landing';
+const Landing = lazy(
+  () =>
+    new Promise((resolve, reject) =>
+      setTimeout(() => resolve(import('./pages/Landing')), 1500),
+    ),
+);
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
-import ArticleList from './pages/ArticleList';
+const ArticleList = lazy(
+  () =>
+    new Promise((resolve, reject) =>
+      setTimeout(() => resolve(import('./pages/ArticleList')), 1500),
+    ),
+);
 import ArticleView from './pages/ArticleView';
 import Contribution from './pages/Contribution';
 import ContributionUpdate from './pages/ContributionUpdate';
@@ -15,31 +25,63 @@ import Subscription from './pages/Subscription';
 import Visual from './pages/Visual';
 import AuthMail from './components/AuthMail';
 import AuthTest from './components/AuthTest';
-import Loading from './pages/Loading';
-import Error from './pages/Error';
+import Error from './components/Common/Error/Error';
+import Loading from './components/Common/Loading/Loading';
 
 function App() {
   return (
-    <>
-      <Header />
-      <Switch>
-        <Route exact path="/" component={Landing} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/signin" component={SignIn} />
-        <Route path="/articlelist" component={ArticleList} />
-        <Route path="/article" component={ArticleView} />
-        <Route path="/contributionupdate/:id" component={ContributionUpdate} />
-        <Route path="/contribution" component={Contribution} />
-        <Route path="/mypage" component={MyPage} />
-        <Route path="/subscribe" component={Subscription} />
-        <Route path="/visual" component={Visual} />
-        <Route path="/authmail/:email" component={AuthMail} />
-        <Route path="/authtest" component={AuthTest} />
-        <Route path="/loading" component={Loading} />
-        <Route path="/error" component={Error} />
-      </Switch>
-      <Footer />
-    </>
+    <div>
+      <Suspense fallback={<Loading />}>
+        <Header />
+        <Switch>
+          <Route exact path="/">
+            <Landing />
+          </Route>
+          <Route path="/signup">
+            <SignUp />
+          </Route>
+          <Route path="/signin">
+            <SignIn />
+          </Route>
+          <Route path="/articlelist">
+            <ArticleList />
+          </Route>
+          <Route path="/article">
+            <ArticleView />
+          </Route>
+          <Route path="/contributionupdate/:id">
+            <ContributionUpdate />
+          </Route>
+          <Route path="/contribution">
+            <Contribution />
+          </Route>
+          <Route path="/mypage">
+            <MyPage />
+          </Route>
+          <Route path="/subscribe">
+            <Subscription />
+          </Route>
+          <Route path="/visual">
+            <Visual />
+          </Route>
+          <Route path="/authmail/:email">
+            <AuthMail />
+          </Route>
+          <Route path="/authtest">
+            <AuthTest />
+          </Route>
+          <Route path="/error">
+            <Error />
+          </Route>
+
+          {/* 잘못된 url 정규식을 방문했을 때 */}
+          <Route>
+            <Error />
+          </Route>
+        </Switch>
+        <Footer />
+      </Suspense>
+    </div>
   );
 }
 
