@@ -12,7 +12,6 @@ import { debounce } from 'lodash';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import OptContents from './OptContents';
-// import { contributions } from '../../assets/datas/MyPageData/data'; // 없애야 할 부분
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
@@ -25,7 +24,7 @@ function MyPageWrapper() {
 
   const [Email, setEmail] = useState('');
   const [Name, setName] = useState('');
-  const [Password, setPassword] = useState(undefined);
+  const [Password, setPassword] = useState(null);
   const [ConfirmPassword, setConfirmPassword] = useState('');
   const [hashedPassword, setHashedPassword] = useState('');
   const [Gender, setGender] = useState('선택안함');
@@ -71,21 +70,29 @@ function MyPageWrapper() {
     }
   }, 800);
 
-  useEffect(() => {
-    const getUserData = () => {
+  useEffect(async () => {
+    const requrest = Auth(true);
+
+    if (requrest === 'Login need') {
+      setModalOpen(true);
+      setEmail('');
+      setPassword('defaultpassword');
+      setName('');
+      setHashedPassword('');
+      setGender('');
+      setAge('');
+      setPosition('');
+      setLanguage([]);
+      setScribed(false); //아래것과 위에것 어떠한 것이 작동하는지 알아보기
+      // res.data.data.user.subscribed === true
+      //   ? setScribed('구독')
+      //   : setScribed('구독안함');
+      setContribution([]);
+      setAllData(true);
+    } else {
       setEmail_isValid(true);
       setPw_isValid(true);
-      ///////////////////////////////실험용//////////////////////////////////////
-      // setEmail('bmanerdaniel@gmail.com');
-      // setGender('남자');
-      // setAge('60대 이상');
-      // setPosition('풀스택');
-      // setLanguage(['JavaScript', '기타']);
-      // setPassword('defaultpassword');
-      // setScribed('구독');
-      // setContribution(contributions);
-      ///////////////////////////////실험용//////////////////////////////////////
-      axios
+      await axios
         .get(`${END_POINT}/mypage/`, {
           withCredentials: true,
         })
@@ -109,18 +116,9 @@ function MyPageWrapper() {
         .catch(err => {
           alert('회원 정보를 받아오는데 실패하였습니다.');
         });
-    };
-    getUserData();
-    setAllData(true);
-  }, []);
-
-  useEffect(() => {
-    const requrest = Auth(true);
-
-    if (requrest === 'Login need') {
-      setModalOpen(true);
+      setAllData(true);
     }
-  });
+  }, []);
 
   const requiredTextInputData = [
     [
@@ -162,18 +160,6 @@ function MyPageWrapper() {
   async function patchHandler() {
     selectInputHandler(); //회원가입 시 화면에 있는 선택사항들을 body에 저장하기 위함
 
-    let multiArr = [];
-
-    let multiValues = document.querySelectorAll('.basicmulti div:nth-child(3)');
-    if (multiValues.length - 1 !== 0 && multiValues[multiValues.length - 1]) {
-      for (let el of multiValues[multiValues.length - 1].childNodes) {
-        multiArr.push(el.attributes[2].value);
-      }
-      setLanguage(multiArr);
-    } else {
-      setLanguage([]);
-    }
-
     let body = {
       user_email: Email,
       user_password: Password,
@@ -210,17 +196,17 @@ function MyPageWrapper() {
     }
   }
 
-  function selectInputHandler() {
-    let singleValues = document.querySelectorAll(
-      '.basicsingle input:nth-child(3)',
-    );
-    let singleArr = [];
-
-    for (let el of singleValues) {
-      singleArr.push(el.value);
+  function selectInputHandler(e, name) {
+    if (name === '나이') {
+      setAge(e.value);
+    } else if (name === '직무') {
+      setPosition(e.value);
+    } else if (name === '언어') {
+      const languageArr = e.map(el => {
+        return el.value;
+      });
+      setLanguage(languageArr);
     }
-    setAge(singleArr[0]);
-    setPosition(singleArr[1]);
   }
 
   return allData ? (
@@ -269,7 +255,9 @@ function MyPageWrapper() {
           정보수정
         </div>
       </div>
-      {modalOpen ? <SigninModal /> : null}
+      {modalOpen ? (
+        <SigninModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      ) : null}
     </div>
   ) : null;
 }

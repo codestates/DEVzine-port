@@ -7,7 +7,6 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
-const session = require('express-session');
 const passport = require('passport');
 const passportConfig = require('./config/passport');
 const schedule = require('node-schedule');
@@ -16,16 +15,8 @@ require('dotenv').config();
 const robots = require('express-robots-txt')
 app.use(robots({UserAgent: '*', Disallow: '/'}))
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true,
-    // store: ?
-  })
-);
-app.use(passport.initialize()); // passport 미들웨어
-app.use(passport.session()); // session 사용할 수 있도록 하는 미들웨어
+// passport 미들웨어
+app.use(passport.initialize());
 passportConfig();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -43,16 +34,25 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: 'server & db connected!' });
 });
 
-const { isAuthenticated } = require('./controller/middleware/isAuthenticated');
-app.get('/testauth', isAuthenticated, (req, res) => {
-	// let user = req.user;
-	// if (user) {
-		res.send(`user: ${req.user}`);
-	// }
-	// else {
-	// 	res.send('not authenticated');
-	// }
+app.get('/testauth', passport.authenticate('jwt', { session: false }), (req, res) => {
+  try {
+    console.log(req.user);
+    res.status(200).json({ message: 'authenticated!' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
+
+// const { isAuthenticated } = require('./controller/middleware/isAuthenticated');
+// app.get('/testauth', isAuthenticated, (req, res) => {
+// 	// let user = req.user;
+// 	// if (user) {
+// 		res.send(`user: ${req.user}`);
+// 	// }
+// 	// else {
+// 	// 	res.send('not authenticated');
+// 	// }
+// });
 
 const { insertSeedData } = require('./seeds/insertSeedData');
 app.use('/seed', insertSeedData);
@@ -86,6 +86,10 @@ const automatedCrawlerForWeekend = schedule.scheduleJob('00 21 * * 7', async () 
   const data = await getRecentArticlesFrom48H();
   await Article.create(data);
 });
+// const test = schedule.scheduleJob('39 13 * * *', async () => { // 크롤링 자동화 test 용 코드, 최종 배포 전에 삭제해야 함 
+//   const data = await getRecentArticlesFrom24H();
+//   console.log(data)
+// });
 
 mongoose
   .connect(process.env.MONGO_STRING, {

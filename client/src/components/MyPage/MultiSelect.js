@@ -8,10 +8,10 @@ function MultiSelect({ options, name, selectInputHandler, defaultValue }) {
       <Select
         className="basicmulti"
         classNamePrefix="select"
-        isMulti
         name={name}
         options={options}
-        onChange={selectInputHandler}
+        isMulti
+        onChange={e => selectInputHandler(e, name)}
         defaultValue={defaultValue}
       />
     </div>

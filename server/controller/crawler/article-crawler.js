@@ -6,7 +6,7 @@ module.exports = {
 
     getRecentArticlesFrom24H : async (req, res) => {
 
-        let boanNewsData= await scrapeBoanNews()
+        let boanNewsData = await scrapeBoanNews()
         let ITWorldData = await scrapeITWorld()
         let codingWorldData = await scrapeCodingWorld()
 
@@ -17,7 +17,7 @@ module.exports = {
 
     getRecentArticlesFrom48H : async (req, res) => {
 
-        let boanNewsData= await scrapeBoanNews(86400000*2)
+        let boanNewsData = await scrapeBoanNews(86400000*2)
         let ITWorldData = await scrapeITWorld('2일')
         let codingWorldData = await scrapeCodingWorld(86400000*2)
 
