@@ -6,14 +6,13 @@ import { statuscodeconvert } from '../../utils/statuscodeconvert';
 
 function ContributionStatus({ Contribution }) {
   async function deleteRequestHandler(contributionid) {
-    const requestDelete = await customAxios
+    await customAxios
       .delete(`/contribution/${contributionid}`)
       .then(res => {
         console.log(res);
         window.location.href = '/mypage';
       })
       .catch(err => console.log(err));
-    return requestDelete;
   }
   return (
     <div className="contributionstatuscontainer">

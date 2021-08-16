@@ -24,7 +24,7 @@ module.exports = {
     const emailRegex =
       /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (!emailRegex.test(user_email)) {
-      return res.status(400).send({ message: 'Invalild email' });
+      return res.status(400).send({ message: 'Invalid email' });
     }
 
     const user = await User.findOne({ user_email });
