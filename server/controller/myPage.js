@@ -72,37 +72,65 @@ module.exports = {
 	},
 
     patchUserInfo: async (req, res) => {
+        // TODO: token 유효성 검사 -> 401 
+        // TODO: 비번 hashing
+        const { 
+            user_email, 
+            user_password, 
+            user_name 
+        } = req.body;
 
-        // TODO: 유저의 개인정보를 수정한다. 
-        // req.body
-        // { 
-        //     "user_email": "example@gmail.com",
-        //     "user_password": "string",
-        //     "user_name": "string",
-        //     "user_info": {
-        //         "user_gender": "string",
-        //         "user_age": number,
-        //         "user_position": "string",
-        //         "user_language": [],
-        //     }	,
-        //     "subscribed" : boolean
-        // }
-        // status:200
-        // {
-        //     "message": "Unauthorized user"
-        // }
-        // status:401
-        // {
-        //     "message": "Unauthorized user"
-        // }
-        // status:404
-        // {
-        //     "message": "Invalid user"
-        // }
-        // status:500
-        // err
-        
-        return res.send('myPage patch');
+        const {
+            user_gender,
+            user_age,
+            user_position,
+            user_language 
+        } = req.body.user_info;
+
+        let subscribed;
+        if (req.body.subscribed === '구독') {
+            subscribed = true;
+        } else {
+            subscribed = false;
+        }
+
+        const update = { 
+            user_password,
+            user_name,
+            user_gender,
+            user_age,
+            user_position,
+            user_language,
+            subscribed
+        }
+
+        try {
+
+            let user = await User.findOneAndUpdate({
+                user_email
+            }, update, {
+                new: true
+            });
+            console.log(user)
+            if(!user) {
+                return res.status(404).json({
+                    "message": "Invalid user"
+                });
+            }
+
+            return res.status(200).json({
+                "data": {
+                    user_name
+                },
+                "message": "Patch success"
+            });
+
+        } catch (err) {
+
+            console.log(err)
+            return res.status(500).send(err);
+
+        }
 
     }
 };

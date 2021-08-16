@@ -135,7 +135,7 @@ module.exports = {
                 "C#",
                 "Java",
                 "PHP",
-                "Javascript"
+                "JavaScript"
             ]
         },
         {
@@ -149,7 +149,7 @@ module.exports = {
                 "C#",
                 "Java",
                 "PHP",
-                "Javascript"
+                "JavaScript"
             ]
         },
         {
