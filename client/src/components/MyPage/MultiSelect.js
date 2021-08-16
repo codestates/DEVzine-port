@@ -2,20 +2,20 @@ import React from 'react';
 import Select from 'react-select';
 
 function MultiSelect({ options, name, selectInputHandler, defaultValue }) {
-  return defaultValue.length !== 0 ? (
+  return (
     <div className="multiselectcontent">
       <div className="subjectwrapper">{name}</div>
       <Select
         className="basicmulti"
         classNamePrefix="select"
-        isMulti
         name={name}
         options={options}
-        onChange={selectInputHandler}
+        isMulti
+        onChange={e => selectInputHandler(e, name)}
         defaultValue={defaultValue}
       />
     </div>
-  ) : null;
+  );
 }
 
 export default MultiSelect;
