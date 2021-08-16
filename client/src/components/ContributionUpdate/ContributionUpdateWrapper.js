@@ -5,7 +5,6 @@ import AlertModal from '../Common/AlertModal/AlertModal';
 import { customAxios } from '../../utils/customAxios';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import Button from '../Common/Button/Button';
-import Error from '../Common/Error/Error';
 
 function ContributionUpdateWrapper({ id }) {
   const [keyword, setKeyword] = useState('게임');
@@ -14,7 +13,7 @@ function ContributionUpdateWrapper({ id }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
   const [colorChange, setcolorChange] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const [AllDate, setAllDate] = useState(false);
 
   let selectOptions = [
     '게임',
@@ -35,7 +34,6 @@ function ContributionUpdateWrapper({ id }) {
       .get(`/magazine/contribution/${id}`)
       .then(res => res.data.data.contribution_keyword)
       .catch(err => {
-        setHasError(true);
         alert('기고 정보를 받아오는데 실패하였습니다.');
         // window.location.href = '/error';
       });
@@ -44,6 +42,10 @@ function ContributionUpdateWrapper({ id }) {
     // setKeyword(requestGet.contribution_keyword);
     // setTitle(requestGet.contribution_title);
     // setContent(requestGet.contribution_content);
+
+    if (keyword !== '' && title !== '' && content !== '') {
+      setAllDate(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -97,7 +99,7 @@ function ContributionUpdateWrapper({ id }) {
     setAlertOpen(false);
   };
 
-  return (
+  return AllDate ? (
     <>
       <div className="contributioncontainer">
         <div className="container">
@@ -197,7 +199,7 @@ function ContributionUpdateWrapper({ id }) {
         <SigninModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       ) : null}
     </>
-  );
+  ) : null;
 }
 
 export default ContributionUpdateWrapper;
