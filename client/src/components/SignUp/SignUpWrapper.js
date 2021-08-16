@@ -80,7 +80,7 @@ function SignUpWrapper() {
       pw_confirm,
       '20',
     ],
-    ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '20'],
+    ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '10'],
   ];
 
   async function postHandler() {
