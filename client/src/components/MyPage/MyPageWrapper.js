@@ -12,7 +12,7 @@ import { debounce } from 'lodash';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import OptContents from './OptContents';
-import { contributions } from '../../assets/datas/MyPageData/data'; // 없애야 할 부분
+// import { contributions } from '../../assets/datas/MyPageData/data'; // 없애야 할 부분
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
@@ -76,14 +76,14 @@ function MyPageWrapper() {
       setEmail_isValid(true);
       setPw_isValid(true);
       ///////////////////////////////실험용//////////////////////////////////////
-      setEmail('bmanerdaniel@gmail.com');
-      setGender('남자');
-      setAge('60대 이상');
-      setPosition('풀스택');
-      setLanguage(['JavaScript', '기타']);
-      setPassword('defaultpassword');
-      setScribed('구독');
-      setContribution(contributions);
+      // setEmail('bmanerdaniel@gmail.com');
+      // setGender('남자');
+      // setAge('60대 이상');
+      // setPosition('풀스택');
+      // setLanguage(['JavaScript', '기타']);
+      // setPassword('defaultpassword');
+      // setScribed('구독');
+      // setContribution(contributions);
       ///////////////////////////////실험용//////////////////////////////////////
       axios
         .get(`${END_POINT}/mypage/`, {

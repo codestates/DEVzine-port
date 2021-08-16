@@ -1222,11 +1222,12 @@ label {
 .signupcontainer {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  height: auto;
   background: #f2f2f2;
   display: flex;
   justify-content: center;
-  margin-top: 120px; }
+  margin-top: 120px;
+  margin-bottom: 220px; }
   .signupcontainer .signupwrapper {
     position: relative;
     display: flex;
@@ -1335,14 +1336,17 @@ label {
     width: 263px;
     display: flex;
     justify-content: space-between; }
-    .radiowrapper .radiocontents .radiocontent .radioinput {
-      margin-right: 6px; }
-    .radiowrapper .radiocontents .radiocontent .radioinput:checked + label {
-      font-weight: bold;
-      color: #191a20; }
-    .radiowrapper .radiocontents .radiocontent .radiorabel {
-      font-weight: bold;
-      color: #9b9b9c; }
+    .radiowrapper .radiocontents .radiocontent {
+      display: flex; }
+      .radiowrapper .radiocontents .radiocontent .radioinput {
+        margin-right: 6px; }
+      .radiowrapper .radiocontents .radiocontent .radioinput:checked + label {
+        font-weight: bold;
+        color: #191a20; }
+      .radiowrapper .radiocontents .radiocontent .radiorabel {
+        margin: 0;
+        font-weight: bold;
+        color: #9b9b9c; }
 
 .singleselectwrapper,
 .multiselectwrapper {
@@ -1404,7 +1408,8 @@ label {
     font-size: 16px;
     line-height: 24px;
     width: 100%;
-    margin-bottom: 8px; }
+    margin-bottom: 8px;
+    color: #191a20; }
   .optcontentswrapper .contributionstatuscontainer .contributionstatustable {
     width: 360px;
     overflow: hidden;
@@ -1428,11 +1433,9 @@ label {
         border-right: 1px solid #d9d9d9;
         border-bottom: 1px solid #d9d9d9; }
         .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader .updatebtn {
-          background-size: cover;
           width: 20px;
           height: 20px; }
         .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader .deletebtn {
-          background-size: cover;
           width: 20px;
           height: 20px; }
       .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader.first {
@@ -1455,12 +1458,10 @@ label {
         line-height: 24px;
         color: #191a20; }
         .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent .updatebtn {
-          background-size: cover;
           width: 20px;
           height: 20px;
           cursor: pointer; }
         .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent .deletebtn {
-          background-size: cover;
           width: 20px;
           height: 20px;
           cursor: pointer; }
