@@ -21,8 +21,8 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-robots-txt": "^0.5.0",
-    "express-session": "^1.17.2",
     "iconv-lite": "^0.6.3",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.5",
     "mongoose-auto-increment": "^5.0.1",
     "morgan": "^1.10.0",
@@ -31,6 +31,7 @@
     "nodemailer-smtp-transport": "^2.7.4",
     "nodemon": "^2.0.12",
     "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "redis": "^3.1.2",
     "winston": "^3.3.3"

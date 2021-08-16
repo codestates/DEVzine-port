@@ -1,6 +1,9 @@
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
 const { User } = require('../Models/Users');
 const { VerifiedEmail } = require('../Models/Verifiedemails');
+require('dotenv').config();
 
 module.exports = {
   signUp: async (req, res) => {
@@ -46,8 +49,9 @@ module.exports = {
     // if (!req.user) {
     //   return res.status(401).send({ message: 'Unauthorized user' });
     // }
-
     try {
+      // console.log(req);
+      console.log(req.headers.authorization);
       req.logout();
       res.status(200).send({ message: 'Logout success' });
     } catch (err) {
@@ -56,20 +60,43 @@ module.exports = {
   },
 
   signIn: async (req, res) => {
-    const { user_name } = req.body;
-    // status:401
-    // {
-    //     "message": "Invalid password"
-    // }
-    // status:404
-    // {
-    //     "message": "Invalid user"
-    // }
-    // invalid user / passwd 경우 passport.js에서 처리하는데 좀 더 찾아봐야함
-    res
-      .status(200)
-      .send({ data: { user_name }, message: 'Login success' });
+    try {
+      passport.authenticate('local', (passportError, user, info) => {
+        if (passportError || !user) {
+          return res.status(400).json({ message: info.message });
+        }
+        req.login(user, { session: false }, (loginError) => {
+          if (loginError) {
+            return res.status(500).send(loginError);
+          }
+          const token = jwt.sign(
+            { id: user._id, user_name: user.user_name },
+            process.env.JWT_SECRET,
+            { expiresIn: '30m' }
+            );
+          res.status(200).send({ data: { user_name: user.user_name, token}, message: 'Login success' });
+        });
+      })(req, res);
+    } catch (err) {
+      res.status(500).send(err);
+    }
   },
+
+  // signIn: async (req, res) => {
+  //   const { user_name } = req.body;
+  //   // status:401
+  //   // {
+  //   //     "message": "Invalid password"
+  //   // }
+  //   // status:404
+  //   // {
+  //   //     "message": "Invalid user"
+  //   // }
+  //   // invalid user / passwd 경우 passport.js에서 처리하는데 좀 더 찾아봐야함
+  //   res
+  //     .status(200)
+  //     .send({ data: { user_name }, message: 'Login success' });
+  // },
 
   deleteUser: async (req, res) => {
     if (!req.user) {
