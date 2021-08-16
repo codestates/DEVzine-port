@@ -24,6 +24,7 @@ const passportVerify = async (user_email, user_password, done) => {
 };
 
 const JWTConfig = {
+	// jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 	jwtFromRequest: ExtractJwt.fromHeader('authorization'),
 	secretOrKey: process.env.JWT_SECRET,
 };
@@ -32,13 +33,11 @@ const JWTVerify = async (jwtPayload, done) => {
   try {
     const user = await User.findOne({ _id: jwtPayload.id });
     if (user) {
-      done(null, user);
-      return;
+      return done(null, user);
     }
-    done(null, false, { message: '올바르지 않은 인증정보 입니다.' });
+    return done(null, false, { message: '올바르지 않은 인증정보 입니다.' });
   } catch (err) {
-    console.error(err);
-    done(err);
+    return done(err);
   }
 };
 
