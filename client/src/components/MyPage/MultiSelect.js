@@ -2,7 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 
 function MultiSelect({ options, name, selectInputHandler, defaultValue }) {
-  return (
+  return defaultValue.length !== 0 ? (
     <div className="multiselectcontent">
       <div className="subjectwrapper">{name}</div>
       <Select
@@ -15,7 +15,7 @@ function MultiSelect({ options, name, selectInputHandler, defaultValue }) {
         defaultValue={defaultValue}
       />
     </div>
-  );
+  ) : null;
 }
 
 export default MultiSelect;

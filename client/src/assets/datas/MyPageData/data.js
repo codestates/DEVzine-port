@@ -5,7 +5,7 @@ export const radioInputGenderData = [
 ];
 
 export const radioInputSubscribedData = [
-  ['구독', 'subscribed', '84px'],
+  ['구독', 'subscribed', '52.61px'],
   ['구독안함', 'subscribed', '91px'],
 ];
 
