@@ -14,6 +14,7 @@
       line-height: 24px;
       width: 100%;
       margin-bottom: 8px;
+      color: #191a20;
     }
     .contributionstatustable {
       width: 360px;
@@ -39,12 +40,10 @@
           border-bottom: 1px solid #d9d9d9;
 
           .updatebtn {
-            background-size: cover;
             width: 20px;
             height: 20px;
           }
           .deletebtn {
-            background-size: cover;
             width: 20px;
             height: 20px;
           }
@@ -72,13 +71,11 @@
           color: #191a20;
 
           .updatebtn {
-            background-size: cover;
             width: 20px;
             height: 20px;
             cursor: pointer;
           }
           .deletebtn {
-            background-size: cover;
             width: 20px;
             height: 20px;
             cursor: pointer;

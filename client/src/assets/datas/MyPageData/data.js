@@ -84,7 +84,7 @@ export const contributions = [
           `,
     contribution_date: new Date('2021-08-02'),
     user_email: 'jonga6431@gmail.com',
-    status: 0o1,
+    status: 101,
   },
   {
     contribution_id: '1',
@@ -99,7 +99,7 @@ export const contributions = [
           `,
     contribution_date: new Date('2021-07-18'),
     user_email: 'haeun.yah@gmail.com',
-    status: 10,
+    status: 110,
   },
   {
     contribution_id: '2',
@@ -153,7 +153,7 @@ export const contributions = [
           `,
     contribution_date: new Date('2021-07-15'),
     user_email: 'jonga6431@gmail.com',
-    status: 10,
+    status: 110,
   },
   {
     contribution_id: '3',
@@ -192,7 +192,7 @@ export const contributions = [
           `,
     contribution_date: new Date('2021-08-10'),
     user_email: 'haeun.yah@gmail.com',
-    status: 10,
+    status: 110,
   },
   {
     contribution_id: '4',
@@ -217,6 +217,6 @@ export const contributions = [
           `,
     contribution_date: new Date('2021-06-05'),
     user_email: 'haeun.yah@gmail.com',
-    status: 10,
+    status: 110,
   },
 ];
