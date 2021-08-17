@@ -58,7 +58,7 @@ const checkCacheForArticles = async () => {
         // cache miss
         if (!articles) { 
             const articlesFromDB = await getArticlesPastTwoWeeks();
-            resolve(articlesFromDB, 'DB');  
+            resolve({data: articlesFromDB, source: 'DB'});  
         }
 
         // cache hit
@@ -67,7 +67,7 @@ const checkCacheForArticles = async () => {
             for (let key in articles) {
                 articleData.push(JSON.parse(articles[key]))
             }
-            resolve(articleData, 'cache');
+            resolve({data: articleData, source: 'cache'});
         }
 
         });

@@ -6,23 +6,16 @@ module.exports = {
 
         try {
 
-            let articleData = {};
-            let contributionData;
-            let articleSource;
-            let contributionSource;
-
-            const temp = await checkCacheForArticles()
-            console.log(temp)
-            return res.send('ok')
-            // return res.status(200).json(
-            //     {
-            //         "data": {
-            //             articleData
-            //         },
-            //         "message" : "Article list successfully found",
-            //         "source" : "cache"
-            //     }
-            // );
+            const articleData = await checkCacheForArticles()
+            return res.status(200).json(
+                {
+                    "articleData": articleData.data,
+                    "contributionData": '',
+                    "message" : "Article list successfully found",
+                    "articleSource" : articleData.source,
+                    "contributionSource" : ''
+                }
+            );
 
         } catch (err) {
             
