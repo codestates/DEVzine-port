@@ -29,7 +29,6 @@ passportConfig();
 
 const app = express();
 
-// passport 미들웨어
 app.set('trust proxy', 1)
 app.use(passport.initialize());
 app.use(express.json());
@@ -50,7 +49,7 @@ app.use(robots(
   }
 ))
 
-
+// TODO: 배포 전에 삭제
 app.get('/authtest', passport.authenticate('jwt', { session: false }), (req, res) => {
   try {
     res.status(200).json({ message: 'authenticated!' });
@@ -63,8 +62,7 @@ app.get('/', (req, res) => {
   res.status(200).json(
     { 
       "message": "server & db connected!"
-    }
-  );
+    });
 });
 app.use('/admin', adminRouter);
 app.use('/contribution', contributionRouter);
