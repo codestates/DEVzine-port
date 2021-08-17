@@ -72,7 +72,7 @@ module.exports = {
           sameSite: 'None',
           secure: true,
           // maxAge: 24 * 60 * 60 * 1000,
-          // domain: 'devzine-port.com', path: '/'
+          // domain: 'devzine-port.com', path: '/' // 이거 넣으면 걍 안됨;;
         });
         res.status(200).send({ data: { user_name: req.user.user_name }, message: 'Login success' });
       }
