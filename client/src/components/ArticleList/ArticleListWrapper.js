@@ -375,8 +375,6 @@ function ArticleListWrapper() {
 
         return alert('조회순 받아오는데 실패하였습니다.');
       });
-
-    console.log('조회수', ArticleDate);
   }
 
   function articlePlusHandler() {

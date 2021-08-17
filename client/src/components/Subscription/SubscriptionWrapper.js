@@ -9,7 +9,7 @@ function SubscriptionWrapper() {
   const [SignIn, setSignIn] = useState(false);
   const [Email, setEmail] = useState(null);
   const [Email_isValid, setEmail_isValid] = useState(true);
-  const [alertOpen, setAlertOpen] = useState(false);
+  const [AlertOpen, setAlertOpen] = useState(false);
   const [BlackInput, setBlackInput] = useState(false);
   const [EmailSubSuc, setEmailSubSuc] = useState(false);
 
@@ -149,7 +149,7 @@ function SubscriptionWrapper() {
             </div>
             <div className="alermodalbox">
               <AlertModal
-                open={alertOpen}
+                open={AlertOpen}
                 close={closeModal}
                 alertString={
                   BlackInput
