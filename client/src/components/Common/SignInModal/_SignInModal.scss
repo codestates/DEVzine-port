@@ -1,5 +1,5 @@
 .signincontainer {
-  z-index: 10000;
+  z-index: 300;
   position: absolute;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
   justify-content: center;
 
   .signinwrapper {
-    z-index: 11000;
+    z-index: 310;
     position: relative;
     width: 550px;
     height: 566px;
@@ -23,7 +23,7 @@
     align-items: center;
     justify-content: center;
 
-    .signinheader{
+    .signinheader {
       position: absolute;
       width: 550px;
       height: 69px;
@@ -35,10 +35,10 @@
       font-weight: 800;
       font-size: 24px;
       line-height: 33px;
-      color: #191A20;
+      color: #191a20;
     }
 
-    .backbtn{
+    .backbtn {
       width: 22.75px;
       height: 22.75px;
       position: absolute;
@@ -46,9 +46,9 @@
       right: 14px;
       cursor: pointer;
     }
-    
-    .leadsignup{
-      z-index: 11000;
+
+    .leadsignup {
+      z-index: 310;
       width: 296px;
       height: 24px;
       font-weight: bold;
@@ -57,13 +57,13 @@
       display: flex;
       justify-content: center;
       text-align: center;
-      color: #191A20;
+      color: #191a20;
       margin-top: 48px;
       margin-bottom: 16px;
     }
 
     .commonbutton {
-      z-index: 11000;
+      z-index: 310;
       width: 296px;
     }
   }

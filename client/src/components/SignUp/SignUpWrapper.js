@@ -23,7 +23,7 @@ function SignUpWrapper() {
   const [Age, setAge] = useState('');
   const [Position, setPosition] = useState('');
   const [Language, setLanguage] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [ModalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     if (checkEmail(Email)) {
@@ -198,7 +198,9 @@ function SignUpWrapper() {
           회원가입
         </div>
       </div>
-      {modalOpen ? <SigninModal /> : null}
+      {ModalOpen ? (
+        <SigninModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
+      ) : null}
     </div>
   );
 }

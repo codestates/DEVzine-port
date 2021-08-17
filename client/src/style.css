@@ -437,7 +437,7 @@ select::-ms-expand {
     position: fixed;
     right: 0;
     top: 0;
-    z-index: 900; }
+    z-index: 200; }
     .modalcontainer .modalbackdrop .modalview {
       background-color: #fff;
       border-radius: 20px;
@@ -480,7 +480,7 @@ select::-ms-expand {
   height: 85px;
   top: 45%;
   width: 85px;
-  z-index: 9000; }
+  z-index: 910; }
   @media screen and (min-width: 768px) {
     .loadingbox {
       width: 40%; } }
@@ -496,7 +496,7 @@ select::-ms-expand {
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 1000; }
+  z-index: 900; }
 
 @keyframes gradient {
   0% {
@@ -546,7 +546,7 @@ select::-ms-expand {
   height: 120px;
   position: fixed;
   width: 100%;
-  z-index: 10; }
+  z-index: 100; }
   @media screen and (max-width: 767px) {
     .headerfix {
       height: 100px; } }
@@ -557,10 +557,10 @@ select::-ms-expand {
     width: 100%; }
   .headerfix .headertime {
     top: 0;
-    z-index: 10; }
+    z-index: 100; }
   .headerfix .headernavwrapper {
     top: 50px;
-    z-index: 10; }
+    z-index: 100; }
     @media screen and (max-width: 767px) {
       .headerfix .headernavwrapper {
         top: 40px; } }
@@ -765,7 +765,7 @@ select::-ms-expand {
       position: absolute; }
 
 .signincontainer {
-  z-index: 10000;
+  z-index: 300;
   position: absolute;
   top: 0;
   left: 0;
@@ -776,7 +776,7 @@ select::-ms-expand {
   align-items: center;
   justify-content: center; }
   .signincontainer .signinwrapper {
-    z-index: 11000;
+    z-index: 310;
     position: relative;
     width: 550px;
     height: 566px;
@@ -799,7 +799,7 @@ select::-ms-expand {
       font-weight: 800;
       font-size: 24px;
       line-height: 33px;
-      color: #191A20; }
+      color: #191a20; }
     .signincontainer .signinwrapper .backbtn {
       width: 22.75px;
       height: 22.75px;
@@ -808,7 +808,7 @@ select::-ms-expand {
       right: 14px;
       cursor: pointer; }
     .signincontainer .signinwrapper .leadsignup {
-      z-index: 11000;
+      z-index: 310;
       width: 296px;
       height: 24px;
       font-weight: bold;
@@ -817,11 +817,11 @@ select::-ms-expand {
       display: flex;
       justify-content: center;
       text-align: center;
-      color: #191A20;
+      color: #191a20;
       margin-top: 48px;
       margin-bottom: 16px; }
     .signincontainer .signinwrapper .commonbutton {
-      z-index: 11000;
+      z-index: 310;
       width: 296px; }
 
 .inputlarge {
@@ -1405,13 +1405,25 @@ label {
   width: 360px;
   height: auto;
   min-height: 115px; }
-  .optcontentswrapper .contributionstatuscontainer .subjectwrapper {
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 24px;
-    width: 100%;
-    margin-bottom: 8px;
-    color: #191a20; }
+  .optcontentswrapper .contributionstatuscontainer .subject {
+    display: flex; }
+    .optcontentswrapper .contributionstatuscontainer .subject .subjectwrapper {
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      width: 95.89px;
+      margin-bottom: 8px;
+      color: #191a20; }
+    .optcontentswrapper .contributionstatuscontainer .subject .btndesc {
+      width: 254.11px;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: -0.005em;
+      font-weight: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px; }
   .optcontentswrapper .contributionstatuscontainer .contributionstatustable {
     width: 360px;
     overflow: hidden;
@@ -1582,7 +1594,7 @@ label {
   outline: none;
   position: absolute;
   transition: all 0.5;
-  z-index: 5; }
+  z-index: 410; }
   .react-multiple-carousel__arrow:hover {
     background-color: rgba(0, 0, 0, 0.8); }
   .react-multiple-carousel__arrow::before {
@@ -1592,7 +1604,7 @@ label {
     font-size: 20px;
     position: relative;
     text-align: center;
-    z-index: 2; }
+    z-index: 400; }
   .react-multiple-carousel__arrow:disabled {
     background-color: rgba(0, 0, 0, 0.5);
     cursor: default; }
@@ -1662,7 +1674,7 @@ label {
   padding: 20px;
   transition: all 0.5s;
   width: 98%;
-  z-index: 10; }
+  z-index: 420; }
   .contributionbox:hover {
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1); }
   @media screen and (min-width: 768px) {

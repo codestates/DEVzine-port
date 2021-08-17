@@ -2,7 +2,7 @@
   height: 120px;
   position: fixed;
   width: 100%;
-  z-index: 10;
+  z-index: 100;
 
   @include mobile-only() {
     height: 100px;
@@ -17,12 +17,12 @@
 
   .headertime {
     top: 0;
-    z-index: 10;
+    z-index: 100;
   }
 
   .headernavwrapper {
     top: 50px;
-    z-index: 10;
+    z-index: 100;
 
     @include mobile-only() {
       top: 40px;
