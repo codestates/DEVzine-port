@@ -16,6 +16,7 @@ const robots = require('express-robots-txt')
 app.use(robots({UserAgent: '*', Disallow: '/'}))
 
 // passport 미들웨어
+app.set('trust proxy', 1)
 app.use(passport.initialize());
 passportConfig();
 app.use(express.json());
