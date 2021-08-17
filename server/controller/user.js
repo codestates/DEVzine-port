@@ -62,7 +62,7 @@ module.exports = {
     jwt.sign(
       { user: req.user },
       process.env.JWT_SECRET,
-      { expiresIn: '30m' },
+      // { expiresIn: '30m' },
       (err, token) => {
         if (err) {
           return res.status(500).send(err);
@@ -71,7 +71,7 @@ module.exports = {
           httpOnly: true,
           sameSite: 'None',
           secure: true,
-          domain: 'devzine-port.com', path: '/'
+          // domain: 'devzine-port.com', path: '/'
         });
         res.status(200).send({ data: { user_name: req.user.user_name }, message: 'Login success' });
       }
