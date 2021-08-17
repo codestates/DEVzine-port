@@ -1,40 +1,69 @@
 import React, { useState, useEffect } from 'react';
 import { customAxios } from '../../utils/customAxios';
-import { contributions } from '../../assets/datas/ArticleViewData/data';
+import {
+  contributions,
+  articles,
+} from '../../assets/datas/ArticleViewData/data'; //지우기
+import Button from '../Common/Button/Button';
+import SigninModal from '../Common/SignInModal/SignInModal';
+import Auth from '../../hoc/auth';
 
-function ArticleViewWrapper() {
-  //props로 id 넣어줘야함
-  const id = 1;
+function ArticleViewWrapper({ id }) {
+  const paramsArr = id.split('-');
+  const indicator = paramsArr[0];
+  const pathParameter = paramsArr[1];
   const [Contribution, setContribution] = useState({});
+  const [Article, setArticle] = useState({});
   const [Alldata, setAlldata] = useState(false);
+  const [ModalOpen, setModalOpen] = useState(false);
+
+  let request = Auth(true);
 
   useEffect(async () => {
-    await setContribution(contributions); //axios연결시 지우기
-
-    const getRequest = await customAxios
-      .get(`/magazine/contribution/${id}`)
-      .then(res => {
-        return res.data.data;
-      })
-      .catch(err => console.log(err));
-    // setContribution(getRequest);
+    indicator === 'con'
+      ? await setContribution(contributions)
+      : await setArticle(articles); //axios연결시 지우기
+    indicator === 'con'
+      ? await customAxios
+          .get(`/magazine/contribution/${pathParameter}`)
+          .then(res => {
+            console.log('contribution으로 요청', res);
+            // return setContribution(res.data.data);
+          })
+          .catch(err => console.log(err))
+      : await customAxios
+          .get(`/magazine/article/${pathParameter}`)
+          .then(res => {
+            console.log('Article로 요청', res);
+            // return setArticle(res.data.data);
+          })
+          .catch(err => console.log(err));
     setAlldata(true);
   }, []);
-
+  console.log(request);
   return Alldata ? (
     <>
       <div className="articlecontainer">
         <div className="container">
           <div className="row">
-            <div className="col-sm-4">
+            <div className="col-sm-4 col-md-12 col-lg-12">
               <div className="articleviewwrapper">
                 <div className="header">
                   <div className="headerleft">
-                    <div className="keyword">
-                      {Contribution.contribution_keyword}
-                    </div>
+                    <span className="keyword">
+                      {indicator === 'con'
+                        ? Contribution.contribution_keyword
+                        : Article.article_keyword}
+                    </span>
                     <div className="title">
-                      {Contribution.contribution_title}
+                      {indicator === 'con'
+                        ? Contribution.contribution_title.slice(0, 30) + '...'
+                        : Article.article_title.slice(0, 30) + '...'}
+                    </div>
+                    <div className="username">
+                      {indicator === 'con'
+                        ? Contribution.user_name
+                        : Article.article_publishment}
                     </div>
                   </div>
                   <svg
@@ -57,23 +86,61 @@ function ArticleViewWrapper() {
                   <div className="datawrapper">
                     게시{' '}
                     <span className="data">
-                      {Contribution.contribution_date}
+                      {indicator === 'con'
+                        ? Contribution.contribution_date
+                        : Article.article_date}
                     </span>
-                    조회 <span className="data">{Contribution.hit}</span>
+                    조회{' '}
+                    <span className="data">
+                      {indicator === 'con' ? Contribution.hit : Article.hit}
+                    </span>
                   </div>
                 </div>
                 <div className="body">
                   <div className="contents">
-                    {Contribution.contribution_content.slice(0, 200) + '...'}
+                    {indicator === 'con'
+                      ? request === 'Login need'
+                        ? Contribution.contribution_content.slice(0, 200) +
+                          '...'
+                        : Contribution.contribution_content
+                      : Article.article_content.slice(0, 200) + '...'}
                   </div>
-                  <div className="layer"></div>
-                  <div className="viewallbtn"></div>
+                  {indicator === 'con' ? (
+                    request === 'Login need' ? (
+                      <div className="layer"></div>
+                    ) : null
+                  ) : (
+                    <div className="layer"></div>
+                  )}
+                  {indicator === 'con' ? (
+                    request === 'Login need' ? (
+                      <Button
+                        subject={'로그인/회원가입 하기'}
+                        color={`#191A20`}
+                        backgroundColor={`#FFDD14`}
+                        onClickHandle={() => setModalOpen(true)}
+                      />
+                    ) : null
+                  ) : (
+                    <Button
+                      subject={'전체 게시글 보기'}
+                      color={`#191A20`}
+                      backgroundColor={`#FFDD14`}
+                      onClickHandle={() =>
+                        (window.location.href = `${Article.article_url}`)
+                      }
+                    />
+                  )}
                 </div>
+                <div className="articlecontainer-footer" />
               </div>
             </div>
           </div>
         </div>
       </div>
+      {ModalOpen ? (
+        <SigninModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
+      ) : null}
     </>
   ) : null;
 }
