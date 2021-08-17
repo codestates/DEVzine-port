@@ -46,7 +46,7 @@ function App() {
           <Route path="/articlelist">
             <ArticleList />
           </Route>
-          <Route path="/article">
+          <Route path="/article/:id">
             <ArticleView />
           </Route>
           <Route path="/contributionupdate/:id">
