@@ -16,6 +16,7 @@ const robots = require('express-robots-txt')
 app.use(robots({UserAgent: '*', Disallow: '/'}))
 
 // passport 미들웨어
+app.set('trust proxy', 1)
 app.use(passport.initialize());
 passportConfig();
 app.use(express.json());
@@ -34,7 +35,7 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: 'server & db connected!' });
 });
 
-app.get('/testauth', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/authtest', passport.authenticate('jwt', { session: false }), (req, res) => {
   try {
     res.status(200).json({ message: 'authenticated!' });
   } catch (err) {
