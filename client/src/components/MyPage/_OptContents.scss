@@ -8,13 +8,23 @@
     width: 360px;
     height: auto;
     min-height: 115px;
-    .subjectwrapper {
-      font-weight: bold;
-      font-size: 16px;
-      line-height: 24px;
-      width: 100%;
-      margin-bottom: 8px;
-      color: #191a20;
+    .subject {
+      display: flex;
+      .subjectwrapper {
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        width: 95.89px;
+        margin-bottom: 8px;
+        color: #191a20;
+      }
+      .btndesc {
+        width: 254.11px;
+        @include text-style-12;
+        font-weight: $lighter;
+        @include flexbox;
+        margin-bottom: 8px;
+      }
     }
     .contributionstatustable {
       width: 360px;
