@@ -62,7 +62,7 @@ module.exports = {
     jwt.sign(
       { user: req.user },
       process.env.JWT_SECRET,
-      { expiresIn: '30m' },
+      { expiresIn: '1d' },
       (err, token) => {
         if (err) {
           return res.status(500).send(err);
@@ -71,38 +71,13 @@ module.exports = {
           httpOnly: true,
           sameSite: 'None',
           secure: true,
-          // maxAge: 24 * 60 * 60 * 1000,
-          // domain: 'devzine-port.com', path: '/' // 이거 넣으면 걍 안됨;;
+          // maxAge: 24 * 60 * 60 * 1000, // 있든 말든 상관 없는듯
+          // domain: 'devzine-port.com', path: '/' // 이건 넣으면 걍 안됨;;
         });
         res.status(200).send({ data: { user_name: req.user.user_name }, message: 'Login success' });
       }
     );
   },
-    // try {
-    //   passport.authenticate('local', (passportError, user, info) => {
-    //     if (passportError || !user) {
-    //       return res.status(400).json({ message: info.message });
-    //     }
-    //     req.login(user, { session: false }, (loginError) => {
-    //       if (loginError) {
-    //         return res.status(500).send(loginError);
-    //       }
-    //       const token = jwt.sign(
-    //         { id: user._id, user_name: user.user_name },
-    //         process.env.JWT_SECRET,
-    //         { expiresIn: '30m' }
-    //         );
-    //       res.cookie("token", token, {
-    //         httpOnly: true,
-    //         secure: true,
-    //         sameSite: 'None'
-    //       });
-    //       res.status(200).send({ data: { user_name: user.user_name }, message: 'Login success' });
-    //     });
-    //   })(req, res);
-    // } catch (err) {
-    //   res.status(500).send(err);
-    // }
 
   deleteUser: async (req, res) => {
     if (!req.user) {
