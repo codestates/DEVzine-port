@@ -1,80 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import ArticleView from '../../pages/ArticleView';
 import Carousel from 'react-multi-carousel';
-import { customAxios } from '../../utils/customAxios';
 
-function ArticelCarousel() {
-  const [ContributionDate, setContributionDate] = useState(null);
-
-  useEffect(async () => {
-    await customAxios
-      .get('/magazine')
-      .then(res => setContributionDate(res.data.contributionData))
-      .catch(err => {
-        let FakeDate = [
-          {
-            contribution_id: 1,
-            contribution_title: 'contribution_title1',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 2,
-            contribution_title: 'contribution_title2',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 3,
-            contribution_title: 'contribution_title3',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 4,
-            contribution_title: 'contribution_title4',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 5,
-            contribution_title: 'contribution_title4',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 6,
-            contribution_title: 'contribution_title4',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 7,
-            contribution_title: 'contribution_title4',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-        ];
-
-        setContributionDate(FakeDate);
-
-        return alert('기고글 받아오는데 실패하였습니다.');
-      });
-  }, []);
-
+function ArticelCarousel({ ContributionDate }) {
   return ContributionDate ? (
     <>
       <Carousel
@@ -107,15 +36,15 @@ function ArticelCarousel() {
               max: 767,
               min: 0,
             },
-            items: 1,
-            partialVisibilityGutter: 30,
+            items: 1.5,
+            partialVisibilityGutter: 40,
           },
           tablet: {
             breakpoint: {
               max: 199,
               min: 768,
             },
-            items: 2,
+            items: 3,
             partialVisibilityGutter: 30,
           },
         }}
@@ -124,17 +53,23 @@ function ArticelCarousel() {
         slidesToSlide={1}
         swipeable
       >
-        {ContributionDate.slice(0, 5).map(el => {
+        {ContributionDate.slice(0, 6).map(el => {
           return (
-            <div key={el.contribution_id} className="contributionBox">
-              <ul>
-                <li>{el.contribution_date}</li>
-                <li>{el.contribution_title}</li>
-                <li>{el.contribution_content}</li>
-                <li>{el.contribution_keyword}</li>
-                <li>{el.hit}</li>
-              </ul>
-            </div>
+            <Link
+              to={`/article/con-${el.contribution_id}`}
+              children={<ArticleView />}
+              key={el.contribution_id}
+            >
+              <div className="contributionbox">
+                <ul>
+                  <li>{el.contribution_date}</li>
+                  <li>{el.contribution_title}</li>
+                  <li>{el.contribution_content}</li>
+                  <li>{el.contribution_keyword}</li>
+                  <li>{el.hit}</li>
+                </ul>
+              </div>
+            </Link>
           );
         })}
       </Carousel>
