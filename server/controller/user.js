@@ -71,7 +71,6 @@ module.exports = {
           httpOnly: true,
           sameSite: 'None',
           secure: true,
-          domain: 'devinze-port.com'
         });
         res.status(200).send({ data: { user_name: req.user.user_name }, message: 'Login success' });
       }
