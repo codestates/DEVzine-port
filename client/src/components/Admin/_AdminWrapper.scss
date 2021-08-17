@@ -1,0 +1,39 @@
+.admin {
+  // background-color: $background;
+  background-color: green;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+
+  &-footer {
+    height: 100px;
+    margin-bottom: 220px; // footer 220px 포함
+    position: relative;
+  }
+}
+
+.request {
+  margin-top: 192px; //header 120px 포함
+}
+
+.approval {
+  margin-top: 60px; //header 120px 포함
+
+  &-title {
+    cursor: pointer;
+  }
+}
+
+table {
+  border-collapse: collapse;
+  margin-top: 12px;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 0.5rem;
+  border: 1px solid $dark;
+  height: 20px;
+  background-color: $white;
+}

@@ -1795,6 +1795,36 @@ label {
   border: 1px solid red;
   padding-top: 300px; }
 
+.admin {
+  background-color: green;
+  min-height: 100vh;
+  position: relative;
+  width: 100%; }
+  .admin-footer {
+    height: 100px;
+    margin-bottom: 200px;
+    position: relative; }
+
+.request {
+  margin-top: 192px; }
+
+.approval {
+  margin-top: 60px; }
+  .approval-title {
+    cursor: pointer; }
+
+table {
+  border-collapse: collapse;
+  margin-top: 12px;
+  width: 100%; }
+
+th,
+td {
+  padding: 0.5rem;
+  border: 1px solid #191a20;
+  height: 20px;
+  background-color: #fff; }
+
 .container {
   width: 100%;
   padding: 0 5px;

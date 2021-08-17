@@ -9,121 +9,122 @@ function ArticleListWrapper() {
   const [ArticleDate, setArticleDate] = useState(null);
   const [ContributionDate, setContributionDate] = useState(null);
 
+  let FakeDate = [
+    {
+      contribution_id: 1,
+      contribution_title: 'contribution_title1',
+      contribution_content: 'contribution_content',
+      contribution_keyword: '게임',
+      contribution_date: '2021.08.16',
+      hit: '1004',
+    },
+    {
+      contribution_id: 2,
+      contribution_title: 'contribution_title2',
+      contribution_content: 'contribution_content',
+      contribution_keyword: '게임',
+      contribution_date: '2021.08.16',
+      hit: '1004',
+    },
+    {
+      contribution_id: 3,
+      contribution_title: 'contribution_title3',
+      contribution_content: 'contribution_content',
+      contribution_keyword: '게임',
+      contribution_date: '2021.08.16',
+      hit: '1004',
+    },
+    {
+      contribution_id: 4,
+      contribution_title: 'contribution_title4',
+      contribution_content: 'contribution_content',
+      contribution_keyword: '게임',
+      contribution_date: '2021.08.16',
+      hit: '1004',
+    },
+    {
+      contribution_id: 5,
+      contribution_title: 'contribution_title5',
+      contribution_content: 'contribution_content',
+      contribution_keyword: '게임',
+      contribution_date: '2021.08.16',
+      hit: '1004',
+    },
+    {
+      contribution_id: 6,
+      contribution_title: 'contribution_title6',
+      contribution_content: 'contribution_content',
+      contribution_keyword: '게임',
+      contribution_date: '2021.08.16',
+      hit: '1004',
+    },
+    {
+      contribution_id: 7,
+      contribution_title: 'contribution_title7',
+      contribution_content: 'contribution_content',
+      contribution_keyword: '게임',
+      contribution_date: '2021.08.16',
+      hit: '1004',
+    },
+    {
+      contribution_id: 8,
+      contribution_title: 'contribution_title8',
+      contribution_content: 'contribution_content',
+      contribution_keyword: '게임',
+      contribution_date: '2021.08.16',
+      hit: '1004',
+    },
+    {
+      contribution_id: 9,
+      contribution_title: 'contribution_title9',
+      contribution_content: 'contribution_content',
+      contribution_keyword: '게임',
+      contribution_date: '2021.08.16',
+      hit: '1004',
+    },
+    {
+      contribution_id: 10,
+      contribution_title: 'contribution_title10',
+      contribution_content: 'contribution_content',
+      contribution_keyword: '게임',
+      contribution_date: '2021.08.16',
+      hit: '1004',
+    },
+    {
+      contribution_id: 11,
+      contribution_title: 'contribution_title11',
+      contribution_content: 'contribution_content',
+      contribution_keyword: '게임',
+      contribution_date: '2021.08.16',
+      hit: '1004',
+    },
+    {
+      contribution_id: 12,
+      contribution_title: 'contribution_title12',
+      contribution_content: 'contribution_content',
+      contribution_keyword: '게임',
+      contribution_date: '2021.08.16',
+      hit: '1004',
+    },
+    {
+      contribution_id: 13,
+      contribution_title: 'contribution_title13',
+      contribution_content: 'contribution_content',
+      contribution_keyword: '게임',
+      contribution_date: '2021.08.16',
+      hit: '1004',
+    },
+  ];
+
   useEffect(async () => {
     await customAxios
       .get('/magazine')
       .then(res => {
+        console.log(res.data);
         setArticleDate(res.data.ArticleeDate.slice(0, 12));
         setContributionDate(res.data.contributionData);
       })
       .catch(err => {
-        let FakeDate = [
-          {
-            contribution_id: 1,
-            contribution_title: 'contribution_title1',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 2,
-            contribution_title: 'contribution_title2',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 3,
-            contribution_title: 'contribution_title3',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 4,
-            contribution_title: 'contribution_title4',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 5,
-            contribution_title: 'contribution_title5',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 6,
-            contribution_title: 'contribution_title6',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 7,
-            contribution_title: 'contribution_title7',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 8,
-            contribution_title: 'contribution_title8',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 9,
-            contribution_title: 'contribution_title9',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 10,
-            contribution_title: 'contribution_title10',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 11,
-            contribution_title: 'contribution_title11',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 12,
-            contribution_title: 'contribution_title12',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 13,
-            contribution_title: 'contribution_title13',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-        ];
-
         setArticleDate(FakeDate.slice(0, 12));
         setContributionDate(FakeDate);
 
@@ -139,113 +140,6 @@ function ArticleListWrapper() {
         setContributionDate(res.data.contributionData);
       })
       .catch(err => {
-        let FakeDate = [
-          {
-            contribution_id: 1,
-            contribution_title: 'contribution_title1',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 2,
-            contribution_title: 'contribution_title2',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 3,
-            contribution_title: 'contribution_title3',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 4,
-            contribution_title: 'contribution_title4',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 5,
-            contribution_title: 'contribution_title5',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 6,
-            contribution_title: 'contribution_title6',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 7,
-            contribution_title: 'contribution_title7',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 8,
-            contribution_title: 'contribution_title8',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 9,
-            contribution_title: 'contribution_title9',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 10,
-            contribution_title: 'contribution_title10',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 11,
-            contribution_title: 'contribution_title11',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 12,
-            contribution_title: 'contribution_title12',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 13,
-            contribution_title: 'contribution_title13',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-        ];
-
         setArticleDate(null);
         setArticleDate(FakeDate.slice(0, 12));
         setContributionDate(FakeDate);
@@ -262,113 +156,6 @@ function ArticleListWrapper() {
         setContributionDate(res.data.contributionData);
       })
       .catch(err => {
-        let FakeDate = [
-          {
-            contribution_id: 1,
-            contribution_title: 'contribution_title1',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 2,
-            contribution_title: 'contribution_title2',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 3,
-            contribution_title: 'contribution_title3',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 4,
-            contribution_title: 'contribution_title4',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 5,
-            contribution_title: 'contribution_title5',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 6,
-            contribution_title: 'contribution_title6',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 7,
-            contribution_title: 'contribution_title7',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 8,
-            contribution_title: 'contribution_title8',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 9,
-            contribution_title: 'contribution_title9',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 10,
-            contribution_title: 'contribution_title10',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 11,
-            contribution_title: 'contribution_title11',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 12,
-            contribution_title: 'contribution_title12',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-          {
-            contribution_id: 13,
-            contribution_title: 'contribution_title13',
-            contribution_content: 'contribution_content',
-            contribution_keyword: '게임',
-            contribution_date: '2021.08.16',
-            hit: '1004',
-          },
-        ];
-
         setArticleDate(null);
         setArticleDate(FakeDate.slice(1, 13));
         setContributionDate(FakeDate);
