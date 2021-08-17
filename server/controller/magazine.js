@@ -1,30 +1,39 @@
+const { checkCacheForArticles } = require('./cachefunction/articlesCache')
+
 module.exports = {
 
 	getMagazineList: async (req, res) => {
-        
-        // TODO: 뉴스를 최신순으로 12개 조회한다.
-        // status: 200
-        // {
-        //     "data": [
-        //         ...
-        //         {
-        //             "article_id": number,
-        //             "article_title": "string",
-        //             "article_content": "string",
-        //             "article_date": date,
-        //             "article_keyword": "string",
-        //             "hit": number,
-        //         }
-        //     ],
-        //     "message" : "Article list successfully found"
+
+        try {
+
+            const articleData = await checkCacheForArticles()
+            return res.status(200).json(
+                {
+                    "articleData": articleData.data,
+                    "contributionData": '',
+                    "message" : "Article list successfully found",
+                    "articleSource" : articleData.source,
+                    "contributionSource" : ''
+                }
+            );
+
+        } catch (err) {
+            
+            console.log(err)
+            return res.status(500).send(err)
+
+        }
+
+        // "contributionData": [
+        //     {
+        //     "contribution_id": "number",
+        //     "contribution_title": "string",
+        //     "contribution_content": "string",
+        //     "contribution_keyword": "string",
+        //     "contribution_date" : "date",
+        //     "hit": "number"
         // }
-        // status:404
-        // {
-        //     "message": "Not found"
-        // } 
-        setTimeout(() => {
-            return res.send('no cache, get magazine list from DB');
-        }, 500);
+        // ]
     },
 
     getArticle: async (req, res) => {
