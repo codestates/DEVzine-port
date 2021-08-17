@@ -2,11 +2,10 @@ import React, { useEffect } from 'react';
 import { customAxios } from '../utils/customAxios';
 import { useParams } from 'react-router-dom';
 
-function AuthMail({ match }) {
+function AuthMail({ }) {
   const { email } = useParams();
-
   function customClose() {
-    window.opener=null;
+    window.opener = null;
     window.open('','_self');
     window.close();
   }
