@@ -71,6 +71,7 @@ module.exports = {
           httpOnly: true,
           sameSite: 'None',
           secure: true,
+          domain: 'devzine-port.com', path: '/'
         });
         res.status(200).send({ data: { user_name: req.user.user_name }, message: 'Login success' });
       }
