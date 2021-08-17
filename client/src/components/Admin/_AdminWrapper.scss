@@ -1,6 +1,5 @@
 .admin {
-  // background-color: $background;
-  background-color: green;
+  background-color: $yellow;
   min-height: 100vh;
   position: relative;
   width: 100%;
@@ -36,4 +35,49 @@ td {
   border: 1px solid $dark;
   height: 20px;
   background-color: $white;
+}
+
+th {
+  &:first-child {
+    width: 150px;
+  }
+
+  &:nth-child(3) {
+    width: 80px;
+  }
+
+  &:nth-child(4) {
+    width: 250px;
+  }
+}
+
+td {
+  &:nth-child(4) {
+    width: 250px;
+  }
+}
+
+.adminform {
+  &-check {
+    display: inline-block;
+    margin-left: 16px;
+
+    &-label {
+      display: inline-block;
+      margin-left: 8px;
+      margin-top: 8px;
+    }
+  }
+
+  &-btn {
+    @include text-style(16, $dark);
+    background-color: $border;
+    height: 30px;
+    margin-left: 16px;
+    width: 70px;
+
+    .checked {
+      background-color: $green;
+    }
+  }
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function ApprovalTable({ columns, data }) {
   return (
@@ -15,13 +16,7 @@ function ApprovalTable({ columns, data }) {
           <tr key={idx}>
             <td>{user_name}</td>
             <td className="approval-title">
-              <a
-                href={`/article/con-${idx}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {contribution_title}
-              </a>
+              <Link to={`/article/con-${idx}`}>{contribution_title}</Link>
             </td>
           </tr>
         ))}

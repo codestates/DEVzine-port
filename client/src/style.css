@@ -1796,13 +1796,13 @@ label {
   padding-top: 300px; }
 
 .admin {
-  background-color: green;
+  background-color: #ffdd14;
   min-height: 100vh;
   position: relative;
   width: 100%; }
   .admin-footer {
     height: 100px;
-    margin-bottom: 200px;
+    margin-bottom: 220px;
     position: relative; }
 
 .request {
@@ -1824,6 +1824,38 @@ td {
   border: 1px solid #191a20;
   height: 20px;
   background-color: #fff; }
+
+th:first-child {
+  width: 150px; }
+
+th:nth-child(3) {
+  width: 80px; }
+
+th:nth-child(4) {
+  width: 250px; }
+
+td:nth-child(4) {
+  width: 250px; }
+
+.adminform-check {
+  display: inline-block;
+  margin-left: 16px; }
+  .adminform-check-label {
+    display: inline-block;
+    margin-left: 8px;
+    margin-top: 8px; }
+
+.adminform-btn {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: #191a20;
+  background-color: #d9d9d9;
+  height: 30px;
+  margin-left: 16px;
+  width: 70px; }
+  .adminform-btn .checked {
+    background-color: #1ebf1e; }
 
 .container {
   width: 100%;

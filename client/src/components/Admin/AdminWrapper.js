@@ -9,23 +9,23 @@ function AdminWrapper() {
   const columns = ['닉네임', '제목', '현황', '변경'];
   const columns2 = ['닉네임', '제목'];
   const status = ['승인요청', '수정요청', '삭제요청'];
-  const manage = ['승인', '거부', '대기'];
 
   /*
-  승인요청 - 게시대기(100), 게시승인(110), 게시거부(120)
+승인요청 - 게시대기(100), 게시승인(110), 게시거부(120)
 수정요청 - 수정대기(101), 수정승인(111), 수정거부(121)
 삭제요청 - 삭제대기(102), 삭제승인(112), 삭제거부(122)
 */
 
-  const data = Array(3)
+  const data = Array(5)
     .fill()
     .map(() => ({
+      contribution_id: Math.floor(Math.random() * 10),
       user_name: faker.name.findName(),
       contribution_title: faker.lorem.sentence(),
       contribution_status: status[Math.floor(Math.random() * status.length)],
     }));
 
-  const data2 = Array(3)
+  const data2 = Array(5)
     .fill()
     .map(() => ({
       user_name: faker.name.findName(),
