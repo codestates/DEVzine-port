@@ -55,7 +55,7 @@ function SideBar(props) {
                 />
                 <ul>
                   {props.userName ? (
-                    <li className="usename">{props.userName}</li>
+                    <li className="usename">{props.UserName}</li>
                   ) : (
                     <li onClick={signInHandler}>로그인</li>
                   )}
@@ -74,7 +74,7 @@ function SideBar(props) {
                   <li onClick={() => props.setOpenSidebar(false)}>
                     <Link to="/subscribe">구독하기</Link>
                   </li>
-                  {props.signIn ? (
+                  {props.SignIn ? (
                     <li className="signout" onClick={signOutHandler}>
                       로그아웃
                     </li>

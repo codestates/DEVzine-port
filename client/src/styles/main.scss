@@ -15,29 +15,29 @@
 
 @import './modules/forms';
 
-@import '../components/Common/Button/button';
-@import '../components/Common/AlertModal/alertmodal';
-@import '../components/Common/Header/header';
-@import '../components/Common/Header/sideBar';
-@import '../components/Common/Footer/footer';
-@import '../components/Common/Loading/loading';
-@import '../components/Common/Error/error';
+@import '../components/Common/Button/Button';
+@import '../components/Common/AlertModal/AlertModal';
+@import '../components/Common/Loading/Loading';
+@import '../components/Common/Error/Error';
+@import '../components/Common/Header/Header';
+@import '../components/Common/Header/SideBar';
+@import '../components/Common/Footer/Footer';
 @import '../components/Common/SignInModal/signinmodal';
 @import '../components/Common/SignInModal/signintextinputgender';
-@import '../components/Landing/landingwrapper';
-@import '../components/Landing/landinginteraction';
+@import '../components/Landing/LandingWrapper';
+@import '../components/Landing/LandingInteraction';
 @import '../components/Landing/LandingSub';
-@import '../components/Contribution/contributionsWrapper';
-@import '../components/Subscription/subscriptionswrapper';
+@import '../components/Contribution/ContributionsWrapper';
+@import '../components/Subscription/SubscriptionWrapper';
 @import '../components/SignUp/signupwrapper';
 @import '../components/SignUp/textinputgenderrequired';
 @import '../components/SignUp/accordion';
 @import '../components/SignUp/radioinputgender';
 @import '../components/SignUp/select';
 @import '../components/MyPage/optcontents';
-@import '../components/ArticleList/articlelistwrapper';
+@import '../components/ArticleList/ArticlelistWrapper';
+@import '../components/ArticleList/ArticleCarousel';
 @import '../components/ArticleView/ArticleViewWrapper';
 @import '../components/Visual/VisualWrapper';
-@import '../components/ArticleList/articleCarousel';
 
 @import './layouts/grids';
