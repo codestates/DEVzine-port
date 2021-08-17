@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { customAxios } from '../utils/customAxios';
 
-function AuthMail({ match }) {
+function AuthMail({ }) {
 
   function customClose() {
     window.opener=null;
@@ -11,7 +12,7 @@ function AuthMail({ match }) {
   
   useEffect(() => {
     const body = {
-      temp_email: match.params.email,
+      temp_email: useParams().email,
     }
     customAxios.post('/email/verify', body).then(res => {
       console.log(res);
@@ -25,7 +26,7 @@ function AuthMail({ match }) {
   
   return (
     <div>
-      이메일 인증 확인되었습니다.{match.params.email}
+      이메일 인증 확인되었습니다.{useParams().email}
     </div>
   );
 }
