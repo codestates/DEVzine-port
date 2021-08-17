@@ -2,10 +2,10 @@ import { SIGNIN_USER, SIGNUP_USER, SIGNOUT_USER, MYPAGE_USER } from './types';
 import { customAxios } from '../utils/customAxios';
 
 export async function signinUser(dataToSubmit) {
-  const request = ['Login success', 'kimcoding'];
-  // const request = await customAxios
-  //   .post(`/user/signin`, dataToSubmit)
-  //   .then(res => [res.data.message, res.data.data.user_name]);
+  // const request = ['Login success', 'kimcoding'];
+  const request = await customAxios
+    .post(`/user/signin`, dataToSubmit)
+    .then(res => [res.data.message, res.data.data.user_name]);
 
   return {
     type: SIGNIN_USER,
@@ -26,10 +26,10 @@ export async function signupUser(dataToSubmit) {
 }
 
 export async function signoutUser() {
-  const request = 'Logout success';
-  // const request = await customAxios
-  //   .post(`/user/signout`)
-  //   .then(res => res.data.message);
+  // const request = 'Logout success';
+  const request = await customAxios
+    .post(`/user/signout`)
+    .then(res => res.data.message);
 
   return {
     type: SIGNOUT_USER,

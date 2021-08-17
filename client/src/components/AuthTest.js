@@ -6,14 +6,14 @@ function AuthTest({ }) {
   useEffect(() => {
     customAxios.get('/authtest').then(res => {
       console.log(res);
-			setState(res.data);
-      return res;
+      return ;
     });
 
   }, []);
   
   return (
     <div>
+      ㅎㅇ
       {state}
     </div>
   );
