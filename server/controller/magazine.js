@@ -1,41 +1,35 @@
-const redisClient = require('../config/redis')
-const { Article } = require('../Models/Articles')
-const { getArticlesPastTwoWeeks } = require('./cachefunction/articlesCache')
+const { checkCacheForArticles } = require('./cachefunction/articlesCache')
 
 module.exports = {
 
 	getMagazineList: async (req, res) => {
-        
-        await redisClient.hgetall('recentArticles', async (err, articles) => {
-            if (err) {
-                return res.status(500).send(err)
-            } else if (!articles) { // cache miss
-                const articlesFromDB = await getArticlesPastTwoWeeks();
-                return res.status(200).json({
-                    "data": {
-                        "articleData" : articlesFromDB
-                    },
-                    "message" : "Article list successfully found",
-                    "source" : "DB"
-                })
-            } else if (articles) { // cache hit
-                let articleData = [];
-                for (let key in articles) {
-                    articleData.push(JSON.parse(articles[key]))
-                }
-                return res.status(200).json({
-                    "data": {
-                        articleData
-                    },
-                    "message" : "Article list successfully found",
-                    "source" : "cache"
-                });
-            } else {
-                return res.status(404).json({
-                    "message" : "Not found"
-                })
-            }
-        })
+
+        try {
+
+            let articleData = {};
+            let contributionData;
+            let articleSource;
+            let contributionSource;
+
+            const temp = await checkCacheForArticles()
+            console.log(temp)
+            return res.send('ok')
+            // return res.status(200).json(
+            //     {
+            //         "data": {
+            //             articleData
+            //         },
+            //         "message" : "Article list successfully found",
+            //         "source" : "cache"
+            //     }
+            // );
+
+        } catch (err) {
+            
+            console.log(err)
+            return res.status(500).send(err)
+
+        }
 
         // "contributionData": [
         //     {

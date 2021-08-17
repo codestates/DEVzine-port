@@ -94,10 +94,11 @@ const automatedCrawlerForWeekend = schedule.scheduleJob('00 21 * * 7', async () 
 });
 
 // TODO: 배포 전에 삭제 (크롤링 자동화 test 를 위한 코드입니다)
-// const test = schedule.scheduleJob('38 * * * *', async () => {
-  // const data = await getRecentArticlesFrom24H();
-  // const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
-  // await setNewCacheForArticles(articlesPastTwoWeeks);
+// const test = schedule.scheduleJob('18 * * * *', async () => {
+//   // const data = await getRecentArticlesFrom24H();
+//   const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
+//   console.log(articlesPastTwoWeeks);
+//   await setNewCacheForArticles(articlesPastTwoWeeks);
 // });
 
 mongoose

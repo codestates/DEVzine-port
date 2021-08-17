@@ -6,12 +6,12 @@ module.exports = {
 
         redisClient.get('visualsActivated', async (err, data) => {
 
-            if(err) {
+            if (err) {
                 console.log(err);
                 return res.status(500).send('Error');
             }
 
-            if(data) {
+            if (data) {
                 return res.status(200).json(
                     {
                         "data": JSON.parse(data), 
