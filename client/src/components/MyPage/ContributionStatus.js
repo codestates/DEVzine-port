@@ -6,18 +6,22 @@ import { statuscodeconvert } from '../../utils/statuscodeconvert';
 
 function ContributionStatus({ Contribution }) {
   async function deleteRequestHandler(contributionid) {
-    const requestDelete = await customAxios
+    await customAxios
       .delete(`/contribution/${contributionid}`)
       .then(res => {
         console.log(res);
         window.location.href = '/mypage';
       })
       .catch(err => console.log(err));
-    return requestDelete;
   }
   return (
     <div className="contributionstatuscontainer">
-      <div className="subjectwrapper">기고현황</div>
+      <div className="subject">
+        <div className="subjectwrapper">기고현황</div>
+        <div className="btndesc">
+          수정, 삭제 요청 후 관리자의 승인을 기다려 주세요
+        </div>
+      </div>
       <ul className="contributionstatustable">
         <li className="contributionstatuslist">
           <span className="tableheader first">제목</span>

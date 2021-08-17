@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 const { User } = require('../Models/Users')
 const { Contribution } = require('../Models/Contributions')
 
@@ -73,10 +74,9 @@ module.exports = {
 
     patchUserInfo: async (req, res) => {
         // TODO: token 유효성 검사 -> 401 
-        // TODO: 비번 hashing
+
         const { 
             user_email, 
-            user_password, 
             user_name 
         } = req.body;
 
@@ -86,6 +86,8 @@ module.exports = {
             user_position,
             user_language 
         } = req.body.user_info;
+        
+        const user_password = await bcrypt.hashSync(req.body.user_password, 10);
 
         let subscribed;
         if (req.body.subscribed === '구독') {

@@ -154,7 +154,7 @@ function MyPageWrapper() {
       '20',
       true,
     ],
-    ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '10', true],
+    ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '15', true],
   ];
 
   async function patchHandler() {

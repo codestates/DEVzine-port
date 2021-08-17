@@ -36,23 +36,11 @@ app.get('/', (req, res) => {
 
 app.get('/testauth', passport.authenticate('jwt', { session: false }), (req, res) => {
   try {
-    console.log(req.user);
     res.status(200).json({ message: 'authenticated!' });
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
-// const { isAuthenticated } = require('./controller/middleware/isAuthenticated');
-// app.get('/testauth', isAuthenticated, (req, res) => {
-// 	// let user = req.user;
-// 	// if (user) {
-// 		res.send(`user: ${req.user}`);
-// 	// }
-// 	// else {
-// 	// 	res.send('not authenticated');
-// 	// }
-// });
 
 const { insertSeedData } = require('./seeds/insertSeedData');
 app.use('/seed', insertSeedData);
