@@ -6,7 +6,19 @@ module.exports = {
 
         try {
 
-            const articleData = await checkCacheForArticles()
+            const articleData = await checkCacheForArticles().catch((err) => {
+                    return res.status(500).send(err)
+                }
+            )
+
+            if (!articleData) {
+                return res.status(404).json(
+                    {
+                        "message" : "Not found"
+                    }
+                )
+            }
+            
             return res.status(200).json(
                 {
                     "articleData": articleData.data,
