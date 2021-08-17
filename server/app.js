@@ -26,7 +26,7 @@ app.use(
   cors({
     origin: true,
     credentials: true,
-    methods: ['GET', 'POST', 'PATCH', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PATCH', 'OPTIONS', 'DELETE'],
   })
 );
 
@@ -66,18 +66,28 @@ app.use('/visual', visualRouter);
 
 const { Article } = require('./Models/Articles')
 const { getRecentArticlesFrom24H, getRecentArticlesFrom48H } = require('./controller/crawler/article-crawler');
+const { getArticlesPastTwoWeeks, setNewCacheForArticles } = require('./controller/cachefunction/articlesCache')
+
 const automatedCrawlerForWeekday = schedule.scheduleJob('00 21 * * 1-5', async () => { // 화-토 오전 6시 크롤링 (24시간 이내 업데이트)
   const data = await getRecentArticlesFrom24H();
   await Article.create(data);
+  const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
+  await setNewCacheForArticles(articlesPastTwoWeeks);
 });
+
 const automatedCrawlerForWeekend = schedule.scheduleJob('00 21 * * 7', async () => { // 월요일 오전 6시 크롤링 (48시간 이내 업데이트) 
   const data = await getRecentArticlesFrom48H();
   await Article.create(data);
+  const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
+  await setNewCacheForArticles(articlesPastTwoWeeks);
 });
-// const test = schedule.scheduleJob('39 13 * * *', async () => { // 크롤링 자동화 test 용 코드, 최종 배포 전에 삭제해야 함 
-//   const data = await getRecentArticlesFrom24H();
-//   console.log(data)
-// });
+
+const test = schedule.scheduleJob('38 * * * *', async () => { // 크롤링 자동화 test 용 코드, 최종 배포 전에 삭제해야 함 
+  // const data = await getRecentArticlesFrom24H();
+  // const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
+  // await setNewCacheForArticles(articlesPastTwoWeeks);
+
+});
 
 mongoose
   .connect(process.env.MONGO_STRING, {
