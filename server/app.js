@@ -61,7 +61,7 @@ app.get('/testauth', passport.authenticate('jwt', { session: false }), (req, res
 app.get('/', (req, res) => {
   res.status(200).json(
     { 
-      message: 'server & db connected!' 
+      "message": "server & db connected!"
     }
   );
 });
@@ -125,5 +125,5 @@ if (fs.existsSync('./key.pem') && fs.existsSync('./cert.pem')) {
 } else {
 
   server = app.listen(HTTPS_PORT, () => console.log('http server success'));
-  
+
 }
