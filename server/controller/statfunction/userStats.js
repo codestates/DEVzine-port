@@ -36,6 +36,7 @@ module.exports = {
                 }; 
 
                 users.users_top_position = {};
+
                 let positionCount = await User.aggregate([
                         {
                                 $group: {
@@ -48,11 +49,13 @@ module.exports = {
                 ]).sort({
                         count: -1
                 }).limit(5);
+
                 positionCount.forEach(position => {
                         users.users_top_position[position._id] = position.count;
                 });
 
                 users.users_top_language = {};
+
                 let languageCount = await User.aggregate([
                         {
                                 $unwind: "$user_language"
@@ -68,6 +71,7 @@ module.exports = {
                 ]).sort({
                         count: -1
                 }).limit(5);
+                
                 languageCount.forEach(language => {
                         users.users_top_language[language._id] = language.count;
                 });

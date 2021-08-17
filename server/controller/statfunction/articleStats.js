@@ -16,9 +16,11 @@ module.exports = {
                 }).limit(5);
 
                 articles.articles_per_keyword_day = {};
+
                 let compareDate = new Date(Date.now());
                 compareDate.setHours(compareDate.getHours() + 9);
                 compareDate.setDate(compareDate.getDate() - 1);
+
                 let keywordCountForDay = await Article.aggregate([
                         {
                                 $match: {
@@ -38,12 +40,15 @@ module.exports = {
                 ]).sort({
                         count: -1
                 }).limit(5);
+
                 keywordCountForDay.forEach(keyword => {
                         articles.articles_per_keyword_day[keyword._id] = keyword.count;
                 });
 
                 articles.articles_per_keyword_month = {};
+
                 compareDate.setDate(compareDate.getDate() - 29);
+
                 let keywordCountForMonth = await Article.aggregate([
                         {
                                 $match: {
@@ -63,6 +68,7 @@ module.exports = {
                 ]).sort({
                         count: -1
                 }).limit(5);
+                
                 keywordCountForMonth.forEach(keyword => {
                         articles.articles_per_keyword_month[keyword._id] = keyword.count;
                 });

@@ -86,7 +86,6 @@ const test = schedule.scheduleJob('38 * * * *', async () => { // 크롤링 자�
   // const data = await getRecentArticlesFrom24H();
   // const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
   // await setNewCacheForArticles(articlesPastTwoWeeks);
-
 });
 
 mongoose

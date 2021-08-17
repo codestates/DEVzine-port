@@ -7,6 +7,7 @@ module.exports = {
 
         let compareDate = new Date(Date.now());
         compareDate.setDate(compareDate.getDate() - 14);
+
         const articlesPastTwoWeeks = await Article.find(
             {
                 article_date: {
@@ -26,7 +27,7 @@ module.exports = {
     },
 
     setNewCacheForArticles: async(articles) => {
-  
+
         await redisClient.hgetall('recentArticles', async (err, data) => {
             if (err) {
                 return err;
@@ -41,5 +42,6 @@ module.exports = {
 
         return true;
 
-    },
+    }
+    
 }
