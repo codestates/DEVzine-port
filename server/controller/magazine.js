@@ -1,5 +1,5 @@
-const { Article } = require('../Models/Articles')
 const redisClient = require('../config/redis')
+const { Article } = require('../Models/Articles')
 const { getArticlesPastTwoWeeks } = require('./cachefunction/articlesCache')
 
 module.exports = {

@@ -1,4 +1,8 @@
 const { stream } = require('./config/winston');
+const { Article } = require('./Models/Articles')
+const { insertSeedData } = require('./seeds/insertSeedData'); // TODO: 배포 직전에 지우기 
+const { getRecentArticlesFrom24H, getRecentArticlesFrom48H } = require('./controller/crawler/article-crawler');
+const { getArticlesPastTwoWeeks, setNewCacheForArticles } = require('./controller/cachefunction/articlesCache')
 const fs = require('fs');
 const https = require('https');
 const mongoose = require('mongoose');
@@ -6,45 +10,10 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const morgan = require('morgan');
-const app = express();
 const passport = require('passport');
 const passportConfig = require('./config/passport');
 const schedule = require('node-schedule');
-require('dotenv').config();
-
 const robots = require('express-robots-txt')
-app.use(robots({UserAgent: '*', Disallow: '/'}))
-
-// passport 미들웨어
-app.use(passport.initialize());
-passportConfig();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(morgan('combined', { stream }));
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-    methods: ['GET', 'POST', 'PATCH', 'OPTIONS', 'DELETE'],
-  })
-);
-
-app.get('/', (req, res) => {
-  res.status(200).json({ message: 'server & db connected!' });
-});
-
-app.get('/testauth', passport.authenticate('jwt', { session: false }), (req, res) => {
-  try {
-    res.status(200).json({ message: 'authenticated!' });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-const { insertSeedData } = require('./seeds/insertSeedData');
-app.use('/seed', insertSeedData);
-
 const adminRouter = require('./router/adminRouter');
 const contributionRouter = require('./router/contributionRouter');
 const emailRouter = require('./router/emailRouter');
@@ -54,6 +23,48 @@ const myPageRouter = require('./router/myPageRouter');
 const subscribeRouter = require('./router/subscribeRouter');
 const userRouter = require('./router/userRouter');
 const visualRouter = require('./router/visualRouter');
+
+require('dotenv').config();
+passportConfig();
+
+const app = express();
+
+app.use(passport.initialize());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(morgan('combined', { stream }));
+app.use(cors(
+  {
+    origin: true,
+    credentials: true,
+    methods: ['GET', 'POST', 'PATCH', 'OPTIONS', 'DELETE'],
+  }
+));
+app.use(robots(
+  {
+    UserAgent: '*', 
+    Disallow: '/'
+  }
+))
+
+
+// TODO: 배포 직전에 지우기 
+app.get('/testauth', passport.authenticate('jwt', { session: false }), (req, res) => {
+  try {
+    res.status(200).json({ message: 'authenticated!' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+app.get('/', (req, res) => {
+  res.status(200).json(
+    { 
+      message: 'server & db connected!' 
+    }
+  );
+});
 app.use('/admin', adminRouter);
 app.use('/contribution', contributionRouter);
 app.use('/email', emailRouter);
@@ -64,29 +75,30 @@ app.use('/subscribe', subscribeRouter);
 app.use('/user', userRouter);
 app.use('/visual', visualRouter);
 
-const { Article } = require('./Models/Articles')
-const { getRecentArticlesFrom24H, getRecentArticlesFrom48H } = require('./controller/crawler/article-crawler');
-const { getArticlesPastTwoWeeks, setNewCacheForArticles } = require('./controller/cachefunction/articlesCache')
+// TODO: 배포 직전에 지우기
+app.use('/seed', insertSeedData);
 
-const automatedCrawlerForWeekday = schedule.scheduleJob('00 21 * * 1-5', async () => { // 화-토 오전 6시 크롤링 (24시간 이내 업데이트)
+// 화-토 오전 6시 크롤링 (24시간 이내 업데이트된 기사 불러오기)
+const automatedCrawlerForWeekday = schedule.scheduleJob('00 21 * * 1-5', async () => { 
   const data = await getRecentArticlesFrom24H();
   await Article.create(data);
   const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
   await setNewCacheForArticles(articlesPastTwoWeeks);
 });
-
-const automatedCrawlerForWeekend = schedule.scheduleJob('00 21 * * 7', async () => { // 월요일 오전 6시 크롤링 (48시간 이내 업데이트) 
+// 월요일 오전 6시 크롤링 (48시간 이내 업데이트된 기사 불러오기) 
+const automatedCrawlerForWeekend = schedule.scheduleJob('00 21 * * 7', async () => { 
   const data = await getRecentArticlesFrom48H();
   await Article.create(data);
   const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
   await setNewCacheForArticles(articlesPastTwoWeeks);
 });
 
-const test = schedule.scheduleJob('38 * * * *', async () => { // 크롤링 자동화 test 용 코드, 최종 배포 전에 삭제해야 함 
+// TODO: 배포 전에 삭제 (크롤링 자동화 test 를 위한 코드입니다)
+// const test = schedule.scheduleJob('38 * * * *', async () => {
   // const data = await getRecentArticlesFrom24H();
   // const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
   // await setNewCacheForArticles(articlesPastTwoWeeks);
-});
+// });
 
 mongoose
   .connect(process.env.MONGO_STRING, {
@@ -102,12 +114,16 @@ mongoose
 const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 let server;
 if (fs.existsSync('./key.pem') && fs.existsSync('./cert.pem')) {
+
   const privateKey = fs.readFileSync(__dirname + '/key.pem', 'utf8');
   const certificate = fs.readFileSync(__dirname + '/cert.pem', 'utf8');
   const credentials = { key: privateKey, cert: certificate };
 
   server = https.createServer(credentials, app);
   server.listen(HTTPS_PORT, () => console.log('https server success'));
+
 } else {
+
   server = app.listen(HTTPS_PORT, () => console.log('http server success'));
+  
 }
