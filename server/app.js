@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: 'server & db connected!' });
 });
 
-app.get('/testauth', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/authtest', passport.authenticate('jwt', { session: false }), (req, res) => {
   try {
     res.status(200).json({ message: 'authenticated!' });
   } catch (err) {
