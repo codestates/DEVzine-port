@@ -32,23 +32,17 @@ function SigninModal({ modalOpen, setModalOpen }) {
     });
   }
 
-  function backbtnHandler() {
-    if (Email === '' && Password === '') {
-      window.location.href = '/';
-    }
-
-    setModalOpen(false);
-  }
-
   return modalOpen ? (
     <div className="signincontainer">
       <div className="signinwrapper">
         <div className="signinheader">DEVzine</div>
-        <div
-          className="backbtn"
-          onClick={backbtnHandler}
-          style={{ backgroundImage: `url(${Union})` }}
-        ></div>
+        <Link to="/">
+          <div
+            className="backbtn"
+            onClick={() => setModalOpen(false)}
+            style={{ backgroundImage: `url(${Union})` }}
+          ></div>
+        </Link>
         {requiredTextInputData.map((el, idx) => {
           return (
             <TextInputGenderRequired
