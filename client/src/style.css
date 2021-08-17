@@ -1270,6 +1270,7 @@ label {
     .inputsmallcontainer .subjectwrapper .required {
       color: #ffc803; }
     .inputsmallcontainer .subjectwrapper .emailverifybtn {
+      z-index: 500;
       position: absolute;
       top: 0;
       right: 0;
@@ -1689,63 +1690,47 @@ label {
   background-color: #f2f2f2;
   min-height: 100vh;
   position: relative;
-  width: 100%;
-  padding-top: 120px;
-  padding-bottom: 218px; }
-  @media screen and (max-width: 767px) {
-    .articlecontainer {
-      height: 1050px;
-      margin-bottom: 50px;
-      width: 100%; } }
+  width: 100%; }
+  .articlecontainer-footer {
+    height: 100px;
+    margin-bottom: 220px; }
   .articlecontainer .articleviewwrapper {
-    position: relative;
-    background-color: #fff;
-    border: 1px solid #d9d9d9;
-    border-radius: 24px;
-    color: #191a20;
-    display: block;
-    height: auto;
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    top: 45%;
-    width: 1120px; }
-    @media screen and (max-width: 767px) {
-      .articlecontainer .articleviewwrapper {
-        min-width: 360px;
-        width: 95%; } }
+    color: #191a20; }
     .articlecontainer .articleviewwrapper .header {
+      margin-top: 192px;
+      background-color: #fff;
       position: relative;
-      display: flex;
-      width: 100%;
-      height: 107px;
-      border-bottom: 1px solid #d9d9d9; }
+      height: 140px;
+      border: 1px solid #d9d9d9;
+      border-radius: 24px 24px 0 0; }
       .articlecontainer .articleviewwrapper .header .headerleft {
-        display: flex;
-        flex-direction: column;
-        margin-left: 29px;
-        padding: 24px 0;
-        width: 863px;
-        height: 107px; }
+        margin: 0 29px;
+        padding-top: 24px; }
         .articlecontainer .articleviewwrapper .header .headerleft .keyword {
-          text-align: center;
-          min-width: 76px;
-          max-width: 76px;
+          display: inline-block;
+          padding: 0 12px;
           height: 22px;
           border: 1px solid #191a20;
-          margin-bottom: 16px;
-          border-radius: 69px;
+          margin-bottom: 8px;
+          border-radius: 70px;
           font-size: 12px;
           line-height: 16px;
           letter-spacing: -0.005em;
-          font-weight: 600; }
+          font-weight: 700; }
         .articlecontainer .articleviewwrapper .header .headerleft .title {
-          width: 863px;
-          height: 21px;
           font-size: 24px;
           line-height: 34px;
+          letter-spacing: -0.01em;
+          font-weight: 700; }
+          @media screen and (max-width: 767px) {
+            .articlecontainer .articleviewwrapper .header .headerleft .title {
+              font-size: 18px;
+              line-height: 28px;
+              letter-spacing: -0.02em;
+              margin-bottom: 13px; } }
+        .articlecontainer .articleviewwrapper .header .headerleft .username {
+          font-size: 14px;
+          line-height: 24px;
           letter-spacing: -0.01em;
           font-weight: 700; }
       .articlecontainer .articleviewwrapper .header .hamburger {
@@ -1754,36 +1739,43 @@ label {
         right: 23px;
         cursor: pointer; }
       .articlecontainer .articleviewwrapper .header .datawrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         position: absolute;
-        width: 166px;
+        width: 170px;
         height: 14px;
-        top: 73px;
-        right: 30px;
+        top: 97px;
+        right: 23px;
         font-size: 14px;
         line-height: 24px;
         letter-spacing: -0.01em;
-        font-weight: 600;
+        font-weight: 700;
         color: #b2b3b9; }
         .articlecontainer .articleviewwrapper .header .datawrapper .data {
           font-weight: 400;
           margin: 0 4px; }
     .articlecontainer .articleviewwrapper .body {
+      background-color: #fff;
       position: relative;
       padding: 24px 30px;
       width: 100%;
-      height: 490px; }
+      min-height: 490px;
+      height: auto;
+      border: 1px solid #d9d9d9;
+      border-top: 0 solid;
+      border-radius: 0 0 24px 24px; }
       .articlecontainer .articleviewwrapper .body .layer {
         position: absolute;
         left: 0;
         bottom: 0;
         width: 100%;
-        height: 423px;
+        min-height: 423px;
         background: linear-gradient(181.43deg, #f2f2f2 30.92%, rgba(229, 229, 229, 0.75) 57.12%, rgba(229, 229, 229, 0.36) 70.83%, rgba(255, 255, 255, 0.49) 85.2%, rgba(255, 255, 255, 0) 99.37%, rgba(255, 255, 255, 0.0822785) 99.37%);
         border-radius: 24px 24px 0px 0px;
         transform: rotate(180deg); }
+      .articlecontainer .articleviewwrapper .body .commonbutton {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 72px; }
 
 .visualwrapper {
   background-color: #f2f2f2;
