@@ -1,22 +1,17 @@
 const bcrypt = require('bcryptjs');
 const { User } = require('../Models/Users');
 const { Contribution } = require('../Models/Contributions');
-const jwt = require('jsonwebtoken');
 
 module.exports = {
     
     getUserInfo: async (req, res) => {
         
         try {
-            // TODO: Token parsing 
-            // status: 401
-            // {
-            //     "message": "Unauthorized user"
-            // }
-            let tempUserID = req.user._id;
+
+            let userID = req.user._id;
             let user = await User.findOne(
                 { 
-                    _id: tempUserID 
+                    _id: userID 
                 }
             );
             if (!user) {
@@ -84,7 +79,6 @@ module.exports = {
 	},
 
     patchUserInfo: async (req, res) => {
-        // TODO: token 유효성 검사 -> 401 
 
         const { 
             user_email, 
