@@ -16,7 +16,7 @@ function AdminWrapper() {
 삭제요청 - 삭제대기(102), 삭제승인(112), 삭제거부(122)
 */
 
-  const data = Array(5)
+  const data = Array(6)
     .fill()
     .map(() => ({
       contribution_id: Math.floor(Math.random() * 10),
@@ -25,7 +25,7 @@ function AdminWrapper() {
       contribution_status: status[Math.floor(Math.random() * status.length)],
     }));
 
-  const data2 = Array(5)
+  const data2 = Array(6)
     .fill()
     .map(() => ({
       user_name: faker.name.findName(),

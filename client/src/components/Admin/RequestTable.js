@@ -4,7 +4,6 @@ import { customAxios } from '../../utils/customAxios';
 
 function RequestTable({ columns, data }) {
   const [StatusNumber, setStatusNumber] = useState(null);
-  const [StatusCheck, setStatusCheck] = useState(false);
 
   const radioInputData = {
     승인요청: [
@@ -51,7 +50,6 @@ function RequestTable({ columns, data }) {
     return customAxios.post(`/admin/contribution/${route}`, body).then(res => {
       if (res.status === 200) {
         alert('요청이 완료되었습니다.');
-        // setStatusCheck(true);
       } else alert('요청이 실패하였습니다.');
     });
   }
@@ -109,16 +107,8 @@ function RequestTable({ columns, data }) {
                         </div>
                       );
                     })}
-                    <button
-                      className={
-                        StatusCheck
-                          ? console.log(contribution_id)
-                          : // 'adminform-btn checked'
-                            'adminform-btn'
-                      }
-                      type="submit"
-                    >
-                      {StatusCheck ? '완료' : '확인'}
+                    <button className="adminform-btn" type="submit">
+                      확인
                     </button>
                   </form>
                 </td>
