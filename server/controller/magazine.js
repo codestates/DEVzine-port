@@ -1,8 +1,11 @@
 const { 
     checkCacheForArticles, 
     checkCacheForOneArticle, 
-    updateArticleHit 
+    updateArticleHit, 
 } = require('./cachefunction/articlesCache')
+const {
+    checkCacheForContributions
+} = require('./cachefunction/contributionsCache')
 
 module.exports = {
 
@@ -22,14 +25,27 @@ module.exports = {
                     }
                 )
             }
+
+            const { contributionData, contributionSource } = await checkCacheForContributions().catch((err) => {
+                    return res.status(500).send(err)
+                }
+            )
+
+            if (!contributionData) {
+                return res.status(404).json(
+                    {
+                        "message" : "Not found"
+                    }
+                )
+            }
             
             return res.status(200).json(
                 {
                     articleData,
                     articleSource,
-                    "contributionData": '',
+                    contributionData,
+                    contributionSource,
                     "message" : "Article list successfully found",
-                    "contributionSource" : ''
                 }
             );
 

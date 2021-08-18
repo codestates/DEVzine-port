@@ -1,36 +1,48 @@
+const { Contribution } = require('../../Models/Contributions')
 
-
-// const updateArticleHit = async (id) => {
+const checkCacheForContributions = async () => {
     
-//     try {
-
-//         Article.findOneAndUpdate({
-//                 article_id: id
-//             }, {
-//                 $inc: {
-//                     hit: 1
-//                 }
-//             }, (err, data) => {
-//                 if (err) {
-//                     throw err;
-//                 }
-//                 redisClient.hmset('recentArticles', id, JSON.stringify(data));
-//                 return true;
-//             }
-//         )
+    return new Promise((resolve, reject) => {
         
-//     } catch (err) {
+        redisClient.hgetall('allContributions', async (err, contributions) => {
+        
+            if (err) {
+                reject(err);
+            }
 
-//         return err;
+            // cache miss
+            if (!contributions) { 
+                // get data
+                // set cache 
+                resolve(
+                    {
+                        contributionData: '',
+                        contributionSource: 'DB'
+                    }
+                );
+            }
 
-//     }
+            // cache hit
+            if (contributions) { 
+                let contributionData = [];
+                for (let key in contributions) {
+                    articleData.push(JSON.parse(contributions[key]))
+                }
+                resolve(
+                    {
+                        contributionData,
+                        contributionSource: 'cache'
+                    }
+                );
+            }
 
-// }
+        });
+
+    })
+
+}
+
     
-// module.exports = {
-//     getArticlesPastTwoWeeks,
-//     setNewCacheForArticles,
-//     checkCacheForArticles,
-//     checkCacheForOneArticle,
-//     updateArticleHit
-// }
+module.exports = {
+    checkCacheForContributions
+}
