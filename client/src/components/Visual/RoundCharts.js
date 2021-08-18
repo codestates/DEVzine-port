@@ -4,6 +4,7 @@ export function UserTopLanguage({ data }) {
   console.log(data);
 
   let options = {
+    colors: ['#b2b3b9', '#d9d9d9', '#ffdd14', '#ffc803', '#ffe33e'],
     fill: {
       colors: ['#b2b3b9', '#d9d9d9', '#ffdd14', '#ffc803', '#ffe33e'],
     },
@@ -57,7 +58,7 @@ export function UserTopLanguage({ data }) {
 
 export function UserTopPosition({ data }) {
   let options = {
-    //datalabels는 차트 위의 숫자의 색을 바꿔주는 것
+    colors: ['#b2b3b9', '#d9d9d9', '#ffdd14', '#ffc803', '#ffe33e'],
     fill: {
       colors: ['#b2b3b9', '#d9d9d9', '#ffdd14', '#ffc803', '#ffe33e'],
     },

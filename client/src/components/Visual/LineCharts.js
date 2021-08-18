@@ -1,22 +1,23 @@
 import Chart from 'react-apexcharts';
 
-export function ArticlesTopHit({ data }) {
+export function ArticlesKeyword({ data }) {
   console.log(data);
 
   let options = {
+    colors: ['#ffdd14', '#ffe33e'],
     stroke: {
-      width: 4,
-      colors: ['#fff'],
+      curve: 'smooth',
     },
     fill: {
       colors: ['#ffe33e'],
     },
     legend: {
+      position: 'bottom',
       labels: {
-        colors: ['#b2b3b9', '#d9d9d9', '#ffdd14', '#ffc803', '#ffe33e'],
+        colors: ['#ffdd14', '#ffe33e'],
       },
       markers: {
-        fillColors: ['#b2b3b9', '#d9d9d9', '#ffdd14', '#ffc803', '#ffe33e'],
+        fillColors: ['#ffdd14', '#ffe33e'],
       },
     },
     chart: {
@@ -24,22 +25,32 @@ export function ArticlesTopHit({ data }) {
         show: false,
       },
       height: 350,
-      type: 'bar',
-    },
-    plotOptions: {
-      bar: {
-        borderRadius: 20,
-        columnWidth: '40%',
-        horizontal: true,
+      type: 'line',
+      dropShadow: {
+        enabled: true,
+        color: '#000',
+        top: 18,
+        left: 7,
+        blur: 10,
+        opacity: 0.4,
       },
     },
     dataLabels: {
-      enabled: false,
+      enabled: true,
+    },
+    title: {
+      text: 'Articles Keyword Per Day',
+      align: 'center',
     },
     grid: {
-      column: {
-        colors: [`#fff`, `#f2f2f2`],
+      borderColor: '#e7e7e7',
+      row: {
+        colors: ['#f3f3f3', 'transparent'],
+        opacity: 0.5,
       },
+    },
+    markers: {
+      size: 1,
     },
     responsive: [
       {
@@ -53,11 +64,14 @@ export function ArticlesTopHit({ data }) {
       },
     ],
     xaxis: {
+      title: {
+        text: '키워드',
+      },
       categories: [],
       labels: {
         style: {
           colors: ['#535353'],
-          fontSize: '15px',
+          fontSize: '12px',
           fontFamily: 'Noto Sans KR, sans-serif',
           fontWeight: 600,
           cssClass: 'apexcharts-xaxis-label',
@@ -65,10 +79,13 @@ export function ArticlesTopHit({ data }) {
       },
     },
     yaxis: {
+      title: {
+        text: '조회수', // 뭐라고 해야할까?
+      },
       labels: {
         style: {
           colors: ['#535353'],
-          fontSize: '15px',
+          fontSize: '12px',
           fontFamily: 'Noto Sans KR, sans-serif',
           fontWeight: 600,
           cssClass: 'apexcharts-yaxis-label',
@@ -79,9 +96,11 @@ export function ArticlesTopHit({ data }) {
   let series = [];
   let categories = [];
 
-  for (const [key, value] of Object.entries(data.articles.articles_top_hit)) {
-    series.push(value.hit);
-    categories.push(value.article_title);
+  for (const [key, value] of Object.entries(
+    data.articles.articles_per_keyword_day,
+  )) {
+    series.push(value);
+    categories.push(key);
   }
 
   options.xaxis.categories = categories;
@@ -89,8 +108,8 @@ export function ArticlesTopHit({ data }) {
   return (
     <Chart
       options={options}
-      series={[{ data: series }]}
-      type="bar"
+      series={[{ name: 'Top Keyword Per Day', data: series }]}
+      type="line"
       height={500}
       width={500}
     />

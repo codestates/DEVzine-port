@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { customAxios } from '../../utils/customAxios';
 import { UserTopLanguage, UserTopPosition } from './RoundCharts';
 import { ArticlesTopHit } from './BarChart';
+import { UserGender } from './PolarAreaChart';
+import { UserGeneration } from './TreeMapChart';
+import { ArticlesKeyword } from './LineCharts';
 
 function VisualWrapper() {
   const [ChartData, setChartData] = useState();
@@ -20,12 +23,19 @@ function VisualWrapper() {
           <div className="row">
             <div className="co-sm-4">
               <div className="visualwrapper">
-                <section className="chartcontainer"></section>
-                <section className="chartcontainer"></section>
+                {/* <section className="chartcontainer"></section> */}
+                <section className="chartcontainer">
+                  <ArticlesKeyword data={ChartData} />
+                </section>
                 <section className="chartcontainer">
                   <ArticlesTopHit data={ChartData} />
                 </section>
-                <section className="chartcontainer"></section>
+                <section className="chartcontainer">
+                  <UserGender data={ChartData} />
+                </section>
+                <section className="chartcontainer">
+                  <UserGeneration data={ChartData} />
+                </section>
                 <section className="chartcontainer">
                   <UserTopPosition data={ChartData} />
                 </section>
