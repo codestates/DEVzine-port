@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import arrow from '../../../assets/images/arrow_right_b.svg';
 import footerArrow from '../../../assets/images/footerArrow.svg';
+import AdminSignInModal from '../AdminModal/AdminSignInModal';
 
 function Footer() {
+  const [ModalOpen, setModalOpen] = useState(false);
+
+  function signInHandler() {
+    setModalOpen(true);
+  }
+
   return (
     <>
       <footer>
@@ -37,9 +44,7 @@ function Footer() {
                       <span className="sm-only">
                         <br />
                       </span>
-                      <span onClick={() => alert('관리자 로그인')}>
-                        관리자 로그인
-                      </span>
+                      <span onClick={() => signInHandler()}>관리자 로그인</span>
                     </div>
                     <div className="okteam2">
                       공동 대표 및 연락처 :
@@ -102,6 +107,9 @@ function Footer() {
             </div>
           </div>
         </div>
+        {ModalOpen ? (
+          <AdminSignInModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
+        ) : null}
       </footer>
     </>
   );
