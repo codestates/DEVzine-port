@@ -68,7 +68,8 @@ function ArticleViewWrapper({ id }) {
                   </div>
                   <svg
                     className="hamburger"
-                    onClick={() => (window.location.href = '/articlelist')}
+                    onClick={() => window.history.back()}
+                    // onClick={() => (window.location.href = '/articlelist')}
                     width="37"
                     height="37"
                     viewBox="0 0 37 37"
