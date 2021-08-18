@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import ArticleView from '../../pages/ArticleView';
 import Carousel from 'react-multi-carousel';
 
-function ArticelCarousel({ ContributionDate }) {
-  return ContributionDate ? (
+function ArticelCarousel({ ContributionData }) {
+  return ContributionData ? (
     <>
       <Carousel
         additionalTransfrom={0}
@@ -53,7 +53,7 @@ function ArticelCarousel({ ContributionDate }) {
         slidesToSlide={1}
         swipeable
       >
-        {ContributionDate.slice(0, 6).map(el => {
+        {ContributionData.slice(0, 6).map(el => {
           return (
             <Link
               to={`/article/con-${el.contribution_id}`}
