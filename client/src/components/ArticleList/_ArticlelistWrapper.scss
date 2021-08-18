@@ -9,9 +9,14 @@
 .carousel {
   height: 267px;
   margin-top: 192px; //header 120px 포함
+  margin-bottom: 5px;
 
   .react-multi-carousel-list {
     padding-left: 0;
+  }
+
+  .allviewbtn {
+    cursor: pointer;
   }
 }
 
@@ -20,6 +25,7 @@
 
   &-align {
     margin-bottom: 20px;
+    // border: 1px solid red;
   }
 
   span {
