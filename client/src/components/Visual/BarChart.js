@@ -4,6 +4,10 @@ export function ArticlesTopHit({ data }) {
   console.log(data);
 
   let options = {
+    stroke: {
+      width: 4,
+      colors: ['#fff'],
+    },
     fill: {
       colors: ['#ffe33e'],
     },
@@ -19,23 +23,30 @@ export function ArticlesTopHit({ data }) {
       toolbar: {
         show: false,
       },
-      width: 380,
+      height: 350,
       type: 'bar',
     },
     plotOptions: {
       bar: {
-        borderRadius: 4,
+        borderRadius: 20,
+        columnWidth: '40%',
         horizontal: true,
       },
     },
     dataLabels: {
       enabled: false,
     },
+    grid: {
+      column: {
+        colors: [`#fff`, `#f2f2f2`],
+      },
+    },
     responsive: [
       {
         breakpoint: 480,
         options: {
           chart: {
+            height: 320,
             width: 320,
           },
         },
@@ -43,6 +54,26 @@ export function ArticlesTopHit({ data }) {
     ],
     xaxis: {
       categories: [],
+      labels: {
+        style: {
+          colors: ['#535353'],
+          fontSize: '15px',
+          fontFamily: 'Noto Sans KR, sans-serif',
+          fontWeight: 600,
+          cssClass: 'apexcharts-xaxis-label',
+        },
+      },
+    },
+    yaxis: {
+      labels: {
+        style: {
+          colors: ['#535353'],
+          fontSize: '15px',
+          fontFamily: 'Noto Sans KR, sans-serif',
+          fontWeight: 600,
+          cssClass: 'apexcharts-yaxis-label',
+        },
+      },
     },
   };
   let series = [];
@@ -61,6 +92,7 @@ export function ArticlesTopHit({ data }) {
       series={[{ data: series }]}
       type="bar"
       height={500}
+      width={500}
     />
   );
 }
