@@ -25,7 +25,8 @@ function AdminSignInModal({ ModalOpen, setModalOpen }) {
     console.log('SignInModal :', body);
 
     dispatch(signinAdmin(body)).then(res => {
-      if (res.payload[0] === 'Login success') {
+      console.log(res.payload);
+      if (res.payload === 'Login success') {
         window.location.href = '/admin';
       } else {
         alert('로그인 실패하였습니다.');

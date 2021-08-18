@@ -25,7 +25,7 @@ function Header() {
         setUserName(store.getState().user.signinSuccess[1]);
       }
     } else if (store.getState().user.adminSigninSuccess) {
-      if (store.getState().user.adminSigninSuccess[0] === 'Login success') {
+      if (store.getState().user.adminSigninSuccess === 'Login success') {
         setSignIn(true);
         setAdmin(true);
       }
@@ -72,7 +72,11 @@ function Header() {
               <div className="col-sm-4">
                 <div className="headernav">
                   {Admin ? (
-                    <img src={logo} alt="DEVzine" className="headernav-logo" />
+                    <img
+                      src={logo}
+                      alt="DEVzine"
+                      className="headernav-logo-admin"
+                    />
                   ) : (
                     <Link to="/">
                       <img
