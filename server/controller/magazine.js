@@ -16,7 +16,7 @@ module.exports = {
         try {
 
             const { articleData, articleSource } = await checkCacheForArticles()
-            const { contributionData, contributionSource } = await checkCacheForContributions()
+            let{ contributionData, contributionSource } = await checkCacheForContributions()
 
             if (!articleData || !contributionData) {
                 return res.status(404).json(
@@ -26,6 +26,8 @@ module.exports = {
                 )
             }
             
+            contributionData = contributionData.slice(0,6)
+
             return res.status(200).json(
                 {
                     articleData,
@@ -46,8 +48,31 @@ module.exports = {
     },
 
     getAllContributions: async (req, res) => {
-        await getAllConfirmedContributions();
-        return res.status(200).send('contribution list ok')
+        
+        try {
+
+            const { contributionData, contributionSource } = await checkCacheForContributions();
+
+            if (!contributionData) {
+                return res.status(404).json(
+                    {
+                        "message" : "Not found"
+                    }
+                )
+            }
+
+            return res.status(200).json({
+                data: contributionData,
+                source: contributionSource,
+                message: "Request success"
+            });
+
+        } catch (err) {
+
+            console.log(err)
+            return res.status(500).send(err)
+
+        }
 
     },
 
@@ -102,7 +127,7 @@ module.exports = {
         // 		"hit": "number"
         // 		"user_name" : "string"
         // 	},
-        // 	"message" : "Update request success"
+        // 	"message" : " request success"
         // }
         // status:404
         // {
