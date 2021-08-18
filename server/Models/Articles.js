@@ -33,7 +33,7 @@ const articleSchema = mongoose.Schema({
     },
     hit : {
         type: Number,
-        default: 0
+        default: 1
     }
     
 });
