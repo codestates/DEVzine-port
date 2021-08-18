@@ -1516,9 +1516,12 @@ label {
 
 .carousel {
   height: 267px;
-  margin-top: 192px; }
+  margin-top: 192px;
+  margin-bottom: 5px; }
   .carousel .react-multi-carousel-list {
     padding-left: 0; }
+  .carousel .allviewbtn {
+    cursor: pointer; }
 
 .articlebox {
   margin-top: 80px; }

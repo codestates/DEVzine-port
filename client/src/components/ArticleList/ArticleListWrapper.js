@@ -6,10 +6,11 @@ import { customAxios } from '../../utils/customAxios';
 import Button from '../Common/Button/Button';
 
 function ArticleListWrapper() {
-  const [ArticleDate, setArticleDate] = useState(null);
-  const [ContributionDate, setContributionDate] = useState(null);
+  const [ArticleData, setArticleData] = useState(null);
+  const [ContributionData, setContributionData] = useState(null);
+  const [ArticlePlus, setArticlePlus] = useState(12);
 
-  let FakeDate = [
+  let FakeData = [
     {
       contribution_id: 1,
       contribution_title: 'contribution_title1',
@@ -121,28 +122,29 @@ function ArticleListWrapper() {
       .get('/magazine')
       .then(res => {
         console.log(res.data);
-        setArticleDate(res.data.ArticleeDate.slice(0, 12));
-        setContributionDate(res.data.contributionData);
+        setArticleData(res.data.articleData);
+        // setContributionData(res.data.contributionData);
+        setContributionData(FakeData);
       })
       .catch(err => {
-        setArticleDate(FakeDate.slice(0, 12));
-        setContributionDate(FakeDate);
+        // setArticleData(FakeData.slice(0, 12));
+        setContributionData(FakeData);
 
         return alert('기고, 기사글 받아오는데 실패하였습니다.');
       });
-  }, []);
+  }, [ArticlePlus]);
 
   function latestBtn() {
     customAxios
       .get('/magazine')
       .then(res => {
-        setArticleDate(res.data.ArticleeDate.slice(0, 12));
-        setContributionDate(res.data.contributionData);
+        setArticleData(res.data.ArticleeData.slice(0, 12));
+        setContributionData(res.data.contributionData);
       })
       .catch(err => {
-        setArticleDate(null);
-        setArticleDate(FakeDate.slice(0, 12));
-        setContributionDate(FakeDate);
+        setArticleData(null);
+        setArticleData(FakeData.slice(0, 12));
+        setContributionData(FakeData);
 
         return alert('최신순 받아오는데 실패하였습니다.');
       });
@@ -152,25 +154,30 @@ function ArticleListWrapper() {
     customAxios
       .get('/magazine')
       .then(res => {
-        setArticleDate(res.data.ArticleeDate.slice(0, 12));
-        setContributionDate(res.data.contributionData);
+        setArticleData(res.data.ArticleeData.slice(0, 12));
+        setContributionData(res.data.contributionData);
       })
       .catch(err => {
-        setArticleDate(null);
-        setArticleDate(FakeDate.slice(1, 13));
-        setContributionDate(FakeDate);
+        setArticleData(null);
+        setArticleData(FakeData.slice(1, 13));
+        setContributionData(FakeData);
 
         return alert('조회순 받아오는데 실패하였습니다.');
       });
   }
 
   function articlePlusHandler() {
-    let pulsDate = ArticleDate.slice(0, 12);
-    let FakeDate = [...ArticleDate, ...pulsDate];
-    setArticleDate(FakeDate);
+    // let pulsData = ArticleData.slice(0, 12);
+    // let FakeData = [...ArticleData, ...pulsData];
+    // setArticleData(FakeData);
+    console.log('누르고 있나');
+    setArticlePlus(ArticlePlus + 12);
+    // setArticleData(ArticleData);
   }
 
-  return ArticleDate ? (
+  console.log(ArticlePlus);
+
+  return ArticleData ? (
     <>
       <div className="artilistwrapper">
         <div className="container">
@@ -178,7 +185,13 @@ function ArticleListWrapper() {
             <div className="col-sm-4">
               <div className="carousel">
                 <h2>DEVzine이 추천하는 소식</h2>
-                <ArticelCarousel ContributionDate={ContributionDate} />
+                <span
+                  onClick={() => alert('추천소식 모두 보기')}
+                  className="allviewbtn"
+                >
+                  추천소식 모두 보기
+                </span>
+                <ArticelCarousel ContributionData={ContributionData} />
               </div>
             </div>
             <div className="col-sm-4 col-md-12 col-lg-12">
@@ -188,28 +201,23 @@ function ArticleListWrapper() {
                   <span onClick={viewBtn}>조회순</span>
                 </div>
 
-                {ArticleDate.map(el => {
+                {ArticleData.slice(0, ArticlePlus).map(el => {
                   return (
-                    <div
-                      className="articlebox-listbox"
-                      key={el.contribution_id}
-                    >
+                    <div className="articlebox-listbox" key={el.article_title}>
                       <Link
-                        to={`/article/art-${el.contribution_id}`}
+                        to={`/article/art-${el.article_id}`}
                         children={<ArticleView />}
                       >
                         <ul>
-                          <li className="articlebox-date">
-                            {el.contribution_date}
-                          </li>
+                          <li className="articlebox-date">{el.article_date}</li>
                           <li className="articlebox-title">
-                            {el.contribution_title}
+                            {el.article_title}
                           </li>
                           <li className="articlebox-content">
-                            {el.contribution_content}
+                            {el.article_content.slice(0, 10) + '...'}
                           </li>
                           <li className="articlebox-keyword">
-                            {el.contribution_keyword}
+                            {el.article_keyword}
                           </li>
                           <li className="articlebox-hit">{el.hit}</li>
                         </ul>
