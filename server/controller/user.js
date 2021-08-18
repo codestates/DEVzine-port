@@ -1,5 +1,4 @@
 const bcrypt = require('bcryptjs');
-const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const { User } = require('../Models/Users');
 const { VerifiedEmail } = require('../Models/Verifiedemails');
@@ -95,7 +94,7 @@ module.exports = {
         secure: true,
         sameSite: 'None'
       });
-      res.status(204).send({ message: 'User deleted' });
+      res.status(200).send({ message: 'User deleted' });
     } catch (err) {
       res.status(500).send(err);
     }
