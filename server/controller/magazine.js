@@ -1,12 +1,16 @@
-const { checkCacheForArticles } = require('./cachefunction/articlesCache')
+const { 
+    checkCacheForArticles, 
+    checkCacheForOneArticle, 
+    updateArticleHit 
+} = require('./cachefunction/articlesCache')
 
 module.exports = {
 
-	getMagazineList: async (req, res) => {
+	getAllArticlesAndRecentContributions: async (req, res) => {
 
         try {
 
-            const articleData = await checkCacheForArticles().catch((err) => {
+            const { articleData, articleSource } = await checkCacheForArticles().catch((err) => {
                     return res.status(500).send(err)
                 }
             )
@@ -21,10 +25,10 @@ module.exports = {
             
             return res.status(200).json(
                 {
-                    "articleData": articleData.data,
+                    articleData,
+                    articleSource,
                     "contributionData": '',
                     "message" : "Article list successfully found",
-                    "articleSource" : articleData.source,
                     "contributionSource" : ''
                 }
             );
@@ -48,31 +52,47 @@ module.exports = {
         // ]
     },
 
+    getAllContributions: async (req, res) => {
+
+        return res.status(200).send('contribution list ok')
+
+    },
+
     getArticle: async (req, res) => {
         
-        // TODO: 개별 기사 정보를 조회한다. 
-        // status: 200
-        // {
-        //     "data": [
-        //         ...
-        //         {
-        //             "article_id": number,
-        //             "article_title": "string",
-        //             "article_content": "string",
-        //             "article_date": date,
-        //             "article_keyword": "string",
-        //             "article_url": "string",
-        //             "hit": number,
-        //         }
-        //     ],
-        //     "message" : "Article list successfully found"
-        // }
-        // status:404
-        // {
-        //     "message": "Not found"
-        // }
+        try {
 
-        return res.send('article');
+            const articleid = Number(req.params.articleid);
+
+            const { data, source } = await checkCacheForOneArticle(articleid).catch((err) => {
+                    return res.status(500).send(err)
+                });
+            
+
+            if (!data) {
+                return res.status(404).json(
+                    {
+                        "message" : "Not found"
+                    }
+                )
+            }
+
+            updateArticleHit(articleid);
+
+            return res.status(200).json(
+                {
+                    data,
+                    source,
+                    "message" : "Article successfully found"
+                }
+            );
+
+        } catch (err) {
+            
+            console.log(err)
+            return res.status(500).send(err)
+
+        }
 
 	},
 
