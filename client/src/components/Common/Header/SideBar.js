@@ -9,7 +9,7 @@ import close from '../../../assets/images/close.svg';
 function SideBar(props) {
   const dispatch = useDispatch();
 
-  const [modalOpen, setModalOpen] = useState(false);
+  const [ModalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     if (store.getState().user.signinSuccess) {
@@ -84,8 +84,8 @@ function SideBar(props) {
             </div>
           </div>
         </div>
-        {modalOpen ? (
-          <SignInModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+        {ModalOpen ? (
+          <SignInModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
         ) : null}
       </nav>
     </>

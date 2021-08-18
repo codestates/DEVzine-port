@@ -14,7 +14,7 @@ function Header() {
 
   const [SignIn, setSignIn] = useState(false);
   const [UserName, setUserName] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [ModalOpen, setModalOpen] = useState(false);
   const [OpenSidebar, setOpenSidebar] = useState(false);
 
   useEffect(() => {
@@ -117,8 +117,8 @@ function Header() {
             </div>
           </div>
         </div>
-        {modalOpen ? (
-          <SignInModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+        {ModalOpen ? (
+          <SignInModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
         ) : null}
       </header>
     </>

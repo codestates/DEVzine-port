@@ -5,7 +5,8 @@ import TextInputGenderRequired from './TextInputGenderRequired';
 import Button from '../Button/Button';
 import Union from '../../../assets/images/Union.png';
 import { Link } from 'react-router-dom';
-function SigninModal({ modalOpen, setModalOpen }) {
+
+function SigninModal({ ModalOpen, setModalOpen }) {
   const dispatch = useDispatch();
 
   const [Email, setEmail] = useState('');
@@ -40,7 +41,7 @@ function SigninModal({ modalOpen, setModalOpen }) {
     setModalOpen(false);
   }
 
-  return modalOpen ? (
+  return ModalOpen ? (
     <div className="signincontainer">
       <div className="signinwrapper">
         <div className="signinheader">DEVzine</div>
