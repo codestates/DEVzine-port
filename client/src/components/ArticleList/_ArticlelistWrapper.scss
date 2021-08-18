@@ -22,10 +22,12 @@
 
 .articlebox {
   margin-top: 80px;
+  // border: 1px solid red;
 
   &-align {
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
     // border: 1px solid red;
+    padding-bottom: 20px;
   }
 
   span {

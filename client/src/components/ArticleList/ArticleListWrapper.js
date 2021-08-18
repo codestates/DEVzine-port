@@ -123,6 +123,7 @@ function ArticleListWrapper() {
       .then(res => {
         console.log(res.data);
         setArticleData(res.data.articleData);
+        // setArticleData(FakeData);
         // setContributionData(res.data.contributionData);
         setContributionData(FakeData);
       })
@@ -167,15 +168,8 @@ function ArticleListWrapper() {
   }
 
   function articlePlusHandler() {
-    // let pulsData = ArticleData.slice(0, 12);
-    // let FakeData = [...ArticleData, ...pulsData];
-    // setArticleData(FakeData);
-    console.log('누르고 있나');
     setArticlePlus(ArticlePlus + 12);
-    // setArticleData(ArticleData);
   }
-
-  console.log(ArticlePlus);
 
   return ArticleData ? (
     <>
@@ -211,10 +205,10 @@ function ArticleListWrapper() {
                         <ul>
                           <li className="articlebox-date">{el.article_date}</li>
                           <li className="articlebox-title">
-                            {el.article_title}
+                            {el.article_title.slice(0, 8) + '...'}
                           </li>
                           <li className="articlebox-content">
-                            {el.article_content.slice(0, 10) + '...'}
+                            {el.article_content.slice(0, 8) + '...'}
                           </li>
                           <li className="articlebox-keyword">
                             {el.article_keyword}

@@ -1526,7 +1526,7 @@ label {
 .articlebox {
   margin-top: 80px; }
   .articlebox-align {
-    margin-bottom: 20px; }
+    padding-bottom: 20px; }
   .articlebox span {
     cursor: pointer;
     margin: 20px; }
