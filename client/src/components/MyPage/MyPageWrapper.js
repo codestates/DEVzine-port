@@ -178,7 +178,7 @@ function MyPageWrapper() {
     dispatch(mypageUser(body)).then(res => {
       if (res.payload[2] === 'Patch Success') {
         alert('정보수정하였습니다.');
-        // window.location.href = '/mypage';
+        // window.location.href = '/';
       } else {
         alert('정보수정을 실패하였습니다.');
       }

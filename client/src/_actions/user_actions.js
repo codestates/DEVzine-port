@@ -40,10 +40,10 @@ export async function signoutUser() {
 export async function mypageUser(dataToSubmit) {
   const request = await customAxios
     .patch(`/mypage`, dataToSubmit)
-    .then(res => ['Login success', res.data.data.user_name, res.data.message]);
-    //! axios
-    // .then(res => ['Login success', 'parkcoding', 'Patch Success']);
-  // .then(res => ['Login success', 'parkcoding','Patch Success']);
+    .then(res => ['Login success', 'parkcoding', 'Patch success']);
+  // .then(res => ['Login success', res.data.data.user_name, res.data.message]);
+  //! axios
+  // .then(res => ['Login success', 'parkcoding', 'Patch success']);
 
   //! axios
   return {
