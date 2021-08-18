@@ -1049,6 +1049,10 @@ select::-ms-expand {
   .landingbottombtn .commonbutton {
     margin-top: 0; }
 
+.adminbottombtn {
+  margin-top: 12px;
+  cursor: pointer; }
+
 .contributioncontainer {
   background-color: #f2f2f2;
   min-height: 100vh;
@@ -1526,7 +1530,7 @@ label {
 .articlebox {
   margin-top: 80px; }
   .articlebox-align {
-    margin-bottom: 20px; }
+    padding-bottom: 20px; }
   .articlebox span {
     cursor: pointer;
     margin: 20px; }
@@ -1840,7 +1844,11 @@ th:nth-child(3) {
 
 th:nth-child(4) {
   padding-left: 16px;
-  text-align: left; }
+  text-align: left;
+  width: 250px; }
+
+td:nth-child(2):hover {
+  text-decoration: underline; }
 
 .adminform-check {
   display: inline-block;

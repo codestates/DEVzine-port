@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', getAllArticlesAndRecentContributions);
 router.get('/article/:articleid', getArticle);
-router.get('/contribution/:contributionid', getContribution);
 router.get('/contribution/all', getAllContributions);
+router.get('/contribution/:contributionid', getContribution);
 
 module.exports = router;
