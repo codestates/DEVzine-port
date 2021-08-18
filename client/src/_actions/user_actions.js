@@ -4,6 +4,7 @@ import {
   SIGNOUT_USER,
   MYPAGE_USER,
   SIGNIN_ADMIN,
+  DELETE_USER,
 } from './types';
 import { customAxios } from '../utils/customAxios';
 
@@ -52,13 +53,25 @@ export async function mypageUser(dataToSubmit) {
 }
 
 export async function signinAdmin(dataToSubmit) {
-  const request = ['Login success'];
+  const request = 'Login success';
+  // TODO: axios 연결 뒤 주석 해제
   // const request = await customAxios
   //   .post(`/admin/signin`, dataToSubmit)
-  //   .then(res => [res.data.message]);
+  //   .then(res => res.data.message);
 
   return {
     type: SIGNIN_ADMIN,
+    payload: request,
+  };
+}
+
+export async function deleteUser() {
+  const request = await customAxios
+    .delete(`/user/delete`)
+    .then(res => res.data.message);
+
+  return {
+    type: SIGNOUT_USER,
     payload: request,
   };
 }
