@@ -25,6 +25,8 @@
 
     @include mobile-only {
       border-radius: 0;
+      width: 100vw;
+      height: 100vh;
     }
     .signinheader {
       position: absolute;
