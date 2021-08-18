@@ -90,7 +90,11 @@ module.exports = {
           return res.status(404).send({ message: 'Not found' });
         }
       });
-      req.logout();
+      res.clearCookie('jwt', {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None'
+      });
       res.status(204).send({ message: 'User deleted' });
     } catch (err) {
       res.status(500).send(err);
