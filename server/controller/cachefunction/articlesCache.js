@@ -139,6 +139,11 @@ const updateArticleHit = async (id) => {
                 $inc: {
                     hit: 1
                 }
+            }, {
+                projection: {
+                    _id: 0,
+                    __v: 0
+                }
             }, (err, data) => {
                 if (err) {
                     throw err;
