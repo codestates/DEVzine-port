@@ -1,8 +1,13 @@
-import { SIGNIN_USER, SIGNUP_USER, SIGNOUT_USER, MYPAGE_USER } from './types';
+import {
+  SIGNIN_USER,
+  SIGNUP_USER,
+  SIGNOUT_USER,
+  MYPAGE_USER,
+  SIGNIN_ADMIN,
+} from './types';
 import { customAxios } from '../utils/customAxios';
 
 export async function signinUser(dataToSubmit) {
-  // const request = ['Login success', 'kimcoding'];
   const request = await customAxios
     .post(`/user/signin`, dataToSubmit)
     .then(res => [res.data.message, res.data.data.user_name]);
@@ -14,7 +19,6 @@ export async function signinUser(dataToSubmit) {
 }
 
 export async function signupUser(dataToSubmit) {
-  // const request = 'User created';
   const request = await customAxios
     .post(`/user/signup`, dataToSubmit)
     .then(res => res.data.message);
@@ -26,7 +30,6 @@ export async function signupUser(dataToSubmit) {
 }
 
 export async function signoutUser() {
-  // const request = 'Logout success';
   const request = await customAxios
     .post(`/user/signout`)
     .then(res => res.data.message);
@@ -41,12 +44,21 @@ export async function mypageUser(dataToSubmit) {
   const request = await customAxios
     .patch(`/mypage`, dataToSubmit)
     .then(res => ['Login success', res.data.data.user_name, res.data.message]);
-  //! axios
-  // .then(res => ['Login success', 'parkcoding', 'Patch success']);
 
-  //! axios
   return {
     type: SIGNIN_USER,
+    payload: request,
+  };
+}
+
+export async function signinAdmin(dataToSubmit) {
+  const request = ['Login success'];
+  // const request = await customAxios
+  //   .post(`/admin/signin`, dataToSubmit)
+  //   .then(res => [res.data.message]);
+
+  return {
+    type: SIGNIN_ADMIN,
     payload: request,
   };
 }

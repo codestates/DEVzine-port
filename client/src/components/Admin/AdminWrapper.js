@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import faker from 'faker/locale/ko';
 import RequestTable from './RequestTable';
 import ApprovalTable from './ApprovalTable';
+import AdminSignInModal from '../Common/AdminModal/AdminSignInModal';
+import store from '../../store/store';
 
 faker.seed(100);
 
 function AdminWrapper() {
+  const [ModalOpen, setModalOpen] = useState(false);
+  const [Admin, setAdmin] = useState(false);
+
   const columns = ['닉네임', '제목', '현황', '변경'];
   const columns2 = ['닉네임', '제목'];
   const status = ['승인요청', '수정요청', '삭제요청'];
@@ -32,28 +37,45 @@ function AdminWrapper() {
       contribution_title: faker.lorem.sentence(),
     }));
 
+  useEffect(() => {
+    if (store.getState().user.adminSigninSuccess) {
+      if (store.getState().user.adminSigninSuccess[0] === 'Login success') {
+        setModalOpen(false);
+        setAdmin(true);
+      }
+    } else {
+      setModalOpen(true);
+      setAdmin(false);
+    }
+  });
+
   return (
     <>
       <div className="admin">
         <div className="container">
           <div className="row">
-            <div className="col-sm-4">
-              <div className="request">
-                <h2>요청</h2>
-                <div className="request-manage">
-                  <RequestTable columns={columns} data={data} />
+            {Admin ? (
+              <div className="col-sm-4">
+                <div className="request">
+                  <h2>요청</h2>
+                  <div className="request-manage">
+                    <RequestTable columns={columns} data={data} />
+                  </div>
                 </div>
-              </div>
-              <div className="approval">
-                <h2>승인</h2>
-                <div className="approval-manage">
-                  <ApprovalTable columns={columns2} data={data2} />
+                <div className="approval">
+                  <h2>승인</h2>
+                  <div className="approval-manage">
+                    <ApprovalTable columns={columns2} data={data2} />
+                  </div>
                 </div>
+                <div className="admin-footer" />
               </div>
-              <div className="admin-footer" />
-            </div>
+            ) : null}
           </div>
         </div>
+        {ModalOpen ? (
+          <AdminSignInModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
+        ) : null}
       </div>
     </>
   );
