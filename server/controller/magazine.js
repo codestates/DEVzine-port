@@ -1,12 +1,12 @@
-const { get } = require('../config/redis');
 const { 
     checkCacheForArticles, 
     checkCacheForOneArticle, 
     updateArticleHit, 
 } = require('./cachefunction/articlesCache')
 const {
-    checkCacheForContributions,
-    getAllConfirmedContributions
+    checkCacheForContributions, 
+    checkCacheForOneContribution,
+    updateContributionHit,
 } = require('./cachefunction/contributionsCache')
 
 module.exports = {
@@ -82,10 +82,7 @@ module.exports = {
 
             const articleid = Number(req.params.articleid);
 
-            const { data, source } = await checkCacheForOneArticle(articleid).catch((err) => {
-                    return res.status(500).send(err)
-                });
-            
+            const { data, source } = await checkCacheForOneArticle(articleid)
 
             if (!data) {
                 return res.status(404).json(
@@ -116,23 +113,39 @@ module.exports = {
 
     getContribution: async (req, res) => {
 
-        //TODO: 사용자가 등록한 (승인된) 기고글을 조회한다.
-        // status: 200
-        // {
-        // 	"data" : {
-        // 		"contribution_title": "string",
-        // 		"contribution_content": "string",
-        // 		"contribution_keyword": "string",
-        // 		"contribution_date" : "date",
-        // 		"hit": "number"
-        // 		"user_name" : "string"
-        // 	},
-        // 	"message" : " request success"
-        // }
-        // status:404
-        // {
-        //     "message": "Not found"
-        // }
-        return res.send('contribution');
+        try {
+
+            const contributionid = Number(req.params.contributionid);
+
+            const cacheResult = await checkCacheForOneContribution(contributionid)
+
+            if (cacheResult === 'Not found') {
+                return res.status(404).json(
+                    {
+                        "message" : "Not found"
+                    }
+                )
+            }
+
+            const { data, source } = cacheResult
+
+            updateContributionHit(contributionid);
+
+            return res.status(200).json(
+                {
+                    data,
+                    source,
+                    "message" : "Contribution successfully found"
+                }
+            );
+
+        } catch (err) {
+            
+            console.log(err)
+            return res.status(500).send(err)
+
+        }
+
     }
+
 };
