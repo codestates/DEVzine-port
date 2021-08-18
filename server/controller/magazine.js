@@ -1,10 +1,12 @@
+const { get } = require('../config/redis');
 const { 
     checkCacheForArticles, 
     checkCacheForOneArticle, 
     updateArticleHit, 
 } = require('./cachefunction/articlesCache')
 const {
-    checkCacheForContributions
+    checkCacheForContributions,
+    getAllConfirmedContributions
 } = require('./cachefunction/contributionsCache')
 
 module.exports = {
@@ -13,25 +15,10 @@ module.exports = {
 
         try {
 
-            const { articleData, articleSource } = await checkCacheForArticles().catch((err) => {
-                    return res.status(500).send(err)
-                }
-            )
+            const { articleData, articleSource } = await checkCacheForArticles()
+            const { contributionData, contributionSource } = await checkCacheForContributions()
 
-            if (!articleData) {
-                return res.status(404).json(
-                    {
-                        "message" : "Not found"
-                    }
-                )
-            }
-
-            const { contributionData, contributionSource } = await checkCacheForContributions().catch((err) => {
-                    return res.status(500).send(err)
-                }
-            )
-
-            if (!contributionData) {
+            if (!articleData || !contributionData) {
                 return res.status(404).json(
                     {
                         "message" : "Not found"
@@ -42,8 +29,8 @@ module.exports = {
             return res.status(200).json(
                 {
                     articleData,
-                    articleSource,
                     contributionData,
+                    articleSource,
                     contributionSource,
                     "message" : "Article list successfully found",
                 }
@@ -56,20 +43,10 @@ module.exports = {
 
         }
 
-        // "contributionData": [
-        //     {
-        //     "contribution_id": "number",
-        //     "contribution_title": "string",
-        //     "contribution_content": "string",
-        //     "contribution_keyword": "string",
-        //     "contribution_date" : "date",
-        //     "hit": "number"
-        // }
-        // ]
     },
 
     getAllContributions: async (req, res) => {
-
+        await getAllConfirmedContributions();
         return res.status(200).send('contribution list ok')
 
     },
