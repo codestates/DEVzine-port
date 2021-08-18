@@ -1405,13 +1405,25 @@ label {
   width: 360px;
   height: auto;
   min-height: 115px; }
-  .optcontentswrapper .contributionstatuscontainer .subjectwrapper {
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 24px;
-    width: 100%;
-    margin-bottom: 8px;
-    color: #191a20; }
+  .optcontentswrapper .contributionstatuscontainer .subject {
+    display: flex; }
+    .optcontentswrapper .contributionstatuscontainer .subject .subjectwrapper {
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      width: 95.89px;
+      margin-bottom: 8px;
+      color: #191a20; }
+    .optcontentswrapper .contributionstatuscontainer .subject .btndesc {
+      width: 254.11px;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: -0.005em;
+      font-weight: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px; }
   .optcontentswrapper .contributionstatuscontainer .contributionstatustable {
     width: 360px;
     overflow: hidden;
