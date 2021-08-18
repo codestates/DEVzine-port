@@ -7,7 +7,7 @@ require('dotenv').config();
 
 module.exports = {
   signUp: async (req, res) => {
-    const { user_email, user_password, user_name, user_info } = req.body;
+    const { user_email, user_name, user_info } = req.body;
 
     const emailRegex =
       /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -20,7 +20,7 @@ module.exports = {
     }
 
     try {
-      // need hashing password
+      const user_password = await bcrypt.hash(req.body.user_password, 10);
       const newUser = new User({
         user_email,
         user_password,

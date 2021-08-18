@@ -1,25 +1,24 @@
 const bcrypt = require('bcryptjs');
-const { User } = require('../Models/Users')
-const { Contribution } = require('../Models/Contributions')
+const { User } = require('../Models/Users');
+const { Contribution } = require('../Models/Contributions');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     
     getUserInfo: async (req, res) => {
         
         try {
-            
             // TODO: Token parsing 
             // status: 401
             // {
             //     "message": "Unauthorized user"
             // }
-            let tempUserID = '6113dc06a10fa04bd6b1fdec';
+            let tempUserID = req.user._id;
             let user = await User.findOne(
                 { 
                     _id: tempUserID 
                 }
             );
-
             if (!user) {
                 return res.status(404).json(
                     {

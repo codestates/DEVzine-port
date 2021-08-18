@@ -162,7 +162,7 @@ function MyPageWrapper() {
 
     let body = {
       user_email: Email,
-      user_password: Password,
+      user_password: ConfirmPassword,
       user_name: Name,
       user_info: {
         user_gender: Gender,
@@ -176,7 +176,7 @@ function MyPageWrapper() {
     console.log('MyPageWrapper :', body);
 
     dispatch(mypageUser(body)).then(res => {
-      if (res.payload[2] === 'Patch Success') {
+      if (res.payload[2] === 'Patch success') {
         alert('정보수정하였습니다.');
         // window.location.href = '/mypage';
       } else {
