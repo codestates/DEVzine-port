@@ -1254,6 +1254,10 @@ label {
       color: #ffffff;
       cursor: pointer;
       margin-left: 48px; }
+    .signupcontainer .signupwrapper .commonbutton {
+      font-weight: 400;
+      margin-left: 48px;
+      margin-top: 24px; }
 
 .inputsmallcontainer {
   display: flex;
