@@ -34,7 +34,7 @@ function MyPageWrapper() {
   const [Language, setLanguage] = useState([]);
   const [Contribution, setContribution] = useState([]);
 
-  const [modalOpen, setModalOpen] = useState(false);
+  const [ModalOpen, setModalOpen] = useState(false);
   const [allData, setAllData] = useState(false);
 
   useEffect(() => {
@@ -154,7 +154,7 @@ function MyPageWrapper() {
       '20',
       true,
     ],
-    ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '10', true],
+    ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '15', true],
   ];
 
   async function patchHandler() {
@@ -255,8 +255,8 @@ function MyPageWrapper() {
           정보수정
         </div>
       </div>
-      {modalOpen ? (
-        <SigninModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      {ModalOpen ? (
+        <SigninModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
       ) : null}
     </div>
   ) : null;

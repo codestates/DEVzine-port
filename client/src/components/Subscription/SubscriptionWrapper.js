@@ -6,12 +6,12 @@ import Button from '../Common/Button/Button';
 import { customAxios } from '../../utils/customAxios';
 
 function SubscriptionWrapper() {
-  const [signIn, setSignIn] = useState(false);
-  const [Email, setEmail] = useState('');
-  const [email_isValid, setEmail_isValid] = useState(true);
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [blackInput, setBlackInput] = useState(false);
-  const [emailSubSuc, setEmailSubSuc] = useState(false);
+  const [SignIn, setSignIn] = useState(false);
+  const [Email, setEmail] = useState(null);
+  const [Email_isValid, setEmail_isValid] = useState(true);
+  const [AlertOpen, setAlertOpen] = useState(false);
+  const [BlackInput, setBlackInput] = useState(false);
+  const [EmailSubSuc, setEmailSubSuc] = useState(false);
 
   useEffect(() => {
     if (store.getState().user.signinSuccess) {
@@ -86,7 +86,7 @@ function SubscriptionWrapper() {
                   메일로 받아보세요.
                 </div>
                 <div className="subtextsmall">월~토요일 오전 7시 발송</div>
-                {signIn ? (
+                {SignIn ? (
                   <div>
                     <div className="subpostbtn">
                       <Button
@@ -107,7 +107,7 @@ function SubscriptionWrapper() {
                       className="signinform"
                     >
                       <div className="emailalerttext">
-                        {email_isValid
+                        {Email_isValid
                           ? ''
                           : '이메일 형식에 맞게 다시 작성해 주십시오.'}
                       </div>
@@ -149,12 +149,12 @@ function SubscriptionWrapper() {
             </div>
             <div className="alermodalbox">
               <AlertModal
-                open={alertOpen}
+                open={AlertOpen}
                 close={closeModal}
                 alertString={
-                  blackInput
+                  BlackInput
                     ? '이메일을 작성해야 합니다.'
-                    : emailSubSuc
+                    : EmailSubSuc
                     ? '구독신청이 완료되었습니다.'
                     : '구독신청이 실패하였습니다.'
                 }

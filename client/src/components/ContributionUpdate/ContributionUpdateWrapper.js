@@ -5,16 +5,15 @@ import AlertModal from '../Common/AlertModal/AlertModal';
 import { customAxios } from '../../utils/customAxios';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import Button from '../Common/Button/Button';
-import Error from '../Common/Error/Error';
 
 function ContributionUpdateWrapper({ id }) {
-  const [keyword, setKeyword] = useState('게임');
-  const [title, setTitle] = useState('nothing');
-  const [content, setContent] = useState('nothing');
-  const [modalOpen, setModalOpen] = useState(false);
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [colorChange, setcolorChange] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const [Keyword, setKeyword] = useState('게임');
+  const [Title, setTitle] = useState('nothing');
+  const [Content, setContent] = useState('nothing');
+  const [ModalOpen, setModalOpen] = useState(false);
+  const [AlertOpen, setAlertOpen] = useState(false);
+  const [ColorChange, setColorChange] = useState(false);
+  const [AllDate, setAllDate] = useState(false);
 
   let selectOptions = [
     '게임',
@@ -35,7 +34,6 @@ function ContributionUpdateWrapper({ id }) {
       .get(`/magazine/contribution/${id}`)
       .then(res => res.data.data.contribution_keyword)
       .catch(err => {
-        setHasError(true);
         alert('기고 정보를 받아오는데 실패하였습니다.');
         // window.location.href = '/error';
       });
@@ -44,6 +42,10 @@ function ContributionUpdateWrapper({ id }) {
     // setKeyword(requestGet.contribution_keyword);
     // setTitle(requestGet.contribution_title);
     // setContent(requestGet.contribution_content);
+
+    if (Keyword !== '' && Title !== '' && Content !== '') {
+      setAllDate(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -66,23 +68,23 @@ function ContributionUpdateWrapper({ id }) {
     setContent(e.currentTarget.value);
 
     if (e.currentTarget.value.length >= 200) {
-      setcolorChange(true);
+      setColorChange(true);
     } else {
-      setcolorChange(false);
+      setColorChange(false);
     }
   }
 
   function onSubmitHandler(e) {
     e.preventDefault();
 
-    if (title.length < 8 || content.length < 200 || keyword === '') {
+    if (Title.length < 8 || Content.length < 200 || Keyword === '') {
       return setAlertOpen(true);
     }
 
     let body = {
-      contribution_title: title,
-      contribution_content: content,
-      contibution_keyword: keyword,
+      contribution_title: Title,
+      contribution_content: Content,
+      contibution_keyword: Keyword,
     };
 
     return customAxios.post('/contribution', body).then(res => {
@@ -97,7 +99,7 @@ function ContributionUpdateWrapper({ id }) {
     setAlertOpen(false);
   };
 
-  return (
+  return AllDate ? (
     <>
       <div className="contributioncontainer">
         <div className="container">
@@ -110,7 +112,7 @@ function ContributionUpdateWrapper({ id }) {
                   </label>
                   <select
                     onChange={e => onKeywordHandler(e)}
-                    value={keyword}
+                    value={Keyword}
                     className="conselect"
                     id="conselect"
                   >
@@ -132,7 +134,7 @@ function ContributionUpdateWrapper({ id }) {
                     type="text"
                     onChange={e => onTitleHandler(e)}
                     placeholder="제목"
-                    defaultValue={title}
+                    defaultValue={Title}
                     placeholder="8자 이상 입력해주세요."
                     className="contitle"
                     id="contitle"
@@ -143,10 +145,10 @@ function ContributionUpdateWrapper({ id }) {
                     미리보기 내용 <span>(필수)</span>
                     <p
                       className={
-                        colorChange ? 'textlength active' : 'textlength'
+                        ColorChange ? 'textlength active' : 'textlength'
                       }
                     >
-                      ( {content.length} / 200 이상 )
+                      ( {Content.length} / 200 이상 )
                     </p>
                   </label>
                   <textarea
@@ -155,7 +157,7 @@ function ContributionUpdateWrapper({ id }) {
                     onChange={e => onContentHandler(e)}
                     placeholder="200자 이상 입력해주세요."
                     className="contextarea"
-                    defaultValue={content}
+                    defaultValue={Content}
                     id="contextarea"
                   ></textarea>
 
@@ -183,7 +185,7 @@ function ContributionUpdateWrapper({ id }) {
               </div>
               <div className="alermodalbox">
                 <AlertModal
-                  open={alertOpen}
+                  open={AlertOpen}
                   close={closeModal}
                   alertString={'모두 입력해야 합니다.'}
                   alertBtn="확인"
@@ -193,11 +195,11 @@ function ContributionUpdateWrapper({ id }) {
           </div>
         </div>
       </div>
-      {modalOpen ? (
-        <SigninModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      {ModalOpen ? (
+        <SigninModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
       ) : null}
     </>
-  );
+  ) : null;
 }
 
 export default ContributionUpdateWrapper;

@@ -1,4 +1,4 @@
-const contributions = {
+export const contributions = {
   contribution_keyword: '코딩',
   contribution_title: 'Full IM 29기 17주 회고록',
   contribution_url:
@@ -28,4 +28,21 @@ const contributions = {
   contribution_date: '2021-08-02',
   user_email: 'jonga6431@gmail.com',
   status: 100,
+  hit: 210,
+  user_name: 'jong-ah',
+};
+
+export const articles = {
+  article_keyword: '보안',
+  article_title:
+    'Officia elit do sunt sit dolore Lorem consequat minim fugiat nisi.',
+  article_url: 'https://m.boannews.com/html/index.html',
+  article_content: `Irure labore laborum incididunt quis quis commodo Lorem ad voluptate eu enim. Cillum magna cillum excepteur fugiat velit sit culpa Lorem incididunt excepteur duis. Nostrud labore duis minim eu dolore eu labore do adipisicing aliqua magna ut. Ad irure quis excepteur sunt dolor ex ad culpa. Labore qui nulla reprehenderit laborum velit. Consectetur amet sit adipisicing cillum nisi sit.
+
+Enim mollit proident laborum dolore ad dolor cupidatat et aliqua dolor in deserunt. Consequat do in eiusmod ut. Id Lorem officia nostrud mollit non dolore reprehenderit. Nulla cupidatat laborum fugiat proident in laborum proident laborum consequat veniam irure.
+            `,
+  article_date: '2021-08-16',
+  article_publishment: 'anonymous',
+  status: 100,
+  hit: 997,
 };

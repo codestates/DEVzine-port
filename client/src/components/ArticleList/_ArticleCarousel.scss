@@ -1,0 +1,149 @@
+.react-multi-carousel-list {
+  align-items: center;
+  display: flex;
+  height: 300px;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  top: 0;
+}
+
+.react-multi-carousel-track {
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform, transition;
+}
+
+.react-multiple-carousel__arrow {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 0;
+  border-radius: 35px;
+  cursor: pointer;
+  min-height: 43px;
+  min-width: 43px;
+  opacity: 1;
+  outline: none;
+  position: absolute;
+  transition: all 0.5;
+  z-index: 410;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  &::before {
+    color: $white;
+    display: block;
+    font-family: revicons;
+    font-size: 20px;
+    position: relative;
+    text-align: center;
+    z-index: 400;
+  }
+
+  &:disabled {
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: default;
+  }
+
+  &--left {
+    background-image: url("data:image/svg+xml,%3Csvg width='23' height='38' viewBox='0 0 23 38' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M20.341 31.3724C21.2197 30.5355 21.2197 29.1788 20.341 28.3419L8.43198 17L20.341 5.65809C21.2197 4.82125 21.2197 3.46447 20.341 2.62763C19.4623 1.79079 18.0377 1.79079 17.159 2.62763L3.65901 15.4848C2.78033 16.3216 2.78033 17.6784 3.65901 18.5152L17.159 31.3724C18.0377 32.2092 19.4623 32.2092 20.341 31.3724Z' fill='%23ffdd14'/%3E%3C/svg%3E%0A");
+    background-position: 45% 55%;
+    background-repeat: no-repeat;
+    background-size: 30%;
+    left: calc(2% + 1px);
+  }
+
+  &--right {
+    background-image: url("data:image/svg+xml,%3Csvg width='23' height='38' viewBox='0 0 23 38' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.65901 31.3724C1.78033 30.5355 1.78033 29.1788 2.65901 28.3419L14.568 17L2.65901 5.65809C1.78033 4.82125 1.78033 3.46447 2.65901 2.62763C3.53769 1.79079 4.96231 1.79079 5.84099 2.62763L19.341 15.4848C20.2197 16.3216 20.2197 17.6784 19.341 18.5152L5.84099 31.3724C4.96231 32.2092 3.53769 32.2092 2.65901 31.3724Z' fill='%23ffdd14'/%3E%3C/svg%3E%0A");
+    background-position: 50% 55%;
+    background-repeat: no-repeat;
+    background-size: 30%;
+    right: calc(3% + 1px);
+  }
+}
+
+.react-multi-carousel-dot-list {
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  list-style: none;
+  margin: auto;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
+
+  button {
+    border-color: grey;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: none;
+    cursor: pointer;
+    display: inline-block;
+    height: 12px;
+    margin: 0;
+    margin-right: 6px;
+    opacity: 1;
+    outline: 0;
+    padding: 5px;
+    transition: background 0.5;
+    width: 12px;
+
+    &:hover:active {
+      background: #080808;
+    }
+  }
+}
+
+.react-multi-carousel-dot--active button {
+  background: #080808;
+}
+
+.react-multi-carousel-item {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .react-multi-carousel-item {
+    flex-shrink: 0 !important;
+  }
+
+  .react-multi-carousel-track {
+    overflow: visible !important;
+  }
+}
+
+.contributionbox {
+  background-color: $yellow-light;
+  border-radius: 20px;
+  color: $dark;
+  cursor: pointer;
+  height: 267px;
+  margin-left: 0;
+  padding: 20px;
+  transition: all 0.5s;
+  width: 98%;
+  z-index: 420;
+
+  &:hover {
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  @include responsive(T) {
+    width: 95%;
+  }
+
+  @include responsive(D) {
+    margin-left: 2px;
+    width: 95%;
+  }
+}

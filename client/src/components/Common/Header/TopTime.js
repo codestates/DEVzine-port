@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 function TopTime() {
-  const [time, setTime] = useState('00:00:00');
+  const [Time, setTime] = useState('00:00:00');
 
   useEffect(() => {
     setInterval(getTime, 1000);
@@ -29,7 +29,7 @@ function TopTime() {
 
     setTime(`${hours}:${mins}:${secs}`);
   }
-  return <span>{time}</span>;
+  return <span>{Time}</span>;
 }
 
 export default TopTime;

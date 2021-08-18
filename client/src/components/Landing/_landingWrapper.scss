@@ -1,0 +1,104 @@
+.landingimg {
+  background-color: $white;
+  margin-top: 820px;
+  position: relative;
+
+  @include mobile-only() {
+    margin-top: 500px;
+  }
+
+  .container {
+    @include column-flexbox;
+    margin-bottom: 0;
+    padding-top: 30px;
+
+    @include responsive(T) {
+      padding-top: 120px;
+    }
+  }
+}
+
+.landingbackground {
+  background-color: $background;
+  border-radius: 20px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+
+  @include responsive(T) {
+    height: 315px;
+    margin-bottom: 56px;
+  }
+
+  @include responsive(D) {
+    height: 315px;
+    margin-bottom: 98px;
+  }
+
+  &.last {
+    margin-bottom: 120px;
+
+    @include mobile-only() {
+      margin-bottom: 0;
+    }
+  }
+
+  img {
+    @include pos-center-x;
+    bottom: 0;
+
+    @include mobile-only() {
+      height: 160px;
+      width: auto;
+    }
+  }
+}
+
+.landingcontent {
+  @include column-flexbox();
+  height: 150px;
+  position: relative;
+
+  @include responsive(T) {
+    align-items: center;
+    height: 315px;
+    text-align: left;
+  }
+
+  &.last {
+    margin-bottom: 120px;
+
+    @include mobile-only() {
+      margin-bottom: 0;
+    }
+  }
+
+  h2 {
+    @include text-style(18, primary);
+    margin-bottom: 8px;
+    text-align: center;
+    width: 100%;
+
+    @include responsive(T) {
+      font-size: 30px;
+      line-height: 40px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    @include responsive(D) {
+      font-size: 36px;
+      line-height: 48px;
+    }
+  }
+
+  p {
+    @include text-style(18, primary);
+    width: 100%;
+
+    @include mobile-only() {
+      @include text-style(14, primary);
+      text-align: center;
+    }
+  }
+}

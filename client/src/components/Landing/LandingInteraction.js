@@ -6,7 +6,7 @@ import data from './data';
 import BlinkText from './BlinkText';
 
 function Image({ url, index, camera }) {
-  const [active, setActive] = useState(0);
+  const [Active, setActive] = useState(0);
   const mesh = useRef();
   let speed = 0.2;
   let positionX = 0;
@@ -17,7 +17,7 @@ function Image({ url, index, camera }) {
   });
 
   const { spring } = useSpring({
-    spring: Number(active),
+    spring: Number(Active),
     config: { mass: 5, tension: 400, friction: 50, precision: 0.0001 },
   });
   const scale = spring.to([0, 1], [1, 1.2]);
@@ -31,7 +31,7 @@ function Image({ url, index, camera }) {
     positionX += speed - plus;
     speed *= 0.95;
     plus *= 0.95;
-    active ? (mesh.current.position.y = -0.5) : (mesh.current.position.y = -1);
+    Active ? (mesh.current.position.y = -0.5) : (mesh.current.position.y = -1);
     camera.position.x = positionX * 1.2;
 
     if (camera.position.x > 9.7) {
@@ -48,7 +48,7 @@ function Image({ url, index, camera }) {
       rotation-y={rotation}
       scale-x={scale}
       scale-y={scale}
-      onClick={() => setActive(!active)}
+      onClick={() => setActive(!Active)}
     >
       <planeBufferGeometry attach="geometry" args={[1, 1.2]} />
       <meshBasicMaterial

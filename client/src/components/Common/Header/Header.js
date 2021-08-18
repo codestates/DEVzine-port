@@ -12,10 +12,10 @@ import SideBar from './SideBar';
 function Header() {
   const dispatch = useDispatch();
 
-  const [signIn, setSignIn] = useState(false);
-  const [userName, setUserName] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [openSidebar, setOpenSidebar] = useState(false);
+  const [SignIn, setSignIn] = useState(false);
+  const [UserName, setUserName] = useState(null);
+  const [ModalOpen, setModalOpen] = useState(false);
+  const [OpenSidebar, setOpenSidebar] = useState(false);
 
   useEffect(() => {
     if (store.getState().user.signinSuccess) {
@@ -50,7 +50,7 @@ function Header() {
       <header className="headerfix">
         <div className="headertime">
           <span className="sm-hidden">
-            {signIn ? `${userName}님께 ` : '여러분께 '}
+            {SignIn ? `${UserName}님께 ` : '여러분께 '}
           </span>
           새로운 소식을 전하기까지 남은 시간
           <span className="timer">
@@ -67,11 +67,11 @@ function Header() {
                     <img src={logo} alt="DEVzine" className="headernav-logo" />
                   </Link>
                   <div className="sm-only">
-                    {openSidebar ? (
+                    {OpenSidebar ? (
                       <SideBar
                         setOpenSidebar={setOpenSidebar}
-                        signIn={signIn}
-                        userName={userName}
+                        SignIn={SignIn}
+                        UserName={UserName}
                         setSignIn={setSignIn}
                         setUserName={setUserName}
                       />
@@ -96,7 +96,7 @@ function Header() {
                         <Link to="/mypage">마이페이지</Link>
                       </li>
                     </ul>
-                    {signIn ? (
+                    {SignIn ? (
                       <button
                         onClick={signOutHandler}
                         className="rightbox-button"
@@ -117,8 +117,8 @@ function Header() {
             </div>
           </div>
         </div>
-        {modalOpen ? (
-          <SignInModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+        {ModalOpen ? (
+          <SignInModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
         ) : null}
       </header>
     </>
