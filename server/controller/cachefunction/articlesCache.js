@@ -34,7 +34,7 @@ const setNewCacheForArticles = async (articles) => {
         } else {
             await redisClient.del('recentArticles');
             for (let i = 0; i < articles.length; i++) {
-                const id = articles[i].article_id;
+                let id = articles[i].article_id;
                 await redisClient.hset('recentArticles', id, JSON.stringify(articles[i]));
             }
         }
@@ -138,6 +138,11 @@ const updateArticleHit = async (id) => {
             }, {
                 $inc: {
                     hit: 1
+                }
+            }, {
+                projection: {
+                    _id: 0,
+                    __v: 0
                 }
             }, (err, data) => {
                 if (err) {
