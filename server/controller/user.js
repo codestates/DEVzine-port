@@ -78,21 +78,21 @@ module.exports = {
     );
   },
 
-  deleteUser: async (req, res) => {
+  deleteUser: async (req, res, next) => {
     if (!req.user) {
       return res.status(400).send({ message: 'Invalid user' });
     }
     const { _id } = req.user;
+    res.cookie('jwt', '', {
+      httpOnly: true,
+      sameSite: 'None',
+      secure: true,
+    });
     try {
       User.deleteOne({ _id }, (err) => {
         if (err) {
           return res.status(404).send({ message: 'Not found' });
         }
-      });
-      res.clearCookie('jwt', {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'None'
       });
       res.status(200).send({ message: 'User deleted' });
     } catch (err) {
