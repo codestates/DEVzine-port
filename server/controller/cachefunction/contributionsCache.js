@@ -21,7 +21,6 @@ const getAllConfirmedContributions = async () => {
         },
         {
             $project: {
-                _id: 0,
                 contribution_id: 1,
                 contribution_keyword: 1,
                 contribution_title: 1,
@@ -30,7 +29,8 @@ const getAllConfirmedContributions = async () => {
                 contribution_date: 1,
                 status: 1,
                 hit: 1,
-                user_name: { $arrayElemAt: [ "$user_info.user_name", 0 ] }
+                user_name: { $arrayElemAt: [ "$user_info.user_name", 0 ] },
+                _id: 0
             }
         }
     ])
@@ -45,7 +45,7 @@ const setNewCacheForContributions = async (contributions) => {
         let id = contributions[i].contribution_id;
         await redisClient.hset('allContributions', id, JSON.stringify(contributions[i]));
     }
-    await redisClient.expire('allContributions', 60 * 60 * 24);
+    await redisClient.expire('allContributions', 30); //TODO: 배포 전에 24시간으로 설정
 
 }
 
@@ -91,8 +91,87 @@ const checkCacheForContributions = async () => {
 
 }
 
+const checkCacheForOneContribution = async (id) => {
+
+    return new Promise((resolve, reject) => {
+        
+        redisClient.hgetall('allContributions', async (err, contributions) => {
+
+            if (err) {
+                reject(err);
+            }
+
+            // cache miss
+            if (!contributions) {
+                const contributionListFromDB = await getAllConfirmedContributions();
+                await setNewCacheForContributions(contributionListFromDB);
+            }
+
+            // cache hit
+            redisClient.hget('allContributions', id, async (err, contribution) => {
+    
+                if (err) {
+                    reject(err);
+                }
+    
+                if (!contribution) {
+                    resolve('Not found');
+                }
+    
+                if (contribution) {
+                    resolve(
+                        {
+                            data: JSON.parse(contribution),
+                            source: 'cache'
+                        }
+                    );
+                }
+    
+            });
+
+        })
+        
+    });
+
+}
+
+const updateContributionHit = async (id) => {
+    
+    try {
+
+        Contribution.findOneAndUpdate({
+            contribution_id: id
+        }, {
+            $inc: {
+                hit: 1
+            }
+        }, (err, data) => {
+            if (err) {
+                throw err;
+            }
+            redisClient.hget('allContributions', id, async (err, data) => {
+                if (err) {
+                    throw err;
+                }
+                let temp = JSON.parse(data)
+                temp.hit += 1;
+                redisClient.hset('allContributions', id, JSON.stringify(temp));
+                return true;
+            })
+        });
+
+    } catch (err) {
+
+        return err;
+
+    }
+
+}
+
     
 module.exports = {
     getAllConfirmedContributions,
-    checkCacheForContributions
+    checkCacheForContributions,
+    checkCacheForOneContribution,
+    updateContributionHit
 }
