@@ -12,6 +12,8 @@ import { debounce } from 'lodash';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import OptContents from './OptContents';
+import Button from '../Common/Button/Button';
+import { customAxios } from '../../utils/customAxios';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
@@ -209,6 +211,13 @@ function MyPageWrapper() {
     }
   }
 
+  async function withdrawal() {
+    await customAxios
+      .delete('/user/delete')
+      .then(res => alert('회원탈퇴 성공', res))
+      .catch(err => alert('회원탈퇴 에러', err));
+  }
+
   return allData ? (
     <div className="signupcontainer">
       <div className="signupwrapper">
@@ -254,6 +263,13 @@ function MyPageWrapper() {
         >
           정보수정
         </div>
+        <Button
+          subject={`회원 탈퇴`}
+          color={`#999999`}
+          backgroundColor={`#ffffff`}
+          border={`1px solid #d9d9d9`}
+          onClickHandle={() => withdrawal()}
+        />
       </div>
       {ModalOpen ? (
         <SigninModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
