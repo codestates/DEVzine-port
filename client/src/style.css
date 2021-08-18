@@ -1597,8 +1597,7 @@ label {
   opacity: 1;
   outline: none;
   position: absolute;
-  transition: all 0.5;
-  z-index: 410; }
+  transition: all 0.5; }
   .react-multiple-carousel__arrow:hover {
     background-color: rgba(0, 0, 0, 0.8); }
   .react-multiple-carousel__arrow::before {
