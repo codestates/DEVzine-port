@@ -3,6 +3,7 @@ import {
   SIGNUP_USER,
   SIGNOUT_USER,
   MYPAGE_USER,
+  SIGNIN_ADMIN,
 } from '../_actions/types';
 
 export default function (state = {}, action) {
@@ -18,6 +19,9 @@ export default function (state = {}, action) {
       break;
     case MYPAGE_USER:
       return { ...state, signinSuccess: action.payload };
+      break;
+    case SIGNIN_ADMIN:
+      return { ...state, adminSigninSuccess: action.payload };
       break;
     default:
       return state;
