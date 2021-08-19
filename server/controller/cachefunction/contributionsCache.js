@@ -32,7 +32,12 @@ const getAllConfirmedContributions = async () => {
                 user_name: { $arrayElemAt: [ "$user_info.user_name", 0 ] },
                 _id: 0
             }
-        }
+        },
+        {
+            $sort: {
+                contribution_date: -1
+            }
+        },
     ])
 
     return contributionList;
