@@ -1,8 +1,6 @@
 import Chart from 'react-apexcharts';
 
 export function UserTopLanguage({ data }) {
-  console.log(data);
-
   let options = {
     colors: ['#b2b3b9', '#d9d9d9', '#ffdd14', '#ffc803', '#ffe33e'],
     fill: {
