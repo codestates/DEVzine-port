@@ -64,20 +64,20 @@ function ArticelCarousel({ ContributionData }) {
               <div className="contributionbox">
                 <ul>
                   <li className="articlebox-date ">
-                    {el.article_date.split('T')[0].replace(/-/gi, '.')}
+                    {el.contribution_date.split('T')[0].replace(/-/gi, '.')}
                   </li>
                   <li className="articlebox-title ell-24 sm-hidden">
-                    {el.article_title}
+                    {el.contribution_title}
                   </li>
                   <li className="articlebox-title ell-18-2 sm-only">
-                    {el.article_title}
+                    {el.contribution_title}
                   </li>
                   <li className="articlebox-content-con ell-12 ">
-                    {el.article_content}
+                    {el.contribution_content}
                   </li>
                   <li>
                     <span className="articlebox-keyword-con">
-                      {el.article_keyword}
+                      {el.contribution_keyword}
                     </span>
                     <span className="articlebox-hit-con">
                       <img src={eye} alt="view number" />

@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getArticleData } from '../../_actions/article_actions';
-import { getContributionData } from '../../_actions/article_actions';
 import ArticleView from '../../pages/ArticleView';
 import ArticelCarousel from './ArticleCarousel';
 import { customAxios } from '../../utils/customAxios';
 import Button from '../Common/Button/Button';
 import eye from '../../assets/images/eye.svg';
-import store from '../../store/store';
 
 function ArticleListWrapper() {
   const dispatch = useDispatch();
@@ -18,54 +16,22 @@ function ArticleListWrapper() {
   const [ArticlePlus, setArticlePlus] = useState(12);
 
   useEffect(() => {
-    dispatch(getArticleData)
+    dispatch(getArticleData())
       .then(res => {
-        console.log(res.payload);
-        setArticleData(res.payload);
-        setContributionData(res.payload);
+        setArticleData(res.payload[0]);
+        setContributionData(res.payload[1]);
       })
       .catch(err => {
         alert('기고, 기사글 받아오는데 실패하였습니다.');
       });
-
-    // dispatch(getContributionData)
-    //   .then(res => {
-    //     console.log(res.payload);
-    //     setContributionData(res.payload);
-    //   })
-    //   .catch(err => {
-    //     alert('기고, 기사글 받아오는데 실패하였습니다.');
-    //   });
   }, [ArticlePlus]);
 
   function latestBtn() {
-    customAxios
-      .get('/magazine')
-      .then(res => {
-        setArticleData(res.data.ArticleeData.slice(0, 12));
-        setContributionData(res.data.contributionData);
-      })
-      .catch(err => {
-        setArticleData(null);
-
-        return alert('최신순 받아오는데 실패하였습니다.');
-      });
+    cconsole.log('최신순');
   }
 
   function viewBtn() {
-    customAxios
-      .get('/magazine')
-      .then(res => {
-        setArticleData(res.data.ArticleeData.slice(0, 12));
-        setContributionData(res.data.contributionData);
-      })
-      .catch(err => {
-        setArticleData(null);
-        // setArticleData(FakeData.slice(1, 13));
-        // setContributionData(FakeData);
-
-        return alert('조회순 받아오는데 실패하였습니다.');
-      });
+    console.log('조회순');
   }
 
   function articlePlusHandler() {
