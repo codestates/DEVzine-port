@@ -49,20 +49,6 @@ module.exports = {
 
         }
 
-
-        //         "accepted":  // 삭제 거부는 미포함
-        //                         [ ...,
-        //                             {
-        //                                     "contribution_id": "number", 
-        //                                     "contribution_title": "string",
-        //                                     "contribution_content": "string",
-        //                                     "user_name" : "string",
-        //                                     "status" : "string"
-        //                             }, 
-        //                         ...]
-        //         }
-
-
 	},
 
     rejectContribRequest: async (req, res) => {
