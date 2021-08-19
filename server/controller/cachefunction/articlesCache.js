@@ -17,7 +17,7 @@ const getArticlesPastTwoWeeks = async () => {
         }
     ).sort(
         {
-            article_id: -1
+            article_date: -1
         }
     );
 
