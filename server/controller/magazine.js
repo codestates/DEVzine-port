@@ -16,7 +16,7 @@ module.exports = {
         try {
 
             const { articleData, articleSource } = await checkCacheForArticles()
-            let     { contributionData, contributionSource } = await checkCacheForContributions()
+            let { contributionData, contributionSource } = await checkCacheForContributions()
 
             if (!articleData || !contributionData) {
                 return res.status(404).json(
