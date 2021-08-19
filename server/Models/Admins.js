@@ -6,7 +6,7 @@ const adminSchema = mongoose.Schema({
         unique: true
     },
     admin_password : String
-});
+}, { versionKey: false });
 
 const Admin = mongoose.model("admins", adminSchema);
 

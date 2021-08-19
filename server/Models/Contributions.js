@@ -17,7 +17,6 @@ const contributionSchema = mongoose.Schema({
     },
     contribution_url : {
         type: String,
-        required: true,
         unique: true
     },
     contribution_content : {
@@ -38,15 +37,14 @@ const contributionSchema = mongoose.Schema({
     user_email : {
         type: String
     }
-
-});
+}, { versionKey: false });
 
 contributionSchema.plugin(
     autoIncrement.plugin,
     {
         model : 'contributions',
         field : 'contribution_id',
-        startAt: 1,
+        startAt: 20,
         increment : 1 
     });
 const Contribution = mongoose.model("contributions", contributionSchema);
