@@ -609,6 +609,16 @@ select::-ms-expand {
     .headernav-logo {
       height: 20px; } }
 
+.headernav-logo-admin {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 30px;
+  width: auto; }
+  @media screen and (max-width: 767px) {
+    .headernav-logo-admin {
+      height: 20px; } }
+
 .headernav-menu {
   display: flex;
   align-items: center;
@@ -890,6 +900,17 @@ select::-ms-expand {
       .landingbackground img {
         height: 160px;
         width: auto; } }
+  .landingbackground::after {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10px;
+    content: 'Designed by freepik';
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.1); }
+    @media screen and (max-width: 767px) {
+      .landingbackground::after {
+        font-size: 10px; } }
 
 .landingcontent {
   display: flex;
@@ -1135,6 +1156,33 @@ label {
 
 .active {
   color: #ffc803; }
+
+.contributionlistwrapper {
+  background-color: #f2f2f2;
+  min-height: 100vh;
+  position: relative;
+  width: 100%; }
+  .contributionlistwrapper .articlebox {
+    margin-top: 192px; }
+    @media screen and (max-width: 767px) {
+      .contributionlistwrapper .articlebox {
+        margin-top: 162px; } }
+    .contributionlistwrapper .articlebox .prebtn {
+      float: right;
+      margin: 0;
+      color: #d9d9d9;
+      font-weight: 700; }
+      .contributionlistwrapper .articlebox .prebtn:hover {
+        color: #ffc803; }
+    .contributionlistwrapper .articlebox-listbox {
+      background-color: #ffe33e;
+      border: 0; }
+    .contributionlistwrapper .articlebox-keyword {
+      font-size: 13px;
+      line-height: 20px;
+      letter-spacing: -0.01em;
+      color: #ffe33e;
+      background-color: #191a20; }
 
 .subscriptioncontainer {
   background-color: #f2f2f2;
@@ -1522,10 +1570,30 @@ label {
   height: 267px;
   margin-top: 192px;
   margin-bottom: 5px; }
+  @media screen and (max-width: 767px) {
+    .carousel {
+      margin-top: 162px; } }
   .carousel .react-multi-carousel-list {
     padding-left: 0; }
+  .carousel h2 {
+    display: inline-block;
+    padding-right: 20px; }
+    @media screen and (max-width: 767px) {
+      .carousel h2 {
+        margin-bottom: 8px; } }
   .carousel .allviewbtn {
-    cursor: pointer; }
+    float: right;
+    padding-top: 10px;
+    padding-right: 20px;
+    cursor: pointer;
+    color: #d9d9d9;
+    font-weight: 700; }
+    @media screen and (max-width: 767px) {
+      .carousel .allviewbtn {
+        float: none; } }
+    .carousel .allviewbtn:hover {
+      color: #ffc803;
+      font-weight: 700; }
 
 .articlebox {
   margin-top: 80px; }
@@ -1549,10 +1617,11 @@ label {
     margin-right: 20px;
     padding: 20px;
     transition: all 0.5s;
-    width: 100%; }
+    width: 100%;
+    position: relative; }
     .articlebox-listbox ul {
-      width: 100%;
-      height: 100%; }
+      height: 100%;
+      width: 100%; }
     @media screen and (min-width: 768px) {
       .articlebox-listbox {
         height: 267px;
@@ -1571,6 +1640,63 @@ label {
           margin-right: 0; } }
     .articlebox-listbox:hover {
       box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1); }
+  .articlebox-date {
+    font-size: 13px;
+    line-height: 20px;
+    letter-spacing: -0.01em;
+    color: #191a20;
+    margin-bottom: 4px; }
+  .articlebox-title {
+    font-size: 24px;
+    line-height: 34px;
+    letter-spacing: -0.01em;
+    color: #191a20;
+    font-weight: 700;
+    margin-bottom: 12px; }
+    @media screen and (max-width: 767px) {
+      .articlebox-title {
+        font-size: 18px;
+        line-height: 28px;
+        letter-spacing: -0.02em;
+        color: #191a20; } }
+  .articlebox-content {
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    color: #191a20;
+    margin-bottom: 45px; }
+    @media screen and (max-width: 767px) {
+      .articlebox-content {
+        margin-bottom: 24px; } }
+  .articlebox-keyword {
+    font-size: 13px;
+    line-height: 20px;
+    letter-spacing: -0.01em;
+    color: #191a20;
+    font-weight: 700;
+    border: 1px solid #191a20;
+    border-radius: 20px;
+    padding: 0 12px 2px 12px; }
+  .articlebox-hit {
+    font-size: 24px;
+    line-height: 34px;
+    letter-spacing: -0.01em;
+    color: rgba(25, 26, 32, 0.15);
+    position: absolute;
+    right: 24px;
+    bottom: 20px;
+    margin: 0; }
+    @media screen and (max-width: 767px) {
+      .articlebox-hit {
+        bottom: 12px; } }
+    .articlebox-hit img {
+      opacity: 10%;
+      margin-right: 5px; }
+    .articlebox-hit span {
+      margin: 0 0 3px 0; }
+
+.articlebox-hit {
+  margin: 0 !important; }
 
 .plusbtn {
   height: 55px;
@@ -1580,6 +1706,33 @@ label {
     position: absolute;
     left: 50%;
     transform: translateX(-50%); }
+
+.ell-24 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  height: 68px; }
+
+.ell-18 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  height: 28px; }
+
+.ell-12 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  height: 48px; }
 
 .react-multi-carousel-list {
   align-items: center;
@@ -1701,6 +1854,55 @@ label {
       margin-left: 2px;
       width: 95%; } }
 
+.articlebox-content-con {
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: #191a20;
+  margin-bottom: 50px; }
+  @media screen and (max-width: 767px) {
+    .articlebox-content-con {
+      margin-bottom: 60px; } }
+
+.articlebox-keyword-con {
+  font-size: 13px;
+  line-height: 20px;
+  letter-spacing: -0.01em;
+  color: #ffe33e;
+  font-weight: 700;
+  border: 1px solid #191a20;
+  background-color: #191a20;
+  border-radius: 20px;
+  padding: 0 12px 2px 12px; }
+
+.articlebox-hit-con {
+  font-size: 24px;
+  line-height: 34px;
+  letter-spacing: -0.01em;
+  bottom: 15px;
+  color: rgba(25, 26, 32, 0.15);
+  margin: 0;
+  position: absolute;
+  right: 35px; }
+  @media screen and (max-width: 767px) {
+    .articlebox-hit-con {
+      bottom: 18px;
+      right: 24px; } }
+  .articlebox-hit-con img {
+    opacity: 10%;
+    margin-right: 5px; }
+  .articlebox-hit-con span {
+    margin: 0 0 3px 0; }
+
+.ell-18-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  height: 56px; }
+
 .articlecontainer {
   background-color: #f2f2f2;
   min-height: 100vh;
@@ -1736,7 +1938,8 @@ label {
           font-size: 24px;
           line-height: 34px;
           letter-spacing: -0.01em;
-          font-weight: 700; }
+          font-weight: 700;
+          margin-bottom: 13px; }
           @media screen and (max-width: 767px) {
             .articlecontainer .articleviewwrapper .header .headerleft .title {
               font-size: 18px;
@@ -1763,7 +1966,9 @@ label {
         line-height: 24px;
         letter-spacing: -0.01em;
         font-weight: 700;
-        color: #b2b3b9; }
+        color: #b2b3b9;
+        text-align: right;
+        padding-right: 1px; }
         .articlecontainer .articleviewwrapper .header .datawrapper .data {
           font-weight: 400;
           margin: 0 4px; }
@@ -1792,15 +1997,26 @@ label {
         transform: translateX(-50%);
         bottom: 72px; }
 
-.visualwrapper {
+.visualcontainer {
   background-color: #f2f2f2;
   min-height: 100vh;
-  position: relative;
-  width: 100%; }
-
-.visualtest {
-  border: 1px solid red;
-  padding-top: 300px; }
+  position: relative; }
+  .visualcontainer-footer {
+    height: 100px;
+    margin-bottom: 220px; }
+  .visualcontainer .visualwrapper {
+    margin-top: 206px;
+    margin-bottom: 306px; }
+    .visualcontainer .visualwrapper .chartcontainer {
+      height: 500px;
+      width: 500px; }
+      .visualcontainer .visualwrapper .chartcontainer .chartwrapper {
+        min-height: 360px;
+        background-color: #fff;
+        position: relative;
+        border: 1px solid #d9d9d9;
+        border-radius: 24px;
+        margin-bottom: 120px; }
 
 .admin {
   background-color: #ffdd14;

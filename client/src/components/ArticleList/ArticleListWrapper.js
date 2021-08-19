@@ -1,170 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { getArticleData } from '../../_actions/article_actions';
 import ArticleView from '../../pages/ArticleView';
 import ArticelCarousel from './ArticleCarousel';
 import { customAxios } from '../../utils/customAxios';
 import Button from '../Common/Button/Button';
+import eye from '../../assets/images/eye.svg';
 
 function ArticleListWrapper() {
+  const dispatch = useDispatch();
+
   const [ArticleData, setArticleData] = useState(null);
   const [ContributionData, setContributionData] = useState(null);
   const [ArticlePlus, setArticlePlus] = useState(12);
 
-  let FakeData = [
-    {
-      contribution_id: 1,
-      contribution_title: 'contribution_title1',
-      contribution_content: 'contribution_content',
-      contribution_keyword: '게임',
-      contribution_date: '2021.08.16',
-      hit: '1004',
-    },
-    {
-      contribution_id: 2,
-      contribution_title: 'contribution_title2',
-      contribution_content: 'contribution_content',
-      contribution_keyword: '게임',
-      contribution_date: '2021.08.16',
-      hit: '1004',
-    },
-    {
-      contribution_id: 3,
-      contribution_title: 'contribution_title3',
-      contribution_content: 'contribution_content',
-      contribution_keyword: '게임',
-      contribution_date: '2021.08.16',
-      hit: '1004',
-    },
-    {
-      contribution_id: 4,
-      contribution_title: 'contribution_title4',
-      contribution_content: 'contribution_content',
-      contribution_keyword: '게임',
-      contribution_date: '2021.08.16',
-      hit: '1004',
-    },
-    {
-      contribution_id: 5,
-      contribution_title: 'contribution_title5',
-      contribution_content: 'contribution_content',
-      contribution_keyword: '게임',
-      contribution_date: '2021.08.16',
-      hit: '1004',
-    },
-    {
-      contribution_id: 6,
-      contribution_title: 'contribution_title6',
-      contribution_content: 'contribution_content',
-      contribution_keyword: '게임',
-      contribution_date: '2021.08.16',
-      hit: '1004',
-    },
-    {
-      contribution_id: 7,
-      contribution_title: 'contribution_title7',
-      contribution_content: 'contribution_content',
-      contribution_keyword: '게임',
-      contribution_date: '2021.08.16',
-      hit: '1004',
-    },
-    {
-      contribution_id: 8,
-      contribution_title: 'contribution_title8',
-      contribution_content: 'contribution_content',
-      contribution_keyword: '게임',
-      contribution_date: '2021.08.16',
-      hit: '1004',
-    },
-    {
-      contribution_id: 9,
-      contribution_title: 'contribution_title9',
-      contribution_content: 'contribution_content',
-      contribution_keyword: '게임',
-      contribution_date: '2021.08.16',
-      hit: '1004',
-    },
-    {
-      contribution_id: 10,
-      contribution_title: 'contribution_title10',
-      contribution_content: 'contribution_content',
-      contribution_keyword: '게임',
-      contribution_date: '2021.08.16',
-      hit: '1004',
-    },
-    {
-      contribution_id: 11,
-      contribution_title: 'contribution_title11',
-      contribution_content: 'contribution_content',
-      contribution_keyword: '게임',
-      contribution_date: '2021.08.16',
-      hit: '1004',
-    },
-    {
-      contribution_id: 12,
-      contribution_title: 'contribution_title12',
-      contribution_content: 'contribution_content',
-      contribution_keyword: '게임',
-      contribution_date: '2021.08.16',
-      hit: '1004',
-    },
-    {
-      contribution_id: 13,
-      contribution_title: 'contribution_title13',
-      contribution_content: 'contribution_content',
-      contribution_keyword: '게임',
-      contribution_date: '2021.08.16',
-      hit: '1004',
-    },
-  ];
-
-  useEffect(async () => {
-    await customAxios
-      .get('/magazine')
+  useEffect(() => {
+    dispatch(getArticleData())
       .then(res => {
-        console.log(res.data);
-        setArticleData(res.data.articleData);
-        // setArticleData(FakeData);
-        // setContributionData(res.data.contributionData);
-        setContributionData(FakeData);
+        setArticleData(res.payload[0]);
+        setContributionData(res.payload[1]);
       })
       .catch(err => {
-        // setArticleData(FakeData.slice(0, 12));
-        setContributionData(FakeData);
-
-        return alert('기고, 기사글 받아오는데 실패하였습니다.');
+        alert('기고, 기사글 받아오는데 실패하였습니다.');
       });
   }, [ArticlePlus]);
 
   function latestBtn() {
-    customAxios
-      .get('/magazine')
-      .then(res => {
-        setArticleData(res.data.ArticleeData.slice(0, 12));
-        setContributionData(res.data.contributionData);
-      })
-      .catch(err => {
-        setArticleData(null);
-        setArticleData(FakeData.slice(0, 12));
-        setContributionData(FakeData);
-
-        return alert('최신순 받아오는데 실패하였습니다.');
-      });
+    cconsole.log('최신순');
   }
 
   function viewBtn() {
-    customAxios
-      .get('/magazine')
-      .then(res => {
-        setArticleData(res.data.ArticleeData.slice(0, 12));
-        setContributionData(res.data.contributionData);
-      })
-      .catch(err => {
-        setArticleData(null);
-        setArticleData(FakeData.slice(1, 13));
-        setContributionData(FakeData);
-
-        return alert('조회순 받아오는데 실패하였습니다.');
-      });
+    console.log('조회순');
   }
 
   function articlePlusHandler() {
@@ -179,12 +46,9 @@ function ArticleListWrapper() {
             <div className="col-sm-4">
               <div className="carousel">
                 <h2>DEVzine이 추천하는 소식</h2>
-                <span
-                  onClick={() => alert('추천소식 모두 보기')}
-                  className="allviewbtn"
-                >
-                  추천소식 모두 보기
-                </span>
+                <Link to="/contributionlist">
+                  <span className="allviewbtn">모두 보기</span>
+                </Link>
                 <ArticelCarousel ContributionData={ContributionData} />
               </div>
             </div>
@@ -203,17 +67,27 @@ function ArticleListWrapper() {
                         children={<ArticleView />}
                       >
                         <ul>
-                          <li className="articlebox-date">{el.article_date}</li>
-                          <li className="articlebox-title">
-                            {el.article_title.slice(0, 8) + '...'}
+                          <li className="articlebox-date ">
+                            {el.article_date.split('T')[0].replace(/-/gi, '.')}
                           </li>
-                          <li className="articlebox-content">
-                            {el.article_content.slice(0, 8) + '...'}
+                          <li className="articlebox-title ell-24 sm-hidden">
+                            {el.article_title}
                           </li>
-                          <li className="articlebox-keyword">
-                            {el.article_keyword}
+                          <li className="articlebox-title ell-18 sm-only">
+                            {el.article_title}
                           </li>
-                          <li className="articlebox-hit">{el.hit}</li>
+                          <li className="articlebox-content ell-12 ">
+                            {el.article_content}
+                          </li>
+                          <li>
+                            <span className="articlebox-keyword">
+                              {el.article_keyword}
+                            </span>
+                            <span className="articlebox-hit">
+                              <img src={eye} alt="view number" />
+                              <span>{el.hit}</span>
+                            </span>
+                          </li>
                         </ul>
                       </Link>
                     </div>

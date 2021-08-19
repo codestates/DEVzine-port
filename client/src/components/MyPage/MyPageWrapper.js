@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { mypageUser } from '../../_actions/user_actions';
+import { deleteUser } from '../../_actions/user_actions';
 import {
   checkEmail,
   checkPassword,
@@ -211,10 +212,12 @@ function MyPageWrapper() {
     }
   }
 
-  async function withdrawal() {
-    await customAxios
-      .delete('/user/delete')
-      .then(res => alert('회원탈퇴 성공', res))
+  function withdrawal() {
+    return dispatch(deleteUser())
+      .then(res => {
+        alert('회원탈퇴 성공', res);
+        window.location.href = '/';
+      })
       .catch(err => alert('회원탈퇴 에러', err));
   }
 
@@ -268,7 +271,7 @@ function MyPageWrapper() {
           color={`#999999`}
           backgroundColor={`#ffffff`}
           border={`1px solid #d9d9d9`}
-          onClickHandle={() => withdrawal()}
+          onClickHandle={withdrawal}
         />
       </div>
       {ModalOpen ? (

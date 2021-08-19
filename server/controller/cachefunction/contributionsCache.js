@@ -32,18 +32,23 @@ const getAllConfirmedContributions = async () => {
                 user_name: { $arrayElemAt: [ "$user_info.user_name", 0 ] },
                 _id: 0
             }
-        }
+        },
+        {
+            $sort: {
+                contribution_date: -1
+            }
+        },
     ])
-    
+
     return contributionList;
 
 }
 
 const setNewCacheForContributions = async (contributions) => {
-
+    
     for (let i = 0; i < contributions.length; i++) {
         let id = contributions[i].contribution_id;
-        await redisClient.hset('allContributions', id, JSON.stringify(contributions[i]));
+        await redisClient.hset('allContributions', id, JSON.stringify(contributions[i]))
     }
     await redisClient.expire('allContributions', 30); //TODO: 배포 전에 24시간으로 설정
 
@@ -77,6 +82,9 @@ const checkCacheForContributions = async () => {
                 for (let key in contributions) {
                     contributionData.push(JSON.parse(contributions[key]))
                 }
+                contributionData.sort((a, b) => {
+                    return new Date(b.contribution_date) - new Date(a.contribution_date);
+                });
                 resolve(
                     {
                         contributionData,

@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { customAxios } from '../../utils/customAxios';
-import {
-  contributions,
-  articles,
-} from '../../assets/datas/ArticleViewData/data'; //지우기
 import Button from '../Common/Button/Button';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import Auth from '../../hoc/auth';
@@ -20,15 +16,12 @@ function ArticleViewWrapper({ id }) {
   let request = Auth(true);
 
   useEffect(async () => {
-    // indicator === 'con'
-    //   ? await setContribution(contributions)
-    //   : await setArticle(articles); //axios연결시 지우기
     indicator === 'con'
       ? await customAxios
           .get(`/magazine/contribution/${pathParameter}`)
           .then(res => {
             console.log('contribution으로 요청', res);
-            // return setContribution(res.data.data);
+            return setContribution(res.data.data);
           })
           .catch(err => console.log(err))
       : await customAxios
@@ -57,19 +50,18 @@ function ArticleViewWrapper({ id }) {
                     </span>
                     <div className="title">
                       {indicator === 'con'
-                        ? Contribution.contribution_title.slice(0, 30) + '...'
-                        : Article.article_title.slice(0, 30) + '...'}
+                        ? Contribution.contribution_title.slice(0, 15) + '...'
+                        : Article.article_title.slice(0, 15) + '...'}
                     </div>
                     <div className="username">
                       {indicator === 'con'
                         ? Contribution.user_name
-                        : Article.article_publishment}
+                        : Article.article_publisher}
                     </div>
                   </div>
                   <svg
                     className="hamburger"
                     onClick={() => window.history.back()}
-                    // onClick={() => (window.location.href = '/articlelist')}
                     width="37"
                     height="37"
                     viewBox="0 0 37 37"
@@ -88,8 +80,8 @@ function ArticleViewWrapper({ id }) {
                     게시{' '}
                     <span className="data">
                       {indicator === 'con'
-                        ? Contribution.contribution_date
-                        : Article.article_date}
+                        ? Contribution.contribution_date.slice(0, 10)
+                        : Article.article_date.slice(0, 10)}
                     </span>
                     조회{' '}
                     <span className="data">
@@ -127,9 +119,7 @@ function ArticleViewWrapper({ id }) {
                       subject={'전체 게시글 보기'}
                       color={`#191A20`}
                       backgroundColor={`#FFDD14`}
-                      onClickHandle={() =>
-                        (window.location.href = `${Article.article_url}`)
-                      }
+                      onClickHandle={() => window.open(Article.article_url)}
                     />
                   )}
                 </div>

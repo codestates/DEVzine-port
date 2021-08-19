@@ -17,7 +17,6 @@ const contributionSchema = mongoose.Schema({
     },
     contribution_url : {
         type: String,
-        required: true,
         unique: true
     },
     contribution_content : {
@@ -29,24 +28,23 @@ const contributionSchema = mongoose.Schema({
     },
     status : {
         type: Number,
-        default: 00
+        default: 100
     },
     hit : {
         type: Number,
-        default: 0
+        default: 1
     },
     user_email : {
         type: String
     }
-
-});
+}, { versionKey: false });
 
 contributionSchema.plugin(
     autoIncrement.plugin,
     {
         model : 'contributions',
         field : 'contribution_id',
-        startAt: 1,
+        startAt: 20,
         increment : 1 
     });
 const Contribution = mongoose.model("contributions", contributionSchema);

@@ -6,7 +6,7 @@ const subscriberSchema = mongoose.Schema({
         required: true,
         unique: true
     }
-});
+}, { versionKey: false });
 
 const Subscriber = mongoose.model("subscribers", subscriberSchema);
 

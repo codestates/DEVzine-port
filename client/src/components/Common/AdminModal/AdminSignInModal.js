@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { signinAdmin } from '../../../_actions/user_actions';
+import { signinAdmin } from '../../../_actions/admin_actions';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import Button from '../Button/Button';
 import Union from '../../../assets/images/Union.png';
@@ -25,7 +25,8 @@ function AdminSignInModal({ ModalOpen, setModalOpen }) {
     console.log('SignInModal :', body);
 
     dispatch(signinAdmin(body)).then(res => {
-      if (res.payload[0] === 'Login success') {
+      console.log(res.payload);
+      if (res.payload === 'Login success') {
         window.location.href = '/admin';
       } else {
         alert('로그인 실패하였습니다.');

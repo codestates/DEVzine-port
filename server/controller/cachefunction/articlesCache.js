@@ -12,12 +12,11 @@ const getArticlesPastTwoWeeks = async () => {
                 $gte: compareDate
             },
         }, {
-            _id: 0,
-            __v: 0
+            _id: 0
         }
     ).sort(
         {
-            article_id: -1
+            article_date: -1
         }
     );
 
@@ -27,21 +26,12 @@ const getArticlesPastTwoWeeks = async () => {
 
 const setNewCacheForArticles = async (articles) => {
 
-    redisClient.hgetall('recentArticles', async (err, data) => {
+    await redisClient.del('recentArticles');
 
-        if (err) {
-            return err;
-        } else {
-            await redisClient.del('recentArticles');
-            for (let i = 0; i < articles.length; i++) {
-                let id = articles[i].article_id;
-                await redisClient.hset('recentArticles', id, JSON.stringify(articles[i]));
-            }
-        }
-
-    })
-
-    return true;
+    for (let i = 0; i < articles.length; i++) {
+        let id = articles[i].article_id;
+        await redisClient.hset('recentArticles', id, JSON.stringify(articles[i]));
+    }
 
 }
 
@@ -58,6 +48,7 @@ const checkCacheForArticles = async () => {
             // cache miss
             if (!articles) { 
                 const articlesFromDB = await getArticlesPastTwoWeeks();
+                await setNewCacheForArticles(articlesFromDB);
                 resolve(
                     {
                         articleData: articlesFromDB, 
@@ -72,6 +63,9 @@ const checkCacheForArticles = async () => {
                 for (let key in articles) {
                     articleData.push(JSON.parse(articles[key]))
                 }
+                articleData.sort((a, b) => {
+                    return new Date(b.article_date) - new Date(a.article_date);
+                });
                 resolve(
                     {
                         articleData, 
@@ -90,38 +84,52 @@ const checkCacheForOneArticle = async (id) => {
     
     return new Promise((resolve, reject) => {
         
-        redisClient.hget('recentArticles', id, async (err, article) => {
-        
+        redisClient.hgetall('recentArticles', async (err, articles) => {
+
             if (err) {
                 reject(err);
             }
 
-            if (!article) {
-                const articleFromDB = await Article.findOne(
-                    {
-                        article_id: id
-                    }, {
-                        _id: 0,
-                        __v: 0
-                    }
-                );
-                resolve(
-                    {
-                        data: articleFromDB,
-                        source: 'DB'
-                    }
-                );
+            // cache miss
+            if (!articles) { 
+                const articlesFromDB = await getArticlesPastTwoWeeks();
+                await setNewCacheForArticles(articlesFromDB);
             }
 
-            if (article) {
-                
-                resolve(
-                    {
-                        data: JSON.parse(article),
-                        source: 'cache'
-                    }
-                );
-            }
+            //cache hit
+            redisClient.hget('recentArticles', id, async (err, article) => {
+            
+                if (err) {
+                    reject(err);
+                }
+
+                if (!article) {
+                    const articleFromDB = await Article.findOne(
+                        {
+                            article_id: id
+                        }, {
+                            _id: 0
+                        }
+                    );
+                    resolve(
+                        {
+                            data: articleFromDB,
+                            source: 'DB'
+                        }
+                    );
+                }
+
+                if (article) {
+                    
+                    resolve(
+                        {
+                            data: JSON.parse(article),
+                            source: 'cache'
+                        }
+                    );
+                }
+
+            });
 
         });
 
@@ -133,23 +141,34 @@ const updateArticleHit = async (id) => {
     
     try {
 
-        Article.findOneAndUpdate({
-                article_id: id
+        Article.updateOne(
+            {
+            article_id: id
             }, {
                 $inc: {
                     hit: 1
                 }
-            }, {
-                projection: {
-                    _id: 0,
-                    __v: 0
-                }
-            }, (err, data) => {
+            }, (err, result) => {
+
                 if (err) {
-                    throw err;
+                    console.log(err)
                 }
-                redisClient.hmset('recentArticles', id, JSON.stringify(data));
-                return true;
+
+                Article.findOne(
+                    {
+                        article_id: id
+                    }, {
+                        _id: 0
+                    }, (err, data) => {
+
+                        if (err) {
+                            console.log(err)
+                        }
+
+                        redisClient.hmset('recentArticles', id, JSON.stringify(data));
+                        
+                    }
+                )
             }
         )
         

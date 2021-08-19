@@ -75,6 +75,16 @@
     }
   }
 
+  &-logo-admin {
+    @include pos-center-y;
+    height: 30px;
+    width: auto;
+
+    @include mobile-only() {
+      height: 20px;
+    }
+  }
+
   &-menu {
     @include flexbox(end);
     height: 70px;

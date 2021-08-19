@@ -23,8 +23,11 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
-    contribution_id: Array
-});
+    contribution_id: {
+        type: Array,
+        default: []
+    }
+}, { versionKey: false });
 
 const User = mongoose.model("users", userSchema);
 
