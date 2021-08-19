@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { customAxios } from '../../utils/customAxios';
-import {
-  contributions,
-  articles,
-} from '../../assets/datas/ArticleViewData/data'; //지우기
 import Button from '../Common/Button/Button';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import Auth from '../../hoc/auth';
@@ -20,15 +16,12 @@ function ArticleViewWrapper({ id }) {
   let request = Auth(true);
 
   useEffect(async () => {
-    // indicator === 'con'
-    //   ? await setContribution(contributions)
-    //   : await setArticle(articles); //axios연결시 지우기
     indicator === 'con'
       ? await customAxios
           .get(`/magazine/contribution/${pathParameter}`)
           .then(res => {
             console.log('contribution으로 요청', res);
-            // return setContribution(res.data.data);
+            return setContribution(res.data.data);
           })
           .catch(err => console.log(err))
       : await customAxios
@@ -69,7 +62,6 @@ function ArticleViewWrapper({ id }) {
                   <svg
                     className="hamburger"
                     onClick={() => window.history.back()}
-                    // onClick={() => (window.location.href = '/articlelist')}
                     width="37"
                     height="37"
                     viewBox="0 0 37 37"
