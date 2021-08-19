@@ -33,7 +33,12 @@ export async function signinAdmin(dataToSubmit) {
 export async function getContributionAdmin() {
   const request = await customAxios
     .get(`/admin/contributionlist`)
-    .then(res => res.data.data);
+    .then(res => [
+      res.data.data.requested.postRequest,
+      res.data.data.requested.patchRequest,
+      res.data.data.requested.deletRequest,
+      res.data.data.accepted,
+    ]);
 
   return {
     type: CONTRIBUTION_ADMIN,
