@@ -1,87 +1,79 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { getArticleData } from '../../_actions/article_actions';
 import ArticleView from '../../pages/ArticleView';
-import ArticelCarousel from './ArticleCarousel';
-import { customAxios } from '../../utils/customAxios';
+import { useDispatch } from 'react-redux';
+import { getContributionData } from '../../_actions/article_actions';
 import Button from '../Common/Button/Button';
 import eye from '../../assets/images/eye.svg';
 
-function ArticleListWrapper() {
+function ContributionListWrapper() {
   const dispatch = useDispatch();
 
-  const [ArticleData, setArticleData] = useState(null);
   const [ContributionData, setContributionData] = useState(null);
-  const [ArticlePlus, setArticlePlus] = useState(12);
+  const [ConPlus, setConPlus] = useState(12);
 
   useEffect(() => {
-    dispatch(getArticleData())
+    dispatch(getContributionData)
       .then(res => {
-        setArticleData(res.payload[0]);
-        setContributionData(res.payload[1]);
+        setContributionData(res.payload);
       })
       .catch(err => {
         alert('기고, 기사글 받아오는데 실패하였습니다.');
       });
-  }, [ArticlePlus]);
+  }, [ConPlus]);
 
   function latestBtn() {
-    cconsole.log('최신순');
+    console.log('최신순');
   }
 
   function viewBtn() {
     console.log('조회순');
   }
 
-  function articlePlusHandler() {
-    setArticlePlus(ArticlePlus + 12);
+  function ConPlusHandler() {
+    setConPlus(ConPlus + 12);
   }
 
-  return ArticleData ? (
+  return ContributionData ? (
     <>
-      <div className="artilistwrapper">
+      <div className="contributionlistwrapper">
         <div className="container">
           <div className="row">
-            <div className="col-sm-4">
-              <div className="carousel">
-                <h2>DEVzine이 추천하는 소식</h2>
-                <Link to="/contributionlist">
-                  <span className="allviewbtn">모두 보기</span>
-                </Link>
-                <ArticelCarousel ContributionData={ContributionData} />
-              </div>
-            </div>
             <div className="col-sm-4 col-md-12 col-lg-12">
               <div className="articlebox">
                 <div className="articlebox-align">
                   <span onClick={latestBtn}>최신순</span>|
                   <span onClick={viewBtn}>조회순</span>
+                  <Link to="/articlelist">
+                    <span className="prebtn">이전으로</span>
+                  </Link>
                 </div>
 
-                {ArticleData.slice(0, ArticlePlus).map(el => {
+                {ContributionData.map(el => {
                   return (
                     <div className="articlebox-listbox" key={el.article_title}>
                       <Link
-                        to={`/article/art-${el.article_id}`}
+                        to={`/article/con-${el.contribution_id}`}
                         children={<ArticleView />}
                       >
                         <ul>
                           <li className="articlebox-date ">
-                            {el.article_date.split('T')[0].replace(/-/gi, '.')}
+                            {el.contribution_date
+                              .split('T')[0]
+                              .replace(/-/gi, '.')}
                           </li>
                           <li className="articlebox-title ell-24 sm-hidden">
-                            {el.article_title}
+                            {el.contribution_title}
                           </li>
                           <li className="articlebox-title ell-18 sm-only">
-                            {el.article_title}
+                            {el.contribution_title}
                           </li>
                           <li className="articlebox-content ell-12 ">
-                            {el.article_content}
+                            {el.contribution_content}
                           </li>
                           <li>
                             <span className="articlebox-keyword">
-                              {el.article_keyword}
+                              {el.contribution_keyword}
                             </span>
                             <span className="articlebox-hit">
                               <img src={eye} alt="view number" />
@@ -106,7 +98,7 @@ function ArticleListWrapper() {
                   color={`#999999`}
                   backgroundColor={`#ffffff`}
                   border={`1px solid #d9d9d9`}
-                  onClickHandle={articlePlusHandler}
+                  onClickHandle={ConPlusHandler}
                 />
               </div>
             </div>
@@ -117,4 +109,4 @@ function ArticleListWrapper() {
   ) : null;
 }
 
-export default ArticleListWrapper;
+export default ContributionListWrapper;

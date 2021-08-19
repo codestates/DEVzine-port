@@ -1,0 +1,36 @@
+.contributionlistwrapper {
+  background-color: $background;
+  // background-color: $border;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+
+  .articlebox {
+    margin-top: 192px; //header 120px 포함
+
+    @include mobile-only() {
+      margin-top: 162px; //header 90px 포함
+    }
+
+    .prebtn {
+      float: right;
+      margin: 0;
+      color: $border;
+      font-weight: $bold;
+
+      &:hover {
+        color: $yellow-dark;
+      }
+    }
+
+    &-listbox {
+      background-color: $yellow-light;
+      border: 0;
+    }
+
+    &-keyword {
+      @include text-style(13, $yellow-light);
+      background-color: $dark;
+    }
+  }
+}
