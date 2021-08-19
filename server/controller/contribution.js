@@ -150,23 +150,73 @@ module.exports = {
 
         updateContribution: async (req, res) => {
 
-                // 날짜 바뀜 
-        
-        // TODO: 사용자가 원하는 글에 대해 수정 요청한다.
-        // req.body
-        // { 
-	// 	"contribution_title" : "string",
-	// 	"contribution_content" : "string",
-	// 	"contibution_keyword" : "string",
-        // }       
-        // status: 200
-        // {
-        //     "message" : "Update request success"
-        // }
-        // status:404
-        // {
-        //     "message": "Not found"
-        // }
+                
+                try {
+
+                        const { _id, user_email } = req.user;
+                        const contribution_id = Number(req.params.contributionid);
+
+                        let user = await User.findOne(
+                                { 
+                                        _id
+                                }
+                        );
+                        if (!user) {
+                                return res.status(404).json(
+                                        {
+                                                "message": "User not found"
+                                        }
+                                );
+                        }
+
+                        const contributionForDeletion = await Contribution.findOne(
+                                {
+                                        contribution_id
+                                }
+                        )
+
+                        if (!contributionForDeletion) {
+                                return res.status(404).json(
+                                        {
+                                                "message": "Contribution not found"
+                                        }
+                                );
+                        }
+
+                        if (contributionForDeletion.user_email !== user_email) {
+                                return res.status(403).json(
+                                        {
+                                                "message": "Unauthorized user"
+                                        }
+                                );
+                        }
+
+                        let contribution_date = new Date(Date.now());
+                        contribution_date.setHours(contribution_date.getHours() + 9);
+
+                        await Contribution.updateOne(
+                                {
+                                        contribution_id
+                                }, {
+                                        $set: {
+                                                status: 101,
+                                                contribution_date
+                                        }
+                                }
+                        )
+
+                        return res.status(200).json(
+                                {
+                                        "message": "Update request success"
+                                }
+                        );
+
+                } catch (err) {
+
+                        console.log(err)
+                        return res.status(500).send(err);
+                
+                }
 
         return res.send('patch contribution');
         
