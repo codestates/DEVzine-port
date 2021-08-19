@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signoutUser } from '../../../_actions/user_actions';
+import { signoutAdmin } from '../../../_actions/admin_actions';
 import store from '../../../store/store';
 import TopTime from './TopTime';
 import SignInModal from '../SignInModal/SignInModal';
@@ -24,13 +25,15 @@ function Header() {
         setSignIn(true);
         setUserName(store.getState().user.signinSuccess[1]);
       }
-    } else if (store.getState().user.adminSigninSuccess) {
-      if (store.getState().user.adminSigninSuccess === 'Login success') {
-        setSignIn(true);
+    } else {
+      setSignIn(false);
+    }
+
+    if (store.getState().admin.adminSigninSuccess) {
+      if (store.getState().admin.adminSigninSuccess === 'Login success') {
         setAdmin(true);
       }
     } else {
-      setSignIn(false);
       setAdmin(false);
     }
   }, []);
@@ -40,15 +43,28 @@ function Header() {
   }
 
   function signOutHandler() {
-    dispatch(signoutUser()).then(res => {
-      if (res.payload === 'Logout success') {
-        setSignIn(false);
-        setAdmin(false);
-        window.location.reload();
-      } else {
-        alert('로그아웃 실패하였습니다.');
-      }
-    });
+    if (SignIn) {
+      dispatch(signoutUser()).then(res => {
+        if (res.payload === 'Logout success') {
+          setSignIn(false);
+
+          window.location.reload();
+        } else {
+          alert('로그아웃 실패하였습니다.');
+        }
+      });
+    }
+
+    if (Admin) {
+      dispatch(signoutAdmin()).then(res => {
+        if (res.payload === 'Logout success') {
+          setAdmin(false);
+          window.location.href = '/';
+        } else {
+          alert('로그아웃 실패하였습니다.');
+        }
+      });
+    }
   }
 
   return (
@@ -118,7 +134,7 @@ function Header() {
                         </li>
                       </ul>
                     )}
-                    {SignIn ? (
+                    {SignIn || Admin ? (
                       <button
                         onClick={signOutHandler}
                         className="rightbox-button"

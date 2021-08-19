@@ -19,8 +19,6 @@ function SideBar(props) {
       } else {
         props.setSignIn(false);
       }
-    } else {
-      props.setSignIn(false);
     }
   }, []);
 

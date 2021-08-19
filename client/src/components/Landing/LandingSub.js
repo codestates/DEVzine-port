@@ -47,8 +47,8 @@ function LandingSub() {
   });
 
   useEffect(() => {
-    if (store.getState().user.adminSigninSuccess) {
-      if (store.getState().user.adminSigninSuccess === 'Login success') {
+    if (store.getState().admin.adminSigninSuccess) {
+      if (store.getState().admin.adminSigninSuccess === 'Login success') {
         setAdmin(true);
       }
     } else {

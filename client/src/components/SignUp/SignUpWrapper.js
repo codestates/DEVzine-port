@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { signupUser } from '../../_actions/user_actions';
+// import { useDispatch } from 'react-redux';
+// import { signupUser } from '../../_actions/user_actions';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import Accordion from './Accordion';
 import { checkEmail, checkPassword } from '../../utils/validation';
@@ -9,7 +9,7 @@ import { customAxios } from '../../utils/customAxios';
 import SigninModal from '../Common/SignInModal/SignInModal';
 
 function SignUpWrapper() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [email_isValid, setEmail_isValid] = useState(false);
   const [pw_isValid, setPw_isValid] = useState(false);
@@ -112,15 +112,20 @@ function SignUpWrapper() {
 
     console.log('SignUpWrapper :', body);
 
-    dispatch(signupUser(body)).then(res => {
-      console.log(res.payload);
-      if (res.payload === 'User created') {
-        console.log(res.payload);
-        setModalOpen(true);
-      } else {
-        alert('회원가입 실패하였습니다.');
-      }
-    });
+    // dispatch(signupUser(body)).then(res => {
+    //   console.log(res.payload);
+    //   if (res.payload === 'User created') {
+    //     console.log(res.payload);
+    //     setModalOpen(true);
+    //   } else {
+    //     alert('회원가입 실패하였습니다.');
+    //   }
+    // });
+
+    return await customAxios
+      .post(`/user/signup`, body)
+      .then(res => setModalOpen(true))
+      .catch(err => alert('회원가입 실패하였습니다.'));
   }
 
   function radioInputHandler() {

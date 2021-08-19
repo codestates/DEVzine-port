@@ -10,8 +10,8 @@ function Footer() {
   const [Admin, setAdmin] = useState(false);
 
   useEffect(() => {
-    if (store.getState().user.adminSigninSuccess) {
-      if (store.getState().user.adminSigninSuccess === 'Login success') {
+    if (store.getState().admin.adminSigninSuccess) {
+      if (store.getState().admin.adminSigninSuccess === 'Login success') {
         setAdmin(true);
       }
     } else {
@@ -52,11 +52,13 @@ function Footer() {
                       >
                         DEVzine:port Github
                       </a>
-                      |
+                      <span className="lg-only">|</span>
                       <span className="sm-only">
                         <br />
                       </span>
-                      <span onClick={() => signInHandler()}>관리자 로그인</span>
+                      <span className="lg-only" onClick={() => signInHandler()}>
+                        관리자 로그인
+                      </span>
                     </div>
                     <div className="okteam2">
                       공동 대표 및 연락처 :
