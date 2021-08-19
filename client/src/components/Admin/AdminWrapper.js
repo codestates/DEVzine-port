@@ -57,13 +57,25 @@ function AdminWrapper() {
             {Admin ? (
               <div className="col-sm-4">
                 <div className="request">
-                  <h2>요청</h2>
+                  <h2>
+                    요청
+                    <span className="request-sub">
+                      승인, 수정, 삭제 요청을 확인할 수 있고, 승인하거나 거부할
+                      수 있습니다.
+                    </span>
+                  </h2>
                   <div className="request-manage">
                     <RequestTable columns={columns} data={data} />
                   </div>
                 </div>
                 <div className="approval">
-                  <h2>승인</h2>
+                  <h2>
+                    승인
+                    <span className="approval-sub">
+                      승인 처리된 소식을 볼 수 있으며, 이 소식들은 추천 소식으로
+                      보여집니다.
+                    </span>
+                  </h2>
                   <div className="approval-manage">
                     <ApprovalTable columns={columns2} data={data2} />
                   </div>

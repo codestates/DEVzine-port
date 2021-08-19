@@ -23,6 +23,13 @@
   }
 }
 
+.request-sub,
+.approval-sub {
+  @include text-style(16, $dark);
+  margin-left: 12px;
+  font-weight: $normal;
+}
+
 table {
   border-collapse: collapse;
   margin-top: 12px;
