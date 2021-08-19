@@ -23,7 +23,10 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
-    contribution_id: Array
+    contribution_id: {
+        type: Array,
+        default: []
+    }
 });
 
 const User = mongoose.model("users", userSchema);

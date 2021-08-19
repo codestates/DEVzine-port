@@ -44,8 +44,18 @@ module.exports = {
                                 }
                         );
 
-                        const contribution_url = `${process.env.DEVZINE_CLIENT_ENDPOINT}/article/con-${newContribution.contribution_id}`;
+                        await User.updateOne(
+                                {
+                                        user_email
+                                }, {
+                                        $push: {
+                                                contribution_id: newContribution.contribution_id
+                                        }
+                                }
+                        );
 
+                        const contribution_url = `${process.env.DEVZINE_CLIENT_ENDPOINT}/article/con-${newContribution.contribution_id}`;
+                
                         await Contribution.updateOne(
                                 {
                                         contribution_id: newContribution.contribution_id

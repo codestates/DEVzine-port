@@ -34,16 +34,16 @@ const getAllConfirmedContributions = async () => {
             }
         }
     ])
-    
+
     return contributionList;
 
 }
 
 const setNewCacheForContributions = async (contributions) => {
-
+    
     for (let i = 0; i < contributions.length; i++) {
         let id = contributions[i].contribution_id;
-        await redisClient.hset('allContributions', id, JSON.stringify(contributions[i]));
+        await redisClient.hset('allContributions', id, JSON.stringify(contributions[i]))
     }
     await redisClient.expire('allContributions', 30); //TODO: 배포 전에 24시간으로 설정
 
