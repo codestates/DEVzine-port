@@ -19,9 +19,11 @@ module.exports = {
         let articles = [];
 
         let CRAWL_URL = `https://www.boannews.com/media/t_list.asp`
-        const html = await axios.get(CRAWL_URL, {
-            responseEncoding: 'binary'
-        });
+        const html = await axios.get(CRAWL_URL, 
+            {
+                responseEncoding: 'binary'
+            }
+        );
         const htmlData = iconv.decode(html.data, 'euc-kr').toString();
         const $ = cheerio.load(htmlData);
 

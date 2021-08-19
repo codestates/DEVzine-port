@@ -20,9 +20,9 @@ function ArticleViewWrapper({ id }) {
   let request = Auth(true);
 
   useEffect(async () => {
-    indicator === 'con'
-      ? await setContribution(contributions)
-      : await setArticle(articles); //axios연결시 지우기
+    // indicator === 'con'
+    //   ? await setContribution(contributions)
+    //   : await setArticle(articles); //axios연결시 지우기
     indicator === 'con'
       ? await customAxios
           .get(`/magazine/contribution/${pathParameter}`)
@@ -35,7 +35,7 @@ function ArticleViewWrapper({ id }) {
           .get(`/magazine/article/${pathParameter}`)
           .then(res => {
             console.log('Article로 요청', res);
-            // return setArticle(res.data.data);
+            return setArticle(res.data.data);
           })
           .catch(err => console.log(err));
     setAlldata(true);
@@ -68,7 +68,8 @@ function ArticleViewWrapper({ id }) {
                   </div>
                   <svg
                     className="hamburger"
-                    onClick={() => (window.location.href = '/articlelist')}
+                    onClick={() => window.history.back()}
+                    // onClick={() => (window.location.href = '/articlelist')}
                     width="37"
                     height="37"
                     viewBox="0 0 37 37"

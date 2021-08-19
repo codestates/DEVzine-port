@@ -1,79 +1,151 @@
+const { 
+    checkCacheForArticles, 
+    checkCacheForOneArticle, 
+    updateArticleHit, 
+} = require('./cachefunction/articlesCache')
+const {
+    checkCacheForContributions, 
+    checkCacheForOneContribution,
+    updateContributionHit,
+} = require('./cachefunction/contributionsCache')
+
 module.exports = {
 
-	getMagazineList: async (req, res) => {
+	getAllArticlesAndRecentContributions: async (req, res) => {
+
+        try {
+
+            const { articleData, articleSource } = await checkCacheForArticles()
+            let     { contributionData, contributionSource } = await checkCacheForContributions()
+
+            if (!articleData || !contributionData) {
+                return res.status(404).json(
+                    {
+                        "message" : "Not found"
+                    }
+                )
+            }
+            
+            contributionData = contributionData.slice(0,6)
+
+            return res.status(200).json(
+                {
+                    articleData,
+                    contributionData,
+                    articleSource,
+                    contributionSource,
+                    "message" : "Article list successfully found",
+                }
+            );
+
+        } catch (err) {
+            
+            console.log(err)
+            return res.status(500).send(err)
+
+        }
+
+    },
+
+    getAllContributions: async (req, res) => {
         
-        // TODO: 뉴스를 최신순으로 12개 조회한다.
-        // status: 200
-        // {
-        //     "data": [
-        //         ...
-        //         {
-        //             "article_id": number,
-        //             "article_title": "string",
-        //             "article_content": "string",
-        //             "article_date": date,
-        //             "article_keyword": "string",
-        //             "hit": number,
-        //         }
-        //     ],
-        //     "message" : "Article list successfully found"
-        // }
-        // status:404
-        // {
-        //     "message": "Not found"
-        // } 
-        setTimeout(() => {
-            return res.send('no cache, get magazine list from DB');
-        }, 500);
+        try {
+
+            const { contributionData, contributionSource } = await checkCacheForContributions();
+
+            if (!contributionData) {
+                return res.status(404).json(
+                    {
+                        "message" : "Not found"
+                    }
+                )
+            }
+
+            return res.status(200).json({
+                data: contributionData,
+                source: contributionSource,
+                message: "Request success"
+            });
+
+        } catch (err) {
+
+            console.log(err)
+            return res.status(500).send(err)
+
+        }
+
     },
 
     getArticle: async (req, res) => {
         
-        // TODO: 개별 기사 정보를 조회한다. 
-        // status: 200
-        // {
-        //     "data": [
-        //         ...
-        //         {
-        //             "article_id": number,
-        //             "article_title": "string",
-        //             "article_content": "string",
-        //             "article_date": date,
-        //             "article_keyword": "string",
-        //             "article_url": "string",
-        //             "hit": number,
-        //         }
-        //     ],
-        //     "message" : "Article list successfully found"
-        // }
-        // status:404
-        // {
-        //     "message": "Not found"
-        // }
+        try {
 
-        return res.send('article');
+            const articleid = Number(req.params.articleid);
+
+            const { data, source } = await checkCacheForOneArticle(articleid)
+
+            if (!data) {
+                return res.status(404).json(
+                    {
+                        "message" : "Not found"
+                    }
+                )
+            }
+
+            updateArticleHit(articleid);
+
+            return res.status(200).json(
+                {
+                    data,
+                    source,
+                    "message" : "Article successfully found"
+                }
+            );
+
+        } catch (err) {
+            
+            console.log(err)
+            return res.status(500).send(err)
+
+        }
 
 	},
 
     getContribution: async (req, res) => {
 
-        //TODO: 사용자가 등록한 (승인된) 기고글을 조회한다.
-        // status: 200
-        // {
-        // 	"data" : {
-        // 		"contribution_title": "string",
-        // 		"contribution_content": "string",
-        // 		"contribution_keyword": "string",
-        // 		"contribution_date" : "date",
-        // 		"hit": "number"
-        // 		"user_name" : "string"
-        // 	},
-        // 	"message" : "Update request success"
-        // }
-        // status:404
-        // {
-        //     "message": "Not found"
-        // }
-        return res.send('contribution');
+        try {
+
+            const contributionid = Number(req.params.contributionid);
+
+            const cacheResult = await checkCacheForOneContribution(contributionid)
+
+            if (cacheResult === 'Not found') {
+                return res.status(404).json(
+                    {
+                        "message" : "Not found"
+                    }
+                )
+            }
+
+            const { data, source } = cacheResult
+
+            updateContributionHit(contributionid);
+
+            return res.status(200).json(
+                {
+                    data,
+                    source,
+                    "message" : "Contribution successfully found"
+                }
+            );
+
+        } catch (err) {
+            
+            console.log(err)
+            return res.status(500).send(err)
+
+        }
+
     }
+
 };

@@ -16,17 +16,22 @@ function Header() {
   const [UserName, setUserName] = useState(null);
   const [ModalOpen, setModalOpen] = useState(false);
   const [OpenSidebar, setOpenSidebar] = useState(false);
+  const [Admin, setAdmin] = useState(false);
 
   useEffect(() => {
     if (store.getState().user.signinSuccess) {
       if (store.getState().user.signinSuccess[0] === 'Login success') {
         setSignIn(true);
         setUserName(store.getState().user.signinSuccess[1]);
-      } else {
-        setSignIn(false);
+      }
+    } else if (store.getState().user.adminSigninSuccess) {
+      if (store.getState().user.adminSigninSuccess[0] === 'Login success') {
+        setSignIn(true);
+        setAdmin(true);
       }
     } else {
       setSignIn(false);
+      setAdmin(false);
     }
   }, []);
 
@@ -38,6 +43,7 @@ function Header() {
     dispatch(signoutUser()).then(res => {
       if (res.payload === 'Logout success') {
         setSignIn(false);
+        setAdmin(false);
         window.location.reload();
       } else {
         alert('로그아웃 실패하였습니다.');
@@ -50,9 +56,11 @@ function Header() {
       <header className="headerfix">
         <div className="headertime">
           <span className="sm-hidden">
-            {SignIn ? `${UserName}님께 ` : '여러분께 '}
+            {SignIn ? (Admin ? '' : `${UserName}님께 `) : '여러분께 '}
           </span>
-          새로운 소식을 전하기까지 남은 시간
+          {Admin
+            ? '새로운 소식을 만들기까지 남은 시간'
+            : '새로운 소식을 전하기까지 남은 시간'}
           <span className="timer">
             <TopTime />
           </span>
@@ -63,9 +71,17 @@ function Header() {
             <div className="row">
               <div className="col-sm-4">
                 <div className="headernav">
-                  <Link to="/">
+                  {Admin ? (
                     <img src={logo} alt="DEVzine" className="headernav-logo" />
-                  </Link>
+                  ) : (
+                    <Link to="/">
+                      <img
+                        src={logo}
+                        alt="DEVzine"
+                        className="headernav-logo"
+                      />
+                    </Link>
+                  )}
                   <div className="sm-only">
                     {OpenSidebar ? (
                       <SideBar
@@ -85,17 +101,19 @@ function Header() {
                     )}
                   </div>
                   <div className="rightbox sm-hidden">
-                    <ul className="navlist">
-                      <li>
-                        <Link to="/articlelist">매거진 보기</Link>
-                      </li>
-                      <li>
-                        <Link to="/subscribe">구독하기</Link>
-                      </li>
-                      <li>
-                        <Link to="/mypage">마이페이지</Link>
-                      </li>
-                    </ul>
+                    {Admin ? null : (
+                      <ul className="navlist">
+                        <li>
+                          <Link to="/articlelist">매거진 보기</Link>
+                        </li>
+                        <li>
+                          <Link to="/subscribe">구독하기</Link>
+                        </li>
+                        <li>
+                          <Link to="/mypage">마이페이지</Link>
+                        </li>
+                      </ul>
+                    )}
                     {SignIn ? (
                       <button
                         onClick={signOutHandler}

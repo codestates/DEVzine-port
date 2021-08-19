@@ -1,9 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import arrow from '../../../assets/images/arrow_right_b.svg';
 import footerArrow from '../../../assets/images/footerArrow.svg';
+import AdminSignInModal from '../AdminModal/AdminSignInModal';
+import store from '../../../store/store';
 
 function Footer() {
+  const [ModalOpen, setModalOpen] = useState(false);
+  const [Admin, setAdmin] = useState(false);
+
+  useEffect(() => {
+    if (store.getState().user.adminSigninSuccess) {
+      if (store.getState().user.adminSigninSuccess[0] === 'Login success') {
+        setAdmin(true);
+      }
+    } else {
+      setAdmin(false);
+    }
+  }, []);
+
+  function signInHandler() {
+    setModalOpen(true);
+  }
+
   return (
     <>
       <footer>
@@ -37,9 +56,7 @@ function Footer() {
                       <span className="sm-only">
                         <br />
                       </span>
-                      <span onClick={() => alert('관리자 로그인')}>
-                        관리자 로그인
-                      </span>
+                      <span onClick={() => signInHandler()}>관리자 로그인</span>
                     </div>
                     <div className="okteam2">
                       공동 대표 및 연락처 :
@@ -83,25 +100,30 @@ function Footer() {
                       </a>
                     </div>
                   </div>
-                  <div className="footerleft sm-hidden">
-                    <div className="footerctbbtn">
-                      <Link to="/contribution">
-                        DEVzine 기고 신청하기
-                        <img src={footerArrow} alt="footerArrow" />
-                      </Link>
+                  {Admin ? null : (
+                    <div className="footerleft sm-hidden">
+                      <div className="footerctbbtn">
+                        <Link to="/contribution">
+                          DEVzine 기고 신청하기
+                          <img src={footerArrow} alt="footerArrow" />
+                        </Link>
+                      </div>
+                      <div className="footervslbtn">
+                        <Link to="/visual">
+                          핵심 데이터 한 눈에 보기
+                          <img src={footerArrow} alt="footerArrow" />
+                        </Link>
+                      </div>
                     </div>
-                    <div className="footervslbtn">
-                      <Link to="/visual">
-                        핵심 데이터 한 눈에 보기
-                        <img src={footerArrow} alt="footerArrow" />
-                      </Link>
-                    </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </div>
+        {ModalOpen ? (
+          <AdminSignInModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
+        ) : null}
       </footer>
     </>
   );

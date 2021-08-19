@@ -1,5 +1,4 @@
 const bcrypt = require('bcryptjs');
-const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const { User } = require('../Models/Users');
 const { VerifiedEmail } = require('../Models/Verifiedemails');
@@ -7,7 +6,7 @@ require('dotenv').config();
 
 module.exports = {
   signUp: async (req, res) => {
-    const { user_email, user_password, user_name, user_info } = req.body;
+    const { user_email, user_name, user_info } = req.body;
 
     const emailRegex =
       /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -20,7 +19,7 @@ module.exports = {
     }
 
     try {
-      // need hashing password
+      const user_password = await bcrypt.hash(req.body.user_password, 10);
       const newUser = new User({
         user_email,
         user_password,
@@ -90,8 +89,12 @@ module.exports = {
           return res.status(404).send({ message: 'Not found' });
         }
       });
-      req.logout();
-      res.status(204).send({ message: 'User deleted' });
+      res.clearCookie('jwt', {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None'
+      });
+      res.status(200).send({ message: 'User deleted' });
     } catch (err) {
       res.status(500).send(err);
     }
