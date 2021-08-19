@@ -78,6 +78,61 @@ module.exports = {
                                 users.users_top_language[language._id] = language.count;
                         });
 
+                        const ageByGender = await await User.aggregate([
+                                {
+                                        $match: {
+                                                user_gender: {
+                                                        $in: [ '남자', '여자']
+                                                }
+                                        }
+                                },
+                                {
+                                        $group: {
+                                                _id: {
+                                                        'user_age':'$user_age',
+                                                        'user_gender': '$user_gender'
+                                                },
+                                                count: {
+                                                        $sum: 1
+                                                }
+                                        }
+                                }
+                        ])
+                        
+                        let ageByGenderSeries = { 
+                                '여자': {
+                                        '10대' : 0, 
+                                        '20대' : 0, 
+                                        '30대' : 0, 
+                                        '40대' : 0, 
+                                        '50대' : 0, 
+                                        '60대 이상' : 0 
+                                },
+                                '남자': {
+                                        '10대' : 0,
+                                        '20대' : 0,
+                                        '30대' : 0,
+                                        '40대' : 0,
+                                        '50대' : 0,
+                                        '60대 이상' : 0
+                                }
+                        }
+
+                        ageByGender.forEach(el => {
+                                ageByGenderSeries[el._id.user_gender][el._id.user_age] = el.count
+                        })
+
+                        users.series = [
+                                {
+                                        name: '여자',
+                                        data: Object.values(ageByGenderSeries.여자)
+                                },
+                                {
+                                        name: '남자',
+                                        data: Object.values(ageByGenderSeries.남자)
+                                }
+                        ]
+
                         return users;
 
                 } catch (err) {

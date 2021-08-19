@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { signupUser } from '../../_actions/user_actions';
+import { checkEmail, checkPassword } from '../../utils/validation';
+import { customAxios } from '../../utils/customAxios';
+import Auth from '../../hoc/auth';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import Accordion from './Accordion';
-import { checkEmail, checkPassword } from '../../utils/validation';
-import Auth from '../../hoc/auth';
-import { customAxios } from '../../utils/customAxios';
 import SigninModal from '../Common/SignInModal/SignInModal';
+import AlertModal from '../Common/AlertModal/AlertModal';
 
 function SignUpWrapper() {
-  // const dispatch = useDispatch();
-
-  const [email_isValid, setEmail_isValid] = useState(false);
-  const [pw_isValid, setPw_isValid] = useState(false);
-  const [pw_confirm, setPw_confirm] = useState(false);
+  const [Email_isValid, setEmail_isValid] = useState(false);
+  const [Pw_isValid, setPw_isValid] = useState(false);
+  const [Pw_confirm, setPw_confirm] = useState(false);
+  const [AlertOpen, setAlertOpen] = useState(false);
 
   const [Email, setEmail] = useState('');
   const [Name, setName] = useState('');
@@ -57,7 +55,7 @@ function SignUpWrapper() {
       setEmail,
       '이메일',
       'email',
-      email_isValid,
+      Email_isValid,
       '30',
     ],
     [
@@ -67,7 +65,7 @@ function SignUpWrapper() {
       setPassword,
       '8자 이상 입력해주세요',
       'password',
-      pw_isValid,
+      Pw_isValid,
       '20',
     ],
     [
@@ -77,14 +75,14 @@ function SignUpWrapper() {
       setConfirmPassword,
       '비밀번호 확인',
       'password',
-      pw_confirm,
+      Pw_confirm,
       '20',
     ],
     ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '15'],
   ];
 
   async function postHandler() {
-    selectInputHandler(); //회원가입 시 화면에 있는 선택사항들을 body에 저장하기 위함
+    selectInputHandler();
 
     let multiArr = [];
 
@@ -111,16 +109,6 @@ function SignUpWrapper() {
     };
 
     console.log('SignUpWrapper :', body);
-
-    // dispatch(signupUser(body)).then(res => {
-    //   console.log(res.payload);
-    //   if (res.payload === 'User created') {
-    //     console.log(res.payload);
-    //     setModalOpen(true);
-    //   } else {
-    //     alert('회원가입 실패하였습니다.');
-    //   }
-    // });
 
     return await customAxios
       .post(`/user/signup`, body)
@@ -155,12 +143,17 @@ function SignUpWrapper() {
     let body = {
       user_email: Email,
     };
+    setAlertOpen(true);
     const request = await customAxios.post(`/email/req`, body).then(res => {
       console.log(res);
       return res;
     });
     return request;
   }
+
+  const closeModal = () => {
+    setAlertOpen(false);
+  };
   return (
     <div className="signupcontainer">
       <div className="signupwrapper">
@@ -186,18 +179,16 @@ function SignUpWrapper() {
         />
         <div
           className="signupbtn"
-          onClick={
-            e =>
-              Email &&
-              Password &&
-              ConfirmPassword &&
-              Name &&
-              email_isValid &&
-              pw_isValid &&
-              pw_confirm
-                ? postHandler()
-                : alert('모든 것을 만족해야 합니다.')
-            // postHandler()
+          onClick={e =>
+            Email &&
+            Password &&
+            ConfirmPassword &&
+            Name &&
+            Email_isValid &&
+            Pw_isValid &&
+            Pw_confirm
+              ? postHandler()
+              : alert('모든 것을 만족해야 합니다.')
           }
         >
           회원가입
@@ -206,6 +197,12 @@ function SignUpWrapper() {
       {ModalOpen ? (
         <SigninModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
       ) : null}
+      <AlertModal
+        open={AlertOpen}
+        close={closeModal}
+        alertString={'30분 이내로 확인해주세요.'}
+        alertBtn="확인"
+      />
     </div>
   );
 }

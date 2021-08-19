@@ -1938,7 +1938,8 @@ label {
           font-size: 24px;
           line-height: 34px;
           letter-spacing: -0.01em;
-          font-weight: 700; }
+          font-weight: 700;
+          margin-bottom: 13px; }
           @media screen and (max-width: 767px) {
             .articlecontainer .articleviewwrapper .header .headerleft .title {
               font-size: 18px;
@@ -1965,7 +1966,9 @@ label {
         line-height: 24px;
         letter-spacing: -0.01em;
         font-weight: 700;
-        color: #b2b3b9; }
+        color: #b2b3b9;
+        text-align: right;
+        padding-right: 1px; }
         .articlecontainer .articleviewwrapper .header .datawrapper .data {
           font-weight: 400;
           margin: 0 4px; }
@@ -1994,15 +1997,25 @@ label {
         transform: translateX(-50%);
         bottom: 72px; }
 
-.visualwrapper {
+.visualcontainer {
   background-color: #f2f2f2;
   min-height: 100vh;
   position: relative;
   width: 100%; }
-
-.visualtest {
-  border: 1px solid red;
-  padding-top: 300px; }
+  .visualcontainer-footer {
+    height: 100px;
+    margin-bottom: 220px; }
+  .visualcontainer .visualwrapper {
+    margin-top: 206px;
+    margin-bottom: 306px; }
+    .visualcontainer .visualwrapper .chartcontainer {
+      min-height: 360px;
+      background-color: #fff;
+      position: relative;
+      border: 1px solid #d9d9d9;
+      border-radius: 24px;
+      width: 100%;
+      margin-bottom: 72px; }
 
 .admin {
   background-color: #ffdd14;

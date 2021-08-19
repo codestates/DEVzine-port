@@ -57,13 +57,13 @@ function ArticleViewWrapper({ id }) {
                     </span>
                     <div className="title">
                       {indicator === 'con'
-                        ? Contribution.contribution_title.slice(0, 30) + '...'
-                        : Article.article_title.slice(0, 30) + '...'}
+                        ? Contribution.contribution_title.slice(0, 15) + '...'
+                        : Article.article_title.slice(0, 15) + '...'}
                     </div>
                     <div className="username">
                       {indicator === 'con'
                         ? Contribution.user_name
-                        : Article.article_publishment}
+                        : Article.article_publisher}
                     </div>
                   </div>
                   <svg
@@ -88,8 +88,8 @@ function ArticleViewWrapper({ id }) {
                     게시{' '}
                     <span className="data">
                       {indicator === 'con'
-                        ? Contribution.contribution_date
-                        : Article.article_date}
+                        ? Contribution.contribution_date.slice(0, 10)
+                        : Article.article_date.slice(0, 10)}
                     </span>
                     조회{' '}
                     <span className="data">
@@ -127,9 +127,7 @@ function ArticleViewWrapper({ id }) {
                       subject={'전체 게시글 보기'}
                       color={`#191A20`}
                       backgroundColor={`#FFDD14`}
-                      onClickHandle={() =>
-                        (window.location.href = `${Article.article_url}`)
-                      }
+                      onClickHandle={() => window.open(Article.article_url)}
                     />
                   )}
                 </div>

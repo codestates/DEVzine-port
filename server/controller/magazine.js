@@ -1,8 +1,13 @@
 const { 
     checkCacheForArticles, 
     checkCacheForOneArticle, 
-    updateArticleHit 
+    updateArticleHit, 
 } = require('./cachefunction/articlesCache')
+const {
+    checkCacheForContributions, 
+    checkCacheForOneContribution,
+    updateContributionHit,
+} = require('./cachefunction/contributionsCache')
 
 module.exports = {
 
@@ -10,12 +15,10 @@ module.exports = {
 
         try {
 
-            const { articleData, articleSource } = await checkCacheForArticles().catch((err) => {
-                    return res.status(500).send(err)
-                }
-            )
+            const { articleData, articleSource } = await checkCacheForArticles()
+            let     { contributionData, contributionSource } = await checkCacheForContributions()
 
-            if (!articleData) {
+            if (!articleData || !contributionData) {
                 return res.status(404).json(
                     {
                         "message" : "Not found"
@@ -23,13 +26,15 @@ module.exports = {
                 )
             }
             
+            contributionData = contributionData.slice(0,6)
+
             return res.status(200).json(
                 {
                     articleData,
+                    contributionData,
                     articleSource,
-                    "contributionData": '',
+                    contributionSource,
                     "message" : "Article list successfully found",
-                    "contributionSource" : ''
                 }
             );
 
@@ -40,21 +45,34 @@ module.exports = {
 
         }
 
-        // "contributionData": [
-        //     {
-        //     "contribution_id": "number",
-        //     "contribution_title": "string",
-        //     "contribution_content": "string",
-        //     "contribution_keyword": "string",
-        //     "contribution_date" : "date",
-        //     "hit": "number"
-        // }
-        // ]
     },
 
     getAllContributions: async (req, res) => {
+        
+        try {
 
-        return res.status(200).send('contribution list ok')
+            const { contributionData, contributionSource } = await checkCacheForContributions();
+
+            if (!contributionData) {
+                return res.status(404).json(
+                    {
+                        "message" : "Not found"
+                    }
+                )
+            }
+
+            return res.status(200).json({
+                data: contributionData,
+                source: contributionSource,
+                message: "Request success"
+            });
+
+        } catch (err) {
+
+            console.log(err)
+            return res.status(500).send(err)
+
+        }
 
     },
 
@@ -64,10 +82,7 @@ module.exports = {
 
             const articleid = Number(req.params.articleid);
 
-            const { data, source } = await checkCacheForOneArticle(articleid).catch((err) => {
-                    return res.status(500).send(err)
-                });
-            
+            const { data, source } = await checkCacheForOneArticle(articleid)
 
             if (!data) {
                 return res.status(404).json(
@@ -98,23 +113,39 @@ module.exports = {
 
     getContribution: async (req, res) => {
 
-        //TODO: 사용자가 등록한 (승인된) 기고글을 조회한다.
-        // status: 200
-        // {
-        // 	"data" : {
-        // 		"contribution_title": "string",
-        // 		"contribution_content": "string",
-        // 		"contribution_keyword": "string",
-        // 		"contribution_date" : "date",
-        // 		"hit": "number"
-        // 		"user_name" : "string"
-        // 	},
-        // 	"message" : "Update request success"
-        // }
-        // status:404
-        // {
-        //     "message": "Not found"
-        // }
-        return res.send('contribution');
+        try {
+
+            const contributionid = Number(req.params.contributionid);
+
+            const cacheResult = await checkCacheForOneContribution(contributionid)
+
+            if (cacheResult === 'Not found') {
+                return res.status(404).json(
+                    {
+                        "message" : "Not found"
+                    }
+                )
+            }
+
+            const { data, source } = cacheResult
+
+            updateContributionHit(contributionid);
+
+            return res.status(200).json(
+                {
+                    data,
+                    source,
+                    "message" : "Contribution successfully found"
+                }
+            );
+
+        } catch (err) {
+            
+            console.log(err)
+            return res.status(500).send(err)
+
+        }
+
     }
+
 };
