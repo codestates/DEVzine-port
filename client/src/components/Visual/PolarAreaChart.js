@@ -1,8 +1,6 @@
 import Chart from 'react-apexcharts';
 
 export function UserGender({ data }) {
-  console.log(data);
-
   let options = {
     colors: ['#ffc803', '#ffe33e'],
     fill: {
