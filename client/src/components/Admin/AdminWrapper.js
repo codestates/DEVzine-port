@@ -1,28 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getContributionAdmin } from '../../_actions/admin_actions';
-import faker from 'faker/locale/ko';
+import { SearchData } from '../../_actions/admin_actions';
+import { SearchAppData } from '../../_actions/admin_actions';
 import RequestTable from './RequestTable';
 import ApprovalTable from './ApprovalTable';
 import AdminSignInModal from '../Common/AdminModal/AdminSignInModal';
 import store from '../../store/store';
 
-faker.seed(100);
-
 function AdminWrapper() {
   const dispatch = useDispatch();
 
-  const [PostRequest, setPostRequest] = useState(null);
-  const [PatchRequest, setPatchRequest] = useState(null);
-  const [DeleteRequest, setDeleteRequest] = useState(null);
+  const [Requested, setRequested] = useState(null);
   const [Accepted, setAccepted] = useState(null);
   const [AllData, setAllData] = useState(false);
+  const [Select, setSelect] = useState('');
+  const [Text, setText] = useState('');
+  const [AppText, setAppText] = useState('');
   const [ModalOpen, setModalOpen] = useState(false);
   const [Admin, setAdmin] = useState(false);
-
-  const columns = ['닉네임', '제목', '현황', '변경'];
-  const columns2 = ['닉네임', '제목'];
-  const status = ['승인요청', '수정요청', '삭제요청'];
 
   /*
 승인요청 - 게시대기(100), 게시승인(110), 게시거부(120)
@@ -30,21 +26,12 @@ function AdminWrapper() {
 삭제요청 - 삭제대기(102), 삭제승인(112), 삭제거부(122)
 */
 
-  const data = Array(6)
-    .fill()
-    .map(() => ({
-      contribution_id: Math.floor(Math.random() * 10),
-      user_name: faker.name.findName(),
-      contribution_title: faker.lorem.sentence(),
-      contribution_status: status[Math.floor(Math.random() * status.length)],
-    }));
-
-  const data2 = Array(6)
-    .fill()
-    .map(() => ({
-      user_name: faker.name.findName(),
-      contribution_title: faker.lorem.sentence(),
-    }));
+  let selectOptions = [
+    ['모든요청', 'All'],
+    ['승인요청', 'postRequest'],
+    ['수정요청', 'patchRequest'],
+    ['삭제요청', 'deleteRequest'],
+  ];
 
   useEffect(() => {
     if (store.getState().admin.adminSigninSuccess) {
@@ -59,19 +46,48 @@ function AdminWrapper() {
   });
 
   useEffect(() => {
-    dispatch(getContributionAdmin)
+    dispatch(getContributionAdmin())
       .then(res => {
-        console.log(res.payload);
-        setPostRequest(res.payload[0]);
-        setPatchRequest(res.payload[1]);
-        setDeleteRequest(res.payload[2]);
-        setAccepted(res.payload[3]);
+        setRequested([
+          ...res.payload.data.requested.postRequest,
+          ...res.payload.data.requested.patchRequest,
+          ...res.payload.data.requested.deleteRequest,
+        ]);
+        setAccepted(res.payload.data.accepted);
         setAllData(true);
       })
       .catch(err => alert('관리데이터 받아오는데 실패하였습니다.'));
   }, []);
 
-  return (
+  function onSelectHandler(e) {
+    setSelect(e.currentTarget.value);
+  }
+
+  function onTextHandler(e) {
+    setText(e.currentTarget.value);
+  }
+
+  function onAppTextHandler(e) {
+    setAppText(e.currentTarget.value);
+  }
+
+  function onSubmitHandler(e) {
+    e.preventDefault();
+
+    dispatch(SearchData(Select, Text))
+      .then(res => setRequested(res.payload))
+      .catch(err => alert('검색한 결과를 받아오는데 실패하였습니다.'));
+  }
+
+  function onApprovalHandler(e) {
+    e.preventDefault();
+
+    dispatch(SearchAppData(AppText))
+      .then(res => setAccepted(res.payload))
+      .catch(err => alert('검색한 결과를 받아오는데 실패하였습니다.'));
+  }
+
+  return AllData ? (
     <>
       <div className="admin">
         <div className="container">
@@ -86,8 +102,36 @@ function AdminWrapper() {
                       수 있습니다.
                     </span>
                   </h2>
+                  <div>
+                    <form
+                      onSubmit={e => onSubmitHandler(e)}
+                      className="request-form"
+                    >
+                      <select
+                        className="request-select"
+                        onChange={e => onSelectHandler(e)}
+                        id="request-select"
+                      >
+                        <option value="">선택</option>
+                        {selectOptions.map((el, idx) => (
+                          <option key={idx} value={el[1]}>
+                            {el[0]}
+                          </option>
+                        ))}
+                      </select>
+                      <input
+                        type="text"
+                        className="request-text"
+                        placeholder="닉네임을 검색하세요."
+                        onChange={e => onTextHandler(e)}
+                      />
+                      <button type="submit" className="request-search">
+                        검색
+                      </button>
+                    </form>
+                  </div>
                   <div className="request-manage">
-                    <RequestTable columns={columns} data={data} />
+                    <RequestTable Requested={Requested} />
                   </div>
                 </div>
                 <div className="approval">
@@ -98,8 +142,24 @@ function AdminWrapper() {
                       보여집니다.
                     </span>
                   </h2>
+                  <div>
+                    <form
+                      onSubmit={e => onApprovalHandler(e)}
+                      className="approval-form"
+                    >
+                      <input
+                        type="text"
+                        className="approval-text"
+                        placeholder="닉네임을 검색하세요."
+                        onChange={e => onAppTextHandler(e)}
+                      />
+                      <button type="submit" className="approval-search">
+                        검색
+                      </button>
+                    </form>
+                  </div>
                   <div className="approval-manage">
-                    <ApprovalTable columns={columns2} data={data2} />
+                    <ApprovalTable data={Accepted} />
                   </div>
                 </div>
                 <div className="admin-footer" />
@@ -112,7 +172,7 @@ function AdminWrapper() {
         ) : null}
       </div>
     </>
-  );
+  ) : null;
 }
 
 export default AdminWrapper;

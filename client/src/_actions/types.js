@@ -15,4 +15,6 @@ export const DELETE_DATA = 'delete_data';
 export const SIGNIN_ADMIN = 'signin_admin';
 export const SIGNOUT_ADMIN = 'signout_admin';
 export const CONTRIBUTION_ADMIN = 'contribution_admin';
+export const SEARCH_ADMIN = 'search_admin';
+export const SEARCH_APP_ADMIN = 'search_app_admin';
 export const DELETE_ADMIN_DATA = 'delete_data';
