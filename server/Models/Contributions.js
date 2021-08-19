@@ -29,11 +29,11 @@ const contributionSchema = mongoose.Schema({
     },
     status : {
         type: Number,
-        default: 00
+        default: 100
     },
     hit : {
         type: Number,
-        default: 0
+        default: 1
     },
     user_email : {
         type: String

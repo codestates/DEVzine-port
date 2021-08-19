@@ -38,7 +38,7 @@ module.exports = {
                     continue;
                 }
                 
-                if (!articleKeywords[keyword]){ // 지정된 키워드가 아닐 경우, skip 
+                if (!articleKeywords[keyword]) { // 지정된 키워드가 아닐 경우, skip 
                     continue;
                 }
 

@@ -1,0 +1,94 @@
+.admin {
+  background-color: $yellow;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+
+  &-footer {
+    height: 100px;
+    margin-bottom: 220px; // footer 220px 포함
+    position: relative;
+  }
+}
+
+.request {
+  margin-top: 192px; //header 120px 포함
+}
+
+.approval {
+  margin-top: 60px; //header 120px 포함
+
+  &-title {
+    cursor: pointer;
+  }
+}
+
+table {
+  border-collapse: collapse;
+  margin-top: 12px;
+  width: 100%;
+}
+
+th,
+td {
+  background-color: $white;
+  border: 1px solid $dark;
+  height: 20px;
+  padding: 0.5rem;
+}
+
+th {
+  &:first-child {
+    text-align: left;
+    width: 10%;
+  }
+
+  &:nth-child(2) {
+    text-align: left;
+  }
+
+  &:nth-child(3) {
+    width: 80px;
+  }
+
+  &:nth-child(4) {
+    padding-left: 16px;
+    text-align: left;
+    width: 250px;
+  }
+}
+
+td {
+  &:nth-child(2) {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.adminform {
+  &-check {
+    display: inline-block;
+    margin-left: 16px;
+
+    &-label {
+      display: inline-block;
+      margin-left: 8px;
+      margin-top: 8px;
+    }
+  }
+
+  &-btn {
+    @include text-style(16, $dark);
+    background-color: $background;
+    border: 1px solid $border;
+    border-radius: 24px;
+    height: 30px;
+    margin-left: 16px;
+    width: 70px;
+
+    &:hover {
+      background-color: $border;
+    }
+  }
+}

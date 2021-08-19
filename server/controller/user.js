@@ -1,5 +1,4 @@
 const bcrypt = require('bcryptjs');
-const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const { User } = require('../Models/Users');
 const { VerifiedEmail } = require('../Models/Verifiedemails');
@@ -7,7 +6,7 @@ require('dotenv').config();
 
 module.exports = {
   signUp: async (req, res) => {
-    const { user_email, user_password, user_name, user_info } = req.body;
+    const { user_email, user_name, user_info } = req.body;
 
     const emailRegex =
       /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -20,7 +19,7 @@ module.exports = {
     }
 
     try {
-      // need hashing password
+      const user_password = await bcrypt.hash(req.body.user_password, 10);
       const newUser = new User({
         user_email,
         user_password,
@@ -62,7 +61,7 @@ module.exports = {
     jwt.sign(
       { user: req.user },
       process.env.JWT_SECRET,
-      { expiresIn: '30m' },
+      { expiresIn: '1d' },
       (err, token) => {
         if (err) {
           return res.status(500).send(err);
@@ -71,36 +70,13 @@ module.exports = {
           httpOnly: true,
           sameSite: 'None',
           secure: true,
+          // maxAge: 24 * 60 * 60 * 1000, // 있든 말든 상관 없는듯
+          // domain: 'devzine-port.com', path: '/' // 이건 넣으면 걍 안됨;;
         });
         res.status(200).send({ data: { user_name: req.user.user_name }, message: 'Login success' });
       }
     );
   },
-    // try {
-    //   passport.authenticate('local', (passportError, user, info) => {
-    //     if (passportError || !user) {
-    //       return res.status(400).json({ message: info.message });
-    //     }
-    //     req.login(user, { session: false }, (loginError) => {
-    //       if (loginError) {
-    //         return res.status(500).send(loginError);
-    //       }
-    //       const token = jwt.sign(
-    //         { id: user._id, user_name: user.user_name },
-    //         process.env.JWT_SECRET,
-    //         { expiresIn: '30m' }
-    //         );
-    //       res.cookie("token", token, {
-    //         httpOnly: true,
-    //         secure: true,
-    //         sameSite: 'None'
-    //       });
-    //       res.status(200).send({ data: { user_name: user.user_name }, message: 'Login success' });
-    //     });
-    //   })(req, res);
-    // } catch (err) {
-    //   res.status(500).send(err);
-    // }
 
   deleteUser: async (req, res) => {
     if (!req.user) {
@@ -113,8 +89,12 @@ module.exports = {
           return res.status(404).send({ message: 'Not found' });
         }
       });
-      req.logout();
-      res.status(204).send({ message: 'User deleted' });
+      res.clearCookie('jwt', {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None'
+      });
+      res.status(200).send({ message: 'User deleted' });
     } catch (err) {
       res.status(500).send(err);
     }

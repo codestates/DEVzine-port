@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { signinUser } from '../../../_actions/user_actions';
+import { signinAdmin } from '../../../_actions/user_actions';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import Button from '../Button/Button';
 import Union from '../../../assets/images/Union.png';
 import { Link } from 'react-router-dom';
-function SigninModal({ modalOpen, setModalOpen }) {
+
+function AdminSignInModal({ ModalOpen, setModalOpen }) {
   const dispatch = useDispatch();
 
   const [Email, setEmail] = useState('');
@@ -23,32 +24,26 @@ function SigninModal({ modalOpen, setModalOpen }) {
 
     console.log('SignInModal :', body);
 
-    dispatch(signinUser(body)).then(res => {
+    dispatch(signinAdmin(body)).then(res => {
       if (res.payload[0] === 'Login success') {
-        window.location.reload();
+        window.location.href = '/admin';
       } else {
         alert('로그인 실패하였습니다.');
       }
     });
   }
 
-  function backbtnHandler() {
-    if (Email === '' && Password === '') {
-      window.location.href = '/';
-    }
-
-    setModalOpen(false);
-  }
-
-  return modalOpen ? (
+  return ModalOpen ? (
     <div className="signincontainer">
       <div className="signinwrapper">
         <div className="signinheader">DEVzine</div>
-        <div
-          className="backbtn"
-          onClick={backbtnHandler}
-          style={{ backgroundImage: `url(${Union})` }}
-        ></div>
+        <Link to="/">
+          <div
+            className="backbtn"
+            onClick={() => setModalOpen(false)}
+            style={{ backgroundImage: `url(${Union})` }}
+          ></div>
+        </Link>
         {requiredTextInputData.map((el, idx) => {
           return (
             <TextInputGenderRequired
@@ -62,23 +57,14 @@ function SigninModal({ modalOpen, setModalOpen }) {
           );
         })}
         <Button
-          subject={`로그인`}
+          subject={`관리자 로그인`}
           color={`#ffffff`}
           backgroundColor={`#191A20`}
           onClickHandle={postHandler}
         />
-        <div className="leadsignup">아직 회원이 아니신가요?</div>
-        <Link to="/signup">
-          <Button
-            subject={`회원가입`}
-            color={`#191A20`}
-            backgroundColor={`#FFDD14`}
-            onClickHandle={() => setModalOpen(false)}
-          />
-        </Link>
       </div>
     </div>
   ) : null;
 }
 
-export default SigninModal;
+export default AdminSignInModal;

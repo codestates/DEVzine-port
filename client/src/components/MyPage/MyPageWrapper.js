@@ -12,6 +12,8 @@ import { debounce } from 'lodash';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import OptContents from './OptContents';
+import Button from '../Common/Button/Button';
+import { customAxios } from '../../utils/customAxios';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
@@ -34,7 +36,7 @@ function MyPageWrapper() {
   const [Language, setLanguage] = useState([]);
   const [Contribution, setContribution] = useState([]);
 
-  const [modalOpen, setModalOpen] = useState(false);
+  const [ModalOpen, setModalOpen] = useState(false);
   const [allData, setAllData] = useState(false);
 
   useEffect(() => {
@@ -162,7 +164,7 @@ function MyPageWrapper() {
 
     let body = {
       user_email: Email,
-      user_password: Password,
+      user_password: ConfirmPassword,
       user_name: Name,
       user_info: {
         user_gender: Gender,
@@ -176,9 +178,9 @@ function MyPageWrapper() {
     console.log('MyPageWrapper :', body);
 
     dispatch(mypageUser(body)).then(res => {
-      if (res.payload[2] === 'Patch Success') {
+      if (res.payload[2] === 'Patch success') {
         alert('정보수정하였습니다.');
-        // window.location.href = '/mypage';
+        window.location.href = '/';
       } else {
         alert('정보수정을 실패하였습니다.');
       }
@@ -207,6 +209,13 @@ function MyPageWrapper() {
       });
       setLanguage(languageArr);
     }
+  }
+
+  async function withdrawal() {
+    await customAxios
+      .delete('/user/delete')
+      .then(res => alert('회원탈퇴 성공', res))
+      .catch(err => alert('회원탈퇴 에러', err));
   }
 
   return allData ? (
@@ -254,9 +263,16 @@ function MyPageWrapper() {
         >
           정보수정
         </div>
+        <Button
+          subject={`회원 탈퇴`}
+          color={`#999999`}
+          backgroundColor={`#ffffff`}
+          border={`1px solid #d9d9d9`}
+          onClickHandle={() => withdrawal()}
+        />
       </div>
-      {modalOpen ? (
-        <SigninModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      {ModalOpen ? (
+        <SigninModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
       ) : null}
     </div>
   ) : null;

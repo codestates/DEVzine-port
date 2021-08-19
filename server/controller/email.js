@@ -3,6 +3,7 @@ const smtpTransport = require('nodemailer-smtp-transport');
 const ejs = require('ejs');
 const { User } = require('../Models/Users');
 const { VerifiedEmail } = require('../Models/Verifiedemails');
+const crypto = require('crypto');
 require('dotenv').config();
 
 const CLIENT_ENDPOINT=process.env.DEVZINE_CLIENT_ENDPOINT;
@@ -33,9 +34,14 @@ module.exports = {
     }
 
     let authMailForm;
+    const cipher = crypto.createCipher('aes-256-cbc', '1111');
+    let encryptEmail = cipher.update(user_email, 'utf8', 'base64');
+    encryptEmail += cipher.final('base64');
+    console.log('Encrypt : ', encryptEmail);
+
     ejs.renderFile(
       __dirname + '/ejsform/authMail.ejs',
-      { CLIENT_ENDPOINT, user_email },
+      { CLIENT_ENDPOINT, user_email, encryptEmail },
       (err, data) => {
         if (err) console.log(err);
         authMailForm = data;
@@ -64,9 +70,13 @@ module.exports = {
 
   verifyUserEmail: async (req, res) => {
     const { temp_email } = req.body;
+    const decipher = crypto.createDecipher('aes-256-cbc', '1111');
+    let decryptEmail = decipher.update(temp_email, 'base64', 'utf8');
+    decryptEmail += decipher.final('utf8');
+    console.log('Decrypt : ', decryptEmail);
 
     const tempEmail = new VerifiedEmail({
-      temp_email,
+      temp_email: decryptEmail,
     });
     await tempEmail.save((err) => {
       if (err) {

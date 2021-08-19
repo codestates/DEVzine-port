@@ -1,4 +1,5 @@
 const passport = require('passport');
+const bcrypt = require('bcryptjs');
 const { Strategy: JWTStrategy } = require('passport-jwt');
 const { Strategy: LocalStrategy } = require('passport-local');
 
@@ -9,14 +10,15 @@ require('dotenv').config();
 const passportConfig = { usernameField: 'user_email', passwordField: 'user_password', session: false };
 
 const passportVerify = async (user_email, user_password, done) => {
-	User.findOne({ user_email }, (err, user) => {
+	User.findOne({ user_email }, async (err, user) => {
 		if (err) {
 			return done(err);
 		}
 		if (!user) {
 			return done(null, false, { message: "Invalid user" });
 		}
-		if (user.user_password !== user_password) {
+		const isValidPassword = await bcrypt.compare(user_password, user.user_password);
+		if (!isValidPassword) {
 			return done(null, false, { message: "Invalid password" });
 		}
 		return done(null, user);

@@ -7,13 +7,13 @@ import { customAxios } from '../../utils/customAxios';
 import Button from '../Common/Button/Button';
 
 function ContributionWrapper() {
-  const [keyword, setKeyword] = useState('');
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [modalOpen, setModalOpen] = useState(false);
-  const [userName, setUserName] = useState('');
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [colorChange, setcolorChange] = useState(false);
+  const [Keyword, setKeyword] = useState('');
+  const [Title, setTitle] = useState('');
+  const [Content, setContent] = useState('');
+  const [ModalOpen, setModalOpen] = useState(false);
+  const [UserName, setUserName] = useState('');
+  const [AlertOpen, setAlertOpen] = useState(false);
+  const [ColorChange, setColorChange] = useState(false);
 
   let selectOptions = [
     '게임',
@@ -51,23 +51,23 @@ function ContributionWrapper() {
     setContent(e.currentTarget.value);
 
     if (e.currentTarget.value.length >= 200) {
-      setcolorChange(true);
+      setColorChange(true);
     } else {
-      setcolorChange(false);
+      setColorChange(false);
     }
   }
 
   function onSubmitHandler(e) {
     e.preventDefault();
 
-    if (title.length < 8 || content.length < 200 || keyword === '') {
+    if (Title.length < 8 || Content.length < 200 || Keyword === '') {
       return setAlertOpen(true);
     }
 
     let body = {
-      contribution_title: title,
-      contribution_content: content,
-      contibution_keyword: keyword,
+      contribution_title: Title,
+      contribution_content: Content,
+      contibution_keyword: Keyword,
     };
 
     return customAxios.post('/contribution', body).then(res => {
@@ -90,7 +90,7 @@ function ContributionWrapper() {
             <div className="col-sm-4">
               <div className="continner">
                 <div className="context">
-                  {userName}님의
+                  {UserName}님의
                   <br />
                   얕고 넓은 지식을 기고해보세요.
                 </div>
@@ -131,10 +131,10 @@ function ContributionWrapper() {
                     미리보기 내용 <span>(필수)</span>
                     <p
                       className={
-                        colorChange ? 'textlength active' : 'textlength'
+                        ColorChange ? 'textlength active' : 'textlength'
                       }
                     >
-                      ( {content.length} / 200 이상 )
+                      ( {Content.length} / 200 이상 )
                     </p>
                   </label>
 
@@ -159,7 +159,7 @@ function ContributionWrapper() {
               </div>
               <div className="alermodalbox">
                 <AlertModal
-                  open={alertOpen}
+                  open={AlertOpen}
                   close={closeModal}
                   alertString={'모두 입력해야 합니다.'}
                   alertBtn="확인"
@@ -169,8 +169,8 @@ function ContributionWrapper() {
           </div>
         </div>
       </div>
-      {modalOpen ? (
-        <SigninModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      {ModalOpen ? (
+        <SigninModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
       ) : null}
     </>
   );

@@ -5,7 +5,8 @@ import TextInputGenderRequired from './TextInputGenderRequired';
 import Button from '../Button/Button';
 import Union from '../../../assets/images/Union.png';
 import { Link } from 'react-router-dom';
-function SigninModal({ modalOpen, setModalOpen }) {
+
+function SigninModal({ ModalOpen, setModalOpen }) {
   const dispatch = useDispatch();
 
   const [Email, setEmail] = useState('');
@@ -32,23 +33,17 @@ function SigninModal({ modalOpen, setModalOpen }) {
     });
   }
 
-  function backbtnHandler() {
-    if (Email === '' && Password === '') {
-      window.location.href = '/';
-    }
-
-    setModalOpen(false);
-  }
-
-  return modalOpen ? (
+  return ModalOpen ? (
     <div className="signincontainer">
       <div className="signinwrapper">
         <div className="signinheader">DEVzine</div>
-        <div
-          className="backbtn"
-          onClick={backbtnHandler}
-          style={{ backgroundImage: `url(${Union})` }}
-        ></div>
+        <Link to="/">
+          <div
+            className="backbtn"
+            onClick={() => setModalOpen(false)}
+            style={{ backgroundImage: `url(${Union})` }}
+          ></div>
+        </Link>
         {requiredTextInputData.map((el, idx) => {
           return (
             <TextInputGenderRequired

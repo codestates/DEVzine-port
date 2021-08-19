@@ -27,6 +27,7 @@ import AuthMail from './components/AuthMail';
 import AuthTest from './components/AuthTest';
 import Error from './components/Common/Error/Error';
 import Loading from './components/Common/Loading/Loading';
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -46,7 +47,7 @@ function App() {
           <Route path="/articlelist">
             <ArticleList />
           </Route>
-          <Route path="/article">
+          <Route path="/article/:id">
             <ArticleView />
           </Route>
           <Route path="/contributionupdate/:id">
@@ -72,6 +73,9 @@ function App() {
           </Route>
           <Route path="/error">
             <Error />
+          </Route>
+          <Route path="/admin">
+            <Admin />
           </Route>
 
           {/* 잘못된 url 정규식을 방문했을 때 */}

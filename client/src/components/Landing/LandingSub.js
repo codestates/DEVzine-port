@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../Common/Button/Button';
+import { customAxios } from '../../utils/customAxios';
+import store from '../../store/store';
 
 function LandingSub() {
-  const [subscribers, setSubscribers] = useState('200000');
-  const [count, setCount] = useState('0');
+  const [Subscribers, setSubscribers] = useState('0');
+  const [Count, setCount] = useState('0');
   const [ScrollY, setScrollY] = useState(0);
   const [ScrollActive, setScrollActive] = useState(false);
+  const [Admin, setAdmin] = useState(false);
 
   useEffect(() => {
     let start = 0;
-    const end = parseInt(subscribers.substring(0, 3));
+    const end = parseInt(Subscribers.substring(0, 3));
     if (start === end) return;
 
     let totalMilSecDur = parseInt(1);
@@ -18,10 +21,20 @@ function LandingSub() {
 
     let timer = setInterval(() => {
       start += 1;
-      setCount(String(start) + ',' + subscribers.substring(3));
+      setCount(String(start) + ',' + Subscribers.substring(3));
       if (start === end) clearInterval(timer);
     }, incrementTime);
   }, [ScrollActive]);
+
+  useEffect(async () => {
+    await customAxios
+      .get('/landing')
+      .then(res => setSubscribers(res.data.data.total_subscribers))
+      .catch(err => {
+        alert('회원 수를 받지 못 했습니다.');
+        setSubscribers('200000');
+      });
+  }, []);
 
   useEffect(() => {
     function scrollListener() {
@@ -32,6 +45,16 @@ function LandingSub() {
       window.removeEventListener('scroll', handleScroll);
     };
   });
+
+  useEffect(() => {
+    if (store.getState().user.adminSigninSuccess) {
+      if (store.getState().user.adminSigninSuccess[0] === 'Login success') {
+        setAdmin(true);
+      }
+    } else {
+      setAdmin(false);
+    }
+  }, []);
 
   function handleScroll() {
     if (ScrollY > window.innerHeight) {
@@ -50,31 +73,46 @@ function LandingSub() {
           <div className="row">
             <div className="col-sm-4">
               <div className="withuscontainer">
-                <h2>{count}명</h2>
+                <h2>{Count}명</h2>
                 구독하고 있어요.
                 <p>많은 분들이 찾는 DEVzine과 함께 해요!</p>
-                <div className="landingbottombtn">
-                  <div>
-                    <Link to="/subscribe">
+                {Admin ? (
+                  <div className="adminbottombtn">
+                    <div>
+                      <Link to="/admin">
+                        <Button
+                          subject="관리자 페이지 가기"
+                          color="#191A20"
+                          backgroundColor="#FFDD14"
+                          className="btn1"
+                        />
+                      </Link>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="landingbottombtn">
+                    <div>
+                      <Link to="/subscribe">
+                        <Button
+                          subject="구독하기"
+                          color="#191A20"
+                          backgroundColor="#FFDD14"
+                          className="btn1"
+                        />
+                      </Link>
+                    </div>
+                    <div>
                       <Button
-                        subject="구독하기"
+                        subject="매거진 보기"
                         color="#191A20"
                         backgroundColor="#FFDD14"
-                        className="btn1"
+                        onClickHandle={() =>
+                          (window.location.href = '/articlelist')
+                        }
                       />
-                    </Link>
+                    </div>
                   </div>
-                  <div>
-                    <Button
-                      subject="매거진 보기"
-                      color="#191A20"
-                      backgroundColor="#FFDD14"
-                      onClickHandle={() =>
-                        (window.location.href = '/articlelist')
-                      }
-                    />
-                  </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
