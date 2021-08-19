@@ -16,6 +16,7 @@ function AdminWrapper() {
   const [PatchRequest, setPatchRequest] = useState(null);
   const [DeleteRequest, setDeleteRequest] = useState(null);
   const [Accepted, setAccepted] = useState(null);
+  const [AllData, setAllData] = useState(false);
   const [ModalOpen, setModalOpen] = useState(false);
   const [Admin, setAdmin] = useState(false);
 
@@ -61,8 +62,11 @@ function AdminWrapper() {
     dispatch(getContributionAdmin)
       .then(res => {
         console.log(res.payload);
-        setArticleData(res.payload[0]);
-        setContributionData(res.payload[1]);
+        setPostRequest(res.payload[0]);
+        setPatchRequest(res.payload[1]);
+        setDeleteRequest(res.payload[2]);
+        setAccepted(res.payload[3]);
+        setAllData(true);
       })
       .catch(err => alert('관리데이터 받아오는데 실패하였습니다.'));
   }, []);
