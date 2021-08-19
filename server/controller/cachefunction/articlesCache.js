@@ -72,6 +72,9 @@ const checkCacheForArticles = async () => {
                 for (let key in articles) {
                     articleData.push(JSON.parse(articles[key]))
                 }
+                articleData.sort((a, b) => {
+                    return new Date(a.article_date) - new Date(b.article_date);
+                });
                 resolve(
                     {
                         articleData, 
