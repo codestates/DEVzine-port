@@ -1599,6 +1599,8 @@ label {
   margin-top: 80px; }
   .articlebox-align {
     padding-bottom: 20px; }
+    .articlebox-align .setbold {
+      font-weight: 700; }
   .articlebox span {
     cursor: pointer;
     margin: 20px; }

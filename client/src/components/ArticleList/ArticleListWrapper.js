@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getArticleData } from '../../_actions/article_actions';
+import { getArticleHitData } from '../../_actions/article_actions';
 import ArticleView from '../../pages/ArticleView';
 import ArticelCarousel from './ArticleCarousel';
-import { customAxios } from '../../utils/customAxios';
 import Button from '../Common/Button/Button';
 import eye from '../../assets/images/eye.svg';
 
@@ -14,24 +14,34 @@ function ArticleListWrapper() {
   const [ArticleData, setArticleData] = useState(null);
   const [ContributionData, setContributionData] = useState(null);
   const [ArticlePlus, setArticlePlus] = useState(12);
+  const [OrderStatus, setOrderStatus] = useState('최신순');
 
   useEffect(() => {
-    dispatch(getArticleData())
-      .then(res => {
-        setArticleData(res.payload[0]);
-        setContributionData(res.payload[1]);
-      })
-      .catch(err => {
-        alert('기고, 기사글 받아오는데 실패하였습니다.');
-      });
-  }, [ArticlePlus]);
+    if (OrderStatus === '최신순') {
+      dispatch(getArticleData)
+        .then(res => {
+          console.log(res.payload[0]);
+          setArticleData(res.payload[0]);
+          setContributionData(res.payload[1]);
+        })
+        .catch(err => alert('최신순 받아오는데 실패하였습니다.'));
+    }
+
+    if (OrderStatus === '조회순') {
+      dispatch(getArticleHitData)
+        .then(res => setArticleData(res.payload))
+        .catch(err => alert('조회순 받아오는데 실패하였습니다.'));
+    }
+  }, [ArticlePlus, OrderStatus]);
 
   function latestBtn() {
-    cconsole.log('최신순');
+    setOrderStatus('최신순');
+    setArticlePlus(12);
   }
 
   function viewBtn() {
-    console.log('조회순');
+    setOrderStatus('조회순');
+    setArticlePlus(12);
   }
 
   function articlePlusHandler() {
@@ -55,8 +65,19 @@ function ArticleListWrapper() {
             <div className="col-sm-4 col-md-12 col-lg-12">
               <div className="articlebox">
                 <div className="articlebox-align">
-                  <span onClick={latestBtn}>최신순</span>|
-                  <span onClick={viewBtn}>조회순</span>
+                  <span
+                    className={OrderStatus === '최신순' ? 'setbold' : null}
+                    onClick={latestBtn}
+                  >
+                    최신순
+                  </span>
+                  |
+                  <span
+                    className={OrderStatus === '조회순' ? 'setbold' : null}
+                    onClick={viewBtn}
+                  >
+                    조회순
+                  </span>
                 </div>
 
                 {ArticleData.slice(0, ArticlePlus).map(el => {

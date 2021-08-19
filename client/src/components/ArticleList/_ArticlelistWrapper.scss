@@ -1,6 +1,5 @@
 .artilistwrapper {
   background-color: $background;
-  // background-color: $border;
   min-height: 100vh;
   position: relative;
   width: 100%;
@@ -49,12 +48,13 @@
 
 .articlebox {
   margin-top: 80px;
-  // border: 1px solid red;
 
   &-align {
-    // margin-bottom: 20px;
-    // border: 1px solid red;
     padding-bottom: 20px;
+
+    .setbold {
+      font-weight: $bold;
+    }
   }
 
   span {
