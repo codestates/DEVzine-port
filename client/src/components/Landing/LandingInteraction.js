@@ -8,7 +8,7 @@ import BlinkText from './BlinkText';
 function Image({ url, index, camera }) {
   const [Active, setActive] = useState(0);
   const mesh = useRef();
-  let speed = 0.2;
+  let speed = 1.5;
   let positionX = 0;
   let plus = 0;
 
@@ -34,8 +34,8 @@ function Image({ url, index, camera }) {
     Active ? (mesh.current.position.y = -0.5) : (mesh.current.position.y = -1);
     camera.position.x = positionX * 1.2;
 
-    if (camera.position.x > 9.7) {
-      plus = camera.position.x - 9.7;
+    if (camera.position.x > 42) {
+      plus = camera.position.x - 42;
     } else if (camera.position.x < 0) {
       plus = camera.position.x;
     }
@@ -48,7 +48,9 @@ function Image({ url, index, camera }) {
       rotation-y={rotation}
       scale-x={scale}
       scale-y={scale}
-      onClick={() => setActive(!Active)}
+      onClick={() => {
+        setActive(!Active);
+      }}
     >
       <planeBufferGeometry attach="geometry" args={[1, 1.2]} />
       <meshBasicMaterial
