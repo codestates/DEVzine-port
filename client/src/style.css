@@ -1736,7 +1736,8 @@ label {
           font-size: 24px;
           line-height: 34px;
           letter-spacing: -0.01em;
-          font-weight: 700; }
+          font-weight: 700;
+          margin-bottom: 13px; }
           @media screen and (max-width: 767px) {
             .articlecontainer .articleviewwrapper .header .headerleft .title {
               font-size: 18px;
@@ -1763,7 +1764,9 @@ label {
         line-height: 24px;
         letter-spacing: -0.01em;
         font-weight: 700;
-        color: #b2b3b9; }
+        color: #b2b3b9;
+        text-align: right;
+        padding-right: 1px; }
         .articlecontainer .articleviewwrapper .header .datawrapper .data {
           font-weight: 400;
           margin: 0 4px; }
