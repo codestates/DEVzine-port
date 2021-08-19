@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { signinAdmin } from '../../../_actions/user_actions';
+import { signinAdmin } from '../../../_actions/admin_actions';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import Button from '../Button/Button';
 import Union from '../../../assets/images/Union.png';

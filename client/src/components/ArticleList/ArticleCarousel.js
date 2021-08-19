@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ArticleView from '../../pages/ArticleView';
 import Carousel from 'react-multi-carousel';
+import eye from '../../assets/images/eye.svg';
 
 function ArticelCarousel({ ContributionData }) {
   return ContributionData ? (
@@ -62,11 +63,27 @@ function ArticelCarousel({ ContributionData }) {
             >
               <div className="contributionbox">
                 <ul>
-                  <li>{el.contribution_date}</li>
-                  <li>{el.contribution_title}</li>
-                  <li>{el.contribution_content}</li>
-                  <li>{el.contribution_keyword}</li>
-                  <li>{el.hit}</li>
+                  <li className="articlebox-date ">
+                    {el.article_date.split('T')[0].replace(/-/gi, '.')}
+                  </li>
+                  <li className="articlebox-title ell-24 sm-hidden">
+                    {el.article_title}
+                  </li>
+                  <li className="articlebox-title ell-18-2 sm-only">
+                    {el.article_title}
+                  </li>
+                  <li className="articlebox-content-con ell-12 ">
+                    {el.article_content}
+                  </li>
+                  <li>
+                    <span className="articlebox-keyword-con">
+                      {el.article_keyword}
+                    </span>
+                    <span className="articlebox-hit-con">
+                      <img src={eye} alt="view number" />
+                      <span>{el.hit}</span>
+                    </span>
+                  </li>
                 </ul>
               </div>
             </Link>

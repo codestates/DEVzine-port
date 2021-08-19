@@ -1,54 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { getArticleData } from '../../_actions/article_actions';
-import { getContributionData } from '../../_actions/article_actions';
 import ArticleView from '../../pages/ArticleView';
-import ArticelCarousel from './ArticleCarousel';
 import { customAxios } from '../../utils/customAxios';
 import Button from '../Common/Button/Button';
 import eye from '../../assets/images/eye.svg';
-import store from '../../store/store';
 
-function ArticleListWrapper() {
-  const dispatch = useDispatch();
-
-  const [ArticleData, setArticleData] = useState(null);
+function ContributionListWrapper() {
   const [ContributionData, setContributionData] = useState(null);
-  const [ArticlePlus, setArticlePlus] = useState(12);
+  const [ConPlus, setConPlus] = useState(12);
 
-  useEffect(() => {
-    dispatch(getArticleData)
+  useEffect(async () => {
+    await customAxios
+      .get('/magazine')
       .then(res => {
-        console.log(res.payload);
-        setArticleData(res.payload);
-        setContributionData(res.payload);
+        console.log(res.data);
+        setContributionData(res.data.articleData);
       })
       .catch(err => {
-        alert('기고, 기사글 받아오는데 실패하였습니다.');
+        alert('추천글 받아오는데 실패하였습니다.');
       });
-
-    // dispatch(getContributionData)
-    //   .then(res => {
-    //     console.log(res.payload);
-    //     setContributionData(res.payload);
-    //   })
-    //   .catch(err => {
-    //     alert('기고, 기사글 받아오는데 실패하였습니다.');
-    //   });
-  }, [ArticlePlus]);
+  }, [ConPlus]);
 
   function latestBtn() {
     customAxios
       .get('/magazine')
       .then(res => {
-        setArticleData(res.data.ArticleeData.slice(0, 12));
-        setContributionData(res.data.contributionData);
+        setContributionData(res.data.articleData.slice(0, 12));
       })
       .catch(err => {
-        setArticleData(null);
-
-        return alert('최신순 받아오는데 실패하였습니다.');
+        alert('최신순 받아오는데 실패하였습니다.');
       });
   }
 
@@ -56,44 +36,33 @@ function ArticleListWrapper() {
     customAxios
       .get('/magazine')
       .then(res => {
-        setArticleData(res.data.ArticleeData.slice(0, 12));
-        setContributionData(res.data.contributionData);
+        setContributionData(res.data.articleData.slice(0, 12));
       })
       .catch(err => {
-        setArticleData(null);
-        // setArticleData(FakeData.slice(1, 13));
-        // setContributionData(FakeData);
-
-        return alert('조회순 받아오는데 실패하였습니다.');
+        alert('조회순 받아오는데 실패하였습니다.');
       });
   }
 
-  function articlePlusHandler() {
-    setArticlePlus(ArticlePlus + 12);
+  function ConPlusHandler() {
+    setConPlus(ConPlus + 12);
   }
 
-  return ArticleData ? (
+  return ContributionData ? (
     <>
-      <div className="artilistwrapper">
+      <div className="contributionlistwrapper">
         <div className="container">
           <div className="row">
-            <div className="col-sm-4">
-              <div className="carousel">
-                <h2>DEVzine이 추천하는 소식</h2>
-                <Link to="/contributionlist">
-                  <span className="allviewbtn">모두 보기</span>
-                </Link>
-                <ArticelCarousel ContributionData={ContributionData} />
-              </div>
-            </div>
             <div className="col-sm-4 col-md-12 col-lg-12">
               <div className="articlebox">
                 <div className="articlebox-align">
                   <span onClick={latestBtn}>최신순</span>|
                   <span onClick={viewBtn}>조회순</span>
+                  <Link to="/articlelist">
+                    <span className="prebtn">이전으로</span>
+                  </Link>
                 </div>
 
-                {ArticleData.slice(0, ArticlePlus).map(el => {
+                {ContributionData.slice(0, ConPlus).map(el => {
                   return (
                     <div className="articlebox-listbox" key={el.article_title}>
                       <Link
@@ -140,7 +109,7 @@ function ArticleListWrapper() {
                   color={`#999999`}
                   backgroundColor={`#ffffff`}
                   border={`1px solid #d9d9d9`}
-                  onClickHandle={articlePlusHandler}
+                  onClickHandle={ConPlusHandler}
                 />
               </div>
             </div>
@@ -151,4 +120,4 @@ function ArticleListWrapper() {
   ) : null;
 }
 
-export default ArticleListWrapper;
+export default ContributionListWrapper;

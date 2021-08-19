@@ -1,6 +1,6 @@
 .artilistwrapper {
   background-color: $background;
-  // background-color: green;
+  // background-color: $border;
   min-height: 100vh;
   position: relative;
   width: 100%;
@@ -11,12 +11,39 @@
   margin-top: 192px; //header 120px 포함
   margin-bottom: 5px;
 
+  @include mobile-only() {
+    margin-top: 162px; //header 90px 포함
+  }
+
   .react-multi-carousel-list {
     padding-left: 0;
   }
 
+  h2 {
+    display: inline-block;
+    padding-right: 20px;
+
+    @include mobile-only() {
+      margin-bottom: 8px;
+    }
+  }
+
   .allviewbtn {
+    float: right;
+    padding-top: 10px;
+    padding-right: 20px;
     cursor: pointer;
+    color: $border;
+    font-weight: $bold;
+
+    @include mobile-only() {
+      float: none;
+    }
+
+    &:hover {
+      color: $yellow-dark;
+      font-weight: $bold;
+    }
   }
 }
 
@@ -55,10 +82,11 @@
     padding: 20px;
     transition: all 0.5s;
     width: 100%;
+    position: relative;
 
     ul {
-      width: 100%;
       height: 100%;
+      width: 100%;
     }
 
     @include responsive(T) {
@@ -89,6 +117,64 @@
       box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
     }
   }
+
+  &-date {
+    @include text-style(13, $dark);
+    margin-bottom: 4px;
+  }
+
+  &-title {
+    @include text-style(24, $dark);
+    font-weight: $bold;
+    margin-bottom: 12px;
+
+    @include mobile-only() {
+      @include text-style(18, $dark);
+    }
+  }
+
+  &-content {
+    @include text-style(14, $dark);
+    margin-bottom: 45px;
+
+    @include mobile-only() {
+      margin-bottom: 24px;
+    }
+  }
+
+  &-keyword {
+    @include text-style(13, $dark);
+    font-weight: $bold;
+    border: 1px solid $dark;
+    border-radius: 20px;
+    padding: 0 12px 2px 12px;
+  }
+
+  &-hit {
+    @include text-style-24;
+    color: rgba(25, 26, 32, 0.15);
+    position: absolute;
+    right: 24px;
+    bottom: 20px;
+    margin: 0;
+
+    @include mobile-only() {
+      bottom: 12px;
+    }
+
+    img {
+      opacity: 10%;
+      margin-right: 5px;
+    }
+
+    span {
+      margin: 0 0 3px 0;
+    }
+  }
+}
+
+.articlebox-hit {
+  margin: 0 !important;
 }
 
 .plusbtn {
@@ -99,4 +185,37 @@
   .commonbutton {
     @include pos-center-x;
   }
+}
+
+.ell-24 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  height: $line-height-24 * 2;
+}
+
+.ell-18 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+
+  height: $line-height-18;
+}
+
+.ell-12 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  height: $line-height-12 * 3;
 }

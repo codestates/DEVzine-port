@@ -20,6 +20,12 @@ const ArticleList = lazy(
 import ArticleView from './pages/ArticleView';
 import Contribution from './pages/Contribution';
 import ContributionUpdate from './pages/ContributionUpdate';
+const ContributionList = lazy(
+  () =>
+    new Promise((resolve, reject) =>
+      setTimeout(() => resolve(import('./pages/ContributionList')), 1500),
+    ),
+);
 import MyPage from './pages/MyPage';
 import Subscription from './pages/Subscription';
 
@@ -64,6 +70,9 @@ function App() {
           </Route>
           <Route path="/contribution">
             <Contribution />
+          </Route>
+          <Route path="/contributionlist">
+            <ContributionList />
           </Route>
           <Route path="/mypage">
             <MyPage />

@@ -38,14 +38,14 @@ function AdminWrapper() {
     }));
 
   useEffect(() => {
-    if (store.getState().user.adminSigninSuccess) {
-      if (store.getState().user.adminSigninSuccess === 'Login success') {
+    if (store.getState().admin.adminSigninSuccess) {
+      if (store.getState().admin.adminSigninSuccess === 'Login success') {
         setModalOpen(false);
         setAdmin(true);
+      } else {
+        setModalOpen(true);
+        setAdmin(false);
       }
-    } else {
-      setModalOpen(true);
-      setAdmin(false);
     }
   });
 
