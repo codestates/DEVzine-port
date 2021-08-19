@@ -1,11 +1,4 @@
-import {
-  SIGNIN_USER,
-  SIGNUP_USER,
-  SIGNOUT_USER,
-  MYPAGE_USER,
-  SIGNIN_ADMIN,
-  DELETE_USER,
-} from './types';
+import { SIGNIN_USER, SIGNOUT_USER, MYPAGE_USER, DELETE_USER } from './types';
 import { customAxios } from '../utils/customAxios';
 
 export async function signinUser(dataToSubmit) {
@@ -15,17 +8,6 @@ export async function signinUser(dataToSubmit) {
 
   return {
     type: SIGNIN_USER,
-    payload: request,
-  };
-}
-
-export async function signupUser(dataToSubmit) {
-  const request = await customAxios
-    .post(`/user/signup`, dataToSubmit)
-    .then(res => res.data.message);
-
-  return {
-    type: SIGNUP_USER,
     payload: request,
   };
 }
@@ -48,19 +30,6 @@ export async function mypageUser(dataToSubmit) {
 
   return {
     type: SIGNIN_USER,
-    payload: request,
-  };
-}
-
-export async function signinAdmin(dataToSubmit) {
-  const request = 'Login success';
-  // TODO: axios 연결 뒤 주석 해제
-  // const request = await customAxios
-  //   .post(`/admin/signin`, dataToSubmit)
-  //   .then(res => res.data.message);
-
-  return {
-    type: SIGNIN_ADMIN,
     payload: request,
   };
 }
