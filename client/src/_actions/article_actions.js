@@ -1,4 +1,4 @@
-import { ARTICLE_DATA, CONTRIBUTION_DATA } from './types';
+import { ARTICLE_DATA, CONTRIBUTION_DATA, DELETE_DATA } from './types';
 import { customAxios } from '../utils/customAxios';
 
 export async function getArticleData() {
@@ -21,6 +21,15 @@ export async function getContributionData() {
 
   return {
     type: CONTRIBUTION_DATA,
+    payload: request,
+  };
+}
+
+export async function DeleteData() {
+  const request = 'Delete data';
+
+  return {
+    type: DELETE_DATA,
     payload: request,
   };
 }

@@ -1,4 +1,9 @@
-import { SIGNOUT_ADMIN, SIGNIN_ADMIN, CONTRIBUTION_ADMIN } from './types';
+import {
+  SIGNOUT_ADMIN,
+  SIGNIN_ADMIN,
+  CONTRIBUTION_ADMIN,
+  DELETE_ADMIN_DATA,
+} from './types';
 import { customAxios } from '../utils/customAxios';
 
 export async function signoutAdmin() {
@@ -32,6 +37,15 @@ export async function getContributionAdmin() {
 
   return {
     type: CONTRIBUTION_ADMIN,
+    payload: request,
+  };
+}
+
+export async function DeleteAdminData() {
+  const request = 'Delete admin data';
+
+  return {
+    type: DELETE_ADMIN_DATA,
     payload: request,
   };
 }

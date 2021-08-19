@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signoutUser } from '../../../_actions/user_actions';
+import { DeleteData } from '../../../_actions/article_actions';
 import SignInModal from '../SignInModal/SignInModal';
 import store from '../../../store/store';
 import close from '../../../assets/images/close.svg';
@@ -31,6 +32,7 @@ function SideBar(props) {
       if (res.payload === 'Logout success') {
         props.setSignIn(false);
         props.setOpenSidebar(false);
+        dispatch(DeleteData());
         window.location.reload();
       } else {
         alert('로그아웃 실패하였습니다.');

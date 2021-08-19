@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signoutUser } from '../../../_actions/user_actions';
+import { DeleteData } from '../../../_actions/article_actions';
 import { signoutAdmin } from '../../../_actions/admin_actions';
+import { DeleteAdminData } from '../../../_actions/admin_actions';
 import store from '../../../store/store';
 import TopTime from './TopTime';
 import SignInModal from '../SignInModal/SignInModal';
@@ -47,7 +49,7 @@ function Header() {
       dispatch(signoutUser()).then(res => {
         if (res.payload === 'Logout success') {
           setSignIn(false);
-
+          dispatch(DeleteData());
           window.location.reload();
         } else {
           alert('로그아웃 실패하였습니다.');
@@ -59,6 +61,7 @@ function Header() {
       dispatch(signoutAdmin()).then(res => {
         if (res.payload === 'Logout success') {
           setAdmin(false);
+          dispatch(DeleteAdminData());
           window.location.href = '/';
         } else {
           alert('로그아웃 실패하였습니다.');
