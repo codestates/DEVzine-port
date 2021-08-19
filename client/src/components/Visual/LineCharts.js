@@ -80,7 +80,7 @@ export function ArticlesKeyword({ data }) {
     },
     yaxis: {
       title: {
-        text: '조회수', // 뭐라고 해야할까?
+        text: '키워드 별 조회 수 Top 5',
       },
       labels: {
         style: {

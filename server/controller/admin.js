@@ -9,23 +9,56 @@ module.exports = {
 	getAllUsersContribution: async (req, res) => {
         // TODO: 모든 사용자의 기고글과 상태를 불러온다.
         // status:200
+
         // {
-        //     "data" : [
-        //         ...
-        //         {
-        //             "contribution_id": "number", 
-        //             "contribution_title": "string",
-        //             "contribution_content": "string",
-        //             "contribution_keyword": "string",
-        //             "contribution_date" : "date",
-        //             "hit": "number",
-        //             "user_name" : "string",
-        //             "status" : "string"
+        //     "data" : { 
+        //         "requested": {
+        //                 "postRequest": 
+        //                         [ ...,
+        //                             {
+        //                                     "contribution_id": "number", 
+        //                                     "contribution_title": "string",
+        //                                     "contribution_content": "string",
+        //                                     "user_name" : "string",
+        //                                     "status" : "string"
+        //                             }, 
+        //                         ...],
+        //                 "patchRequest": 
+        //                         [ ...,
+        //                             {
+        //                                     "contribution_id": "number", 
+        //                                     "contribution_title": "string",
+        //                                     "contribution_content": "string",
+        //                                     "user_name" : "string",
+        //                                     "status" : "string"
+        //                             }, 
+        //                         ...],
+        //                 "deleteRequest": 
+        //                         [ ...,
+        //                             {
+        //                                     "contribution_id": "number", 
+        //                                     "contribution_title": "string",
+        //                                     "contribution_content": "string",
+        //                                     "user_name" : "string",
+        //                                     "status" : "string"
+        //                             }, 
+        //                         ...],
+        //         },
+        //         "accepted":  // 삭제 거부는 미포함
+        //                         [ ...,
+        //                             {
+        //                                     "contribution_id": "number", 
+        //                                     "contribution_title": "string",
+        //                                     "contribution_content": "string",
+        //                                     "user_name" : "string",
+        //                                     "status" : "string"
+        //                             }, 
+        //                         ...]
         //         }
-        //     ]
         // ,
         //     "message" : "All contribution data success"
         // }
+        
         // status: 404
         // {
         //     "message": "Not found"
