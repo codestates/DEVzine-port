@@ -6,7 +6,7 @@ const newsletterSchema = mongoose.Schema({
     },
 	newsletter_content: String,
 	newsletter_total_recipients: Number
-});
+}, { versionKey: false });
 
 const Newsletter = mongoose.model("newsletters", newsletterSchema);
 

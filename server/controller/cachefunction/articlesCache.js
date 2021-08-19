@@ -12,8 +12,7 @@ const getArticlesPastTwoWeeks = async () => {
                 $gte: compareDate
             },
         }, {
-            _id: 0,
-            __v: 0
+            _id: 0
         }
     ).sort(
         {
@@ -104,8 +103,7 @@ const checkCacheForOneArticle = async (id) => {
                     {
                         article_id: id
                     }, {
-                        _id: 0,
-                        __v: 0
+                        _id: 0
                     }
                 );
                 resolve(
@@ -144,8 +142,7 @@ const updateArticleHit = async (id) => {
                 }
             }, {
                 projection: {
-                    _id: 0,
-                    __v: 0
+                    _id: 0
                 }
             }, (err, data) => {
                 if (err) {

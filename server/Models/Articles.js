@@ -35,8 +35,7 @@ const articleSchema = mongoose.Schema({
         type: Number,
         default: 1
     }
-    
-});
+}, { versionKey: false });
 
 articleSchema.plugin(
     autoIncrement.plugin,
