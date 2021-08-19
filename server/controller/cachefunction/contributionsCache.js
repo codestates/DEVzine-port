@@ -82,6 +82,9 @@ const checkCacheForContributions = async () => {
                 for (let key in contributions) {
                     contributionData.push(JSON.parse(contributions[key]))
                 }
+                contributionData.sort((a, b) => {
+                    return new Date(b.contribution_date) - new Date(a.contribution_date);
+                });
                 resolve(
                     {
                         contributionData,
