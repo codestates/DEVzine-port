@@ -1,3 +1,6 @@
+const { findContributionsWithStatus } = require('./adminfunction/adminView');
+const { checkCacheForContributions } = require('./cachefunction/contributionsCache')
+
 module.exports = {
 
     adminSignin: async (req, res) => {
@@ -7,64 +10,44 @@ module.exports = {
     },
 
 	getAllUsersContribution: async (req, res) => {
-        // TODO: 모든 사용자의 기고글과 상태를 불러온다.
-        // status:200
 
-        // {
-        //     "data" : { 
-        //         "requested": {
-        //                 "postRequest": 
-        //                         [ ...,
-        //                             {
-        //                                     "contribution_id": "number", 
-        //                                     "contribution_title": "string",
-        //                                     "contribution_content": "string",
-        //                                     "user_name" : "string",
-        //                                     "status" : "string"
-        //                             }, 
-        //                         ...],
-        //                 "patchRequest": 
-        //                         [ ...,
-        //                             {
-        //                                     "contribution_id": "number", 
-        //                                     "contribution_title": "string",
-        //                                     "contribution_content": "string",
-        //                                     "user_name" : "string",
-        //                                     "status" : "string"
-        //                             }, 
-        //                         ...],
-        //                 "deleteRequest": 
-        //                         [ ...,
-        //                             {
-        //                                     "contribution_id": "number", 
-        //                                     "contribution_title": "string",
-        //                                     "contribution_content": "string",
-        //                                     "user_name" : "string",
-        //                                     "status" : "string"
-        //                             }, 
-        //                         ...],
-        //         },
-        //         "accepted":  // 삭제 거부는 미포함
-        //                         [ ...,
-        //                             {
-        //                                     "contribution_id": "number", 
-        //                                     "contribution_title": "string",
-        //                                     "contribution_content": "string",
-        //                                     "user_name" : "string",
-        //                                     "status" : "string"
-        //                             }, 
-        //                         ...]
-        //         }
-        // ,
-        //     "message" : "All contribution data success"
-        // }
-        
-        // status: 404
-        // {
-        //     "message": "Not found"
-        // } 
-        
-        return res.send('all contributions');
+        try {
+
+            const postRequest = await findContributionsWithStatus(100);
+            const patchRequest = await findContributionsWithStatus(101);
+            const deleteRequest = await findContributionsWithStatus(102);
+            
+            let { contributionData } = await checkCacheForContributions();
+            const accepted = contributionData.map(data => {
+                return {
+                    contribution_id: data.contribution_id,
+                    contribution_title: data.contribution_title,
+                    contribution_url: data.contribution_url,
+                    status: data.status,
+                    user_name: data.user_name
+                }
+            })
+            
+            return res.status(200).json(
+                {
+                    "data": {
+                        "requested": {
+                            postRequest,
+                            patchRequest,
+                            deleteRequest
+                        },
+                        accepted
+                    },
+                    "message" : "All contribution data success"
+                }
+            );
+
+        } catch (err) {
+
+            console.log(err);
+            return res.status(500).send(err);
+
+        }
 
 	},
 

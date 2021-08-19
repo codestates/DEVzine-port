@@ -75,6 +75,23 @@ module.exports = {
                                 articles.articles_per_keyword_month[keyword._id] = keyword.count;
                         });
 
+                        let all_keywords_accumulated = await Article.aggregate([
+                                {
+                                        $group: {
+                                                _id: '$article_keyword',
+                                                count: {
+                                                        $sum: 1
+                                                }
+                                        }
+                                }
+                        ]).sort({
+                                count: -1
+                        });
+
+                        articles.all_keywords_accumulated = all_keywords_accumulated.map(keyword => {
+                                return { x: keyword._id, y: keyword.count };
+                        });
+                        
                         return articles;
                         
                 } catch (err) {
