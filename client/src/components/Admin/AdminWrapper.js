@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getContributionAdmin } from '../../_actions/admin_actions';
 import faker from 'faker/locale/ko';
 import RequestTable from './RequestTable';
 import ApprovalTable from './ApprovalTable';
@@ -8,6 +10,13 @@ import store from '../../store/store';
 faker.seed(100);
 
 function AdminWrapper() {
+  const dispatch = useDispatch();
+
+  const [PostRequest, setPostRequest] = useState(null);
+  const [PatchRequest, setPatchRequest] = useState(null);
+  const [DeleteRequest, setDeleteRequest] = useState(null);
+  const [Accepted, setAccepted] = useState(null);
+  const [AllData, setAllData] = useState(false);
   const [ModalOpen, setModalOpen] = useState(false);
   const [Admin, setAdmin] = useState(false);
 
@@ -48,6 +57,19 @@ function AdminWrapper() {
       }
     }
   });
+
+  useEffect(() => {
+    dispatch(getContributionAdmin)
+      .then(res => {
+        console.log(res.payload);
+        setPostRequest(res.payload[0]);
+        setPatchRequest(res.payload[1]);
+        setDeleteRequest(res.payload[2]);
+        setAccepted(res.payload[3]);
+        setAllData(true);
+      })
+      .catch(err => alert('관리데이터 받아오는데 실패하였습니다.'));
+  }, []);
 
   return (
     <>
