@@ -42,9 +42,12 @@ function RequestTable({ Requested }) {
       route = 'reject';
     }
 
+    // console.log(typeof StatusNumber);
+    // console.log(typeof Number(status));
+
     let body = {
       contribution_id: contribution_id,
-      status: StatusNumber,
+      status: Number(StatusNumber),
     };
 
     console.log(body);
@@ -52,6 +55,7 @@ function RequestTable({ Requested }) {
     return customAxios.post(`/admin/contribution/${route}`, body).then(res => {
       if (res.status === 200) {
         alert('요청이 완료되었습니다.');
+        window.location.reload();
       } else alert('요청이 실패하였습니다.');
     });
   }
