@@ -5,20 +5,19 @@ import { customAxios } from '../../utils/customAxios';
 function RequestTable({ Requested }) {
   const [StatusNumber, setStatusNumber] = useState(null);
 
-  console.log(Requested);
   const columns = ['닉네임', '제목', '현황', '변경'];
   const radioInputData = {
-    승인요청: [
+    100: [
       ['승인', '110'],
       ['거부', '120'],
     ],
 
-    수정요청: [
+    101: [
       ['승인', '111'],
       ['거부', '121'],
     ],
 
-    삭제요청: [
+    102: [
       ['승인', '112'],
       ['거부', '122'],
     ],
@@ -44,14 +43,13 @@ function RequestTable({ Requested }) {
 
     let body = {
       contribution_id: contribution_id,
-      status: StatusNumber,
+      status: Number(StatusNumber),
     };
-
-    console.log(body);
 
     return customAxios.post(`/admin/contribution/${route}`, body).then(res => {
       if (res.status === 200) {
         alert('요청이 완료되었습니다.');
+        window.location.reload();
       } else alert('요청이 실패하였습니다.');
     });
   }
@@ -75,7 +73,9 @@ function RequestTable({ Requested }) {
                   {el.contribution_title}
                 </Link>
               </td>
-              <td>{el.status}</td>
+              {el.status === 100 ? <td>승인요청</td> : null}
+              {el.status === 101 ? <td>수정요청</td> : null}
+              {el.status === 102 ? <td>삭제요청</td> : null}
               <td>
                 <form
                   onSubmit={e => onSubmitHandler(e, el.contribution_id)}

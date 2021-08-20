@@ -27,7 +27,6 @@ function AdminWrapper() {
 */
 
   let selectOptions = [
-    ['모든요청', 'All'],
     ['승인요청', 'postRequest'],
     ['수정요청', 'patchRequest'],
     ['삭제요청', 'deleteRequest'],
@@ -83,7 +82,9 @@ function AdminWrapper() {
     e.preventDefault();
 
     dispatch(SearchAppData(AppText))
-      .then(res => setAccepted(res.payload))
+      .then(res => {
+        setAccepted(res.payload);
+      })
       .catch(err => alert('검색한 결과를 받아오는데 실패하였습니다.'));
   }
 
@@ -112,7 +113,7 @@ function AdminWrapper() {
                         onChange={e => onSelectHandler(e)}
                         id="request-select"
                       >
-                        <option value="">요청선택</option>
+                        <option value="">모든요청</option>
                         {selectOptions.map((el, idx) => (
                           <option key={idx} value={el[1]}>
                             {el[0]}
