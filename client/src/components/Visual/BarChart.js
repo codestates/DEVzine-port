@@ -2,8 +2,6 @@ import React from 'react';
 import Chart from 'react-apexcharts';
 
 export function ArticlesTopHit({ data }) {
-  console.log(data);
-
   let options = {
     stroke: {
       width: 4,

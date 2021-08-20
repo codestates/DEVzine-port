@@ -1,8 +1,6 @@
 import Chart from 'react-apexcharts';
 
 export function ArticlesKeyword({ data }) {
-  console.log(data);
-
   let options = {
     colors: ['#ffdd14', '#ffe33e'],
     stroke: {
