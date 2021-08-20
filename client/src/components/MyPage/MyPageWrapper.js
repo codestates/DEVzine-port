@@ -232,57 +232,59 @@ function MyPageWrapper() {
 
   return allData ? (
     <div className="signupcontainer">
-      <div className="signupwrapper">
-        {requiredTextInputData.map((el, idx) => {
-          return (
-            <TextInputGenderRequired
-              key={`TextInputGenderRequired${idx}`}
-              inputname={el[0]}
-              detailString={el[1]}
-              stateName={el[2]}
-              stateFunc={el[3]}
-              placeholder={el[4]}
-              type={el[5]}
-              isValid={el[6]}
-              maxLength={el[7]}
-              isMutable={el[8]}
-            />
-          );
-        })}
-        <OptContents
-          Gender={Gender}
-          Scribed={Scribed}
-          Age={Age}
-          Position={Position}
-          Language={Language}
-          radioInputHandler={radioInputHandler}
-          selectInputHandler={selectInputHandler}
-          Contribution={Contribution}
-        />
-        <div
-          className="signupbtn"
-          onClick={e =>
-            Email &&
-            Password &&
-            ConfirmPassword &&
-            Name &&
-            email_isValid &&
-            pw_isValid &&
-            pw_confirm
-              ? patchHandler()
-              : alert('모든 것을 만족해야 합니다.')
-          }
-        >
-          정보수정
+      {Auth(true) === 'Login need' ? null : (
+        <div className="signupwrapper">
+          {requiredTextInputData.map((el, idx) => {
+            return (
+              <TextInputGenderRequired
+                key={`TextInputGenderRequired${idx}`}
+                inputname={el[0]}
+                detailString={el[1]}
+                stateName={el[2]}
+                stateFunc={el[3]}
+                placeholder={el[4]}
+                type={el[5]}
+                isValid={el[6]}
+                maxLength={el[7]}
+                isMutable={el[8]}
+              />
+            );
+          })}
+          <OptContents
+            Gender={Gender}
+            Scribed={Scribed}
+            Age={Age}
+            Position={Position}
+            Language={Language}
+            radioInputHandler={radioInputHandler}
+            selectInputHandler={selectInputHandler}
+            Contribution={Contribution}
+          />
+          <div
+            className="signupbtn"
+            onClick={e =>
+              Email &&
+              Password &&
+              ConfirmPassword &&
+              Name &&
+              email_isValid &&
+              pw_isValid &&
+              pw_confirm
+                ? patchHandler()
+                : alert('모든 것을 만족해야 합니다.')
+            }
+          >
+            정보수정
+          </div>
+          <Button
+            subject={`회원 탈퇴`}
+            color={`#999999`}
+            backgroundColor={`#ffffff`}
+            border={`1px solid #d9d9d9`}
+            onClickHandle={withdrawal}
+          />
         </div>
-        <Button
-          subject={`회원 탈퇴`}
-          color={`#999999`}
-          backgroundColor={`#ffffff`}
-          border={`1px solid #d9d9d9`}
-          onClickHandle={withdrawal}
-        />
-      </div>
+      )}
       {ModalOpen ? (
         <SigninModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
       ) : null}
