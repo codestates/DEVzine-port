@@ -1601,8 +1601,6 @@ label {
     padding-bottom: 20px; }
     .articlebox-align .setbold {
       font-weight: 700; }
-  .articlebox-select {
-    border: 1px solid red; }
   .articlebox span {
     cursor: pointer;
     margin: 20px; }
@@ -1738,12 +1736,52 @@ label {
   -webkit-box-orient: vertical;
   height: 48px; }
 
-.articlebox input {
-  border: 1px solid red;
-  width: 400px; }
-
-.articlebox img {
-  border: 1px solid red; }
+.selectionbox {
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  position: relative;
+  height: 60px; }
+  .selectionbox .articlebox-select {
+    border: 1px solid #d9d9d9;
+    width: 180px;
+    height: 36px;
+    position: absolute;
+    left: 0;
+    top: 10px;
+    border-radius: 16px;
+    text-indent: 1.2em; }
+  .selectionbox input {
+    border: 1px solid #d9d9d9;
+    width: 640px;
+    height: 36px;
+    position: absolute;
+    left: 195px;
+    top: 10px;
+    border-radius: 16px;
+    text-indent: 1.2em; }
+  .selectionbox img {
+    width: auto;
+    height: 30px;
+    position: absolute;
+    left: 790px;
+    top: 50%;
+    transform: translateY(-50%); }
+  .selectionbox .ordergroup {
+    position: absolute;
+    left: 835px;
+    top: 0px; }
+  .selectionbox .initialbtn {
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    border: 1px solid #d9d9d9;
+    height: 36px;
+    line-height: 36px;
+    width: 100px;
+    text-align: center;
+    border-radius: 16px; }
+    .selectionbox .initialbtn:hover {
+      background-color: #d9d9d9; }
 
 .react-multi-carousel-list {
   align-items: center;

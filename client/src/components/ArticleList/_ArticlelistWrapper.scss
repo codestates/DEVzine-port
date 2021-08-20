@@ -57,10 +57,6 @@
     }
   }
 
-  &-select {
-    border: 1px solid red;
-  }
-
   span {
     cursor: pointer;
     margin: 20px;
@@ -224,11 +220,64 @@
   height: $line-height-12 * 3;
 }
 
-.articlebox input {
-  border: 1px solid red;
-  width: 400px;
-}
+.selectionbox {
+  border-top: 1px solid $border;
+  border-bottom: 1px solid $border;
+  position: relative;
+  height: 60px;
 
-.articlebox img {
-  border: 1px solid red;
+  .articlebox-select {
+    border: 1px solid $border;
+    width: 180px;
+    height: 36px;
+    position: absolute;
+    left: 0;
+    top: 10px;
+    border-radius: 16px;
+    text-indent: 1.2em;
+    // color: $border;
+  }
+
+  input {
+    border: 1px solid $border;
+    width: 640px;
+    height: 36px;
+    position: absolute;
+    left: 195px;
+    top: 10px;
+    border-radius: 16px;
+    text-indent: 1.2em;
+  }
+
+  img {
+    // border: 1px solid $green;
+    width: auto;
+    height: 30px;
+    position: absolute;
+    left: 790px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .ordergroup {
+    position: absolute;
+    left: 835px;
+    top: 0px;
+  }
+
+  .initialbtn {
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    border: 1px solid $border;
+    height: 36px;
+    line-height: 36px;
+    width: 100px;
+    text-align: center;
+    border-radius: 16px;
+
+    &:hover {
+      background-color: $border;
+    }
+  }
 }
