@@ -38,6 +38,9 @@ module.exports = {
                 {
                     contribution_id: {
                         $in: contribution_id
+                    },
+                    status: {
+                        $nin: [112]
                     }
                 }, {
                     contribution_id: 1,
