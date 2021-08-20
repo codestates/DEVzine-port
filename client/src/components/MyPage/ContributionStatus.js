@@ -38,7 +38,7 @@ function ContributionStatus({ Contribution }) {
                 key={`contributionstatuslist${idx}`}
               >
                 <span className="tablecontent first">
-                  {el.contribution_title.slice(0, 16) + '...'}
+                  {el.contribution_title.slice(0, 14) + '...'}
                 </span>
                 <span className="tablecontent">
                   <Link
@@ -82,7 +82,7 @@ function ContributionStatus({ Contribution }) {
                 </span>
                 <span className="tablecontent last">
                   {statuscodeconvert(String(el.status))}
-                  {el.status === 110 ? (
+                  {el.status === 110 || el.status === 111 ? (
                     <a href={el.contribution_url}>URL</a>
                   ) : null}
                 </span>
