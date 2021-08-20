@@ -18,8 +18,8 @@ function AdminSignInModal({ ModalOpen, setModalOpen }) {
 
   async function postHandler(e) {
     let body = {
-      user_email: Email,
-      user_password: Password,
+      admin_id: Email,
+      admin_password: Password,
     };
 
     console.log('SignInModal :', body);

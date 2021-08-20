@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getArticleData } from '../../_actions/article_actions';
-import { getArticleHitData } from '../../_actions/article_actions';
 import { filterArticleData } from '../../_actions/article_actions';
 import ArticleView from '../../pages/ArticleView';
 import ArticelCarousel from './ArticleCarousel';
 import Button from '../Common/Button/Button';
 import eye from '../../assets/images/eye.svg';
+import search from '../../assets/images/search.svg';
 
 function ArticleListWrapper() {
   const dispatch = useDispatch();
@@ -18,21 +18,9 @@ function ArticleListWrapper() {
   const [CurrentTitle, setCurrentTitle] = useState('');
   const [CurrentOrder, setCurrentOrder] = useState('최신순');
   const [ArticlePlus, setArticlePlus] = useState(12);
-
-  // let selectOptions = [
-  //   ['전체', 'All'],
-  //   ['게임', '게임'],
-  //   ['머신러닝', '머신러닝'],
-  //   ['모바일', '모바일'],
-  //   ['보안', '보안'],
-  //   ['블록체인', '블록체인'],
-  //   ['빅데이터', '빅데이터'],
-  //   ['코딩', '코딩'],
-  //   ['클라우드', '클라우드'],
-  //   ['퍼스널 컴퓨팅', '퍼스널 컴퓨팅'],
-  //   ['AI/로봇', 'AI/로봇'],
-  //   ['기타', '기타'],
-  // ];
+  const [PlaceHodler, setPlaceHolder] = useState('기사를 검색하세요.');
+  const [Selected, setSelected] = useState('키워드선택');
+  const [ArchiveTitle, setArchiveTitle] = useState('');
 
   let selectOptions = [
     '전체',
@@ -52,7 +40,6 @@ function ArticleListWrapper() {
   useEffect(() => {
     dispatch(getArticleData())
       .then(res => {
-        console.log(res.payload[0]);
         setArticleData(res.payload[0]);
         setContributionData(res.payload[1]);
       })
@@ -62,18 +49,17 @@ function ArticleListWrapper() {
   useEffect(() => {
     let body = {
       CurrentKeyword,
-      CurrentTitle,
+      CurrentTitle: ArchiveTitle,
       CurrentOrder,
     };
 
     dispatch(filterArticleData(body))
       .then(res => {
-        console.log(res.payload);
         setArticleData(null);
         setArticleData(res.payload);
       })
       .catch(err => alert('검색한 결과를 받아오는데 실패하였습니다.'));
-  }, [CurrentKeyword, CurrentTitle, CurrentOrder]);
+  }, [CurrentKeyword, CurrentOrder]);
 
   function latestBtn() {
     setCurrentOrder('최신순');
@@ -91,19 +77,45 @@ function ArticleListWrapper() {
 
   function onKeywordHandler(e) {
     setCurrentKeyword(e.currentTarget.value);
+    setSelected(e.currentTarget.value);
   }
 
   function onTitleHandler(e) {
-    setCurrentTitle(e.currentTarget.valu);
+    setCurrentTitle(e.currentTarget.value);
+  }
+
+  function onTitleSubmit() {
+    let body = {
+      CurrentKeyword,
+      CurrentTitle,
+      CurrentOrder,
+    };
+
+    setArchiveTitle(CurrentTitle);
+
+    dispatch(filterArticleData(body))
+      .then(res => {
+        setArticleData(null);
+        setPlaceHolder(`'${CurrentTitle}'의 검색 결과입니다.`);
+        setArticleData(res.payload);
+        setCurrentTitle('');
+      })
+      .catch(err => alert('검색한 결과를 받아오는데 실패하였습니다.'));
   }
 
   function initialBtn() {
+    setCurrentKeyword('');
+    setCurrentTitle('');
+    setArchiveTitle('');
+    setCurrentOrder('최신순');
+    setPlaceHolder('기사를 검색하세요.');
+    setSelected('키워드선택');
+    setArticlePlus(12);
+
     dispatch(getArticleData())
       .then(res => {
-        console.log(res.payload[0]);
-        setArticleData(res.payload[0]);
         setContributionData(res.payload[1]);
-        setArticlePlus(12);
+        setArticleData(res.payload[0]);
       })
       .catch(err => alert('최신순 받아오는데 실패하였습니다.'));
   }
@@ -125,42 +137,54 @@ function ArticleListWrapper() {
             <div className="col-sm-4 col-md-12 col-lg-12">
               <div className="articlebox">
                 <div className="articlebox-align">
-                  <span>
-                    <select
-                      className="articlebox-select"
-                      onChange={e => onKeywordHandler(e)}
-                      id="articlebox-select"
-                    >
-                      <option value="">키워드선택</option>
-                      {selectOptions.map((el, idx) => (
-                        <option key={idx} value={el}>
-                          {el}
-                        </option>
-                      ))}
-                    </select>
-                  </span>
-                  <span>
-                    <input
-                      type="text"
-                      className="request-text"
-                      placeholder="기사를 검색하세요."
-                      onChange={e => onTitleHandler(e)}
-                    />
-                  </span>
-                  <span
-                    className={CurrentOrder === '최신순' ? 'setbold' : null}
-                    onClick={latestBtn}
-                  >
-                    최신순
-                  </span>
-                  |
-                  <span
-                    className={CurrentOrder === '조회순' ? 'setbold' : null}
-                    onClick={viewBtn}
-                  >
-                    조회순
-                  </span>
-                  <span onClick={initialBtn}>초기화</span>
+                  <div className="selectionbox">
+                    <span>
+                      <select
+                        className="articlebox-select"
+                        onChange={e => onKeywordHandler(e)}
+                        id="articlebox-select"
+                      >
+                        <option value="">{Selected}</option>
+                        {selectOptions.map((el, idx) => (
+                          <option key={idx} value={el}>
+                            {el}
+                          </option>
+                        ))}
+                      </select>
+                    </span>
+                    <span>
+                      <input
+                        type="text"
+                        className="articlebox-text"
+                        placeholder={PlaceHodler}
+                        onChange={e => onTitleHandler(e)}
+                      />
+                      <img
+                        src={search}
+                        alt="search btn"
+                        className="articlebox-search-btn"
+                        onClick={onTitleSubmit}
+                      />
+                    </span>
+                    <span className="ordergroup">
+                      <span
+                        className={CurrentOrder === '최신순' ? 'setbold' : null}
+                        onClick={latestBtn}
+                      >
+                        최신순
+                      </span>
+                      |
+                      <span
+                        className={CurrentOrder === '조회순' ? 'setbold' : null}
+                        onClick={viewBtn}
+                      >
+                        조회순
+                      </span>
+                    </span>
+                    <span onClick={initialBtn} className="initialbtn">
+                      초기화
+                    </span>
+                  </div>
                 </div>
 
                 {ArticleData.length === 0
