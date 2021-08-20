@@ -3,6 +3,7 @@ import { customAxios } from '../../utils/customAxios';
 import Button from '../Common/Button/Button';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import Auth from '../../hoc/auth';
+import store from '../../store/store';
 
 function ArticleViewWrapper({ id }) {
   const paramsArr = id.split('-');
@@ -12,8 +13,21 @@ function ArticleViewWrapper({ id }) {
   const [Article, setArticle] = useState({});
   const [Alldata, setAlldata] = useState(false);
   const [ModalOpen, setModalOpen] = useState(false);
+  const [Request, setRrequest] = useState(Auth(true));
 
-  let request = Auth(true);
+  // let request = Auth(true);
+
+  useEffect(() => {
+    // setRrequest(Auth(true));
+
+    if (Request === 'Login need') {
+      if (store.getState().admin.adminSigninSuccess) {
+        if (store.getState().admin.adminSigninSuccess === 'Login success') {
+          setRrequest('');
+        }
+      }
+    }
+  }, []);
 
   useEffect(async () => {
     indicator === 'con'
@@ -23,17 +37,23 @@ function ArticleViewWrapper({ id }) {
             console.log('contribution으로 요청', res);
             return setContribution(res.data.data);
           })
-          .catch(err => console.log(err))
+          .catch(err => {
+            window.location.href = '/error';
+            // console.log(err);
+          })
       : await customAxios
           .get(`/magazine/article/${pathParameter}`)
           .then(res => {
             console.log('Article로 요청', res);
             return setArticle(res.data.data);
           })
-          .catch(err => console.log(err));
+          .catch(err => {
+            window.location.href = '/error';
+            // console.log(err);
+          });
     setAlldata(true);
   }, []);
-  console.log(request);
+  console.log(Request);
   return Alldata ? (
     <>
       <div className="articlecontainer">
@@ -92,21 +112,21 @@ function ArticleViewWrapper({ id }) {
                 <div className="body">
                   <div className="contents">
                     {indicator === 'con'
-                      ? request === 'Login need'
+                      ? Request === 'Login need'
                         ? Contribution.contribution_content.slice(0, 200) +
                           '...'
                         : Contribution.contribution_content
                       : Article.article_content.slice(0, 200) + '...'}
                   </div>
                   {indicator === 'con' ? (
-                    request === 'Login need' ? (
+                    Request === 'Login need' ? (
                       <div className="layer"></div>
                     ) : null
                   ) : (
                     <div className="layer"></div>
                   )}
                   {indicator === 'con' ? (
-                    request === 'Login need' ? (
+                    Request === 'Login need' ? (
                       <Button
                         subject={'로그인/회원가입 하기'}
                         color={`#191A20`}
