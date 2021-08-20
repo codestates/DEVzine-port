@@ -5,7 +5,6 @@ import { customAxios } from '../../utils/customAxios';
 function RequestTable({ Requested }) {
   const [StatusNumber, setStatusNumber] = useState(null);
 
-  console.log(Requested);
   const columns = ['닉네임', '제목', '현황', '변경'];
   const radioInputData = {
     100: [
@@ -42,15 +41,10 @@ function RequestTable({ Requested }) {
       route = 'reject';
     }
 
-    // console.log(typeof StatusNumber);
-    // console.log(typeof Number(status));
-
     let body = {
       contribution_id: contribution_id,
       status: Number(StatusNumber),
     };
-
-    console.log(body);
 
     return customAxios.post(`/admin/contribution/${route}`, body).then(res => {
       if (res.status === 200) {
