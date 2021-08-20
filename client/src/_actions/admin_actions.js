@@ -9,7 +9,8 @@ import {
 import { customAxios } from '../utils/customAxios';
 
 export async function signoutAdmin() {
-  const request = await customAxios.post(`/user/signout`);
+  const request = 'Logout success';
+  // const request = await customAxios.post(`/user/signout`);
 
   return {
     type: SIGNOUT_ADMIN,
