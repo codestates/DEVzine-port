@@ -1599,6 +1599,8 @@ label {
   margin-top: 80px; }
   .articlebox-align {
     padding-bottom: 20px; }
+    .articlebox-align .setbold {
+      font-weight: 700; }
   .articlebox span {
     cursor: pointer;
     margin: 20px; }
@@ -2035,6 +2037,15 @@ label {
   margin-top: 60px; }
   .approval-title {
     cursor: pointer; }
+
+.request-sub,
+.approval-sub {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: #191a20;
+  margin-left: 12px;
+  font-weight: 400; }
 
 table {
   border-collapse: collapse;

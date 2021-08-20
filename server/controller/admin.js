@@ -1,5 +1,10 @@
 const { findContributionsWithStatus } = require('./adminfunction/adminView');
-const { checkCacheForContributions } = require('./cachefunction/contributionsCache')
+const { 
+    checkCacheForContributions, 
+    insertCacheForOneContribution, 
+    deleteCacheForOneContribution 
+} = require('./cachefunction/contributionsCache')
+const { Contribution } = require('../Models/Contributions')
 
 module.exports = {
 
@@ -53,42 +58,121 @@ module.exports = {
 
     rejectContribRequest: async (req, res) => {
         
-        
-        //TODO: 사용자의 기고글 게시/수정/삭제 요청을 거부한다. 
-        // body parameters
-        // { 
-        //     "contribution_id" : "string",
-        //     "status" : "number"
-        // }
-        // status:200
-        // {
-        //     "message" : "Update rejected"
-        // }
-        // status:404
-        // {   
-        //     "message": "Not found"
-        // }  
-        return res.send('contribution request rejected');
+        const { contribution_id, status } = req.body;
+
+        try {
+
+            if (![120, 121, 122].includes(status)) {
+
+                return res.status(400).json(
+                    {
+                        "message": "Invalid status"
+                    }
+                );
+
+            }
+
+            const rejectedContribution = await Contribution.findOneAndUpdate(
+                {
+                    contribution_id
+                }, {
+                    $set: {
+                        status
+                    }
+                }, {
+                    new: true
+                }
+            )
+
+            if (!rejectedContribution) {
+
+                return res.status(404).json(
+                    {
+                        "message": "Not found"
+                    }
+                );
+            }
+
+            return res.status(200).json(
+                {
+                    "message": "Reject success"
+                }
+            );
+
+        } catch (err) {
+
+            console.log(err);
+            return res.status(500).send(err);
+
+        }
 
 	},
 
     acceptContribRequest: async (req, res) => {
 
-        //TODO: 사용자의 기고글 게시/수정/삭제 요청을 수락한다. 
-        // body parameters
-        // { 
-        //     "contribution_id" : "string",
-        //     "status" : "number"
-        // }
-        // status:200
-        // {
-        //     "message" : "Update success"
-        // }
-        // status:404
-        // {   
-        //     "message": "Not found"
-        // }  
-        return res.send('contribution request accepted');
+        const { contribution_id, status } = req.body;
+
+        try {
+
+            if (![110, 111, 112].includes(status)) {
+
+                return res.status(400).json(
+                    {
+                        "message": "Invalid status"
+                    }
+                );
+
+            }
+
+            let acceptedContribution = await Contribution.findOneAndUpdate(
+                {
+                    contribution_id
+                }, {
+                    $set: {
+                        status
+                    }
+                }, {
+                    new: true,
+                    fields: {
+                        _id: 0
+                    }
+                }
+            )
+
+            if (!acceptedContribution) {
+
+                return res.status(404).json(
+                    {
+                        "message": "Not found"
+                    }
+                );
+
+            }
+
+            if (acceptedContribution.status === 110 || acceptedContribution.status === 111) {
+
+                await insertCacheForOneContribution(contribution_id, acceptedContribution);
+        
+            }
+
+            if (acceptedContribution.status === 112) {
+
+                await deleteCacheForOneContribution(contribution_id);
+
+            }
+
+            return res.status(200).json(
+                {
+                    "message": "Update success"
+                }
+            );
+
+        } catch (err) {
+
+            console.log(err);
+            return res.status(500).send(err);
+
+        }
 
     }   
 

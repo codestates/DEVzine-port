@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function ApprovalTable({ columns, data }) {
+function ApprovalTable({ data }) {
+  const columns = ['닉네임', '제목'];
   return (
     <table>
       <thead>
