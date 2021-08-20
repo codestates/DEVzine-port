@@ -11,13 +11,15 @@ module.exports = {
           message: "Not Found"
         });
       } else {
-        res.status(200).send({
-          data: 
-          {
-              total_subscribers : count,
-          },
-          message : "Subscribers successfully found"
-        });
+        // res.status(200).send({
+        //   data: 
+        //   {
+        //       total_subscribers : count,
+        //   },
+        //   message : "Subscribers successfully found"
+        // });
+        res.status(200).send('Subscribers successfully found');
+
       }
     });
 	}
