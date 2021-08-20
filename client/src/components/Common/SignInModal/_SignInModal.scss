@@ -1,5 +1,5 @@
 .signincontainer {
-  z-index: 800;
+  z-index: 700;
   position: fixed;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
   justify-content: center;
 
   .signinwrapper {
-    z-index: 810;
+    z-index: 710;
     position: relative;
     width: 550px;
     height: 566px;
@@ -53,7 +53,7 @@
     }
 
     .leadsignup {
-      z-index: 810;
+      z-index: 710;
       width: 296px;
       height: 24px;
       font-weight: bold;
@@ -68,7 +68,7 @@
     }
 
     .commonbutton {
-      z-index: 810;
+      z-index: 710;
       width: 296px;
     }
   }
