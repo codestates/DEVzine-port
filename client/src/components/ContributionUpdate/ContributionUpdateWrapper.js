@@ -31,7 +31,7 @@ function ContributionUpdateWrapper({ id }) {
 
   useEffect(async () => {
     const requestGet = await customAxios
-      .get(`/magazine/contribution/${id}`)
+      .get(`/contribution/update/${id}`)
       .then(res => res.data.data)
       .catch(err => {
         alert('기고 정보를 받아오는데 실패하였습니다.');
