@@ -5,12 +5,29 @@ const {
     deleteCacheForOneContribution 
 } = require('./cachefunction/contributionsCache')
 const { Contribution } = require('../Models/Contributions')
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 module.exports = {
 
     adminSignin: async (req, res) => {
-        
-        return res.send('admin signin');
+
+        jwt.sign(
+            { admin_id: req.user.admin_id },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' },
+            (err, token) => {
+                if (err) {
+                    res.status(500).send(err);
+                } 
+                res.cookie('admin', token, {
+                    httpOnly: true,
+                    sameSite: 'None',
+                    secure: true
+                });
+                return res.send('admin signin');
+            }
+        );
 
     },
 
