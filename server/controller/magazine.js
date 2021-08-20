@@ -8,6 +8,8 @@ const {
     checkCacheForOneContribution,
     updateContributionHit,
 } = require('./cachefunction/contributionsCache')
+const { Contribution } = require('../Models/Contributions');
+const { User } = require('../Models/Users');
 
 module.exports = {
 
@@ -113,31 +115,80 @@ module.exports = {
 
     getContribution: async (req, res) => {
 
+        let auth;
+        if (!req.user || req.user.user_email) {
+            auth = 'user'
+        } else {
+            auth = 'admin'
+        }
+
         try {
 
             const contributionid = Number(req.params.contributionid);
 
-            const cacheResult = await checkCacheForOneContribution(contributionid)
+            if (auth === 'user') {
 
-            if (cacheResult === 'Not found') {
-                return res.status(404).json(
+                const cacheResult = await checkCacheForOneContribution(contributionid)
+
+                if (cacheResult === 'Not found') {
+                    return res.status(404).json(
+                        {
+                            "message" : "Not found"
+                        }
+                    )
+                }
+
+                const { data, source } = cacheResult
+
+                updateContributionHit(contributionid);
+
+                return res.status(200).json(
                     {
-                        "message" : "Not found"
+                        data,
+                        source,
+                        "message" : "Contribution successfully found"
+                    }
+                );
+
+            } else {
+
+                const contribData = await Contribution.findOne(
+                    {
+                        contribution_id: contributionid
+                    }, {
+                        _id: 0,
                     }
                 )
-            }
 
-            const { data, source } = cacheResult
-
-            updateContributionHit(contributionid);
-
-            return res.status(200).json(
-                {
-                    data,
-                    source,
-                    "message" : "Contribution successfully found"
+                if (!contribData) {
+                    return res.status(404).json(
+                        {
+                            "message" : "Not found"
+                        }
+                    )
                 }
-            );
+
+                const user = await User.findOne(
+                    {
+                        user_email: contribData.user_email
+                    }, {
+                        _id: 0,
+                        user_name:1
+                    }
+                )
+
+                const { user_email, ...data } = contribData._doc;
+                const { user_name } = user._doc;
+
+                return res.status(200).json(
+                    {
+                        "data" : { user_name, ...data },
+                        "source" : "DB",
+                        "message" : "Contribution successfully found"
+                    }
+                );
+
+            }
 
         } catch (err) {
             

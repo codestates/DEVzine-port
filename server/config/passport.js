@@ -71,7 +71,8 @@ const passportVerifyAdmin = async (admin_id, admin_password, done) => {
 	});
 };
 
-const cookieExtractorAdmin = function(req) {
+const cookieExtractorAdmin = function(req, res, next) {
+
 	var token = null;
 	if (req && req.cookies)
 	{
@@ -86,7 +87,6 @@ const JWTConfigAdmin = {
 };
 
 const JWTVerifyAdmin = async (jwtPayload, done) => {
-	console.log(jwtPayload)
   try {
     const admin = await Admin.findOne({ admin_id: jwtPayload.admin_id });
     if (admin) {
