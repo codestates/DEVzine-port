@@ -8,6 +8,7 @@ import ArticleView from '../../pages/ArticleView';
 import ArticelCarousel from './ArticleCarousel';
 import Button from '../Common/Button/Button';
 import eye from '../../assets/images/eye.svg';
+import search from '../../assets/images/search.svg';
 
 function ArticleListWrapper() {
   const dispatch = useDispatch();
@@ -18,21 +19,6 @@ function ArticleListWrapper() {
   const [CurrentTitle, setCurrentTitle] = useState('');
   const [CurrentOrder, setCurrentOrder] = useState('최신순');
   const [ArticlePlus, setArticlePlus] = useState(12);
-
-  // let selectOptions = [
-  //   ['전체', 'All'],
-  //   ['게임', '게임'],
-  //   ['머신러닝', '머신러닝'],
-  //   ['모바일', '모바일'],
-  //   ['보안', '보안'],
-  //   ['블록체인', '블록체인'],
-  //   ['빅데이터', '빅데이터'],
-  //   ['코딩', '코딩'],
-  //   ['클라우드', '클라우드'],
-  //   ['퍼스널 컴퓨팅', '퍼스널 컴퓨팅'],
-  //   ['AI/로봇', 'AI/로봇'],
-  //   ['기타', '기타'],
-  // ];
 
   let selectOptions = [
     '전체',
@@ -73,7 +59,7 @@ function ArticleListWrapper() {
         setArticleData(res.payload);
       })
       .catch(err => alert('검색한 결과를 받아오는데 실패하였습니다.'));
-  }, [CurrentKeyword, CurrentTitle, CurrentOrder]);
+  }, [CurrentKeyword, CurrentOrder]);
 
   function latestBtn() {
     setCurrentOrder('최신순');
@@ -95,6 +81,22 @@ function ArticleListWrapper() {
 
   function onTitleHandler(e) {
     setCurrentTitle(e.currentTarget.valu);
+  }
+
+  function onTitleSubmit() {
+    let body = {
+      CurrentKeyword,
+      CurrentTitle,
+      CurrentOrder,
+    };
+
+    dispatch(filterArticleData(body))
+      .then(res => {
+        console.log(res.payload);
+        setArticleData(null);
+        setArticleData(res.payload);
+      })
+      .catch(err => alert('검색한 결과를 받아오는데 실패하였습니다.'));
   }
 
   function initialBtn() {
@@ -142,9 +144,15 @@ function ArticleListWrapper() {
                   <span>
                     <input
                       type="text"
-                      className="request-text"
+                      className="articlebox-text"
                       placeholder="기사를 검색하세요."
                       onChange={e => onTitleHandler(e)}
+                    />
+                    <img
+                      src={search}
+                      alt="search btn"
+                      className="articlebox-search-btn"
+                      onClick={onTitleSubmit}
                     />
                   </span>
                   <span

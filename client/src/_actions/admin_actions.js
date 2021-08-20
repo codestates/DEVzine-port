@@ -98,8 +98,9 @@ export async function signinAdmin(dataToSubmit) {
 
 export async function getContributionAdmin() {
   const request = await customAxios.get(`/admin/contributionlist`).then(res => {
-    console.log(res.data.data);
-    return fakeData;
+    // console.log(res.data.data);
+    return res.data;
+    // return fakeData;
   });
   // .then(res => res.data.data);
 
@@ -112,9 +113,9 @@ export async function getContributionAdmin() {
 export async function SearchData(Select, Text) {
   const request = await customAxios
     .get(`/admin/contributionlist`)
-    .then(res => fakeData)
+    .then(res => res.data)
     .then(res => {
-      if (Select === 'All' || Select === '') {
+      if (Select === '') {
         return [
           ...res.data.requested.postRequest,
           ...res.data.requested.patchRequest,
@@ -142,7 +143,7 @@ export async function SearchData(Select, Text) {
 export async function SearchAppData(AppText) {
   const request = await customAxios
     .get(`/admin/contributionlist`)
-    .then(res => fakeData)
+    .then(res => res.data)
     .then(res => res.data.accepted)
     .then(res => {
       if (AppText === '') {

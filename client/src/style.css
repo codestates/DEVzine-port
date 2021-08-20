@@ -1601,6 +1601,8 @@ label {
     padding-bottom: 20px; }
     .articlebox-align .setbold {
       font-weight: 700; }
+  .articlebox-select {
+    border: 1px solid red; }
   .articlebox span {
     cursor: pointer;
     margin: 20px; }
@@ -1735,6 +1737,13 @@ label {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   height: 48px; }
+
+.articlebox input {
+  border: 1px solid red;
+  width: 400px; }
+
+.articlebox img {
+  border: 1px solid red; }
 
 .react-multi-carousel-list {
   align-items: center;
