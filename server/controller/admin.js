@@ -5,6 +5,7 @@ const {
     deleteCacheForOneContribution 
 } = require('./cachefunction/contributionsCache')
 const { Contribution } = require('../Models/Contributions')
+const { User } = require('../Models/Users')
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
@@ -170,9 +171,21 @@ module.exports = {
 
             }
 
+            const user = await User.findOne(
+                {
+                    user_email: acceptedContribution.user_email
+                }, {
+                    user_name: 1
+                }
+            )
+
+            const { user_email, ...temp } = acceptedContribution._doc;
+            const { user_name } = user;
+            const data = { user_name, ...temp };
+
             if (acceptedContribution.status === 110 || acceptedContribution.status === 111) {
 
-                await insertCacheForOneContribution(contribution_id, acceptedContribution);
+                await insertCacheForOneContribution(contribution_id, data);
         
             }
 
