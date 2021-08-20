@@ -423,6 +423,62 @@ select::-ms-expand {
   padding: 8px;
   width: 265px; }
 
+.modalcontainer {
+  height: 15rem;
+  margin: 120px auto;
+  text-align: center; }
+  .modalcontainer .modalbackdrop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 200; }
+    .modalcontainer .modalbackdrop .modalview {
+      background-color: #fff;
+      border-radius: 20px;
+      height: 241px;
+      position: relative;
+      width: 360px; }
+      @media screen and (max-width: 767px) {
+        .modalcontainer .modalbackdrop .modalview {
+          max-width: 360px;
+          width: 95%;
+          height: 200px; } }
+  .modalcontainer .desc {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.02em;
+    color: #191a20;
+    font-weight: 700;
+    width: 90%; }
+    .modalcontainer .desc .closebtn {
+      background-color: #d9d9d9;
+      border-radius: 8px;
+      color: #191a20;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 700;
+      height: 55px;
+      margin-top: 16px;
+      width: 265px; }
+      @media screen and (max-width: 767px) {
+        .modalcontainer .desc .closebtn {
+          max-width: 265px;
+          width: 90%; } }
+
+.alermodalbox {
+  height: 0;
+  width: 0; }
+
 .loadingbox {
   position: absolute;
   top: 50%;
@@ -2100,62 +2156,6 @@ td:nth-child(2):hover {
   width: 70px; }
   .adminform-btn:hover {
     background-color: #d9d9d9; }
-
-.modalcontainer {
-  height: 15rem;
-  margin: 120px auto;
-  text-align: center; }
-  .modalcontainer .modalbackdrop {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.4);
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 200; }
-    .modalcontainer .modalbackdrop .modalview {
-      background-color: #fff;
-      border-radius: 20px;
-      height: 241px;
-      position: relative;
-      width: 360px; }
-      @media screen and (max-width: 767px) {
-        .modalcontainer .modalbackdrop .modalview {
-          max-width: 360px;
-          width: 95%;
-          height: 200px; } }
-  .modalcontainer .desc {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 18px;
-    line-height: 28px;
-    letter-spacing: -0.02em;
-    color: #191a20;
-    font-weight: 700;
-    width: 90%; }
-    .modalcontainer .desc .closebtn {
-      background-color: #d9d9d9;
-      border-radius: 8px;
-      color: #191a20;
-      cursor: pointer;
-      font-size: 18px;
-      font-weight: 700;
-      height: 55px;
-      margin-top: 16px;
-      width: 265px; }
-      @media screen and (max-width: 767px) {
-        .modalcontainer .desc .closebtn {
-          max-width: 265px;
-          width: 90%; } }
-
-.alermodalbox {
-  height: 0;
-  width: 0; }
 
 .container {
   width: 100%;
