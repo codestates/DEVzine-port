@@ -8,20 +8,22 @@
     margin-bottom: 220px;
   }
 
-  .visualwrapper {
-    margin-top: 206px;
-    margin-bottom: 306px;
-    .chartcontainer {
-      height: 500px;
-      width: 500px;
-      // background: red;
-      .chartwrapper {
-        min-height: 360px;
-        background-color: $white;
-        position: relative;
-        border: 1px solid $border;
-        border-radius: 24px;
-        margin-bottom: 120px;
+  .container {
+    .row {
+      .visualwrapper {
+        margin-top: 206px;
+        margin-bottom: 306px;
+        .chartcontainer {
+          min-height: 500px;
+          min-width: 500px;
+          .chartwrapper {
+            min-height: 500px;
+            background-color: $white;
+            position: relative;
+            border: 1px solid $border;
+            border-radius: 24px;
+          }
+        }
       }
     }
   }
