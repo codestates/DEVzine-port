@@ -5,14 +5,14 @@ import TextInputGenderRequired from './TextInputGenderRequired';
 import Button from '../Button/Button';
 import Union from '../../../assets/images/Union.png';
 import { Link } from 'react-router-dom';
-// import AlertModal from '../AlertModal/AlertModal';
+import AlertModal from '../AlertModal/AlertModal';
 
 function SigninModal({ ModalOpen, setModalOpen }) {
   const dispatch = useDispatch();
 
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
-  // const [AlertOpen, setAlertOpen] = useState(false);
+  const [AlertOpen, setAlertOpen] = useState(false);
   const requiredTextInputData = [
     [Email, setEmail, '이메일 입력', 'email', '30'],
     [Password, setPassword, '비밀번호 입력', 'password', '20'],
@@ -35,14 +35,14 @@ function SigninModal({ ModalOpen, setModalOpen }) {
         }
       })
       .catch(err => {
-        // setAlertOpen(true);
-        alert('아이디 혹은 비밀번호가 일치하지 않습니다.');
+        // alert('아이디 혹은 비밀번호가 일치하지 않습니다.');
+        setAlertOpen(true);
       });
   }
 
-  // const closeModal = () => {
-  //   setAlertOpen(false);
-  // };
+  const closeModal = () => {
+    setAlertOpen(false);
+  };
 
   return ModalOpen ? (
     <div className="signincontainer">
@@ -83,12 +83,14 @@ function SigninModal({ ModalOpen, setModalOpen }) {
           />
         </Link>
       </div>
-      {/* <AlertModal
-        open={AlertOpen}
-        close={closeModal}
-        alertString={'아이디 혹은 비밀번호가 일치하지 않습니다.'}
-        alertBtn="확인"
-      /> */}
+      <div className="alert-modal">
+        <AlertModal
+          open={AlertOpen}
+          close={closeModal}
+          alertString={'아이디 혹은 비밀번호가\n일치하지 않습니다.'}
+          alertBtn="확인"
+        />
+      </div>
     </div>
   ) : null;
 }

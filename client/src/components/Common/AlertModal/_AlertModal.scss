@@ -23,7 +23,7 @@
       @include mobile-only() {
         // margin-top: 162px;
         max-width: 360px;
-        width: 90%;
+        width: 95%;
         height: 200px;
       }
     }
@@ -31,8 +31,7 @@
 
   .desc {
     @include pos-center;
-    color: $dark;
-    font-size: 18px;
+    @include text-style(18, $dark);
     font-weight: $bold;
     width: 90%;
 
