@@ -32,16 +32,16 @@ function ContributionUpdateWrapper({ id }) {
   useEffect(async () => {
     const requestGet = await customAxios
       .get(`/magazine/contribution/${id}`)
-      .then(res => res.data.data.contribution_keyword)
+      .then(res => res.data.data)
       .catch(err => {
         alert('기고 정보를 받아오는데 실패하였습니다.');
         // window.location.href = '/error';
       });
 
-    setKeyword(requestGet);
-    // setKeyword(requestGet.contribution_keyword);
-    // setTitle(requestGet.contribution_title);
-    // setContent(requestGet.contribution_content);
+    // setKeyword(requestGet);
+    setKeyword(requestGet.contribution_keyword);
+    setTitle(requestGet.contribution_title);
+    setContent(requestGet.contribution_content);
 
     if (Keyword !== '' && Title !== '' && Content !== '') {
       setAllDate(true);
@@ -107,7 +107,7 @@ function ContributionUpdateWrapper({ id }) {
             <div className="col-sm-4">
               <div className="continner">
                 <form onSubmit={e => onSubmitHandler(e)} className="signinform">
-                  <label for="conselect">
+                  <label htmlFor="conselect">
                     키워드 <span>(필수)</span>
                   </label>
                   <select
@@ -127,7 +127,7 @@ function ContributionUpdateWrapper({ id }) {
                   </select>
 
                   <br />
-                  <label for="contitle">
+                  <label htmlFor="contitle">
                     제목 <span>(필수)</span>
                   </label>
                   <input
@@ -141,7 +141,7 @@ function ContributionUpdateWrapper({ id }) {
                   />
 
                   <br />
-                  <label for="contextarea">
+                  <label htmlFor="contextarea">
                     미리보기 내용 <span>(필수)</span>
                     <p
                       className={
@@ -173,7 +173,7 @@ function ContributionUpdateWrapper({ id }) {
                 <div className="contextsmall">
                   수정 완료 후엔 심사가 다시 시작해요.
                 </div>
-                <div class="updatecancelbtn">
+                <div className="updatecancelbtn">
                   <Link to="/mypage">
                     <Button
                       subject="이전으로"
