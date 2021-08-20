@@ -14,7 +14,7 @@ function ContributionUpdateWrapper({ id }) {
   const [AlertOpen, setAlertOpen] = useState(false);
   const [ColorChange, setColorChange] = useState(false);
   const [AllDate, setAllDate] = useState(false);
-
+  let requrest = Auth(true);
   let selectOptions = [
     '게임',
     '머신러닝',
@@ -35,13 +35,16 @@ function ContributionUpdateWrapper({ id }) {
       .get(`/contribution/update/${id}`)
       .then(res => res.data.data)
       .catch(err => {
-        alert('기고 정보를 받아오는데 실패하였습니다.');
+        // alert('기고 정보를 받아오는데 실패하였습니다.');
+        requrest = Auth(true);
+
         // window.location.href = '/error';
       });
-
-    setKeyword(requestGet.contribution_keyword);
-    setTitle(requestGet.contribution_title);
-    setContent(requestGet.contribution_content);
+    if (requestGet !== undefined) {
+      setKeyword(requestGet.contribution_keyword);
+      setTitle(requestGet.contribution_title);
+      setContent(requestGet.contribution_content);
+    }
 
     if (Keyword !== '' && Title !== '' && Content !== '') {
       setAllDate(true);
@@ -49,8 +52,6 @@ function ContributionUpdateWrapper({ id }) {
   }, []);
 
   useEffect(() => {
-    const requrest = Auth(true);
-
     if (requrest === 'Login need') {
       setModalOpen(true);
     }
@@ -104,94 +105,99 @@ function ContributionUpdateWrapper({ id }) {
       <div className="contributioncontainer">
         <div className="container">
           <div className="row">
-            <div className="col-sm-4">
-              <div className="continner">
-                <form onSubmit={e => onSubmitHandler(e)} className="signinform">
-                  <label htmlFor="conselect">
-                    키워드 <span>(필수)</span>
-                  </label>
-                  <select
-                    onChange={e => onKeywordHandler(e)}
-                    value={Keyword}
-                    className="conselect"
-                    id="conselect"
+            {requrest === 'Login need' ? null : (
+              <div className="col-sm-4">
+                <div className="continner">
+                  <form
+                    onSubmit={e => onSubmitHandler(e)}
+                    className="signinform"
                   >
-                    <option value="" className="optionslect">
-                      선택
-                    </option>
-                    {selectOptions.map((option, idx) => (
-                      <option key={idx} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-
-                  <br />
-                  <label htmlFor="contitle">
-                    제목 <span>(필수)</span>
-                  </label>
-                  <input
-                    type="text"
-                    onChange={e => onTitleHandler(e)}
-                    placeholder="제목"
-                    defaultValue={Title}
-                    placeholder="8자 이상 입력해주세요."
-                    className="contitle"
-                    id="contitle"
-                  />
-
-                  <br />
-                  <label htmlFor="contextarea">
-                    미리보기 내용 <span>(필수)</span>
-                    <p
-                      className={
-                        ColorChange ? 'textlength active' : 'textlength'
-                      }
+                    <label htmlFor="conselect">
+                      키워드 <span>(필수)</span>
+                    </label>
+                    <select
+                      onChange={e => onKeywordHandler(e)}
+                      value={Keyword}
+                      className="conselect"
+                      id="conselect"
                     >
-                      ( {Content.length} / 200 이상 )
-                    </p>
-                  </label>
-                  <textarea
-                    cols="50"
-                    rows="10"
-                    onChange={e => onContentHandler(e)}
-                    placeholder="200자 이상 입력해주세요."
-                    className="contextarea"
-                    defaultValue={Content}
-                    id="contextarea"
-                  ></textarea>
+                      <option value="" className="optionslect">
+                        선택
+                      </option>
+                      {selectOptions.map((option, idx) => (
+                        <option key={idx} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
 
-                  <br />
-                  <button type="submit" className="contributionbtn">
-                    <Button
-                      subject="기고수정"
-                      color="#fff"
-                      backgroundColor="#191a20"
+                    <br />
+                    <label htmlFor="contitle">
+                      제목 <span>(필수)</span>
+                    </label>
+                    <input
+                      type="text"
+                      onChange={e => onTitleHandler(e)}
+                      placeholder="제목"
+                      defaultValue={Title}
+                      placeholder="8자 이상 입력해주세요."
+                      className="contitle"
+                      id="contitle"
                     />
-                  </button>
-                </form>
-                <div className="contextsmall">
-                  수정 완료 후엔 심사가 다시 시작해요.
+
+                    <br />
+                    <label htmlFor="contextarea">
+                      미리보기 내용 <span>(필수)</span>
+                      <p
+                        className={
+                          ColorChange ? 'textlength active' : 'textlength'
+                        }
+                      >
+                        ( {Content.length} / 200 이상 )
+                      </p>
+                    </label>
+                    <textarea
+                      cols="50"
+                      rows="10"
+                      onChange={e => onContentHandler(e)}
+                      placeholder="200자 이상 입력해주세요."
+                      className="contextarea"
+                      defaultValue={Content}
+                      id="contextarea"
+                    ></textarea>
+
+                    <br />
+                    <button type="submit" className="contributionbtn">
+                      <Button
+                        subject="기고수정"
+                        color="#fff"
+                        backgroundColor="#191a20"
+                      />
+                    </button>
+                  </form>
+                  <div className="contextsmall">
+                    수정 완료 후엔 심사가 다시 시작해요.
+                  </div>
+                  <div className="updatecancelbtn">
+                    <Link to="/mypage">
+                      <Button
+                        subject="이전으로"
+                        color="#191a20"
+                        backgroundColor="#d9d9d9"
+                      />
+                    </Link>
+                  </div>
                 </div>
-                <div className="updatecancelbtn">
-                  <Link to="/mypage">
-                    <Button
-                      subject="이전으로"
-                      color="#191a20"
-                      backgroundColor="#d9d9d9"
-                    />
-                  </Link>
+                <div className="alermodalbox">
+                  <AlertModal
+                    open={AlertOpen}
+                    close={closeModal}
+                    alertString={'모두 입력해야 합니다.'}
+                    alertBtn="확인"
+                  />
                 </div>
               </div>
-              <div className="alermodalbox">
-                <AlertModal
-                  open={AlertOpen}
-                  close={closeModal}
-                  alertString={'모두 입력해야 합니다.'}
-                  alertBtn="확인"
-                />
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

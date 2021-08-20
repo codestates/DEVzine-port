@@ -39,8 +39,8 @@ function ArticleViewWrapper({ id }) {
             return setContribution(res.data.data);
           })
           .catch(err => {
-            window.location.href = '/error';
-            // console.log(err);
+            // window.location.href = '/error';
+            console.log('무슨오류1', err);
           })
       : await customAxios
           .get(`/magazine/article/${pathParameter}`)
@@ -49,8 +49,8 @@ function ArticleViewWrapper({ id }) {
             return setArticle(res.data.data);
           })
           .catch(err => {
-            window.location.href = '/error';
-            // console.log(err);
+            // window.location.href = '/error';
+            console.log('무슨오류2', err);
           });
     setAlldata(true);
   }, []);
