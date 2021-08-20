@@ -8,6 +8,7 @@ const {
     checkCacheForOneContribution,
     updateContributionHit,
 } = require('./cachefunction/contributionsCache')
+const { Contribution } = require('../Models/Contributions')
 
 module.exports = {
 
@@ -113,31 +114,45 @@ module.exports = {
 
     getContribution: async (req, res) => {
 
+        let auth;
+        if (!req.user || req.user.user_email) {
+            auth = 'user'
+        } else {
+            auth = 'admin'
+        }
+
         try {
 
             const contributionid = Number(req.params.contributionid);
 
-            const cacheResult = await checkCacheForOneContribution(contributionid)
+            if (auth === 'user') {
 
-            if (cacheResult === 'Not found') {
-                return res.status(404).json(
-                    {
-                        "message" : "Not found"
-                    }
-                )
-            }
+                const cacheResult = await checkCacheForOneContribution(contributionid)
 
-            const { data, source } = cacheResult
-
-            updateContributionHit(contributionid);
-
-            return res.status(200).json(
-                {
-                    data,
-                    source,
-                    "message" : "Contribution successfully found"
+                if (cacheResult === 'Not found') {
+                    return res.status(404).json(
+                        {
+                            "message" : "Not found"
+                        }
+                    )
                 }
-            );
+
+                const { data, source } = cacheResult
+
+                updateContributionHit(contributionid);
+
+                return res.status(200).json(
+                    {
+                        data,
+                        source,
+                        "message" : "Contribution successfully found"
+                    }
+                );
+            } else {
+
+
+
+            }
 
         } catch (err) {
             
