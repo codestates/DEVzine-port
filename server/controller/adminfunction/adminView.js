@@ -29,7 +29,7 @@ const findContributionsWithStatus = async (statusCode) => {
             }
         },
     ]);
-    
+
     return result;
 
 }
