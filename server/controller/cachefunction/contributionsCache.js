@@ -143,6 +143,50 @@ const checkCacheForOneContribution = async (id) => {
 
 }
 
+const insertCacheForOneContribution = async (id, data) => {
+        
+    redisClient.hgetall('allContributions', async (err, contributions) => {
+
+        if (err) {
+            console.log(err);
+        }
+
+        // cache miss
+        if (!contributions) {
+            const contributionListFromDB = await getAllConfirmedContributions();
+            await setNewCacheForContributions(contributionListFromDB);
+        }
+
+        // cache hit
+        await redisClient.hset('allContributions', id, JSON.stringify(data));
+
+    })
+        
+}
+
+const deleteCacheForOneContribution = async (id, data) => {
+        
+    redisClient.hgetall('allContributions', async (err, contributions) => {
+
+        if (err) {
+            console.log(err);
+        }
+
+        // cache miss
+        if (!contributions) {
+            const contributionListFromDB = await getAllConfirmedContributions();
+            await setNewCacheForContributions(contributionListFromDB);
+        }
+
+        // cache hit
+        if (contributions) {
+            await redisClient.hdel('allContributions', id);
+        }
+        
+    })
+        
+}
+
 const updateContributionHit = async (id) => {
     
     try {
@@ -181,5 +225,7 @@ module.exports = {
     getAllConfirmedContributions,
     checkCacheForContributions,
     checkCacheForOneContribution,
-    updateContributionHit
+    updateContributionHit,
+    insertCacheForOneContribution,
+    deleteCacheForOneContribution
 }
