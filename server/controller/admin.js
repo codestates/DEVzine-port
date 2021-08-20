@@ -10,7 +10,7 @@ require('dotenv').config();
 
 module.exports = {
 
-    adminSignin: async (req, res) => {
+    adminSignIn: async (req, res) => {
 
         jwt.sign(
             { admin_id: req.user.admin_id },
@@ -33,6 +33,19 @@ module.exports = {
             }
         );
 
+    },
+
+    adminSignOut: async (req, res) => {
+        try {
+            res.clearCookie('admin', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None'
+        });
+            res.status(200).send({ message: 'Logout success' });
+        } catch (err) {
+            res.status(404).send({ message: 'Not found' });
+        }
     },
 
 	getAllUsersContribution: async (req, res) => {
