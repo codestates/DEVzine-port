@@ -1,19 +1,31 @@
 import React, { useEffect, useState } from 'react';
+import { useTransition, animated } from 'react-spring';
 import Chart from 'react-apexcharts';
 
 export function ArticlesTopHit({ data }) {
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const [ScrollPosition, setScrollPosition] = useState(0);
+  const [Indicator, setIndicator] = useState(false);
+  const transition = useTransition(Indicator, {
+    from: { x: -100, opacity: 0, skew: '20deg' },
+    enter: { x: 0, opacity: 1, skew: '0deg' },
+    leave: { x: 100, opacity: 0, skew: '20deg' },
+  });
+
+  let rect = 500;
 
   const onScroll = () => {
     setScrollPosition(window.pageYOffset);
-    // console.log(window.pageYOffset);
+    if (ScrollPosition > 400 && ScrollPosition < 400 + rect) {
+      setIndicator(true);
+    } else {
+      setIndicator(false);
+    }
   };
-
   useEffect(() => {
     window.addEventListener('scroll', onScroll);
     // 컴포넌트가 언마운트 되기 직전에 이벤트를 끝낸다. 메모리 누수 방지
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [ScrollPosition]);
 
   let options = {
     stroke: {
@@ -37,6 +49,19 @@ export function ArticlesTopHit({ data }) {
       },
       height: 350,
       type: 'bar',
+      animations: {
+        enabled: true,
+        easing: 'easeinout',
+        speed: 1200,
+        animateGradually: {
+          enabled: true,
+          delay: 300,
+        },
+        dynamicAnimation: {
+          enabled: true,
+          speed: 1000,
+        },
+      },
     },
     plotOptions: {
       bar: {
@@ -98,31 +123,46 @@ export function ArticlesTopHit({ data }) {
 
   options.xaxis.categories = categories;
 
-  return scrollPosition > 400 ? (
-    <Chart
-      options={options}
-      series={[{ data: series }]}
-      type="bar"
-      height={500}
-      width={500}
-      marginTop={1200}
-    />
-  ) : null;
+  return transition((style, item) =>
+    item ? (
+      <animated.div style={style}>
+        <Chart
+          options={options}
+          series={[{ data: series }]}
+          type="bar"
+          height={500}
+          width={500}
+        />
+      </animated.div>
+    ) : null,
+  );
 }
 
 export function UserAgeAndGender({ data }) {
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const [ScrollPosition, setScrollPosition] = useState(0);
+  const [Indicator, setIndicator] = useState(false);
+  const transition = useTransition(Indicator, {
+    from: { x: 100, opacity: 0, skew: '20deg' },
+    enter: { x: 0, opacity: 1, skew: '0deg' },
+    leave: { x: -100, opacity: 0, skew: '20deg' },
+  });
+
+  let rect = 500;
 
   const onScroll = () => {
     setScrollPosition(window.pageYOffset);
-    // console.log(window.pageYOffset);
+    if (ScrollPosition > 800 && ScrollPosition < 800 + rect) {
+      setIndicator(true);
+    } else {
+      setIndicator(false);
+    }
   };
 
   useEffect(() => {
     window.addEventListener('scroll', onScroll);
     // 컴포넌트가 언마운트 되기 직전에 이벤트를 끝낸다. 메모리 누수 방지
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [ScrollPosition]);
 
   let series = [
     {
@@ -143,6 +183,19 @@ export function UserAgeAndGender({ data }) {
       stacked: true,
       toolbar: {
         show: false,
+      },
+      animations: {
+        enabled: true,
+        easing: 'easeinout',
+        speed: 1200,
+        animateGradually: {
+          enabled: true,
+          delay: 300,
+        },
+        dynamicAnimation: {
+          enabled: true,
+          speed: 1000,
+        },
       },
     },
     colors: ['#ffdd14', '#ffc803'],
@@ -205,15 +258,11 @@ export function UserAgeAndGender({ data }) {
     },
   };
 
-  return scrollPosition > 700 ? (
-    <div id="chart">
-      <Chart
-        options={options}
-        series={series}
-        type="bar"
-        height={500}
-        marginTop={1200}
-      />
-    </div>
-  ) : null;
+  return transition((style, item) =>
+    item ? (
+      <animated.div style={style}>
+        <Chart options={options} series={series} type="bar" height={500} />
+      </animated.div>
+    ) : null,
+  );
 }
