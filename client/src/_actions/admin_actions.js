@@ -9,9 +9,7 @@ import {
 import { customAxios } from '../utils/customAxios';
 
 export async function signoutAdmin() {
-  const request = await customAxios
-    .post(`/user/signout`)
-    .then(res => res.data.message);
+  const request = await customAxios.post(`/user/signout`);
 
   return {
     type: SIGNOUT_ADMIN,
@@ -20,11 +18,11 @@ export async function signoutAdmin() {
 }
 
 export async function signinAdmin(dataToSubmit) {
-  const request = 'Login success';
+  // const request = 'Login success';
   // TODO: axios 연결 뒤 주석 해제
-  // const request = await customAxios
-  //   .post(`/admin/signin`, dataToSubmit)
-  //   .then(res => res.data.message);
+  const request = await customAxios
+    .post(`/admin/signin`, dataToSubmit)
+    .then(res => res.data.message);
 
   return {
     type: SIGNIN_ADMIN,
