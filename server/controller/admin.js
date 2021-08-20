@@ -62,7 +62,7 @@ module.exports = {
 
         try {
 
-            if (![100, 101, 102].includes(status)) {
+            if (![120, 121, 122].includes(status)) {
 
                 return res.status(400).json(
                     {
@@ -77,7 +77,7 @@ module.exports = {
                     contribution_id
                 }, {
                     $set: {
-                        status: status + 20
+                        status
                     }
                 }, {
                     new: true
@@ -114,7 +114,7 @@ module.exports = {
 
         try {
 
-            if (![100, 101, 102].includes(status)) {
+            if (![110, 111, 112].includes(status)) {
 
                 return res.status(400).json(
                     {
@@ -129,7 +129,7 @@ module.exports = {
                     contribution_id
                 }, {
                     $set: {
-                        status: status + 10
+                        status
                     }
                 }, {
                     new: true,
