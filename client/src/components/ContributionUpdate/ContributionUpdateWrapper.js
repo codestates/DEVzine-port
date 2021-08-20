@@ -84,7 +84,7 @@ function ContributionUpdateWrapper({ id }) {
     let body = {
       contribution_title: Title,
       contribution_content: Content,
-      contibution_keyword: Keyword,
+      contribution_keyword: Keyword,
     };
 
     return customAxios.post('/contribution', body).then(res => {
