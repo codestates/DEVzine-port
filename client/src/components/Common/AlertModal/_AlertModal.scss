@@ -19,6 +19,13 @@
       height: 241px;
       position: relative;
       width: 360px;
+
+      @include mobile-only() {
+        // margin-top: 162px;
+        max-width: 360px;
+        width: 90%;
+        height: 200px;
+      }
     }
   }
 
@@ -27,6 +34,7 @@
     color: $dark;
     font-size: 18px;
     font-weight: $bold;
+    width: 90%;
 
     .closebtn {
       background-color: $border;
@@ -38,6 +46,11 @@
       height: 55px;
       margin-top: 16px;
       width: 265px;
+
+      @include mobile-only() {
+        max-width: 265px;
+        width: 90%;
+      }
     }
   }
 }
