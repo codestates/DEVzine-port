@@ -25,7 +25,11 @@ module.exports = {
                     sameSite: 'None',
                     secure: true
                 });
-                return res.send('admin signin');
+                return res.status(200).json(
+                    {
+                        "message": "Login success"
+                    }
+                );
             }
         );
 
