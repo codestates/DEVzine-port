@@ -72,6 +72,7 @@ function SubscriptionWrapper() {
 
   const closeModal = () => {
     setAlertOpen(false);
+    window.location.href = '/';
   };
 
   return (

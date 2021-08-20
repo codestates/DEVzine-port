@@ -14,6 +14,7 @@ function ContributionWrapper() {
   const [UserName, setUserName] = useState('');
   const [AlertOpen, setAlertOpen] = useState(false);
   const [ColorChange, setColorChange] = useState(false);
+  const [SignIn, setSignIn] = useState(false);
 
   let selectOptions = [
     '게임',
@@ -35,6 +36,7 @@ function ContributionWrapper() {
     if (requrest === 'Login need') {
       setModalOpen(true);
     } else {
+      setSignIn(true);
       setUserName(store.getState().user.signinSuccess[1]);
     }
   });
@@ -73,7 +75,7 @@ function ContributionWrapper() {
     return customAxios.post('/contribution', body).then(res => {
       if (res.status === 200) {
         alert('기고신청이 완료되었습니다.');
-        // window.history.back();
+        window.location.href = '/';
       } else alert('기고신청이 실패하였습니다.');
     });
   }
@@ -87,85 +89,91 @@ function ContributionWrapper() {
       <div className="contributioncontainer">
         <div className="container">
           <div className="row">
-            <div className="col-sm-4">
-              <div className="continner">
-                <div className="context">
-                  {UserName}님의
-                  <br />
-                  얕고 넓은 지식을 기고해보세요.
-                </div>
-                <div className="contextsmall">
-                  심사 후에 기고되며,
-                  <br />
-                  기고 관리는 마이페이지에 할 수 있어요.
-                </div>
-                <form onSubmit={e => onSubmitHandler(e)} className="signinform">
-                  <label for="conselect">
-                    키워드 <span>(필수)</span>
-                  </label>
-                  <select
-                    className="conselect"
-                    onChange={e => onKeywordHandler(e)}
-                    id="conselect"
+            {SignIn ? (
+              <div className="col-sm-4">
+                <div className="continner">
+                  <div className="context">
+                    {UserName}님의
+                    <br />
+                    얕고 넓은 지식을 기고해보세요.
+                  </div>
+                  <div className="contextsmall">
+                    심사 후에 기고되며,
+                    <br />
+                    기고 관리는 마이페이지에 할 수 있어요.
+                  </div>
+                  <form
+                    onSubmit={e => onSubmitHandler(e)}
+                    className="signinform"
                   >
-                    <option value="">선택</option>
-                    {selectOptions.map((option, idx) => (
-                      <option key={idx} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-
-                  <label for="contitle">
-                    제목 <span>(필수)</span>
-                  </label>
-                  <input
-                    type="text"
-                    onChange={e => onTitleHandler(e)}
-                    placeholder="8자 이상 입력해주세요."
-                    className="contitle"
-                    id="contitle"
-                  />
-
-                  <label for="contextarea">
-                    미리보기 내용 <span>(필수)</span>
-                    <p
-                      className={
-                        ColorChange ? 'textlength active' : 'textlength'
-                      }
+                    <label htmlFor="conselect">
+                      키워드 <span>(필수)</span>
+                    </label>
+                    <select
+                      className="conselect"
+                      onChange={e => onKeywordHandler(e)}
+                      id="conselect"
                     >
-                      ( {Content.length} / 200 이상 )
-                    </p>
-                  </label>
+                      <option value="">선택</option>
+                      {selectOptions.map((option, idx) => (
+                        <option key={idx} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
 
-                  <textarea
-                    cols="50"
-                    rows="10"
-                    onChange={e => onContentHandler(e)}
-                    placeholder="200자 이상 입력해주세요."
-                    className="contextarea"
-                    id="contextarea"
-                  ></textarea>
-
-                  <br />
-                  <button type="submit" className="contributionbtn">
-                    <Button
-                      subject="기고신청"
-                      color="#fff"
-                      backgroundColor="black"
+                    <label htmlFor="contitle">
+                      제목 <span>(필수)</span>
+                    </label>
+                    <input
+                      type="text"
+                      onChange={e => onTitleHandler(e)}
+                      placeholder="8자 이상 입력해주세요."
+                      className="contitle"
+                      id="contitle"
                     />
-                  </button>
-                </form>
+
+                    <label htmlFor="contextarea">
+                      미리보기 내용 <span>(필수)</span>
+                      <p
+                        className={
+                          ColorChange ? 'textlength active' : 'textlength'
+                        }
+                      >
+                        ( {Content.length} / 200 이상 )
+                      </p>
+                    </label>
+
+                    <textarea
+                      cols="50"
+                      rows="10"
+                      onChange={e => onContentHandler(e)}
+                      placeholder="200자 이상 입력해주세요."
+                      className="contextarea"
+                      id="contextarea"
+                    ></textarea>
+
+                    <br />
+                    <button type="submit" className="contributionbtn">
+                      <Button
+                        subject="기고신청"
+                        color="#fff"
+                        backgroundColor="black"
+                      />
+                    </button>
+                  </form>
+                </div>
+                <div className="alermodalbox">
+                  <AlertModal
+                    open={AlertOpen}
+                    close={closeModal}
+                    alertString={'모두 입력해야 합니다.'}
+                    alertBtn="확인"
+                  />
+                </div>
+                <div className="admin-footer" />
               </div>
-              <div className="alermodalbox">
-                <AlertModal
-                  open={AlertOpen}
-                  close={closeModal}
-                  alertString={'모두 입력해야 합니다.'}
-                  alertBtn="확인"
-                />
-              </div>
-            </div>
+            ) : null}
           </div>
         </div>
       </div>
