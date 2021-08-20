@@ -6,10 +6,8 @@ export const DELETE_USER = 'delete_admin';
 
 // article_actions
 export const ARTICLE_DATA = 'article_data';
-export const ARTICLE_HIT_DATA = 'article_hit_data';
 export const ARTICLE_FILTER = 'article_filter';
 export const CONTRIBUTION_DATA = 'contribution_data';
-export const CONTRIBUTION_HIT_DATA = 'contribution_hit_data';
 export const CONTRIBUTION_FILTER = 'contribution_filter';
 export const DELETE_DATA = 'delete_data';
 
