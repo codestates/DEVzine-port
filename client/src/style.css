@@ -785,7 +785,7 @@ select::-ms-expand {
       position: absolute; }
 
 .signincontainer {
-  z-index: 800;
+  z-index: 700;
   position: fixed;
   top: 0;
   left: 0;
@@ -796,7 +796,7 @@ select::-ms-expand {
   align-items: center;
   justify-content: center; }
   .signincontainer .signinwrapper {
-    z-index: 810;
+    z-index: 710;
     position: relative;
     width: 550px;
     height: 566px;
@@ -833,7 +833,7 @@ select::-ms-expand {
       right: 14px;
       cursor: pointer; }
     .signincontainer .signinwrapper .leadsignup {
-      z-index: 810;
+      z-index: 710;
       width: 296px;
       height: 24px;
       font-weight: bold;
@@ -846,7 +846,7 @@ select::-ms-expand {
       margin-top: 48px;
       margin-bottom: 16px; }
     .signincontainer .signinwrapper .commonbutton {
-      z-index: 810;
+      z-index: 710;
       width: 296px; }
 
 .inputlarge {
