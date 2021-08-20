@@ -1,5 +1,6 @@
 const { findContributionsWithStatus } = require('./adminfunction/adminView');
 const { checkCacheForContributions } = require('./cachefunction/contributionsCache')
+const { Contribution } = require('../Models/Contributions')
 
 module.exports = {
 
@@ -53,22 +54,39 @@ module.exports = {
 
     rejectContribRequest: async (req, res) => {
         
-        
-        //TODO: 사용자의 기고글 게시/수정/삭제 요청을 거부한다. 
-        // body parameters
-        // { 
-        //     "contribution_id" : "string",
-        //     "status" : "number"
-        // }
-        // status:200
-        // {
-        //     "message" : "Update rejected"
-        // }
-        // status:404
-        // {   
-        //     "message": "Not found"
-        // }  
-        return res.send('contribution request rejected');
+        const { contribution_id, status } = req.body;
+
+        try {
+
+            const rejectedContribution = await Contribution.findOneAndUpdate(
+                {
+                    contribution_id
+                }, {
+                    $set: {
+                        status: status + 20
+                    }
+                }, {
+                    new: true
+                }
+            )
+
+            if (!rejectedContribution) {
+
+                return res.status(404).json(
+                    {
+                        "message": "Not found"
+                    }
+                );
+            }
+
+            return res.status(200).send('Update rejected');
+
+        } catch (err) {
+
+            console.log(err);
+            return res.status(500).send(err);
+
+        }
 
 	},
 
