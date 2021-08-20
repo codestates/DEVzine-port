@@ -1,18 +1,32 @@
 import React, { useEffect, useState } from 'react';
+import { useTransition, animated } from 'react-spring';
 import Chart from 'react-apexcharts';
 
 export function ArticlesKeyword({ data }) {
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const [ScrollPosition, setScrollPosition] = useState(0);
+  const [Indicator, setIndicator] = useState(false);
+  const transition = useTransition(Indicator, {
+    from: { x: 100, opacity: 0, skew: '20deg' },
+    enter: { x: 0, opacity: 1, skew: '0deg' },
+    leave: { x: -100, opacity: 0, skew: '20deg' },
+  });
+
+  let rect = 400;
 
   const onScroll = () => {
     setScrollPosition(window.pageYOffset);
+    if (ScrollPosition > 0 && ScrollPosition < rect) {
+      setIndicator(true);
+    } else {
+      setIndicator(false);
+    }
   };
 
   useEffect(() => {
     window.addEventListener('scroll', onScroll);
     // 컴포넌트가 언마운트 되기 직전에 이벤트를 끝낸다. 메모리 누수 방지
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [ScrollPosition]);
 
   let options = {
     colors: ['#ffdd14', '#ffe33e'],
@@ -34,6 +48,19 @@ export function ArticlesKeyword({ data }) {
     chart: {
       toolbar: {
         show: false,
+        animations: {
+          enabled: true,
+          easing: 'easeinout',
+          speed: 1200,
+          animateGradually: {
+            enabled: true,
+            delay: 300,
+          },
+          dynamicAnimation: {
+            enabled: true,
+            speed: 1000,
+          },
+        },
       },
       height: 350,
       type: 'line',
@@ -50,7 +77,7 @@ export function ArticlesKeyword({ data }) {
       enabled: true,
     },
     title: {
-      text: 'Articles Keyword Per Day',
+      text: 'Articles Keyword Per Month',
       align: 'center',
     },
     grid: {
@@ -108,7 +135,7 @@ export function ArticlesKeyword({ data }) {
   let categories = [];
 
   for (const [key, value] of Object.entries(
-    data.articles.articles_per_keyword_day,
+    data.articles.articles_per_keyword_month,
   )) {
     series.push(value);
     categories.push(key);
@@ -116,13 +143,17 @@ export function ArticlesKeyword({ data }) {
 
   options.xaxis.categories = categories;
 
-  return scrollPosition > 7350 ? (
-    <Chart
-      options={options}
-      series={[{ name: 'Top Keyword Per Day', data: series }]}
-      type="line"
-      height={500}
-      width={500}
-    />
-  ) : null;
+  return transition((style, item) =>
+    item ? (
+      <animated.div style={style}>
+        <Chart
+          options={options}
+          series={[{ name: 'Top Keyword Per Month', data: series }]}
+          type="line"
+          height={500}
+          width={500}
+        />
+      </animated.div>
+    ) : null,
+  );
 }
