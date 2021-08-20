@@ -29,6 +29,7 @@ function ContributionUpdateWrapper({ id }) {
     '기타',
   ];
 
+  // TODO: 안된다. 확인필요
   useEffect(async () => {
     const requestGet = await customAxios
       .get(`/contribution/update/${id}`)
@@ -38,7 +39,6 @@ function ContributionUpdateWrapper({ id }) {
         // window.location.href = '/error';
       });
 
-    // setKeyword(requestGet);
     setKeyword(requestGet.contribution_keyword);
     setTitle(requestGet.contribution_title);
     setContent(requestGet.contribution_content);
@@ -87,10 +87,10 @@ function ContributionUpdateWrapper({ id }) {
       contribution_keyword: Keyword,
     };
 
-    return customAxios.post('/contribution', body).then(res => {
+    return customAxios.patch('/contribution', body).then(res => {
       if (res.status === 200) {
         alert('기고수정요청이 완료되었습니다.');
-        // window.location.href = '/mypage';
+        window.history.back();
       } else alert('기고수정요청이 실패하였습니다.');
     });
   }

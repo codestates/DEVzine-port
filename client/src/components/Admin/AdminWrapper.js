@@ -47,6 +47,7 @@ function AdminWrapper() {
   useEffect(() => {
     dispatch(getContributionAdmin())
       .then(res => {
+        console.log(res.payload.data.accepted);
         setRequested([
           ...res.payload.data.requested.postRequest,
           ...res.payload.data.requested.patchRequest,

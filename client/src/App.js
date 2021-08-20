@@ -29,14 +29,13 @@ const ContributionList = lazy(
 import MyPage from './pages/MyPage';
 import Subscription from './pages/Subscription';
 
-// TODO: Visual 구현 완료되면 아래 lazy로 변경
-import Visual from './pages/Visual';
-// const Visual = lazy(
-//   () =>
-//     new Promise((resolve, reject) =>
-//       setTimeout(() => resolve(import('./pages/Visual')), 1500),
-//     ),
-// );
+// import Visual from './pages/Visual';
+const Visual = lazy(
+  () =>
+    new Promise((resolve, reject) =>
+      setTimeout(() => resolve(import('./pages/Visual')), 1500),
+    ),
+);
 
 import AuthMail from './components/AuthMail';
 import AuthTest from './components/AuthTest';

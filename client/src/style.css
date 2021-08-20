@@ -444,14 +444,22 @@ select::-ms-expand {
       height: 241px;
       position: relative;
       width: 360px; }
+      @media screen and (max-width: 767px) {
+        .modalcontainer .modalbackdrop .modalview {
+          max-width: 360px;
+          width: 95%;
+          height: 200px; } }
   .modalcontainer .desc {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #191a20;
     font-size: 18px;
-    font-weight: 700; }
+    line-height: 28px;
+    letter-spacing: -0.02em;
+    color: #191a20;
+    font-weight: 700;
+    width: 90%; }
     .modalcontainer .desc .closebtn {
       background-color: #d9d9d9;
       border-radius: 8px;
@@ -462,6 +470,10 @@ select::-ms-expand {
       height: 55px;
       margin-top: 16px;
       width: 265px; }
+      @media screen and (max-width: 767px) {
+        .modalcontainer .desc .closebtn {
+          max-width: 265px;
+          width: 90%; } }
 
 .alermodalbox {
   height: 0;
@@ -839,6 +851,9 @@ select::-ms-expand {
       z-index: 710;
       width: 296px; }
 
+.alert-modal {
+  z-index: 720; }
+
 .inputlarge {
   width: 296px;
   height: 55px;
@@ -1080,20 +1095,13 @@ select::-ms-expand {
   position: relative;
   text-align: center;
   width: 100%; }
-  @media screen and (max-width: 767px) {
-    .contributioncontainer {
-      height: 1050px;
-      margin-bottom: 50px;
-      width: 100%; } }
   .contributioncontainer .continner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    top: 45%;
+    margin: 0 auto;
+    margin-top: 20%;
     width: 360px; }
     @media screen and (max-width: 767px) {
       .contributioncontainer .continner {
+        margin-top: 162px;
         max-width: 360px;
         width: 95%; } }
 
@@ -2075,8 +2083,10 @@ label {
   width: 100%; }
   .admin-footer {
     height: 100px;
-    margin-bottom: 220px;
-    position: relative; }
+    margin-bottom: 220px; }
+    @media screen and (max-width: 767px) {
+      .admin-footer {
+        margin-bottom: 100px; } }
 
 .request {
   margin-top: 192px; }
