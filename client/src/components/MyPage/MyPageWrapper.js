@@ -11,10 +11,10 @@ import {
 import Auth from '../../hoc/auth';
 import { debounce } from 'lodash';
 import SigninModal from '../Common/SignInModal/SignInModal';
+import AlertModal from '../Common/AlertModal/AlertModal';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import OptContents from './OptContents';
 import Button from '../Common/Button/Button';
-import { customAxios } from '../../utils/customAxios';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
@@ -38,6 +38,7 @@ function MyPageWrapper() {
   const [Contribution, setContribution] = useState([]);
 
   const [ModalOpen, setModalOpen] = useState(false);
+  const [AlertOpen, setAlertOpen] = useState(false);
   const [allData, setAllData] = useState(false);
 
   useEffect(() => {
@@ -213,13 +214,21 @@ function MyPageWrapper() {
   }
 
   function withdrawal() {
-    return dispatch(deleteUser())
-      .then(res => {
-        alert('회원탈퇴 성공', res);
-        window.location.href = '/';
-      })
-      .catch(err => alert('회원탈퇴 에러', err));
+    if (pw_confirm) {
+      return dispatch(deleteUser())
+        .then(res => {
+          alert('회원탈퇴 성공', res);
+          window.location.href = '/';
+        })
+        .catch(err => alert('회원탈퇴 에러', err));
+    } else {
+      return setAlertOpen(true);
+    }
   }
+
+  const closeModal = () => {
+    setAlertOpen(false);
+  };
 
   return allData ? (
     <div className="signupcontainer">
@@ -277,6 +286,12 @@ function MyPageWrapper() {
       {ModalOpen ? (
         <SigninModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
       ) : null}
+      <AlertModal
+        open={AlertOpen}
+        close={closeModal}
+        alertString={'비밀번호를 확인해 주세요.'}
+        alertBtn="확인"
+      />
     </div>
   ) : null;
 }
