@@ -27,7 +27,7 @@ module.exports = {
         const htmlData = iconv.decode(html.data, 'euc-kr').toString();
         const $ = cheerio.load(htmlData);
 
-        for (let i=0; i<=10; i++){
+        for (let i=0; i<=5; i++){
             
             const article = $('.news_list')[i]
             const url = $(article).find('a').attr('href')
