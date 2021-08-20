@@ -1,6 +1,7 @@
 import {
   ARTICLE_DATA,
   ARTICLE_HIT_DATA,
+  ARTICLE_FILTER,
   CONTRIBUTION_DATA,
   CONTRIBUTION_HIT_DATA,
   DELETE_DATA,
@@ -13,6 +14,9 @@ export default function (state = {}, action) {
       break;
     case ARTICLE_HIT_DATA:
       return { ...state, articleHitData: action.payload };
+      break;
+    case ARTICLE_FILTER:
+      return { ...state, articleData: action.payload };
       break;
     case CONTRIBUTION_DATA:
       return { ...state, allContributionData: action.payload };
