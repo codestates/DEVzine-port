@@ -1,23 +1,24 @@
+const { User } = require('../Models/Users');
+
 module.exports = {
 
+  // count all users
 	getAllUsers: async (req, res) => {
-        
-        // TODO: 등록된 회원수와 구독자수를 가져온다.
-        // status: 200
-        // {
-        //     "data": 
-        //         {
-        //             "total_subscribers" : number,
-        //         },
-        //     "message" : "Subscribers successfully found"
-        // }
-        // status: 404
-        // {
-        //     "message": "Not Found"
-        // } 
-        
 
-        return res.send('landing');
-
+    User.countDocuments({ subscribed: true }, (err, count) => {
+      if (err) {
+        res.status(404).send({
+          message: "Not Found"
+        });
+      } else {
+        res.status(200).send({
+          data: 
+          {
+              total_subscribers : count,
+          },
+          message : "Subscribers successfully found"
+        });
+      }
+    });
 	}
 };
