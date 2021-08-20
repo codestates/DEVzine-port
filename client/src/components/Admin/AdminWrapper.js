@@ -112,7 +112,7 @@ function AdminWrapper() {
                         onChange={e => onSelectHandler(e)}
                         id="request-select"
                       >
-                        <option value="">선택</option>
+                        <option value="">요청선택</option>
                         {selectOptions.map((el, idx) => (
                           <option key={idx} value={el[1]}>
                             {el[0]}

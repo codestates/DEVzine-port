@@ -114,7 +114,7 @@ export async function SearchData(Select, Text) {
     .get(`/admin/contributionlist`)
     .then(res => fakeData)
     .then(res => {
-      if (Select === 'All') {
+      if (Select === 'All' || Select === '') {
         return [
           ...res.data.requested.postRequest,
           ...res.data.requested.patchRequest,
