@@ -493,6 +493,9 @@ select::-ms-expand {
   top: 45%;
   width: 85px;
   z-index: 910; }
+  @media screen and (max-width: 767px) {
+    .loadingbox {
+      top: 50%; } }
   @media screen and (min-width: 768px) {
     .loadingbox {
       width: 40%; } }
@@ -532,6 +535,9 @@ select::-ms-expand {
   text-align: center;
   top: 45%;
   width: 100%; }
+  @media screen and (max-width: 767px) {
+    .errortext {
+      top: 40%; } }
   .errortext .errortitle {
     color: #191a20;
     font-size: 24px;
