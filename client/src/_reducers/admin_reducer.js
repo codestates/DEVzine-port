@@ -2,6 +2,8 @@ import {
   SIGNIN_ADMIN,
   SIGNOUT_ADMIN,
   CONTRIBUTION_ADMIN,
+  SEARCH_ADMIN,
+  SEARCH_APP_ADMIN,
   DELETE_ADMIN_DATA,
 } from '../_actions/types';
 
@@ -14,6 +16,12 @@ export default function (state = {}, action) {
       return (state = {});
       break;
     case CONTRIBUTION_ADMIN:
+      return { ...state, manageContributionData: action.payload };
+      break;
+    case SEARCH_ADMIN:
+      return { ...state, manageContributionData: action.payload };
+      break;
+    case SEARCH_APP_ADMIN:
       return { ...state, manageContributionData: action.payload };
       break;
     case DELETE_ADMIN_DATA:

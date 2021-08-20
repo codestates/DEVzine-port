@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 
 export function ArticlesTopHit({ data }) {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  const onScroll = () => {
+    setScrollPosition(window.pageYOffset);
+    // console.log(window.pageYOffset);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', onScroll);
+    // 컴포넌트가 언마운트 되기 직전에 이벤트를 끝낸다. 메모리 누수 방지
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   let options = {
     stroke: {
       width: 4,
@@ -85,18 +98,32 @@ export function ArticlesTopHit({ data }) {
 
   options.xaxis.categories = categories;
 
-  return (
+  return scrollPosition > 400 ? (
     <Chart
       options={options}
       series={[{ data: series }]}
       type="bar"
       height={500}
       width={500}
+      marginTop={1200}
     />
-  );
+  ) : null;
 }
 
 export function UserAgeAndGender({ data }) {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  const onScroll = () => {
+    setScrollPosition(window.pageYOffset);
+    // console.log(window.pageYOffset);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', onScroll);
+    // 컴포넌트가 언마운트 되기 직전에 이벤트를 끝낸다. 메모리 누수 방지
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   let series = [
     {
       name: '남자',
@@ -178,9 +205,15 @@ export function UserAgeAndGender({ data }) {
     },
   };
 
-  return (
+  return scrollPosition > 700 ? (
     <div id="chart">
-      <Chart options={options} series={series} type="bar" height={500} />
+      <Chart
+        options={options}
+        series={series}
+        type="bar"
+        height={500}
+        marginTop={1200}
+      />
     </div>
-  );
+  ) : null;
 }

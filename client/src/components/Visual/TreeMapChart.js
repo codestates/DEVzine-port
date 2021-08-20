@@ -1,7 +1,21 @@
+import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 import { userGenerationDataConvert } from '../../utils/userGenerationDataConvert';
 
 export function UserGeneration({ data }) {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  const onScroll = () => {
+    setScrollPosition(window.pageYOffset);
+    // console.log(window.pageYOffset);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', onScroll);
+    // 컴포넌트가 언마운트 되기 직전에 이벤트를 끝낸다. 메모리 누수 방지
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   let options = {
     colors: ['#b2b3b9', '#d9d9d9', '#ffdd14', '#ffc803', '#ffe33e'],
     // fill: {
@@ -55,7 +69,7 @@ export function UserGeneration({ data }) {
   for (const [key, value] of Object.entries(data.users.user_generation)) {
     series.push({ x: userGenerationDataConvert(key), y: value });
   }
-  return (
+  return scrollPosition > 800 ? (
     <Chart
       options={options}
       series={[{ data: series }]}
@@ -63,5 +77,5 @@ export function UserGeneration({ data }) {
       width={500}
       height={500}
     />
-  );
+  ) : null;
 }
