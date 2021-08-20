@@ -16,13 +16,13 @@ function ContributionListWrapper() {
 
   useEffect(() => {
     if (OrderStatus === '최신순') {
-      dispatch(getContributionData)
+      dispatch(getContributionData())
         .then(res => setContributionData(res.payload))
         .catch(err => alert('최신순 받아오는데 실패하였습니다.'));
     }
 
     if (OrderStatus === '조회순') {
-      dispatch(getContributionHitData)
+      dispatch(getContributionHitData())
         .then(res => setContributionData(res.payload))
         .catch(err => alert('조회순 받아오는데 실패하였습니다.'));
     }
