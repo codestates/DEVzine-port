@@ -13,7 +13,12 @@ function LandingSub() {
 
   useEffect(() => {
     let start = 0;
-    const end = parseInt(Subscribers.substring(0, 3));
+    // const end = parseInt(
+    //   Subscribers.toString()
+    //     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    //     .substring(0, 3),
+    // );
+    const end = parseInt(Subscribers.toString().substring(0, 3));
     if (start === end) return;
 
     let totalMilSecDur = parseInt(1);
@@ -21,18 +26,27 @@ function LandingSub() {
 
     let timer = setInterval(() => {
       start += 1;
-      setCount(String(start) + ',' + Subscribers.substring(3));
-      if (start === end) clearInterval(timer);
+
+      setCount(
+        String(start) +
+          Subscribers.substring(3)
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      );
+      if (start === end) {
+        clearInterval(timer);
+        setCount(Subscribers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+      }
     }, incrementTime);
   }, [ScrollActive]);
 
   useEffect(async () => {
     await customAxios
       .get('/landing')
-      .then(res => setSubscribers(res.data.data.total_subscribers))
+      .then(res => setSubscribers(String(res.data.data.total_subscribers)))
       .catch(err => {
         alert('회원 수를 받지 못 했습니다.');
-        setSubscribers('200000');
+        setSubscribers(String(5959000));
       });
   }, []);
 
