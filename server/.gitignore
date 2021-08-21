@@ -3,6 +3,8 @@
 cert.pem
 key.pem
 /uploads
+.eslinrc.json
+.prettierrc.json
 
 # Logs
 logs

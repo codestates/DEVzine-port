@@ -3,6 +3,7 @@ const { Subscriber } = require('../Models/Subscribers');
 module.exports = {
 
 	addSubscriber: async (req, res) => {
+    console.log(req.body);
     const { user_email: subscriber_email } = req.body;
     const subscriber = await Subscriber.findOne({ subscriber_email });
     if (subscriber) {
