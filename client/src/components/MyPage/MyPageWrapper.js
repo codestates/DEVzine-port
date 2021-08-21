@@ -11,10 +11,10 @@ import {
 import Auth from '../../hoc/auth';
 import { debounce } from 'lodash';
 import SigninModal from '../Common/SignInModal/SignInModal';
+import AlertModal from '../Common/AlertModal/AlertModal';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import OptContents from './OptContents';
 import Button from '../Common/Button/Button';
-import { customAxios } from '../../utils/customAxios';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
@@ -38,6 +38,7 @@ function MyPageWrapper() {
   const [Contribution, setContribution] = useState([]);
 
   const [ModalOpen, setModalOpen] = useState(false);
+  const [AlertOpen, setAlertOpen] = useState(false);
   const [allData, setAllData] = useState(false);
 
   useEffect(() => {
@@ -213,70 +214,86 @@ function MyPageWrapper() {
   }
 
   function withdrawal() {
-    return dispatch(deleteUser())
-      .then(res => {
-        alert('회원탈퇴 성공', res);
-        window.location.href = '/';
-      })
-      .catch(err => alert('회원탈퇴 에러', err));
+    if (pw_confirm) {
+      return dispatch(deleteUser())
+        .then(res => {
+          alert('회원탈퇴 성공', res);
+          window.location.href = '/';
+        })
+        .catch(err => alert('회원탈퇴 에러', err));
+    } else {
+      return setAlertOpen(true);
+    }
   }
+
+  const closeModal = () => {
+    setAlertOpen(false);
+  };
 
   return allData ? (
     <div className="signupcontainer">
-      <div className="signupwrapper">
-        {requiredTextInputData.map((el, idx) => {
-          return (
-            <TextInputGenderRequired
-              key={`TextInputGenderRequired${idx}`}
-              inputname={el[0]}
-              detailString={el[1]}
-              stateName={el[2]}
-              stateFunc={el[3]}
-              placeholder={el[4]}
-              type={el[5]}
-              isValid={el[6]}
-              maxLength={el[7]}
-              isMutable={el[8]}
-            />
-          );
-        })}
-        <OptContents
-          Gender={Gender}
-          Scribed={Scribed}
-          Age={Age}
-          Position={Position}
-          Language={Language}
-          radioInputHandler={radioInputHandler}
-          selectInputHandler={selectInputHandler}
-          Contribution={Contribution}
-        />
-        <div
-          className="signupbtn"
-          onClick={e =>
-            Email &&
-            Password &&
-            ConfirmPassword &&
-            Name &&
-            email_isValid &&
-            pw_isValid &&
-            pw_confirm
-              ? patchHandler()
-              : alert('모든 것을 만족해야 합니다.')
-          }
-        >
-          정보수정
+      {Auth(true) === 'Login need' ? null : (
+        <div className="signupwrapper">
+          {requiredTextInputData.map((el, idx) => {
+            return (
+              <TextInputGenderRequired
+                key={`TextInputGenderRequired${idx}`}
+                inputname={el[0]}
+                detailString={el[1]}
+                stateName={el[2]}
+                stateFunc={el[3]}
+                placeholder={el[4]}
+                type={el[5]}
+                isValid={el[6]}
+                maxLength={el[7]}
+                isMutable={el[8]}
+              />
+            );
+          })}
+          <OptContents
+            Gender={Gender}
+            Scribed={Scribed}
+            Age={Age}
+            Position={Position}
+            Language={Language}
+            radioInputHandler={radioInputHandler}
+            selectInputHandler={selectInputHandler}
+            Contribution={Contribution}
+          />
+          <div
+            className="signupbtn"
+            onClick={e =>
+              Email &&
+              Password &&
+              ConfirmPassword &&
+              Name &&
+              email_isValid &&
+              pw_isValid &&
+              pw_confirm
+                ? patchHandler()
+                : alert('모든 것을 만족해야 합니다.')
+            }
+          >
+            정보수정
+          </div>
+          <Button
+            subject={`회원 탈퇴`}
+            color={`#999999`}
+            backgroundColor={`#ffffff`}
+            border={`1px solid #d9d9d9`}
+            onClickHandle={withdrawal}
+          />
         </div>
-        <Button
-          subject={`회원 탈퇴`}
-          color={`#999999`}
-          backgroundColor={`#ffffff`}
-          border={`1px solid #d9d9d9`}
-          onClickHandle={withdrawal}
-        />
-      </div>
+      )}
       {ModalOpen ? (
         <SigninModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
       ) : null}
+      <AlertModal
+        open={AlertOpen}
+        close={closeModal}
+        alertString={'비밀번호를 확인해 주세요.'}
+        alertBtn="확인"
+      />
     </div>
   ) : null;
 }

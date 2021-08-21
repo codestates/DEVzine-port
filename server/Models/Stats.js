@@ -1,10 +1,13 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const statSchema = mongoose.Schema({
+const statSchema = mongoose.Schema(
+  {
     stat_datetime: Date,
-    stat_content: Object
-}, { versionKey: false });
+    stat_content: Object,
+  },
+  { versionKey: false }
+);
 
-const Stat = mongoose.model("stats", statSchema);
+const Stat = mongoose.model('stats', statSchema);
 
 module.exports = { Stat };

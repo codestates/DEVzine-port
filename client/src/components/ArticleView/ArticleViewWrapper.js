@@ -13,21 +13,22 @@ function ArticleViewWrapper({ id }) {
   const [Article, setArticle] = useState({});
   const [Alldata, setAlldata] = useState(false);
   const [ModalOpen, setModalOpen] = useState(false);
-  const [Request, setRrequest] = useState(Auth(true));
+  // const [Request, setRrequest] = useState(Auth(true));
 
-  // let request = Auth(true);
+  // console.log(Auth(true));
+  const Request = Auth(true);
 
-  useEffect(() => {
-    // setRrequest(Auth(true));
+  // useEffect(() => {
+  //   // setRrequest(Auth(true));
 
-    if (Request === 'Login need') {
-      if (store.getState().admin.adminSigninSuccess) {
-        if (store.getState().admin.adminSigninSuccess === 'Login success') {
-          setRrequest('');
-        }
-      }
-    }
-  }, []);
+  //   if (Request === 'Login need') {
+  //     if (store.getState().admin.adminSigninSuccess) {
+  //       if (store.getState().admin.adminSigninSuccess === 'Login success') {
+  //         setRrequest('');
+  //       }
+  //     }
+  //   }
+  // }, []);
 
   useEffect(async () => {
     indicator === 'con'
@@ -38,8 +39,8 @@ function ArticleViewWrapper({ id }) {
             return setContribution(res.data.data);
           })
           .catch(err => {
-            window.location.href = '/error';
-            // console.log(err);
+            // window.location.href = '/error';
+            console.log('무슨오류1', err);
           })
       : await customAxios
           .get(`/magazine/article/${pathParameter}`)
@@ -48,8 +49,8 @@ function ArticleViewWrapper({ id }) {
             return setArticle(res.data.data);
           })
           .catch(err => {
-            window.location.href = '/error';
-            // console.log(err);
+            // window.location.href = '/error';
+            console.log('무슨오류2', err);
           });
     setAlldata(true);
   }, []);

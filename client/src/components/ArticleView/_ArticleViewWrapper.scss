@@ -88,6 +88,10 @@
       border-top: 0 solid;
       border-radius: 0 0 24px 24px;
 
+      .contents {
+        word-break: break-all;
+      }
+
       .layer {
         position: absolute;
         left: 0;

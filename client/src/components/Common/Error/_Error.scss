@@ -11,6 +11,10 @@
   top: 45%;
   width: 100%;
 
+  @include mobile-only() {
+    top: 40%;
+  }
+
   .errortitle {
     color: $dark;
     font-size: 24px;

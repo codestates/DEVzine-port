@@ -4,7 +4,11 @@ import { customAxios } from '../utils/customAxios';
 export async function signinUser(dataToSubmit) {
   const request = await customAxios
     .post(`/user/signin`, dataToSubmit)
-    .then(res => [res.data.message, res.data.data.user_name]);
+    .then(res => [
+      res.data.message,
+      res.data.data.user_name,
+      res.data.data.user_email,
+    ]);
 
   return {
     type: SIGNIN_USER,

@@ -1,5 +1,5 @@
 const { getStatisticsForVisual } = require('../controller/visual');
-const { checkCacheForVisuals } = require('../controller/middleware/isCached')
+const { checkCacheForVisuals } = require('../controller/middleware/isCached');
 const express = require('express');
 const router = express.Router();
 

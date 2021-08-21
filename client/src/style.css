@@ -444,14 +444,22 @@ select::-ms-expand {
       height: 241px;
       position: relative;
       width: 360px; }
+      @media screen and (max-width: 767px) {
+        .modalcontainer .modalbackdrop .modalview {
+          max-width: 360px;
+          width: 95%;
+          height: 200px; } }
   .modalcontainer .desc {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #191a20;
     font-size: 18px;
-    font-weight: 700; }
+    line-height: 28px;
+    letter-spacing: -0.02em;
+    color: #191a20;
+    font-weight: 700;
+    width: 90%; }
     .modalcontainer .desc .closebtn {
       background-color: #d9d9d9;
       border-radius: 8px;
@@ -462,6 +470,10 @@ select::-ms-expand {
       height: 55px;
       margin-top: 16px;
       width: 265px; }
+      @media screen and (max-width: 767px) {
+        .modalcontainer .desc .closebtn {
+          max-width: 265px;
+          width: 90%; } }
 
 .alermodalbox {
   height: 0;
@@ -481,6 +493,9 @@ select::-ms-expand {
   top: 45%;
   width: 85px;
   z-index: 910; }
+  @media screen and (max-width: 767px) {
+    .loadingbox {
+      top: 50%; } }
   @media screen and (min-width: 768px) {
     .loadingbox {
       width: 40%; } }
@@ -520,6 +535,9 @@ select::-ms-expand {
   text-align: center;
   top: 45%;
   width: 100%; }
+  @media screen and (max-width: 767px) {
+    .errortext {
+      top: 40%; } }
   .errortext .errortitle {
     color: #191a20;
     font-size: 24px;
@@ -775,7 +793,7 @@ select::-ms-expand {
       position: absolute; }
 
 .signincontainer {
-  z-index: 800;
+  z-index: 700;
   position: fixed;
   top: 0;
   left: 0;
@@ -786,7 +804,7 @@ select::-ms-expand {
   align-items: center;
   justify-content: center; }
   .signincontainer .signinwrapper {
-    z-index: 810;
+    z-index: 710;
     position: relative;
     width: 550px;
     height: 566px;
@@ -823,7 +841,7 @@ select::-ms-expand {
       right: 14px;
       cursor: pointer; }
     .signincontainer .signinwrapper .leadsignup {
-      z-index: 810;
+      z-index: 710;
       width: 296px;
       height: 24px;
       font-weight: bold;
@@ -836,8 +854,11 @@ select::-ms-expand {
       margin-top: 48px;
       margin-bottom: 16px; }
     .signincontainer .signinwrapper .commonbutton {
-      z-index: 810;
+      z-index: 710;
       width: 296px; }
+
+.alert-modal {
+  z-index: 720; }
 
 .inputlarge {
   width: 296px;
@@ -1080,20 +1101,13 @@ select::-ms-expand {
   position: relative;
   text-align: center;
   width: 100%; }
-  @media screen and (max-width: 767px) {
-    .contributioncontainer {
-      height: 1050px;
-      margin-bottom: 50px;
-      width: 100%; } }
   .contributioncontainer .continner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    top: 45%;
+    margin: 0 auto;
+    margin-top: 20%;
     width: 360px; }
     @media screen and (max-width: 767px) {
       .contributioncontainer .continner {
+        margin-top: 162px;
         max-width: 360px;
         width: 95%; } }
 
@@ -1277,21 +1291,21 @@ label {
     padding-bottom: 70px; }
 
 .signupcontainer {
+  background-color: #f2f2f2;
+  min-height: 100vh;
   position: relative;
-  width: 100%;
-  height: auto;
-  background: #f2f2f2;
-  display: flex;
-  justify-content: center;
-  margin-top: 120px;
-  margin-bottom: 220px; }
+  width: 100%; }
+  .signupcontainer-footer {
+    height: 100px;
+    margin-bottom: 220px; }
   .signupcontainer .signupwrapper {
-    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 72px 0; }
+    align-items: center;
+    justify-content: center; }
+    .signupcontainer .signupwrapper .textinputcontainer {
+      margin-top: 192px;
+      position: relative; }
     .signupcontainer .signupwrapper .signupbtn {
       display: flex;
       align-items: center;
@@ -1304,8 +1318,7 @@ label {
       font-size: 18px;
       line-height: 28px;
       color: #ffffff;
-      cursor: pointer;
-      margin-left: 48px; }
+      cursor: pointer; }
     .signupcontainer .signupwrapper .commonbutton {
       font-weight: 400;
       margin-left: 48px;
@@ -1315,7 +1328,7 @@ label {
   display: flex;
   flex-direction: column;
   align-items: inherit;
-  width: 360px;
+  width: 100%;
   height: 72px;
   margin-bottom: 24px; }
   .inputsmallcontainer .subjectwrapper {
@@ -1331,7 +1344,6 @@ label {
     .inputsmallcontainer .subjectwrapper .required {
       color: #ffc803; }
     .inputsmallcontainer .subjectwrapper .emailverifybtn {
-      z-index: 500;
       position: absolute;
       top: 0;
       right: 0;
@@ -1339,7 +1351,7 @@ label {
       color: #9d9d9d;
       cursor: pointer; }
   .inputsmallcontainer .inputsmall {
-    width: 360px;
+    width: 100%;
     height: 40px;
     background: #ffffff;
     border: 1px solid #d9d9d9;
@@ -1358,7 +1370,7 @@ label {
     font-size: 12px; }
 
 .accordioncontainer {
-  width: 360px;
+  width: 100%;
   display: flex;
   position: relative;
   flex-direction: column;
@@ -1381,19 +1393,19 @@ label {
       position: absolute;
       cursor: pointer; }
   .accordioncontainer .contentswrapper {
-    width: 100%;
-    transition: height 0.7s cubic-bezier(0.42, 0, 0.84, 0.26); }
+    width: 100%; }
 
 .radiowrapper {
   display: flex;
-  transition: opacity 0.7s;
-  margin-top: 24px;
-  transition: opacity 0.7s cubic-bezier(0.42, 0, 0.84, 0.26); }
+  margin-top: 24px; }
   .radiowrapper .subjectwrapper {
-    width: 32px;
+    min-width: 32px;
     margin-right: 64px;
     font-weight: bold;
     color: #191a20; }
+    @media screen and (max-width: 767px) {
+      .radiowrapper .subjectwrapper {
+        margin-right: 20px; } }
   .radiowrapper .radiocontents {
     width: 263px;
     display: flex; }
@@ -1402,6 +1414,9 @@ label {
       align-items: center;
       justify-content: center;
       margin-right: 26px; }
+      @media screen and (max-width: 767px) {
+        .radiowrapper .radiocontents .radiocontent {
+          margin-right: 6px; } }
       .radiowrapper .radiocontents .radiocontent .radioinput {
         margin-right: 6px; }
       .radiowrapper .radiocontents .radiocontent .radioinput:checked + label {
@@ -1412,52 +1427,58 @@ label {
         font-weight: bold;
         color: #9b9b9c; }
 
-.singleselectwrapper,
-.multiselectwrapper {
-  transition: opacity 1s cubic-bezier(0.42, 0, 0.84, 0.26); }
-  .singleselectwrapper .singleselectcontents .singleselectcontent,
-  .singleselectwrapper .singleselectcontents .multiselectcontent,
-  .singleselectwrapper .multiselectcontents .singleselectcontent,
-  .singleselectwrapper .multiselectcontents .multiselectcontent,
-  .multiselectwrapper .singleselectcontents .singleselectcontent,
-  .multiselectwrapper .singleselectcontents .multiselectcontent,
-  .multiselectwrapper .multiselectcontents .singleselectcontent,
-  .multiselectwrapper .multiselectcontents .multiselectcontent {
-    width: 350px;
-    height: 36px;
-    margin-top: 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; }
-    .singleselectwrapper .singleselectcontents .singleselectcontent .subjectwrapper,
-    .singleselectwrapper .singleselectcontents .multiselectcontent .subjectwrapper,
-    .singleselectwrapper .multiselectcontents .singleselectcontent .subjectwrapper,
-    .singleselectwrapper .multiselectcontents .multiselectcontent .subjectwrapper,
-    .multiselectwrapper .singleselectcontents .singleselectcontent .subjectwrapper,
-    .multiselectwrapper .singleselectcontents .multiselectcontent .subjectwrapper,
-    .multiselectwrapper .multiselectcontents .singleselectcontent .subjectwrapper,
-    .multiselectwrapper .multiselectcontents .multiselectcontent .subjectwrapper {
-      width: 32px;
-      margin-right: 64px;
-      font-weight: bold;
-      color: #191a20; }
-    .singleselectwrapper .singleselectcontents .singleselectcontent .basicsingle,
-    .singleselectwrapper .singleselectcontents .singleselectcontent .basicmulti,
-    .singleselectwrapper .singleselectcontents .multiselectcontent .basicsingle,
-    .singleselectwrapper .singleselectcontents .multiselectcontent .basicmulti,
-    .singleselectwrapper .multiselectcontents .singleselectcontent .basicsingle,
-    .singleselectwrapper .multiselectcontents .singleselectcontent .basicmulti,
-    .singleselectwrapper .multiselectcontents .multiselectcontent .basicsingle,
-    .singleselectwrapper .multiselectcontents .multiselectcontent .basicmulti,
-    .multiselectwrapper .singleselectcontents .singleselectcontent .basicsingle,
-    .multiselectwrapper .singleselectcontents .singleselectcontent .basicmulti,
-    .multiselectwrapper .singleselectcontents .multiselectcontent .basicsingle,
-    .multiselectwrapper .singleselectcontents .multiselectcontent .basicmulti,
-    .multiselectwrapper .multiselectcontents .singleselectcontent .basicsingle,
-    .multiselectwrapper .multiselectcontents .singleselectcontent .basicmulti,
-    .multiselectwrapper .multiselectcontents .multiselectcontent .basicsingle,
-    .multiselectwrapper .multiselectcontents .multiselectcontent .basicmulti {
-      width: 254.97px; }
+.singleselectwrapper .singleselectcontents .singleselectcontent,
+.singleselectwrapper .singleselectcontents .multiselectcontent,
+.singleselectwrapper .multiselectcontents .singleselectcontent,
+.singleselectwrapper .multiselectcontents .multiselectcontent,
+.multiselectwrapper .singleselectcontents .singleselectcontent,
+.multiselectwrapper .singleselectcontents .multiselectcontent,
+.multiselectwrapper .multiselectcontents .singleselectcontent,
+.multiselectwrapper .multiselectcontents .multiselectcontent {
+  width: 100%;
+  height: 36px;
+  margin-top: 24px;
+  display: flex;
+  align-items: center; }
+  .singleselectwrapper .singleselectcontents .singleselectcontent .subjectwrapper,
+  .singleselectwrapper .singleselectcontents .multiselectcontent .subjectwrapper,
+  .singleselectwrapper .multiselectcontents .singleselectcontent .subjectwrapper,
+  .singleselectwrapper .multiselectcontents .multiselectcontent .subjectwrapper,
+  .multiselectwrapper .singleselectcontents .singleselectcontent .subjectwrapper,
+  .multiselectwrapper .singleselectcontents .multiselectcontent .subjectwrapper,
+  .multiselectwrapper .multiselectcontents .singleselectcontent .subjectwrapper,
+  .multiselectwrapper .multiselectcontents .multiselectcontent .subjectwrapper {
+    min-width: 32px;
+    margin-right: 64px;
+    font-weight: bold;
+    color: #191a20; }
+    @media screen and (max-width: 767px) {
+      .singleselectwrapper .singleselectcontents .singleselectcontent .subjectwrapper,
+      .singleselectwrapper .singleselectcontents .multiselectcontent .subjectwrapper,
+      .singleselectwrapper .multiselectcontents .singleselectcontent .subjectwrapper,
+      .singleselectwrapper .multiselectcontents .multiselectcontent .subjectwrapper,
+      .multiselectwrapper .singleselectcontents .singleselectcontent .subjectwrapper,
+      .multiselectwrapper .singleselectcontents .multiselectcontent .subjectwrapper,
+      .multiselectwrapper .multiselectcontents .singleselectcontent .subjectwrapper,
+      .multiselectwrapper .multiselectcontents .multiselectcontent .subjectwrapper {
+        margin-right: 20px; } }
+  .singleselectwrapper .singleselectcontents .singleselectcontent .basicsingle,
+  .singleselectwrapper .singleselectcontents .singleselectcontent .basicmulti,
+  .singleselectwrapper .singleselectcontents .multiselectcontent .basicsingle,
+  .singleselectwrapper .singleselectcontents .multiselectcontent .basicmulti,
+  .singleselectwrapper .multiselectcontents .singleselectcontent .basicsingle,
+  .singleselectwrapper .multiselectcontents .singleselectcontent .basicmulti,
+  .singleselectwrapper .multiselectcontents .multiselectcontent .basicsingle,
+  .singleselectwrapper .multiselectcontents .multiselectcontent .basicmulti,
+  .multiselectwrapper .singleselectcontents .singleselectcontent .basicsingle,
+  .multiselectwrapper .singleselectcontents .singleselectcontent .basicmulti,
+  .multiselectwrapper .singleselectcontents .multiselectcontent .basicsingle,
+  .multiselectwrapper .singleselectcontents .multiselectcontent .basicmulti,
+  .multiselectwrapper .multiselectcontents .singleselectcontent .basicsingle,
+  .multiselectwrapper .multiselectcontents .singleselectcontent .basicmulti,
+  .multiselectwrapper .multiselectcontents .multiselectcontent .basicsingle,
+  .multiselectwrapper .multiselectcontents .multiselectcontent .basicmulti {
+    width: 254.97px; }
 
 .optcontentswrapper .radiowrapper {
   margin-top: 0px; }
@@ -2031,6 +2052,8 @@ label {
       border: 1px solid #d9d9d9;
       border-top: 0 solid;
       border-radius: 0 0 24px 24px; }
+      .articlecontainer .articleviewwrapper .body .contents {
+        word-break: break-all; }
       .articlecontainer .articleviewwrapper .body .layer {
         position: absolute;
         left: 0;
@@ -2073,8 +2096,10 @@ label {
   width: 100%; }
   .admin-footer {
     height: 100px;
-    margin-bottom: 220px;
-    position: relative; }
+    margin-bottom: 220px; }
+    @media screen and (max-width: 767px) {
+      .admin-footer {
+        margin-bottom: 100px; } }
 
 .request {
   margin-top: 192px; }

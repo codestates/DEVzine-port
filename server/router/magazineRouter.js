@@ -1,10 +1,10 @@
-const { 
-    getAllArticlesAndRecentContributions, 
-    getAllContributions, 
-    getArticle, 
-    getContribution 
+const {
+  getAllArticlesAndRecentContributions,
+  getAllContributions,
+  getArticle,
+  getContribution,
 } = require('../controller/magazine');
-const { checkAdminAuth } = require('../controller/middleware/isAdmin')
+const { checkAdminAuth } = require('../controller/middleware/isAdmin');
 const express = require('express');
 const router = express.Router();
 

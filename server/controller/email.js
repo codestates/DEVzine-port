@@ -6,7 +6,7 @@ const { VerifiedEmail } = require('../Models/Verifiedemails');
 const crypto = require('crypto');
 require('dotenv').config();
 
-const CLIENT_ENDPOINT=process.env.DEVZINE_CLIENT_ENDPOINT;
+const CLIENT_ENDPOINT = process.env.DEVZINE_CLIENT_ENDPOINT;
 
 const transporter = nodemailer.createTransport(
   smtpTransport({

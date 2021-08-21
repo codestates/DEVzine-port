@@ -11,7 +11,7 @@ function MultiSelect({ options, name, selectInputHandler }) {
         isMulti
         name={name}
         options={options}
-        onChange={selectInputHandler}
+        onChange={e => selectInputHandler(e, name)}
       />
     </div>
   );
