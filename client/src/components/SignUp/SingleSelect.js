@@ -10,7 +10,7 @@ function SingleSelect({ options, name, selectInputHandler }) {
         classNamePrefix="select"
         name={name}
         options={options}
-        onChange={selectInputHandler}
+        onChange={e => selectInputHandler(e, name)}
       />
     </div>
   );
