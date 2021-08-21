@@ -175,11 +175,11 @@ function SignUpWrapper() {
                       />
                     );
                   })}
+                  <Accordion
+                    radioInputHandler={radioInputHandler}
+                    selectInputHandler={selectInputHandler}
+                  />
                 </div>
-                <Accordion
-                  radioInputHandler={radioInputHandler}
-                  selectInputHandler={selectInputHandler}
-                />
                 <div
                   className="signupbtn"
                   onClick={e =>
