@@ -1,22 +1,20 @@
 .signupcontainer {
+  background-color: $background;
+  min-height: 100vh;
   position: relative;
   width: 100%;
-  // min-height: 100vh;
-  height: auto;
-  background: #f2f2f2;
-  display: flex;
-  justify-content: center;
-  margin-top: 120px;
-  margin-bottom: 220px;
+
+  &-footer {
+    height: 100px;
+    margin-bottom: 220px;
+  }
 
   .signupwrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 72px 0;
-
+    @include column-flexbox;
+    .textinputcontainer{
+      margin-top: 192px;
+      position: relative;
+    }
     .signupbtn {
       display: flex;
       align-items: center;
@@ -30,7 +28,6 @@
       line-height: 28px;
       color: #ffffff;
       cursor: pointer;
-      margin-left: 48px;
     }
 
     .commonbutton {

@@ -1291,21 +1291,21 @@ label {
     padding-bottom: 70px; }
 
 .signupcontainer {
+  background-color: #f2f2f2;
+  min-height: 100vh;
   position: relative;
-  width: 100%;
-  height: auto;
-  background: #f2f2f2;
-  display: flex;
-  justify-content: center;
-  margin-top: 120px;
-  margin-bottom: 220px; }
+  width: 100%; }
+  .signupcontainer-footer {
+    height: 100px;
+    margin-bottom: 220px; }
   .signupcontainer .signupwrapper {
-    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 72px 0; }
+    align-items: center;
+    justify-content: center; }
+    .signupcontainer .signupwrapper .textinputcontainer {
+      margin-top: 192px;
+      position: relative; }
     .signupcontainer .signupwrapper .signupbtn {
       display: flex;
       align-items: center;
@@ -1318,8 +1318,7 @@ label {
       font-size: 18px;
       line-height: 28px;
       color: #ffffff;
-      cursor: pointer;
-      margin-left: 48px; }
+      cursor: pointer; }
     .signupcontainer .signupwrapper .commonbutton {
       font-weight: 400;
       margin-left: 48px;
@@ -1329,7 +1328,7 @@ label {
   display: flex;
   flex-direction: column;
   align-items: inherit;
-  width: 360px;
+  max-width: 360px;
   height: 72px;
   margin-bottom: 24px; }
   .inputsmallcontainer .subjectwrapper {
@@ -1345,7 +1344,6 @@ label {
     .inputsmallcontainer .subjectwrapper .required {
       color: #ffc803; }
     .inputsmallcontainer .subjectwrapper .emailverifybtn {
-      z-index: 500;
       position: absolute;
       top: 0;
       right: 0;
@@ -1353,7 +1351,7 @@ label {
       color: #9d9d9d;
       cursor: pointer; }
   .inputsmallcontainer .inputsmall {
-    width: 360px;
+    width: 100%;
     height: 40px;
     background: #ffffff;
     border: 1px solid #d9d9d9;
@@ -1372,7 +1370,7 @@ label {
     font-size: 12px; }
 
 .accordioncontainer {
-  width: 360px;
+  max-width: 348px;
   display: flex;
   position: relative;
   flex-direction: column;
@@ -1381,6 +1379,9 @@ label {
   border-radius: 8px;
   margin-bottom: 24px;
   padding-left: 8px; }
+  @media screen and (max-width: 767px) {
+    .accordioncontainer {
+      max-width: 290px; } }
   .accordioncontainer .header {
     display: flex;
     align-items: center;
@@ -1395,19 +1396,19 @@ label {
       position: absolute;
       cursor: pointer; }
   .accordioncontainer .contentswrapper {
-    width: 100%;
-    transition: height 0.7s cubic-bezier(0.42, 0, 0.84, 0.26); }
+    width: 100%; }
 
 .radiowrapper {
   display: flex;
-  transition: opacity 0.7s;
-  margin-top: 24px;
-  transition: opacity 0.7s cubic-bezier(0.42, 0, 0.84, 0.26); }
+  margin-top: 24px; }
   .radiowrapper .subjectwrapper {
-    width: 32px;
+    min-width: 32px;
     margin-right: 64px;
     font-weight: bold;
     color: #191a20; }
+    @media screen and (max-width: 767px) {
+      .radiowrapper .subjectwrapper {
+        margin-right: 20px; } }
   .radiowrapper .radiocontents {
     width: 263px;
     display: flex; }
@@ -1416,6 +1417,9 @@ label {
       align-items: center;
       justify-content: center;
       margin-right: 26px; }
+      @media screen and (max-width: 767px) {
+        .radiowrapper .radiocontents .radiocontent {
+          margin-right: 6px; } }
       .radiowrapper .radiocontents .radiocontent .radioinput {
         margin-right: 6px; }
       .radiowrapper .radiocontents .radiocontent .radioinput:checked + label {
@@ -1426,52 +1430,58 @@ label {
         font-weight: bold;
         color: #9b9b9c; }
 
-.singleselectwrapper,
-.multiselectwrapper {
-  transition: opacity 1s cubic-bezier(0.42, 0, 0.84, 0.26); }
-  .singleselectwrapper .singleselectcontents .singleselectcontent,
-  .singleselectwrapper .singleselectcontents .multiselectcontent,
-  .singleselectwrapper .multiselectcontents .singleselectcontent,
-  .singleselectwrapper .multiselectcontents .multiselectcontent,
-  .multiselectwrapper .singleselectcontents .singleselectcontent,
-  .multiselectwrapper .singleselectcontents .multiselectcontent,
-  .multiselectwrapper .multiselectcontents .singleselectcontent,
-  .multiselectwrapper .multiselectcontents .multiselectcontent {
-    width: 350px;
-    height: 36px;
-    margin-top: 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; }
-    .singleselectwrapper .singleselectcontents .singleselectcontent .subjectwrapper,
-    .singleselectwrapper .singleselectcontents .multiselectcontent .subjectwrapper,
-    .singleselectwrapper .multiselectcontents .singleselectcontent .subjectwrapper,
-    .singleselectwrapper .multiselectcontents .multiselectcontent .subjectwrapper,
-    .multiselectwrapper .singleselectcontents .singleselectcontent .subjectwrapper,
-    .multiselectwrapper .singleselectcontents .multiselectcontent .subjectwrapper,
-    .multiselectwrapper .multiselectcontents .singleselectcontent .subjectwrapper,
-    .multiselectwrapper .multiselectcontents .multiselectcontent .subjectwrapper {
-      width: 32px;
-      margin-right: 64px;
-      font-weight: bold;
-      color: #191a20; }
-    .singleselectwrapper .singleselectcontents .singleselectcontent .basicsingle,
-    .singleselectwrapper .singleselectcontents .singleselectcontent .basicmulti,
-    .singleselectwrapper .singleselectcontents .multiselectcontent .basicsingle,
-    .singleselectwrapper .singleselectcontents .multiselectcontent .basicmulti,
-    .singleselectwrapper .multiselectcontents .singleselectcontent .basicsingle,
-    .singleselectwrapper .multiselectcontents .singleselectcontent .basicmulti,
-    .singleselectwrapper .multiselectcontents .multiselectcontent .basicsingle,
-    .singleselectwrapper .multiselectcontents .multiselectcontent .basicmulti,
-    .multiselectwrapper .singleselectcontents .singleselectcontent .basicsingle,
-    .multiselectwrapper .singleselectcontents .singleselectcontent .basicmulti,
-    .multiselectwrapper .singleselectcontents .multiselectcontent .basicsingle,
-    .multiselectwrapper .singleselectcontents .multiselectcontent .basicmulti,
-    .multiselectwrapper .multiselectcontents .singleselectcontent .basicsingle,
-    .multiselectwrapper .multiselectcontents .singleselectcontent .basicmulti,
-    .multiselectwrapper .multiselectcontents .multiselectcontent .basicsingle,
-    .multiselectwrapper .multiselectcontents .multiselectcontent .basicmulti {
-      width: 254.97px; }
+.singleselectwrapper .singleselectcontents .singleselectcontent,
+.singleselectwrapper .singleselectcontents .multiselectcontent,
+.singleselectwrapper .multiselectcontents .singleselectcontent,
+.singleselectwrapper .multiselectcontents .multiselectcontent,
+.multiselectwrapper .singleselectcontents .singleselectcontent,
+.multiselectwrapper .singleselectcontents .multiselectcontent,
+.multiselectwrapper .multiselectcontents .singleselectcontent,
+.multiselectwrapper .multiselectcontents .multiselectcontent {
+  width: 100%;
+  height: 36px;
+  margin-top: 24px;
+  display: flex;
+  align-items: center; }
+  .singleselectwrapper .singleselectcontents .singleselectcontent .subjectwrapper,
+  .singleselectwrapper .singleselectcontents .multiselectcontent .subjectwrapper,
+  .singleselectwrapper .multiselectcontents .singleselectcontent .subjectwrapper,
+  .singleselectwrapper .multiselectcontents .multiselectcontent .subjectwrapper,
+  .multiselectwrapper .singleselectcontents .singleselectcontent .subjectwrapper,
+  .multiselectwrapper .singleselectcontents .multiselectcontent .subjectwrapper,
+  .multiselectwrapper .multiselectcontents .singleselectcontent .subjectwrapper,
+  .multiselectwrapper .multiselectcontents .multiselectcontent .subjectwrapper {
+    min-width: 32px;
+    margin-right: 64px;
+    font-weight: bold;
+    color: #191a20; }
+    @media screen and (max-width: 767px) {
+      .singleselectwrapper .singleselectcontents .singleselectcontent .subjectwrapper,
+      .singleselectwrapper .singleselectcontents .multiselectcontent .subjectwrapper,
+      .singleselectwrapper .multiselectcontents .singleselectcontent .subjectwrapper,
+      .singleselectwrapper .multiselectcontents .multiselectcontent .subjectwrapper,
+      .multiselectwrapper .singleselectcontents .singleselectcontent .subjectwrapper,
+      .multiselectwrapper .singleselectcontents .multiselectcontent .subjectwrapper,
+      .multiselectwrapper .multiselectcontents .singleselectcontent .subjectwrapper,
+      .multiselectwrapper .multiselectcontents .multiselectcontent .subjectwrapper {
+        margin-right: 20px; } }
+  .singleselectwrapper .singleselectcontents .singleselectcontent .basicsingle,
+  .singleselectwrapper .singleselectcontents .singleselectcontent .basicmulti,
+  .singleselectwrapper .singleselectcontents .multiselectcontent .basicsingle,
+  .singleselectwrapper .singleselectcontents .multiselectcontent .basicmulti,
+  .singleselectwrapper .multiselectcontents .singleselectcontent .basicsingle,
+  .singleselectwrapper .multiselectcontents .singleselectcontent .basicmulti,
+  .singleselectwrapper .multiselectcontents .multiselectcontent .basicsingle,
+  .singleselectwrapper .multiselectcontents .multiselectcontent .basicmulti,
+  .multiselectwrapper .singleselectcontents .singleselectcontent .basicsingle,
+  .multiselectwrapper .singleselectcontents .singleselectcontent .basicmulti,
+  .multiselectwrapper .singleselectcontents .multiselectcontent .basicsingle,
+  .multiselectwrapper .singleselectcontents .multiselectcontent .basicmulti,
+  .multiselectwrapper .multiselectcontents .singleselectcontent .basicsingle,
+  .multiselectwrapper .multiselectcontents .singleselectcontent .basicmulti,
+  .multiselectwrapper .multiselectcontents .multiselectcontent .basicsingle,
+  .multiselectwrapper .multiselectcontents .multiselectcontent .basicmulti {
+    width: 254.97px; }
 
 .optcontentswrapper .radiowrapper {
   margin-top: 0px; }

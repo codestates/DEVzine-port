@@ -155,55 +155,66 @@ function SignUpWrapper() {
     setAlertOpen(false);
   };
   return (
-    <div className="signupcontainer">
-      <div className="signupwrapper">
-        {requiredTextInputData.map((el, idx) => {
-          return (
-            <TextInputGenderRequired
-              key={`TextInputGenderRequired${idx}`}
-              inputname={el[0]}
-              detailString={el[1]}
-              stateName={el[2]}
-              stateFunc={el[3]}
-              placeholder={el[4]}
-              type={el[5]}
-              isValid={el[6]}
-              maxLength={el[7]}
-              emailVerify={emailVerify}
-            />
-          );
-        })}
-        <Accordion
-          radioInputHandler={radioInputHandler}
-          selectInputHandler={selectInputHandler}
-        />
-        <div
-          className="signupbtn"
-          onClick={e =>
-            Email &&
-            Password &&
-            ConfirmPassword &&
-            Name &&
-            Email_isValid &&
-            Pw_isValid &&
-            Pw_confirm
-              ? postHandler()
-              : alert('모든 것을 만족해야 합니다.')
-          }
-        >
-          회원가입
+    <>
+      <div className="signupcontainer">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-4 col-md-12 col-lg-12">
+              <div className="signupwrapper">
+                <div className="textinputcontainer">
+                  {requiredTextInputData.map((el, idx) => {
+                    return (
+                      <TextInputGenderRequired
+                        key={`TextInputGenderRequired${idx}`}
+                        inputname={el[0]}
+                        detailString={el[1]}
+                        stateName={el[2]}
+                        stateFunc={el[3]}
+                        placeholder={el[4]}
+                        type={el[5]}
+                        isValid={el[6]}
+                        maxLength={el[7]}
+                        emailVerify={emailVerify}
+                      />
+                    );
+                  })}
+                </div>
+                <Accordion
+                  radioInputHandler={radioInputHandler}
+                  selectInputHandler={selectInputHandler}
+                />
+                <div
+                  className="signupbtn"
+                  onClick={e =>
+                    Email &&
+                    Password &&
+                    ConfirmPassword &&
+                    Name &&
+                    Email_isValid &&
+                    Pw_isValid &&
+                    Pw_confirm
+                      ? postHandler()
+                      : alert('모든 것을 만족해야 합니다.')
+                  }
+                >
+                  회원가입
+                </div>
+                <div className="signupwrapper-footer" />
+                <AlertModal
+                  open={AlertOpen}
+                  close={closeModal}
+                  alertString={'30분 이내로 확인해주세요.'}
+                  alertBtn="확인"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       {ModalOpen ? (
         <SigninModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
       ) : null}
-      <AlertModal
-        open={AlertOpen}
-        close={closeModal}
-        alertString={'30분 이내로 확인해주세요.'}
-        alertBtn="확인"
-      />
-    </div>
+    </>
   );
 }
 
