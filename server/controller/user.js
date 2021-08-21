@@ -74,7 +74,11 @@ module.exports = {
           // domain: 'devzine-port.com', path: '/' // 이건 넣으면 걍 안됨;;
         });
         res.status(200).send({
-          data: { user_name: req.user.user_name },
+          data: {
+            user_name: req.user.user_name,
+            user_email: req.user.user_email,
+            subscribed: req.user.subscribed,
+          },
           message: 'Login success',
         });
       }
