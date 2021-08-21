@@ -444,14 +444,22 @@ select::-ms-expand {
       height: 241px;
       position: relative;
       width: 360px; }
+      @media screen and (max-width: 767px) {
+        .modalcontainer .modalbackdrop .modalview {
+          max-width: 360px;
+          width: 95%;
+          height: 200px; } }
   .modalcontainer .desc {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #191a20;
     font-size: 18px;
-    font-weight: 700; }
+    line-height: 28px;
+    letter-spacing: -0.02em;
+    color: #191a20;
+    font-weight: 700;
+    width: 90%; }
     .modalcontainer .desc .closebtn {
       background-color: #d9d9d9;
       border-radius: 8px;
@@ -462,6 +470,10 @@ select::-ms-expand {
       height: 55px;
       margin-top: 16px;
       width: 265px; }
+      @media screen and (max-width: 767px) {
+        .modalcontainer .desc .closebtn {
+          max-width: 265px;
+          width: 90%; } }
 
 .alermodalbox {
   height: 0;
@@ -481,6 +493,9 @@ select::-ms-expand {
   top: 45%;
   width: 85px;
   z-index: 910; }
+  @media screen and (max-width: 767px) {
+    .loadingbox {
+      top: 50%; } }
   @media screen and (min-width: 768px) {
     .loadingbox {
       width: 40%; } }
@@ -520,6 +535,9 @@ select::-ms-expand {
   text-align: center;
   top: 45%;
   width: 100%; }
+  @media screen and (max-width: 767px) {
+    .errortext {
+      top: 40%; } }
   .errortext .errortitle {
     color: #191a20;
     font-size: 24px;
@@ -775,7 +793,7 @@ select::-ms-expand {
       position: absolute; }
 
 .signincontainer {
-  z-index: 800;
+  z-index: 700;
   position: fixed;
   top: 0;
   left: 0;
@@ -786,7 +804,7 @@ select::-ms-expand {
   align-items: center;
   justify-content: center; }
   .signincontainer .signinwrapper {
-    z-index: 810;
+    z-index: 710;
     position: relative;
     width: 550px;
     height: 566px;
@@ -823,7 +841,7 @@ select::-ms-expand {
       right: 14px;
       cursor: pointer; }
     .signincontainer .signinwrapper .leadsignup {
-      z-index: 810;
+      z-index: 710;
       width: 296px;
       height: 24px;
       font-weight: bold;
@@ -836,8 +854,11 @@ select::-ms-expand {
       margin-top: 48px;
       margin-bottom: 16px; }
     .signincontainer .signinwrapper .commonbutton {
-      z-index: 810;
+      z-index: 710;
       width: 296px; }
+
+.alert-modal {
+  z-index: 720; }
 
 .inputlarge {
   width: 296px;
@@ -1080,20 +1101,13 @@ select::-ms-expand {
   position: relative;
   text-align: center;
   width: 100%; }
-  @media screen and (max-width: 767px) {
-    .contributioncontainer {
-      height: 1050px;
-      margin-bottom: 50px;
-      width: 100%; } }
   .contributioncontainer .continner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    top: 45%;
+    margin: 0 auto;
+    margin-top: 20%;
     width: 360px; }
     @media screen and (max-width: 767px) {
       .contributioncontainer .continner {
+        margin-top: 162px;
         max-width: 360px;
         width: 95%; } }
 
@@ -2031,6 +2045,8 @@ label {
       border: 1px solid #d9d9d9;
       border-top: 0 solid;
       border-radius: 0 0 24px 24px; }
+      .articlecontainer .articleviewwrapper .body .contents {
+        word-break: break-all; }
       .articlecontainer .articleviewwrapper .body .layer {
         position: absolute;
         left: 0;
@@ -2073,8 +2089,10 @@ label {
   width: 100%; }
   .admin-footer {
     height: 100px;
-    margin-bottom: 220px;
-    position: relative; }
+    margin-bottom: 220px; }
+    @media screen and (max-width: 767px) {
+      .admin-footer {
+        margin-bottom: 100px; } }
 
 .request {
   margin-top: 192px; }

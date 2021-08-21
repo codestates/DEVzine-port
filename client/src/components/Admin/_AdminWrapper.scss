@@ -7,7 +7,10 @@
   &-footer {
     height: 100px;
     margin-bottom: 220px; // footer 220px 포함
-    position: relative;
+
+    @include mobile-only() {
+      margin-bottom: 100px;
+    }
   }
 }
 

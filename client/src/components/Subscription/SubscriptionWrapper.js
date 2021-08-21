@@ -72,6 +72,10 @@ function SubscriptionWrapper() {
 
   const closeModal = () => {
     setAlertOpen(false);
+
+    if (BlackInput === false && EmailSubSuc === true) {
+      window.location.href = '/';
+    }
   };
 
   return (

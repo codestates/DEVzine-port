@@ -218,5 +218,64 @@ module.exports = {
                 
                 }
         
+        },
+
+        viewContribution: async (req, res) => {
+                
+                try {
+
+                        const { user_email, user_name } = req.user;
+                        const contribution_id = Number(req.params.contributionid);
+                        
+                        let contribData = await Contribution.findOne(
+                                {
+                                        contribution_id
+                                }, {
+                                        _id: 0,
+                                        status: 0,
+                                        contribution_id: 0,
+                                        contribution_url: 0,
+                                }
+                        )
+
+                        if (!contribData) {
+
+                                return res.status(404).json(
+                                        {
+                                                "message": "Not found"
+                                        }
+                                );
+
+                        }
+
+                        if (contribData.user_email !== user_email) {
+
+                                return res.status(403).json(
+                                        {
+                                                "message": "Unauthorized user"
+                                        }
+                                );
+
+                        }
+                        
+                        delete contribData._doc.user_email;
+                        const data = { user_name, ...contribData._doc } 
+                        
+                        return res.status(200).json(
+                                {
+                                        data,
+                                        "source" : "DB",
+                                        "message" : "Contribution successfully found"
+                                }
+                        );
+
+                } catch (err) {
+
+                        console.log(err)
+                        return res.status(500).send(err);
+                
+                }
+
         }
+
 };

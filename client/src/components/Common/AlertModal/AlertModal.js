@@ -10,7 +10,12 @@ function AlertModal(props) {
           <div className="modalbackdrop">
             <div className="modalview">
               <div className="desc">
-                {alertString}
+                {alertString.split('\n').map(line => (
+                  <span>
+                    {line}
+                    <br />
+                  </span>
+                ))}
                 <button className="closebtn" onClick={close}>
                   {alertBtn}
                 </button>

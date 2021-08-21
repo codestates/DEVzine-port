@@ -22,7 +22,13 @@ function LandingWrapper() {
                   <br />
                   편하게 본다
                 </h2>
-                <p>매일 7시에 새로운 뉴스가 추가됩니다.</p>
+                <p>
+                  매일 7시에 새로운 뉴스가{' '}
+                  <span className="md-only">
+                    <br />
+                  </span>
+                  추가됩니다.
+                </p>
               </div>
             </div>
             <div className="col-sm-4 col-md-8 col-lg-7">
@@ -38,7 +44,11 @@ function LandingWrapper() {
                   빠르게 확인한다
                 </h2>
                 <p className="sm-hidden">
-                  하단 핵심 데이터 한 눈에 보기에서 확인할 수 있습니다.
+                  하단 핵심 데이터 한 눈에{' '}
+                  <span className="md-only">
+                    <br />
+                  </span>
+                  보기에서 확인할 수 있습니다.
                 </p>
                 <p className="sm-only">
                   하단 핵심 데이터 한 눈에 보기에서
@@ -59,7 +69,13 @@ function LandingWrapper() {
                   <br />
                   주기적으로 받아본다
                 </h2>
-                <p>구독신청하면 신청한 이메일로 받아볼 수 있습니다.</p>
+                <p>
+                  구독신청하면 신청한{' '}
+                  <span className="md-only">
+                    <br />
+                  </span>
+                  이메일로 받아볼 수 있습니다.
+                </p>
               </div>
             </div>
             <div className="col-sm-4 col-md-8 col-lg-7">
@@ -74,7 +90,13 @@ function LandingWrapper() {
                   <br />
                   DEVzine에 기고한다
                 </h2>
-                <p>하단 기고 신청하기에서 기고 신청할 수 있습니다.</p>
+                <p>
+                  하단 기고 신청하기에서{' '}
+                  <span className="md-only">
+                    <br />
+                  </span>
+                  기고 신청할 수 있습니다.
+                </p>
               </div>
             </div>
           </div>

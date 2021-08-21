@@ -25,6 +25,8 @@ function SideBar(props) {
 
   function signInHandler() {
     setModalOpen(true);
+    // props.setOpenSidebar(false);
+    // console.log('왜');
   }
 
   function signOutHandler() {
@@ -57,7 +59,7 @@ function SideBar(props) {
                   {props.userName ? (
                     <li className="usename">{props.UserName}</li>
                   ) : (
-                    <li onClick={signInHandler}>로그인</li>
+                    <li onClick={() => signInHandler()}>로그인</li>
                   )}
                   <li onClick={() => props.setOpenSidebar(false)}>
                     <Link to="/mypage">마이페이지</Link>
