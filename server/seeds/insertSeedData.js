@@ -14,18 +14,18 @@ const { Admin } = require('../Models/Admins');
 const { seedAdmins } = require('./seed-admins');
 
 module.exports = {
-insertSeedData: async (req, res) => {
+  insertSeedData: async (req, res) => {
     try {
-        await Article.create(seedArticles);
-        await Contribution.create(seedContributions);
-        await Subscriber.create(seedSubscribers);
-        await User.create(seedUsers);
-        await Newsletter.create(seedNewsletters);
-        await VerifiedEmail.create(seedVerifiedEmails);
-        await Admin.create(seedAdmins);
-        res.json({ message: 'Seed success' });
+      await Article.create(seedArticles);
+      await Contribution.create(seedContributions);
+      await Subscriber.create(seedSubscribers);
+      await User.create(seedUsers);
+      await Newsletter.create(seedNewsletters);
+      await VerifiedEmail.create(seedVerifiedEmails);
+      await Admin.create(seedAdmins);
+      res.json({ message: 'Seed success' });
     } catch (err) {
-        res.json(err);
-        }
-    },
+      res.json(err);
+    }
+  },
 };

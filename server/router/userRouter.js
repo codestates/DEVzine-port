@@ -5,7 +5,15 @@ const router = express.Router();
 
 router.post('/signup', signUp);
 router.post('/signout', signOut);
-router.post('/signin', passport.authenticate('local', { session: false }), signIn);
-router.delete('/delete', passport.authenticate('jwt', { session: false }), deleteUser);
+router.post(
+  '/signin',
+  passport.authenticate('local', { session: false }),
+  signIn
+);
+router.delete(
+  '/delete',
+  passport.authenticate('jwt', { session: false }),
+  deleteUser
+);
 
 module.exports = router;
