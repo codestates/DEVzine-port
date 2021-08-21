@@ -46,12 +46,21 @@ module.exports = {
 
   signOut: async (req, res) => {
     try {
-      res.clearCookie('jwt', {
+      if(res.cookie.jwt) {
+        res.clearCookie('jwt', {
+          httpOnly: true,
+          secure: true,
+          sameSite: 'None',
+        });
+        return res.status(200).send({ message: 'Logout success' });
+      }
+      res.clearCookie('admin', {
         httpOnly: true,
         secure: true,
         sameSite: 'None',
       });
-      res.status(200).send({ message: 'Logout success' });
+      return res.status(200).send({ message: 'Logout success' });
+
     } catch (err) {
       res.status(404).send({ message: 'Not found' });
     }
