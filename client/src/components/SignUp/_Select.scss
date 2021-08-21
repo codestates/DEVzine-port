@@ -1,22 +1,25 @@
 .singleselectwrapper,
 .multiselectwrapper {
-  transition: opacity 1s cubic-bezier(0.42, 0, 0.84, 0.26);
   .singleselectcontents,
   .multiselectcontents {
     .singleselectcontent,
     .multiselectcontent {
-      width: 350px;
+      width: 100%;
       height: 36px;
       margin-top: 24px;
       display: flex;
 
-      justify-content: space-between;
+      // justify-content: space-between;
       align-items: center;
+
       .subjectwrapper {
-        width: 32px;
+        min-width: 32px;
         margin-right: 64px;
         font-weight: bold;
         color: #191a20;
+        @include mobile-only() {
+          margin-right: 20px;
+        }
       }
       .basicsingle,
       .basicmulti {
