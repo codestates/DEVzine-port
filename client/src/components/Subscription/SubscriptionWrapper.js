@@ -7,6 +7,7 @@ import { customAxios } from '../../utils/customAxios';
 
 function SubscriptionWrapper() {
   const [SignIn, setSignIn] = useState(false);
+  const [UserEmail, setUserEmail] = useState(null);
   const [Email, setEmail] = useState(null);
   const [Email_isValid, setEmail_isValid] = useState(true);
   const [AlertOpen, setAlertOpen] = useState(false);
@@ -17,6 +18,7 @@ function SubscriptionWrapper() {
     if (store.getState().user.signinSuccess) {
       if (store.getState().user.signinSuccess[0] === 'Login success') {
         setSignIn(true);
+        setUserEmail(store.getState().user.signinSuccess[2]);
       } else {
         setSignIn(false);
       }
@@ -47,27 +49,35 @@ function SubscriptionWrapper() {
 
     let body = { user_email: Email };
 
-    return customAxios.post('/subscribe', body).then(res => {
-      if (res.status === 200) {
-        setEmailSubSuc(true);
-        setAlertOpen(true);
-      } else {
-        setEmailSubSuc(false);
-        setAlertOpen(true);
-      }
-    });
+    return customAxios
+      .post('/subscribe', body)
+      .then(res => {
+        if (res.status === 200) {
+          setEmailSubSuc(true);
+          setAlertOpen(true);
+        } else {
+          setEmailSubSuc(false);
+          setAlertOpen(true);
+        }
+      })
+      .catch(err => setAlertOpen(true));
   }
 
   function subscriptionHandler() {
-    return customAxios.post('/subscribe').then(res => {
-      if (res.status === 200) {
-        setEmailSubSuc(true);
-        setAlertOpen(true);
-      } else {
-        setEmailSubSuc(false);
-        setAlertOpen(true);
-      }
-    });
+    let body = { user_email: UserEmail };
+
+    return customAxios
+      .post('/subscribe', body)
+      .then(res => {
+        if (res.status === 200) {
+          setEmailSubSuc(true);
+          setAlertOpen(true);
+        } else {
+          setEmailSubSuc(false);
+          setAlertOpen(true);
+        }
+      })
+      .catch(err => setAlertOpen(true));
   }
 
   const closeModal = () => {
