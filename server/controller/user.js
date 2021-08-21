@@ -73,12 +73,10 @@ module.exports = {
           // maxAge: 24 * 60 * 60 * 1000, // 있든 말든 상관 없는듯
           // domain: 'devzine-port.com', path: '/' // 이건 넣으면 걍 안됨;;
         });
-        res
-          .status(200)
-          .send({
-            data: { user_name: req.user.user_name },
-            message: 'Login success',
-          });
+        res.status(200).send({
+          data: { user_name: req.user.user_name },
+          message: 'Login success',
+        });
       }
     );
   },
