@@ -1,5 +1,5 @@
 .accordioncontainer {
-  max-width: 348px;
+  width: 100%;
   display: flex;
   position: relative;
   flex-direction: column;
@@ -8,9 +8,6 @@
   border-radius: 8px;
   margin-bottom: 24px;
   padding-left: 8px;
-  @include mobile-only() {
-    max-width: 290px;
-  }
   .header {
     display: flex;
     align-items: center;
