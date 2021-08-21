@@ -1,7 +1,7 @@
-module.exports = { 
-    seedVerifiedEmails: [
-        {
-            "temp_email": "forseed@db.com"
-        }
-    ]
+module.exports = {
+  seedVerifiedEmails: [
+    {
+      temp_email: 'forseed@db.com',
+    },
+  ],
 };

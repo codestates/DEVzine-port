@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 // });
 
 // console.log(bcrypt.compareSync(
-//     'qwer1234', 
+//     'qwer1234',
 //     '$2a$10$BbDR8KsUhOOo7Q0CYauz2uEKHRxmLdxZ2bT7kLzeB9FfEd4TcaIDW'
 // ))
 
@@ -17,7 +17,9 @@ const bcrypt = require('bcryptjs');
 //     })
 // });
 
-console.log(bcrypt.compareSync(
-    'port8080', 
+console.log(
+  bcrypt.compareSync(
+    'port8080',
     '$2a$10$4p0MaNm4KmTIKyhOUBOyUeoCT1/MZWdlQSNyx6/m46vuaUd.pptXK'
-))
+  )
+);
