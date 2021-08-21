@@ -11,7 +11,6 @@ function SignUpWrapper() {
   const [Email_isValid, setEmail_isValid] = useState(false);
   const [Pw_isValid, setPw_isValid] = useState(false);
   const [Pw_confirm, setPw_confirm] = useState(false);
-  const [AlertOpen, setAlertOpen] = useState(false);
 
   const [Email, setEmail] = useState('');
   const [Name, setName] = useState('');
@@ -22,7 +21,10 @@ function SignUpWrapper() {
   const [Position, setPosition] = useState('');
   const [Language, setLanguage] = useState([]);
   const [ModalOpen, setModalOpen] = useState(false);
-
+  const [AlertOpen, setAlertOpen] = useState(false); //email인증 눌렀을 때 쓰는 것
+  const [SignUpFail, setSignUpFail] = useState(false); //회원가입에 실패 시
+  const [SignUpSuccess, setSignUpSuccess] = useState(false); //회원가입에 성공 시
+  const [AllVerified, setAllVerified] = useState(false); //회원가입 조건을 충족했는지 ?
   useEffect(() => {
     if (checkEmail(Email)) {
       setEmail_isValid(true);
@@ -84,18 +86,6 @@ function SignUpWrapper() {
   async function postHandler() {
     selectInputHandler();
 
-    let multiArr = [];
-
-    let multiValues = document.querySelectorAll('.basicmulti div:nth-child(3)');
-    if (multiValues.length - 1 !== 0 && multiValues[multiValues.length - 1]) {
-      for (let el of multiValues[multiValues.length - 1].childNodes) {
-        multiArr.push(el.attributes[2].value);
-      }
-      setLanguage(multiArr);
-    } else {
-      setLanguage([]);
-    }
-
     let body = {
       user_email: Email,
       user_password: Password,
@@ -112,8 +102,13 @@ function SignUpWrapper() {
 
     return await customAxios
       .post(`/user/signup`, body)
-      .then(res => setModalOpen(true))
-      .catch(err => alert('회원가입 실패하였습니다.'));
+      .then(res => {
+        setSignUpSuccess(true);
+        setModalOpen(true);
+      })
+      .catch(err => {
+        setSignUpFail(true);
+      });
   }
 
   function radioInputHandler() {
@@ -125,18 +120,17 @@ function SignUpWrapper() {
     }
   }
 
-  function selectInputHandler() {
-    let singleValues = document.querySelectorAll(
-      '.basicsingle input:nth-child(3)',
-    );
-    let singleArr = [];
-
-    for (let el of singleValues) {
-      singleArr.push(el.value);
+  function selectInputHandler(e, name) {
+    if (name === '나이') {
+      setAge(e.value);
+    } else if (name === '직무') {
+      setPosition(e.value);
+    } else if (name === '언어') {
+      const languageArr = e.map(el => {
+        return el.value;
+      });
+      setLanguage(languageArr);
     }
-
-    setAge(singleArr[0]);
-    setPosition(singleArr[1]);
   }
 
   async function emailVerify() {
@@ -153,6 +147,9 @@ function SignUpWrapper() {
 
   const closeModal = () => {
     setAlertOpen(false);
+    setSignUpFail(false);
+    setSignUpSuccess(false);
+    setAllVerified(false);
   };
   return (
     <>
@@ -194,16 +191,26 @@ function SignUpWrapper() {
                     Pw_isValid &&
                     Pw_confirm
                       ? postHandler()
-                      : alert('모든 것을 만족해야 합니다.')
+                      : setAllVerified(true)
                   }
                 >
                   회원가입
                 </div>
                 <div className="signupwrapper-footer" />
                 <AlertModal
-                  open={AlertOpen}
+                  open={AlertOpen || SignUpFail || SignUpSuccess || AllVerified}
                   close={closeModal}
-                  alertString={'30분 이내로 확인해주세요.'}
+                  alertString={
+                    AlertOpen
+                      ? '30분 이내로 확인해주세요.'
+                      : SignUpFail
+                      ? '회원가입에 실패하였습니다.'
+                      : SignUpSuccess
+                      ? '회원가입에 성공하였습니다.'
+                      : AllVerified
+                      ? '모든 것을 만족해야 합니다.'
+                      : ''
+                  }
                   alertBtn="확인"
                 />
               </div>
