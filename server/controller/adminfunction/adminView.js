@@ -21,7 +21,13 @@ const findContributionsWithStatus = async (statusCode) => {
         contribution_title: 1,
         contribution_url: 1,
         status: 1,
-        user_name: { $arrayElemAt: ['$user_info.user_name', 0] },
+        user_name: { 
+          $ifNull: [
+            {
+              $arrayElemAt: ['$user_info.user_name', 0]
+            }, 'anonymous'
+          ]
+        },
         _id: 0,
       },
     },
