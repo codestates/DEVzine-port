@@ -148,7 +148,7 @@ function ArticleListWrapper() {
             <div className="col-sm-4 col-md-12 col-lg-12">
               <div className="articlebox">
                 <div className="articlebox-align">
-                  <div className="selectionbox">
+                  <div className="selectionbox stopdragging">
                     <span>
                       <select
                         className="articlebox-select"
@@ -209,7 +209,7 @@ function ArticleListWrapper() {
                   : ArticleData.slice(0, ArticlePlus).map(el => {
                       return (
                         <div
-                          className="articlebox-listbox"
+                          className="articlebox-listbox stopdragging"
                           key={el.article_title}
                         >
                           <Link
@@ -252,7 +252,7 @@ function ArticleListWrapper() {
         <div className="container">
           <div className="row">
             <div className="col-sm-4">
-              <div className="plusbtn">
+              <div className="plusbtn stopdragging">
                 {ArticleData.length <= 12 ? null : (
                   <Button
                     subject={`더보기`}

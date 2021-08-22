@@ -102,7 +102,7 @@ function ContributionUpdateWrapper({ id }) {
 
   return AllDate ? (
     <>
-      <div className="contributioncontainer">
+      <div className="contributioncontainer stopdragging">
         <div className="container">
           <div className="row">
             {requrest === 'Login need' ? null : (

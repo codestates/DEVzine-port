@@ -25,6 +25,7 @@ function SignUpWrapper() {
   const [SignUpFail, setSignUpFail] = useState(false); //회원가입에 실패 시
   const [SignUpSuccess, setSignUpSuccess] = useState(false); //회원가입에 성공 시
   const [AllVerified, setAllVerified] = useState(false); //회원가입 조건을 충족했는지 ?
+
   useEffect(() => {
     if (checkEmail(Email)) {
       setEmail_isValid(true);
@@ -49,6 +50,7 @@ function SignUpWrapper() {
     setEmail_isValid(true);
     setPw_isValid(true);
   }, []);
+
   const requiredTextInputData = [
     [
       '이메일',

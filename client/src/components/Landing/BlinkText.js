@@ -11,7 +11,7 @@ function BlinkText() {
   return (
     <>
       <div
-        className="sm-hidden"
+        className="sm-hidden stopdragging"
         style={{
           display: 'flex',
           textAlign: 'center',
@@ -25,7 +25,7 @@ function BlinkText() {
         <animated.div style={styles}>Scroll and Click</animated.div>
       </div>
       <div
-        className="sm-only"
+        className="sm-only stopdragging"
         style={{
           display: 'flex',
           textAlign: 'center',

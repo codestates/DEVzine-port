@@ -80,7 +80,7 @@ function LandingSub() {
 
   return (
     <>
-      <div className="landinglast">
+      <div className="landinglast stopdragging">
         <div className="container">
           <div className="row">
             <div className="col-sm-4">

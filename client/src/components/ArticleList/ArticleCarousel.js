@@ -12,7 +12,7 @@ function ArticelCarousel({ ContributionData }) {
         arrows
         autoPlaySpeed={3000}
         centerMode={false}
-        className=""
+        className="stopdragging"
         containerClass="container"
         dotListClass=""
         draggable

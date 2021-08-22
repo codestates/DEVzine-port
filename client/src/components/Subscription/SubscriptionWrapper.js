@@ -94,7 +94,7 @@ function SubscriptionWrapper() {
 
   return (
     <>
-      <div className="subscriptioncontainer">
+      <div className="subscriptioncontainer stopdragging">
         <div className="container">
           <div className="row">
             <div className="col-sm-4">
