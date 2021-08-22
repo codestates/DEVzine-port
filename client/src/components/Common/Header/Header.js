@@ -20,6 +20,7 @@ function Header() {
   const [ModalOpen, setModalOpen] = useState(false);
   const [OpenSidebar, setOpenSidebar] = useState(false);
   const [Admin, setAdmin] = useState(false);
+  const [Date, setDate] = useState('D');
 
   useEffect(() => {
     if (store.getState().user.signinSuccess) {
@@ -38,6 +39,13 @@ function Header() {
     } else {
       setAdmin(false);
     }
+  }, []);
+
+  useEffect(() => {
+    const week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    const nowDate = week[new window.Date().getDay()];
+    setDate(nowDate);
+    // console.log('요일', nowDate);
   }, []);
 
   function signInHandler() {
@@ -70,19 +78,47 @@ function Header() {
     }
   }
 
-  return (
+  return Date ? (
     <>
       <header className="headerfix">
         <div className="headertime">
           <span className="sm-hidden">
-            {SignIn ? (Admin ? '' : `${UserName}님께 `) : '여러분께 '}
+            {SignIn
+              ? Admin
+                ? ''
+                : `${UserName}님께 `
+              : Admin
+              ? ''
+              : '여러분께 '}
           </span>
-          {Admin
-            ? '새로운 소식을 만들기까지 남은 시간'
-            : '새로운 소식을 전하기까지 남은 시간'}
-          <span className="timer">
-            <TopTime />
-          </span>
+          {Date === 'SUN' || Date === 'MON' ? (
+            Admin ? (
+              Date === 'SUN' ? (
+                <span>
+                  일요일엔 본능적으로 쉬고, 그 외에는 이성적으로 업무합니다.
+                </span>
+              ) : (
+                <span>
+                  새로운 소식을 전하기까지 남은 시간
+                  <span className="timer">
+                    <TopTime />
+                  </span>
+                </span>
+              )
+            ) : (
+              <span>전달할 새로운 소식을 차곡차곡 모으는 중입니다</span>
+            )
+          ) : (
+            <span>
+              {Admin
+                ? '새로운 소식을 만들기까지 남은 시간'
+                : '새로운 소식을 전하기까지 남은 시간'}
+
+              <span className="timer">
+                <TopTime />
+              </span>
+            </span>
+          )}
         </div>
 
         <div className="headernavwrapper">
@@ -163,7 +199,7 @@ function Header() {
         ) : null}
       </header>
     </>
-  );
+  ) : null;
 }
 
 export default Header;
