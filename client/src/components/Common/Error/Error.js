@@ -12,7 +12,7 @@ function ErrorText() {
   }, 3500);
 
   return (
-    <div className="errorbox">
+    <div className="errorbox stopdragging">
       <div className="errortext">
         <div className="errortitle stop-dragging">
           페이지가 존재하지 않습니다.

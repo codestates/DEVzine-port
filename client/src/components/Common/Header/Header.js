@@ -80,7 +80,7 @@ function Header() {
 
   return Date ? (
     <>
-      <header className="headerfix">
+      <header className="headerfix stopdragging">
         <div className="headertime">
           <span className="sm-hidden">
             {SignIn

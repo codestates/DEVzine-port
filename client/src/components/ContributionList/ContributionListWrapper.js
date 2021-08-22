@@ -122,7 +122,7 @@ function ContributionListWrapper() {
 
   return ContributionData ? (
     <>
-      <div className="contributionlistwrapper">
+      <div className="contributionlistwrapper stopdragging">
         <div className="container">
           <div className="row">
             <div className="col-sm-4 col-md-12 col-lg-12">

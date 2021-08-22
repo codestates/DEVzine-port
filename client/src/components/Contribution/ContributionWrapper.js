@@ -86,7 +86,7 @@ function ContributionWrapper() {
 
   return (
     <>
-      <div className="contributioncontainer">
+      <div className="contributioncontainer stopdragging">
         <div className="container">
           <div className="row">
             {SignIn ? (
