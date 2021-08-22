@@ -99,7 +99,7 @@ export async function filterContributionData(body) {
   };
 }
 
-export async function DeleteData() {
+export async function deleteData() {
   const request = 'Delete data';
 
   return {

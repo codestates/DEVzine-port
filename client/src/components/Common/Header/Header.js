@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signoutUser } from '../../../_actions/user_actions';
-import { DeleteData } from '../../../_actions/article_actions';
+import { deleteData } from '../../../_actions/article_actions';
 import { signoutAdmin } from '../../../_actions/admin_actions';
-import { DeleteAdminData } from '../../../_actions/admin_actions';
+import { deleteAdminData } from '../../../_actions/admin_actions';
 import store from '../../../store/store';
 import TopTime from './TopTime';
 import SignInModal from '../SignInModal/SignInModal';
@@ -20,7 +20,7 @@ function Header() {
   const [ModalOpen, setModalOpen] = useState(false);
   const [OpenSidebar, setOpenSidebar] = useState(false);
   const [Admin, setAdmin] = useState(false);
-  const [Date, setDate] = useState('D');
+  const [Date, setDate] = useState('');
 
   useEffect(() => {
     if (store.getState().user.signinSuccess) {
@@ -57,7 +57,7 @@ function Header() {
       dispatch(signoutUser()).then(res => {
         if (res.payload === 'Logout success') {
           setSignIn(false);
-          dispatch(DeleteData());
+          dispatch(deleteData());
           window.location.reload();
         } else {
           alert('로그아웃 실패하였습니다.');
@@ -69,7 +69,7 @@ function Header() {
       dispatch(signoutAdmin()).then(res => {
         if (res.payload === 'Logout success') {
           setAdmin(false);
-          dispatch(DeleteAdminData());
+          dispatch(deleteAdminData());
           window.location.href = '/';
         } else {
           alert('로그아웃 실패하였습니다.');
@@ -78,9 +78,16 @@ function Header() {
     }
   }
 
+  function headerNavOpen() {
+    setOpenSidebar(true);
+  }
+
   return Date ? (
     <>
-      <header className="headerfix stopdragging">
+      <header
+        className="headerfix stopdragging"
+        mousemove={() => setTest(!Test)}
+      >
         <div className="headertime">
           <span className="sm-hidden">
             {SignIn
@@ -145,16 +152,14 @@ function Header() {
                     {OpenSidebar ? (
                       <SideBar
                         setOpenSidebar={setOpenSidebar}
+                        OpenSidebar={OpenSidebar}
                         SignIn={SignIn}
                         UserName={UserName}
                         setSignIn={setSignIn}
                         setUserName={setUserName}
                       />
                     ) : (
-                      <span
-                        className="headernav-menu"
-                        onClick={() => setOpenSidebar(true)}
-                      >
+                      <span className="headernav-menu" onClick={headerNavOpen}>
                         <img src={menu} alt="menu" />
                       </span>
                     )}

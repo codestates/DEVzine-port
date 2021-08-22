@@ -42,7 +42,7 @@ export async function getContributionAdmin() {
   };
 }
 
-export async function SearchData(Select, Text) {
+export async function searchData(Select, Text) {
   const request = await customAxios
     .get(`/admin/contributionlist`)
     .then(res => res.data)
@@ -71,7 +71,7 @@ export async function SearchData(Select, Text) {
   };
 }
 
-export async function SearchAppData(AppText) {
+export async function searchAppData(AppText) {
   const request = await customAxios
     .get(`/admin/contributionlist`)
     .then(res => res.data)
@@ -90,7 +90,7 @@ export async function SearchAppData(AppText) {
   };
 }
 
-export async function DeleteAdminData() {
+export async function deleteAdminData() {
   const request = 'Delete admin data';
 
   return {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signoutUser } from '../../../_actions/user_actions';
-import { DeleteData } from '../../../_actions/article_actions';
+import { deleteData } from '../../../_actions/article_actions';
 import SignInModal from '../SignInModal/SignInModal';
 import store from '../../../store/store';
 import close from '../../../assets/images/close.svg';
@@ -25,8 +25,6 @@ function SideBar(props) {
 
   function signInHandler() {
     setModalOpen(true);
-    // props.setOpenSidebar(false);
-    // console.log('왜');
   }
 
   function signOutHandler() {
@@ -34,7 +32,7 @@ function SideBar(props) {
       if (res.payload === 'Logout success') {
         props.setSignIn(false);
         props.setOpenSidebar(false);
-        dispatch(DeleteData());
+        dispatch(deleteData());
         window.location.reload();
       } else {
         alert('로그아웃 실패하였습니다.');
@@ -59,7 +57,7 @@ function SideBar(props) {
                   {props.UserName ? (
                     <li className="usename">{props.UserName}</li>
                   ) : (
-                    <li onClick={() => signInHandler()}>로그인</li>
+                    <li onClick={signInHandler}>로그인</li>
                   )}
                   <li onClick={() => props.setOpenSidebar(false)}>
                     <Link to="/mypage">마이페이지</Link>
