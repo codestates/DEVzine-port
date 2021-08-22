@@ -201,30 +201,30 @@ app.get('/mailtest', async (req, res) => {
       }
     );
     console.log('////////');
-    console.log(new Date());
+    console.log(date);
     console.log(userEmail);
     console.log(userName);
-    console.log(articleList);
-    console.log(contribution);
+    // console.log(articleList);
+    // console.log(contribution);
     console.log('////////');
 
-    // transporter.sendMail(
-    //   {
-    //     from: 'DEVzine:port <devzineport@gmail.com>',
-    //     to: 'idhyo0o@naver.com',
-    //     // to: userEmail,
-    //     subject: 'DEVzine:port 에서 발송된 뉴스레터',
-    //     html: newsLetter,
-    //   },
-    //   (err, info) => {
-    //     if (err) {
-    //       console.log(err);
-    //     } else {
-    //       console.log('Email send: ' + info.response);
-    //       transporter.close();
-    //     }
-    //   }
-    // );
+    await transporter.sendMail(
+      {
+        from: 'DEVzine:port <devzineport@gmail.com>',
+        to: 'idhyo0o@naver.com', // dummy email
+        // to: userEmail,
+        subject: 'DEVzine:port 에서 발송된 뉴스레터',
+        html: newsLetter,
+      },
+      (err, info) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log('Email send: ' + info.response);
+          transporter.close();
+        }
+      }
+    );
   });
 
   res.status(200).send('mail test');
