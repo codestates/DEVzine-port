@@ -96,7 +96,13 @@ function ArticleListWrapper() {
     dispatch(filterArticleData(body))
       .then(res => {
         setArticleData(null);
-        setPlaceHolder(`'${CurrentTitle}'의 검색 결과입니다.`);
+
+        if (CurrentTitle !== '') {
+          setPlaceHolder(`'${CurrentTitle}'의 검색 결과입니다.`);
+        } else {
+          setPlaceHolder(`기사를 검색하세요.`);
+        }
+
         setArticleData(res.payload);
         setCurrentTitle('');
       })
@@ -128,8 +134,13 @@ function ArticleListWrapper() {
             <div className="col-sm-4">
               <div className="carousel">
                 <h2>DEVzine이 추천하는 소식</h2>
+                <div className="sm-only">
+                  <Link to="/contributionlist">
+                    <span className="allviewbtn">모두 보기</span>
+                  </Link>
+                </div>
                 <Link to="/contributionlist">
-                  <span className="allviewbtn">모두 보기</span>
+                  <span className="allviewbtn sm-hidden">모두 보기</span>
                 </Link>
                 <ArticelCarousel ContributionData={ContributionData} />
               </div>
@@ -168,14 +179,20 @@ function ArticleListWrapper() {
                     </span>
                     <span className="ordergroup">
                       <span
-                        className={CurrentOrder === '최신순' ? 'setbold' : null}
+                        className={
+                          CurrentOrder === '최신순' ? 'setbold first' : 'first'
+                        }
                         onClick={latestBtn}
                       >
                         최신순
                       </span>
                       |
                       <span
-                        className={CurrentOrder === '조회순' ? 'setbold' : null}
+                        className={
+                          CurrentOrder === '조회순'
+                            ? 'setbold second'
+                            : 'second'
+                        }
                         onClick={viewBtn}
                       >
                         조회순

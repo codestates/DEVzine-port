@@ -390,7 +390,7 @@ ol {
   .lg-hidden {
     display: none !important; } }
 
-.signinform .conselect, .signinform .contitle, .signinform .contextarea, .nonesubinner .emailinput {
+.signinform .conselect, .signinform .contitle, .signinform .contextarea, .nonesubinner .emailinput, .selectionbox .articlebox-select, .selectionbox input, .request-select, .request-text, .request-search, .approval-text, .approval-search {
   font-size: 16px;
   line-height: 24px;
   letter-spacing: -0.01em;
@@ -405,7 +405,7 @@ ol {
   padding: 8px 14px;
   text-overflow: ellipsis;
   width: 100%; }
-  .signinform .conselect::placeholder, .signinform .contitle::placeholder, .signinform .contextarea::placeholder, .nonesubinner .emailinput::placeholder {
+  .signinform .conselect::placeholder, .signinform .contitle::placeholder, .signinform .contextarea::placeholder, .nonesubinner .emailinput::placeholder, .selectionbox .articlebox-select::placeholder, .selectionbox input::placeholder, .request-select::placeholder, .request-text::placeholder, .request-search::placeholder, .approval-text::placeholder, .approval-search::placeholder {
     color: #999; }
 
 select::-ms-expand {
@@ -447,7 +447,7 @@ select::-ms-expand {
       @media screen and (max-width: 767px) {
         .modalcontainer .modalbackdrop .modalview {
           max-width: 360px;
-          width: 95%;
+          width: 90%;
           height: 200px; } }
   .modalcontainer .desc {
     position: absolute;
@@ -1181,11 +1181,14 @@ label {
     @media screen and (max-width: 767px) {
       .contributionlistwrapper .articlebox {
         margin-top: 162px; } }
+    .contributionlistwrapper .articlebox .prebox {
+      height: 30px; }
     .contributionlistwrapper .articlebox .prebtn {
       float: right;
       margin: 0;
       color: #d9d9d9;
-      font-weight: 700; }
+      font-weight: 700;
+      margin-bottom: 10px; }
       .contributionlistwrapper .articlebox .prebtn:hover {
         color: #ffc803; }
     .contributionlistwrapper .articlebox-listbox {
@@ -1611,7 +1614,8 @@ label {
     font-weight: 700; }
     @media screen and (max-width: 767px) {
       .carousel .allviewbtn {
-        float: none; } }
+        padding-top: 5px;
+        float: left; } }
     .carousel .allviewbtn:hover {
       color: #ffc803;
       font-weight: 700; }
@@ -1627,8 +1631,6 @@ label {
     margin: 20px; }
     .articlebox span:first-child {
       margin-left: 0; }
-    .articlebox span:hover {
-      font-weight: 700; }
   .articlebox-listbox {
     background-color: #fff;
     border: 1px solid #d9d9d9;
@@ -1762,45 +1764,114 @@ label {
   border-bottom: 1px solid #d9d9d9;
   position: relative;
   height: 60px; }
+  @media screen and (max-width: 767px) {
+    .selectionbox {
+      height: 160px; } }
   .selectionbox .articlebox-select {
+    padding: 0;
+    background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.64645 4.14645C2.84171 3.95118 3.15829 3.95118 3.35355 4.14645L6 6.79289L8.64645 4.14645C8.84171 3.95118 9.15829 3.95118 9.35355 4.14645C9.54882 4.34171 9.54882 4.65829 9.35355 4.85355L6.35355 7.85355C6.15829 8.04882 5.84171 8.04882 5.64645 7.85355L2.64645 4.85355C2.45118 4.65829 2.45118 4.34171 2.64645 4.14645Z' fill='%23b2b3b9'/%3E%3C/svg%3E%0A") no-repeat 97% 50%;
+    background-color: #fff;
     border: 1px solid #d9d9d9;
-    width: 180px;
+    width: 100%;
     height: 36px;
     position: absolute;
     left: 0;
     top: 10px;
     border-radius: 16px;
-    text-indent: 1.2em; }
+    text-indent: 1.2em;
+    padding-left: 10px; }
+    .selectionbox .articlebox-select option {
+      color: #191a20; }
+    @media screen and (min-width: 768px) {
+      .selectionbox .articlebox-select {
+        width: 18%; } }
+    @media screen and (min-width: 1200px) {
+      .selectionbox .articlebox-select {
+        width: 180px; } }
   .selectionbox input {
+    padding: 0;
     border: 1px solid #d9d9d9;
-    width: 640px;
+    width: 100%;
     height: 36px;
     position: absolute;
-    left: 195px;
-    top: 10px;
+    left: 0;
+    top: 60px;
     border-radius: 16px;
     text-indent: 1.2em; }
+    @media screen and (min-width: 768px) {
+      .selectionbox input {
+        left: 20%;
+        width: 41%;
+        top: 10px; } }
+    @media screen and (min-width: 1200px) {
+      .selectionbox input {
+        left: 195px;
+        width: 640px; } }
   .selectionbox img {
     width: auto;
     height: 30px;
     position: absolute;
-    left: 790px;
-    top: 50%;
+    right: 5px;
+    top: 77px;
     transform: translateY(-50%); }
+    @media screen and (min-width: 768px) {
+      .selectionbox img {
+        left: 55%;
+        top: 30px; } }
+    @media screen and (min-width: 1200px) {
+      .selectionbox img {
+        left: 790px; } }
   .selectionbox .ordergroup {
     position: absolute;
-    left: 835px;
-    top: 0px; }
+    left: 0;
+    top: 100px;
+    color: #999;
+    text-align: left; }
+    @media screen and (min-width: 768px) {
+      .selectionbox .ordergroup {
+        left: 60%;
+        margin-right: 0;
+        width: 20%;
+        text-align: center;
+        top: 0px; } }
+    @media screen and (min-width: 1200px) {
+      .selectionbox .ordergroup {
+        left: 835px;
+        text-align: left; } }
+    @media screen and (min-width: 768px) {
+      .selectionbox .ordergroup .first {
+        margin-right: 15px; } }
+    @media screen and (min-width: 1200px) {
+      .selectionbox .ordergroup .first {
+        margin-right: 20px; } }
+    .selectionbox .ordergroup .second {
+      margin-right: 0; }
+      @media screen and (min-width: 768px) {
+        .selectionbox .ordergroup .second {
+          margin-left: 15px; } }
+      @media screen and (min-width: 1200px) {
+        .selectionbox .ordergroup .second {
+          margin-left: 20px; } }
   .selectionbox .initialbtn {
     position: absolute;
-    right: -8px;
-    top: -8px;
+    right: -20px;
+    top: 90px;
     border: 1px solid #d9d9d9;
     height: 36px;
     line-height: 36px;
     width: 100px;
     text-align: center;
-    border-radius: 16px; }
+    border-radius: 16px;
+    color: #999; }
+    @media screen and (min-width: 768px) {
+      .selectionbox .initialbtn {
+        left: 82%;
+        width: 15%;
+        top: -8px; } }
+    @media screen and (min-width: 1200px) {
+      .selectionbox .initialbtn {
+        left: 1000px;
+        width: 100px; } }
     .selectionbox .initialbtn:hover {
       background-color: #d9d9d9; }
 
@@ -2103,9 +2174,67 @@ label {
 
 .request {
   margin-top: 192px; }
+  .request-form {
+    border-bottom: 1px solid #ffc803;
+    border-top: 1px solid #ffc803;
+    position: relative;
+    width: 100%;
+    height: 60px;
+    padding-top: 8px;
+    margin-top: 10px; }
+  .request-select {
+    background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.64645 4.14645C2.84171 3.95118 3.15829 3.95118 3.35355 4.14645L6 6.79289L8.64645 4.14645C8.84171 3.95118 9.15829 3.95118 9.35355 4.14645C9.54882 4.34171 9.54882 4.65829 9.35355 4.85355L6.35355 7.85355C6.15829 8.04882 5.84171 8.04882 5.64645 7.85355L2.64645 4.85355C2.45118 4.65829 2.45118 4.34171 2.64645 4.14645Z' fill='%23b2b3b9'/%3E%3C/svg%3E%0A") no-repeat 97% 50%;
+    background-color: #fff;
+    border-color: #ffc803;
+    color: #191a20;
+    left: 0;
+    position: absolute;
+    width: 15%; }
+    .request-select option {
+      color: #191a20; }
+  .request-text {
+    border-color: #ffc803;
+    color: #191a20;
+    left: 16%;
+    position: absolute;
+    width: 70%; }
+  .request-search {
+    background-color: #ffc803;
+    border-color: #ffc803;
+    color: #191a20;
+    left: 87%;
+    position: absolute;
+    width: 13%; }
+    .request-search:hover {
+      background-color: #FFBB34;
+      font-weight: 700; }
 
 .approval {
   margin-top: 60px; }
+  .approval-form {
+    border-bottom: 1px solid #ffc803;
+    border-top: 1px solid #ffc803;
+    position: relative;
+    width: 100%;
+    height: 60px;
+    padding-top: 8px;
+    margin-top: 10px; }
+  .approval-text {
+    border-color: #ffc803;
+    color: #191a20;
+    left: 0;
+    position: absolute;
+    width: 85%; }
+  .approval-search {
+    background-color: #ffc803;
+    border-color: #ffc803;
+    color: #191a20;
+    left: 87%;
+    position: absolute;
+    width: 13%; }
+    .approval-search:hover {
+      background-color: #FFBB34;
+      font-weight: 700; }
   .approval-title {
     cursor: pointer; }
 

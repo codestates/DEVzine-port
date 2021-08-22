@@ -112,14 +112,13 @@ function LandingSub() {
                       </Link>
                     </div>
                     <div>
-                      <Button
-                        subject="매거진 보기"
-                        color="#191A20"
-                        backgroundColor="#FFDD14"
-                        onClickHandle={() =>
-                          (window.location.href = '/articlelist')
-                        }
-                      />
+                      <Link to="/articlelist">
+                        <Button
+                          subject="매거진 보기"
+                          color="#191A20"
+                          backgroundColor="#FFDD14"
+                        />
+                      </Link>
                     </div>
                   </div>
                 )}

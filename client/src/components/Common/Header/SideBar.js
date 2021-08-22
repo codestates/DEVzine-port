@@ -44,7 +44,7 @@ function SideBar(props) {
 
   return (
     <>
-      <nav class="sidebar">
+      <nav className="sidebar">
         <div className="sidebar-nav">
           <div className="container">
             <div className="row">
@@ -56,7 +56,7 @@ function SideBar(props) {
                   onClick={() => props.setOpenSidebar(false)}
                 />
                 <ul>
-                  {props.userName ? (
+                  {props.UserName ? (
                     <li className="usename">{props.UserName}</li>
                   ) : (
                     <li onClick={() => signInHandler()}>로그인</li>
