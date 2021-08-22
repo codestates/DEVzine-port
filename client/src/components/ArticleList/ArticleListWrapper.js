@@ -168,14 +168,20 @@ function ArticleListWrapper() {
                     </span>
                     <span className="ordergroup">
                       <span
-                        className={CurrentOrder === '최신순' ? 'setbold' : null}
+                        className={
+                          CurrentOrder === '최신순' ? 'setbold first' : 'first'
+                        }
                         onClick={latestBtn}
                       >
                         최신순
                       </span>
                       |
                       <span
-                        className={CurrentOrder === '조회순' ? 'setbold' : null}
+                        className={
+                          CurrentOrder === '조회순'
+                            ? 'setbold second'
+                            : 'second'
+                        }
                         onClick={viewBtn}
                       >
                         조회순
