@@ -84,10 +84,7 @@ function Header() {
 
   return Date ? (
     <>
-      <header
-        className="headerfix stopdragging"
-        mousemove={() => setTest(!Test)}
-      >
+      <header className="headerfix stopdragging">
         <div className="headertime">
           <span className="sm-hidden">
             {SignIn
