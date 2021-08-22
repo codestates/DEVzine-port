@@ -11,7 +11,7 @@ function AlertModal(props) {
             <div className="modalview">
               <div className="desc">
                 {alertString.split('\n').map(line => (
-                  <span>
+                  <span key={line}>
                     {line}
                     <br />
                   </span>
