@@ -10,14 +10,37 @@
 
   .container {
     .row {
+      .canvascontainer{
+        z-index: 0;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+      }
       .visualwrapper {
+        position: relative;
+        z-index: 1;
         margin-top: 206px;
         margin-bottom: 306px;
-        .chartcontainer {
-          min-height: 500px;
-          min-width: 500px;
-          .chartwrapper {
-            min-height: 500px;
+
+        .chartcontainer{
+          @include flexbox;
+
+            .chartdesc{
+              margin: 0 20px;
+              width: 360px;
+              height: 150px;
+              .chartsubject{
+                font-weight: $bold;
+                @include text-style(36, $dark);
+                margin-bottom: 20px;
+              }
+              .chartdetail{
+                font-weight: normal;
+                @include text-style(18, $dark);
+              }
+            } 
+           .chartwrapper {
+            @include flexbox;
             background-color: $white;
             position: relative;
             border: 1px solid $border;

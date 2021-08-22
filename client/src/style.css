@@ -2147,14 +2147,41 @@ label {
   .visualcontainer-footer {
     height: 100px;
     margin-bottom: 220px; }
+  .visualcontainer .container .row .canvascontainer {
+    z-index: 0;
+    position: fixed;
+    width: 100vw;
+    height: 100vh; }
   .visualcontainer .container .row .visualwrapper {
+    position: relative;
+    z-index: 1;
     margin-top: 206px;
     margin-bottom: 306px; }
     .visualcontainer .container .row .visualwrapper .chartcontainer {
-      min-height: 500px;
-      min-width: 500px; }
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      .visualcontainer .container .row .visualwrapper .chartcontainer .chartdesc {
+        margin: 0 20px;
+        width: 360px;
+        height: 150px; }
+        .visualcontainer .container .row .visualwrapper .chartcontainer .chartdesc .chartsubject {
+          font-weight: 700;
+          font-size: 36px;
+          line-height: 48px;
+          letter-spacing: -0.01em;
+          color: #191a20;
+          margin-bottom: 20px; }
+        .visualcontainer .container .row .visualwrapper .chartcontainer .chartdesc .chartdetail {
+          font-weight: normal;
+          font-size: 18px;
+          line-height: 28px;
+          letter-spacing: -0.02em;
+          color: #191a20; }
       .visualcontainer .container .row .visualwrapper .chartcontainer .chartwrapper {
-        min-height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-color: #fff;
         position: relative;
         border: 1px solid #d9d9d9;

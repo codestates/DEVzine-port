@@ -49,6 +49,8 @@ function LandingSub() {
         setCount(Subscribers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
       }
     }, incrementTime);
+
+    return () => setScrollActive(false);
   }, [ScrollActive, MScrollActive]);
 
   useEffect(async () => {

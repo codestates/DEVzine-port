@@ -1,31 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useTransition, animated } from 'react-spring';
+import React, { useEffect } from 'react';
 import Chart from 'react-apexcharts';
+import 'aos/dist/aos.css';
+import Aos from 'aos';
 
 export function ArticlesTopHit({ data }) {
-  const [ScrollPosition, setScrollPosition] = useState(0);
-  const [Indicator, setIndicator] = useState(false);
-  const transition = useTransition(Indicator, {
-    from: { x: -100, opacity: 0, skew: '20deg' },
-    enter: { x: 0, opacity: 1, skew: '0deg' },
-    leave: { x: 100, opacity: 0, skew: '20deg' },
-  });
-
-  let rect = 500;
-
-  const onScroll = () => {
-    setScrollPosition(window.pageYOffset);
-    if (ScrollPosition > 400 && ScrollPosition < 400 + rect) {
-      setIndicator(true);
-    } else {
-      setIndicator(false);
-    }
-  };
   useEffect(() => {
-    window.addEventListener('scroll', onScroll);
-    // 컴포넌트가 언마운트 되기 직전에 이벤트를 끝낸다. 메모리 누수 방지
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [ScrollPosition]);
+    Aos.init({
+      duration: 800,
+      easing: 'ease-in-out',
+    });
+  }, []);
 
   let options = {
     stroke: {
@@ -83,8 +67,7 @@ export function ArticlesTopHit({ data }) {
         breakpoint: 480,
         options: {
           chart: {
-            height: 320,
-            width: 320,
+            width: 300,
           },
         },
       },
@@ -123,46 +106,39 @@ export function ArticlesTopHit({ data }) {
 
   options.xaxis.categories = categories;
 
-  return transition((style, item) =>
-    item ? (
-      <animated.div style={style}>
+  return (
+    <div className="chartcontainer" style={{ margin: '240px 0' }}>
+      <div className="chartdesc" data-aos="fade-right">
+        <div className="chartsubject">
+          가장 많이 본 소식은
+          <br /> 무엇일까?
+        </div>
+        <div className="chartdetail">
+          DEVzine:port가 시작한 날부터 <br />
+          바로 전일까지 기준으로 <br />
+          가장 많이 본 소식을 알아볼 수 있어요.
+        </div>
+      </div>
+      <div className="chartwrapper" data-aos="fade-left" data-aos-delay="300">
         <Chart
           options={options}
           series={[{ data: series }]}
           type="bar"
-          height={500}
-          width={500}
+          height={504}
+          width={740}
         />
-      </animated.div>
-    ) : null,
+      </div>
+    </div>
   );
 }
 
 export function UserAgeAndGender({ data }) {
-  const [ScrollPosition, setScrollPosition] = useState(0);
-  const [Indicator, setIndicator] = useState(false);
-  const transition = useTransition(Indicator, {
-    from: { x: 100, opacity: 0, skew: '20deg' },
-    enter: { x: 0, opacity: 1, skew: '0deg' },
-    leave: { x: -100, opacity: 0, skew: '20deg' },
-  });
-
-  let rect = 500;
-
-  const onScroll = () => {
-    setScrollPosition(window.pageYOffset);
-    if (ScrollPosition > 800 && ScrollPosition < 800 + rect) {
-      setIndicator(true);
-    } else {
-      setIndicator(false);
-    }
-  };
-
   useEffect(() => {
-    window.addEventListener('scroll', onScroll);
-    // 컴포넌트가 언마운트 되기 직전에 이벤트를 끝낸다. 메모리 누수 방지
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [ScrollPosition]);
+    Aos.init({
+      duration: 800,
+      easing: 'ease-in-out',
+    });
+  }, []);
 
   let series = [
     {
@@ -225,8 +201,7 @@ export function UserAgeAndGender({ data }) {
         breakpoint: 480,
         options: {
           chart: {
-            height: 320,
-            width: 320,
+            width: 300,
           },
         },
       },
@@ -258,11 +233,35 @@ export function UserAgeAndGender({ data }) {
     },
   };
 
-  return transition((style, item) =>
-    item ? (
-      <animated.div style={style}>
-        <Chart options={options} series={series} type="bar" height={500} />
-      </animated.div>
-    ) : null,
+  return (
+    <div className="chartcontainer" style={{ marginBottom: '72px' }}>
+      <div className="chartwrapper" data-aos="fade-right" data-aos-delay="300">
+        <Chart
+          options={options}
+          series={series}
+          type="bar"
+          height={504}
+          width={740}
+        />
+      </div>
+      <div
+        className="chartdesc"
+        data-aos="fade-left"
+        style={{ textAlign: 'right' }}
+      >
+        <div className="chartsubject">
+          어떤 분들이 <br />
+          IT 소식을 보실까요?
+        </div>
+        <div className="chartdetail">
+          DEVzine:port가 시작한 날부터 <br />
+          바로 전일까지 기준으로
+          <br />
+          DEVzine:port에 가입한 회원들의
+          <br />
+          성별, 나이, 직무, 언어를 알아볼 수 있어요.
+        </div>
+      </div>
+    </div>
   );
 }

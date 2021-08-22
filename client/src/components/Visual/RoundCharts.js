@@ -1,32 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useTransition, animated } from 'react-spring';
+import React, { useEffect } from 'react';
 import Chart from 'react-apexcharts';
+import 'aos/dist/aos.css';
+import Aos from 'aos';
 
 export function UserTopLanguage({ data }) {
-  const [ScrollPosition, setScrollPosition] = useState(0);
-  const [Indicator, setIndicator] = useState(false);
-  const transition = useTransition(Indicator, {
-    from: { x: 100, opacity: 0, skew: '20deg' },
-    enter: { x: 0, opacity: 1, skew: '0deg' },
-    leave: { x: -100, opacity: 0, skew: '20deg' },
-  });
-
-  let rect = 500;
-
-  const onScroll = () => {
-    setScrollPosition(window.pageYOffset);
-    if (ScrollPosition > 2400 && ScrollPosition < 2400 + rect) {
-      setIndicator(true);
-    } else {
-      setIndicator(false);
-    }
-  };
-
   useEffect(() => {
-    window.addEventListener('scroll', onScroll);
-    // 컴포넌트가 언마운트 되기 직전에 이벤트를 끝낸다. 메모리 누수 방지
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [ScrollPosition]);
+    Aos.init({
+      duration: 800,
+      easing: 'ease-in-out',
+    });
+  }, []);
 
   let options = {
     colors: ['#b2b3b9', '#d9d9d9', '#ffdd14', '#ffc803', '#ffe33e'],
@@ -64,7 +47,7 @@ export function UserTopLanguage({ data }) {
         breakpoint: 480,
         options: {
           chart: {
-            width: 320,
+            width: 300,
           },
           legend: {
             position: 'bottom',
@@ -83,46 +66,34 @@ export function UserTopLanguage({ data }) {
 
   options.labels = labels;
 
-  return transition((style, item) =>
-    item ? (
-      <animated.div style={style}>
+  return (
+    <div
+      className="chartcontainer"
+      style={{
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+      }}
+    >
+      <div className="chartwrapper" data-aos="fade-left">
         <Chart
           options={options}
           series={series}
           type="pie"
-          width={500}
-          height={320}
+          height={504}
+          width={740}
         />
-      </animated.div>
-    ) : null,
+      </div>
+    </div>
   );
 }
 
 export function UserTopPosition({ data }) {
-  const [ScrollPosition, setScrollPosition] = useState(0);
-  const [Indicator, setIndicator] = useState(false);
-  const transition = useTransition(Indicator, {
-    from: { x: -100, opacity: 0, skew: '20deg' },
-    enter: { x: 0, opacity: 1, skew: '0deg' },
-    leave: { x: 100, opacity: 0, skew: '20deg' },
-  });
-
-  let rect = 500;
-
-  const onScroll = () => {
-    setScrollPosition(window.pageYOffset);
-    if (ScrollPosition > 2000 && ScrollPosition < 2000 + rect) {
-      setIndicator(true);
-    } else {
-      setIndicator(false);
-    }
-  };
-
   useEffect(() => {
-    window.addEventListener('scroll', onScroll);
-    // 컴포넌트가 언마운트 되기 직전에 이벤트를 끝낸다. 메모리 누수 방지
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [ScrollPosition]);
+    Aos.init({
+      duration: 800,
+      easing: 'ease-in-out',
+    });
+  }, []);
 
   let options = {
     colors: ['#b2b3b9', '#d9d9d9', '#ffdd14', '#ffc803', '#ffe33e'],
@@ -160,7 +131,7 @@ export function UserTopPosition({ data }) {
         breakpoint: 480,
         options: {
           chart: {
-            width: 320,
+            width: 300,
           },
           legend: {
             position: 'bottom',
@@ -179,17 +150,17 @@ export function UserTopPosition({ data }) {
 
   options.labels = labels;
 
-  return transition((style, item) =>
-    item ? (
-      <animated.div style={style}>
+  return (
+    <div className="chartcontainer" style={{ marginBottom: '72px' }}>
+      <div className="chartwrapper" data-aos="fade-right">
         <Chart
           options={options}
           series={series}
           type="donut"
-          width={500}
-          height={320}
+          height={504}
+          width={740}
         />
-      </animated.div>
-    ) : null,
+      </div>
+    </div>
   );
 }

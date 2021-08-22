@@ -1,32 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useTransition, animated } from 'react-spring';
+import React, { useEffect } from 'react';
 import Chart from 'react-apexcharts';
+import 'aos/dist/aos.css';
+import Aos from 'aos';
 
 export function ArticlesKeyword({ data }) {
-  const [ScrollPosition, setScrollPosition] = useState(0);
-  const [Indicator, setIndicator] = useState(false);
-  const transition = useTransition(Indicator, {
-    from: { x: 100, opacity: 0, skew: '20deg' },
-    enter: { x: 0, opacity: 1, skew: '0deg' },
-    leave: { x: -100, opacity: 0, skew: '20deg' },
-  });
-
-  let rect = 400;
-
-  const onScroll = () => {
-    setScrollPosition(window.pageYOffset);
-    if (ScrollPosition > 0 && ScrollPosition < rect) {
-      setIndicator(true);
-    } else {
-      setIndicator(false);
-    }
-  };
-
   useEffect(() => {
-    window.addEventListener('scroll', onScroll);
-    // 컴포넌트가 언마운트 되기 직전에 이벤트를 끝낸다. 메모리 누수 방지
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [ScrollPosition]);
+    Aos.init({
+      duration: 800,
+      easing: 'ease-in-out',
+    });
+  }, []);
 
   let options = {
     colors: ['#ffdd14', '#ffe33e'],
@@ -95,16 +78,12 @@ export function ArticlesKeyword({ data }) {
         breakpoint: 480,
         options: {
           chart: {
-            height: 320,
-            width: 320,
+            width: 300,
           },
         },
       },
     ],
     xaxis: {
-      title: {
-        text: '키워드',
-      },
       categories: [],
       labels: {
         style: {
@@ -117,9 +96,6 @@ export function ArticlesKeyword({ data }) {
       },
     },
     yaxis: {
-      title: {
-        text: '키워드 별 조회 수 Top 5',
-      },
       labels: {
         style: {
           colors: ['#535353'],
@@ -143,17 +119,27 @@ export function ArticlesKeyword({ data }) {
 
   options.xaxis.categories = categories;
 
-  return transition((style, item) =>
-    item ? (
-      <animated.div style={style}>
+  return (
+    <div className="chartcontainer">
+      <div className="chartdesc" data-aos="fade-right">
+        <div className="chartsubject">
+          핵심 IT 키워드는 <br />
+          무엇일까?
+        </div>
+        <div className="chartdetail">
+          전월 한 달의 핵심 키워드를 <br />
+          알아볼 수 있어요.
+        </div>
+      </div>
+      <div className="chartwrapper" data-aos="fade-left" data-aos-delay="300">
         <Chart
           options={options}
           series={[{ name: 'Top Keyword Per Month', data: series }]}
           type="line"
-          height={500}
-          width={500}
+          height={504}
+          width={740}
         />
-      </animated.div>
-    ) : null,
+      </div>
+    </div>
   );
 }
