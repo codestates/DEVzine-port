@@ -168,7 +168,7 @@ app.get('/mailtest', async (req, res) => {
     idx++;
   }
 
-  const contributions = await Contribution.find(
+  const contribution = await Contribution.findOne(
     {
       contribution_date: {
         $gte: new Date(
@@ -194,7 +194,7 @@ app.get('/mailtest', async (req, res) => {
     let newsLetter;
     ejs.renderFile(
       __dirname + '/controller/ejsform/newsLetter.ejs',
-      {},
+      { date, userEmail, userName, articleList, contributions: contribution },
       (err, data) => {
         if (err) console.log(err);
         newsLetter = data;
@@ -205,7 +205,7 @@ app.get('/mailtest', async (req, res) => {
     console.log(userEmail);
     console.log(userName);
     console.log(articleList);
-    console.log(contributions[0]);
+    console.log(contribution);
     console.log('////////');
 
     // transporter.sendMail(
