@@ -17,6 +17,14 @@ module.exports = {
     if (!tempUser) {
       return res.status(401).send({ message: 'Email unverified' });
     }
+    const email = await User.findOne({ user_email });
+    if (email) {
+      return res.status(409).send({ message: `${user_email} already exists` });
+    }
+    const name = await User.findOne({ user_name });
+    if (name) {
+      return res.status(409).send({ message: `${user_name} already exists` });
+    }
 
     try {
       const user_password = await bcrypt.hash(req.body.user_password, 10);
@@ -26,13 +34,7 @@ module.exports = {
         user_name,
         ...user_info,
       });
-      await newUser.save((err) => {
-        if (err) {
-          return res
-            .status(409)
-            .send({ message: `${user_email} already exists` });
-        }
-      });
+      await newUser.save();
       VerifiedEmail.deleteOne({ temp_email: user_email }, (err) => {
         if (err) {
           return res.status(404).send({ message: 'Not found' });
@@ -46,7 +48,7 @@ module.exports = {
 
   signOut: async (req, res) => {
     try {
-      if(res.cookie.jwt) {
+      if (res.cookie.jwt) {
         res.clearCookie('jwt', {
           httpOnly: true,
           secure: true,
@@ -60,7 +62,6 @@ module.exports = {
         sameSite: 'None',
       });
       return res.status(200).send({ message: 'Logout success' });
-
     } catch (err) {
       res.status(404).send({ message: 'Not found' });
     }
