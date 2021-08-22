@@ -65,7 +65,7 @@ function Image({ url, index, camera }) {
 function Images() {
   const { camera } = useThree();
   return data.map((el, index) => (
-    <Suspense fallback={null}>
+    <Suspense fallback={null} key={index}>
       <Image key={el} url={el} index={index} camera={camera} />
     </Suspense>
   ));
