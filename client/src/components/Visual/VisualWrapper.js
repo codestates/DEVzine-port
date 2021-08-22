@@ -1,10 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { customAxios } from '../../utils/customAxios';
 import { UserTopLanguage, UserTopPosition } from './RoundCharts';
 import { ArticlesTopHit, UserAgeAndGender } from './BarChart';
 import { ArticlesKeywordAccumulated } from './TreeMapChart';
 import { ArticlesKeyword } from './LineCharts';
-import { UserAge } from './PolarAreaChart';
+
+function Bar() {
+  const mesh = useRef();
+
+  useFrame(() => {
+    mesh.current.rotation.z += 0.003;
+  });
+  return (
+    <mesh ref={mesh} position={[8, 0, 0]}>
+      <planeGeometry args={[7, 40]} />
+      <meshStandardMaterial color="orange" />
+    </mesh>
+  );
+}
 
 function VisualWrapper() {
   const [ChartData, setChartData] = useState('');
@@ -24,42 +38,25 @@ function VisualWrapper() {
         <div className="container">
           <div className="row">
             <div className="co-sm-4">
+              <div className="canvascontainer">
+                <Canvas>
+                  <ambientLight intensity={1} />
+                  <Bar />
+                </Canvas>
+              </div>
               <div className="visualwrapper">
-                <div className="chartcontainer">
-                  <section className="chartwrapper">
-                    <ArticlesKeyword data={ChartData} />
-                  </section>
-                </div>
-                <div className="chartcontainer">
-                  <section className="chartwrapper">
-                    <ArticlesTopHit data={ChartData} />
-                  </section>
-                </div>
-                <div className="chartcontainer">
-                  <section className="chartwrapper">
-                    <UserAgeAndGender data={ChartData} />
-                  </section>
-                </div>
-                <div className="chartcontainer">
-                  <section className="chartwrapper">
-                    <UserAge data={ChartData} />
-                  </section>
-                </div>
-                <div className="chartcontainer">
-                  <section className="chartwrapper">
-                    <ArticlesKeywordAccumulated data={ChartData} />
-                  </section>
-                </div>
-                <div className="chartcontainer">
-                  <section className="chartwrapper">
-                    <UserTopPosition data={ChartData} />
-                  </section>
-                </div>
-                <div className="chartcontainer">
-                  <section className="chartwrapper">
-                    <UserTopLanguage data={ChartData} />
-                  </section>
-                </div>
+                <ArticlesKeyword data={ChartData} />
+
+                <ArticlesKeywordAccumulated data={ChartData} />
+
+                <ArticlesTopHit data={ChartData} />
+
+                <UserAgeAndGender data={ChartData} />
+
+                <UserTopPosition data={ChartData} />
+
+                <UserTopLanguage data={ChartData} />
+
                 <div className="visualwrapper-footer" />
               </div>
             </div>
