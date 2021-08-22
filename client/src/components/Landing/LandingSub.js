@@ -20,7 +20,7 @@ function LandingSub() {
       setScrollActive(false);
     }
 
-    if (ScrollPosition > 1800) {
+    if (ScrollPosition > 2000) {
       setMScrollActive(true);
     } else {
       setMScrollActive(false);
@@ -56,7 +56,6 @@ function LandingSub() {
       .get('/landing')
       .then(res => setSubscribers(String(res.data.data.total_subscribers)))
       .catch(err => {
-        alert('회원 수를 받지 못 했습니다.');
         setSubscribers(String(5959000));
       });
   }, []);
@@ -85,7 +84,6 @@ function LandingSub() {
             <div className="col-sm-4">
               <div className="withuscontainer">
                 <h2>{Count}명</h2>
-                {/* {MScrollActive ? <h2 className="sm-only">{Count}명</h2> : null} */}
                 구독하고 있어요.
                 <p>많은 분들이 찾는 DEVzine과 함께 해요!</p>
                 {Admin ? (

@@ -13,6 +13,7 @@ function SubscriptionWrapper() {
   const [AlertOpen, setAlertOpen] = useState(false);
   const [BlackInput, setBlackInput] = useState(false);
   const [EmailSubSuc, setEmailSubSuc] = useState(false);
+  const [Subscribed, setSubscribed] = useState(false);
 
   useEffect(() => {
     if (store.getState().user.signinSuccess) {
@@ -77,7 +78,10 @@ function SubscriptionWrapper() {
           setAlertOpen(true);
         }
       })
-      .catch(err => setAlertOpen(true));
+      .catch(err => {
+        setSubscribed(true);
+        setAlertOpen(true);
+      });
   }
 
   const closeModal = () => {
@@ -170,7 +174,9 @@ function SubscriptionWrapper() {
                     ? '이메일을 작성해야 합니다.'
                     : EmailSubSuc
                     ? '구독신청이 완료되었습니다.'
-                    : '구독신청이 실패하였습니다.'
+                    : Subscribed
+                    ? '현재 구독 중입니다.'
+                    : '현재 구독 중인 이메일입니다.'
                 }
                 alertBtn="확인"
               />

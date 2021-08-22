@@ -21,7 +21,7 @@ function ContributionUpdateWrapper({ id }) {
     '모바일',
     '보안',
     '블록체인',
-    '빅데이터',
+    '빅 데이터',
     '코딩',
     '클라우드',
     '퍼스널 컴퓨팅',
