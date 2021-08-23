@@ -1,10 +1,11 @@
-const nodemailer = require('nodemailer');
-const smtpTransport = require('nodemailer-smtp-transport');
-const ejs = require('ejs');
 const { User } = require('../Models/Users');
 const { VerifiedEmail } = require('../Models/Verifiedemails');
+const smtpTransport = require('nodemailer-smtp-transport');
+const nodemailer = require('nodemailer');
+const ejs = require('ejs');
+require('dotenv').config(); 
+
 const crypto = require('crypto');
-require('dotenv').config();
 const algorithm = 'aes-128-cbc';
 const key = '1234567890123456';
 const iv = key.toString('hex').slice(0, 16);

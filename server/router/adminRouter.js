@@ -1,6 +1,6 @@
 const {
   getAllUsersContribution,
-  adminSignIn: adminSignIn,
+  adminSignIn,
   adminSignOut,
   acceptContribRequest,
   rejectContribRequest,

@@ -1,11 +1,9 @@
-const passport = require('passport');
-const bcrypt = require('bcryptjs');
-const { Strategy: JWTStrategy } = require('passport-jwt');
-const { Strategy: LocalStrategy } = require('passport-local');
-
 const { User } = require('../Models/Users');
 const { Admin } = require('../Models/Admins');
-
+const { Strategy: JWTStrategy } = require('passport-jwt');
+const { Strategy: LocalStrategy } = require('passport-local');
+const passport = require('passport');
+const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
 const passportConfig = {

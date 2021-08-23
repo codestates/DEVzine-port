@@ -3,8 +3,8 @@ const { Subscriber } = require('../../Models/Subscribers');
 const { Article } = require('../../Models/Articles');
 const { User } = require('../../Models/Users');
 const smtpTransport = require('nodemailer-smtp-transport');
-const nodemailer = require('nodemailer');
 const inlineCss = require('nodemailer-juice');
+const nodemailer = require('nodemailer');
 const ejs = require('ejs');
 require('dotenv').config();
 
