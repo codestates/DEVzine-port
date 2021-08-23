@@ -1298,18 +1298,26 @@ label {
   min-height: 100vh;
   position: relative;
   width: 100%; }
-  .signupcontainer-footer {
+  .signupcontainer .admin-footer {
     height: 100px;
     margin-bottom: 220px; }
   .signupcontainer .signupwrapper {
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; }
+    justify-content: center;
+    margin-top: 192px;
+    width: 360px; }
+    @media screen and (max-width: 767px) {
+      .signupcontainer .signupwrapper {
+        margin-top: 162px;
+        max-width: 360px;
+        width: 95%; } }
     .signupcontainer .signupwrapper .textinputcontainer {
-      margin-top: 192px;
       position: relative; }
     .signupcontainer .signupwrapper .signupbtn {
+      margin-top: 34px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1373,15 +1381,19 @@ label {
     font-size: 12px; }
 
 .accordioncontainer {
+  padding: 2px;
+  margin: 0 auto;
   width: 100%;
   display: flex;
   position: relative;
   flex-direction: column;
   background: #ffffff;
   border: 1px solid #d9d9d9;
-  border-radius: 8px;
-  margin-bottom: 24px;
-  padding-left: 8px; }
+  border-radius: 8px; }
+  @media screen and (max-width: 767px) {
+    .accordioncontainer {
+      max-width: 360px;
+      width: 100%; } }
   .accordioncontainer .header {
     display: flex;
     align-items: center;
@@ -1399,8 +1411,13 @@ label {
     width: 100%; }
 
 .radiowrapper {
+  margin: 0 auto;
   display: flex;
   margin-top: 24px; }
+  @media screen and (max-width: 767px) {
+    .radiowrapper {
+      max-width: 360px;
+      width: 95%; } }
   .radiowrapper .subjectwrapper {
     min-width: 32px;
     margin-right: 64px;
@@ -1438,11 +1455,23 @@ label {
 .multiselectwrapper .singleselectcontents .multiselectcontent,
 .multiselectwrapper .multiselectcontents .singleselectcontent,
 .multiselectwrapper .multiselectcontents .multiselectcontent {
+  margin: 0 auto;
   width: 100%;
   height: 36px;
   margin-top: 24px;
   display: flex;
   align-items: center; }
+  @media screen and (max-width: 767px) {
+    .singleselectwrapper .singleselectcontents .singleselectcontent,
+    .singleselectwrapper .singleselectcontents .multiselectcontent,
+    .singleselectwrapper .multiselectcontents .singleselectcontent,
+    .singleselectwrapper .multiselectcontents .multiselectcontent,
+    .multiselectwrapper .singleselectcontents .singleselectcontent,
+    .multiselectwrapper .singleselectcontents .multiselectcontent,
+    .multiselectwrapper .multiselectcontents .singleselectcontent,
+    .multiselectwrapper .multiselectcontents .multiselectcontent {
+      max-width: 360px;
+      width: 95%; } }
   .singleselectwrapper .singleselectcontents .singleselectcontent .subjectwrapper,
   .singleselectwrapper .singleselectcontents .multiselectcontent .subjectwrapper,
   .singleselectwrapper .multiselectcontents .singleselectcontent .subjectwrapper,
@@ -2147,11 +2176,6 @@ label {
   .visualcontainer-footer {
     height: 100px;
     margin-bottom: 220px; }
-  .visualcontainer .container .row .canvascontainer {
-    z-index: 0;
-    position: fixed;
-    width: 100vw;
-    height: 100vh; }
   .visualcontainer .container .row .visualwrapper {
     position: relative;
     z-index: 1;
@@ -2159,8 +2183,15 @@ label {
     margin-bottom: 306px; }
     .visualcontainer .container .row .visualwrapper .chartcontainer {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center; }
+      @media screen and (min-width: 1200px) {
+        .visualcontainer .container .row .visualwrapper .chartcontainer {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: row; } }
       .visualcontainer .container .row .visualwrapper .chartcontainer .chartdesc {
         margin: 0 20px;
         width: 360px;

@@ -4,14 +4,16 @@
   .multiselectcontents {
     .singleselectcontent,
     .multiselectcontent {
+      margin: 0 auto;
       width: 100%;
       height: 36px;
       margin-top: 24px;
       display: flex;
-
-      // justify-content: space-between;
       align-items: center;
-
+      @include mobile-only() {
+        max-width: 360px;
+        width: 95%;
+      }
       .subjectwrapper {
         min-width: 32px;
         margin-right: 64px;
