@@ -152,6 +152,11 @@ export function UserAgeAndGender({ data }) {
       data: data.users.series[0].data,
     },
   ];
+
+  // 최대값과 가장 근접한 5의 배수를 찾는 로직 
+  let maxCount = Math.max(...series[0].data.map(el => Math.abs(el)), ...series[1].data)
+  maxCount = maxCount + 5 - (maxCount % 5)
+
   const options = {
     chart: {
       type: 'bar',
@@ -207,8 +212,8 @@ export function UserAgeAndGender({ data }) {
       },
     ],
     yaxis: {
-      min: -5,
-      max: 5,
+      min: maxCount * -1,
+      max: maxCount,
     },
     tooltip: {
       shared: false,
