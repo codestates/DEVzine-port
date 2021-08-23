@@ -2153,12 +2153,12 @@ label {
       position: relative;
       height: 140px;
       border: 1px solid #d9d9d9;
-      border-radius: 24px 24px 0 0; }
+      border-radius: 24px 24px 0 0;
+      padding-left: 20px; }
       @media screen and (max-width: 767px) {
         .articlecontainer .articleviewwrapper .header {
           margin-top: 110px; } }
       .articlecontainer .articleviewwrapper .header .headerleft {
-        margin: 0 29px;
         padding-top: 24px; }
         @media screen and (max-width: 767px) {
           .articlecontainer .articleviewwrapper .header .headerleft {
@@ -2220,7 +2220,7 @@ label {
         @media screen and (max-width: 767px) {
           .articlecontainer .articleviewwrapper .header .datawrapper {
             margin-top: 0px;
-            left: 18px; } }
+            left: 7px; } }
     .articlecontainer .articleviewwrapper .body {
       background-color: #fff;
       position: relative;
