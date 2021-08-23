@@ -1,15 +1,60 @@
 <html>
-	<head>
-		<link href="style.css" rel="stylesheet" type="text/css">
-	</head>
-	<body>
-		<div>DEVzine:Port</div>
+	<header>
+		<div style="font-size: 30px; font-weight: bold;">
+			DEVzine:port
+		</div>
 		<div>
-			<div>
-				님께 보냄ㅎㅎ
-				<br/>
-				우와
-			</div>
+			<p><%= formatDate %></p>
+			<p><%= userName %>께 전해드리는 최신 IT 소식</p>
+		</div>
+	</header>
+	<style type="text/css">
+	</style>
+	<body>
+		<div>
+			<p>오늘의 최신 뉴스</p>
+			<p><%= articlesCount %>개</p>
+		</div>
+		<div>
+			<p>오늘의 추천 기고글</p>
+			<p><%= contribution.contribution_title %></p>
+		</div>
+		<div>
+			<div>추천 기고글</div>
+			<a href="https://devzine-port.com/contributionlist" style="display: block; width: 100%; height: 100%; text-decoration: none; color: black">
+				<div>
+					<p>제목 <%= contribution.contribution_title %></p>
+					<p>기고자 <%= contribution.user_email %></p>
+					<p>
+						본문 미리보기
+						<br>
+						<%= contributionContent %>
+					</p>
+				</div>
+			</a>
+		</div>
+		<div>최신 기사</div>
+		<%for(var i = 0; i < max; i++) {%>
+			<a href="<%= articleList[i].article_url %>" style="display: block; width: 100%; height: 100%; text-decoration: none; color: black">
+				<div>
+					<p>제목 <%= articleList[i].article_title %></p>
+					<p>신문사 <%= articleList[i].article_publisher %></p>
+					<p>
+						본문 미리보기
+						<br>
+						<%= articleList[i].article_content %>
+					</p>
+				</div>
+			</a>
+		<%}%>
+		<div>
+			<a href="https://devzine-port.com/articlelist" style="display: block; width: 100%; height: 100%; text-decoration: none; color: black" target="_blank">웹에서 보기</a>
+			<a href="https://devzine-port.com/contribution" style="display: block; width: 100%; height: 100%; text-decoration: none; color: black" target="_blank">기고하기</a>
+			<a href="https://devzine-port.com/unsubscribe/<%= userEmail %>" style="display: block; width: 100%; height: 100%; text-decoration: none; color: black">구독 취소하기</a>
 		</div>
 	</body>
+	<footer>
+		<p>Copyright (c) 200ok. All rights  reserved.</p>
+		<p>본 메일은 발신전용입니다. 문의사항이 있으시다면 DEVzine:port Github 를 확인해주세요.</p>
+	</footer>
 </html>

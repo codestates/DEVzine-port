@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { User } = require('../Models/Users');
 const { VerifiedEmail } = require('../Models/Verifiedemails');
-const { Contribution } = require('../Models/Contributions')
+const { Contribution } = require('../Models/Contributions');
 require('dotenv').config();
 
 module.exports = {
@@ -14,10 +14,6 @@ module.exports = {
     if (!emailRegex.test(user_email)) {
       return res.status(400).send({ message: 'Invalid email' });
     }
-    const tempUser = await VerifiedEmail.findOne({ temp_email: user_email });
-    if (!tempUser) {
-      return res.status(401).send({ message: 'Email unverified' });
-    }
     const email = await User.findOne({ user_email });
     if (email) {
       return res.status(409).send({ message: `${user_email} already exists` });
@@ -25,6 +21,10 @@ module.exports = {
     const name = await User.findOne({ user_name });
     if (name) {
       return res.status(409).send({ message: `${user_name} already exists` });
+    }
+    const tempUser = await VerifiedEmail.findOne({ temp_email: user_email });
+    if (!tempUser) {
+      return res.status(401).send({ message: 'Email unverified' });
     }
 
     try {
@@ -107,12 +107,14 @@ module.exports = {
       secure: true,
     });
     try {
-
-      await Contribution.updateMany({
-        user_email
-      }, {
-        user_email: 'anonymous'
-      })
+      await Contribution.updateMany(
+        {
+          user_email,
+        },
+        {
+          user_email: 'anonymous',
+        }
+      );
 
       User.deleteOne({ _id }, (err) => {
         if (err) {
