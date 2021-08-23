@@ -63,7 +63,7 @@ function ContributionStatus({ Contribution }) {
                 <span className="tablecontent">
                   <svg
                     onClick={() => {
-                      deleteRequestHandler();
+                      deleteRequestHandler(el.contribution_id);
                     }}
                     className="deletebtn"
                     width="39"
@@ -83,7 +83,9 @@ function ContributionStatus({ Contribution }) {
                 <span className="tablecontent last">
                   {statuscodeconvert(String(el.status))}
                   {el.status === 110 || el.status === 111 ? (
-                    <a href={el.contribution_url}>URL</a>
+                    <a href={el.contribution_url} className="sm-hidden">
+                      URL
+                    </a>
                   ) : null}
                 </span>
               </li>
