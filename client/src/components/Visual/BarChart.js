@@ -114,7 +114,7 @@ export function ArticlesTopHit({ data }) {
           <br /> 무엇일까?
         </div>
         <div className="chartdetail">
-          DEVzine:port가 시작한 날부터 <br />
+          DEVzine이 시작한 날부터 <br />
           바로 전일까지 기준으로 <br />
           가장 많이 본 소식을 알아볼 수 있어요.
         </div>
@@ -254,10 +254,10 @@ export function UserAgeAndGender({ data }) {
           IT 소식을 보실까요?
         </div>
         <div className="chartdetail">
-          DEVzine:port가 시작한 날부터 <br />
+          DEVzine이 시작한 날부터 <br />
           바로 전일까지 기준으로
           <br />
-          DEVzine:port에 가입한 회원들의
+          DEVzine에 가입한 회원들의
           <br />
           성별, 나이, 직무, 언어를 알아볼 수 있어요.
         </div>
