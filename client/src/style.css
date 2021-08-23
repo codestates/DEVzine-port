@@ -477,10 +477,6 @@ select::-ms-expand {
           max-width: 265px;
           width: 90%; } }
 
-.alermodalbox {
-  height: 0;
-  width: 0; }
-
 .loadingbox {
   position: absolute;
   top: 50%;

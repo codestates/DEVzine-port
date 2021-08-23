@@ -7,6 +7,7 @@ import { filterContributionData } from '../../_actions/article_actions';
 import Button from '../Common/Button/Button';
 import eye from '../../assets/images/eye.svg';
 import search from '../../assets/images/search.svg';
+import AlertModal from '../Common/AlertModal/AlertModal';
 
 function ContributionListWrapper() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ function ContributionListWrapper() {
   const [PlaceHodler, setPlaceHolder] = useState('기사를 검색하세요.');
   const [Selected, setSelected] = useState('키워드선택');
   const [ArchiveTitle, setArchiveTitle] = useState('');
+  const [AlertOpen, setAlertOpen] = useState(false);
 
   let selectOptions = [
     '전체',
@@ -38,7 +40,10 @@ function ContributionListWrapper() {
   useEffect(() => {
     dispatch(getContributionData())
       .then(res => setContributionData(res.payload))
-      .catch(err => alert('최신순 받아오는데 실패하였습니다.'));
+      .catch(err => {
+        // alert('최신순 받아오는데 실패하였습니다.');
+        setAlertOpen(true);
+      });
   }, []);
 
   useEffect(() => {
@@ -53,7 +58,10 @@ function ContributionListWrapper() {
         setContributionData(null);
         setContributionData(res.payload);
       })
-      .catch(err => alert('검색한 결과를 받아오는데 실패하였습니다.'));
+      .catch(err => {
+        // alert('검색한 결과를 받아오는데 실패하였습니다.');
+        setAlertOpen(true);
+      });
   }, [CurrentKeyword, CurrentOrder]);
 
   function latestBtn() {
@@ -101,7 +109,10 @@ function ContributionListWrapper() {
         setContributionData(res.payload);
         setCurrentTitle('');
       })
-      .catch(err => alert('검색한 결과를 받아오는데 실패하였습니다.'));
+      .catch(err => {
+        // alert('검색한 결과를 받아오는데 실패하였습니다.');
+        setAlertOpen(true);
+      });
   }
 
   function initialBtn() {
@@ -117,8 +128,15 @@ function ContributionListWrapper() {
       .then(res => {
         setContributionData(res.payload);
       })
-      .catch(err => alert('최신순 받아오는데 실패하였습니다.'));
+      .catch(err => {
+        // alert('최신순 받아오는데 실패하였습니다.');
+        setAlertOpen(true);
+      });
   }
+
+  const closeModal = () => {
+    setAlertOpen(false);
+  };
 
   return ContributionData ? (
     <>
@@ -253,6 +271,12 @@ function ContributionListWrapper() {
             </div>
           </div>
         </div>
+        <AlertModal
+          open={AlertOpen}
+          close={closeModal}
+          alertString={'정보를 받아오는데\n실패하였습니다.'}
+          alertBtn="확인"
+        />
       </div>
     </>
   ) : null;

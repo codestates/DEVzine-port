@@ -286,14 +286,12 @@ function ArticleListWrapper() {
             </div>
           </div>
         </div>
-        <div className="alert-modal">
-          <AlertModal
-            open={AlertOpen}
-            close={closeModal}
-            alertString={'정보를 받아오는데\n실패하였습니다.'}
-            alertBtn="확인"
-          />
-        </div>
+        <AlertModal
+          open={AlertOpen}
+          close={closeModal}
+          alertString={'정보를 받아오는데\n실패하였습니다.'}
+          alertBtn="확인"
+        />
       </div>
     </>
   ) : null;

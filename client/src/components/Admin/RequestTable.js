@@ -59,10 +59,11 @@ function RequestTable({ Requested }) {
           if (res.status === 200) {
             // alert('요청이 완료되었습니다.');
             setPostSuc(true);
-            window.location.reload();
+            setAlertOpen(true);
           } else {
             // alert('요청이 실패하였습니다.');
             setPostSuc(false);
+            setAlertOpen(true);
           }
         });
     }
@@ -70,6 +71,10 @@ function RequestTable({ Requested }) {
 
   const closeModal = () => {
     setAlertOpen(false);
+
+    if (PostSuc) {
+      window.location.reload();
+    }
   };
 
   return Requested ? (
