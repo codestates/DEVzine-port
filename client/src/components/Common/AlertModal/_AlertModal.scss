@@ -1,7 +1,9 @@
 .modalcontainer {
+  position:fixed;
   height: 15rem;
   margin: 120px auto;
   text-align: center;
+  z-index: 720;
 
   .modalbackdrop {
     @include flexbox;
@@ -57,4 +59,5 @@
 .alermodalbox {
   height: 0;
   width: 0;
+  // display: none;
 }
