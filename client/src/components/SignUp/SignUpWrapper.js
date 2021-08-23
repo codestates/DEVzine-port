@@ -21,13 +21,13 @@ function SignUpWrapper() {
   const [Position, setPosition] = useState('');
   const [Language, setLanguage] = useState([]);
   const [ModalOpen, setModalOpen] = useState(false);
-  const [AlertOpen, setAlertOpen] = useState(false); //email인증 눌렀을 때 쓰는 것
-  const [SignUpFail, setSignUpFail] = useState(false); //회원가입에 실패 시
-  const [SignUpSuccess, setSignUpSuccess] = useState(false); //회원가입에 성공 시
-  const [AllVerified, setAllVerified] = useState(false); //회원가입 조건을 충족했는지 ?
-  const [EmailNotVerified, setEmailNotVerified] = useState(false); //이메일 인증 시 이메일이 형식에 맞지 않는 경우
-  const [AlreadyExist, setAlreadyExist] = useState(false); //이메일 인증 시 이메일이 형식에 맞지 않는 경우
-  const [EmailUnverified, setEmailUnverified] = useState(false); //이메일 인증이 아직 안된 경우
+  const [AlertOpen, setAlertOpen] = useState(false);
+  const [SignUpFail, setSignUpFail] = useState(false);
+  const [SignUpSuccess, setSignUpSuccess] = useState(false);
+  const [AllVerified, setAllVerified] = useState(false);
+  const [EmailNotVerified, setEmailNotVerified] = useState(false);
+  const [AlreadyExist, setAlreadyExist] = useState(false);
+  const [EmailUnverified, setEmailUnverified] = useState(false);
 
   useEffect(() => {
     if (checkEmail(Email)) {
@@ -103,8 +103,6 @@ function SignUpWrapper() {
       },
     };
 
-    console.log('SignUpWrapper :', body);
-
     return await customAxios
       .post(`/user/signup`, body)
       .then(res => {
@@ -154,7 +152,6 @@ function SignUpWrapper() {
         setAlertOpen(true);
       })
       .catch(err => {
-        console.log(err.message.includes(400));
         if (err.message.includes(400)) {
           setAlreadyExist(true);
         }

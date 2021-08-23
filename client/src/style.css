@@ -1653,17 +1653,6 @@ label {
           font-size: 10px;
           line-height: 14px;
           width: 15%; }
-          .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last a {
-            width: 40px;
-            height: 15px;
-            background: #c4c4c4;
-            display: flex;
-            align-items: center;
-            justify-content: center; }
-            @media screen and (max-width: 767px) {
-              .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last a {
-                width: 35px;
-                height: 13px; } }
     .optcontentswrapper .contributionstatuscontainer .contributionstatustable > li:last-child .tablecontent {
       border-bottom: 0px solid; }
 
