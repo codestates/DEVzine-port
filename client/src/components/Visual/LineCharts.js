@@ -75,10 +75,11 @@ export function ArticlesKeyword({ data }) {
     },
     responsive: [
       {
-        breakpoint: 480,
+        breakpoint: 768,
         options: {
           chart: {
-            width: 300,
+            width: '100%',
+            height: 'auto',
           },
         },
       },
