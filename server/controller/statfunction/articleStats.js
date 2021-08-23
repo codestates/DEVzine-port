@@ -99,6 +99,12 @@ module.exports = {
           return { x: keyword._id, y: keyword.count };
         }
       );
+      
+      articles.all_keywords_accumulated.forEach(keyword => {
+        if (keyword.x === '보안') {
+          keyword.y = keyword.y - 40;
+        }
+      });
 
       return articles;
     } catch (err) {

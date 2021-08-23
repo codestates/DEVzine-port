@@ -198,23 +198,27 @@ function SignUpWrapper() {
                 >
                   회원가입
                 </div>
-                <div className="signupwrapper-footer" />
-                <AlertModal
-                  open={AlertOpen || SignUpFail || SignUpSuccess || AllVerified}
-                  close={closeModal}
-                  alertString={
-                    AlertOpen
-                      ? '30분 이내로 확인해주세요.'
-                      : SignUpFail
-                      ? '회원가입에 실패하였습니다.'
-                      : SignUpSuccess
-                      ? '회원가입에 성공하였습니다.'
-                      : AllVerified
-                      ? '모든 것을 만족해야 합니다.'
-                      : ''
-                  }
-                  alertBtn="확인"
-                />
+                <div className="alermodalbox">
+                  <AlertModal
+                    open={
+                      AlertOpen || SignUpFail || SignUpSuccess || AllVerified
+                    }
+                    close={closeModal}
+                    alertString={
+                      AlertOpen
+                        ? '30분 이내로 확인해주세요.'
+                        : SignUpFail
+                        ? '회원가입에 실패하였습니다.'
+                        : SignUpSuccess
+                        ? '회원가입에 성공하였습니다.'
+                        : AllVerified
+                        ? '모든 것을 만족해야 합니다.'
+                        : ''
+                    }
+                    alertBtn="확인"
+                  />
+                </div>
+                <div className="admin-footer" />
               </div>
             </div>
           </div>

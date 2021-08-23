@@ -70,31 +70,41 @@ module.exports = {
   },
 
   patchUserInfo: async (req, res) => {
-    const { user_email, user_name } = req.body;
-
-    const { user_gender, user_age, user_position, user_language } =
-      req.body.user_info;
-
-    const user_password = await bcrypt.hashSync(req.body.user_password, 10);
-
-    let subscribed;
-    if (req.body.subscribed === '구독') {
-      subscribed = true;
-    } else {
-      subscribed = false;
-    }
-
-    const update = {
-      user_password,
-      user_name,
-      user_gender,
-      user_age,
-      user_position,
-      user_language,
-      subscribed,
-    };
-
+    
     try {
+
+      const { user_email, user_name } = req.body;
+  
+      let overlapUser = await User.findOne({
+        user_name
+      });
+
+      if (overlapUser) {
+        return res.status(409).send({ message: `${user_name} already exists` });
+      }
+  
+      const { user_gender, user_age, user_position, user_language } =
+        req.body.user_info;
+  
+      const user_password = await bcrypt.hashSync(req.body.user_password, 10);
+  
+      let subscribed;
+      if (req.body.subscribed === '구독') {
+        subscribed = true;
+      } else {
+        subscribed = false;
+      }
+  
+      const update = {
+        user_password,
+        user_name,
+        user_gender,
+        user_age,
+        user_position,
+        user_language,
+        subscribed,
+      };
+
       let user = await User.findOneAndUpdate(
         {
           user_email,

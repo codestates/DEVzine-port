@@ -84,6 +84,7 @@ function AdminWrapper() {
 
     dispatch(searchAppData(AppText))
       .then(res => {
+        console.log(res.payload);
         setAccepted(res.payload);
       })
       .catch(err => alert('검색한 결과를 받아오는데 실패하였습니다.'));

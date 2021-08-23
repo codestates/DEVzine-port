@@ -1,6 +1,11 @@
 .radiowrapper {
+  margin: 0 auto;
   display: flex;
   margin-top: 24px;
+  @include mobile-only() {
+    max-width: 360px;
+    width: 95%;
+  }
 
   .subjectwrapper {
     min-width: 32px;
