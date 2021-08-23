@@ -38,6 +38,10 @@ const contributionSchema = mongoose.Schema(
     user_email: {
       type: String,
     },
+    recommended: {
+      type: Boolean,
+      default: false,
+    }
   },
   { versionKey: false }
 );
