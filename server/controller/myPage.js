@@ -1,7 +1,7 @@
-const bcrypt = require('bcryptjs');
 const { User } = require('../Models/Users');
 const { Contribution } = require('../Models/Contributions');
 const { Subscriber } = require('../Models/Subscribers')
+const bcrypt = require('bcryptjs');
 
 module.exports = {
   getUserInfo: async (req, res) => {
