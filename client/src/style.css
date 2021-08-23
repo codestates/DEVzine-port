@@ -2149,7 +2149,8 @@ label {
       height: 140px;
       border: 1px solid #d9d9d9;
       border-radius: 24px 24px 0 0;
-      padding-left: 20px; }
+      padding-left: 20px;
+      width: 100%; }
       @media screen and (max-width: 767px) {
         .articlecontainer .articleviewwrapper .header {
           margin-top: 110px; } }
@@ -2185,7 +2186,8 @@ label {
               font-size: 18px;
               line-height: 28px;
               letter-spacing: -0.02em;
-              margin-bottom: 0px; } }
+              margin-bottom: 0px;
+              padding-right: 20px; } }
         .articlecontainer .articleviewwrapper .header .headerleft .username {
           font-size: 14px;
           line-height: 24px;
@@ -2214,43 +2216,62 @@ label {
           margin: 0 4px; }
         @media screen and (max-width: 767px) {
           .articlecontainer .articleviewwrapper .header .datawrapper {
-            margin-top: 0px;
-            left: 7px; } }
+            clear: both;
+            text-align: left;
+            line-height: 18px;
+            height: 18px;
+            width: 100%;
+            padding-left: 43px;
+            padding-top: 4px; } }
     .articlecontainer .articleviewwrapper .body {
       background-color: #fff;
       position: relative;
-      padding: 24px 30px;
+      padding: 24px;
       width: 100%;
-      min-height: 490px;
+      min-height: 500px;
       height: auto;
       border: 1px solid #d9d9d9;
       border-top: 0 solid;
       border-radius: 0 0 24px 24px; }
+      @media screen and (max-width: 767px) {
+        .articlecontainer .articleviewwrapper .body {
+          min-height: 400px; } }
       .articlecontainer .articleviewwrapper .body .contents {
         font-size: 18px;
         line-height: 28px;
         letter-spacing: -0.02em;
         word-break: break-all; }
+        @media screen and (max-width: 767px) {
+          .articlecontainer .articleviewwrapper .body .contents {
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: -0.01em; } }
       .articlecontainer .articleviewwrapper .body .layer {
         position: absolute;
         left: 0;
         bottom: 0;
         width: 100%;
         min-height: 423px;
-        background: linear-gradient(181.43deg, #f2f2f2 30.92%, rgba(229, 229, 229, 0.75) 57.12%, rgba(229, 229, 229, 0.36) 70.83%, rgba(255, 255, 255, 0.49) 85.2%, rgba(255, 255, 255, 0) 99.37%, rgba(255, 255, 255, 0.0822785) 99.37%);
+        background: linear-gradient(-360deg, rgba(242, 242, 242, 0) 0%, rgba(242, 242, 242, 0.7) 20%, rgba(242, 242, 242, 0.9) 50%, rgba(242, 242, 242, 0.95) 70%, #f2f2f2 100%);
         border-radius: 24px 24px 0px 0px;
         transform: rotate(180deg); }
+        @media screen and (max-width: 767px) {
+          .articlecontainer .articleviewwrapper .body .layer {
+            min-height: 400px; } }
       .articlecontainer .articleviewwrapper .body .commonbutton {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        bottom: 72px; }
+        bottom: 100px; }
+        @media screen and (max-width: 767px) {
+          .articlecontainer .articleviewwrapper .body .commonbutton {
+            width: 85%;
+            bottom: 70px; } }
 
 .line-spacing {
-  padding-right: 5px; }
-  .line-spacing:nth-child(3n+1) {
-    display: inline-block;
-    margin-bottom: 20px; }
+  padding-right: 5px;
+  display: inline-block;
+  margin-bottom: 20px; }
 
 .ell-24-view {
   width: 100%;
