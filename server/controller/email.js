@@ -5,7 +5,9 @@ const { User } = require('../Models/Users');
 const { VerifiedEmail } = require('../Models/Verifiedemails');
 const crypto = require('crypto');
 require('dotenv').config();
-
+const algorithm = 'aes-128-cbc';
+const key = '1234567890123456';
+const iv = key.toString('hex').slice(0, 16);
 const CLIENT_ENDPOINT = process.env.DEVZINE_CLIENT_ENDPOINT;
 
 const transporter = nodemailer.createTransport(
@@ -34,7 +36,7 @@ module.exports = {
     }
 
     let authMailForm;
-    const cipher = crypto.createCipher('aes-256-cbc', '1111');
+    const cipher = crypto.createCipheriv(algorithm, key, iv);
     let encryptEmail = cipher.update(user_email, 'utf8', 'base64');
     encryptEmail += cipher.final('base64');
     console.log('Encrypt : ', encryptEmail);
@@ -70,7 +72,7 @@ module.exports = {
 
   verifyUserEmail: async (req, res) => {
     const { temp_email } = req.body;
-    const decipher = crypto.createDecipher('aes-256-cbc', '1111');
+    const decipher = crypto.createDecipheriv(algorithm, key, iv);
     let decryptEmail = decipher.update(temp_email, 'base64', 'utf8');
     decryptEmail += decipher.final('utf8');
     console.log('Decrypt : ', decryptEmail);
