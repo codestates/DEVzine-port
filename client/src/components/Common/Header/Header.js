@@ -95,20 +95,11 @@ function Header() {
               ? ''
               : '여러분께 '}
           </span>
-          {Date === 'SUN' || Date === 'MON' ? (
+          {Date === 'SUN' ? (
             Admin ? (
-              Date === 'SUN' ? (
-                <span>
-                  일요일엔 본능적으로 쉬고, 그 외에는 이성적으로 업무합니다.
-                </span>
-              ) : (
-                <span>
-                  새로운 소식을 전하기까지 남은 시간
-                  <span className="timer">
-                    <TopTime />
-                  </span>
-                </span>
-              )
+              <span>
+                일요일엔 본능적으로 쉬고, 그 외에는 이성적으로 업무합니다.
+              </span>
             ) : (
               <span>전달할 새로운 소식을 차곡차곡 모으는 중입니다</span>
             )
@@ -117,7 +108,6 @@ function Header() {
               {Admin
                 ? '새로운 소식을 만들기까지 남은 시간'
                 : '새로운 소식을 전하기까지 남은 시간'}
-
               <span className="timer">
                 <TopTime />
               </span>

@@ -7,23 +7,22 @@ import store from '../../store/store';
 function LandingSub() {
   const [Subscribers, setSubscribers] = useState('0');
   const [Count, setCount] = useState('0');
+  const [MCount, setMCount] = useState('0');
   const [ScrollActive, setScrollActive] = useState(false);
   const [MScrollActive, setMScrollActive] = useState(false);
   const [Admin, setAdmin] = useState(false);
   const [ScrollPosition, setScrollPosition] = useState(0);
 
+  // console.log(ScrollPosition);
+
   const onScroll = () => {
     setScrollPosition(window.pageYOffset);
-    if (ScrollPosition > 1200) {
+    if (ScrollPosition > 1000) {
       setScrollActive(true);
-    } else {
-      setScrollActive(false);
     }
 
-    if (ScrollPosition > 2000) {
+    if (ScrollPosition > 1400) {
       setMScrollActive(true);
-    } else {
-      setMScrollActive(false);
     }
   };
 
@@ -51,7 +50,33 @@ function LandingSub() {
     }, incrementTime);
 
     return () => setScrollActive(false);
-  }, [ScrollActive, MScrollActive]);
+  }, [ScrollActive]);
+
+  useEffect(() => {
+    let start = 0;
+    const end = parseInt(Subscribers.toString().substring(0, 3));
+    if (start === end) return;
+
+    let totalMilSecDur = parseInt(1);
+    let incrementTime = (totalMilSecDur / end) * 3500;
+
+    let timer = setInterval(() => {
+      start += 1;
+
+      setMCount(
+        String(start) +
+          Subscribers.substring(3)
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+      );
+      if (start === end) {
+        clearInterval(timer);
+        setMCount(Subscribers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+      }
+    }, incrementTime);
+
+    return () => setScrollActive(false);
+  }, [MScrollActive]);
 
   useEffect(async () => {
     await customAxios
@@ -85,7 +110,8 @@ function LandingSub() {
           <div className="row">
             <div className="col-sm-4">
               <div className="withuscontainer">
-                <h2>{Count}명</h2>
+                <h2 className="sm-hidden">{Count}명</h2>
+                <h2 className="sm-only">{MCount}명</h2>
                 구독하고 있어요.
                 <p>많은 분들이 찾는 DEVzine과 함께 해요!</p>
                 {Admin ? (
