@@ -424,9 +424,11 @@ select::-ms-expand {
   width: 265px; }
 
 .modalcontainer {
+  position: fixed;
   height: 15rem;
   margin: 120px auto;
-  text-align: center; }
+  text-align: center;
+  z-index: 720; }
   .modalcontainer .modalbackdrop {
     display: flex;
     align-items: center;
@@ -2153,7 +2155,7 @@ label {
       width: 100%; }
       @media screen and (max-width: 767px) {
         .articlecontainer .articleviewwrapper .header {
-          margin-top: 110px; } }
+          margin-top: 120px; } }
       .articlecontainer .articleviewwrapper .header .headerleft {
         padding-top: 24px; }
         @media screen and (max-width: 767px) {
@@ -2379,7 +2381,8 @@ label {
     color: #191a20;
     left: 87%;
     position: absolute;
-    width: 13%; }
+    width: 13%;
+    line-height: 21px; }
     .request-search:hover {
       background-color: #FFBB34;
       font-weight: 700; }
@@ -2406,7 +2409,8 @@ label {
     color: #191a20;
     left: 87%;
     position: absolute;
-    width: 13%; }
+    width: 13%;
+    line-height: 21px; }
     .approval-search:hover {
       background-color: #FFBB34;
       font-weight: 700; }
