@@ -204,47 +204,49 @@ function ArticleListWrapper() {
                   </div>
                 </div>
 
-                {ArticleData.length === 0
-                  ? '소식이 없습니다.'
-                  : ArticleData.slice(0, ArticlePlus).map(el => {
-                      return (
-                        <div
-                          className="articlebox-listbox stopdragging"
-                          key={el.article_title}
+                {ArticleData.length === 0 ? (
+                  <p className="noissue stopdragging">소식이 없습니다.</p>
+                ) : (
+                  ArticleData.slice(0, ArticlePlus).map(el => {
+                    return (
+                      <div
+                        className="articlebox-listbox stopdragging"
+                        key={el.article_title}
+                      >
+                        <Link
+                          to={`/article/art-${el.article_id}`}
+                          children={<ArticleView />}
                         >
-                          <Link
-                            to={`/article/art-${el.article_id}`}
-                            children={<ArticleView />}
-                          >
-                            <ul>
-                              <li className="articlebox-date ">
-                                {el.article_date
-                                  .split('T')[0]
-                                  .replace(/-/gi, '.')}
-                              </li>
-                              <li className="articlebox-title ell-24 sm-hidden">
-                                {el.article_title}
-                              </li>
-                              <li className="articlebox-title ell-18 sm-only">
-                                {el.article_title}
-                              </li>
-                              <li className="articlebox-content ell-12 ">
-                                {el.article_content}
-                              </li>
-                              <li>
-                                <span className="articlebox-keyword">
-                                  {el.article_keyword}
-                                </span>
-                                <span className="articlebox-hit">
-                                  <img src={eye} alt="view number" />
-                                  <span>{el.hit}</span>
-                                </span>
-                              </li>
-                            </ul>
-                          </Link>
-                        </div>
-                      );
-                    })}
+                          <ul>
+                            <li className="articlebox-date ">
+                              {el.article_date
+                                .split('T')[0]
+                                .replace(/-/gi, '.')}
+                            </li>
+                            <li className="articlebox-title ell-24 sm-hidden">
+                              {el.article_title}
+                            </li>
+                            <li className="articlebox-title ell-18 sm-only">
+                              {el.article_title}
+                            </li>
+                            <li className="articlebox-content ell-12 ">
+                              {el.article_content}
+                            </li>
+                            <li>
+                              <span className="articlebox-keyword">
+                                {el.article_keyword}
+                              </span>
+                              <span className="articlebox-hit">
+                                <img src={eye} alt="view number" />
+                                <span>{el.hit}</span>
+                              </span>
+                            </li>
+                          </ul>
+                        </Link>
+                      </div>
+                    );
+                  })
+                )}
               </div>
             </div>
           </div>

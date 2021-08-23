@@ -21,7 +21,7 @@ function LandingSub() {
       setScrollActive(true);
     }
 
-    if (ScrollPosition > 1400) {
+    if (ScrollPosition > 1300) {
       setMScrollActive(true);
     }
   };

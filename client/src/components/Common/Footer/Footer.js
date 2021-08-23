@@ -83,23 +83,25 @@ function Footer() {
                       <span className="sm-only">
                         <br />
                       </span>
-                      <a
-                        href="https://github.com/bmaner"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ cursor: 'pointer' }}
-                      >
-                        박성현 Github
-                      </a>
-                      ,
-                      <a
-                        href="https://github.com/jong-ah"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ cursor: 'pointer' }}
-                      >
-                        박종아 Github
-                      </a>
+                      <span className="line-height">
+                        <a
+                          href="https://github.com/bmaner"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ cursor: 'pointer' }}
+                        >
+                          박성현 Github
+                        </a>
+                        ,
+                        <a
+                          href="https://github.com/jong-ah"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ cursor: 'pointer' }}
+                        >
+                          박종아 Github
+                        </a>
+                      </span>
                     </div>
                   </div>
                   {Admin ? null : (

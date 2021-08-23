@@ -9,7 +9,8 @@
     margin-top: 192px; //header 120px 포함
 
     @include mobile-only() {
-      margin-top: 162px; //header 90px 포함
+      // margin-top: 162px; //header 90px 포함
+      margin-top: 110px; //header 90px 포함
     }
 
     .prebox{
