@@ -2137,7 +2137,7 @@ label {
     margin-bottom: 220px; }
     @media screen and (max-width: 767px) {
       .articlecontainer-footer {
-        margin-bottom: 180px; } }
+        margin-bottom: 160px; } }
   .articlecontainer .articleviewwrapper {
     color: #191a20; }
     .articlecontainer .articleviewwrapper .header {
@@ -2185,7 +2185,8 @@ label {
               line-height: 28px;
               letter-spacing: -0.02em;
               margin-bottom: 0px;
-              padding-right: 20px; } }
+              padding-right: 20px;
+              height: 56px; } }
         .articlecontainer .articleviewwrapper .header .headerleft .username {
           font-size: 14px;
           line-height: 24px;
@@ -2215,12 +2216,12 @@ label {
         @media screen and (max-width: 767px) {
           .articlecontainer .articleviewwrapper .header .datawrapper {
             clear: both;
-            text-align: left;
+            text-align: right;
             line-height: 18px;
             height: 18px;
             width: 100%;
             padding-left: 43px;
-            padding-top: 4px; } }
+            padding-top: 10px; } }
     .articlecontainer .articleviewwrapper .body {
       background-color: #fff;
       position: relative;

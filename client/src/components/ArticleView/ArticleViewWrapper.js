@@ -56,10 +56,7 @@ function ArticleViewWrapper({ id }) {
                         ? Contribution.contribution_keyword
                         : Article.article_keyword}
                     </span>
-                    <div className="title ell-24-view">
-                      {/* {indicator === 'con'
-                        ? Contribution.contribution_title.slice(0, 15) + '...'
-                        : Article.article_title.slice(0, 15) + '...'} */}
+                    <div className="title">
                       {indicator === 'con'
                         ? Contribution.contribution_title
                         : Article.article_title}
