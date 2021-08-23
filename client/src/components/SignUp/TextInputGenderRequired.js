@@ -9,8 +9,10 @@ function TextInputGenderRequired({
   type,
   isValid,
   maxLength,
+  Email,
   emailVerify,
-  IsSended,
+  Email_isValid,
+  setEmailNotVerified,
 }) {
   //inputname은 이메일 같은거, detailString은 state에 문자열한거, stateName은 state, stateFunc은 set함수
   return (
@@ -19,7 +21,14 @@ function TextInputGenderRequired({
         {inputname}
         <span className="required">(필수)</span>
         {type === 'email' ? (
-          <div className="emailverifybtn" onClick={() => emailVerify()}>
+          <div
+            className="emailverifybtn"
+            onClick={() =>
+              Email_isValid && Email !== ''
+                ? emailVerify()
+                : setEmailNotVerified(true)
+            }
+          >
             이메일 인증
           </div>
         ) : null}
