@@ -96,7 +96,13 @@ function ArticleListWrapper() {
     dispatch(filterArticleData(body))
       .then(res => {
         setArticleData(null);
-        setPlaceHolder(`'${CurrentTitle}'의 검색 결과입니다.`);
+
+        if (CurrentTitle !== '') {
+          setPlaceHolder(`'${CurrentTitle}'의 검색 결과입니다.`);
+        } else {
+          setPlaceHolder(`기사를 검색하세요.`);
+        }
+
         setArticleData(res.payload);
         setCurrentTitle('');
       })
@@ -128,8 +134,13 @@ function ArticleListWrapper() {
             <div className="col-sm-4">
               <div className="carousel">
                 <h2>DEVzine이 추천하는 소식</h2>
+                <div className="sm-only">
+                  <Link to="/contributionlist">
+                    <span className="allviewbtn">모두 보기</span>
+                  </Link>
+                </div>
                 <Link to="/contributionlist">
-                  <span className="allviewbtn">모두 보기</span>
+                  <span className="allviewbtn sm-hidden">모두 보기</span>
                 </Link>
                 <ArticelCarousel ContributionData={ContributionData} />
               </div>
@@ -137,7 +148,7 @@ function ArticleListWrapper() {
             <div className="col-sm-4 col-md-12 col-lg-12">
               <div className="articlebox">
                 <div className="articlebox-align">
-                  <div className="selectionbox">
+                  <div className="selectionbox stopdragging">
                     <span>
                       <select
                         className="articlebox-select"
@@ -168,14 +179,20 @@ function ArticleListWrapper() {
                     </span>
                     <span className="ordergroup">
                       <span
-                        className={CurrentOrder === '최신순' ? 'setbold' : null}
+                        className={
+                          CurrentOrder === '최신순' ? 'setbold first' : 'first'
+                        }
                         onClick={latestBtn}
                       >
                         최신순
                       </span>
                       |
                       <span
-                        className={CurrentOrder === '조회순' ? 'setbold' : null}
+                        className={
+                          CurrentOrder === '조회순'
+                            ? 'setbold second'
+                            : 'second'
+                        }
                         onClick={viewBtn}
                       >
                         조회순
@@ -192,7 +209,7 @@ function ArticleListWrapper() {
                   : ArticleData.slice(0, ArticlePlus).map(el => {
                       return (
                         <div
-                          className="articlebox-listbox"
+                          className="articlebox-listbox stopdragging"
                           key={el.article_title}
                         >
                           <Link
@@ -235,7 +252,7 @@ function ArticleListWrapper() {
         <div className="container">
           <div className="row">
             <div className="col-sm-4">
-              <div className="plusbtn">
+              <div className="plusbtn stopdragging">
                 {ArticleData.length <= 12 ? null : (
                   <Button
                     subject={`더보기`}

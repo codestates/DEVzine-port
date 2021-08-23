@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { User } = require('../Models/Users');
 const { VerifiedEmail } = require('../Models/Verifiedemails');
+const { Contribution } = require('../Models/Contributions')
 require('dotenv').config();
 
 module.exports = {
@@ -99,13 +100,20 @@ module.exports = {
     if (!req.user) {
       return res.status(400).send({ message: 'Invalid user' });
     }
-    const { _id } = req.user;
+    const { _id, user_email } = req.user;
     res.cookie('jwt', '', {
       httpOnly: true,
       sameSite: 'None',
       secure: true,
     });
     try {
+
+      await Contribution.updateMany({
+        user_email
+      }, {
+        user_email: 'anonymous'
+      })
+
       User.deleteOne({ _id }, (err) => {
         if (err) {
           return res.status(404).send({ message: 'Not found' });

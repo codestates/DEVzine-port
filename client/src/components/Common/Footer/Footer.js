@@ -26,7 +26,7 @@ function Footer() {
   return (
     <>
       <footer>
-        <div className="footercontainer">
+        <div className="footercontainer stopdragging">
           <div className="container">
             <div className="row">
               <div className="col-sm-4">

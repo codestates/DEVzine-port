@@ -74,14 +74,27 @@ function SigninModal({ ModalOpen, setModalOpen }) {
           onClickHandle={postHandler}
         />
         <div className="leadsignup">아직 회원이 아니신가요?</div>
-        <Link to="/signup">
+        <span className="sm-only">
           <Button
             subject={`회원가입`}
             color={`#191A20`}
             backgroundColor={`#FFDD14`}
-            onClickHandle={() => setModalOpen(false)}
+            onClickHandle={() => {
+              setModalOpen(false);
+              window.location.href = '/signup';
+            }}
           />
-        </Link>
+        </span>
+        <span className="sm-hidden">
+          <Link to="/signup">
+            <Button
+              subject={`회원가입`}
+              color={`#191A20`}
+              backgroundColor={`#FFDD14`}
+              onClickHandle={() => setModalOpen(false)}
+            />
+          </Link>
+        </span>
       </div>
       <div className="alert-modal">
         <AlertModal

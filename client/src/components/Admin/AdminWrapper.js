@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getContributionAdmin } from '../../_actions/admin_actions';
-import { SearchData } from '../../_actions/admin_actions';
-import { SearchAppData } from '../../_actions/admin_actions';
+import { searchData } from '../../_actions/admin_actions';
+import { searchAppData } from '../../_actions/admin_actions';
 import RequestTable from './RequestTable';
 import ApprovalTable from './ApprovalTable';
 import AdminSignInModal from '../Common/AdminModal/AdminSignInModal';
@@ -47,7 +47,7 @@ function AdminWrapper() {
   useEffect(() => {
     dispatch(getContributionAdmin())
       .then(res => {
-        console.log(res.payload.data.accepted);
+        // console.log(res.payload.data.accepted);
         setRequested([
           ...res.payload.data.requested.postRequest,
           ...res.payload.data.requested.patchRequest,
@@ -74,7 +74,7 @@ function AdminWrapper() {
   function onSubmitHandler(e) {
     e.preventDefault();
 
-    dispatch(SearchData(Select, Text))
+    dispatch(searchData(Select, Text))
       .then(res => setRequested(res.payload))
       .catch(err => alert('검색한 결과를 받아오는데 실패하였습니다.'));
   }
@@ -82,7 +82,7 @@ function AdminWrapper() {
   function onApprovalHandler(e) {
     e.preventDefault();
 
-    dispatch(SearchAppData(AppText))
+    dispatch(searchAppData(AppText))
       .then(res => {
         setAccepted(res.payload);
       })

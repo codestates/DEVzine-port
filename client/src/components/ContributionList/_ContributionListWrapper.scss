@@ -12,16 +12,27 @@
       margin-top: 162px; //header 90px 포함
     }
 
+    .prebox{
+      // border:1px solid red;
+      height:30px;
+    }
+
     .prebtn {
       float: right;
       margin: 0;
       color: $border;
       font-weight: $bold;
+      // border:1px solid red;
+      margin-bottom:10px;
 
       &:hover {
         color: $yellow-dark;
       }
     }
+
+    // .selectionbox{
+    //   margin-top: 10px;
+    // }
 
     &-listbox {
       background-color: $yellow-light;

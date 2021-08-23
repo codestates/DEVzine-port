@@ -107,6 +107,138 @@ const automatedCrawlerForWeekend = schedule.scheduleJob(
   }
 );
 
+const { Contribution } = require('./Models/Contributions');
+const { Subscriber } = require('./Models/Subscribers');
+const { User } = require('./Models/Users');
+const nodemailer = require('nodemailer');
+const smtpTransport = require('nodemailer-smtp-transport');
+const ejs = require('ejs');
+const transporter = nodemailer.createTransport(
+  smtpTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    auth: {
+      user: process.env.NODEMAIL_EMAIL,
+      pass: process.env.NODEMAIL_PWD,
+    },
+  })
+);
+
+app.get('/mailtest', async (req, res) => {
+  const subscribers = await Subscriber.find({});
+
+  // articles 어제 06시 이후에 크롤링 된 기사 가져오기
+  const getRange = new Date().getDay() === 0 ? 3 : 2;
+  const articles = await Article.find({
+    article_date: {
+      $gte: new Date(
+        Date.now() - 1000 * 60 * 60 * 24 * getRange - 1000 * 60 * 60
+      ),
+    },
+  });
+  articles.sort(() => Math.random() - 0.5); // 랜덤으로 정렬
+  const articlesCount = articles.length;
+  let usedKeyword = new Array();
+  let articleList = new Array();
+  let usedId = new Array();
+  let count = 0;
+  let idx = 0;
+
+  while (articles[idx]) {
+    let currentArticle = articles[idx];
+    if (count === 4) break;
+    // 배열 순회 하면서 alreadyKeyword 에 있는지 확인 후 있으면 안 담음
+    if (usedKeyword.includes(currentArticle.article_keyword)) {
+      idx++;
+      continue;
+    }
+    articleList.push(currentArticle);
+    usedKeyword.push(currentArticle.article_keyword);
+    usedId.push(currentArticle.article_id);
+    idx++;
+    count++;
+  }
+  idx = 0;
+  // 키워드가 4개 미만일 때 중복되는 키워드지만 다른 기사 담기
+  while (count < 4) {
+    if (!usedId.includes(articles[idx].article_id)) {
+      articleList.push(articles[idx]);
+      count++;
+    }
+    idx++;
+  }
+
+  const contribution = await Contribution.findOne(
+    {
+      contribution_date: {
+        $gte: new Date(
+          Date.now() - 1000 * 60 * 60 * 24 * getRange - 1000 * 60 * 60
+        ),
+      },
+    },
+    [],
+    {
+      sort: {
+        hit: -1,
+      },
+    }
+  );
+
+  subscribers.map(async (subscriber) => {
+    const userEmail = subscriber.subscriber_email;
+    let user = await User.findOne({
+      user_email: userEmail,
+    });
+    const userName = user ? user.user_name : '여러분';
+    const date = new Date();
+    let newsLetter;
+    ejs.renderFile(
+      __dirname + '/controller/ejsform/newsLetter.ejs',
+      { date, userEmail, userName, articleList, contributions: contribution },
+      (err, data) => {
+        if (err) console.log(err);
+        newsLetter = data;
+      }
+    );
+    console.log('////////');
+    console.log(date);
+    console.log(userEmail);
+    console.log(userName);
+    // console.log(articleList);
+    // console.log(contribution);
+    console.log('////////');
+
+    await transporter.sendMail(
+      {
+        from: 'DEVzine:port <devzineport@gmail.com>',
+        to: 'idhyo0o@naver.com', // dummy email
+        // to: userEmail,
+        subject: 'DEVzine:port 에서 발송된 뉴스레터',
+        html: newsLetter,
+      },
+      (err, info) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log('Email send: ' + info.response);
+          transporter.close();
+        }
+      }
+    );
+  });
+
+  res.status(200).send('mail test');
+});
+
+/////////////////// schedule
+const automatedNewsLetter = schedule.scheduleJob(
+  '00 22 * * 1,2,3,4,5,7',
+  async () => {
+    // fill it
+  }
+);
+///////////////
+
 // TODO: 배포 전에 삭제 (크롤링 자동화 test 를 위한 코드입니다)
 // const test = schedule.scheduleJob('* * * * *', async () => {
 //   // const data = await getRecentArticlesFrom24H();

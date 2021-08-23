@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signoutUser } from '../../../_actions/user_actions';
-import { DeleteData } from '../../../_actions/article_actions';
+import { deleteData } from '../../../_actions/article_actions';
 import { signoutAdmin } from '../../../_actions/admin_actions';
-import { DeleteAdminData } from '../../../_actions/admin_actions';
+import { deleteAdminData } from '../../../_actions/admin_actions';
 import store from '../../../store/store';
 import TopTime from './TopTime';
 import SignInModal from '../SignInModal/SignInModal';
@@ -20,7 +20,7 @@ function Header() {
   const [ModalOpen, setModalOpen] = useState(false);
   const [OpenSidebar, setOpenSidebar] = useState(false);
   const [Admin, setAdmin] = useState(false);
-  const [Date, setDate] = useState('D');
+  const [Date, setDate] = useState('');
 
   useEffect(() => {
     if (store.getState().user.signinSuccess) {
@@ -57,7 +57,7 @@ function Header() {
       dispatch(signoutUser()).then(res => {
         if (res.payload === 'Logout success') {
           setSignIn(false);
-          dispatch(DeleteData());
+          dispatch(deleteData());
           window.location.reload();
         } else {
           alert('로그아웃 실패하였습니다.');
@@ -69,7 +69,7 @@ function Header() {
       dispatch(signoutAdmin()).then(res => {
         if (res.payload === 'Logout success') {
           setAdmin(false);
-          dispatch(DeleteAdminData());
+          dispatch(deleteAdminData());
           window.location.href = '/';
         } else {
           alert('로그아웃 실패하였습니다.');
@@ -78,9 +78,13 @@ function Header() {
     }
   }
 
+  function headerNavOpen() {
+    setOpenSidebar(true);
+  }
+
   return Date ? (
     <>
-      <header className="headerfix">
+      <header className="headerfix stopdragging">
         <div className="headertime">
           <span className="sm-hidden">
             {SignIn
@@ -91,20 +95,11 @@ function Header() {
               ? ''
               : '여러분께 '}
           </span>
-          {Date === 'SUN' || Date === 'MON' ? (
+          {Date === 'SUN' ? (
             Admin ? (
-              Date === 'SUN' ? (
-                <span>
-                  일요일엔 본능적으로 쉬고, 그 외에는 이성적으로 업무합니다.
-                </span>
-              ) : (
-                <span>
-                  새로운 소식을 전하기까지 남은 시간
-                  <span className="timer">
-                    <TopTime />
-                  </span>
-                </span>
-              )
+              <span>
+                일요일엔 본능적으로 쉬고, 그 외에는 이성적으로 업무합니다.
+              </span>
             ) : (
               <span>전달할 새로운 소식을 차곡차곡 모으는 중입니다</span>
             )
@@ -113,7 +108,6 @@ function Header() {
               {Admin
                 ? '새로운 소식을 만들기까지 남은 시간'
                 : '새로운 소식을 전하기까지 남은 시간'}
-
               <span className="timer">
                 <TopTime />
               </span>
@@ -145,16 +139,14 @@ function Header() {
                     {OpenSidebar ? (
                       <SideBar
                         setOpenSidebar={setOpenSidebar}
+                        OpenSidebar={OpenSidebar}
                         SignIn={SignIn}
                         UserName={UserName}
                         setSignIn={setSignIn}
                         setUserName={setUserName}
                       />
                     ) : (
-                      <span
-                        className="headernav-menu"
-                        onClick={() => setOpenSidebar(true)}
-                      >
+                      <span className="headernav-menu" onClick={headerNavOpen}>
                         <img src={menu} alt="menu" />
                       </span>
                     )}

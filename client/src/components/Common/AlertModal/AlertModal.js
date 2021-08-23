@@ -5,7 +5,7 @@ function AlertModal(props) {
 
   return (
     <div>
-      <div className="modalcontainer">
+      <div className="modalcontainer stopdragging">
         {open ? (
           <div className="modalbackdrop">
             <div className="modalview">

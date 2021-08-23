@@ -19,7 +19,6 @@ export default function (state = {}, action) {
     case DELETE_USER:
       return (state = {});
       break;
-
     default:
       return state;
   }

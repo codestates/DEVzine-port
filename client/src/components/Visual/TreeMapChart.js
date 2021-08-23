@@ -1,32 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useTransition, animated } from 'react-spring';
+import React, { useEffect } from 'react';
 import Chart from 'react-apexcharts';
+import 'aos/dist/aos.css';
+import Aos from 'aos';
 
 export function ArticlesKeywordAccumulated({ data }) {
-  const [ScrollPosition, setScrollPosition] = useState(0);
-  const [Indicator, setIndicator] = useState(false);
-  const transition = useTransition(Indicator, {
-    from: { x: 100, opacity: 0, skew: '20deg' },
-    enter: { x: 0, opacity: 1, skew: '0deg' },
-    leave: { x: -100, opacity: 0, skew: '20deg' },
-  });
-
-  let rect = 500;
-
-  const onScroll = () => {
-    setScrollPosition(window.pageYOffset);
-    if (ScrollPosition > 1600 && ScrollPosition < 1600 + rect) {
-      setIndicator(true);
-    } else {
-      setIndicator(false);
-    }
-  };
-
   useEffect(() => {
-    window.addEventListener('scroll', onScroll);
-    // 컴포넌트가 언마운트 되기 직전에 이벤트를 끝낸다. 메모리 누수 방지
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [ScrollPosition]);
+    Aos.init({
+      duration: 800,
+      easing: 'ease-in-out',
+    });
+  }, []);
 
   let options = {
     colors: [
@@ -62,17 +45,6 @@ export function ArticlesKeywordAccumulated({ data }) {
         },
       },
     },
-    // title: {
-    //   text: '사용자 연령대',
-    //   align: 'center',
-    //   style: {
-    //     colors: ['#535353'],
-    //     fontSize: '15px',
-    //     fontFamily: 'Noto Sans KR, sans-serif',
-    //     fontWeight: 600,
-    //     cssClass: 'apexcharts-xaxis-label',
-    //   },
-    // },
     plotOptions: {
       treemap: {
         distributed: true,
@@ -92,7 +64,6 @@ export function ArticlesKeywordAccumulated({ data }) {
         options: {
           chart: {
             width: 300,
-            height: 300,
           },
           legend: {
             position: 'bottom',
@@ -102,17 +73,28 @@ export function ArticlesKeywordAccumulated({ data }) {
     ],
   };
 
-  return transition((style, item) =>
-    item ? (
-      <animated.div style={style}>
+  return (
+    <div className="chartcontainer" style={{ marginTop: '72px' }}>
+      <div className="chartwrapper" data-aos="fade-right" data-aos-delay="300">
         <Chart
           options={options}
           series={[{ data: data.articles.all_keywords_accumulated }]}
           type="treemap"
-          width={500}
-          height={500}
+          height={504}
+          width={740}
         />
-      </animated.div>
-    ) : null,
+      </div>
+      <div
+        className="chartdesc"
+        data-aos="fade-left"
+        style={{ textAlign: 'right' }}
+      >
+        <div className="chartsubject">어떤 소식을 다룰까?</div>
+        <div className="chartdetail">
+          DEVzine:port의 모든 키워드와 <br />
+          키워드 별 콘텐츠 수를 확인해보세요.
+        </div>
+      </div>
+    </div>
   );
 }

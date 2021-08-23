@@ -7,7 +7,7 @@ import landing04 from '../../assets/images/landing04.svg';
 function LandingWrapper() {
   return (
     <>
-      <div className="landingimg">
+      <div className="landingimg stopdragging">
         <div className="container">
           <div className="row">
             <div className="col-sm-4 col-md-8 col-lg-7">
