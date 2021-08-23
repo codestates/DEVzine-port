@@ -20,9 +20,6 @@
       max-width: 360px;
       width: 95%;
     }
-    .textinputcontainer{
-      position: relative;
-    }
     .signupbtn {
       margin-top: 34px;
       display: flex;
@@ -41,7 +38,6 @@
 
     .commonbutton {
       font-weight: $normal;
-      margin-left: 48px;
       margin-top: 24px;
     }
   }

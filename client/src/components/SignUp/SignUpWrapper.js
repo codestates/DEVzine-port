@@ -177,31 +177,29 @@ function SignUpWrapper() {
           <div className="row">
             <div className="col-sm-4 col-md-12 col-lg-12">
               <div className="signupwrapper">
-                <div className="textinputcontainer">
-                  {requiredTextInputData.map((el, idx) => {
-                    return (
-                      <TextInputGenderRequired
-                        key={`TextInputGenderRequired${idx}`}
-                        inputname={el[0]}
-                        detailString={el[1]}
-                        stateName={el[2]}
-                        stateFunc={el[3]}
-                        placeholder={el[4]}
-                        type={el[5]}
-                        isValid={el[6]}
-                        maxLength={el[7]}
-                        Email={Email}
-                        Email_isValid={Email_isValid}
-                        emailVerify={emailVerify}
-                        setEmailNotVerified={setEmailNotVerified}
-                      />
-                    );
-                  })}
-                  <Accordion
-                    radioInputHandler={radioInputHandler}
-                    selectInputHandler={selectInputHandler}
-                  />
-                </div>
+                {requiredTextInputData.map((el, idx) => {
+                  return (
+                    <TextInputGenderRequired
+                      key={`TextInputGenderRequired${idx}`}
+                      inputname={el[0]}
+                      detailString={el[1]}
+                      stateName={el[2]}
+                      stateFunc={el[3]}
+                      placeholder={el[4]}
+                      type={el[5]}
+                      isValid={el[6]}
+                      maxLength={el[7]}
+                      Email={Email}
+                      Email_isValid={Email_isValid}
+                      emailVerify={emailVerify}
+                      setEmailNotVerified={setEmailNotVerified}
+                    />
+                  );
+                })}
+                <Accordion
+                  radioInputHandler={radioInputHandler}
+                  selectInputHandler={selectInputHandler}
+                />
                 <div
                   className="signupbtn"
                   onClick={e =>
