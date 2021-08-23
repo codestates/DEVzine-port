@@ -71,13 +71,11 @@ module.exports = {
   },
 
   patchUserInfo: async (req, res) => {
-    
     try {
-
       const { user_email, user_name } = req.body;
-  
+
       let overlapUser = await User.findOne({
-        user_name
+        user_name,
       });
 
       if (overlapUser.user_email !== user_email) {
@@ -86,9 +84,9 @@ module.exports = {
 
       const { user_gender, user_age, user_position, user_language } =
         req.body.user_info;
-  
+
       const user_password = await bcrypt.hashSync(req.body.user_password, 10);
-  
+
       let subscribed;
       if (req.body.subscribed === '구독') {
         subscribed = true;
@@ -102,7 +100,7 @@ module.exports = {
       } else {
         subscribed = false;
       }
-  
+
       const update = {
         user_password,
         user_name,
