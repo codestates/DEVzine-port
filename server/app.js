@@ -130,7 +130,7 @@ app.get('/mailtest', async (req, res) => {
   const subscribers = await Subscriber.find({});
 
   // articles 어제 06시 이후에 크롤링 된 기사 가져오기
-  const getRange = new Date().getDay() === 0 ? 3 : 2;
+  const getRange = new Date().getDay() === 0 ? 4 : 3;
   const articles = await Article.find({
     article_date: {
       $gte: new Date(
@@ -146,6 +146,7 @@ app.get('/mailtest', async (req, res) => {
   let count = 0;
   let idx = 0;
 
+  const max = articlesCount > 4 ? 4 : articlesCount;
   while (articles[idx]) {
     let currentArticle = articles[idx];
     if (count === 4) break;
@@ -162,7 +163,7 @@ app.get('/mailtest', async (req, res) => {
   }
   idx = 0;
   // 키워드가 4개 미만일 때 중복되는 키워드지만 다른 기사 담기
-  while (count < 4) {
+  while (count < max) {
     if (!usedId.includes(articles[idx].article_id)) {
       articleList.push(articles[idx]);
       count++;
@@ -172,11 +173,7 @@ app.get('/mailtest', async (req, res) => {
 
   const contribution = await Contribution.findOne(
     {
-      contribution_date: {
-        $gte: new Date(
-          Date.now() - 1000 * 60 * 60 * 24 * getRange - 1000 * 60 * 60
-        ),
-      },
+      recommended: false,
     },
     [],
     {
@@ -185,29 +182,59 @@ app.get('/mailtest', async (req, res) => {
       },
     }
   );
+  // const contribution = await Contribution.findOneAndUpdate(
+  //   {
+  //     recommended: false,
+  //   },
+  //   {
+  //     recommended: true,
+  //   },
+  //   {
+  //     sort: {
+  //       hit: -1,
+  //     },
+  //   }
+  // );
 
   subscribers.map(async (subscriber) => {
     const userEmail = subscriber.subscriber_email;
     let user = await User.findOne({
       user_email: userEmail,
     });
-    const userName = user ? user.user_name : '여러분';
-    const date = new Date();
+    const userName = user ? user.user_name + '님' : '여러분';
+    var date = new Date();
+    const week = ['일', '월', '화', '수', '목', '금', '토'];
+    let formatDate = `${date.getFullYear()}/${
+      date.getMonth() + 1
+    }/${date.getDate()} ${week[date.getDay()]}요일`;
+    const contributionContent =
+      contribution.contribution_content.substr(0, 150) + '...';
     let newsLetter;
     ejs.renderFile(
       __dirname + '/controller/ejsform/newsLetter.ejs',
-      { date, userEmail, userName, articleList, contributions: contribution },
+      {
+        formatDate,
+        userEmail,
+        userName,
+        articleList,
+        contribution,
+        articlesCount,
+        max,
+        contributionContent,
+      },
       (err, data) => {
         if (err) console.log(err);
         newsLetter = data;
       }
     );
     console.log('////////');
-    console.log(date);
+    console.log(formatDate);
     console.log(userEmail);
     console.log(userName);
-    // console.log(articleList);
-    // console.log(contribution);
+    console.log(articleList);
+    console.log(max);
+    console.log(contribution);
+    console.log(contributionContent);
     console.log('////////');
 
     await transporter.sendMail(
