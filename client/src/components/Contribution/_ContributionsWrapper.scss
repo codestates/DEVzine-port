@@ -6,14 +6,14 @@
   width: 100%;
 
   .continner {
-    // border: 1px solid red;
     margin: 0 auto;
-    // margin-top: 192px;
-    margin-top: 20%;
+    margin-top: 192px;
+    // margin-top: 20%;
     width: 360px;
 
     @include mobile-only() {
-      margin-top: 162px;
+      // margin-top: 162px;
+      margin-top: 110px; //header 90px 포함
       max-width: 360px;
       width: 95%;
     }
@@ -74,6 +74,10 @@ label {
     height: 200px;
     margin-bottom: 24px;
     resize: none;
+
+    @include mobile-only() {
+      margin-bottom: 12px;
+    }
   }
 
   .contributionbtn {

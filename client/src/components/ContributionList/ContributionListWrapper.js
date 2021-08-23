@@ -189,47 +189,49 @@ function ContributionListWrapper() {
                   </div>
                 </div>
 
-                {ContributionData.length === 0
-                  ? '소식이 없습니다.'
-                  : ContributionData.map(el => {
-                      return (
-                        <div
-                          className="articlebox-listbox"
-                          key={el.article_title}
+                {ContributionData.length === 0 ? (
+                  <p className="noissue stopdragging">소식이 없습니다.</p>
+                ) : (
+                  ContributionData.map(el => {
+                    return (
+                      <div
+                        className="articlebox-listbox"
+                        key={el.article_title}
+                      >
+                        <Link
+                          to={`/article/con-${el.contribution_id}`}
+                          children={<ArticleView />}
                         >
-                          <Link
-                            to={`/article/con-${el.contribution_id}`}
-                            children={<ArticleView />}
-                          >
-                            <ul>
-                              <li className="articlebox-date ">
-                                {el.contribution_date
-                                  .split('T')[0]
-                                  .replace(/-/gi, '.')}
-                              </li>
-                              <li className="articlebox-title ell-24 sm-hidden">
-                                {el.contribution_title}
-                              </li>
-                              <li className="articlebox-title ell-18 sm-only">
-                                {el.contribution_title}
-                              </li>
-                              <li className="articlebox-content ell-12 ">
-                                {el.contribution_content}
-                              </li>
-                              <li>
-                                <span className="articlebox-keyword">
-                                  {el.contribution_keyword}
-                                </span>
-                                <span className="articlebox-hit">
-                                  <img src={eye} alt="view number" />
-                                  <span>{el.hit}</span>
-                                </span>
-                              </li>
-                            </ul>
-                          </Link>
-                        </div>
-                      );
-                    })}
+                          <ul>
+                            <li className="articlebox-date ">
+                              {el.contribution_date
+                                .split('T')[0]
+                                .replace(/-/gi, '.')}
+                            </li>
+                            <li className="articlebox-title ell-24 sm-hidden">
+                              {el.contribution_title}
+                            </li>
+                            <li className="articlebox-title ell-18 sm-only">
+                              {el.contribution_title}
+                            </li>
+                            <li className="articlebox-content ell-12 ">
+                              {el.contribution_content}
+                            </li>
+                            <li>
+                              <span className="articlebox-keyword">
+                                {el.contribution_keyword}
+                              </span>
+                              <span className="articlebox-hit">
+                                <img src={eye} alt="view number" />
+                                <span>{el.hit}</span>
+                              </span>
+                            </li>
+                          </ul>
+                        </Link>
+                      </div>
+                    );
+                  })
+                )}
               </div>
             </div>
           </div>
