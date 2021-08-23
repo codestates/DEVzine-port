@@ -25,6 +25,9 @@ function SignUpWrapper() {
   const [SignUpFail, setSignUpFail] = useState(false); //회원가입에 실패 시
   const [SignUpSuccess, setSignUpSuccess] = useState(false); //회원가입에 성공 시
   const [AllVerified, setAllVerified] = useState(false); //회원가입 조건을 충족했는지 ?
+  const [EmailNotVerified, setEmailNotVerified] = useState(false); //이메일 인증 시 이메일이 형식에 맞지 않는 경우
+  const [AlreadyExist, setAlreadyExist] = useState(false); //이메일 인증 시 이메일이 형식에 맞지 않는 경우
+  const [EmailUnverified, setEmailUnverified] = useState(false); //이메일 인증이 아직 안된 경우
 
   useEffect(() => {
     if (checkEmail(Email)) {
@@ -109,7 +112,13 @@ function SignUpWrapper() {
         setModalOpen(true);
       })
       .catch(err => {
-        setSignUpFail(true);
+        if (err.message.includes(401)) {
+          setEmailUnverified(true);
+        } else if (err.message.includes(404)) {
+          setSignUpFail(true);
+        } else if (err.message.includes(409)) {
+          setAlreadyExist(true);
+        }
       });
   }
 
@@ -139,12 +148,17 @@ function SignUpWrapper() {
     let body = {
       user_email: Email,
     };
-    setAlertOpen(true);
-    const request = await customAxios.post(`/email/req`, body).then(res => {
-      console.log(res);
-      return res;
-    });
-    return request;
+    await customAxios
+      .post(`/email/req`, body)
+      .then(res => {
+        setAlertOpen(true);
+      })
+      .catch(err => {
+        console.log(err.message.includes(400));
+        if (err.message.includes(400)) {
+          setAlreadyExist(true);
+        }
+      });
   }
 
   const closeModal = () => {
@@ -152,6 +166,9 @@ function SignUpWrapper() {
     setSignUpFail(false);
     setSignUpSuccess(false);
     setAllVerified(false);
+    setEmailNotVerified(false);
+    setAlreadyExist(false);
+    setEmailUnverified(false);
   };
   return (
     <>
@@ -173,7 +190,10 @@ function SignUpWrapper() {
                         type={el[5]}
                         isValid={el[6]}
                         maxLength={el[7]}
+                        Email={Email}
+                        Email_isValid={Email_isValid}
                         emailVerify={emailVerify}
+                        setEmailNotVerified={setEmailNotVerified}
                       />
                     );
                   })}
@@ -201,7 +221,13 @@ function SignUpWrapper() {
                 <div className="alermodalbox">
                   <AlertModal
                     open={
-                      AlertOpen || SignUpFail || SignUpSuccess || AllVerified
+                      AlertOpen ||
+                      SignUpFail ||
+                      SignUpSuccess ||
+                      AllVerified ||
+                      EmailNotVerified ||
+                      AlreadyExist ||
+                      EmailUnverified
                     }
                     close={closeModal}
                     alertString={
@@ -213,6 +239,12 @@ function SignUpWrapper() {
                         ? '회원가입에 성공하였습니다.'
                         : AllVerified
                         ? '모든 것을 만족해야 합니다.'
+                        : EmailNotVerified
+                        ? '이메일 형식을 확인해주세요.'
+                        : AlreadyExist
+                        ? '이미 존재하는 회원입니다.'
+                        : EmailUnverified
+                        ? '이메일 인증이 필요합니다.'
                         : ''
                     }
                     alertBtn="확인"
