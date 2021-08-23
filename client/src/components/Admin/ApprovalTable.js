@@ -13,14 +13,26 @@ function ApprovalTable({ data }) {
         </tr>
       </thead>
       <tbody>
-        {data.map(({ user_name, contribution_title }, idx) => (
-          <tr key={idx}>
-            <td>{user_name}</td>
-            <td className="approval-title">
-              <Link to={`/article/con-${idx}`}>{contribution_title}</Link>
-            </td>
-          </tr>
-        ))}
+        {data.map(
+          (
+            {
+              contribution_id,
+              contribution_title,
+              contribution_url,
+              user_name,
+            },
+            idx,
+          ) => (
+            <tr key={idx}>
+              <td>{user_name}</td>
+              <td className="approval-title">
+                <Link to={`/article/con-${contribution_id}`}>
+                  {contribution_title}
+                </Link>
+              </td>
+            </tr>
+          ),
+        )}
       </tbody>
     </table>
   );
