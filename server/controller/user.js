@@ -72,7 +72,7 @@ module.exports = {
     jwt.sign(
       { user: req.user },
       process.env.JWT_SECRET,
-      { expiresIn: '1d' },
+      { expiresIn: '30m' },
       (err, token) => {
         if (err) {
           return res.status(500).send(err);
