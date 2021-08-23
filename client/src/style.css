@@ -2257,11 +2257,6 @@ label {
   .visualcontainer-footer {
     height: 100px;
     margin-bottom: 220px; }
-  .visualcontainer .container .row .canvascontainer {
-    z-index: 0;
-    position: fixed;
-    width: 100vw;
-    height: 100vh; }
   .visualcontainer .container .row .visualwrapper {
     position: relative;
     z-index: 1;
@@ -2269,8 +2264,15 @@ label {
     margin-bottom: 306px; }
     .visualcontainer .container .row .visualwrapper .chartcontainer {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center; }
+      @media screen and (min-width: 1200px) {
+        .visualcontainer .container .row .visualwrapper .chartcontainer {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: row; } }
       .visualcontainer .container .row .visualwrapper .chartcontainer .chartdesc {
         margin: 0 20px;
         width: 360px;
