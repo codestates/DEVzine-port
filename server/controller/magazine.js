@@ -1,3 +1,5 @@
+const { Contribution } = require('../Models/Contributions');
+const { User } = require('../Models/Users');
 const {
   checkCacheForArticles,
   checkCacheForOneArticle,
@@ -8,8 +10,6 @@ const {
   checkCacheForOneContribution,
   updateContributionHit,
 } = require('./cachefunction/contributionsCache');
-const { Contribution } = require('../Models/Contributions');
-const { User } = require('../Models/Users');
 
 module.exports = {
   getAllArticlesAndRecentContributions: async (req, res) => {

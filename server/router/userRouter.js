@@ -1,6 +1,11 @@
-const { signUp, signIn, signOut, deleteUser } = require('../controller/user');
-const passport = require('passport');
+const { 
+  signUp, 
+  signIn, 
+  signOut, 
+  deleteUser 
+} = require('../controller/user');
 const express = require('express');
+const passport = require('passport');
 const router = express.Router();
 
 router.post('/signup', signUp);
