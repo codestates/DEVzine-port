@@ -1,0 +1,12 @@
+
+body { 
+  background-color: #ffffff;
+  color: rgb(255, 0, 0);
+}
+
+.text-center {
+  font-size: 30px; 
+  font-weight: bold;
+  color: rgb(255, 0, 0);
+}
+

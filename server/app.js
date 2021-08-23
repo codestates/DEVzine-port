@@ -195,7 +195,7 @@ app.get('/mailtest', async (req, res) => {
     const date = new Date();
     let newsLetter;
     ejs.renderFile(
-      __dirname + '/controller/ejsform/newsLetter.ejs',
+      __dirname + '/public/newsLetter.ejs',
       { date, userEmail, userName, articleList, contributions: contribution },
       (err, data) => {
         if (err) console.log(err);
@@ -242,12 +242,40 @@ const automatedNewsLetter = schedule.scheduleJob(
 ///////////////
 
 // TODO: 배포 전에 삭제 (크롤링 자동화 test 를 위한 코드입니다)
-// const test = schedule.scheduleJob('* * * * *', async () => {
-//   // const data = await getRecentArticlesFrom24H();
-//   const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
-//   console.log(articlesPastTwoWeeks);
-//   await setNewCacheForArticles(articlesPastTwoWeeks);
-// });
+const test = schedule.scheduleJob('*/10 * * * * *', async () => {
+  // const data = await getRecentArticlesFrom24H();
+  // const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
+  // console.log(articlesPastTwoWeeks);
+  // await setNewCacheForArticles(articlesPastTwoWeeks);
+
+  const date = new Date();
+    let newsLetter;
+    ejs.renderFile(
+      __dirname + '/public/index.ejs',
+      { date },
+      (err, data) => {
+        if (err) console.log(err);
+        newsLetter = data;
+      }
+    );
+  await transporter.sendMail(
+    {
+      from: 'DEVzine:port <devzineport@gmail.com>',
+      to: 'haeun.yah@gmail.com', // dummy email
+      // to: userEmail,
+      subject: 'DEVzine:port 에서 발송된 뉴스레터',
+      html: newsLetter,
+    },
+    (err, info) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('Email send: ' + info.response);
+        transporter.close();
+      }
+    }
+  );
+});
 
 mongoose
   .connect(process.env.MONGO_STRING, {
