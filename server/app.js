@@ -30,6 +30,7 @@ const subscribeRouter = require('./router/subscribeRouter');
 const unsubscribeRouter = require('./router/unsubscribeRouter');
 const userRouter = require('./router/userRouter');
 const visualRouter = require('./router/visualRouter');
+const inlineCss = require('nodemailer-juice');
 
 require('dotenv').config();
 passportConfig();
@@ -125,6 +126,7 @@ const transporter = nodemailer.createTransport(
     },
   })
 );
+transporter.use('compile', inlineCss());
 
 app.get('/mailtest', async (req, res) => {
   const subscribers = await Subscriber.find({});
@@ -236,11 +238,12 @@ app.get('/mailtest', async (req, res) => {
     console.log(contribution);
     console.log(contributionContent);
     console.log('////////');
-
+    
     await transporter.sendMail(
       {
         from: 'DEVzine:port <devzineport@gmail.com>',
-        to: 'idhyo0o@naver.com', // dummy email
+        // to: 'idhyo0o@naver.com', // dummy email
+        to: 'haeun.yah@gmail.com',
         // to: userEmail,
         subject: 'DEVzine:port 에서 발송된 뉴스레터',
         html: newsLetter,
@@ -274,34 +277,6 @@ const test = schedule.scheduleJob('*/10 * * * * *', async () => {
   // const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
   // console.log(articlesPastTwoWeeks);
   // await setNewCacheForArticles(articlesPastTwoWeeks);
-
-  const date = new Date();
-    let newsLetter;
-    ejs.renderFile(
-      __dirname + '/public/index.ejs',
-      { date },
-      (err, data) => {
-        if (err) console.log(err);
-        newsLetter = data;
-      }
-    );
-  await transporter.sendMail(
-    {
-      from: 'DEVzine:port <devzineport@gmail.com>',
-      to: 'haeun.yah@gmail.com', // dummy email
-      // to: userEmail,
-      subject: 'DEVzine:port 에서 발송된 뉴스레터',
-      html: newsLetter,
-    },
-    (err, info) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log('Email send: ' + info.response);
-        transporter.close();
-      }
-    }
-  );
 });
 
 mongoose

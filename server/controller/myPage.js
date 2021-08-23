@@ -78,7 +78,7 @@ module.exports = {
         user_name,
       });
 
-      if (overlapUser.user_email !== user_email) {
+      if (overlapUser && overlapUser.user_email !== user_email) {
         return res.status(409).send({ message: `${user_name} already exists` });
       }
 
