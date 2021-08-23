@@ -88,7 +88,7 @@ function ContributionUpdateWrapper({ id }) {
       contribution_keyword: Keyword,
     };
 
-    return customAxios.patch('/contribution', body).then(res => {
+    return customAxios.patch(`/contribution/${id}`, body).then(res => {
       if (res.status === 200) {
         alert('기고수정요청이 완료되었습니다.');
         window.history.back();

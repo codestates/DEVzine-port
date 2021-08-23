@@ -1583,7 +1583,8 @@ label {
       flex-direction: column; }
       @media screen and (max-width: 767px) {
         .optcontentswrapper .contributionstatuscontainer .contributionstatustable {
-          overflow-x: scroll; } }
+          max-width: 320px;
+          width: 100%; } }
       .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist {
         width: 360px;
         height: auto;
@@ -1597,6 +1598,9 @@ label {
           height: 40px;
           border-right: 1px solid #d9d9d9;
           border-bottom: 1px solid #d9d9d9; }
+          @media screen and (max-width: 767px) {
+            .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader {
+              width: 10%; } }
           .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader .updatebtn {
             width: 20px;
             height: 20px; }
@@ -1607,8 +1611,15 @@ label {
           padding-left: 8px;
           width: 40%;
           justify-content: flex-start; }
+          @media screen and (max-width: 767px) {
+            .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader.first {
+              width: 54%; } }
         .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader.last {
-          border-right: 0px solid; }
+          border-right: 0px solid;
+          width: 20%; }
+          @media screen and (max-width: 767px) {
+            .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader.last {
+              width: 15%; } }
         .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent {
           display: flex;
           align-items: center;
@@ -1622,6 +1633,9 @@ label {
           line-height: 24px;
           letter-spacing: -0.01em;
           color: #191a20; }
+          @media screen and (max-width: 767px) {
+            .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent {
+              width: 10%; } }
           .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent .updatebtn {
             width: 20px;
             height: 20px;
@@ -1642,6 +1656,9 @@ label {
           padding-left: 8px;
           width: 40%;
           justify-content: flex-start; }
+          @media screen and (max-width: 767px) {
+            .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.first {
+              width: 54%; } }
         .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last {
           border-right: 0px solid;
           display: flex;
@@ -1649,7 +1666,11 @@ label {
           align-items: center;
           justify-content: center;
           font-size: 10px;
-          line-height: 14px; }
+          line-height: 14px;
+          width: 20%; }
+          @media screen and (max-width: 767px) {
+            .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last {
+              width: 15%; } }
           .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last a {
             width: 40px;
             height: 15px;
@@ -2156,12 +2177,12 @@ label {
       position: relative;
       height: 140px;
       border: 1px solid #d9d9d9;
-      border-radius: 24px 24px 0 0; }
+      border-radius: 24px 24px 0 0;
+      padding-left: 20px; }
       @media screen and (max-width: 767px) {
         .articlecontainer .articleviewwrapper .header {
           margin-top: 110px; } }
       .articlecontainer .articleviewwrapper .header .headerleft {
-        margin: 0 29px;
         padding-top: 24px; }
         @media screen and (max-width: 767px) {
           .articlecontainer .articleviewwrapper .header .headerleft {
@@ -2223,7 +2244,7 @@ label {
         @media screen and (max-width: 767px) {
           .articlecontainer .articleviewwrapper .header .datawrapper {
             margin-top: 0px;
-            left: 18px; } }
+            left: 7px; } }
     .articlecontainer .articleviewwrapper .body {
       background-color: #fff;
       position: relative;
