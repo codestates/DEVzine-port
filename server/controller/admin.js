@@ -49,7 +49,7 @@ module.exports = {
       const postRequest = await findContributionsWithStatus(100);
       const patchRequest = await findContributionsWithStatus(101);
       const deleteRequest = await findContributionsWithStatus(102);
-
+      
       let { contributionData } = await checkCacheForContributions();
       const accepted = contributionData.map((data) => {
         return {
