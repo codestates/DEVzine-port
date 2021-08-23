@@ -4,8 +4,8 @@ module.exports = {
   unsubscribe: async (req, res) => {
     
     try {
-
-      const { user_email: subscriber_email } = req.body;
+      
+      const { subscriber_email } = req.body;
 
       const unsubcriber = await Subscriber.findOneAndDelete({ 
         subscriber_email 
