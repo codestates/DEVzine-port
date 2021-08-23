@@ -1,4 +1,6 @@
 .accordioncontainer {
+  padding: 2px;
+  margin: 0 auto;
   width: 100%;
   display: flex;
   position: relative;
@@ -6,8 +8,10 @@
   background: #ffffff;
   border: 1px solid #d9d9d9;
   border-radius: 8px;
-  margin-bottom: 24px;
-  padding-left: 8px;
+  @include mobile-only() {
+    max-width: 360px;
+    width: 100%;
+  }
   .header {
     display: flex;
     align-items: center;

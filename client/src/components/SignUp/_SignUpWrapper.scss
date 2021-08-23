@@ -4,18 +4,27 @@
   position: relative;
   width: 100%;
 
-  &-footer {
+  .admin-footer {
     height: 100px;
     margin-bottom: 220px;
   }
 
   .signupwrapper {
+    margin: 0 auto;
     @include column-flexbox;
+    margin-top: 192px;
+    width: 360px;
+
+    @include mobile-only() {
+      margin-top: 162px;
+      max-width: 360px;
+      width: 95%;
+    }
     .textinputcontainer{
-      margin-top: 192px;
       position: relative;
     }
     .signupbtn {
+      margin-top: 34px;
       display: flex;
       align-items: center;
       justify-content: center;
