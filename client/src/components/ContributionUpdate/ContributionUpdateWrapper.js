@@ -147,7 +147,7 @@ function ContributionUpdateWrapper({ id }) {
 
                     <br />
                     <label htmlFor="contextarea">
-                      미리보기 내용 <span>(필수)</span>
+                      내용 <span>(필수)</span>
                       <p
                         className={
                           ColorChange ? 'textlength active' : 'textlength'
@@ -196,6 +196,7 @@ function ContributionUpdateWrapper({ id }) {
                     alertBtn="확인"
                   />
                 </div>
+                <div className="admin-footer" />
               </div>
             )}
           </div>

@@ -134,7 +134,7 @@ function ContributionWrapper() {
                     />
 
                     <label htmlFor="contextarea">
-                      미리보기 내용 <span>(필수)</span>
+                      내용 <span>(필수)</span>
                       <p
                         className={
                           ColorChange ? 'textlength active' : 'textlength'

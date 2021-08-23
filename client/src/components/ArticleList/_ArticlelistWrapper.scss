@@ -11,7 +11,8 @@
   margin-bottom: 5px;
 
   @include mobile-only() {
-    margin-top: 162px; //header 90px 포함
+    // margin-top: 162px; //header 90px 포함
+    margin-top: 110px; //header 90px 포함
   }
 
   .react-multi-carousel-list {
@@ -21,6 +22,8 @@
   h2 {
     display: inline-block;
     padding-right: 20px;
+    color: $dark;
+    font-size:20px;
 
     @include mobile-only() {
       margin-bottom: 8px;
@@ -160,7 +163,7 @@
     }
 
     img {
-      opacity: 15%;
+      opacity: 0.15;
       // border:1px solid red;
       margin-right: 5px;
     }
@@ -179,6 +182,10 @@
   height: 55px;
   margin-bottom: 300px; // footer 200px 포함
   position: relative;
+
+  @include mobile-only() {
+    margin-bottom: 250px;
+  }
 
   .commonbutton {
     @include pos-center-x;
@@ -389,4 +396,10 @@
       background-color: $border;
     }
   }
+}
+
+.noissue {
+  @include text-style(16, $primary);
+  cursor: default;
+  padding-left: 8px;
 }

@@ -64,15 +64,18 @@ function ArticleViewWrapper({ id }) {
               <div className="articleviewwrapper">
                 <div className="header">
                   <div className="headerleft">
-                    <span className="keyword">
+                    <span className="keyword stopdragging">
                       {indicator === 'con'
                         ? Contribution.contribution_keyword
                         : Article.article_keyword}
                     </span>
-                    <div className="title">
-                      {indicator === 'con'
+                    <div className="title ell-24-view">
+                      {/* {indicator === 'con'
                         ? Contribution.contribution_title.slice(0, 15) + '...'
-                        : Article.article_title.slice(0, 15) + '...'}
+                        : Article.article_title.slice(0, 15) + '...'} */}
+                      {indicator === 'con'
+                        ? Contribution.contribution_title
+                        : Article.article_title}
                     </div>
                     <div className="username">
                       {indicator === 'con'
@@ -114,17 +117,26 @@ function ArticleViewWrapper({ id }) {
                   <div className="contents">
                     {indicator === 'con'
                       ? Request === 'Login need'
-                        ? Contribution.contribution_content.slice(0, 200) +
-                          '...'
-                        : Contribution.contribution_content
-                            .split('. ')
+                        ? Contribution.contribution_content
+                            .slice(0, 200)
+                            .split(/!|\.\s|\✨/)
                             .map(line => (
-                              <span key={line}>
+                              <div key={line} className="line-spacing">
                                 {line}.
-                                <br />
-                              </span>
+                              </div>
                             ))
-                      : Article.article_content.slice(0, 200) + '...'}
+                        : Contribution.contribution_content
+                            .split(/!|\.\s|\✨/)
+                            .map(line => (
+                              <div key={line} className="line-spacing">
+                                {line}.
+                              </div>
+                            ))
+                      : Article.article_content.split(/!|\.\s/).map(line => (
+                          <div key={line} className="line-spacing">
+                            {line}.
+                          </div>
+                        ))}
                   </div>
                   {indicator === 'con' ? (
                     Request === 'Login need' ? (

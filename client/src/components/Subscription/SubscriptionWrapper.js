@@ -183,6 +183,7 @@ function SubscriptionWrapper() {
             </div>
           </div>
         </div>
+        <div className="admin-footer" />
       </div>
     </>
   );

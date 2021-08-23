@@ -146,8 +146,8 @@ function Header() {
                         setUserName={setUserName}
                       />
                     ) : (
-                      <span className="headernav-menu" onClick={headerNavOpen}>
-                        <img src={menu} alt="menu" />
+                      <span className="headernav-menu">
+                        <img src={menu} alt="menu" onClick={headerNavOpen} />
                       </span>
                     )}
                   </div>
