@@ -2,52 +2,74 @@
   background-color: $background;
   min-height: 100vh;
   position: relative;
+  overflow-x: hidden;
+  width: 100%;
 
-  &-footer {
+  .admin-footer {
     height: 100px;
     margin-bottom: 220px;
   }
 
-  .container {
-    .row {
-      .visualwrapper {
-        position: relative;
-        z-index: 1;
-        margin-top: 206px;
-        margin-bottom: 306px;
 
+      .visualwrapper {
+        margin: 0 auto;
+        @include column-flexbox;
+        margin-top: 192px;
+        width: 360px;
+
+        @include mobile-only() {
+          margin-top: 162px;
+          max-width: 360px;
+          width: 95%;
+        }
         .chartcontainer{
           @include column-flexbox;
           @include responsive(D){
             @include flexbox;
             flex-direction: row;
           }
-          // @include mobile-only() {
-          //   flex-direction: column;
-          // }
-            .chartdesc{
+          .chartdesc{
+            position: relative;
+            margin: 20px 0;
+            width: 100%;
+            height: auto;
+            @include responsive(D){
               margin: 0 20px;
               width: 360px;
-              height: 150px;
-              .chartsubject{
+            }
+            .chartsubject{
+              font-weight: $bold;
+              @include text-style(24, $dark);
+              margin-bottom: 10px;
+              @include responsive(D){
                 font-weight: $bold;
                 @include text-style(36, $dark);
                 margin-bottom: 20px;
               }
-              .chartdetail{
+            }
+            .chartdetail{
+              @include text-style(10, $dark);
+
+              @include responsive(D){
                 font-weight: normal;
                 @include text-style(18, $dark);
               }
-            } 
-           .chartwrapper {
+            }
+          } 
+          .chartwrapper {
             @include flexbox;
             background-color: $white;
             position: relative;
             border: 1px solid $border;
             border-radius: 24px;
+            @include responsive(D){
+              background-color: $white;
+              position: relative;
+              border: 1px solid $border;
+              border-radius: 24px;
+            }
           }
         }
       }
-    }
-  }
+
 }
