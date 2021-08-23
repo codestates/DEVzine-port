@@ -91,7 +91,7 @@ export function ArticlesKeywordAccumulated({ data }) {
       >
         <div className="chartsubject">어떤 소식을 다룰까?</div>
         <div className="chartdetail">
-          DEVzine:port의 모든 키워드와 <br />
+          DEVzine의 모든 키워드와 <br />
           키워드 별 콘텐츠 수를 확인해보세요.
         </div>
       </div>

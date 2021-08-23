@@ -12,16 +12,28 @@ export function UserTopLanguage({ data }) {
   }, []);
 
   let options = {
-    colors: ['#b2b3b9', '#d9d9d9', '#ffdd14', '#ffc803', '#ffe33e'],
+    colors: ['#d9d9d9', '#f2f2f2', '#ffe33e', '#ffdd14', '#ffc803'].reverse(),
     fill: {
-      colors: ['#b2b3b9', '#d9d9d9', '#ffdd14', '#ffc803', '#ffe33e'],
+      colors: ['#d9d9d9', '#f2f2f2', '#ffe33e', '#ffdd14', '#ffc803'].reverse(),
     },
     legend: {
       labels: {
-        colors: ['#b2b3b9', '#d9d9d9', '#ffdd14', '#ffc803', '#ffe33e'],
+        colors: [
+          '#d9d9d9',
+          '#f2f2f2',
+          '#ffe33e',
+          '#ffdd14',
+          '#ffc803',
+        ].reverse(),
       },
       markers: {
-        fillColors: ['#b2b3b9', '#d9d9d9', '#ffdd14', '#ffc803', '#ffe33e'],
+        fillColors: [
+          '#d9d9d9',
+          '#f2f2f2',
+          '#ffe33e',
+          '#ffdd14',
+          '#ffc803',
+        ].reverse(),
       },
     },
     chart: {
@@ -96,16 +108,28 @@ export function UserTopPosition({ data }) {
   }, []);
 
   let options = {
-    colors: ['#b2b3b9', '#d9d9d9', '#ffdd14', '#ffc803', '#ffe33e'],
+    colors: ['#d9d9d9', '#f2f2f2', '#ffe33e', '#ffdd14', '#ffc803'].reverse(),
     fill: {
-      colors: ['#b2b3b9', '#d9d9d9', '#ffdd14', '#ffc803', '#ffe33e'],
+      colors: ['#d9d9d9', '#f2f2f2', '#ffe33e', '#ffdd14', '#ffc803'].reverse(),
     },
     legend: {
       labels: {
-        colors: ['#b2b3b9', '#d9d9d9', '#ffdd14', '#ffc803', '#ffe33e'],
+        colors: [
+          '#d9d9d9',
+          '#f2f2f2',
+          '#ffe33e',
+          '#ffdd14',
+          '#ffc803',
+        ].reverse(),
       },
       markers: {
-        fillColors: ['#b2b3b9', '#d9d9d9', '#ffdd14', '#ffc803', '#ffe33e'],
+        fillColors: [
+          '#d9d9d9',
+          '#f2f2f2',
+          '#ffe33e',
+          '#ffdd14',
+          '#ffc803',
+        ].reverse(),
       },
     },
     chart: {
