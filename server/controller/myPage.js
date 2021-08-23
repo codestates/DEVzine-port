@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const { User } = require('../Models/Users');
 const { Contribution } = require('../Models/Contributions');
+const { Subscriber } = require('../Models/Subscribers')
 
 module.exports = {
   getUserInfo: async (req, res) => {
@@ -79,10 +80,10 @@ module.exports = {
         user_name
       });
 
-      if (overlapUser) {
+      if (overlapUser.user_email !== user_email) {
         return res.status(409).send({ message: `${user_name} already exists` });
       }
-  
+
       const { user_gender, user_age, user_position, user_language } =
         req.body.user_info;
   
@@ -91,6 +92,13 @@ module.exports = {
       let subscribed;
       if (req.body.subscribed === '구독') {
         subscribed = true;
+        await Subscriber.updateOne({
+          subscriber_email: user_email
+        }, {
+          subscriber_email: user_email
+        }, {
+          upsert: true
+        })
       } else {
         subscribed = false;
       }
