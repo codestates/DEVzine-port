@@ -1573,7 +1573,7 @@ label {
             display: none; } }
     .optcontentswrapper .contributionstatuscontainer .contributionstatustable {
       width: 100%;
-      overflow-x: scroll;
+      overflow: hidden;
       height: auto;
       background: #ffffff;
       border: 1px solid #d9d9d9;
@@ -1581,6 +1581,9 @@ label {
       border-radius: 8px;
       display: flex;
       flex-direction: column; }
+      @media screen and (max-width: 767px) {
+        .optcontentswrapper .contributionstatuscontainer .contributionstatustable {
+          overflow-x: scroll; } }
       .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist {
         width: 360px;
         height: auto;

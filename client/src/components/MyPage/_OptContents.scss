@@ -38,7 +38,7 @@
     }
     .contributionstatustable {
       width: 100%;
-      overflow-x : scroll;
+      overflow: hidden;
       height: auto;
       background: #ffffff;
       border: 1px solid #d9d9d9;
@@ -46,7 +46,9 @@
       border-radius: 8px;
       display: flex;
       flex-direction: column;
-
+      @include mobile-only() {
+        overflow-x : scroll;
+      }
       .contributionstatuslist {
         width: 360px;
         height: auto;
