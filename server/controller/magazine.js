@@ -142,7 +142,12 @@ module.exports = {
         );
 
         const { user_email, ...data } = contribData._doc;
-        const { user_name } = user._doc;
+        let user_name;
+        if (user) { 
+          user_name = user.user_name;
+        } else {
+          user_name = 'anonymous';
+        }
 
         return res.status(200).json({
           data: { user_name, ...data },

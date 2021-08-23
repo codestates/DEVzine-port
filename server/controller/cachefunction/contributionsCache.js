@@ -28,7 +28,13 @@ const getAllConfirmedContributions = async () => {
         contribution_date: 1,
         status: 1,
         hit: 1,
-        user_name: { $arrayElemAt: ['$user_info.user_name', 0] },
+        user_name: { 
+          $ifNull: [
+            {
+              $arrayElemAt: ['$user_info.user_name', 0]
+            }, 'anonymous'
+          ]
+        },
         _id: 0,
       },
     },
