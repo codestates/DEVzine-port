@@ -859,9 +859,6 @@ select::-ms-expand {
       z-index: 710;
       width: 296px; }
 
-.alert-modal {
-  z-index: 720; }
-
 .inputlarge {
   width: 296px;
   height: 55px;
