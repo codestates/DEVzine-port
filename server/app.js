@@ -30,6 +30,7 @@ const subscribeRouter = require('./router/subscribeRouter');
 const unsubscribeRouter = require('./router/unsubscribeRouter');
 const userRouter = require('./router/userRouter');
 const visualRouter = require('./router/visualRouter');
+const inlineCss = require('nodemailer-juice');
 
 require('dotenv').config();
 passportConfig();
@@ -125,6 +126,7 @@ const transporter = nodemailer.createTransport(
     },
   })
 );
+transporter.use('compile', inlineCss());
 
 app.get('/mailtest', async (req, res) => {
   const subscribers = await Subscriber.find({});
@@ -236,11 +238,12 @@ app.get('/mailtest', async (req, res) => {
     console.log(contribution);
     console.log(contributionContent);
     console.log('////////');
-
+    
     await transporter.sendMail(
       {
         from: 'DEVzine:port <devzineport@gmail.com>',
-        to: 'idhyo0o@naver.com', // dummy email
+        // to: 'idhyo0o@naver.com', // dummy email
+        to: 'haeun.yah@gmail.com',
         // to: userEmail,
         subject: 'DEVzine:port 에서 발송된 뉴스레터',
         html: newsLetter,
@@ -269,12 +272,12 @@ const automatedNewsLetter = schedule.scheduleJob(
 ///////////////
 
 // TODO: 배포 전에 삭제 (크롤링 자동화 test 를 위한 코드입니다)
-// const test = schedule.scheduleJob('* * * * *', async () => {
-//   // const data = await getRecentArticlesFrom24H();
-//   const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
-//   console.log(articlesPastTwoWeeks);
-//   await setNewCacheForArticles(articlesPastTwoWeeks);
-// });
+const test = schedule.scheduleJob('*/10 * * * * *', async () => {
+  // const data = await getRecentArticlesFrom24H();
+  // const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
+  // console.log(articlesPastTwoWeeks);
+  // await setNewCacheForArticles(articlesPastTwoWeeks);
+});
 
 mongoose
   .connect(process.env.MONGO_STRING, {
