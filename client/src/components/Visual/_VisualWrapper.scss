@@ -10,12 +10,6 @@
 
   .container {
     .row {
-      .canvascontainer{
-        z-index: 0;
-        position: fixed;
-        width: 100vw;
-        height: 100vh;
-      }
       .visualwrapper {
         position: relative;
         z-index: 1;
@@ -23,8 +17,14 @@
         margin-bottom: 306px;
 
         .chartcontainer{
-          @include flexbox;
-
+          @include column-flexbox;
+          @include responsive(D){
+            @include flexbox;
+            flex-direction: row;
+          }
+          // @include mobile-only() {
+          //   flex-direction: column;
+          // }
             .chartdesc{
               margin: 0 20px;
               width: 360px;
