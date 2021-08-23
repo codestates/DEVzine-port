@@ -390,7 +390,7 @@ ol {
   .lg-hidden {
     display: none !important; } }
 
-.signinform .conselect, .signinform .contitle, .signinform .contextarea, .nonesubinner .emailinput, .selectionbox .articlebox-select, .selectionbox input, .request-select, .request-text, .request-search, .approval-text, .approval-search {
+.signinform .conselect, .signinform .contitle, .signinform .contextarea, .nonesubinner .emailinput, .inputsmallcontainer .inputsmall, .selectionbox .articlebox-select, .selectionbox input, .request-select, .request-text, .request-search, .approval-text, .approval-search {
   font-size: 16px;
   line-height: 24px;
   letter-spacing: -0.01em;
@@ -405,7 +405,7 @@ ol {
   padding: 8px 14px;
   text-overflow: ellipsis;
   width: 100%; }
-  .signinform .conselect::placeholder, .signinform .contitle::placeholder, .signinform .contextarea::placeholder, .nonesubinner .emailinput::placeholder, .selectionbox .articlebox-select::placeholder, .selectionbox input::placeholder, .request-select::placeholder, .request-text::placeholder, .request-search::placeholder, .approval-text::placeholder, .approval-search::placeholder {
+  .signinform .conselect::placeholder, .signinform .contitle::placeholder, .signinform .contextarea::placeholder, .nonesubinner .emailinput::placeholder, .inputsmallcontainer .inputsmall::placeholder, .selectionbox .articlebox-select::placeholder, .selectionbox input::placeholder, .request-select::placeholder, .request-text::placeholder, .request-search::placeholder, .approval-text::placeholder, .approval-search::placeholder {
     color: #999; }
 
 select::-ms-expand {
@@ -1314,8 +1314,6 @@ label {
         margin-top: 162px;
         max-width: 360px;
         width: 95%; } }
-    .signupcontainer .signupwrapper .textinputcontainer {
-      position: relative; }
     .signupcontainer .signupwrapper .signupbtn {
       margin-top: 34px;
       display: flex;
@@ -1332,10 +1330,10 @@ label {
       cursor: pointer; }
     .signupcontainer .signupwrapper .commonbutton {
       font-weight: 400;
-      margin-left: 48px;
       margin-top: 24px; }
 
 .inputsmallcontainer {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: inherit;
@@ -1367,18 +1365,15 @@ label {
     background: #ffffff;
     border: 1px solid #d9d9d9;
     border-radius: 8px; }
-  .inputsmallcontainer .inputsmall::placeholder {
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 24px;
-    padding-top: 8px;
-    padding-left: 16px;
-    color: #d9d9d9; }
   .inputsmallcontainer .isvalidindicator {
     color: red;
     position: absolute;
+    left: 0;
     margin-top: 80px;
     font-size: 12px; }
+    @media screen and (max-width: 767px) {
+      .inputsmallcontainer .isvalidindicator {
+        font-size: 10px; } }
 
 .accordioncontainer {
   padding: 2px;
@@ -1516,106 +1511,131 @@ label {
   .multiselectwrapper .multiselectcontents .multiselectcontent .basicmulti {
     width: 254.97px; }
 
-.optcontentswrapper .radiowrapper {
-  margin-top: 0px; }
-
-.optcontentswrapper .contributionstatuscontainer {
-  margin: 24px 0;
-  width: 360px;
-  height: auto;
-  min-height: 115px; }
-  .optcontentswrapper .contributionstatuscontainer .subject {
-    display: flex; }
-    .optcontentswrapper .contributionstatuscontainer .subject .subjectwrapper {
-      font-weight: bold;
-      font-size: 16px;
-      line-height: 24px;
-      width: 95.89px;
-      margin-bottom: 8px;
-      color: #191a20; }
-    .optcontentswrapper .contributionstatuscontainer .subject .btndesc {
-      width: 254.11px;
-      font-size: 12px;
-      line-height: 16px;
-      letter-spacing: -0.005em;
-      font-weight: 200;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 8px; }
-  .optcontentswrapper .contributionstatuscontainer .contributionstatustable {
-    width: 360px;
-    overflow: hidden;
+.optcontentswrapper {
+  padding: 2px;
+  margin-top: 0 auto;
+  width: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: column; }
+  .optcontentswrapper .radiowrapper {
+    margin-top: 0px; }
+  .optcontentswrapper .contributionstatuscontainer {
+    margin: 24px 0;
+    width: 100%;
     height: auto;
-    background: #ffffff;
-    border: 1px solid #d9d9d9;
-    border-right: 1px solid #d9d9d9;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column; }
-    .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist {
-      width: 360px;
-      height: auto;
-      background: #ffffff;
+    min-height: 115px; }
+    .optcontentswrapper .contributionstatuscontainer .subject {
       display: flex; }
-      .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader {
-        padding-top: 8px;
-        padding-left: 16px;
-        width: 60px;
-        height: 40px;
-        border-right: 1px solid #d9d9d9;
-        border-bottom: 1px solid #d9d9d9; }
-        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader .updatebtn {
-          width: 20px;
-          height: 20px; }
-        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader .deletebtn {
-          width: 20px;
-          height: 20px; }
-      .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader.first {
-        width: 180px; }
-      .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader.last {
-        border-right: 0px solid;
-        padding-top: 8px;
-        padding-left: 16px; }
-      .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent {
-        padding-top: 8px;
-        padding-left: 16px;
-        width: 60px;
-        height: 40px;
-        border-right: 1px solid #d9d9d9;
-        border-bottom: 1px solid #d9d9d9;
-        font-weight: normal;
+      .optcontentswrapper .contributionstatuscontainer .subject .subjectwrapper {
+        font-weight: bold;
         font-size: 16px;
         line-height: 24px;
+        width: 95.89px;
+        margin-bottom: 8px;
         color: #191a20; }
-        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent .updatebtn {
-          width: 20px;
-          height: 20px;
-          cursor: pointer; }
-        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent .deletebtn {
-          width: 20px;
-          height: 20px;
-          cursor: pointer; }
-      .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.first {
-        width: 180px; }
-      .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last {
-        border-right: 0px solid;
-        padding: 4px;
+      .optcontentswrapper .contributionstatuscontainer .subject .btndesc {
+        width: 254.11px;
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: -0.005em;
+        font-weight: 200;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
         align-items: center;
-        font-size: 10px;
-        line-height: 14px; }
-        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last a {
-          width: 40px;
-          height: 15px;
-          background: #c4c4c4;
+        justify-content: center;
+        margin-bottom: 8px; }
+        @media screen and (max-width: 767px) {
+          .optcontentswrapper .contributionstatuscontainer .subject .btndesc {
+            display: none; } }
+    .optcontentswrapper .contributionstatuscontainer .contributionstatustable {
+      width: 100%;
+      overflow-x: scroll;
+      height: auto;
+      background: #ffffff;
+      border: 1px solid #d9d9d9;
+      border-right: 1px solid #d9d9d9;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column; }
+      .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist {
+        width: 360px;
+        height: auto;
+        background: #ffffff;
+        display: flex; }
+        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader {
           display: flex;
+          align-items: center;
           justify-content: center;
-          align-items: center; }
-  .optcontentswrapper .contributionstatuscontainer .contributionstatustable > li:last-child .tablecontent {
-    border-bottom: 0px solid; }
+          width: 20%;
+          height: 40px;
+          border-right: 1px solid #d9d9d9;
+          border-bottom: 1px solid #d9d9d9; }
+          .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader .updatebtn {
+            width: 20px;
+            height: 20px; }
+          .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader .deletebtn {
+            width: 20px;
+            height: 20px; }
+        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader.first {
+          padding-left: 8px;
+          width: 40%;
+          justify-content: flex-start; }
+        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader.last {
+          border-right: 0px solid; }
+        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 20%;
+          height: 30px;
+          border-right: 1px solid #d9d9d9;
+          border-bottom: 1px solid #d9d9d9;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 24px;
+          letter-spacing: -0.01em;
+          color: #191a20; }
+          .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent .updatebtn {
+            width: 20px;
+            height: 20px;
+            cursor: pointer; }
+          .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent .deletebtn {
+            width: 20px;
+            height: 20px;
+            cursor: pointer; }
+        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.first {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          word-break: break-all;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          padding-left: 8px;
+          width: 40%;
+          justify-content: flex-start; }
+        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last {
+          border-right: 0px solid;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          font-size: 10px;
+          line-height: 14px; }
+          .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last a {
+            width: 40px;
+            height: 15px;
+            background: #c4c4c4;
+            display: flex;
+            align-items: center;
+            justify-content: center; }
+            @media screen and (max-width: 767px) {
+              .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last a {
+                width: 35px;
+                height: 13px; } }
+    .optcontentswrapper .contributionstatuscontainer .contributionstatustable > li:last-child .tablecontent {
+      border-bottom: 0px solid; }
 
 .artilistwrapper {
   background-color: #f2f2f2;
@@ -2180,11 +2200,6 @@ label {
   .visualcontainer-footer {
     height: 100px;
     margin-bottom: 220px; }
-  .visualcontainer .container .row .canvascontainer {
-    z-index: 0;
-    position: fixed;
-    width: 100vw;
-    height: 100vh; }
   .visualcontainer .container .row .visualwrapper {
     position: relative;
     z-index: 1;
@@ -2192,8 +2207,15 @@ label {
     margin-bottom: 306px; }
     .visualcontainer .container .row .visualwrapper .chartcontainer {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center; }
+      @media screen and (min-width: 1200px) {
+        .visualcontainer .container .row .visualwrapper .chartcontainer {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: row; } }
       .visualcontainer .container .row .visualwrapper .chartcontainer .chartdesc {
         margin: 0 20px;
         width: 360px;
