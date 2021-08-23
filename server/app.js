@@ -1,13 +1,5 @@
 const { stream } = require('./config/winston');
-const { Article } = require('./Models/Articles');
-const {
-  getRecentArticlesFrom24H,
-  getRecentArticlesFrom48H,
-} = require('./controller/crawler/article-crawler');
-const {
-  getArticlesPastTwoWeeks,
-  setNewCacheForArticles,
-} = require('./controller/cachefunction/articlesCache');
+const { crawlerFor24H, crawlerFor48H } = require('./controller/crawler/automateCrawler')
 const { sendMailToSubscribers } = require('./controller/emailfunction/subscriberEmail')
 const fs = require('fs');
 const https = require('https');
@@ -75,26 +67,19 @@ app.use('/visual', visualRouter);
 const automatedCrawlerForWeekday = schedule.scheduleJob(
   '00 21 * * 1-5',
   async () => {
-    const data = await getRecentArticlesFrom24H();
-    await Article.create(data);
-    const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
-    await setNewCacheForArticles(articlesPastTwoWeeks);
+    crawlerFor24H();
   }
 );
 // 월요일 오전 6시 크롤링 (48시간 이내 업데이트된 기사 불러오기)
 const automatedCrawlerForWeekend = schedule.scheduleJob(
   '00 21 * * 7',
   async () => {
-    const data = await getRecentArticlesFrom48H();
-    await Article.create(data);
-    const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
-    await setNewCacheForArticles(articlesPastTwoWeeks);
+    crawlerFor48H();
   }
 );
-
+// 구독자 이메일 자동 발송 (오전 7시) 
 const automatedNewsLetter = schedule.scheduleJob(
-  // '00 22 * * 1-5,7',
-  '* * * * *',
+  '00 22 * * 1-5,7',
   async () => {
     await sendMailToSubscribers();
   }
