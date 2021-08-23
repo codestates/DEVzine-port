@@ -1,11 +1,18 @@
 .optcontentswrapper {
+  padding: 2px;
+  margin-top: 0 auto;
+  width: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+
   .radiowrapper {
     margin-top: 0px;
   }
 
   .contributionstatuscontainer {
     margin: 24px 0;
-    width: 360px;
+    width: 100%;
     height: auto;
     min-height: 115px;
     .subject {
@@ -24,10 +31,13 @@
         font-weight: $lighter;
         @include flexbox;
         margin-bottom: 8px;
+        @include mobile-only() {
+          display: none;
+        }
       }
     }
     .contributionstatustable {
-      width: 360px;
+      width: 100%;
       overflow: hidden;
       height: auto;
       background: #ffffff;
@@ -36,19 +46,21 @@
       border-radius: 8px;
       display: flex;
       flex-direction: column;
+      @include mobile-only() {
+        overflow-x : scroll;
+      }
       .contributionstatuslist {
         width: 360px;
         height: auto;
         background: #ffffff;
         display: flex;
+
         .tableheader {
-          padding-top: 8px;
-          padding-left: 16px;
-          width: 60px;
+          @include flexbox;
+          width: 20%;
           height: 40px;
           border-right: 1px solid #d9d9d9;
           border-bottom: 1px solid #d9d9d9;
-
           .updatebtn {
             width: 20px;
             height: 20px;
@@ -59,25 +71,21 @@
           }
         }
         .tableheader.first {
-          width: 180px;
+          padding-left: 8px;
+          width: 40%;
+          justify-content: flex-start;
         }
         .tableheader.last {
           border-right: 0px solid;
-          padding-top: 8px;
-          padding-left: 16px;
         }
         .tablecontent {
-          padding-top: 8px;
-          padding-left: 16px;
-          width: 60px;
-          height: 40px;
+          @include flexbox;
+          width: 20%;
+          height: 30px;
           border-right: 1px solid #d9d9d9;
           border-bottom: 1px solid #d9d9d9;
           font-weight: normal;
-          font-size: 16px;
-          line-height: 24px;
-          color: #191a20;
-
+          @include text-style(14, $dark);
           .updatebtn {
             width: 20px;
             height: 20px;
@@ -90,15 +98,23 @@
           }
         }
         .tablecontent.first {
-          width: 180px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          word-break: break-all;
+          display: -webkit-box;
+          // height: $line-height-13;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+
+          overflow: hidden;
+          text-overflow: ellipsis;
+          padding-left: 8px;
+          width: 40%;
+          justify-content: flex-start;
         }
         .tablecontent.last {
           border-right: 0px solid;
-          padding: 4px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
+          @include column-flexbox; 
           font-size: 10px;
           line-height: 14px;
 
@@ -106,9 +122,11 @@
             width: 40px;
             height: 15px;
             background: #c4c4c4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            @include flexbox;
+            @include mobile-only() {
+              width: 35px;
+              height: 13px;
+            }
           }
         }
       }

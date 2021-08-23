@@ -390,7 +390,7 @@ ol {
   .lg-hidden {
     display: none !important; } }
 
-.signinform .conselect, .signinform .contitle, .signinform .contextarea, .nonesubinner .emailinput, .selectionbox .articlebox-select, .selectionbox input, .request-select, .request-text, .request-search, .approval-text, .approval-search {
+.signinform .conselect, .signinform .contitle, .signinform .contextarea, .nonesubinner .emailinput, .inputsmallcontainer .inputsmall, .selectionbox .articlebox-select, .selectionbox input, .request-select, .request-text, .request-search, .approval-text, .approval-search {
   font-size: 16px;
   line-height: 24px;
   letter-spacing: -0.01em;
@@ -405,7 +405,7 @@ ol {
   padding: 8px 14px;
   text-overflow: ellipsis;
   width: 100%; }
-  .signinform .conselect::placeholder, .signinform .contitle::placeholder, .signinform .contextarea::placeholder, .nonesubinner .emailinput::placeholder, .selectionbox .articlebox-select::placeholder, .selectionbox input::placeholder, .request-select::placeholder, .request-text::placeholder, .request-search::placeholder, .approval-text::placeholder, .approval-search::placeholder {
+  .signinform .conselect::placeholder, .signinform .contitle::placeholder, .signinform .contextarea::placeholder, .nonesubinner .emailinput::placeholder, .inputsmallcontainer .inputsmall::placeholder, .selectionbox .articlebox-select::placeholder, .selectionbox input::placeholder, .request-select::placeholder, .request-text::placeholder, .request-search::placeholder, .approval-text::placeholder, .approval-search::placeholder {
     color: #999; }
 
 select::-ms-expand {
@@ -447,7 +447,7 @@ select::-ms-expand {
       @media screen and (max-width: 767px) {
         .modalcontainer .modalbackdrop .modalview {
           max-width: 360px;
-          width: 90%;
+          width: 92.5%;
           height: 200px; } }
   .modalcontainer .desc {
     position: absolute;
@@ -792,6 +792,10 @@ select::-ms-expand {
       left: 0;
       position: absolute; }
 
+.line-height {
+  display: inline-block;
+  padding-top: 6px; }
+
 .signincontainer {
   z-index: 700;
   position: fixed;
@@ -1103,11 +1107,11 @@ select::-ms-expand {
   width: 100%; }
   .contributioncontainer .continner {
     margin: 0 auto;
-    margin-top: 20%;
+    margin-top: 192px;
     width: 360px; }
     @media screen and (max-width: 767px) {
       .contributioncontainer .continner {
-        margin-top: 162px;
+        margin-top: 110px;
         max-width: 360px;
         width: 95%; } }
 
@@ -1159,6 +1163,9 @@ label {
   height: 200px;
   margin-bottom: 24px;
   resize: none; }
+  @media screen and (max-width: 767px) {
+    .signinform .contextarea {
+      margin-bottom: 12px; } }
 
 .signinform .contributionbtn {
   background-color: transparent; }
@@ -1180,7 +1187,7 @@ label {
     margin-top: 192px; }
     @media screen and (max-width: 767px) {
       .contributionlistwrapper .articlebox {
-        margin-top: 162px; } }
+        margin-top: 110px; } }
     .contributionlistwrapper .articlebox .prebox {
       height: 30px; }
     .contributionlistwrapper .articlebox .prebtn {
@@ -1216,7 +1223,14 @@ label {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    top: 45%; }
+    top: 45%;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto; }
+    @media screen and (max-width: 767px) {
+      .subscriptioncontainer .subinnner {
+        max-width: 360px;
+        width: 86%; } }
   .subscriptioncontainer .subtext {
     font-size: 24px;
     line-height: 34px;
@@ -1252,6 +1266,9 @@ label {
   margin: 0 auto;
   text-align: center;
   width: 296px; }
+  @media screen and (max-width: 767px) {
+    .nonesubinner .emailinput {
+      width: 100%; } }
 
 .nonesubinner .emailalerttext {
   color: #f43808;
@@ -1262,10 +1279,16 @@ label {
       margin-bottom: 0; } }
 
 .nonesubinner .subemailbtn {
-  background-color: transparent; }
+  background-color: transparent;
+  width: 100%;
+  padding: 0; }
 
 .nonesubinner .commonbutton {
   width: 296px; }
+  @media screen and (max-width: 767px) {
+    .nonesubinner .commonbutton {
+      max-width: 296px;
+      width: 100%; } }
 
 .nonesubinner .subjoinbox {
   margin-top: 48px;
@@ -1278,7 +1301,8 @@ label {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin-top: 24px; }
+    margin-top: 24px;
+    width: 100%; }
   .nonesubinner .subjoinbox .subtextsmall1 {
     font-size: 16px;
     line-height: 24px;
@@ -1314,8 +1338,6 @@ label {
         margin-top: 162px;
         max-width: 360px;
         width: 95%; } }
-    .signupcontainer .signupwrapper .textinputcontainer {
-      position: relative; }
     .signupcontainer .signupwrapper .signupbtn {
       margin-top: 34px;
       display: flex;
@@ -1332,10 +1354,10 @@ label {
       cursor: pointer; }
     .signupcontainer .signupwrapper .commonbutton {
       font-weight: 400;
-      margin-left: 48px;
       margin-top: 24px; }
 
 .inputsmallcontainer {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: inherit;
@@ -1367,18 +1389,15 @@ label {
     background: #ffffff;
     border: 1px solid #d9d9d9;
     border-radius: 8px; }
-  .inputsmallcontainer .inputsmall::placeholder {
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 24px;
-    padding-top: 8px;
-    padding-left: 16px;
-    color: #d9d9d9; }
   .inputsmallcontainer .isvalidindicator {
     color: red;
     position: absolute;
+    left: 0;
     margin-top: 80px;
     font-size: 12px; }
+    @media screen and (max-width: 767px) {
+      .inputsmallcontainer .isvalidindicator {
+        font-size: 10px; } }
 
 .accordioncontainer {
   padding: 2px;
@@ -1516,106 +1535,134 @@ label {
   .multiselectwrapper .multiselectcontents .multiselectcontent .basicmulti {
     width: 254.97px; }
 
-.optcontentswrapper .radiowrapper {
-  margin-top: 0px; }
-
-.optcontentswrapper .contributionstatuscontainer {
-  margin: 24px 0;
-  width: 360px;
-  height: auto;
-  min-height: 115px; }
-  .optcontentswrapper .contributionstatuscontainer .subject {
-    display: flex; }
-    .optcontentswrapper .contributionstatuscontainer .subject .subjectwrapper {
-      font-weight: bold;
-      font-size: 16px;
-      line-height: 24px;
-      width: 95.89px;
-      margin-bottom: 8px;
-      color: #191a20; }
-    .optcontentswrapper .contributionstatuscontainer .subject .btndesc {
-      width: 254.11px;
-      font-size: 12px;
-      line-height: 16px;
-      letter-spacing: -0.005em;
-      font-weight: 200;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 8px; }
-  .optcontentswrapper .contributionstatuscontainer .contributionstatustable {
-    width: 360px;
-    overflow: hidden;
+.optcontentswrapper {
+  padding: 2px;
+  margin-top: 0 auto;
+  width: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: column; }
+  .optcontentswrapper .radiowrapper {
+    margin-top: 0px; }
+  .optcontentswrapper .contributionstatuscontainer {
+    margin: 24px 0;
+    width: 100%;
     height: auto;
-    background: #ffffff;
-    border: 1px solid #d9d9d9;
-    border-right: 1px solid #d9d9d9;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column; }
-    .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist {
-      width: 360px;
-      height: auto;
-      background: #ffffff;
+    min-height: 115px; }
+    .optcontentswrapper .contributionstatuscontainer .subject {
       display: flex; }
-      .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader {
-        padding-top: 8px;
-        padding-left: 16px;
-        width: 60px;
-        height: 40px;
-        border-right: 1px solid #d9d9d9;
-        border-bottom: 1px solid #d9d9d9; }
-        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader .updatebtn {
-          width: 20px;
-          height: 20px; }
-        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader .deletebtn {
-          width: 20px;
-          height: 20px; }
-      .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader.first {
-        width: 180px; }
-      .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader.last {
-        border-right: 0px solid;
-        padding-top: 8px;
-        padding-left: 16px; }
-      .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent {
-        padding-top: 8px;
-        padding-left: 16px;
-        width: 60px;
-        height: 40px;
-        border-right: 1px solid #d9d9d9;
-        border-bottom: 1px solid #d9d9d9;
-        font-weight: normal;
+      .optcontentswrapper .contributionstatuscontainer .subject .subjectwrapper {
+        font-weight: bold;
         font-size: 16px;
         line-height: 24px;
+        width: 95.89px;
+        margin-bottom: 8px;
         color: #191a20; }
-        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent .updatebtn {
-          width: 20px;
-          height: 20px;
-          cursor: pointer; }
-        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent .deletebtn {
-          width: 20px;
-          height: 20px;
-          cursor: pointer; }
-      .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.first {
-        width: 180px; }
-      .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last {
-        border-right: 0px solid;
-        padding: 4px;
+      .optcontentswrapper .contributionstatuscontainer .subject .btndesc {
+        width: 254.11px;
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: -0.005em;
+        font-weight: 200;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
         align-items: center;
-        font-size: 10px;
-        line-height: 14px; }
-        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last a {
-          width: 40px;
-          height: 15px;
-          background: #c4c4c4;
+        justify-content: center;
+        margin-bottom: 8px; }
+        @media screen and (max-width: 767px) {
+          .optcontentswrapper .contributionstatuscontainer .subject .btndesc {
+            display: none; } }
+    .optcontentswrapper .contributionstatuscontainer .contributionstatustable {
+      width: 100%;
+      overflow: hidden;
+      height: auto;
+      background: #ffffff;
+      border: 1px solid #d9d9d9;
+      border-right: 1px solid #d9d9d9;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column; }
+      @media screen and (max-width: 767px) {
+        .optcontentswrapper .contributionstatuscontainer .contributionstatustable {
+          overflow-x: scroll; } }
+      .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist {
+        width: 360px;
+        height: auto;
+        background: #ffffff;
+        display: flex; }
+        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader {
           display: flex;
+          align-items: center;
           justify-content: center;
-          align-items: center; }
-  .optcontentswrapper .contributionstatuscontainer .contributionstatustable > li:last-child .tablecontent {
-    border-bottom: 0px solid; }
+          width: 20%;
+          height: 40px;
+          border-right: 1px solid #d9d9d9;
+          border-bottom: 1px solid #d9d9d9; }
+          .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader .updatebtn {
+            width: 20px;
+            height: 20px; }
+          .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader .deletebtn {
+            width: 20px;
+            height: 20px; }
+        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader.first {
+          padding-left: 8px;
+          width: 40%;
+          justify-content: flex-start; }
+        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader.last {
+          border-right: 0px solid; }
+        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 20%;
+          height: 30px;
+          border-right: 1px solid #d9d9d9;
+          border-bottom: 1px solid #d9d9d9;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 24px;
+          letter-spacing: -0.01em;
+          color: #191a20; }
+          .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent .updatebtn {
+            width: 20px;
+            height: 20px;
+            cursor: pointer; }
+          .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent .deletebtn {
+            width: 20px;
+            height: 20px;
+            cursor: pointer; }
+        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.first {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          word-break: break-all;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          padding-left: 8px;
+          width: 40%;
+          justify-content: flex-start; }
+        .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last {
+          border-right: 0px solid;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          font-size: 10px;
+          line-height: 14px; }
+          .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last a {
+            width: 40px;
+            height: 15px;
+            background: #c4c4c4;
+            display: flex;
+            align-items: center;
+            justify-content: center; }
+            @media screen and (max-width: 767px) {
+              .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last a {
+                width: 35px;
+                height: 13px; } }
+    .optcontentswrapper .contributionstatuscontainer .contributionstatustable > li:last-child .tablecontent {
+      border-bottom: 0px solid; }
 
 .artilistwrapper {
   background-color: #f2f2f2;
@@ -1629,12 +1676,14 @@ label {
   margin-bottom: 5px; }
   @media screen and (max-width: 767px) {
     .carousel {
-      margin-top: 162px; } }
+      margin-top: 110px; } }
   .carousel .react-multi-carousel-list {
     padding-left: 0; }
   .carousel h2 {
     display: inline-block;
-    padding-right: 20px; }
+    padding-right: 20px;
+    color: #191a20;
+    font-size: 20px; }
     @media screen and (max-width: 767px) {
       .carousel h2 {
         margin-bottom: 8px; } }
@@ -1748,7 +1797,7 @@ label {
       .articlebox-hit {
         bottom: 12px; } }
     .articlebox-hit img {
-      opacity: 15%;
+      opacity: 0.15;
       margin-right: 5px; }
     .articlebox-hit span {
       margin: 0 0 3px 0; }
@@ -1760,6 +1809,9 @@ label {
   height: 55px;
   margin-bottom: 300px;
   position: relative; }
+  @media screen and (max-width: 767px) {
+    .plusbtn {
+      margin-bottom: 250px; } }
   .plusbtn .commonbutton {
     position: absolute;
     left: 50%;
@@ -1907,6 +1959,14 @@ label {
         width: 100px; } }
     .selectionbox .initialbtn:hover {
       background-color: #d9d9d9; }
+
+.noissue {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: #535353;
+  cursor: default;
+  padding-left: 8px; }
 
 .react-multi-carousel-list {
   align-items: center;
@@ -2063,7 +2123,7 @@ label {
       bottom: 18px;
       right: 24px; } }
   .articlebox-hit-con img {
-    opacity: 15%;
+    opacity: 0.15;
     margin-right: 5px; }
   .articlebox-hit-con span {
     margin: 0 0 3px 0; }
@@ -2085,6 +2145,9 @@ label {
   .articlecontainer-footer {
     height: 100px;
     margin-bottom: 220px; }
+    @media screen and (max-width: 767px) {
+      .articlecontainer-footer {
+        margin-bottom: 180px; } }
   .articlecontainer .articleviewwrapper {
     color: #191a20; }
     .articlecontainer .articleviewwrapper .header {
@@ -2094,32 +2157,43 @@ label {
       height: 140px;
       border: 1px solid #d9d9d9;
       border-radius: 24px 24px 0 0; }
+      @media screen and (max-width: 767px) {
+        .articlecontainer .articleviewwrapper .header {
+          margin-top: 110px; } }
       .articlecontainer .articleviewwrapper .header .headerleft {
         margin: 0 29px;
         padding-top: 24px; }
+        @media screen and (max-width: 767px) {
+          .articlecontainer .articleviewwrapper .header .headerleft {
+            padding-top: 20px; } }
         .articlecontainer .articleviewwrapper .header .headerleft .keyword {
+          font-size: 12px;
+          line-height: 16px;
+          letter-spacing: -0.005em;
           display: inline-block;
-          padding: 0 12px;
+          padding: 0 12px 0px 12px;
+          line-height: 18px;
           height: 22px;
           border: 1px solid #191a20;
           margin-bottom: 8px;
           border-radius: 70px;
-          font-size: 12px;
-          line-height: 16px;
-          letter-spacing: -0.005em;
           font-weight: 700; }
+          @media screen and (max-width: 767px) {
+            .articlecontainer .articleviewwrapper .header .headerleft .keyword {
+              margin-bottom: 4px;
+              line-height: 20px; } }
         .articlecontainer .articleviewwrapper .header .headerleft .title {
           font-size: 24px;
           line-height: 34px;
           letter-spacing: -0.01em;
           font-weight: 700;
-          margin-bottom: 13px; }
+          margin-bottom: 8px; }
           @media screen and (max-width: 767px) {
             .articlecontainer .articleviewwrapper .header .headerleft .title {
               font-size: 18px;
               line-height: 28px;
               letter-spacing: -0.02em;
-              margin-bottom: 13px; } }
+              margin-bottom: 0px; } }
         .articlecontainer .articleviewwrapper .header .headerleft .username {
           font-size: 14px;
           line-height: 24px;
@@ -2134,7 +2208,7 @@ label {
         position: absolute;
         width: 170px;
         height: 14px;
-        top: 97px;
+        top: 95px;
         right: 23px;
         font-size: 14px;
         line-height: 24px;
@@ -2146,6 +2220,10 @@ label {
         .articlecontainer .articleviewwrapper .header .datawrapper .data {
           font-weight: 400;
           margin: 0 4px; }
+        @media screen and (max-width: 767px) {
+          .articlecontainer .articleviewwrapper .header .datawrapper {
+            margin-top: 0px;
+            left: 18px; } }
     .articlecontainer .articleviewwrapper .body {
       background-color: #fff;
       position: relative;
@@ -2157,6 +2235,9 @@ label {
       border-top: 0 solid;
       border-radius: 0 0 24px 24px; }
       .articlecontainer .articleviewwrapper .body .contents {
+        font-size: 18px;
+        line-height: 28px;
+        letter-spacing: -0.02em;
         word-break: break-all; }
       .articlecontainer .articleviewwrapper .body .layer {
         position: absolute;
@@ -2173,6 +2254,25 @@ label {
         transform: translateX(-50%);
         bottom: 72px; }
 
+.line-spacing {
+  padding-right: 5px; }
+  .line-spacing:nth-child(3n+1) {
+    display: inline-block;
+    margin-bottom: 20px; }
+
+.ell-24-view {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  height: 34px; }
+  @media screen and (max-width: 767px) {
+    .ell-24-view {
+      height: 28px; } }
+
 .visualcontainer {
   background-color: #f2f2f2;
   min-height: 100vh;
@@ -2180,11 +2280,6 @@ label {
   .visualcontainer-footer {
     height: 100px;
     margin-bottom: 220px; }
-  .visualcontainer .container .row .canvascontainer {
-    z-index: 0;
-    position: fixed;
-    width: 100vw;
-    height: 100vh; }
   .visualcontainer .container .row .visualwrapper {
     position: relative;
     z-index: 1;
@@ -2192,8 +2287,15 @@ label {
     margin-bottom: 306px; }
     .visualcontainer .container .row .visualwrapper .chartcontainer {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center; }
+      @media screen and (min-width: 1200px) {
+        .visualcontainer .container .row .visualwrapper .chartcontainer {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: row; } }
       .visualcontainer .container .row .visualwrapper .chartcontainer .chartdesc {
         margin: 0 20px;
         width: 360px;
@@ -2230,7 +2332,7 @@ label {
     margin-bottom: 220px; }
     @media screen and (max-width: 767px) {
       .admin-footer {
-        margin-bottom: 100px; } }
+        margin-bottom: 40px; } }
 
 .request {
   margin-top: 192px; }

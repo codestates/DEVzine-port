@@ -37,8 +37,8 @@ function ContributionStatus({ Contribution }) {
                 className="contributionstatuslist"
                 key={`contributionstatuslist${idx}`}
               >
-                <span className="tablecontent first">
-                  {el.contribution_title.slice(0, 14) + '...'}
+                <span className="tablecontent first ell-16-mypage">
+                  {el.contribution_title}
                 </span>
                 <span className="tablecontent">
                   <Link

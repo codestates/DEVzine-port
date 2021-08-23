@@ -233,67 +233,77 @@ function MyPageWrapper() {
   return allData ? (
     <div className="signupcontainer">
       {Auth(true) === 'Login need' ? null : (
-        <div className="signupwrapper">
-          {requiredTextInputData.map((el, idx) => {
-            return (
-              <TextInputGenderRequired
-                key={`TextInputGenderRequired${idx}`}
-                inputname={el[0]}
-                detailString={el[1]}
-                stateName={el[2]}
-                stateFunc={el[3]}
-                placeholder={el[4]}
-                type={el[5]}
-                isValid={el[6]}
-                maxLength={el[7]}
-                isMutable={el[8]}
-              />
-            );
-          })}
-          <OptContents
-            Gender={Gender}
-            Scribed={Scribed}
-            Age={Age}
-            Position={Position}
-            Language={Language}
-            radioInputHandler={radioInputHandler}
-            selectInputHandler={selectInputHandler}
-            Contribution={Contribution}
-          />
-          <div
-            className="signupbtn"
-            onClick={e =>
-              Email &&
-              Password &&
-              ConfirmPassword &&
-              Name &&
-              email_isValid &&
-              pw_isValid &&
-              pw_confirm
-                ? patchHandler()
-                : alert('모든 것을 만족해야 합니다.')
-            }
-          >
-            정보수정
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-4 col-md-12 col-lg-12">
+              <div className="signupwrapper">
+                {requiredTextInputData.map((el, idx) => {
+                  return (
+                    <TextInputGenderRequired
+                      key={`TextInputGenderRequired${idx}`}
+                      inputname={el[0]}
+                      detailString={el[1]}
+                      stateName={el[2]}
+                      stateFunc={el[3]}
+                      placeholder={el[4]}
+                      type={el[5]}
+                      isValid={el[6]}
+                      maxLength={el[7]}
+                      isMutable={el[8]}
+                    />
+                  );
+                })}
+                <OptContents
+                  Gender={Gender}
+                  Scribed={Scribed}
+                  Age={Age}
+                  Position={Position}
+                  Language={Language}
+                  radioInputHandler={radioInputHandler}
+                  selectInputHandler={selectInputHandler}
+                  Contribution={Contribution}
+                />
+                <div
+                  className="signupbtn"
+                  onClick={e =>
+                    Email &&
+                    Password &&
+                    ConfirmPassword &&
+                    Name &&
+                    email_isValid &&
+                    pw_isValid &&
+                    pw_confirm
+                      ? patchHandler()
+                      : alert('모든 것을 만족해야 합니다.')
+                  }
+                  style={{ margin: '0' }}
+                >
+                  정보수정
+                </div>
+                <Button
+                  subject={`회원 탈퇴`}
+                  color={`#999999`}
+                  backgroundColor={`#ffffff`}
+                  border={`1px solid #d9d9d9`}
+                  onClickHandle={withdrawal}
+                />
+                <div className="alermodalbox">
+                  <AlertModal
+                    open={AlertOpen}
+                    close={closeModal}
+                    alertString={'비밀번호를 확인해 주세요.'}
+                    alertBtn="확인"
+                  />
+                </div>
+                <div className="admin-footer" />
+              </div>
+            </div>
           </div>
-          <Button
-            subject={`회원 탈퇴`}
-            color={`#999999`}
-            backgroundColor={`#ffffff`}
-            border={`1px solid #d9d9d9`}
-            onClickHandle={withdrawal}
-          />
         </div>
       )}
       {ModalOpen ? (
         <SigninModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
       ) : null}
-      <AlertModal
-        open={AlertOpen}
-        close={closeModal}
-        alertString={'비밀번호를 확인해 주세요.'}
-        alertBtn="확인"
-      />
     </div>
   ) : null;
 }

@@ -61,7 +61,7 @@ export async function searchData(Select, Text) {
       if (Text === '') {
         return res;
       } else {
-        return res.filter(el => el.user_name === Text);
+        return res.filter(el => el.user_name.indexOf(Text) !== -1);
       }
     });
 
@@ -80,7 +80,7 @@ export async function searchAppData(AppText) {
       if (AppText === '') {
         return res;
       } else {
-        return res.filter(el => el.user_name === AppText);
+        return res.filter(el => el.user_name.indexOf(AppText) !== -1);
       }
     });
 
