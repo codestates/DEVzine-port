@@ -1,14 +1,6 @@
 const { stream } = require('./config/winston');
-const { Article } = require('./Models/Articles');
-const { insertSeedData } = require('./seeds/insertSeedData'); // TODO: 배포 직전에 지우기
-const {
-  getRecentArticlesFrom24H,
-  getRecentArticlesFrom48H,
-} = require('./controller/crawler/article-crawler');
-const {
-  getArticlesPastTwoWeeks,
-  setNewCacheForArticles,
-} = require('./controller/cachefunction/articlesCache');
+const { crawlerFor24H, crawlerFor48H } = require('./controller/crawler/automateCrawler')
+const { sendMailToSubscribers } = require('./controller/emailfunction/subscriberEmail')
 const fs = require('fs');
 const https = require('https');
 const mongoose = require('mongoose');
@@ -30,18 +22,16 @@ const subscribeRouter = require('./router/subscribeRouter');
 const unsubscribeRouter = require('./router/unsubscribeRouter');
 const userRouter = require('./router/userRouter');
 const visualRouter = require('./router/visualRouter');
-const inlineCss = require('nodemailer-juice');
+const app = express();
 
 require('dotenv').config();
 passportConfig();
 
-const app = express();
-
 app.set('trust proxy', 1);
-app.use(passport.initialize());
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(passport.initialize());
+app.use(express.urlencoded({ extended: false }));
 app.use(morgan('combined', { stream }));
 app.use(
   cors({
@@ -55,19 +45,6 @@ app.use(
     UserAgent: '*',
     Disallow: '/',
   })
-);
-
-// TODO: 배포 전에 삭제
-app.get(
-  '/authtest',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    try {
-      res.status(200).json({ message: 'authenticated!' });
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  }
 );
 
 app.get('/', (req, res) => {
@@ -86,198 +63,27 @@ app.use('/unsubscribe', unsubscribeRouter);
 app.use('/user', userRouter);
 app.use('/visual', visualRouter);
 
-// TODO: 배포 직전에 지우기
-app.use('/seed', insertSeedData);
-
 // 화-토 오전 6시 크롤링 (24시간 이내 업데이트된 기사 불러오기)
 const automatedCrawlerForWeekday = schedule.scheduleJob(
   '00 21 * * 1-5',
   async () => {
-    const data = await getRecentArticlesFrom24H();
-    await Article.create(data);
-    const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
-    await setNewCacheForArticles(articlesPastTwoWeeks);
+    crawlerFor24H();
   }
 );
 // 월요일 오전 6시 크롤링 (48시간 이내 업데이트된 기사 불러오기)
 const automatedCrawlerForWeekend = schedule.scheduleJob(
   '00 21 * * 7',
   async () => {
-    const data = await getRecentArticlesFrom48H();
-    await Article.create(data);
-    const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
-    await setNewCacheForArticles(articlesPastTwoWeeks);
+    crawlerFor48H();
   }
 );
-
-const { Contribution } = require('./Models/Contributions');
-const { Subscriber } = require('./Models/Subscribers');
-const { User } = require('./Models/Users');
-const nodemailer = require('nodemailer');
-const smtpTransport = require('nodemailer-smtp-transport');
-const ejs = require('ejs');
-const transporter = nodemailer.createTransport(
-  smtpTransport({
-    service: 'gmail',
-    host: 'smtp.gmail.com',
-    auth: {
-      user: process.env.NODEMAIL_EMAIL,
-      pass: process.env.NODEMAIL_PWD,
-    },
-  })
-);
-transporter.use('compile', inlineCss());
-
-app.get('/mailtest', async (req, res) => {
-  const subscribers = await Subscriber.find({});
-
-  // articles 어제 06시 이후에 크롤링 된 기사 가져오기
-  const getRange = new Date().getDay() === 0 ? 4 : 3;
-  const articles = await Article.find({
-    article_date: {
-      $gte: new Date(
-        Date.now() - 1000 * 60 * 60 * 24 * getRange - 1000 * 60 * 60
-      ),
-    },
-  });
-  articles.sort(() => Math.random() - 0.5); // 랜덤으로 정렬
-  const articlesCount = articles.length;
-  let usedKeyword = new Array();
-  let articleList = new Array();
-  let usedId = new Array();
-  let count = 0;
-  let idx = 0;
-
-  const max = articlesCount > 4 ? 4 : articlesCount;
-  while (articles[idx]) {
-    let currentArticle = articles[idx];
-    if (count === 4) break;
-    // 배열 순회 하면서 alreadyKeyword 에 있는지 확인 후 있으면 안 담음
-    if (usedKeyword.includes(currentArticle.article_keyword)) {
-      idx++;
-      continue;
-    }
-    articleList.push(currentArticle);
-    usedKeyword.push(currentArticle.article_keyword);
-    usedId.push(currentArticle.article_id);
-    idx++;
-    count++;
-  }
-  idx = 0;
-  // 키워드가 4개 미만일 때 중복되는 키워드지만 다른 기사 담기
-  while (count < max) {
-    if (!usedId.includes(articles[idx].article_id)) {
-      articleList.push(articles[idx]);
-      count++;
-    }
-    idx++;
-  }
-
-  const contribution = await Contribution.findOne(
-    {
-      recommended: false,
-    },
-    [],
-    {
-      sort: {
-        hit: -1,
-      },
-    }
-  );
-  // const contribution = await Contribution.findOneAndUpdate(
-  //   {
-  //     recommended: false,
-  //   },
-  //   {
-  //     recommended: true,
-  //   },
-  //   {
-  //     sort: {
-  //       hit: -1,
-  //     },
-  //   }
-  // );
-
-  subscribers.map(async (subscriber) => {
-    const userEmail = subscriber.subscriber_email;
-    let user = await User.findOne({
-      user_email: userEmail,
-    });
-    const userName = user ? user.user_name + '님' : '여러분';
-    var date = new Date();
-    const week = ['일', '월', '화', '수', '목', '금', '토'];
-    let formatDate = `${date.getFullYear()}/${
-      date.getMonth() + 1
-    }/${date.getDate()} ${week[date.getDay()]}요일`;
-    const contributionContent =
-      contribution.contribution_content.substr(0, 150) + '...';
-    let newsLetter;
-    ejs.renderFile(
-      __dirname + '/controller/ejsform/newsLetter.ejs',
-      {
-        formatDate,
-        userEmail,
-        userName,
-        articleList,
-        contribution,
-        articlesCount,
-        max,
-        contributionContent,
-      },
-      (err, data) => {
-        if (err) console.log(err);
-        newsLetter = data;
-      }
-    );
-    console.log('////////');
-    console.log(formatDate);
-    console.log(userEmail);
-    console.log(userName);
-    console.log(articleList);
-    console.log(max);
-    console.log(contribution);
-    console.log(contributionContent);
-    console.log('////////');
-    
-    await transporter.sendMail(
-      {
-        from: 'DEVzine:port <devzineport@gmail.com>',
-        // to: 'idhyo0o@naver.com', // dummy email
-        to: 'haeun.yah@gmail.com',
-        // to: userEmail,
-        subject: 'DEVzine:port 에서 발송된 뉴스레터',
-        html: newsLetter,
-      },
-      (err, info) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log('Email send: ' + info.response);
-          transporter.close();
-        }
-      }
-    );
-  });
-
-  res.status(200).send('mail test');
-});
-
-/////////////////// schedule
+// 구독자 이메일 자동 발송 (오전 7시) 
 const automatedNewsLetter = schedule.scheduleJob(
-  '00 22 * * 1,2,3,4,5,7',
+  '00 22 * * 1-5,7',
   async () => {
-    // fill it
+    await sendMailToSubscribers();
   }
 );
-///////////////
-
-// TODO: 배포 전에 삭제 (크롤링 자동화 test 를 위한 코드입니다)
-const test = schedule.scheduleJob('*/10 * * * * *', async () => {
-  // const data = await getRecentArticlesFrom24H();
-  // const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
-  // console.log(articlesPastTwoWeeks);
-  // await setNewCacheForArticles(articlesPastTwoWeeks);
-});
 
 mongoose
   .connect(process.env.MONGO_STRING, {

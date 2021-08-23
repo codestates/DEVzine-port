@@ -424,9 +424,11 @@ select::-ms-expand {
   width: 265px; }
 
 .modalcontainer {
+  position: fixed;
   height: 15rem;
   margin: 120px auto;
-  text-align: center; }
+  text-align: center;
+  z-index: 720; }
   .modalcontainer .modalbackdrop {
     display: flex;
     align-items: center;
@@ -474,10 +476,6 @@ select::-ms-expand {
         .modalcontainer .desc .closebtn {
           max-width: 265px;
           width: 90%; } }
-
-.alermodalbox {
-  height: 0;
-  width: 0; }
 
 .loadingbox {
   position: absolute;
@@ -860,9 +858,6 @@ select::-ms-expand {
     .signincontainer .signinwrapper .commonbutton {
       z-index: 710;
       width: 296px; }
-
-.alert-modal {
-  z-index: 720; }
 
 .inputlarge {
   width: 296px;
@@ -1586,7 +1581,7 @@ label {
           max-width: 320px;
           width: 100%; } }
       .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist {
-        width: 360px;
+        width: 100%;
         height: auto;
         background: #ffffff;
         display: flex; }
@@ -1594,13 +1589,10 @@ label {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 20%;
+          width: 15%;
           height: 40px;
           border-right: 1px solid #d9d9d9;
           border-bottom: 1px solid #d9d9d9; }
-          @media screen and (max-width: 767px) {
-            .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader {
-              width: 10%; } }
           .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader .updatebtn {
             width: 20px;
             height: 20px; }
@@ -1609,22 +1601,16 @@ label {
             height: 20px; }
         .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader.first {
           padding-left: 8px;
-          width: 40%;
+          width: 55%;
           justify-content: flex-start; }
-          @media screen and (max-width: 767px) {
-            .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader.first {
-              width: 54%; } }
         .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader.last {
           border-right: 0px solid;
-          width: 20%; }
-          @media screen and (max-width: 767px) {
-            .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tableheader.last {
-              width: 15%; } }
+          width: 15%; }
         .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 20%;
+          width: 15%;
           height: 30px;
           border-right: 1px solid #d9d9d9;
           border-bottom: 1px solid #d9d9d9;
@@ -1633,9 +1619,6 @@ label {
           line-height: 24px;
           letter-spacing: -0.01em;
           color: #191a20; }
-          @media screen and (max-width: 767px) {
-            .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent {
-              width: 10%; } }
           .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent .updatebtn {
             width: 20px;
             height: 20px;
@@ -1654,11 +1637,8 @@ label {
           overflow: hidden;
           text-overflow: ellipsis;
           padding-left: 8px;
-          width: 40%;
+          width: 55%;
           justify-content: flex-start; }
-          @media screen and (max-width: 767px) {
-            .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.first {
-              width: 54%; } }
         .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last {
           border-right: 0px solid;
           display: flex;
@@ -1667,21 +1647,7 @@ label {
           justify-content: center;
           font-size: 10px;
           line-height: 14px;
-          width: 20%; }
-          @media screen and (max-width: 767px) {
-            .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last {
-              width: 15%; } }
-          .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last a {
-            width: 40px;
-            height: 15px;
-            background: #c4c4c4;
-            display: flex;
-            align-items: center;
-            justify-content: center; }
-            @media screen and (max-width: 767px) {
-              .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last a {
-                width: 35px;
-                height: 13px; } }
+          width: 15%; }
     .optcontentswrapper .contributionstatuscontainer .contributionstatustable > li:last-child .tablecontent {
       border-bottom: 0px solid; }
 
@@ -2168,7 +2134,7 @@ label {
     margin-bottom: 220px; }
     @media screen and (max-width: 767px) {
       .articlecontainer-footer {
-        margin-bottom: 180px; } }
+        margin-bottom: 160px; } }
   .articlecontainer .articleviewwrapper {
     color: #191a20; }
     .articlecontainer .articleviewwrapper .header {
@@ -2178,10 +2144,11 @@ label {
       height: 140px;
       border: 1px solid #d9d9d9;
       border-radius: 24px 24px 0 0;
-      padding-left: 20px; }
+      padding-left: 20px;
+      width: 100%; }
       @media screen and (max-width: 767px) {
         .articlecontainer .articleviewwrapper .header {
-          margin-top: 110px; } }
+          margin-top: 120px; } }
       .articlecontainer .articleviewwrapper .header .headerleft {
         padding-top: 24px; }
         @media screen and (max-width: 767px) {
@@ -2214,7 +2181,9 @@ label {
               font-size: 18px;
               line-height: 28px;
               letter-spacing: -0.02em;
-              margin-bottom: 0px; } }
+              margin-bottom: 0px;
+              padding-right: 20px;
+              height: 56px; } }
         .articlecontainer .articleviewwrapper .header .headerleft .username {
           font-size: 14px;
           line-height: 24px;
@@ -2243,43 +2212,62 @@ label {
           margin: 0 4px; }
         @media screen and (max-width: 767px) {
           .articlecontainer .articleviewwrapper .header .datawrapper {
-            margin-top: 0px;
-            left: 7px; } }
+            clear: both;
+            text-align: right;
+            line-height: 18px;
+            height: 18px;
+            width: 100%;
+            padding-left: 43px;
+            padding-top: 10px; } }
     .articlecontainer .articleviewwrapper .body {
       background-color: #fff;
       position: relative;
-      padding: 24px 30px;
+      padding: 24px;
       width: 100%;
-      min-height: 490px;
+      min-height: 500px;
       height: auto;
       border: 1px solid #d9d9d9;
       border-top: 0 solid;
       border-radius: 0 0 24px 24px; }
+      @media screen and (max-width: 767px) {
+        .articlecontainer .articleviewwrapper .body {
+          min-height: 400px; } }
       .articlecontainer .articleviewwrapper .body .contents {
         font-size: 18px;
         line-height: 28px;
         letter-spacing: -0.02em;
         word-break: break-all; }
+        @media screen and (max-width: 767px) {
+          .articlecontainer .articleviewwrapper .body .contents {
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: -0.01em; } }
       .articlecontainer .articleviewwrapper .body .layer {
         position: absolute;
         left: 0;
         bottom: 0;
         width: 100%;
         min-height: 423px;
-        background: linear-gradient(181.43deg, #f2f2f2 30.92%, rgba(229, 229, 229, 0.75) 57.12%, rgba(229, 229, 229, 0.36) 70.83%, rgba(255, 255, 255, 0.49) 85.2%, rgba(255, 255, 255, 0) 99.37%, rgba(255, 255, 255, 0.0822785) 99.37%);
+        background: linear-gradient(-360deg, rgba(242, 242, 242, 0) 0%, rgba(242, 242, 242, 0.7) 20%, rgba(242, 242, 242, 0.9) 50%, rgba(242, 242, 242, 0.95) 70%, #f2f2f2 100%);
         border-radius: 24px 24px 0px 0px;
         transform: rotate(180deg); }
+        @media screen and (max-width: 767px) {
+          .articlecontainer .articleviewwrapper .body .layer {
+            min-height: 400px; } }
       .articlecontainer .articleviewwrapper .body .commonbutton {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        bottom: 72px; }
+        bottom: 100px; }
+        @media screen and (max-width: 767px) {
+          .articlecontainer .articleviewwrapper .body .commonbutton {
+            width: 85%;
+            bottom: 70px; } }
 
 .line-spacing {
-  padding-right: 5px; }
-  .line-spacing:nth-child(3n+1) {
-    display: inline-block;
-    margin-bottom: 20px; }
+  padding-right: 5px;
+  display: inline-block;
+  margin-bottom: 20px; }
 
 .ell-24-view {
   width: 100%;
@@ -2387,7 +2375,8 @@ label {
     color: #191a20;
     left: 87%;
     position: absolute;
-    width: 13%; }
+    width: 13%;
+    line-height: 21px; }
     .request-search:hover {
       background-color: #FFBB34;
       font-weight: 700; }
@@ -2414,7 +2403,8 @@ label {
     color: #191a20;
     left: 87%;
     position: absolute;
-    width: 13%; }
+    width: 13%;
+    line-height: 21px; }
     .approval-search:hover {
       background-color: #FFBB34;
       font-weight: 700; }

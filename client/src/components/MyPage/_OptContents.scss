@@ -51,21 +51,20 @@
         width:100%;
       }
       .contributionstatuslist {
-        width: 360px;
+        // width: 360px;
+        width: 100%;
         height: auto;
         background: #ffffff;
         display: flex;
-
+        
         .tableheader {
           @include flexbox;
-          width: 20%;
+          width: 15%;
           height: 40px;
           border-right: 1px solid #d9d9d9;
           border-bottom: 1px solid #d9d9d9;
 
-          @include mobile-only() {
-            width: 10%;
-          }
+
 
           .updatebtn {
             width: 20px;
@@ -78,33 +77,27 @@
         }
         .tableheader.first {
           padding-left: 8px;
-          width: 40%;
+          width: 55%;
           justify-content: flex-start;
 
-          @include mobile-only() {
-            width:54%;
-          }
+
         }
         .tableheader.last {
           border-right: 0px solid;
-          width: 20%;
+          width: 15%;
 
-          @include mobile-only() {
-            width: 15%;
-          }
+
          
         }
         .tablecontent {
           @include flexbox;
-          width: 20%;
+          width: 15%;
           height: 30px;
           border-right: 1px solid #d9d9d9;
           border-bottom: 1px solid #d9d9d9;
           font-weight: normal;
 
-          @include mobile-only() {
-            width: 10%;
-          }
+
 
           @include text-style(14, $dark);
           .updatebtn {
@@ -130,34 +123,18 @@
           overflow: hidden;
           text-overflow: ellipsis;
           padding-left: 8px;
-          width: 40%;
+          width: 55%;
           justify-content: flex-start;
 
-          @include mobile-only() {           
-            width:54%;
-          }
+
         }
         .tablecontent.last {
           border-right: 0px solid;
           @include column-flexbox; 
           font-size: 10px;
           line-height: 14px;
-          width: 20%;
+          width: 15%;
 
-          @include mobile-only() {
-            width: 15%;
-          }
-
-          a {
-            width: 40px;
-            height: 15px;
-            background: #c4c4c4;
-            @include flexbox;
-            @include mobile-only() {
-              width: 35px;
-              height: 13px;
-            }
-          }
         }
       }
     }

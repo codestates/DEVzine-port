@@ -39,6 +39,12 @@ function MyPageWrapper() {
 
   const [ModalOpen, setModalOpen] = useState(false);
   const [AlertOpen, setAlertOpen] = useState(false);
+  const [AlreadyExist, setAlreadyExist] = useState(false);
+  const [AllVerified, setAllVerified] = useState(false);
+  const [IsEditedSuccess, setIsEditedSuccess] = useState(false);
+  const [IsEditedFail, setIsEditedFail] = useState(false);
+  const [SuccessWithdrawal, setSuccessWithdrawal] = useState(false);
+  const [FailWithdrawal, setFailWithdrawal] = useState(false);
   const [allData, setAllData] = useState(false);
 
   useEffect(() => {
@@ -52,7 +58,6 @@ function MyPageWrapper() {
 
   const debouncePasswordValidation = debounce(() => {
     if (Password !== 'defaultpassword') {
-      // 유저가 비밀번호를 변경할 경우
       if (checkPassword(Password)) {
         setPw_isValid(true);
       } else {
@@ -87,10 +92,7 @@ function MyPageWrapper() {
       setAge('');
       setPosition('');
       setLanguage([]);
-      setScribed(false); //아래것과 위에것 어떠한 것이 작동하는지 알아보기
-      // res.data.data.user.subscribed === true
-      //   ? setScribed('구독')
-      //   : setScribed('구독안함');
+      setScribed(false);
       setContribution([]);
       setAllData(true);
     } else {
@@ -101,6 +103,7 @@ function MyPageWrapper() {
           withCredentials: true,
         })
         .then(res => {
+          console.log(res.data.data);
           setEmail(res.data.data.user.user_email);
           setPassword('defaultpassword');
           setName(res.data.data.user.user_name);
@@ -111,10 +114,7 @@ function MyPageWrapper() {
           setLanguage(res.data.data.user.user_info.user_language);
           setScribed(
             res.data.data.user.subscribed === true ? '구독' : '구독안함',
-          ); //아래것과 위에것 어떠한 것이 작동하는지 알아보기
-          // res.data.data.user.subscribed === true
-          //   ? setScribed('구독')
-          //   : setScribed('구독안함');
+          );
           setContribution(res.data.data.contributions);
         })
         .catch(err => {
@@ -162,7 +162,7 @@ function MyPageWrapper() {
   ];
 
   async function patchHandler() {
-    selectInputHandler(); //회원가입 시 화면에 있는 선택사항들을 body에 저장하기 위함
+    selectInputHandler();
 
     let body = {
       user_email: Email,
@@ -177,16 +177,22 @@ function MyPageWrapper() {
       subscribed: Scribed,
     };
 
-    console.log('MyPageWrapper :', body);
+    // console.log('MyPageWrapper :', body);
 
-    dispatch(mypageUser(body)).then(res => {
-      if (res.payload[2] === 'Patch success') {
-        alert('정보수정하였습니다.');
-        window.location.href = '/';
-      } else {
-        alert('정보수정을 실패하였습니다.');
-      }
-    });
+    dispatch(mypageUser(body))
+      .then(res => {
+        if (res.payload[2] === 'Patch success') {
+          setIsEditedSuccess(true);
+          window.location.href = '/';
+        }
+      })
+      .catch(err => {
+        if (err.message.includes(409)) {
+          setAlreadyExist(true);
+        } else {
+          setIsEditedFail(true);
+        }
+      });
   }
 
   function radioInputHandler() {
@@ -217,10 +223,12 @@ function MyPageWrapper() {
     if (pw_confirm) {
       return dispatch(deleteUser())
         .then(res => {
-          alert('회원탈퇴 성공', res);
+          setSuccessWithdrawal(true);
           window.location.href = '/';
         })
-        .catch(err => alert('회원탈퇴 에러', err));
+        .catch(err => {
+          setFailWithdrawal(true);
+        });
     } else {
       return setAlertOpen(true);
     }
@@ -228,6 +236,12 @@ function MyPageWrapper() {
 
   const closeModal = () => {
     setAlertOpen(false);
+    setAlreadyExist(false);
+    setAllVerified(false);
+    setIsEditedSuccess(false);
+    setIsEditedFail(false);
+    setSuccessWithdrawal(false);
+    setFailWithdrawal(false);
   };
 
   return allData ? (
@@ -274,7 +288,7 @@ function MyPageWrapper() {
                     pw_isValid &&
                     pw_confirm
                       ? patchHandler()
-                      : alert('모든 것을 만족해야 합니다.')
+                      : setAllVerified(true)
                   }
                   style={{ margin: '0' }}
                 >
@@ -287,14 +301,36 @@ function MyPageWrapper() {
                   border={`1px solid #d9d9d9`}
                   onClickHandle={withdrawal}
                 />
-                <div className="alermodalbox">
-                  <AlertModal
-                    open={AlertOpen}
-                    close={closeModal}
-                    alertString={'비밀번호를 확인해 주세요.'}
-                    alertBtn="확인"
-                  />
-                </div>
+                <AlertModal
+                  open={
+                    AlertOpen ||
+                    AlreadyExist ||
+                    AllVerified ||
+                    IsEditedSuccess ||
+                    IsEditedFail ||
+                    SuccessWithdrawal ||
+                    FailWithdrawal
+                  }
+                  close={closeModal}
+                  alertString={
+                    AlertOpen
+                      ? '비밀번호를 확인해 주세요.'
+                      : AlreadyExist
+                      ? '이미 존재하는 회원입니다.'
+                      : AllVerified
+                      ? '모든 것을 만족해야 합니다.'
+                      : IsEditedSuccess
+                      ? '정보 수정 완료하였습니다.'
+                      : SuccessWithdrawal
+                      ? '회원 탈퇴에 성공하였습니다.'
+                      : FailWithdrawal
+                      ? '회원 탈퇴에 실패하였습니다.'
+                      : IsEditedFail
+                      ? '정보 수정 실패하였습니다.'
+                      : ''
+                  }
+                  alertBtn="확인"
+                />
                 <div className="admin-footer" />
               </div>
             </div>

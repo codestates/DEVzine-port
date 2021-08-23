@@ -6,11 +6,13 @@ import { deleteData } from '../../../_actions/article_actions';
 import SignInModal from '../SignInModal/SignInModal';
 import store from '../../../store/store';
 import close from '../../../assets/images/close.svg';
+import AlertModal from '../AlertModal/AlertModal';
 
 function SideBar(props) {
   const dispatch = useDispatch();
 
   const [ModalOpen, setModalOpen] = useState(false);
+  const [AlertOpen, setAlertOpen] = useState(false);
 
   useEffect(() => {
     if (store.getState().user.signinSuccess) {
@@ -23,10 +25,6 @@ function SideBar(props) {
     }
   }, []);
 
-  function signInHandler() {
-    setModalOpen(true);
-  }
-
   function signOutHandler() {
     dispatch(signoutUser()).then(res => {
       if (res.payload === 'Logout success') {
@@ -35,10 +33,15 @@ function SideBar(props) {
         dispatch(deleteData());
         window.location.reload();
       } else {
-        alert('로그아웃 실패하였습니다.');
+        // alert('로그아웃 실패하였습니다.');
+        setAlertOpen(true);
       }
     });
   }
+
+  const closeModal = () => {
+    setAlertOpen(false);
+  };
 
   return (
     <>
@@ -57,7 +60,7 @@ function SideBar(props) {
                   {props.UserName ? (
                     <li className="usename">{props.UserName}</li>
                   ) : (
-                    <li onClick={signInHandler}>로그인</li>
+                    <li onClick={() => setModalOpen(true)}>로그인</li>
                   )}
                   <li onClick={() => props.setOpenSidebar(false)}>
                     <Link to="/mypage">마이페이지</Link>
@@ -84,6 +87,12 @@ function SideBar(props) {
             </div>
           </div>
         </div>
+        <AlertModal
+          open={AlertOpen}
+          close={closeModal}
+          alertString={'로그아웃 실패하였습니다.'}
+          alertBtn="확인"
+        />
         {ModalOpen ? (
           <SignInModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
         ) : null}

@@ -11,6 +11,7 @@ import SignInModal from '../SignInModal/SignInModal';
 import logo from '../../../assets/images/DEVzine.svg';
 import menu from '../../../assets/images/menu_b.svg';
 import SideBar from './SideBar';
+import AlertModal from '../AlertModal/AlertModal';
 
 function Header() {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function Header() {
   const [OpenSidebar, setOpenSidebar] = useState(false);
   const [Admin, setAdmin] = useState(false);
   const [Date, setDate] = useState('');
+  const [AlertOpen, setAlertOpen] = useState(false);
 
   useEffect(() => {
     if (store.getState().user.signinSuccess) {
@@ -60,7 +62,8 @@ function Header() {
           dispatch(deleteData());
           window.location.reload();
         } else {
-          alert('로그아웃 실패하였습니다.');
+          // alert('로그아웃 실패하였습니다.');
+          setAlertOpen(true);
         }
       });
     }
@@ -72,15 +75,16 @@ function Header() {
           dispatch(deleteAdminData());
           window.location.href = '/';
         } else {
-          alert('로그아웃 실패하였습니다.');
+          // alert('로그아웃 실패하였습니다.');
+          setAlertOpen(true);
         }
       });
     }
   }
 
-  function headerNavOpen() {
-    setOpenSidebar(true);
-  }
+  const closeModal = () => {
+    setAlertOpen(false);
+  };
 
   return Date ? (
     <>
@@ -147,7 +151,11 @@ function Header() {
                       />
                     ) : (
                       <span className="headernav-menu">
-                        <img src={menu} alt="menu" onClick={headerNavOpen} />
+                        <img
+                          src={menu}
+                          alt="menu"
+                          onClick={() => setOpenSidebar(true)}
+                        />
                       </span>
                     )}
                   </div>
@@ -186,6 +194,12 @@ function Header() {
             </div>
           </div>
         </div>
+        <AlertModal
+          open={AlertOpen}
+          close={closeModal}
+          alertString={'로그인 실패하였습니다.'}
+          alertBtn="확인"
+        />
         {ModalOpen ? (
           <SignInModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
         ) : null}

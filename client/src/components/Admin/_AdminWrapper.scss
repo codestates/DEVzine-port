@@ -7,6 +7,7 @@
   &-footer {
     height: 100px;
     margin-bottom: 220px; // footer 220px 포함
+    // margin-bottom: 100px; // footer 220px 포함
 
     @include mobile-only() {
       margin-bottom: 40px;
@@ -16,6 +17,7 @@
 
 .request {
   margin-top: 192px; //header 120px 포함
+  // border:1px solid red;
 
   &-form {
     border-bottom: 1px solid $yellow-dark;
@@ -57,15 +59,15 @@
   &-search {
     @extend %form-base;
     background-color: $yellow-dark;
-    // background-color: transparent;
     border-color: $yellow-dark;
     color: $dark;
     left: 87%;
     position: absolute;
     width: 13%;
+    line-height: 21px;
 
     &:hover {
-      background-color:  #FFBB34;
+      background-color: #FFBB34;
       font-weight: $bold;
     }
   }
@@ -104,6 +106,7 @@
     left: 87%;
     position: absolute;
     width: 13%;
+    line-height: 21px;
 
     &:hover {
       background-color:  #FFBB34;

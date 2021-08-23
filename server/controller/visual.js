@@ -1,7 +1,7 @@
-const redisClient = require('../config/redis');
+const { Stat } = require('../Models/Stats');
 const { getUserStats } = require('./statfunction/userStats');
 const { getArticleStats } = require('./statfunction/articleStats');
-const { Stat } = require('../Models/Stats');
+const redisClient = require('../config/redis');
 
 module.exports = {
   getStatisticsForVisual: async (req, res) => {

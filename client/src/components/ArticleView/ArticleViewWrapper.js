@@ -3,7 +3,6 @@ import { customAxios } from '../../utils/customAxios';
 import Button from '../Common/Button/Button';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import Auth from '../../hoc/auth';
-import store from '../../store/store';
 
 function ArticleViewWrapper({ id }) {
   const paramsArr = id.split('-');
@@ -13,22 +12,8 @@ function ArticleViewWrapper({ id }) {
   const [Article, setArticle] = useState({});
   const [Alldata, setAlldata] = useState(false);
   const [ModalOpen, setModalOpen] = useState(false);
-  // const [Request, setRrequest] = useState(Auth(true));
 
-  // console.log(Auth(true));
   const Request = Auth(true);
-
-  // useEffect(() => {
-  //   // setRrequest(Auth(true));
-
-  //   if (Request === 'Login need') {
-  //     if (store.getState().admin.adminSigninSuccess) {
-  //       if (store.getState().admin.adminSigninSuccess === 'Login success') {
-  //         setRrequest('');
-  //       }
-  //     }
-  //   }
-  // }, []);
 
   useEffect(async () => {
     indicator === 'con'
@@ -39,22 +24,24 @@ function ArticleViewWrapper({ id }) {
             return setContribution(res.data.data);
           })
           .catch(err => {
-            // window.location.href = '/error';
-            console.log('무슨오류1', err);
+            window.location.href = '/error';
+            // console.log(err);
           })
       : await customAxios
           .get(`/magazine/article/${pathParameter}`)
           .then(res => {
-            console.log('Article로 요청', res);
+            // console.log('Article로 요청', res);
             return setArticle(res.data.data);
           })
           .catch(err => {
-            // window.location.href = '/error';
-            console.log('무슨오류2', err);
+            window.location.href = '/error';
+            // console.log(err);
           });
     setAlldata(true);
   }, []);
-  console.log(Request);
+
+  // console.log(Request);
+
   return Alldata ? (
     <>
       <div className="articlecontainer">
@@ -69,10 +56,7 @@ function ArticleViewWrapper({ id }) {
                         ? Contribution.contribution_keyword
                         : Article.article_keyword}
                     </span>
-                    <div className="title ell-24-view">
-                      {/* {indicator === 'con'
-                        ? Contribution.contribution_title.slice(0, 15) + '...'
-                        : Article.article_title.slice(0, 15) + '...'} */}
+                    <div className="title">
                       {indicator === 'con'
                         ? Contribution.contribution_title
                         : Article.article_title}
@@ -118,7 +102,7 @@ function ArticleViewWrapper({ id }) {
                     {indicator === 'con'
                       ? Request === 'Login need'
                         ? Contribution.contribution_content
-                            .slice(0, 200)
+                            .slice(0, 300)
                             .split(/!|\.\s|\✨/)
                             .map(line => (
                               <div key={line} className="line-spacing">

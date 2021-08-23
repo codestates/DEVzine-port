@@ -9,7 +9,6 @@ function ContributionStatus({ Contribution }) {
     await customAxios
       .delete(`/contribution/${contributionid}`)
       .then(res => {
-        console.log(res);
         window.location.href = '/mypage';
       })
       .catch(err => console.log(err));
@@ -80,14 +79,17 @@ function ContributionStatus({ Contribution }) {
                     />
                   </svg>
                 </span>
-                <span className="tablecontent last">
-                  {statuscodeconvert(String(el.status))}
-                  {el.status === 110 || el.status === 111 ? (
-                    <a href={el.contribution_url} className="sm-hidden">
-                      URL
-                    </a>
-                  ) : null}
-                </span>
+                {el.status === 110 || el.status === 111 ? (
+                  <span className="tablecontent last">
+                    <Link to={el.contribution_url.split('3000')[1]}>
+                      {statuscodeconvert(String(el.status))}
+                    </Link>
+                  </span>
+                ) : (
+                  <span className="tablecontent last">
+                    {statuscodeconvert(String(el.status))}
+                  </span>
+                )}
               </li>
             );
           })
