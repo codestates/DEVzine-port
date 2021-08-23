@@ -96,14 +96,12 @@ function SigninModal({ ModalOpen, setModalOpen }) {
           </Link>
         </span>
       </div>
-      <div className="alert-modal">
-        <AlertModal
-          open={AlertOpen}
-          close={closeModal}
-          alertString={'아이디 혹은 비밀번호가\n일치하지 않습니다.'}
-          alertBtn="확인"
-        />
-      </div>
+      <AlertModal
+        open={AlertOpen}
+        close={closeModal}
+        alertString={'아이디 혹은 비밀번호가\n일치하지 않습니다.'}
+        alertBtn="확인"
+      />
     </div>
   ) : null;
 }

@@ -165,22 +165,20 @@ function SubscriptionWrapper() {
                 )}
               </div>
             </div>
-            <div className="alermodalbox">
-              <AlertModal
-                open={AlertOpen}
-                close={closeModal}
-                alertString={
-                  BlackInput
-                    ? '이메일을 작성해야 합니다.'
-                    : EmailSubSuc
-                    ? '구독신청이 완료되었습니다.'
-                    : Subscribed
-                    ? '현재 구독 중입니다.'
-                    : '현재 구독 중인 이메일입니다.'
-                }
-                alertBtn="확인"
-              />
-            </div>
+            <AlertModal
+              open={AlertOpen}
+              close={closeModal}
+              alertString={
+                BlackInput
+                  ? '이메일을 작성해야 합니다.'
+                  : EmailSubSuc
+                  ? '구독신청이 완료되었습니다.'
+                  : Subscribed
+                  ? '현재 구독 중입니다.'
+                  : '현재 구독 중인 이메일입니다.'
+              }
+              alertBtn="확인"
+            />
           </div>
         </div>
         <div className="admin-footer" />

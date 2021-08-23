@@ -213,38 +213,36 @@ function SignUpWrapper() {
                 >
                   회원가입
                 </div>
-                <div className="alermodalbox">
-                  <AlertModal
-                    open={
-                      AlertOpen ||
-                      SignUpFail ||
-                      SignUpSuccess ||
-                      AllVerified ||
-                      EmailNotVerified ||
-                      AlreadyExist ||
-                      EmailUnverified
-                    }
-                    close={closeModal}
-                    alertString={
-                      AlertOpen
-                        ? '30분 이내로 확인해주세요.'
-                        : SignUpFail
-                        ? '회원가입에 실패하였습니다.'
-                        : SignUpSuccess
-                        ? '회원가입에 성공하였습니다.'
-                        : AllVerified
-                        ? '모든 것을 만족해야 합니다.'
-                        : EmailNotVerified
-                        ? '이메일 형식을 확인해주세요.'
-                        : AlreadyExist
-                        ? '이미 존재하는 회원입니다.'
-                        : EmailUnverified
-                        ? '이메일 인증이 필요합니다.'
-                        : ''
-                    }
-                    alertBtn="확인"
-                  />
-                </div>
+                <AlertModal
+                  open={
+                    AlertOpen ||
+                    SignUpFail ||
+                    SignUpSuccess ||
+                    AllVerified ||
+                    EmailNotVerified ||
+                    AlreadyExist ||
+                    EmailUnverified
+                  }
+                  close={closeModal}
+                  alertString={
+                    AlertOpen
+                      ? '30분 이내로 확인해주세요.'
+                      : SignUpFail
+                      ? '회원가입에 실패하였습니다.'
+                      : SignUpSuccess
+                      ? '회원가입에 성공하였습니다.'
+                      : AllVerified
+                      ? '모든 것을 만족해야 합니다.'
+                      : EmailNotVerified
+                      ? '이메일 형식을 확인해주세요.'
+                      : AlreadyExist
+                      ? '이미 존재하는 회원입니다.'
+                      : EmailUnverified
+                      ? '이메일 인증이 필요합니다.'
+                      : ''
+                  }
+                  alertBtn="확인"
+                />
                 <div className="admin-footer" />
               </div>
             </div>

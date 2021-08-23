@@ -5,34 +5,46 @@ import TextInputGenderRequired from './TextInputGenderRequired';
 import Button from '../Button/Button';
 import Union from '../../../assets/images/Union.png';
 import { Link } from 'react-router-dom';
+import AlertModal from '../AlertModal/AlertModal';
 
 function AdminSignInModal({ ModalOpen, setModalOpen }) {
   const dispatch = useDispatch();
 
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
+  const [AlertOpen, setAlertOpen] = useState(false);
+
   const requiredTextInputData = [
     [Email, setEmail, '이메일 입력', 'email', '30'],
     [Password, setPassword, '비밀번호 입력', 'password', '20'],
   ];
 
   async function postHandler(e) {
-    let body = {
-      admin_id: Email,
-      admin_password: Password,
-    };
+    if (Email === '' || Password === '') {
+      return setAlertOpen(true);
+    } else {
+      let body = {
+        admin_id: Email,
+        admin_password: Password,
+      };
 
-    console.log('SignInModal :', body);
+      // console.log('SignInModal :', body);
 
-    dispatch(signinAdmin(body)).then(res => {
-      console.log(res.payload);
-      if (res.payload === 'Login success') {
-        window.location.href = '/admin';
-      } else {
-        alert('로그인 실패하였습니다.');
-      }
-    });
+      dispatch(signinAdmin(body)).then(res => {
+        console.log(res.payload);
+        if (res.payload === 'Login success') {
+          window.location.href = '/admin';
+        } else {
+          // alert('로그인 실패하였습니다.');
+          setAlertOpen(true);
+        }
+      });
+    }
   }
+
+  const closeModal = () => {
+    setAlertOpen(false);
+  };
 
   return ModalOpen ? (
     <div className="signincontainer">
@@ -64,6 +76,12 @@ function AdminSignInModal({ ModalOpen, setModalOpen }) {
           onClickHandle={postHandler}
         />
       </div>
+      <AlertModal
+        open={AlertOpen}
+        close={closeModal}
+        alertString={'로그인 실패하였습니다.'}
+        alertBtn="확인"
+      />
     </div>
   ) : null;
 }

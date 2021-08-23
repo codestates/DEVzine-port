@@ -7,6 +7,7 @@ import RequestTable from './RequestTable';
 import ApprovalTable from './ApprovalTable';
 import AdminSignInModal from '../Common/AdminModal/AdminSignInModal';
 import store from '../../store/store';
+import AlertModal from '../Common/AlertModal/AlertModal';
 
 function AdminWrapper() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ function AdminWrapper() {
   const [AppText, setAppText] = useState('');
   const [ModalOpen, setModalOpen] = useState(false);
   const [Admin, setAdmin] = useState(false);
+  const [AlertOpen, setAlertOpen] = useState(false);
 
   /*
 승인요청 - 게시대기(100), 게시승인(110), 게시거부(120)
@@ -56,7 +58,10 @@ function AdminWrapper() {
         setAccepted(res.payload.data.accepted);
         setAllData(true);
       })
-      .catch(err => alert('관리데이터 받아오는데 실패하였습니다.'));
+      .catch(err => {
+        // alert('관리데이터 받아오는데 실패하였습니다.');
+        setAlertOpen(true);
+      });
   }, []);
 
   function onSelectHandler(e) {
@@ -76,7 +81,10 @@ function AdminWrapper() {
 
     dispatch(searchData(Select, Text))
       .then(res => setRequested(res.payload))
-      .catch(err => alert('검색한 결과를 받아오는데 실패하였습니다.'));
+      .catch(err => {
+        // alert('검색한 결과를 받아오는데 실패하였습니다.');
+        setAlertOpen(true);
+      });
   }
 
   function onApprovalHandler(e) {
@@ -87,8 +95,15 @@ function AdminWrapper() {
         console.log(res.payload);
         setAccepted(res.payload);
       })
-      .catch(err => alert('검색한 결과를 받아오는데 실패하였습니다.'));
+      .catch(err => {
+        // alert('검색한 결과를 받아오는데 실패하였습니다.');
+        setAlertOpen(true);
+      });
   }
+
+  const closeModal = () => {
+    setAlertOpen(false);
+  };
 
   return AllData ? (
     <>
@@ -169,6 +184,12 @@ function AdminWrapper() {
               </div>
             ) : null}
           </div>
+          <AlertModal
+            open={AlertOpen}
+            close={closeModal}
+            alertString={'검색한 결과를 받아오는데\n실패하였습니다.'}
+            alertBtn="확인"
+          />
         </div>
         {ModalOpen ? (
           <AdminSignInModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />

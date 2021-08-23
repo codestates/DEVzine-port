@@ -177,7 +177,7 @@ function MyPageWrapper() {
       subscribed: Scribed,
     };
 
-    console.log('MyPageWrapper :', body);
+    // console.log('MyPageWrapper :', body);
 
     dispatch(mypageUser(body))
       .then(res => {
@@ -301,38 +301,36 @@ function MyPageWrapper() {
                   border={`1px solid #d9d9d9`}
                   onClickHandle={withdrawal}
                 />
-                <div className="alermodalbox">
-                  <AlertModal
-                    open={
-                      AlertOpen ||
-                      AlreadyExist ||
-                      AllVerified ||
-                      IsEditedSuccess ||
-                      IsEditedFail ||
-                      SuccessWithdrawal ||
-                      FailWithdrawal
-                    }
-                    close={closeModal}
-                    alertString={
-                      AlertOpen
-                        ? '비밀번호를 확인해 주세요.'
-                        : AlreadyExist
-                        ? '이미 존재하는 회원입니다.'
-                        : AllVerified
-                        ? '모든 것을 만족해야 합니다.'
-                        : IsEditedSuccess
-                        ? '정보 수정 완료하였습니다.'
-                        : SuccessWithdrawal
-                        ? '회원 탈퇴에 성공하였습니다.'
-                        : FailWithdrawal
-                        ? '회원 탈퇴에 실패하였습니다.'
-                        : IsEditedFail
-                        ? '정보 수정 실패하였습니다.'
-                        : ''
-                    }
-                    alertBtn="확인"
-                  />
-                </div>
+                <AlertModal
+                  open={
+                    AlertOpen ||
+                    AlreadyExist ||
+                    AllVerified ||
+                    IsEditedSuccess ||
+                    IsEditedFail ||
+                    SuccessWithdrawal ||
+                    FailWithdrawal
+                  }
+                  close={closeModal}
+                  alertString={
+                    AlertOpen
+                      ? '비밀번호를 확인해 주세요.'
+                      : AlreadyExist
+                      ? '이미 존재하는 회원입니다.'
+                      : AllVerified
+                      ? '모든 것을 만족해야 합니다.'
+                      : IsEditedSuccess
+                      ? '정보 수정 완료하였습니다.'
+                      : SuccessWithdrawal
+                      ? '회원 탈퇴에 성공하였습니다.'
+                      : FailWithdrawal
+                      ? '회원 탈퇴에 실패하였습니다.'
+                      : IsEditedFail
+                      ? '정보 수정 실패하였습니다.'
+                      : ''
+                  }
+                  alertBtn="확인"
+                />
                 <div className="admin-footer" />
               </div>
             </div>

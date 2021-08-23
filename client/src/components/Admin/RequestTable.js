@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { customAxios } from '../../utils/customAxios';
+import AlertModal from '../Common/AlertModal/AlertModal';
 
 function RequestTable({ Requested }) {
   const [StatusNumber, setStatusNumber] = useState(null);
+  const [AlertOpen, setAlertOpen] = useState(false);
+  const [AllSelect, setAllSelect] = useState(false);
+  const [PostSuc, setPostSuc] = useState(false);
 
   const columns = ['닉네임', '제목', '현황', '변경'];
   const radioInputData = {
@@ -31,28 +35,47 @@ function RequestTable({ Requested }) {
     e.preventDefault();
 
     if (StatusNumber === null) {
-      return alert('승인 혹은 거부를 선택해야 합니다.');
+      //  alert('승인 혹은 거부를 선택해야 합니다.');
+      setAllSelect(false);
+      setAlertOpen(true);
+    } else {
+      setAllSelect(true);
+
+      let route;
+      if (StatusNumber.slice(0, 2) === '11') {
+        route = 'accept';
+      } else if (StatusNumber.slice(0, 2) === '12') {
+        route = 'reject';
+      }
+
+      let body = {
+        contribution_id: contribution_id,
+        status: Number(StatusNumber),
+      };
+
+      return customAxios
+        .post(`/admin/contribution/${route}`, body)
+        .then(res => {
+          if (res.status === 200) {
+            // alert('요청이 완료되었습니다.');
+            setPostSuc(true);
+            setAlertOpen(true);
+          } else {
+            // alert('요청이 실패하였습니다.');
+            setPostSuc(false);
+            setAlertOpen(true);
+          }
+        });
     }
-
-    let route;
-    if (StatusNumber.slice(0, 2) === '11') {
-      route = 'accept';
-    } else if (StatusNumber.slice(0, 2) === '12') {
-      route = 'reject';
-    }
-
-    let body = {
-      contribution_id: contribution_id,
-      status: Number(StatusNumber),
-    };
-
-    return customAxios.post(`/admin/contribution/${route}`, body).then(res => {
-      if (res.status === 200) {
-        alert('요청이 완료되었습니다.');
-        window.location.reload();
-      } else alert('요청이 실패하였습니다.');
-    });
   }
+
+  const closeModal = () => {
+    setAlertOpen(false);
+
+    if (PostSuc) {
+      window.location.reload();
+    }
+  };
 
   return Requested ? (
     <table>
@@ -108,6 +131,18 @@ function RequestTable({ Requested }) {
             </tr>
           );
         })}
+        <AlertModal
+          open={AlertOpen}
+          close={closeModal}
+          alertString={
+            AllSelect
+              ? PostSuc
+                ? '요청이 완료되었습니다.'
+                : '요청이 실패하였습니다.'
+              : '승인 혹은 거부를\n선택해야 합니다.'
+          }
+          alertBtn="확인"
+        />
       </tbody>
     </table>
   ) : null;

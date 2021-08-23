@@ -11,9 +11,12 @@ function ContributionUpdateWrapper({ id }) {
   const [Title, setTitle] = useState('nothing');
   const [Content, setContent] = useState('nothing');
   const [ModalOpen, setModalOpen] = useState(false);
-  const [AlertOpen, setAlertOpen] = useState(false);
   const [ColorChange, setColorChange] = useState(false);
   const [AllDate, setAllDate] = useState(false);
+  const [AlertOpen, setAlertOpen] = useState(false);
+  const [AllSelect, setAllSelect] = useState(false);
+  const [PostSuc, setPostSuc] = useState(false);
+
   let requrest = Auth(true);
   let selectOptions = [
     '게임',
@@ -79,25 +82,37 @@ function ContributionUpdateWrapper({ id }) {
     e.preventDefault();
 
     if (Title.length < 8 || Content.length < 200 || Keyword === '') {
-      return setAlertOpen(true);
+      setAllSelect(false);
+      setAlertOpen(true);
+    } else {
+      setAllSelect(true);
+
+      let body = {
+        contribution_title: Title,
+        contribution_content: Content,
+        contribution_keyword: Keyword,
+      };
+
+      return customAxios.patch(`/contribution/${id}`, body).then(res => {
+        if (res.status === 200) {
+          // alert('기고수정요청이 완료되었습니다.');
+          setPostSuc(true);
+          setAlertOpen(true);
+        } else {
+          // alert('기고수정요청이 실패하였습니다.');
+          setPostSuc(false);
+          setAlertOpen(true);
+        }
+      });
     }
-
-    let body = {
-      contribution_title: Title,
-      contribution_content: Content,
-      contribution_keyword: Keyword,
-    };
-
-    return customAxios.patch(`/contribution/${id}`, body).then(res => {
-      if (res.status === 200) {
-        alert('기고수정요청이 완료되었습니다.');
-        window.history.back();
-      } else alert('기고수정요청이 실패하였습니다.');
-    });
   }
 
   const closeModal = () => {
     setAlertOpen(false);
+
+    if (PostSuc) {
+      window.history.back();
+    }
   };
 
   return AllDate ? (
@@ -188,14 +203,18 @@ function ContributionUpdateWrapper({ id }) {
                     </Link>
                   </div>
                 </div>
-                <div className="alermodalbox">
-                  <AlertModal
-                    open={AlertOpen}
-                    close={closeModal}
-                    alertString={'모두 입력해야 합니다.'}
-                    alertBtn="확인"
-                  />
-                </div>
+                <AlertModal
+                  open={AlertOpen}
+                  close={closeModal}
+                  alertString={
+                    AllSelect
+                      ? PostSuc
+                        ? '수정신청이 완료되었습니다.'
+                        : '수정신청이 실패하였습니다.'
+                      : '모두 입력해야 합니다.'
+                  }
+                  alertBtn="확인"
+                />
                 <div className="admin-footer" />
               </div>
             )}
