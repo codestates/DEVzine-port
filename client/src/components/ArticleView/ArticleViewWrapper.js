@@ -117,6 +117,13 @@ function ArticleViewWrapper({ id }) {
                         ? Contribution.contribution_content.slice(0, 200) +
                           '...'
                         : Contribution.contribution_content
+                            .split('. ')
+                            .map(line => (
+                              <span key={line}>
+                                {line}.
+                                <br />
+                              </span>
+                            ))
                       : Article.article_content.slice(0, 200) + '...'}
                   </div>
                   {indicator === 'con' ? (
