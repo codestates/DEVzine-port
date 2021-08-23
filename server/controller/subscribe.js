@@ -1,3 +1,4 @@
+const { User } = require('../Models/Users');
 const { Subscriber } = require('../Models/Subscribers');
 
 module.exports = {
@@ -15,6 +16,19 @@ module.exports = {
         return res.status(500).send(err);
       }
     });
+
+    await User.findOneAndUpdate(
+      {
+        user_email: subscriber_email,
+      },
+      {
+        subscribed: true,
+      },
+      {
+        new: true,
+      }
+    );
+
     res.status(200).send({ message: 'Subscription success' });
   },
 };
