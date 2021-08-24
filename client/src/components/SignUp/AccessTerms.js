@@ -1,10 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AccessModal from './AccessModal';
+import { AccessTermsData } from '../../assets/datas/SignUpData/data';
 
-function AcessTerms() {
+function AcessTerms({ setAllChecked }) {
   const [AlertOpen, setAlertOpen] = useState(false);
+  const [AlertString, setAlertString] = useState(false);
+  const [checkedInputs, setCheckedInputs] = useState([]);
 
-  const Data = '안녕';
+  function SigninPopup(data) {
+    setAlertString(data);
+    setAlertOpen(true);
+  }
+
+  useEffect(() => {
+    // console.log(checkedInputs);
+    setAllChecked(checkedInputs.length === 3);
+  }, [checkedInputs]);
+
+  const changeHandler = (checked, id) => {
+    if (checked) {
+      setCheckedInputs([...checkedInputs, id]);
+      // console.log('체크 반영 완료');
+    } else {
+      setCheckedInputs(checkedInputs.filter(el => el !== id));
+      // console.log('체크 해제 반영 완료');
+    }
+  };
 
   const closeModal = () => {
     setAlertOpen(false);
@@ -12,26 +33,39 @@ function AcessTerms() {
 
   return (
     <div className="accesswrapper">
-      이용약관 들어갑니당
+      <p>
+        이용약관동의<span className="accesswrapper-required">(필수)</span>
+      </p>
       <br />
-      <div
-        onClick={() => setAlertOpen(true)}
-        style={{
-          cursor: 'pointer',
-          height: '20px',
-          border: '1px solid #999',
-          display: 'block',
-        }}
-      >
-        개인정보수집 및 이용 약관
-        <input type="checkbox"></input>
-      </div>
-      <p>뉴스레터 신청 개인정보 수집 약관</p>
-      <p>서비스 이용 약관</p>
+      {AccessTermsData.map((el, idx) => {
+        return (
+          <div key={idx} className="accessdata">
+            <input
+              type="checkbox"
+              name="accessdata"
+              value="accept"
+              className="accessdata-ckb"
+              id={`check${idx}`}
+              onChange={e => {
+                changeHandler(e.currentTarget.checked, `check${idx}`);
+              }}
+              checked={checkedInputs.includes(`check${idx}`) ? true : false}
+            />
+            {el[0]}(필수)
+            <span
+              onClick={() => SigninPopup(el[1])}
+              className="accessdata-view"
+            >
+              <span className="sm-hidden">약관 보기</span>
+              <span className="sm-only">보기</span>
+            </span>
+          </div>
+        );
+      })}
       <AccessModal
         open={AlertOpen}
         close={closeModal}
-        alertString={Data}
+        alertString={AlertString}
         alertBtn="확인"
       />
     </div>

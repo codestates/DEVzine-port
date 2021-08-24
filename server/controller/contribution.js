@@ -182,7 +182,6 @@ module.exports = {
         },
         {
           _id: 0,
-          status: 0,
           contribution_id: 0,
           contribution_url: 0,
         }
@@ -199,11 +198,11 @@ module.exports = {
           message: 'Unauthorized user',
         });
       }
-
+      
       delete contribData._doc.user_email;
 
       if (contribData.temp_content) {
-
+        
         const { 
           hit, 
           contribution_date, 
