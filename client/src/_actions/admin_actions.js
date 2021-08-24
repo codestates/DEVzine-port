@@ -8,6 +8,7 @@ import {
 } from './types';
 import { customAxios } from '../utils/customAxios';
 
+// 관리자 로그아웃
 export async function signoutAdmin() {
   const request = await customAxios.post(`/user/signout`);
 
@@ -17,6 +18,7 @@ export async function signoutAdmin() {
   };
 }
 
+// 관리자 로그인
 export async function signinAdmin(dataToSubmit) {
   const request = await customAxios
     .post(`/admin/signin`, dataToSubmit)
@@ -28,6 +30,7 @@ export async function signinAdmin(dataToSubmit) {
   };
 }
 
+// 기고현황 정보
 export async function getContributionAdmin() {
   const request = await customAxios
     .get(`/admin/contributionlist`)
@@ -39,6 +42,7 @@ export async function getContributionAdmin() {
   };
 }
 
+// 검색된 요청
 export async function searchData(Select, Text) {
   const request = await customAxios
     .get(`/admin/contributionlist`)
@@ -68,6 +72,7 @@ export async function searchData(Select, Text) {
   };
 }
 
+// 검색된 승인
 export async function searchAppData(AppText) {
   const request = await customAxios
     .get(`/admin/contributionlist`)
@@ -87,6 +92,7 @@ export async function searchAppData(AppText) {
   };
 }
 
+// state 초기화
 export async function deleteAdminData() {
   const request = 'Delete admin data';
 

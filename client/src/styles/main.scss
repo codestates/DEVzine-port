@@ -24,6 +24,7 @@
 @import '../components/Common/Footer/Footer';
 @import '../components/Common/SignInModal/SignInModal';
 @import '../components/Common/SignInModal/TextInputGenderRequired';
+@import '../components/Admin/AdminWrapper';
 @import '../components/Landing/LandingWrapper';
 @import '../components/Landing/LandingInteraction';
 @import '../components/Landing/LandingSub';
@@ -40,6 +41,5 @@
 @import '../components/ArticleList/ArticleCarousel';
 @import '../components/ArticleView/ArticleViewWrapper';
 @import '../components/Visual/VisualWrapper';
-@import '../components/Admin/AdminWrapper';
 
 @import './layouts/grids';
