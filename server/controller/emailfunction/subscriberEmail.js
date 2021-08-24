@@ -20,20 +20,6 @@ const transporter = nodemailer.createTransport(
 );
 transporter.use('compile', inlineCss());
 
-// const contribution = await Contribution.findOneAndUpdate(
-//   {
-//     recommended: false,
-//   },
-//   {
-//     recommended: true,
-//   },
-//   {
-//     sort: {
-//       hit: -1,
-//     },
-//   }
-// );
-
 // console.log('////////');
 // console.log(formatDate);
 // console.log(userEmail);
@@ -101,6 +87,20 @@ const sendMailToSubscribers = async () => {
       },
     },
   );
+
+  // const contribution = await Contribution.findOneAndUpdate(
+  //   {
+  //     recommended: false,
+  //   },
+  //   {
+  //     recommended: true,
+  //   },
+  //   {
+  //     sort: {
+  //       hit: -1,
+  //     },
+  //   }
+  // );
 
   subscribers.map(async subscriber => {
     const userEmail = subscriber.subscriber_email;
