@@ -59,6 +59,7 @@ const setNewCacheForContributions = async contributions => {
     );
   }
   await redisClient.expire('allContributions', 60 * 60 * 24); 
+};
 
 const checkCacheForContributions = async () => {
   return new Promise((resolve, reject) => {
