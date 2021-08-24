@@ -67,24 +67,24 @@ const sendMailToSubscribers = async () => {
     idx++;
   }
 
-  // const contribution = await Contribution.findOne(
-  //   {
-  //     recommended: false,
-  //   },
-  //   [],
-  //   {
-  //     sort: {
-  //       hit: -1,
-  //     },
-  //   },
-  // );
-
   const contribution = await Contribution.findOneAndUpdate(
     {
       recommended: false,
+      $or: [
+        {
+          status: 110,
+        },
+        {
+          status: 111,
+        },
+        {
+          status: 112,
+        },
+      ],
     },
     {
       recommended: true,
+      // recommended: false,
     },
     {
       sort: {
@@ -93,16 +93,22 @@ const sendMailToSubscribers = async () => {
     },
   );
 
+  console.log(contribution);
+
   const date = new Date();
   const week = ['일', '월', '화', '수', '목', '금', '토'];
   const formatDate = `${date.getFullYear()}/${
     date.getMonth() + 1
   }/${date.getDate()} ${week[date.getDay()]}요일`;
-  const contributionContent =
-    contribution.contribution_content.substr(0, 150) + '...';
-  const contributionUserInfo = await User.findOne({
-    user_email: contribution.user_email,
-  });
+
+  const contributionContent = contribution
+    ? contribution.contribution_content.substr(0, 150) + '...'
+    : null;
+  const contributionUserInfo = contribution
+    ? await User.findOne({
+        user_email: contribution.user_email,
+      })
+    : null;
   const contributionUserName = contributionUserInfo
     ? contributionUserInfo.user_name
     : 'anonymous';
