@@ -19,6 +19,7 @@ const articleSchema = mongoose.Schema(
     },
     article_date: {
       type: Date,
+      expires: 60 * 60 * 24 * 30 * 6,
     },
     article_keyword: {
       type: String,
