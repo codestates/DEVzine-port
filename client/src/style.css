@@ -1394,8 +1394,12 @@ label {
       top: 0;
       right: 0;
       border-radius: 2px;
-      color: #9d9d9d;
+      color: #d9d9d9;
+      font-weight: 700;
       cursor: pointer; }
+      .inputsmallcontainer .subjectwrapper .emailverifybtn:hover {
+        color: #ffc803;
+        font-weight: 700; }
   .inputsmallcontainer .inputsmall {
     width: 100%;
     height: 40px;
@@ -1581,9 +1585,6 @@ label {
         align-items: center;
         justify-content: center;
         margin-bottom: 8px; }
-        @media screen and (max-width: 767px) {
-          .optcontentswrapper .contributionstatuscontainer .subject .btndesc {
-            display: none; } }
     .optcontentswrapper .contributionstatuscontainer .contributionstatustable {
       width: 100%;
       overflow: hidden;
