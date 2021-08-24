@@ -3,13 +3,12 @@ const { VerifiedEmail } = require('../Models/Verifiedemails');
 const smtpTransport = require('nodemailer-smtp-transport');
 const nodemailer = require('nodemailer');
 const ejs = require('ejs');
+const CryptoJS = require('crypto-js');
 require('dotenv').config();
 
-const crypto = require('crypto');
-const algorithm = 'aes-128-cbc';
-const key = '1234567890123456';
-const iv = key.toString('hex').slice(0, 16);
 const CLIENT_ENDPOINT = process.env.DEVZINE_CLIENT_ENDPOINT;
+const cryptoKey = '111';
+// const cryptoKey = process.env.CRYPTO_KEY;
 
 const transporter = nodemailer.createTransport(
   smtpTransport({
@@ -36,13 +35,16 @@ module.exports = {
       return res.status(400).send({ message: 'Email already exists' });
     }
 
-    let authMailForm;
-    const cipher = crypto.createCipheriv(algorithm, key, iv);
-    let encryptEmail = user_email;
-    // let encryptEmail = cipher.update(user_email, 'utf8', 'base64');
-    // encryptEmail += cipher.final('base64');
-    // console.log('Encrypt : ', encryptEmail);
+    let data = {
+      email: user_email,
+    };
+    let encryptEmail = CryptoJS.AES.encrypt(
+      JSON.stringify(data),
+      cryptoKey,
+    ).toString();
+    console.log('Encrypt : ', encryptEmail);
 
+    let authMailForm;
     ejs.renderFile(
       __dirname + '/ejsform/authMail.ejs',
       { CLIENT_ENDPOINT, user_email, encryptEmail },
@@ -74,11 +76,10 @@ module.exports = {
 
   verifyUserEmail: async (req, res) => {
     const { temp_email } = req.body;
-    const decipher = crypto.createDecipheriv(algorithm, key, iv);
-    let decryptEmail = temp_email;
-    // let decryptEmail = decipher.update(temp_email, 'base64', 'utf8');
-    // decryptEmail += decipher.final('utf8');
-    // console.log('Decrypt : ', decryptEmail);
+
+    let bytes = CryptoJS.AES.decrypt(temp_email, cryptoKey);
+    let decryptEmail = JSON.parse(bytes.toString(CryptoJS.enc.Utf8)).email;
+    console.log('Decrypt : ', decryptEmail);
 
     const tempEmail = new VerifiedEmail({
       temp_email: decryptEmail,
