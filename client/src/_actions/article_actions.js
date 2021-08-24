@@ -7,6 +7,7 @@ import {
 } from './types';
 import { customAxios } from '../utils/customAxios';
 
+// 기사 정보
 export async function getArticleData() {
   const request = await customAxios
     .get(`/magazine`)
@@ -18,6 +19,7 @@ export async function getArticleData() {
   };
 }
 
+// 검색된 기사
 export async function filterArticleData(body) {
   const request = await customAxios
     .get(`/magazine/`)
@@ -52,6 +54,7 @@ export async function filterArticleData(body) {
   };
 }
 
+// 기고 정보
 export async function getContributionData() {
   const request = await customAxios
     .get(`/magazine/contribution/all`)
@@ -63,6 +66,7 @@ export async function getContributionData() {
   };
 }
 
+// 검색된 기고
 export async function filterContributionData(body) {
   const request = await customAxios
     .get(`/magazine/contribution/all`)
@@ -99,6 +103,7 @@ export async function filterContributionData(body) {
   };
 }
 
+// state 초기화
 export async function deleteData() {
   const request = 'Delete data';
 

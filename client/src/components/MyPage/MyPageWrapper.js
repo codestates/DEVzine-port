@@ -349,7 +349,7 @@ function MyPageWrapper() {
                   yesBtn="네"
                   noBtn="아니오"
                 />
-                <div className="admin-footer" />
+                <div className="common-footer" />
               </div>
             </div>
           </div>

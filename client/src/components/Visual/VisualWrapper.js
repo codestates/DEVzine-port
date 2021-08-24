@@ -37,7 +37,7 @@ function VisualWrapper() {
 
                 <UserTopLanguage data={ChartData} />
 
-                <div className="admin-footer" />
+                <div className="visualcontainer-footer" />
               </div>
             </div>
           </div>
