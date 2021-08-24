@@ -7,7 +7,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), getUserInfo);
 router.patch(
   '/',
   passport.authenticate('jwt', { session: false }),
-  patchUserInfo
+  patchUserInfo,
 );
 
 module.exports = router;

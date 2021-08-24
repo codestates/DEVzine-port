@@ -8,7 +8,7 @@ const verifiedEmailSchema = mongoose.Schema(
       unique: true,
     },
   },
-  { versionKey: false }
+  { versionKey: false },
 );
 
 const VerifiedEmail = mongoose.model('verifiedemails', verifiedEmailSchema);

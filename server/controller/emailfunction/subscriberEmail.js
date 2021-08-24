@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport(
       user: process.env.NODEMAIL_EMAIL,
       pass: process.env.NODEMAIL_PWD,
     },
-  })
+  }),
 );
 transporter.use('compile', inlineCss());
 
@@ -43,9 +43,8 @@ transporter.use('compile', inlineCss());
 // console.log(contribution);
 // console.log(contributionContent);
 // console.log('////////');
-  
-const sendMailToSubscribers = async () => {
 
+const sendMailToSubscribers = async () => {
   const subscribers = await Subscriber.find({});
 
   // articles 어제 06시 이후에 크롤링 된 기사 가져오기
@@ -53,7 +52,7 @@ const sendMailToSubscribers = async () => {
   const articles = await Article.find({
     article_date: {
       $gte: new Date(
-        Date.now() - 1000 * 60 * 60 * 24 * getRange - 1000 * 60 * 60
+        Date.now() - 1000 * 60 * 60 * 24 * getRange - 1000 * 60 * 60,
       ),
     },
   });
@@ -100,10 +99,10 @@ const sendMailToSubscribers = async () => {
       sort: {
         hit: -1,
       },
-    }
+    },
   );
 
-  subscribers.map(async (subscriber) => {
+  subscribers.map(async subscriber => {
     const userEmail = subscriber.subscriber_email;
     let user = await User.findOne({
       user_email: userEmail,
@@ -133,7 +132,7 @@ const sendMailToSubscribers = async () => {
       (err, data) => {
         if (err) console.log(err);
         newsLetter = data;
-      }
+      },
     );
 
     await transporter.sendMail(
@@ -152,7 +151,7 @@ const sendMailToSubscribers = async () => {
           console.log('Email send: ' + info.response);
           transporter.close();
         }
-      }
+      },
     );
   });
 };
@@ -160,4 +159,3 @@ const sendMailToSubscribers = async () => {
 module.exports = {
   sendMailToSubscribers,
 };
-

@@ -5,7 +5,7 @@ iconv.skipDecodeWarning = true;
 
 module.exports = {
   scrapeBoanNews: async (compareDate = 86400000) => {
-    const parseDate = (date) => {
+    const parseDate = date => {
       // 입력 형식: 2021년 08월 10일 12:23
       const year = date.substring(0, 4);
       const month = date.substring(6, 8);

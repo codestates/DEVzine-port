@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 
 module.exports = {
   scrapeCodingWorld: async (compareDate = 86400000) => {
-    const getArticlesFromURL = async (url) => {
+    const getArticlesFromURL = async url => {
       const articleKeywords = {
         Coding: '코딩',
         'Ai/Robot': 'AI/로봇',

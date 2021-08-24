@@ -22,7 +22,7 @@ const passportVerify = async (user_email, user_password, done) => {
     }
     const isValidPassword = await bcrypt.compare(
       user_password,
-      user.user_password
+      user.user_password,
     );
     if (!isValidPassword) {
       return done(null, false, { message: 'Invalid password' });
@@ -72,7 +72,7 @@ const passportVerifyAdmin = async (admin_id, admin_password, done) => {
     }
     const isValidPassword = await bcrypt.compare(
       admin_password,
-      admin.admin_password
+      admin.admin_password,
     );
     if (!isValidPassword) {
       return done(null, false, { message: 'Invalid password' });
