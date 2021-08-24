@@ -17,7 +17,7 @@ function ContributionStatus({ Contribution }) {
     <div className="contributionstatuscontainer">
       <div className="subject">
         <div className="subjectwrapper">기고현황</div>
-        <div className="btndesc">
+        <div className="btndesc sm-hidden">
           수정, 삭제 요청 후 관리자의 승인을 기다려 주세요
         </div>
       </div>

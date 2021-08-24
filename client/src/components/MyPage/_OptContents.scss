@@ -31,9 +31,6 @@
         font-weight: $lighter;
         @include flexbox;
         margin-bottom: 8px;
-        @include mobile-only() {
-          display: none;
-        }
       }
     }
     .contributionstatustable {
