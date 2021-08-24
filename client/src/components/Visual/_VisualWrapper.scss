@@ -15,11 +15,9 @@
         margin: 0 auto;
         @include column-flexbox;
         margin-top: 192px;
-        width: 360px;
 
         @include mobile-only() {
           margin-top: 110px;
-          max-width: 360px;
           width: 95%;
         }
         .chartcontainer{

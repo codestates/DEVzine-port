@@ -60,11 +60,32 @@ export function ArticlesKeywordAccumulated({ data }) {
     },
     responsive: [
       {
+        breakpoint: 880,
+        options: {
+          chart: {
+            width: '650', // 이전까진 740px
+            height: '650',
+          },
+        },
+      },
+      {
         breakpoint: 768,
         options: {
           chart: {
-            width: '100%',
-            height: 'auto',
+            width: '460',
+            height: '460',
+          },
+          legend: {
+            position: 'bottom',
+          },
+        },
+      },
+      {
+        breakpoint: 500,
+        options: {
+          chart: {
+            width: '100%', // 300px이라니..
+            height: '300',
           },
           legend: {
             position: 'bottom',
@@ -75,7 +96,7 @@ export function ArticlesKeywordAccumulated({ data }) {
   };
 
   return (
-    <div className="chartcontainer" style={{ marginTop: '60%' }}>
+    <div className="chartcontainer" style={{ marginTop: '30%' }}>
       <div
         className="chartdesc lg-hidden "
         data-aos="fade-left"
