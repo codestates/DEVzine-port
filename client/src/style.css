@@ -1126,6 +1126,12 @@ td:nth-child(2):hover {
         letter-spacing: -0.01em;
         text-align: center; } }
 
+.visuallink {
+  cursor: pointer;
+  font-weight: bold; }
+  .visuallink:hover {
+    color: #ffc803; }
+
 .landinginteractioncontainer {
   display: flex;
   align-items: center;

@@ -96,7 +96,7 @@ function RequestTable({ Requested }) {
                   {el.contribution_title}
                 </Link>
               </td>
-              {el.status === 100 ? <td>승인요청</td> : null}
+              {el.status === 100 ? <td>게시요청</td> : null}
               {el.status === 101 ? <td>수정요청</td> : null}
               {el.status === 102 ? <td>삭제요청</td> : null}
               <td>

@@ -29,7 +29,7 @@ function AdminWrapper() {
 */
 
   let selectOptions = [
-    ['승인요청', 'postRequest'],
+    ['게시요청', 'postRequest'],
     ['수정요청', 'patchRequest'],
     ['삭제요청', 'deleteRequest'],
   ];
