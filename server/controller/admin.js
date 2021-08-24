@@ -118,7 +118,7 @@ module.exports = {
   },
 
   acceptContribRequest: async (req, res) => {
-    const { contribution_id, contribution_title, contribution_content, status } = req.body;
+    const { contribution_id, status } = req.body;
 
     try {
       if (![110, 111, 112].includes(status)) {
@@ -156,8 +156,12 @@ module.exports = {
             contribution_id,
           }, {
             $set: {
-              contribution_content,
-              contribution_title
+              contribution_content: acceptedContribution.temp_content,
+              contribution_title: acceptedContribution.temp_title,
+              contribution_keyword: acceptedContribution.temp_keyword,
+              temp_title: null,
+              temp_content: null,
+              temp_keyword: null
             }
           }
         );
