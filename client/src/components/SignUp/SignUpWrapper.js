@@ -6,6 +6,7 @@ import TextInputGenderRequired from './TextInputGenderRequired';
 import Accordion from './Accordion';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import AlertModal from '../Common/AlertModal/AlertModal';
+import AcessTerms from './AccessTerms';
 
 function SignUpWrapper() {
   const [Email_isValid, setEmail_isValid] = useState(false);
@@ -197,6 +198,7 @@ function SignUpWrapper() {
                   radioInputHandler={radioInputHandler}
                   selectInputHandler={selectInputHandler}
                 />
+                <AcessTerms />
                 <div
                   className="signupbtn"
                   onClick={e =>
