@@ -13,6 +13,7 @@ function VisualWrapper() {
       .get('/visual')
       .then(res => {
         setChartData(res.data.data);
+        console.log(res.data.data);
       })
       .catch(err => alert(err));
   }, []);

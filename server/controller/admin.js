@@ -150,6 +150,19 @@ module.exports = {
         });
       }
 
+      if (status === 112) {
+        let deletedContribution = await Contribution.findOneAndUpdate(
+          {
+            contribution_id,
+          },
+          {
+            $set: {
+              deletedAt: new Date(),
+            },
+          },
+        )
+      }
+
       const user = await User.findOne(
         {
           user_email: acceptedContribution.user_email,
