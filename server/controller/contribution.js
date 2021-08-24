@@ -201,6 +201,33 @@ module.exports = {
       }
 
       delete contribData._doc.user_email;
+
+      if (contribData.temp_content) {
+
+        const { 
+          hit, 
+          contribution_date, 
+          temp_content, 
+          temp_keyword, 
+          temp_title 
+        } = contribData;
+
+        return res.status(200).json(
+          {
+            data: {
+              contribution_date,
+              user_name, 
+              hit,
+              contribution_content: temp_content,
+              contribution_title: temp_title,
+              contribution_keyword: temp_keyword
+            },
+            source: 'DB',
+            message: 'Contribution successfully found',
+          }
+        );
+      }
+
       const data = { user_name, ...contribData._doc };
 
       return res.status(200).json({
