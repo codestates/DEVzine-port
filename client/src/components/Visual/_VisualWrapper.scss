@@ -15,11 +15,9 @@
         margin: 0 auto;
         @include column-flexbox;
         margin-top: 192px;
-        width: 360px;
 
         @include mobile-only() {
-          margin-top: 162px;
-          max-width: 360px;
+          margin-top: 110px;
           width: 95%;
         }
         .chartcontainer{
@@ -30,7 +28,7 @@
           }
           .chartdesc{
             position: relative;
-            margin: 20px 0;
+            margin-bottom: 40px;
             width: 100%;
             height: auto;
             @include responsive(D){
@@ -42,16 +40,15 @@
               @include text-style(24, $dark);
               margin-bottom: 10px;
               @include responsive(D){
-                font-weight: $bold;
                 @include text-style(36, $dark);
                 margin-bottom: 20px;
               }
             }
             .chartdetail{
-              @include text-style(10, $dark);
+              @include text-style(12, $dark);
+              font-weight: normal;
 
               @include responsive(D){
-                font-weight: normal;
                 @include text-style(18, $dark);
               }
             }

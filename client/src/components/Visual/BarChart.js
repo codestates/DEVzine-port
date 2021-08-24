@@ -64,11 +64,35 @@ export function ArticlesTopHit({ data }) {
     },
     responsive: [
       {
+        breakpoint: 880,
+        options: {
+          chart: {
+            width: '650', // 이전까진 740px
+            height: '650',
+          },
+        },
+      },
+      {
         breakpoint: 768,
         options: {
           chart: {
-            width: '100%',
-            height: 'auto',
+            width: '460',
+            height: '460',
+          },
+          legend: {
+            position: 'bottom',
+          },
+        },
+      },
+      {
+        breakpoint: 500,
+        options: {
+          chart: {
+            width: '100%', // 300px이라니..
+            height: '300',
+          },
+          legend: {
+            position: 'bottom',
           },
         },
       },
@@ -108,7 +132,7 @@ export function ArticlesTopHit({ data }) {
   options.xaxis.categories = categories;
 
   return (
-    <div className="chartcontainer" style={{ margin: '240px 0' }}>
+    <div className="chartcontainer" style={{ margin: '30% 0' }}>
       <div className="chartdesc" data-aos="fade-right">
         <div className="chartsubject">
           가장 많이 본 소식은
@@ -144,13 +168,19 @@ export function UserAgeAndGender({ data }) {
   let series = [
     {
       name: '남자',
-      data: data.users.series[1].data.map(el => {
-        return -el;
-      }),
+      data: data.users.series[1].data
+        .map(el => {
+          return -el;
+        })
+        .reverse(),
     },
     {
       name: '여자',
-      data: data.users.series[0].data,
+      data: data.users.series[0].data
+        .map(el => {
+          return el;
+        })
+        .reverse(),
     },
   ];
 
@@ -207,11 +237,35 @@ export function UserAgeAndGender({ data }) {
     },
     responsive: [
       {
+        breakpoint: 880,
+        options: {
+          chart: {
+            width: '650', // 이전까진 740px
+            height: '650',
+          },
+        },
+      },
+      {
         breakpoint: 768,
         options: {
           chart: {
-            width: '100%',
-            height: 'auto',
+            width: '460',
+            height: '460',
+          },
+          legend: {
+            position: 'bottom',
+          },
+        },
+      },
+      {
+        breakpoint: 500,
+        options: {
+          chart: {
+            width: '100%', // 300px이라니..
+            height: '300',
+          },
+          legend: {
+            position: 'bottom',
           },
         },
       },
@@ -234,7 +288,14 @@ export function UserAgeAndGender({ data }) {
       },
     },
     xaxis: {
-      categories: ['10대', '20대', '30대', '40대', '50대', '60대 이상'],
+      categories: [
+        '10대',
+        '20대',
+        '30대',
+        '40대',
+        '50대',
+        '60대 이상',
+      ].reverse(),
       labels: {
         formatter: function (val) {
           return Math.abs(val) + '명';
@@ -245,6 +306,24 @@ export function UserAgeAndGender({ data }) {
 
   return (
     <div className="chartcontainer" style={{ marginBottom: '72px' }}>
+      <div
+        className="chartdesc lg-hidden "
+        data-aos="fade-left"
+        style={{ textAlign: 'right' }}
+      >
+        <div className="chartsubject">
+          어떤 분들이 <br />
+          IT 소식을 보실까요?
+        </div>
+        <div className="chartdetail">
+          DEVzine이 시작한 날부터 <br />
+          바로 전일까지 기준으로
+          <br />
+          DEVzine에 가입한 회원들의
+          <br />
+          성별, 나이, 직무, 언어를 알아볼 수 있어요.
+        </div>
+      </div>
       <div className="chartwrapper" data-aos="fade-right" data-aos-delay="300">
         <Chart
           options={options}
@@ -255,7 +334,7 @@ export function UserAgeAndGender({ data }) {
         />
       </div>
       <div
-        className="chartdesc"
+        className="chartdesc lg-only "
         data-aos="fade-left"
         style={{ textAlign: 'right' }}
       >

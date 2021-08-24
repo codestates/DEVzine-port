@@ -150,6 +150,36 @@ module.exports = {
         });
       }
 
+      if (status === 111) {
+        await Contribution.findOneAndUpdate(
+          {
+            contribution_id,
+          }, {
+            $set: {
+              contribution_content: acceptedContribution.temp_content,
+              contribution_title: acceptedContribution.temp_title,
+              contribution_keyword: acceptedContribution.temp_keyword,
+              temp_title: null,
+              temp_content: null,
+              temp_keyword: null
+            }
+          }
+        );
+      }
+      
+      if (status === 112) {
+        let deletedContribution = await Contribution.findOneAndUpdate(
+          {
+            contribution_id,
+          },
+          {
+            $set: {
+              deletedAt: new Date(),
+            },
+          },
+        )
+      }
+
       const user = await User.findOne(
         {
           user_email: acceptedContribution.user_email,

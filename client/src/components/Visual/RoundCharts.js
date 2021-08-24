@@ -56,11 +56,32 @@ export function UserTopLanguage({ data }) {
     labels: [],
     responsive: [
       {
+        breakpoint: 880,
+        options: {
+          chart: {
+            width: '650', // 이전까진 740px
+            height: '650',
+          },
+        },
+      },
+      {
         breakpoint: 768,
         options: {
           chart: {
-            width: '100%',
-            height: 'auto',
+            width: '460',
+            height: '460',
+          },
+          legend: {
+            position: 'bottom',
+          },
+        },
+      },
+      {
+        breakpoint: 500,
+        options: {
+          chart: {
+            width: '100%', // 300px이라니..
+            height: '300',
           },
           legend: {
             position: 'bottom',
@@ -83,8 +104,8 @@ export function UserTopLanguage({ data }) {
     <div
       className="chartcontainer"
       style={{
+        width: '100%',
         justifyContent: 'flex-end',
-        alignItems: 'center',
       }}
     >
       <div className="chartwrapper" data-aos="fade-left">
@@ -153,11 +174,32 @@ export function UserTopPosition({ data }) {
     labels: [],
     responsive: [
       {
+        breakpoint: 880,
+        options: {
+          chart: {
+            width: '650', // 이전까진 740px
+            height: '650',
+          },
+        },
+      },
+      {
         breakpoint: 768,
         options: {
           chart: {
-            width: '100%',
-            height: 'auto',
+            width: '460',
+            height: '460',
+          },
+          legend: {
+            position: 'bottom',
+          },
+        },
+      },
+      {
+        breakpoint: 500,
+        options: {
+          chart: {
+            width: '100%', // 300px이라니..
+            height: '300',
           },
           legend: {
             position: 'bottom',

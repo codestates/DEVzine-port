@@ -42,6 +42,13 @@ const contributionSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    temp_title: String,
+    temp_content: String,
+    temp_keyword: String,
+    deletedAt: {
+      type: Date,
+      expires: 60
+    }
   },
   { versionKey: false },
 );
@@ -52,6 +59,7 @@ contributionSchema.plugin(autoIncrement.plugin, {
   startAt: 20,
   increment: 1,
 });
+
 const Contribution = mongoose.model('contributions', contributionSchema);
 
 module.exports = { Contribution };
