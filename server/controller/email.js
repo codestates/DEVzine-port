@@ -38,11 +38,12 @@ module.exports = {
     let data = {
       email: user_email,
     };
-    let encryptEmail = CryptoJS.AES.encrypt(
-      JSON.stringify(data),
-      cryptoKey,
-    ).toString();
-    console.log('Encrypt : ', encryptEmail);
+    let encryptEmail = user_email;
+    // let encryptEmail = CryptoJS.AES.encrypt(
+    //   JSON.stringify(data),
+    //   cryptoKey,
+    // ).toString();
+    // console.log('Encrypt : ', encryptEmail);
 
     let authMailForm;
     ejs.renderFile(
@@ -77,9 +78,10 @@ module.exports = {
   verifyUserEmail: async (req, res) => {
     const { temp_email } = req.body;
 
-    let bytes = CryptoJS.AES.decrypt(temp_email, cryptoKey);
-    let decryptEmail = JSON.parse(bytes.toString(CryptoJS.enc.Utf8)).email;
-    console.log('Decrypt : ', decryptEmail);
+    let decryptEmail = temp_email;
+    // let bytes = CryptoJS.AES.decrypt(temp_email, cryptoKey);
+    // let decryptEmail = JSON.parse(bytes.toString(CryptoJS.enc.Utf8)).email;
+    // console.log('Decrypt : ', decryptEmail);
 
     const tempEmail = new VerifiedEmail({
       temp_email: decryptEmail,
