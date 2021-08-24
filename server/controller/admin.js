@@ -118,7 +118,7 @@ module.exports = {
   },
 
   acceptContribRequest: async (req, res) => {
-    const { contribution_id, status } = req.body;
+    const { contribution_id, contribution_title, contribution_content, status } = req.body;
 
     try {
       if (![110, 111, 112].includes(status)) {
@@ -150,6 +150,19 @@ module.exports = {
         });
       }
 
+      if (status === 111) {
+        await Contribution.findOneAndUpdate(
+          {
+            contribution_id,
+          }, {
+            $set: {
+              contribution_content,
+              contribution_title
+            }
+          }
+        );
+      }
+      
       if (status === 112) {
         let deletedContribution = await Contribution.findOneAndUpdate(
           {
