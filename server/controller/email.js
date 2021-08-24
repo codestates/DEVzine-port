@@ -38,9 +38,10 @@ module.exports = {
 
     let authMailForm;
     const cipher = crypto.createCipheriv(algorithm, key, iv);
-    let encryptEmail = cipher.update(user_email, 'utf8', 'base64');
-    encryptEmail += cipher.final('base64');
-    console.log('Encrypt : ', encryptEmail);
+    let encryptEmail = user_email;
+    // let encryptEmail = cipher.update(user_email, 'utf8', 'base64');
+    // encryptEmail += cipher.final('base64');
+    // console.log('Encrypt : ', encryptEmail);
 
     ejs.renderFile(
       __dirname + '/ejsform/authMail.ejs',
@@ -74,9 +75,10 @@ module.exports = {
   verifyUserEmail: async (req, res) => {
     const { temp_email } = req.body;
     const decipher = crypto.createDecipheriv(algorithm, key, iv);
-    let decryptEmail = decipher.update(temp_email, 'base64', 'utf8');
-    decryptEmail += decipher.final('utf8');
-    console.log('Decrypt : ', decryptEmail);
+    let decryptEmail = temp_email;
+    // let decryptEmail = decipher.update(temp_email, 'base64', 'utf8');
+    // decryptEmail += decipher.final('utf8');
+    // console.log('Decrypt : ', decryptEmail);
 
     const tempEmail = new VerifiedEmail({
       temp_email: decryptEmail,
