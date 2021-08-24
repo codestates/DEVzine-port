@@ -58,7 +58,7 @@ module.exports = {
       {
         from: 'DEVzine:port <devzineport@gmail.com>',
         to: user_email,
-        subject: '회원가입 수락하삼[nodemailer]',
+        subject: 'DEVzine 이메일 확인을 위한 메일입니다.',
         html: authMailForm,
       },
       (err, info) => {
