@@ -130,17 +130,12 @@ module.exports = {
       let acceptedContribution = await Contribution.findOneAndUpdate(
         {
           contribution_id,
-        },
-        {
+        }, {
           $set: {
             status,
           },
-        },
-        {
+        }, {
           new: true,
-          fields: {
-            _id: 0,
-          },
         },
       );
 
@@ -151,7 +146,7 @@ module.exports = {
       }
 
       if (status === 111) {
-        await Contribution.findOneAndUpdate(
+        const updatedContribution = await Contribution.findOneAndUpdate(
           {
             contribution_id,
           }, {
@@ -168,7 +163,7 @@ module.exports = {
       }
       
       if (status === 112) {
-        let deletedContribution = await Contribution.findOneAndUpdate(
+        const deletedContribution = await Contribution.findOneAndUpdate(
           {
             contribution_id,
           },
@@ -186,6 +181,14 @@ module.exports = {
         },
         {
           user_name: 1,
+        },
+      );
+
+      acceptedContribution = await Contribution.findOne(
+        {
+          contribution_id,
+        },{
+          _id: 0,
         },
       );
 
