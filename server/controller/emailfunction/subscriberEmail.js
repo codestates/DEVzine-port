@@ -101,9 +101,6 @@ const sendMailToSubscribers = async () => {
     date.getMonth() + 1
   }/${date.getDate()} ${week[date.getDay()]}요일`;
 
-  const contributionContent = contribution
-    ? contribution.contribution_content.substr(0, 150) + '...'
-    : null;
   const contributionUserInfo = contribution
     ? await User.findOne({
         user_email: contribution.user_email,
@@ -131,7 +128,6 @@ const sendMailToSubscribers = async () => {
         contribution,
         articlesCount,
         max,
-        contributionContent,
         contributionUserName,
       },
       (err, data) => {
@@ -144,7 +140,7 @@ const sendMailToSubscribers = async () => {
       {
         from: 'DEVzine:port <devzineport@gmail.com>',
         to: userEmail,
-        subject: 'DEVzine 에서 발송된 뉴스레터',
+        subject: `🗞${formatDate} 최신 IT 소식`,
         html: newsLetter,
       },
       (err, info) => {
