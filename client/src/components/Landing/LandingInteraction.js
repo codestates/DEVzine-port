@@ -29,7 +29,7 @@ function Image({ url, index, camera }) {
   const texture = useLoader(THREE.TextureLoader, url);
   useFrame(() => {
     positionX += speed - plus;
-    speed *= 0.8;
+    speed *= 0.95;
     plus *= 0.95;
     Active ? (mesh.current.position.y = -0.5) : (mesh.current.position.y = -1);
     camera.position.x = positionX * 1.2;
