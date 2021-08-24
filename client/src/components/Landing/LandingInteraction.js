@@ -12,9 +12,44 @@ function Image({ url, index, camera }) {
   let positionX = 0;
   let plus = 0;
 
+  let start_X = 0;
+  let end_X = 0;
+
+  function touchFunc(e) {
+    let type = null;
+    let touch = null;
+
+    switch (e.type) {
+      case 'touchstart':
+        type = 'mousedown';
+        touch = e.changedTouches[0];
+        start_X = touch.clientX;
+        end_X = 0;
+        break;
+      case 'touchend':
+        type = 'mouseup';
+        touch = e.changedTouches[0];
+        end_X = touch.clientX;
+
+        var chkNum = start_X - end_X;
+        var chkNumAbs = Math.abs(chkNum);
+
+        if (chkNumAbs > 100) {
+          if (chkNum < 0) {
+            speed = speed + -0.4;
+          } else {
+            speed = speed + 0.4;
+          }
+        }
+        break;
+    }
+  }
+
   window.addEventListener('wheel', e => {
     speed += e.deltaY * 0.0005;
   });
+  window.addEventListener('touchstart', touchFunc, false);
+  window.addEventListener('touchend', touchFunc, false);
 
   const { spring } = useSpring({
     spring: Number(Active),
@@ -27,6 +62,7 @@ function Image({ url, index, camera }) {
   }, []);
 
   const texture = useLoader(THREE.TextureLoader, url);
+
   useFrame(() => {
     positionX += speed - plus;
     speed *= 0.95;
