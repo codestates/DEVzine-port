@@ -1,6 +1,6 @@
 const { Contribution } = require('../Models/Contributions');
 const { User } = require('../Models/Users');
-const { findContributionsWithStatus } = require('./adminfunction/adminView');
+const { findContributionsWithStatus, findContributionsForUpdate } = require('./adminfunction/adminView');
 const {
   checkCacheForContributions,
   insertCacheForOneContribution,
@@ -47,7 +47,7 @@ module.exports = {
   getAllUsersContribution: async (req, res) => {
     try {
       const postRequest = await findContributionsWithStatus(100);
-      const patchRequest = await findContributionsWithStatus(101);
+      const patchRequest = await findContributionsForUpdate();
       const deleteRequest = await findContributionsWithStatus(102);
 
       let { contributionData } = await checkCacheForContributions();
