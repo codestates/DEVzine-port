@@ -36,9 +36,17 @@ function ContributionStatus({ Contribution }) {
                 className="contributionstatuslist"
                 key={`contributionstatuslist${idx}`}
               >
-                <span className="tablecontent first ell-16-mypage">
-                  {el.contribution_title}
-                </span>
+                {el.status === 110 || el.status === 111 ? (
+                  <span className="tablecontent first ell-16-mypage">
+                    <Link to={`/article/con-${el.contribution_id}`}>
+                      {el.contribution_title}
+                    </Link>
+                  </span>
+                ) : (
+                  <span className="tablecontent first ell-16-mypage">
+                    {el.contribution_title}
+                  </span>
+                )}
                 <span className="tablecontent">
                   <Link
                     to={`/contributionupdate/${el.contribution_id}`}
@@ -79,17 +87,9 @@ function ContributionStatus({ Contribution }) {
                     />
                   </svg>
                 </span>
-                {el.status === 110 || el.status === 111 ? (
-                  <span className="tablecontent last">
-                    <Link to={el.contribution_url.split('3000')[1]}>
-                      {statuscodeconvert(String(el.status))}
-                    </Link>
-                  </span>
-                ) : (
-                  <span className="tablecontent last">
-                    {statuscodeconvert(String(el.status))}
-                  </span>
-                )}
+                <span className="tablecontent last">
+                  {statuscodeconvert(String(el.status))}
+                </span>
               </li>
             );
           })
