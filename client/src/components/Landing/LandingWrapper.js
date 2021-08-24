@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import landing01 from '../../assets/images/landing01.svg';
 import landing02 from '../../assets/images/landing02.svg';
 import landing03 from '../../assets/images/landing03.svg';
@@ -44,14 +45,21 @@ function LandingWrapper() {
                   빠르게 확인한다
                 </h2>
                 <p className="sm-hidden">
-                  하단 핵심 데이터 한 눈에{' '}
+                  하단{' '}
+                  <Link to="/visual">
+                    <span className="visuallink">핵심 데이터 한 눈에 보기</span>
+                  </Link>
                   <span className="md-only">
                     <br />
                   </span>
-                  보기에서 확인할 수 있습니다.
+                  에서 확인할 수 있습니다.
                 </p>
                 <p className="sm-only">
-                  하단 핵심 데이터 한 눈에 보기에서
+                  하단{' '}
+                  <Link to="/visual">
+                    <span className="visuallink">핵심 데이터 한 눈에 보기</span>
+                  </Link>
+                  에서
                   <br />
                   확인할 수 있습니다.
                 </p>

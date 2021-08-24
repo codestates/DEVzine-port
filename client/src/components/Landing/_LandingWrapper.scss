@@ -115,3 +115,12 @@
     }
   }
 }
+
+.visuallink {
+  cursor: pointer;
+  font-weight: bold;
+
+  &:hover {
+    color: $yellow-dark;
+  }
+}
