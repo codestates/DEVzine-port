@@ -2285,44 +2285,70 @@ label {
 .visualcontainer {
   background-color: #f2f2f2;
   min-height: 100vh;
-  position: relative; }
-  .visualcontainer-footer {
+  position: relative;
+  overflow-x: hidden;
+  width: 100%; }
+  .visualcontainer .admin-footer {
     height: 100px;
     margin-bottom: 220px; }
-  .visualcontainer .container .row .visualwrapper {
-    position: relative;
-    z-index: 1;
-    margin-top: 206px;
-    margin-bottom: 306px; }
-    .visualcontainer .container .row .visualwrapper .chartcontainer {
+  .visualcontainer .visualwrapper {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 192px;
+    width: 360px; }
+    @media screen and (max-width: 767px) {
+      .visualcontainer .visualwrapper {
+        margin-top: 162px;
+        max-width: 360px;
+        width: 95%; } }
+    .visualcontainer .visualwrapper .chartcontainer {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center; }
       @media screen and (min-width: 1200px) {
-        .visualcontainer .container .row .visualwrapper .chartcontainer {
+        .visualcontainer .visualwrapper .chartcontainer {
           display: flex;
           align-items: center;
           justify-content: center;
           flex-direction: row; } }
-      .visualcontainer .container .row .visualwrapper .chartcontainer .chartdesc {
-        margin: 0 20px;
-        width: 360px;
-        height: 150px; }
-        .visualcontainer .container .row .visualwrapper .chartcontainer .chartdesc .chartsubject {
+      .visualcontainer .visualwrapper .chartcontainer .chartdesc {
+        position: relative;
+        margin: 20px 0;
+        width: 100%;
+        height: auto; }
+        @media screen and (min-width: 1200px) {
+          .visualcontainer .visualwrapper .chartcontainer .chartdesc {
+            margin: 0 20px;
+            width: 360px; } }
+        .visualcontainer .visualwrapper .chartcontainer .chartdesc .chartsubject {
           font-weight: 700;
-          font-size: 36px;
-          line-height: 48px;
+          font-size: 24px;
+          line-height: 34px;
           letter-spacing: -0.01em;
           color: #191a20;
-          margin-bottom: 20px; }
-        .visualcontainer .container .row .visualwrapper .chartcontainer .chartdesc .chartdetail {
-          font-weight: normal;
-          font-size: 18px;
-          line-height: 28px;
-          letter-spacing: -0.02em;
+          margin-bottom: 10px; }
+          @media screen and (min-width: 1200px) {
+            .visualcontainer .visualwrapper .chartcontainer .chartdesc .chartsubject {
+              font-weight: 700;
+              font-size: 36px;
+              line-height: 48px;
+              letter-spacing: -0.01em;
+              color: #191a20;
+              margin-bottom: 20px; } }
+        .visualcontainer .visualwrapper .chartcontainer .chartdesc .chartdetail {
           color: #191a20; }
-      .visualcontainer .container .row .visualwrapper .chartcontainer .chartwrapper {
+          @media screen and (min-width: 1200px) {
+            .visualcontainer .visualwrapper .chartcontainer .chartdesc .chartdetail {
+              font-weight: normal;
+              font-size: 18px;
+              line-height: 28px;
+              letter-spacing: -0.02em;
+              color: #191a20; } }
+      .visualcontainer .visualwrapper .chartcontainer .chartwrapper {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -2330,6 +2356,12 @@ label {
         position: relative;
         border: 1px solid #d9d9d9;
         border-radius: 24px; }
+        @media screen and (min-width: 1200px) {
+          .visualcontainer .visualwrapper .chartcontainer .chartwrapper {
+            background-color: #fff;
+            position: relative;
+            border: 1px solid #d9d9d9;
+            border-radius: 24px; } }
 
 .admin {
   background-color: #ffdd14;

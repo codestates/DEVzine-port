@@ -64,10 +64,11 @@ export function ArticlesTopHit({ data }) {
     },
     responsive: [
       {
-        breakpoint: 480,
+        breakpoint: 768,
         options: {
           chart: {
-            width: 300,
+            width: '100%',
+            height: 'auto',
           },
         },
       },
@@ -153,9 +154,12 @@ export function UserAgeAndGender({ data }) {
     },
   ];
 
-  // 최대값과 가장 근접한 5의 배수를 찾는 로직 
-  let maxCount = Math.max(...series[0].data.map(el => Math.abs(el)), ...series[1].data)
-  maxCount = maxCount + 5 - (maxCount % 5)
+  // 최대값과 가장 근접한 5의 배수를 찾는 로직
+  let maxCount = Math.max(
+    ...series[0].data.map(el => Math.abs(el)),
+    ...series[1].data,
+  );
+  maxCount = maxCount + 5 - (maxCount % 5);
 
   const options = {
     chart: {
@@ -203,10 +207,11 @@ export function UserAgeAndGender({ data }) {
     },
     responsive: [
       {
-        breakpoint: 480,
+        breakpoint: 768,
         options: {
           chart: {
-            width: 300,
+            width: '100%',
+            height: 'auto',
           },
         },
       },

@@ -22,7 +22,7 @@ function VisualWrapper() {
       <div className="visualcontainer">
         <div className="container">
           <div className="row">
-            <div className="co-sm-4">
+            <div className="col-sm-4 col-md-12 col-lg-12">
               <div className="visualwrapper">
                 <ArticlesKeyword data={ChartData} />
 
@@ -36,7 +36,7 @@ function VisualWrapper() {
 
                 <UserTopLanguage data={ChartData} />
 
-                <div className="visualwrapper-footer" />
+                <div className="admin-footer" />
               </div>
             </div>
           </div>
