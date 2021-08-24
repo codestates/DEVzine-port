@@ -16,7 +16,7 @@
     width: 360px;
 
     @include mobile-only() {
-      margin-top: 162px;
+      margin-top: 110px;
       max-width: 360px;
       width: 95%;
     }
@@ -39,6 +39,27 @@
     .commonbutton {
       font-weight: $normal;
       margin-top: 24px;
+    }
+    .btnwrapper{
+      padding: 0 40px;  
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+
+      @include mobile-only() {
+        padding: 0 20px;  
+      }
+      .yesornobtn{
+        background-color: $border;
+        border-radius: 8px;
+        color: $dark;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: $bold;
+        height: 55px;
+        margin-top: 16px;
+        width: 100px;
+      }
     }
   }
 }

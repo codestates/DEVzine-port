@@ -12,6 +12,7 @@ import Auth from '../../hoc/auth';
 import { debounce } from 'lodash';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import AlertModal from '../Common/AlertModal/AlertModal';
+import WithdrawalModal from './WithdrawalModal';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import OptContents from './OptContents';
 import Button from '../Common/Button/Button';
@@ -45,6 +46,8 @@ function MyPageWrapper() {
   const [IsEditedFail, setIsEditedFail] = useState(false);
   const [SuccessWithdrawal, setSuccessWithdrawal] = useState(false);
   const [FailWithdrawal, setFailWithdrawal] = useState(false);
+  const [WithdrawalQuestion, setWithdrawalQuestion] = useState(false);
+  const [YesOrNo, setYesOrNo] = useState(false);
   const [allData, setAllData] = useState(false);
 
   useEffect(() => {
@@ -220,21 +223,24 @@ function MyPageWrapper() {
   }
 
   function withdrawal() {
-    if (pw_confirm) {
+    if (YesOrNo) {
       return dispatch(deleteUser())
-        .then(res => {
-          setSuccessWithdrawal(true);
-          window.location.href = '/';
-        })
+        .then(result => (window.location.href = '/'))
         .catch(err => {
           setFailWithdrawal(true);
         });
+    }
+  }
+
+  function openWithdrawalModal() {
+    if (pw_confirm) {
+      return setWithdrawalQuestion(true);
     } else {
       return setAlertOpen(true);
     }
   }
 
-  const closeModal = () => {
+  function closeModal() {
     setAlertOpen(false);
     setAlreadyExist(false);
     setAllVerified(false);
@@ -242,7 +248,8 @@ function MyPageWrapper() {
     setIsEditedFail(false);
     setSuccessWithdrawal(false);
     setFailWithdrawal(false);
-  };
+    setWithdrawalQuestion(false);
+  }
 
   return allData ? (
     <div className="signupcontainer">
@@ -299,7 +306,7 @@ function MyPageWrapper() {
                   color={`#999999`}
                   backgroundColor={`#ffffff`}
                   border={`1px solid #d9d9d9`}
-                  onClickHandle={withdrawal}
+                  onClickHandle={() => openWithdrawalModal()}
                 />
                 <AlertModal
                   open={
@@ -330,6 +337,17 @@ function MyPageWrapper() {
                       : ''
                   }
                   alertBtn="확인"
+                />
+                <WithdrawalModal
+                  open={WithdrawalQuestion}
+                  close={closeModal}
+                  setYesOrNo={setYesOrNo}
+                  withdrawal={withdrawal}
+                  alertString={
+                    WithdrawalQuestion ? '정말 회원탈퇴 하시겠습니까?' : ''
+                  }
+                  yesBtn="네"
+                  noBtn="아니오"
                 />
                 <div className="common-footer" />
               </div>
