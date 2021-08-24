@@ -147,7 +147,7 @@ module.exports = {
       let contribution_date = new Date(Date.now());
       contribution_date.setHours(contribution_date.getHours() + 9);
 
-      await Contribution.updateOne(
+      const temp = await Contribution.updateOne(
         {
           contribution_id,
         },
