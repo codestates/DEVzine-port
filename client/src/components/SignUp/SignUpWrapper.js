@@ -29,6 +29,7 @@ function SignUpWrapper() {
   const [EmailNotVerified, setEmailNotVerified] = useState(false);
   const [AlreadyExist, setAlreadyExist] = useState(false);
   const [EmailUnverified, setEmailUnverified] = useState(false);
+  const [AllChecked, setAllChecked] = useState(false);
 
   useEffect(() => {
     if (checkEmail(Email)) {
@@ -47,7 +48,8 @@ function SignUpWrapper() {
     } else {
       setPw_confirm(false);
     }
-  }, [Email, Password, ConfirmPassword]);
+    // console.log(AllChecked);
+  }, [Email, Password, ConfirmPassword, AllChecked]);
 
   useEffect(() => {
     Auth(false);
@@ -198,7 +200,7 @@ function SignUpWrapper() {
                   radioInputHandler={radioInputHandler}
                   selectInputHandler={selectInputHandler}
                 />
-                <AcessTerms />
+                <AcessTerms setAllChecked={setAllChecked} />
                 <div
                   className="signupbtn"
                   onClick={e =>
@@ -208,7 +210,8 @@ function SignUpWrapper() {
                     Name &&
                     Email_isValid &&
                     Pw_isValid &&
-                    Pw_confirm
+                    Pw_confirm &&
+                    AllChecked
                       ? postHandler()
                       : setAllVerified(true)
                   }

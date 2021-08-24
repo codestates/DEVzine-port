@@ -38,7 +38,7 @@ function Footer() {
                         <img src={arrow} alt="arrow" />
                       </span>
                     </p>
-                    <p className="cscontact">02-1004-1004</p>
+                    <p className="cscontact">02-5959-5959</p>
                     <p className="csworktime">
                       평일 및 토요일 09:00 ~ 18:00 (일요일 & 공휴일 제외)
                     </p>

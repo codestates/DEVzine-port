@@ -20,7 +20,7 @@ function ArticleListWrapper() {
   const [CurrentOrder, setCurrentOrder] = useState('최신순');
   const [ArticlePlus, setArticlePlus] = useState(12);
   const [PlaceHodler, setPlaceHolder] =
-    useState('관심 기사를 검색할 수 있습니다.');
+    useState('관심 소식을 검색할 수 있습니다.');
   const [Selected, setSelected] = useState('키워드선택');
   const [ArchiveTitle, setArchiveTitle] = useState('');
   const [AlertOpen, setAlertOpen] = useState(false);
@@ -109,7 +109,7 @@ function ArticleListWrapper() {
         if (CurrentTitle !== '') {
           setPlaceHolder(`'${CurrentTitle}'의 검색 결과입니다.`);
         } else {
-          setPlaceHolder(`관심 기사를 검색할 수 있습니다.`);
+          setPlaceHolder(`관심 소식을 검색할 수 있습니다.`);
         }
 
         setArticleData(res.payload);
@@ -126,7 +126,7 @@ function ArticleListWrapper() {
     setCurrentTitle('');
     setArchiveTitle('');
     setCurrentOrder('최신순');
-    setPlaceHolder('관심 기사를 검색할 수 있습니다.');
+    setPlaceHolder('관심 소식을 검색할 수 있습니다.');
     setSelected('키워드선택');
     setArticlePlus(12);
 
