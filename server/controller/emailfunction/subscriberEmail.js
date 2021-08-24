@@ -16,6 +16,7 @@ const transporter = nodemailer.createTransport(
       user: process.env.NODEMAIL_EMAIL,
       pass: process.env.NODEMAIL_PWD,
     },
+    pool: true,
   }),
 );
 transporter.use('compile', inlineCss());
@@ -92,25 +93,26 @@ const sendMailToSubscribers = async () => {
     },
   );
 
-  await subscribers.map(async subscriber => {
+  const date = new Date();
+  const week = ['일', '월', '화', '수', '목', '금', '토'];
+  const formatDate = `${date.getFullYear()}/${
+    date.getMonth() + 1
+  }/${date.getDate()} ${week[date.getDay()]}요일`;
+  const contributionContent =
+    contribution.contribution_content.substr(0, 150) + '...';
+  const contributionUserInfo = await User.findOne({
+    user_email: contribution.user_email,
+  });
+  const contributionUserName = contributionUserInfo
+    ? contributionUserInfo.user_name
+    : 'anonymous';
+
+  subscribers.map(async subscriber => {
     const userEmail = subscriber.subscriber_email;
-    let user = await User.findOne({
+    const user = await User.findOne({
       user_email: userEmail,
     });
     const userName = user ? `${user.user_name}님` : '여러분';
-    let date = new Date();
-    const week = ['일', '월', '화', '수', '목', '금', '토'];
-    let formatDate = `${date.getFullYear()}/${
-      date.getMonth() + 1
-    }/${date.getDate()} ${week[date.getDay()]}요일`;
-    const contributionContent =
-      contribution.contribution_content.substr(0, 150) + '...';
-    const contributionUserName = await User.findOne(
-      {
-        user_email: contribution.user_email,
-      },
-      [user_name],
-    );
 
     let newsLetter;
     ejs.renderFile(
