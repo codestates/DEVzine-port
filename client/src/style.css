@@ -1330,7 +1330,7 @@ label {
     width: 360px; }
     @media screen and (max-width: 767px) {
       .signupcontainer .signupwrapper {
-        margin-top: 162px;
+        margin-top: 110px;
         max-width: 360px;
         width: 95%; } }
     .signupcontainer .signupwrapper .signupbtn {
@@ -1350,6 +1350,24 @@ label {
     .signupcontainer .signupwrapper .commonbutton {
       font-weight: 400;
       margin-top: 24px; }
+    .signupcontainer .signupwrapper .btnwrapper {
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly; }
+      @media screen and (max-width: 767px) {
+        .signupcontainer .signupwrapper .btnwrapper {
+          padding: 0 20px; } }
+      .signupcontainer .signupwrapper .btnwrapper .yesornobtn {
+        background-color: #d9d9d9;
+        border-radius: 8px;
+        color: #191a20;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 700;
+        height: 55px;
+        margin-top: 16px;
+        width: 100px; }
 
 .inputsmallcontainer {
   position: relative;
@@ -1639,6 +1657,8 @@ label {
           padding-left: 8px;
           width: 55%;
           justify-content: flex-start; }
+          .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.first a {
+            text-decoration: underline; }
         .optcontentswrapper .contributionstatuscontainer .contributionstatustable .contributionstatuslist .tablecontent.last {
           border-right: 0px solid;
           display: flex;

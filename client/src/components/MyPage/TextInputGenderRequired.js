@@ -16,7 +16,7 @@ function TextInputGenderRequired({
     <div className="inputsmallcontainer">
       <div className="subjectwrapper">
         {inputname}
-        <span className="required">(필수)</span>
+        <span className="required">{isMutable ? '(필수)' : ''}</span>
       </div>
       <input
         type={type}

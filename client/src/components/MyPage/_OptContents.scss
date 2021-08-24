@@ -126,8 +126,11 @@
           width: 55%;
           justify-content: flex-start;
 
-
+          a{
+            text-decoration: underline;
+          }
         }
+
         .tablecontent.last {
           border-right: 0px solid;
           @include column-flexbox; 
