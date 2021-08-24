@@ -116,6 +116,7 @@ module.exports = {
   updateContribution: async (req, res) => {
     try {
       const { _id, user_email } = req.user;
+      const { contribution_content, contribution_title, contribution_keyword } = req.body
       const contribution_id = Number(req.params.contributionid);
 
       let user = await User.findOne({
@@ -127,17 +128,17 @@ module.exports = {
         });
       }
 
-      const contributionForDeletion = await Contribution.findOne({
+      const contributionForUpdate = await Contribution.findOne({
         contribution_id,
       });
 
-      if (!contributionForDeletion) {
+      if (!contributionForUpdate) {
         return res.status(404).json({
           message: 'Contribution not found',
         });
       }
 
-      if (contributionForDeletion.user_email !== user_email) {
+      if (contributionForUpdate.user_email !== user_email) {
         return res.status(403).json({
           message: 'Unauthorized user',
         });
@@ -146,7 +147,7 @@ module.exports = {
       let contribution_date = new Date(Date.now());
       contribution_date.setHours(contribution_date.getHours() + 9);
 
-      await Contribution.updateOne(
+      const temp = await Contribution.updateOne(
         {
           contribution_id,
         },
@@ -154,6 +155,9 @@ module.exports = {
           $set: {
             status: 101,
             contribution_date,
+            temp_title: contribution_title,
+            temp_content: contribution_content,
+            temp_keyword: contribution_keyword,
           },
         }
       );

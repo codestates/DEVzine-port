@@ -42,6 +42,9 @@ const contributionSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    temp_title: String,
+    temp_content: String,
+    temp_keyword: String,
     deletedAt: {
       type: Date,
       expires: 60
