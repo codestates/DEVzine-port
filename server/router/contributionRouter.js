@@ -11,22 +11,22 @@ const router = express.Router();
 router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
-  addContribution
+  addContribution,
 );
 router.delete(
   '/:contributionid',
   passport.authenticate('jwt', { session: false }),
-  deleteContribution
+  deleteContribution,
 );
 router.patch(
   '/:contributionid',
   passport.authenticate('jwt', { session: false }),
-  updateContribution
+  updateContribution,
 );
 router.get(
   '/update/:contributionid',
   passport.authenticate('jwt', { session: false }),
-  viewContribution
+  viewContribution,
 );
 
 module.exports = router;

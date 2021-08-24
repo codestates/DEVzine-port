@@ -3,7 +3,7 @@ const { VerifiedEmail } = require('../Models/Verifiedemails');
 const smtpTransport = require('nodemailer-smtp-transport');
 const nodemailer = require('nodemailer');
 const ejs = require('ejs');
-require('dotenv').config(); 
+require('dotenv').config();
 
 const crypto = require('crypto');
 const algorithm = 'aes-128-cbc';
@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport(
       user: process.env.NODEMAIL_EMAIL,
       pass: process.env.NODEMAIL_PWD,
     },
-  })
+  }),
 );
 
 module.exports = {
@@ -38,9 +38,10 @@ module.exports = {
 
     let authMailForm;
     const cipher = crypto.createCipheriv(algorithm, key, iv);
-    let encryptEmail = cipher.update(user_email, 'utf8', 'base64');
-    encryptEmail += cipher.final('base64');
-    console.log('Encrypt : ', encryptEmail);
+    let encryptEmail = user_email;
+    // let encryptEmail = cipher.update(user_email, 'utf8', 'base64');
+    // encryptEmail += cipher.final('base64');
+    // console.log('Encrypt : ', encryptEmail);
 
     ejs.renderFile(
       __dirname + '/ejsform/authMail.ejs',
@@ -48,7 +49,7 @@ module.exports = {
       (err, data) => {
         if (err) console.log(err);
         authMailForm = data;
-      }
+      },
     );
 
     transporter.sendMail(
@@ -65,7 +66,7 @@ module.exports = {
           console.log('Email sent: ' + info.response);
           transporter.close();
         }
-      }
+      },
     );
 
     return res.status(200).send({ message: 'Email sent' });
@@ -74,14 +75,15 @@ module.exports = {
   verifyUserEmail: async (req, res) => {
     const { temp_email } = req.body;
     const decipher = crypto.createDecipheriv(algorithm, key, iv);
-    let decryptEmail = decipher.update(temp_email, 'base64', 'utf8');
-    decryptEmail += decipher.final('utf8');
-    console.log('Decrypt : ', decryptEmail);
+    let decryptEmail = temp_email;
+    // let decryptEmail = decipher.update(temp_email, 'base64', 'utf8');
+    // decryptEmail += decipher.final('utf8');
+    // console.log('Decrypt : ', decryptEmail);
 
     const tempEmail = new VerifiedEmail({
       temp_email: decryptEmail,
     });
-    await tempEmail.save((err) => {
+    await tempEmail.save(err => {
       if (err) {
         return res.status(500).send(err);
       }

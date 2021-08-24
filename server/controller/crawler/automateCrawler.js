@@ -9,7 +9,6 @@ const {
 } = require('../cachefunction/articlesCache');
 
 module.exports = {
-
   crawlerFor24H: async () => {
     const data = await getRecentArticlesFrom24H();
     await Article.create(data);
@@ -22,6 +21,5 @@ module.exports = {
     await Article.create(data);
     const articlesPastTwoWeeks = await getArticlesPastTwoWeeks();
     await setNewCacheForArticles(articlesPastTwoWeeks);
-  }
-
-}
+  },
+};

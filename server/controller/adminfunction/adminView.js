@@ -1,6 +1,6 @@
 const { Contribution } = require('../../Models/Contributions');
 
-const findContributionsWithStatus = async (statusCode) => {
+const findContributionsWithStatus = async statusCode => {
   let result = await Contribution.aggregate([
     {
       $match: {
@@ -21,12 +21,13 @@ const findContributionsWithStatus = async (statusCode) => {
         contribution_title: 1,
         contribution_url: 1,
         status: 1,
-        user_name: { 
+        user_name: {
           $ifNull: [
             {
-              $arrayElemAt: ['$user_info.user_name', 0]
-            }, 'anonymous'
-          ]
+              $arrayElemAt: ['$user_info.user_name', 0],
+            },
+            'anonymous',
+          ],
         },
         _id: 0,
       },

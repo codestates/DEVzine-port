@@ -97,9 +97,7 @@ module.exports = {
     const contributionid = Number(req.params.contributionid);
 
     try {
-
       if (auth === 'user') {
-
         const cacheResult = await checkCacheForOneContribution(contributionid);
 
         if (cacheResult === 'Not found') {
@@ -117,18 +115,16 @@ module.exports = {
           source,
           message: 'Contribution successfully found',
         });
-
       } else {
-        
         const contribData = await Contribution.findOne(
           {
             contribution_id: contributionid,
           },
           {
             _id: 0,
-          }
+          },
         );
-          
+
         if (!contribData) {
           return res.status(404).json({
             message: 'Not found',
@@ -142,25 +138,23 @@ module.exports = {
           {
             _id: 0,
             user_name: 1,
-          }
+          },
         );
 
         const { user_email, ...data } = contribData._doc;
         let user_name;
-        if (user) { 
+        if (user) {
           user_name = user.user_name;
         } else {
           user_name = 'anonymous';
         }
-        
+
         return res.status(200).json({
           data: { user_name, ...data },
           source: 'DB',
           message: 'Contribution successfully found',
         });
-
       }
-      
     } catch (err) {
       console.log(err);
       return res.status(500).send(err);

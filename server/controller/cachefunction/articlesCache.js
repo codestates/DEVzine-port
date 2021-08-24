@@ -13,7 +13,7 @@ const getArticlesPastTwoWeeks = async () => {
     },
     {
       _id: 0,
-    }
+    },
   ).sort({
     article_date: -1,
   });
@@ -21,7 +21,7 @@ const getArticlesPastTwoWeeks = async () => {
   return articlesPastTwoWeeks;
 };
 
-const setNewCacheForArticles = async (articles) => {
+const setNewCacheForArticles = async articles => {
   await redisClient.del('recentArticles');
 
   for (let i = 0; i < articles.length; i++) {
@@ -65,7 +65,7 @@ const checkCacheForArticles = async () => {
   });
 };
 
-const checkCacheForOneArticle = async (id) => {
+const checkCacheForOneArticle = async id => {
   return new Promise((resolve, reject) => {
     redisClient.hgetall('recentArticles', async (err, articles) => {
       if (err) {
@@ -91,7 +91,7 @@ const checkCacheForOneArticle = async (id) => {
             },
             {
               _id: 0,
-            }
+            },
           );
           resolve({
             data: articleFromDB,
@@ -110,7 +110,7 @@ const checkCacheForOneArticle = async (id) => {
   });
 };
 
-const updateArticleHit = async (id) => {
+const updateArticleHit = async id => {
   try {
     Article.updateOne(
       {
@@ -139,9 +139,9 @@ const updateArticleHit = async (id) => {
             }
 
             redisClient.hmset('recentArticles', id, JSON.stringify(data));
-          }
+          },
         );
-      }
+      },
     );
   } catch (err) {
     return err;
