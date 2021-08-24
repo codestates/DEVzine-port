@@ -122,9 +122,20 @@ module.exports = {
           },
           {
             _id: 0,
+            contribution_date: 1,
+            hit: 1,
+            contribution_content: {
+              $ifNull: [ '$temp_content', '$contribution_content' ],
+            },
+            contribution_title: {
+              $ifNull: [ '$temp_title', '$contribution_title' ],
+            },
+            contribution_keyword: {
+              $ifNull: [ '$temp_keyword', '$contribution_keyword' ],
+            },
           },
         );
-
+          console.log(contribData)
         if (!contribData) {
           return res.status(404).json({
             message: 'Not found',
@@ -141,7 +152,6 @@ module.exports = {
           },
         );
 
-        const { user_email, ...data } = contribData._doc;
         let user_name;
         if (user) {
           user_name = user.user_name;
@@ -149,6 +159,8 @@ module.exports = {
           user_name = 'anonymous';
         }
 
+        const { user_email, ...data } = contribData._doc;
+        
         return res.status(200).json({
           data: { user_name, ...data },
           source: 'DB',
