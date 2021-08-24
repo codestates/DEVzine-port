@@ -20,21 +20,11 @@ const transporter = nodemailer.createTransport(
 );
 transporter.use('compile', inlineCss());
 
-// console.log('////////');
-// console.log(formatDate);
-// console.log(userEmail);
-// console.log(userName);
-// console.log(articleList);
-// console.log(max);
-// console.log(contribution);
-// console.log(contributionContent);
-// console.log('////////');
-
 const sendMailToSubscribers = async () => {
   const subscribers = await Subscriber.find({});
 
   // articles 어제 06시 이후에 크롤링 된 기사 가져오기
-  const getRange = new Date().getDay() === 0 ? 4 : 3;
+  const getRange = new Date().getDay() === 0 ? 2 : 1;
   const articles = await Article.find({
     article_date: {
       $gte: new Date(
@@ -76,11 +66,25 @@ const sendMailToSubscribers = async () => {
     idx++;
   }
 
-  const contribution = await Contribution.findOne(
+  // const contribution = await Contribution.findOne(
+  //   {
+  //     recommended: false,
+  //   },
+  //   [],
+  //   {
+  //     sort: {
+  //       hit: -1,
+  //     },
+  //   },
+  // );
+
+  const contribution = await Contribution.findOneAndUpdate(
     {
       recommended: false,
     },
-    [],
+    {
+      recommended: true,
+    },
     {
       sort: {
         hit: -1,
@@ -88,26 +92,12 @@ const sendMailToSubscribers = async () => {
     },
   );
 
-  // const contribution = await Contribution.findOneAndUpdate(
-  //   {
-  //     recommended: false,
-  //   },
-  //   {
-  //     recommended: true,
-  //   },
-  //   {
-  //     sort: {
-  //       hit: -1,
-  //     },
-  //   }
-  // );
-
-  subscribers.map(async subscriber => {
+  await subscribers.map(async subscriber => {
     const userEmail = subscriber.subscriber_email;
     let user = await User.findOne({
       user_email: userEmail,
     });
-    const userName = user ? user.user_name + '님' : '여러분';
+    const userName = user ? `${user.user_name}님` : '여러분';
     let date = new Date();
     const week = ['일', '월', '화', '수', '목', '금', '토'];
     let formatDate = `${date.getFullYear()}/${
@@ -115,8 +105,14 @@ const sendMailToSubscribers = async () => {
     }/${date.getDate()} ${week[date.getDay()]}요일`;
     const contributionContent =
       contribution.contribution_content.substr(0, 150) + '...';
-    let newsLetter;
+    const contributionUserName = await User.findOne(
+      {
+        user_email: contribution.user_email,
+      },
+      [user_name],
+    );
 
+    let newsLetter;
     ejs.renderFile(
       __dirname + '/../ejsform/newsLetter.ejs',
       {
@@ -128,6 +124,7 @@ const sendMailToSubscribers = async () => {
         articlesCount,
         max,
         contributionContent,
+        contributionUserName,
       },
       (err, data) => {
         if (err) console.log(err);
@@ -138,10 +135,8 @@ const sendMailToSubscribers = async () => {
     await transporter.sendMail(
       {
         from: 'DEVzine:port <devzineport@gmail.com>',
-        // to: 'idhyo0o@naver.com', // dummy email
-        to: 'haeun.yah@gmail.com',
-        // to: userEmail,
-        subject: 'DEVzine:port 에서 발송된 뉴스레터',
+        to: userEmail,
+        subject: 'DEVzine 에서 발송된 뉴스레터',
         html: newsLetter,
       },
       (err, info) => {
