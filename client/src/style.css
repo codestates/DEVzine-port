@@ -879,7 +879,7 @@ select::-ms-expand {
   margin-bottom: 220px; }
   @media screen and (max-width: 767px) {
     .common-footer {
-      margin-bottom: 40px; } }
+      margin-bottom: 154px; } }
 
 .admin {
   background-color: #ffdd14;
@@ -1308,7 +1308,7 @@ label {
   resize: none; }
   @media screen and (max-width: 767px) {
     .signinform .contextarea {
-      margin-bottom: 30px; } }
+      margin-bottom: 16px; } }
 
 .signinform .contributionbtn {
   background-color: transparent; }
