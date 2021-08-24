@@ -135,7 +135,7 @@ module.exports = {
             },
           },
         );
-          console.log(contribData)
+          
         if (!contribData) {
           return res.status(404).json({
             message: 'Not found',

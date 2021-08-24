@@ -39,7 +39,9 @@ module.exports = {
         },
         {
           contribution_id: 1,
-          contribution_title: 1,
+          contribution_title: {
+            $ifNull: [ '$temp_title', '$contribution_title' ],
+          },
           contribution_url: 1,
           status: 1,
           _id: 0,
