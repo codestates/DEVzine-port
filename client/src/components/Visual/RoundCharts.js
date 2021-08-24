@@ -83,8 +83,8 @@ export function UserTopLanguage({ data }) {
     <div
       className="chartcontainer"
       style={{
-        justifyContent: 'flex-end',
-        alignItems: 'center',
+        width: '100%',
+        justifyContent: 'flex-start',
       }}
     >
       <div className="chartwrapper" data-aos="fade-left">
