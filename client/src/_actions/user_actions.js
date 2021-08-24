@@ -1,6 +1,7 @@
 import { SIGNIN_USER, SIGNOUT_USER, MYPAGE_USER, DELETE_USER } from './types';
 import { customAxios } from '../utils/customAxios';
 
+// 로그인
 export async function signinUser(dataToSubmit) {
   const request = await customAxios
     .post(`/user/signin`, dataToSubmit)
@@ -16,6 +17,7 @@ export async function signinUser(dataToSubmit) {
   };
 }
 
+// 로그아웃(state 초기화)
 export async function signoutUser() {
   const request = await customAxios
     .post(`/user/signout`)
@@ -27,6 +29,7 @@ export async function signoutUser() {
   };
 }
 
+// 마이페이지
 export async function mypageUser(dataToSubmit) {
   const request = await customAxios
     .patch(`/mypage`, dataToSubmit)
@@ -38,6 +41,7 @@ export async function mypageUser(dataToSubmit) {
   };
 }
 
+// 회원탈퇴(state 초기화)
 export async function deleteUser() {
   const request = await customAxios
     .delete(`/user/delete`)

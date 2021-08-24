@@ -390,7 +390,7 @@ ol {
   .lg-hidden {
     display: none !important; } }
 
-.signinform .conselect, .signinform .contitle, .signinform .contextarea, .nonesubinner .emailinput, .inputsmallcontainer .inputsmall, .selectionbox .articlebox-select, .selectionbox input, .request-select, .request-text, .request-search, .approval-text, .approval-search {
+.request-select, .request-text, .request-search, .approval-text, .approval-search, .signinform .conselect, .signinform .contitle, .signinform .contextarea, .nonesubinner .emailinput, .inputsmallcontainer .inputsmall, .selectionbox .articlebox-select, .selectionbox input {
   font-size: 16px;
   line-height: 24px;
   letter-spacing: -0.01em;
@@ -405,7 +405,7 @@ ol {
   padding: 8px 14px;
   text-overflow: ellipsis;
   width: 100%; }
-  .signinform .conselect::placeholder, .signinform .contitle::placeholder, .signinform .contextarea::placeholder, .nonesubinner .emailinput::placeholder, .inputsmallcontainer .inputsmall::placeholder, .selectionbox .articlebox-select::placeholder, .selectionbox input::placeholder, .request-select::placeholder, .request-text::placeholder, .request-search::placeholder, .approval-text::placeholder, .approval-search::placeholder {
+  .request-select::placeholder, .request-text::placeholder, .request-search::placeholder, .approval-text::placeholder, .approval-search::placeholder, .signinform .conselect::placeholder, .signinform .contitle::placeholder, .signinform .contextarea::placeholder, .nonesubinner .emailinput::placeholder, .inputsmallcontainer .inputsmall::placeholder, .selectionbox .articlebox-select::placeholder, .selectionbox input::placeholder {
     color: #999; }
 
 select::-ms-expand {
@@ -874,6 +874,154 @@ select::-ms-expand {
   line-height: 24px;
   color: #d9d9d9; }
 
+.common-footer {
+  height: 100px;
+  margin-bottom: 220px; }
+  @media screen and (max-width: 767px) {
+    .common-footer {
+      margin-bottom: 40px; } }
+
+.admin {
+  background-color: #ffdd14;
+  min-height: 100vh;
+  position: relative;
+  width: 100%; }
+  .admin-footer {
+    height: 100px;
+    margin-bottom: 220px; }
+    @media screen and (max-width: 767px) {
+      .admin-footer {
+        margin-bottom: 40px; } }
+
+.request {
+  margin-top: 192px; }
+  .request-form {
+    border-bottom: 1px solid #ffc803;
+    border-top: 1px solid #ffc803;
+    position: relative;
+    width: 100%;
+    height: 60px;
+    padding-top: 8px;
+    margin-top: 10px; }
+  .request-select {
+    background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.64645 4.14645C2.84171 3.95118 3.15829 3.95118 3.35355 4.14645L6 6.79289L8.64645 4.14645C8.84171 3.95118 9.15829 3.95118 9.35355 4.14645C9.54882 4.34171 9.54882 4.65829 9.35355 4.85355L6.35355 7.85355C6.15829 8.04882 5.84171 8.04882 5.64645 7.85355L2.64645 4.85355C2.45118 4.65829 2.45118 4.34171 2.64645 4.14645Z' fill='%23b2b3b9'/%3E%3C/svg%3E%0A") no-repeat 97% 50%;
+    background-color: #fff;
+    border-color: #ffc803;
+    color: #191a20;
+    left: 0;
+    position: absolute;
+    width: 15%; }
+    .request-select option {
+      color: #191a20; }
+  .request-text {
+    border-color: #ffc803;
+    color: #191a20;
+    left: 16%;
+    position: absolute;
+    width: 70%; }
+  .request-search {
+    background-color: #ffc803;
+    border-color: #ffc803;
+    color: #191a20;
+    left: 87%;
+    position: absolute;
+    width: 13%;
+    line-height: 21px; }
+    .request-search:hover {
+      background-color: #FFBB34;
+      font-weight: 700; }
+
+.approval {
+  margin-top: 60px; }
+  .approval-form {
+    border-bottom: 1px solid #ffc803;
+    border-top: 1px solid #ffc803;
+    position: relative;
+    width: 100%;
+    height: 60px;
+    padding-top: 8px;
+    margin-top: 10px; }
+  .approval-text {
+    border-color: #ffc803;
+    color: #191a20;
+    left: 0;
+    position: absolute;
+    width: 85%; }
+  .approval-search {
+    background-color: #ffc803;
+    border-color: #ffc803;
+    color: #191a20;
+    left: 87%;
+    position: absolute;
+    width: 13%;
+    line-height: 21px; }
+    .approval-search:hover {
+      background-color: #FFBB34;
+      font-weight: 700; }
+  .approval-title {
+    cursor: pointer; }
+
+.request-sub,
+.approval-sub {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: #191a20;
+  margin-left: 12px;
+  font-weight: 400; }
+
+table {
+  border-collapse: collapse;
+  margin-top: 12px;
+  width: 100%; }
+
+th,
+td {
+  background-color: #fff;
+  border: 1px solid #191a20;
+  height: 20px;
+  padding: 0.5rem; }
+
+th:first-child {
+  text-align: left;
+  width: 10%; }
+
+th:nth-child(2) {
+  text-align: left; }
+
+th:nth-child(3) {
+  width: 80px; }
+
+th:nth-child(4) {
+  padding-left: 16px;
+  text-align: left;
+  width: 250px; }
+
+td:nth-child(2):hover {
+  text-decoration: underline; }
+
+.adminform-check {
+  display: inline-block;
+  margin-left: 16px; }
+  .adminform-check-label {
+    display: inline-block;
+    margin-left: 8px;
+    margin-top: 8px; }
+
+.adminform-btn {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: #191a20;
+  background-color: #f2f2f2;
+  border: 1px solid #d9d9d9;
+  border-radius: 24px;
+  height: 30px;
+  margin-left: 16px;
+  width: 70px; }
+  .adminform-btn:hover {
+    background-color: #d9d9d9; }
+
 .landingimg {
   background-color: #fff;
   margin-top: 820px;
@@ -1317,7 +1465,7 @@ label {
   min-height: 100vh;
   position: relative;
   width: 100%; }
-  .signupcontainer .admin-footer {
+  .signupcontainer-footer {
     height: 100px;
     margin-bottom: 220px; }
   .signupcontainer .signupwrapper {
@@ -2288,7 +2436,7 @@ label {
   position: relative;
   overflow-x: hidden;
   width: 100%; }
-  .visualcontainer .admin-footer {
+  .visualcontainer-footer {
     height: 100px;
     margin-bottom: 220px; }
   .visualcontainer .visualwrapper {
@@ -2362,147 +2510,6 @@ label {
             position: relative;
             border: 1px solid #d9d9d9;
             border-radius: 24px; } }
-
-.admin {
-  background-color: #ffdd14;
-  min-height: 100vh;
-  position: relative;
-  width: 100%; }
-  .admin-footer {
-    height: 100px;
-    margin-bottom: 220px; }
-    @media screen and (max-width: 767px) {
-      .admin-footer {
-        margin-bottom: 40px; } }
-
-.request {
-  margin-top: 192px; }
-  .request-form {
-    border-bottom: 1px solid #ffc803;
-    border-top: 1px solid #ffc803;
-    position: relative;
-    width: 100%;
-    height: 60px;
-    padding-top: 8px;
-    margin-top: 10px; }
-  .request-select {
-    background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.64645 4.14645C2.84171 3.95118 3.15829 3.95118 3.35355 4.14645L6 6.79289L8.64645 4.14645C8.84171 3.95118 9.15829 3.95118 9.35355 4.14645C9.54882 4.34171 9.54882 4.65829 9.35355 4.85355L6.35355 7.85355C6.15829 8.04882 5.84171 8.04882 5.64645 7.85355L2.64645 4.85355C2.45118 4.65829 2.45118 4.34171 2.64645 4.14645Z' fill='%23b2b3b9'/%3E%3C/svg%3E%0A") no-repeat 97% 50%;
-    background-color: #fff;
-    border-color: #ffc803;
-    color: #191a20;
-    left: 0;
-    position: absolute;
-    width: 15%; }
-    .request-select option {
-      color: #191a20; }
-  .request-text {
-    border-color: #ffc803;
-    color: #191a20;
-    left: 16%;
-    position: absolute;
-    width: 70%; }
-  .request-search {
-    background-color: #ffc803;
-    border-color: #ffc803;
-    color: #191a20;
-    left: 87%;
-    position: absolute;
-    width: 13%;
-    line-height: 21px; }
-    .request-search:hover {
-      background-color: #FFBB34;
-      font-weight: 700; }
-
-.approval {
-  margin-top: 60px; }
-  .approval-form {
-    border-bottom: 1px solid #ffc803;
-    border-top: 1px solid #ffc803;
-    position: relative;
-    width: 100%;
-    height: 60px;
-    padding-top: 8px;
-    margin-top: 10px; }
-  .approval-text {
-    border-color: #ffc803;
-    color: #191a20;
-    left: 0;
-    position: absolute;
-    width: 85%; }
-  .approval-search {
-    background-color: #ffc803;
-    border-color: #ffc803;
-    color: #191a20;
-    left: 87%;
-    position: absolute;
-    width: 13%;
-    line-height: 21px; }
-    .approval-search:hover {
-      background-color: #FFBB34;
-      font-weight: 700; }
-  .approval-title {
-    cursor: pointer; }
-
-.request-sub,
-.approval-sub {
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  color: #191a20;
-  margin-left: 12px;
-  font-weight: 400; }
-
-table {
-  border-collapse: collapse;
-  margin-top: 12px;
-  width: 100%; }
-
-th,
-td {
-  background-color: #fff;
-  border: 1px solid #191a20;
-  height: 20px;
-  padding: 0.5rem; }
-
-th:first-child {
-  text-align: left;
-  width: 10%; }
-
-th:nth-child(2) {
-  text-align: left; }
-
-th:nth-child(3) {
-  width: 80px; }
-
-th:nth-child(4) {
-  padding-left: 16px;
-  text-align: left;
-  width: 250px; }
-
-td:nth-child(2):hover {
-  text-decoration: underline; }
-
-.adminform-check {
-  display: inline-block;
-  margin-left: 16px; }
-  .adminform-check-label {
-    display: inline-block;
-    margin-left: 8px;
-    margin-top: 8px; }
-
-.adminform-btn {
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  color: #191a20;
-  background-color: #f2f2f2;
-  border: 1px solid #d9d9d9;
-  border-radius: 24px;
-  height: 30px;
-  margin-left: 16px;
-  width: 70px; }
-  .adminform-btn:hover {
-    background-color: #d9d9d9; }
 
 .container {
   width: 100%;

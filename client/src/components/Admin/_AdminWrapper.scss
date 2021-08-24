@@ -1,3 +1,13 @@
+.common-footer {
+  height: 100px;
+  margin-bottom: 220px; // footer 220px 포함
+  // margin-bottom: 100px; // footer 220px 포함
+
+  @include mobile-only() {
+    margin-bottom: 40px;
+  }
+}
+
 .admin {
   background-color: $yellow;
   min-height: 100vh;

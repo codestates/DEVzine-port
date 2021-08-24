@@ -214,7 +214,7 @@ function ContributionListWrapper() {
                     return (
                       <div
                         className="articlebox-listbox"
-                        key={el.article_title}
+                        key={el.contribution_id}
                       >
                         <Link
                           to={`/article/con-${el.contribution_id}`}

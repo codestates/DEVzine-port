@@ -243,7 +243,7 @@ function SignUpWrapper() {
                   }
                   alertBtn="확인"
                 />
-                <div className="admin-footer" />
+                <div className="signupcontainer-footer" />
               </div>
             </div>
           </div>

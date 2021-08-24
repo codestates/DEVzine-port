@@ -331,7 +331,7 @@ function MyPageWrapper() {
                   }
                   alertBtn="확인"
                 />
-                <div className="admin-footer" />
+                <div className="common-footer" />
               </div>
             </div>
           </div>
