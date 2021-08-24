@@ -64,11 +64,35 @@ export function ArticlesTopHit({ data }) {
     },
     responsive: [
       {
+        breakpoint: 880,
+        options: {
+          chart: {
+            width: '650', // 이전까진 740px
+            height: '650',
+          },
+        },
+      },
+      {
         breakpoint: 768,
         options: {
           chart: {
-            width: '100%',
-            height: 'auto',
+            width: '460',
+            height: '460',
+          },
+          legend: {
+            position: 'bottom',
+          },
+        },
+      },
+      {
+        breakpoint: 500,
+        options: {
+          chart: {
+            width: '100%', // 300px이라니..
+            height: '300',
+          },
+          legend: {
+            position: 'bottom',
           },
         },
       },
@@ -108,7 +132,7 @@ export function ArticlesTopHit({ data }) {
   options.xaxis.categories = categories;
 
   return (
-    <div className="chartcontainer" style={{ margin: '60% 0' }}>
+    <div className="chartcontainer" style={{ margin: '30% 0' }}>
       <div className="chartdesc" data-aos="fade-right">
         <div className="chartsubject">
           가장 많이 본 소식은
@@ -213,11 +237,35 @@ export function UserAgeAndGender({ data }) {
     },
     responsive: [
       {
+        breakpoint: 880,
+        options: {
+          chart: {
+            width: '650', // 이전까진 740px
+            height: '650',
+          },
+        },
+      },
+      {
         breakpoint: 768,
         options: {
           chart: {
-            width: '100%',
-            height: 'auto',
+            width: '460',
+            height: '460',
+          },
+          legend: {
+            position: 'bottom',
+          },
+        },
+      },
+      {
+        breakpoint: 500,
+        options: {
+          chart: {
+            width: '100%', // 300px이라니..
+            height: '300',
+          },
+          legend: {
+            position: 'bottom',
           },
         },
       },
