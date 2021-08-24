@@ -116,6 +116,7 @@ module.exports = {
           message: 'Contribution successfully found',
         });
       } else {
+
         const contribData = await Contribution.findOne(
           {
             contribution_id: contributionid,
@@ -125,17 +126,35 @@ module.exports = {
             contribution_date: 1,
             hit: 1,
             contribution_content: {
-              $ifNull: [ '$temp_content', '$contribution_content' ],
+              $cond: { 
+                if: {
+                  '$eq': [ '$status', 111 ] 
+                }, then: {
+                  $ifNull: [ '$temp_content', '$contribution_content' ]
+                }, else: '$contribution_content' 
+              }
             },
             contribution_title: {
-              $ifNull: [ '$temp_title', '$contribution_title' ],
+              $cond: { 
+                if: {
+                  '$eq': [ '$status', 111] 
+                }, then: {
+                  $ifNull: [ '$temp_title', '$contribution_title' ]
+                }, else: '$contribution_title' 
+              }
             },
             contribution_keyword: {
-              $ifNull: [ '$temp_keyword', '$contribution_keyword' ],
+              $cond: { 
+                if: {
+                  '$eq': [ '$status', 111 ] 
+                }, then: {
+                  $ifNull: [ '$temp_keyword', '$contribution_keyword' ]
+                }, else: '$contribution_keyword' 
+              }
             },
           },
         );
-          
+        
         if (!contribData) {
           return res.status(404).json({
             message: 'Not found',

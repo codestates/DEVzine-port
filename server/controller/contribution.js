@@ -182,7 +182,7 @@ module.exports = {
         },
         {
           _id: 0,
-          status: 0,
+          status: 1,
           contribution_id: 0,
           contribution_url: 0,
         }
@@ -203,7 +203,7 @@ module.exports = {
       delete contribData._doc.user_email;
 
       if (contribData.temp_content) {
-
+        
         const { 
           hit, 
           contribution_date, 
