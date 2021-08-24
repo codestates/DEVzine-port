@@ -2322,7 +2322,7 @@ label {
     width: 360px; }
     @media screen and (max-width: 767px) {
       .visualcontainer .visualwrapper {
-        margin-top: 162px;
+        margin-top: 110px;
         max-width: 360px;
         width: 95%; } }
     .visualcontainer .visualwrapper .chartcontainer {
@@ -2338,7 +2338,7 @@ label {
           flex-direction: row; } }
       .visualcontainer .visualwrapper .chartcontainer .chartdesc {
         position: relative;
-        margin: 20px 0;
+        margin-bottom: 40px;
         width: 100%;
         height: auto; }
         @media screen and (min-width: 1200px) {
@@ -2354,17 +2354,19 @@ label {
           margin-bottom: 10px; }
           @media screen and (min-width: 1200px) {
             .visualcontainer .visualwrapper .chartcontainer .chartdesc .chartsubject {
-              font-weight: 700;
               font-size: 36px;
               line-height: 48px;
               letter-spacing: -0.01em;
               color: #191a20;
               margin-bottom: 20px; } }
         .visualcontainer .visualwrapper .chartcontainer .chartdesc .chartdetail {
-          color: #191a20; }
+          font-size: 12px;
+          line-height: 16px;
+          letter-spacing: -0.005em;
+          color: #191a20;
+          font-weight: normal; }
           @media screen and (min-width: 1200px) {
             .visualcontainer .visualwrapper .chartcontainer .chartdesc .chartdetail {
-              font-weight: normal;
               font-size: 18px;
               line-height: 28px;
               letter-spacing: -0.02em;
