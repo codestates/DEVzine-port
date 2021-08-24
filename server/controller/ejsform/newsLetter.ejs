@@ -6,9 +6,9 @@
 	<body style="font-family:sans-serif;">
 		<header>
 			<div style="height:50px; width:100%; background-color:#191a20; text-align:center; ">
-		  	<h1 style="font-size: 24px; font-weight: bold; color:#ffdd14; line-height:50px;" >
-		    	DEVzine
-		  	</h1>
+				<h1 style="font-size: 24px; font-weight: bold; color:#ffdd14; line-height:50px;" >
+					DEVzine
+				</h1>
 			</div>
 			<div style="text-align: center;  width:100%; padding:20px 0;">
 				<span style="font-weight: bold;"><%= formatDate %></span><br/>
@@ -17,7 +17,7 @@
 		</header>
 	
 		<section style="background-color:#f2f2f2; padding:30px;">
-		  <article style="width:100%; max-width:360px; margin:0 auto; text-align:center; margin-bottom:30px;">
+			<article style="width:100%; max-width:360px; margin:0 auto; text-align:center; margin-bottom:30px;">
 				<div style="background-color: #ffdd14;  border-radius:24px;  padding:30px; margin-bottom:24px; cursor:pointer;">
 					오늘의 최신 뉴스<br/>
 					<span style="font-weight: bold; font-size:24px;"><%= articlesCount %>개</span>
@@ -26,23 +26,23 @@
 					오늘의 추천 기고글<br/>
 					<span style="font-weight: bold;"><%= contribution.contribution_title %></span>
 				</div>
-		  </article>
+			</article>
 
-	  	<article style="width:100%; max-width:1120px; margin:0 auto; margin-bottom:30px;">
+			<article style="width:100%; max-width:1120px; margin:0 auto; margin-bottom:30px;">
 				<h3 style="font-size: 18px; text-align: center;">추천 기고글</h3>
 				<a href="<%= contribution.contribution_url %>" style="display: block; text-decoration: none; color: black; background-color:white; cursor:pointer; border-radius:8px;">
 					<div style="padding: 20px;">
 						<p style="font-weight: bold; line-height:24px;">
 							<%= contribution.contribution_title %><br/>
-							<span style="font-weight: normal; color:#999;">by <%= contribution.user_email %></span>
+							<span style="font-weight: normal; color:#999;">by <%= contributionUserName %></span>
 						</p>
 						
 						<p style="">
-							 [본문 미리보기] <%= contributionContent %>
+							[본문 미리보기] <%= contributionContent %>
 						</p>
 					</div>
 				</a>
-		  </article>
+			</article>
 
 			<article style="width:100%; max-width:1120px; margin:0 auto; margin-bottom:30px; word-break:break-all;">
 				<h3 style="font-size: 18px; text-align: center;">최신 기사</h3>
@@ -62,7 +62,7 @@
 						</div>
 					</a>
 				<%}%>
-		  </article>
+			</article>
 
 			<article style="width:100%; max-width:360px; margin:0 auto;">
 				<div style="text-align:center; font-weight:bold;">
@@ -70,7 +70,7 @@
 					<a href="https://devzine-port.com/contribution" style="display: block; text-decoration: none; color: black; border-radius:8px; background-color:#ffdd14; padding:10px; margin-bottom:20px;" target="_blank">기고하기</a>
 					
 				</div>
-	 	 </article>
+			</article>
 	</section>
 
 		<footer style="font-size:14px; padding:20px; background-color:#191a20; color:#999; text-align:center;">
