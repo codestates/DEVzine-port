@@ -21,7 +21,7 @@
 		</div>
 		<div>
 			<div>추천 기고글</div>
-			<a href="https://devzine-port.com/contributionlist" style="display: block; width: 100%; height: 100%; text-decoration: none; color: black">
+			<a href="<%= contribution.contribution_url %>" style="display: block; text-decoration: none; color: black">
 				<div>
 					<p>제목 <%= contribution.contribution_title %></p>
 					<p>기고자 <%= contribution.user_email %></p>
@@ -35,7 +35,7 @@
 		</div>
 		<div>최신 기사</div>
 		<%for(var i = 0; i < max; i++) {%>
-			<a href="<%= articleList[i].article_url %>" style="display: block; width: 100%; height: 100%; text-decoration: none; color: black">
+			<a href="<%= articleList[i].article_url %>" style="display: block; text-decoration: none; color: black">
 				<div>
 					<p>제목 <%= articleList[i].article_title %></p>
 					<p>신문사 <%= articleList[i].article_publisher %></p>
@@ -48,9 +48,9 @@
 			</a>
 		<%}%>
 		<div>
-			<a href="https://devzine-port.com/articlelist" style="display: block; width: 100%; height: 100%; text-decoration: none; color: black" target="_blank">웹에서 보기</a>
-			<a href="https://devzine-port.com/contribution" style="display: block; width: 100%; height: 100%; text-decoration: none; color: black" target="_blank">기고하기</a>
-			<a href="https://devzine-port.com/unsubscribe/<%= userEmail %>" style="display: block; width: 100%; height: 100%; text-decoration: none; color: black">구독 취소하기</a>
+			<a href="https://devzine-port.com/articlelist" style="display: block; text-decoration: none; color: black" target="_blank">웹에서 보기</a>
+			<a href="https://devzine-port.com/contribution" style="display: block; text-decoration: none; color: black" target="_blank">기고하기</a>
+			<a href="https://devzine-port.com/unsubscribe/<%= userEmail %>" style="display: block; text-decoration: none; color: black">구독 취소하기</a>
 		</div>
 	</body>
 	<footer>
