@@ -8,7 +8,7 @@ const subscriberSchema = mongoose.Schema(
       unique: true,
     },
   },
-  { versionKey: false }
+  { versionKey: false },
 );
 
 const Subscriber = mongoose.model('subscribers', subscriberSchema);

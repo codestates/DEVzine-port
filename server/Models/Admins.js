@@ -8,7 +8,7 @@ const adminSchema = mongoose.Schema(
     },
     admin_password: String,
   },
-  { versionKey: false }
+  { versionKey: false },
 );
 
 const Admin = mongoose.model('admins', adminSchema);

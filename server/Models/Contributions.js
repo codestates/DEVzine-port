@@ -41,9 +41,9 @@ const contributionSchema = mongoose.Schema(
     recommended: {
       type: Boolean,
       default: false,
-    }
+    },
   },
-  { versionKey: false }
+  { versionKey: false },
 );
 
 contributionSchema.plugin(autoIncrement.plugin, {

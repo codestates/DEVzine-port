@@ -1,6 +1,11 @@
 const { stream } = require('./config/winston');
-const { crawlerFor24H, crawlerFor48H } = require('./controller/crawler/automateCrawler')
-const { sendMailToSubscribers } = require('./controller/emailfunction/subscriberEmail')
+const {
+  crawlerFor24H,
+  crawlerFor48H,
+} = require('./controller/crawler/automateCrawler');
+const {
+  sendMailToSubscribers,
+} = require('./controller/emailfunction/subscriberEmail');
 const fs = require('fs');
 const https = require('https');
 const mongoose = require('mongoose');
@@ -38,13 +43,13 @@ app.use(
     origin: true,
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'OPTIONS', 'DELETE'],
-  })
+  }),
 );
 app.use(
   robots({
     UserAgent: '*',
     Disallow: '/',
-  })
+  }),
 );
 
 app.get('/', (req, res) => {
@@ -68,21 +73,21 @@ const automatedCrawlerForWeekday = schedule.scheduleJob(
   '00 21 * * 1-5',
   async () => {
     crawlerFor24H();
-  }
+  },
 );
 // 월요일 오전 6시 크롤링 (48시간 이내 업데이트된 기사 불러오기)
 const automatedCrawlerForWeekend = schedule.scheduleJob(
   '00 21 * * 7',
   async () => {
     crawlerFor48H();
-  }
+  },
 );
-// 구독자 이메일 자동 발송 (오전 7시) 
+// 구독자 이메일 자동 발송 (오전 7시)
 const automatedNewsLetter = schedule.scheduleJob(
   '00 22 * * 1-5,7',
   async () => {
     await sendMailToSubscribers();
-  }
+  },
 );
 
 mongoose
@@ -94,7 +99,7 @@ mongoose
     dbName: process.env.MONGO_DATABASE, // connection string 에 있는 db 대신 다른 디폴트 db 지정
   })
   .then(() => console.log(`mongoDB connected`))
-  .catch((err) => console.error(err));
+  .catch(err => console.error(err));
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 let server;

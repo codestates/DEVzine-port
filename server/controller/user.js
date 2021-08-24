@@ -36,7 +36,7 @@ module.exports = {
         ...user_info,
       });
       await newUser.save();
-      VerifiedEmail.deleteOne({ temp_email: user_email }, (err) => {
+      VerifiedEmail.deleteOne({ temp_email: user_email }, err => {
         if (err) {
           return res.status(404).send({ message: 'Not found' });
         }
@@ -92,7 +92,7 @@ module.exports = {
           },
           message: 'Login success',
         });
-      }
+      },
     );
   },
 
@@ -113,10 +113,10 @@ module.exports = {
         },
         {
           user_email: 'anonymous',
-        }
+        },
       );
 
-      User.deleteOne({ _id }, (err) => {
+      User.deleteOne({ _id }, err => {
         if (err) {
           return res.status(404).send({ message: 'Not found' });
         }

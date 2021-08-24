@@ -1,6 +1,6 @@
 const { User } = require('../Models/Users');
 const { Contribution } = require('../Models/Contributions');
-const { Subscriber } = require('../Models/Subscribers')
+const { Subscriber } = require('../Models/Subscribers');
 const bcrypt = require('bcryptjs');
 
 module.exports = {
@@ -43,7 +43,7 @@ module.exports = {
           contribution_url: 1,
           status: 1,
           _id: 0,
-        }
+        },
       );
 
       return res.status(200).json({
@@ -90,13 +90,17 @@ module.exports = {
       let subscribed;
       if (req.body.subscribed === '구독') {
         subscribed = true;
-        await Subscriber.updateOne({
-          subscriber_email: user_email
-        }, {
-          subscriber_email: user_email
-        }, {
-          upsert: true
-        })
+        await Subscriber.updateOne(
+          {
+            subscriber_email: user_email,
+          },
+          {
+            subscriber_email: user_email,
+          },
+          {
+            upsert: true,
+          },
+        );
       } else {
         subscribed = false;
       }
@@ -118,7 +122,7 @@ module.exports = {
         update,
         {
           new: true,
-        }
+        },
       );
 
       if (!user) {

@@ -11,7 +11,7 @@ module.exports = {
           article_id: 1,
           article_title: 1,
           hit: 1,
-        }
+        },
       )
         .sort({
           hit: -1,
@@ -47,7 +47,7 @@ module.exports = {
         })
         .limit(5);
 
-      keywordCountForDay.forEach((keyword) => {
+      keywordCountForDay.forEach(keyword => {
         articles.articles_per_keyword_day[keyword._id] = keyword.count;
       });
 
@@ -77,7 +77,7 @@ module.exports = {
         })
         .limit(5);
 
-      keywordCountForMonth.forEach((keyword) => {
+      keywordCountForMonth.forEach(keyword => {
         articles.articles_per_keyword_month[keyword._id] = keyword.count;
       });
 
@@ -95,11 +95,11 @@ module.exports = {
       });
 
       articles.all_keywords_accumulated = all_keywords_accumulated.map(
-        (keyword) => {
+        keyword => {
           return { x: keyword._id, y: keyword.count };
-        }
+        },
       );
-      
+
       articles.all_keywords_accumulated.forEach(keyword => {
         if (keyword.x === '보안') {
           keyword.y = keyword.y - 40;

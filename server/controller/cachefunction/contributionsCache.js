@@ -28,12 +28,13 @@ const getAllConfirmedContributions = async () => {
         contribution_date: 1,
         status: 1,
         hit: 1,
-        user_name: { 
+        user_name: {
           $ifNull: [
             {
-              $arrayElemAt: ['$user_info.user_name', 0]
-            }, 'anonymous'
-          ]
+              $arrayElemAt: ['$user_info.user_name', 0],
+            },
+            'anonymous',
+          ],
         },
         _id: 0,
       },
@@ -48,13 +49,13 @@ const getAllConfirmedContributions = async () => {
   return contributionList;
 };
 
-const setNewCacheForContributions = async (contributions) => {
+const setNewCacheForContributions = async contributions => {
   for (let i = 0; i < contributions.length; i++) {
     let id = contributions[i].contribution_id;
     await redisClient.hset(
       'allContributions',
       id,
-      JSON.stringify(contributions[i])
+      JSON.stringify(contributions[i]),
     );
   }
   await redisClient.expire('allContributions', 30); //TODO: 배포 전에 24시간으로 설정
@@ -95,7 +96,7 @@ const checkCacheForContributions = async () => {
   });
 };
 
-const checkCacheForOneContribution = async (id) => {
+const checkCacheForOneContribution = async id => {
   return new Promise((resolve, reject) => {
     redisClient.hgetall('allContributions', async (err, contributions) => {
       if (err) {
@@ -165,7 +166,7 @@ const deleteCacheForOneContribution = async (id, data) => {
   });
 };
 
-const updateContributionHit = async (id) => {
+const updateContributionHit = async id => {
   try {
     Contribution.findOneAndUpdate(
       {
@@ -189,7 +190,7 @@ const updateContributionHit = async (id) => {
           redisClient.hset('allContributions', id, JSON.stringify(temp));
           return true;
         });
-      }
+      },
     );
   } catch (err) {
     return err;

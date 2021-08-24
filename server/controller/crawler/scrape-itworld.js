@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 
 module.exports = {
   scrapeITWorld: async (compareDate = null) => {
-    const getArticlesFromURL = async (url) => {
+    const getArticlesFromURL = async url => {
       let articles = [];
       const html = await axios.get(url);
       const $ = cheerio.load(html.data);
@@ -67,7 +67,7 @@ module.exports = {
 
     const ITWorldCloud = await getArticlesFromURL(ITWorldCloudURL);
     const ITWorldPersonalComputing = await getArticlesFromURL(
-      ITWorldPersonalComputingURL
+      ITWorldPersonalComputingURL,
     );
     const ITWorldBigData = await getArticlesFromURL(ITWorldBigDataURL);
 

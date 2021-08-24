@@ -12,23 +12,23 @@ const passport = require('passport');
 router.get(
   '/contributionlist',
   passport.authenticate('adminJWT', { session: false }),
-  getAllUsersContribution
+  getAllUsersContribution,
 );
 router.post('/signout', adminSignOut);
 router.post(
   '/signin',
   passport.authenticate('admin', { session: false }),
-  adminSignIn
+  adminSignIn,
 );
 router.post(
   '/contribution/reject',
   passport.authenticate('adminJWT', { session: false }),
-  rejectContribRequest
+  rejectContribRequest,
 );
 router.post(
   '/contribution/accept',
   passport.authenticate('adminJWT', { session: false }),
-  acceptContribRequest
+  acceptContribRequest,
 );
 
 module.exports = router;

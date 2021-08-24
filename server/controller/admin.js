@@ -27,7 +27,7 @@ module.exports = {
         return res.status(200).json({
           message: 'Login success',
         });
-      }
+      },
     );
   },
 
@@ -49,9 +49,9 @@ module.exports = {
       const postRequest = await findContributionsWithStatus(100);
       const patchRequest = await findContributionsWithStatus(101);
       const deleteRequest = await findContributionsWithStatus(102);
-      
+
       let { contributionData } = await checkCacheForContributions();
-      const accepted = contributionData.map((data) => {
+      const accepted = contributionData.map(data => {
         return {
           contribution_id: data.contribution_id,
           contribution_title: data.contribution_title,
@@ -99,7 +99,7 @@ module.exports = {
         },
         {
           new: true,
-        }
+        },
       );
 
       if (!rejectedContribution) {
@@ -141,7 +141,7 @@ module.exports = {
           fields: {
             _id: 0,
           },
-        }
+        },
       );
 
       if (!acceptedContribution) {
@@ -156,7 +156,7 @@ module.exports = {
         },
         {
           user_name: 1,
-        }
+        },
       );
 
       const { user_email, ...temp } = acceptedContribution._doc;
