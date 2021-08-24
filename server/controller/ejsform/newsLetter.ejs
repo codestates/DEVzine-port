@@ -38,7 +38,7 @@
 							</p>
 							
 							<p style="">
-								[본문 미리보기] <%= contributionContent %>
+								[본문 미리보기] <%= contribution.contribution_content.substring(0, 100) %>...
 							</p>
 						</div>
 					</a>
@@ -59,7 +59,7 @@
 							</p>
 							
 							<p>
-								[본문 미리보기] <%= articleList[i].article_content %>
+								[본문 미리보기] <%= articleList[i].article_content.substring(0, 50) %>...
 							</p>
 						</div>
 					</a>
