@@ -1,60 +1,82 @@
 <html>
-	<header>
-		<div style="font-size: 30px; font-weight: bold;">
-			DEVzine:port
-		</div>
-		<div>
-			<p><%= formatDate %></p>
-			<p><%= userName %>께 전해드리는 최신 IT 소식</p>
-		</div>
-	</header>
-	<style type="text/css">
-	</style>
-	<body>
-		<div>
-			<p>오늘의 최신 뉴스</p>
-			<p><%= articlesCount %>개</p>
-		</div>
-		<div>
-			<p>오늘의 추천 기고글</p>
-			<p><%= contribution.contribution_title %></p>
-		</div>
-		<div>
-			<div>추천 기고글</div>
-			<a href="<%= contribution.contribution_url %>" style="display: block; text-decoration: none; color: black">
-				<div>
-					<p>제목 <%= contribution.contribution_title %></p>
-					<p>기고자 <%= contribution.user_email %></p>
-					<p>
-						본문 미리보기
-						<br>
-						<%= contributionContent %>
-					</p>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+	<body style="font-family:sans-serif;">
+		<header>
+			<div style="height:50px; width:100%; background-color:#191a20; text-align:center; ">
+		  	<h1 style="font-size: 24px; font-weight: bold; color:#ffdd14; line-height:50px;" >
+		    	DEVzine
+		  	</h1>
+			</div>
+			<div style="text-align: center;  width:100%; padding:20px 0;">
+				<span style="font-weight: bold;"><%= formatDate %></span><br/>
+				<%= userName %>께 전해드리는 최신 IT 소식
+			</div>
+		</header>
+	
+		<section style="background-color:#f2f2f2; padding:30px;">
+		  <article style="width:100%; max-width:360px; margin:0 auto; text-align:center; margin-bottom:30px;">
+				<div style="background-color: #ffdd14;  border-radius:24px;  padding:30px; margin-bottom:24px; cursor:pointer;">
+					오늘의 최신 뉴스<br/>
+					<span style="font-weight: bold; font-size:24px;"><%= articlesCount %>개</span>
 				</div>
-			</a>
-		</div>
-		<div>최신 기사</div>
-		<%for(var i = 0; i < max; i++) {%>
-			<a href="<%= articleList[i].article_url %>" style="display: block; text-decoration: none; color: black">
-				<div>
-					<p>제목 <%= articleList[i].article_title %></p>
-					<p>신문사 <%= articleList[i].article_publisher %></p>
-					<p>
-						본문 미리보기
-						<br>
-						<%= articleList[i].article_content %>
-					</p>
+				<div style="background-color: #ffdd14; border-radius:24px;  padding:30px; cursor:pointer;">
+					오늘의 추천 기고글<br/>
+					<span style="font-weight: bold;"><%= contribution.contribution_title %></span>
 				</div>
-			</a>
-		<%}%>
-		<div>
-			<a href="https://devzine-port.com/articlelist" style="display: block; text-decoration: none; color: black" target="_blank">웹에서 보기</a>
-			<a href="https://devzine-port.com/contribution" style="display: block; text-decoration: none; color: black" target="_blank">기고하기</a>
-			<a href="https://devzine-port.com/unsubscribe/<%= userEmail %>" style="display: block; text-decoration: none; color: black">구독 취소하기</a>
-		</div>
+		  </article>
+
+	  	<article style="width:100%; max-width:1120px; margin:0 auto; margin-bottom:30px;">
+				<h3 style="font-size: 18px; text-align: center;">추천 기고글</h3>
+				<a href="<%= contribution.contribution_url %>" style="display: block; text-decoration: none; color: black; background-color:white; cursor:pointer; border-radius:8px;">
+					<div style="padding: 20px;">
+						<p style="font-weight: bold; line-height:24px;">
+							<%= contribution.contribution_title %><br/>
+							<span style="font-weight: normal; color:#999;">by <%= contribution.user_email %></span>
+						</p>
+						
+						<p style="">
+							 [본문 미리보기] <%= contributionContent %>
+						</p>
+					</div>
+				</a>
+		  </article>
+
+			<article style="width:100%; max-width:1120px; margin:0 auto; margin-bottom:30px; word-break:break-all;">
+				<h3 style="font-size: 18px; text-align: center;">최신 기사</h3>
+				<%for(var i = 0; i < max; i++) {%>
+					<a href="<%= articleList[i].article_url %>" style="display: block; text-decoration: none; color: black; background-color:white; cursor:pointer; border-radius:8px;">
+						<div style="padding: 20px; margin-bottom:16px;">
+							<p style="font-weight: bold; line-height:24px;">
+								<%= articleList[i].article_title %><br/>
+								<span style="font-weight: normal; color:#999;">
+									by <%= articleList[i].article_publisher %>
+								</span>
+							</p>
+							
+							<p>
+								[본문 미리보기] <%= articleList[i].article_content %>
+							</p>
+						</div>
+					</a>
+				<%}%>
+		  </article>
+
+			<article style="width:100%; max-width:360px; margin:0 auto;">
+				<div style="text-align:center; font-weight:bold;">
+					<a href="https://devzine-port.com/articlelist" style="display: block; text-decoration: none; color: black; border-radius:8px; background-color:#ffdd14; padding:10px; margin-bottom:10px;" target="_blank" >웹에서 보기</a>
+					<a href="https://devzine-port.com/contribution" style="display: block; text-decoration: none; color: black; border-radius:8px; background-color:#ffdd14; padding:10px; margin-bottom:20px;" target="_blank">기고하기</a>
+					
+				</div>
+	 	 </article>
+	</section>
+
+		<footer style="font-size:14px; padding:20px; background-color:#191a20; color:#999; text-align:center;">
+			<span style="color:#ffdd14; font-size:30px; font-weight:bolder">D</span>
+			<p>Copyright &copy; 200ok. All rights  reserved.</p>
+			<p style="font-size:12px;">본 메일은 발신전용입니다.<br/>문의사항이 있으시다면 DEVzine:port Github를 확인해주세요.<a href="https://devzine-port.com/unsubscribe/<%= userEmail %>" style="display: block; text-decoration: none; color:#999;">구독 취소하기</a></p>
+		</footer>
 	</body>
-	<footer>
-		<p>Copyright (c) 200ok. All rights  reserved.</p>
-		<p>본 메일은 발신전용입니다. 문의사항이 있으시다면 DEVzine:port Github 를 확인해주세요.</p>
-	</footer>
 </html>
