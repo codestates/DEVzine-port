@@ -1,0 +1,43 @@
+.accesswrapper {
+  margin-top: 24px;
+  width: 100%;
+
+  &-required {
+    color: $yellow-dark;
+  }
+
+  p {
+    @include text-style(15, $dark);
+    font-weight: $bold;
+  }
+
+  .accessdata {
+    @include text-style(15, $secondary);
+    position: relative;
+    margin-bottom: 8px;
+
+    @include mobile-only() {
+      @include text-style(14, $secondary);
+      margin-bottom: 0;
+    }
+
+    &-ckb {
+      margin-right: 6px;
+
+      @include mobile-only() {
+        margin-right: 4px;
+      }
+    }
+
+    &-view {
+      color: $yellow-dark;
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+  
+      &:hover {
+        font-weight: $bold;
+      }
+    }
+  }
+}

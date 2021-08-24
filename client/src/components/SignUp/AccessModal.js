@@ -5,21 +5,21 @@ function AccessModal(props) {
 
   return (
     <div>
-      <div className="modalcontainer stopdragging">
+      <div className="acc-modalcontainer stopdragging">
         {open ? (
           <div className="modalbackdrop">
             <div className="modalview">
               <div className="desc">
-                {alertString.split('\n').map(line => (
-                  <span key={line}>
+                {alertString.split('\n').map((line, idx) => (
+                  <span key={idx}>
                     {line}
                     <br />
                   </span>
                 ))}
-                <button className="closebtn" onClick={close}>
-                  {alertBtn}
-                </button>
               </div>
+              <button className="closebtn" onClick={close}>
+                {alertBtn}
+              </button>
             </div>
           </div>
         ) : null}

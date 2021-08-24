@@ -7,6 +7,10 @@
   &-footer {
     height: 100px;
     margin-bottom: 220px;
+
+    @include mobile-only() {
+      margin-bottom: 160px;
+    }
   }
 
   .signupwrapper {

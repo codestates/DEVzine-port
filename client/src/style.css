@@ -1474,6 +1474,9 @@ label {
   .signupcontainer-footer {
     height: 100px;
     margin-bottom: 220px; }
+    @media screen and (max-width: 767px) {
+      .signupcontainer-footer {
+        margin-bottom: 160px; } }
   .signupcontainer .signupwrapper {
     margin: 0 auto;
     display: flex;
@@ -1705,6 +1708,107 @@ label {
   .multiselectwrapper .multiselectcontents .multiselectcontent .basicsingle,
   .multiselectwrapper .multiselectcontents .multiselectcontent .basicmulti {
     width: 254.97px; }
+
+.accesswrapper {
+  margin-top: 24px;
+  width: 100%; }
+  .accesswrapper-required {
+    color: #ffc803; }
+  .accesswrapper p {
+    color: #191a20;
+    font-weight: 700; }
+  .accesswrapper .accessdata {
+    color: #999;
+    position: relative;
+    margin-bottom: 8px; }
+    @media screen and (max-width: 767px) {
+      .accesswrapper .accessdata {
+        font-size: 14px;
+        line-height: 24px;
+        letter-spacing: -0.01em;
+        color: #999;
+        margin-bottom: 0; } }
+    .accesswrapper .accessdata-ckb {
+      margin-right: 6px; }
+      @media screen and (max-width: 767px) {
+        .accesswrapper .accessdata-ckb {
+          margin-right: 4px; } }
+    .accesswrapper .accessdata-view {
+      color: #ffc803;
+      cursor: pointer;
+      position: absolute;
+      right: 0; }
+      .accesswrapper .accessdata-view:hover {
+        font-weight: 700; }
+
+.acc-modalcontainer {
+  position: fixed;
+  height: 15rem;
+  margin: 120px auto;
+  z-index: 720; }
+  .acc-modalcontainer .modalbackdrop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 200; }
+    .acc-modalcontainer .modalbackdrop .modalview {
+      background-color: #fff;
+      border-radius: 20px;
+      height: 600px;
+      position: relative;
+      width: 600px;
+      padding: 20px; }
+      @media screen and (max-width: 767px) {
+        .acc-modalcontainer .modalbackdrop .modalview {
+          border-radius: 0;
+          height: 100%;
+          width: 100%;
+          padding: 30px; } }
+  .acc-modalcontainer .desc {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    color: #191a20;
+    width: 95%;
+    position: absolute;
+    top: 260px;
+    left: 310px;
+    overflow-y: scroll;
+    height: 80%; }
+    @media screen and (max-width: 767px) {
+      .acc-modalcontainer .desc {
+        top: 45%;
+        left: 50%;
+        height: 70%; } }
+  .acc-modalcontainer .closebtn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #d9d9d9;
+    border-radius: 8px;
+    color: #191a20;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    height: 55px;
+    width: 265px;
+    top: 550px; }
+    @media screen and (max-width: 767px) {
+      .acc-modalcontainer .closebtn {
+        max-width: 265px;
+        width: 90%;
+        top: 90%; } }
 
 .optcontentswrapper {
   padding: 2px;
