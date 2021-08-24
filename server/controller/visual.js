@@ -25,8 +25,7 @@ module.exports = {
         stat_content: data,
       });
 
-      //TODO: 배포 직전에 유효시간 12시간으로 수정 (43200 초)
-      redisClient.setex('visualsActivated', 10, JSON.stringify(data));
+      redisClient.setex('visualsActivated', 60 * 60 * 12, JSON.stringify(data));
       return res.status(200).json({
         data,
         message: 'success',

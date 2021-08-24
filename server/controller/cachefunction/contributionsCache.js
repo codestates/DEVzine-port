@@ -58,7 +58,7 @@ const setNewCacheForContributions = async contributions => {
       JSON.stringify(contributions[i]),
     );
   }
-  await redisClient.expire('allContributions', 30); //TODO: 배포 전에 24시간으로 설정
+  await redisClient.expire('allContributions', 60 * 60 * 24); 
 };
 
 const checkCacheForContributions = async () => {
