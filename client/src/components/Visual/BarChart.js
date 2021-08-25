@@ -147,7 +147,7 @@ export function ArticlesTopHit({ data }) {
       <div className="chartwrapper" data-aos="fade-left" data-aos-delay="300">
         <Chart
           options={options}
-          series={[{ data: series }]}
+          series={[{ name: '조회수', data: series }]}
           type="bar"
           height={504}
           width={740}
