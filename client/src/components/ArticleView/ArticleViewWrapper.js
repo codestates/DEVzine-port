@@ -103,17 +103,17 @@ function ArticleViewWrapper({ id }) {
                       ? Request === 'Login need'
                         ? Contribution.contribution_content
                             .slice(0, 300)
-                            .split(/!|\.\s|\✨/)
+                            .split(/\.\s|\✨/)
                             .map(line => (
                               <div key={line} className="line-spacing">
-                                {line}.
+                                {line}.<br />
                               </div>
                             ))
                         : Contribution.contribution_content
                             .split(/!|\.\s|\✨/)
                             .map(line => (
                               <div key={line} className="line-spacing">
-                                {line}.
+                                {line}.<br />
                               </div>
                             ))
                       : Article.article_content.split(/!|\.\s/).map(line => (
