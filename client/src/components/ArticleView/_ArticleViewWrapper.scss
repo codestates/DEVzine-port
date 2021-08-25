@@ -77,6 +77,8 @@
           font-weight: $bold;
           margin-bottom: 18px;
           position: relative;
+
+       
         }
       }
 
@@ -102,6 +104,7 @@
 
         @include mobile-only() {
           position: static;
+          margin-top: 4px;
           // text-align: left;
           // border:1px solid red;
         }

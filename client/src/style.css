@@ -2495,7 +2495,8 @@ label {
         padding-right: 1px; }
         @media screen and (max-width: 767px) {
           .articlecontainer .articleviewwrapper .header .datawrapper {
-            position: static; } }
+            position: static;
+            margin-top: 4px; } }
         .articlecontainer .articleviewwrapper .header .datawrapper .data {
           font-weight: 400;
           margin: 0 4px; }
