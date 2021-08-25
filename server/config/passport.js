@@ -109,7 +109,10 @@ const JWTConfigAdmin = {
 
 const JWTVerifyAdmin = async (jwtPayload, done) => {
   try {
-    const admin = await Admin.findOne({ admin_id: jwtPayload.admin_id });
+    const admin = await Admin.findOne({ admin_id: jwtPayload.admin_id},
+    {
+      admin_password:0 
+    });
     if (admin) {
       return done(null, admin);
     }
