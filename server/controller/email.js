@@ -85,7 +85,7 @@ module.exports = {
 
     const user = await VerifiedEmail.findOne({ temp_email: decryptEmail });
     if (user) {
-      return res.status(400).send({ message: 'Email already verified' });
+      return res.status(400).json({ message: 'Email already verified' });
     }
 
     const tempEmail = new VerifiedEmail({
@@ -95,7 +95,7 @@ module.exports = {
       if (err) {
         return res.status(500).send(err);
       }
-      return res.status(200).send({ message: 'Verified email created' });
+      return res.status(200).json({ message: 'Verified email created' });
     });
 
     setTimeout(() => {
