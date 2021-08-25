@@ -153,7 +153,7 @@ function ArticleViewWrapper({ id }) {
                               </div>
                             ))
                         : Contribution.contribution_content
-                            .split(/!|\.\s|\✨/)
+                            .split(/\.\s|\✨/)
                             .map(line => (
                               <div key={line} className="line-spacing">
                                 {line}.<br />
