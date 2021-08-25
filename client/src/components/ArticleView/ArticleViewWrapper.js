@@ -124,21 +124,6 @@ function ArticleViewWrapper({ id }) {
                       strokeMiterlimit="10"
                     />
                   </svg>
-
-                  {/* <div className="datawrapper">
-                    게시{' '}
-                    <span className="data">
-                      {indicator === 'con' || indicator === 'pre'
-                        ? Contribution.contribution_date.slice(0, 10)
-                        : Article.article_date.slice(0, 10)}
-                    </span>
-                    조회{' '}
-                    <span className="data">
-                      {indicator === 'con' || indicator === 'pre'
-                        ? Contribution.hit
-                        : Article.hit}
-                    </span>
-                  </div> */}
                 </div>
                 <div className="body">
                   <div className="contents">
