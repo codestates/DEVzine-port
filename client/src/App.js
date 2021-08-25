@@ -37,9 +37,8 @@ const Visual = lazy(
     ),
 );
 
-import AuthMail from './components/AuthMail';
-import AuthTest from './components/AuthTest';
-import Unsubscribe from './components/Unsubscribe';
+import AuthMail from './components/Email/AuthMail';
+import Unsubscribe from './components/Email/Unsubscribe';
 import Error from './components/Common/Error/Error';
 import Loading from './components/Common/Loading/Loading';
 import Admin from './pages/Admin';
@@ -85,9 +84,6 @@ function App() {
           </Route>
           <Route path="/authmail/:email">
             <AuthMail />
-          </Route>
-          <Route path="/authtest">
-            <AuthTest />
           </Route>
           <Route path="/unsubscribe/:email">
             <Unsubscribe />

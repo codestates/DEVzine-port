@@ -14,7 +14,6 @@ function TextInputGenderRequired({
   Email_isValid,
   setEmailNotVerified,
 }) {
-  //inputname은 이메일 같은거, detailString은 state에 문자열한거, stateName은 state, stateFunc은 set함수
   return (
     <div className="inputsmallcontainer">
       <div className="subjectwrapper">
