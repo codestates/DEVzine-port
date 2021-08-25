@@ -19,6 +19,7 @@ export default function (option) {
       }
     }
   } else if (store.getState().admin.adminSigninSuccess) {
+    // admin 로그인 관련
     if (store.getState().admin.adminSigninSuccess === 'Login success') {
       return 'Admin login success';
     }

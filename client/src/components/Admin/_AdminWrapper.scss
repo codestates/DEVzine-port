@@ -1,10 +1,8 @@
 .common-footer {
   height: 100px;
-  margin-bottom: 220px; // footer 220px 포함
-  // margin-bottom: 100px; // footer 220px 포함
+  margin-bottom: 220px; 
 
   @include mobile-only() {
-    // margin-bottom: 40px;
     margin-bottom: 154px;
   }
 }
@@ -17,8 +15,7 @@
 
   &-footer {
     height: 100px;
-    margin-bottom: 220px; // footer 220px 포함
-    // margin-bottom: 100px; // footer 220px 포함
+    margin-bottom: 220px;
 
     @include mobile-only() {
       margin-bottom: 40px;
@@ -27,17 +24,16 @@
 }
 
 .request {
-  margin-top: 192px; //header 120px 포함
-  // border:1px solid red;
+  margin-top: 192px;
 
   &-form {
     border-bottom: 1px solid $yellow-dark;
     border-top: 1px solid $yellow-dark;
+    height: 60px;
+    margin-top: 10px;
+    padding-top: 8px;
     position: relative;
     width: 100%;
-    height: 60px;
-    padding-top:8px;
-    margin-top:10px;
   }
 
   &-select {
@@ -50,7 +46,6 @@
     left: 0;
     position: absolute;
     width: 15%;
-   
 
     option {
       color: $dark;
@@ -59,12 +54,11 @@
 
   &-text {
     @extend %form-base;
-    // background-color: $yellow-light;
     border-color: $yellow-dark;
     color: $dark;
     left: 16%;
     position: absolute;
-    width: 70%; 
+    width: 70%;
   }
 
   &-search {
@@ -73,9 +67,9 @@
     border-color: $yellow-dark;
     color: $dark;
     left: 87%;
+    line-height: 21px;
     position: absolute;
     width: 13%;
-    line-height: 21px;
 
     &:hover {
       background-color: #FFBB34;
@@ -86,41 +80,39 @@
 
 
 .approval {
-  margin-top: 60px; //header 120px 포함
+  margin-top: 60px;
 
   &-form {
     border-bottom: 1px solid $yellow-dark;
     border-top: 1px solid $yellow-dark;
+    height: 60px;
+    margin-top: 10px;
+    padding-top: 8px;
     position: relative;
     width: 100%;
-    height: 60px;
-    padding-top:8px;
-    margin-top:10px;
   }
 
   &-text {
     @extend %form-base;
-    // background-color: $yellow-light;
     border-color: $yellow-dark;
     color: $dark;
     left: 0;
     position: absolute;
-    width: 85%; 
+    width: 85%;
   }
 
   &-search {
     @extend %form-base;
     background-color: $yellow-dark;
-    // background-color: transparent;
     border-color: $yellow-dark;
     color: $dark;
     left: 87%;
+    line-height: 21px;
     position: absolute;
     width: 13%;
-    line-height: 21px;
 
     &:hover {
-      background-color:  #FFBB34;
+      background-color: #FFBB34;
       font-weight: $bold;
     }
   }
@@ -133,8 +125,8 @@
 .request-sub,
 .approval-sub {
   @include text-style(16, $dark);
-  margin-left: 12px;
   font-weight: $normal;
+  margin-left: 12px;
 }
 
 table {

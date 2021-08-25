@@ -32,11 +32,11 @@ function RequestTable({ Requested }) {
     setStatusNumber(e.currentTarget.value);
   }
 
+  // 요청에 관한 승인 or 거부
   function onSubmitHandler(e, contribution_id) {
     e.preventDefault();
 
     if (StatusNumber === null) {
-      //  alert('승인 혹은 거부를 선택해야 합니다.');
       setAllSelect(false);
       setAlertOpen(true);
     } else {
@@ -58,11 +58,9 @@ function RequestTable({ Requested }) {
         .post(`/admin/contribution/${route}`, body)
         .then(res => {
           if (res.status === 200) {
-            // alert('요청이 완료되었습니다.');
             setPostSuc(true);
             setAlertOpen(true);
           } else {
-            // alert('요청이 실패하였습니다.');
             setPostSuc(false);
             setAlertOpen(true);
           }

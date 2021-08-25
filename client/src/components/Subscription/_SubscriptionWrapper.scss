@@ -12,6 +12,7 @@
 
   .subinnner {
     @include pos-center;
+    // border:1px solid red;
     top: 45%;
     width: 100%;
     margin-right: auto;
@@ -37,7 +38,7 @@
 
   .subtextsmall {
     @include text-style(16, $secondary);
-    margin-bottom: 28px;
+    margin-bottom: 8px;
 
     @include mobile-only() {
       margin-bottom: 8px;
@@ -60,6 +61,7 @@
     width: 296px;
 
     @include mobile-only() {
+      max-width: 296px;
       width: 100%;
     }
   }
@@ -77,6 +79,7 @@
   .subemailbtn {
     background-color: transparent;
     // border:1px solid red;
+    max-width: 296px;
     width: 100%;
     padding: 0;
    
@@ -94,7 +97,7 @@
   }
 
   .subjoinbox {
-    margin-top: 48px;
+    margin-top: 24px;
     position: relative;
    
 
