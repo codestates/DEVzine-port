@@ -59,7 +59,7 @@ export function UserTopLanguage({ data }) {
         breakpoint: 880,
         options: {
           chart: {
-            width: '650', // 이전까진 740px
+            width: '650',
             height: '650',
           },
         },
@@ -80,7 +80,7 @@ export function UserTopLanguage({ data }) {
         breakpoint: 500,
         options: {
           chart: {
-            width: '100%', // 300px이라니..
+            width: '100%',
             height: '300',
           },
           legend: {
@@ -177,7 +177,7 @@ export function UserTopPosition({ data }) {
         breakpoint: 880,
         options: {
           chart: {
-            width: '650', // 이전까진 740px
+            width: '650',
             height: '650',
           },
         },
@@ -198,7 +198,7 @@ export function UserTopPosition({ data }) {
         breakpoint: 500,
         options: {
           chart: {
-            width: '100%', // 300px이라니..
+            width: '100%',
             height: '300',
           },
           legend: {

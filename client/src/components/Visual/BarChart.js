@@ -67,7 +67,7 @@ export function ArticlesTopHit({ data }) {
         breakpoint: 880,
         options: {
           chart: {
-            width: '650', // 이전까진 740px
+            width: '650',
             height: '650',
           },
         },
@@ -88,7 +88,7 @@ export function ArticlesTopHit({ data }) {
         breakpoint: 500,
         options: {
           chart: {
-            width: '100%', // 300px이라니..
+            width: '100%',
             height: '300',
           },
           legend: {
@@ -184,7 +184,6 @@ export function UserAgeAndGender({ data }) {
     },
   ];
 
-  // 최대값과 가장 근접한 5의 배수를 찾는 로직
   let maxCount = Math.max(
     ...series[0].data.map(el => Math.abs(el)),
     ...series[1].data,
@@ -240,7 +239,7 @@ export function UserAgeAndGender({ data }) {
         breakpoint: 880,
         options: {
           chart: {
-            width: '650', // 이전까진 740px
+            width: '650',
             height: '650',
           },
         },
@@ -261,7 +260,7 @@ export function UserAgeAndGender({ data }) {
         breakpoint: 500,
         options: {
           chart: {
-            width: '100%', // 300px이라니..
+            width: '100%',
             height: '300',
           },
           legend: {

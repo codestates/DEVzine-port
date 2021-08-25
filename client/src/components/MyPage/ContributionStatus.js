@@ -11,7 +11,7 @@ function ContributionStatus({ Contribution }) {
       .then(res => {
         window.location.href = '/mypage';
       })
-      .catch(err => console.log(err));
+      .catch(err => err);
   }
   return (
     <div className="contributionstatuscontainer">
