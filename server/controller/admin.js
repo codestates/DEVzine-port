@@ -110,6 +110,23 @@ module.exports = {
         });
       }
 
+      const user = await User.findOne(
+        {
+          user_email: rejectedContribution.user_email,
+        },
+        {
+          user_name: 1,
+        },
+      );
+
+      const { user_email, ...temp } = rejectedContribution._doc;
+      let user_name = 'anonymous';
+      if (user) {
+        user_name = user.user_name;
+      }
+      
+      const data = { user_name, ...temp };
+
       if (
         rejectedContribution.status === 121 ||
         rejectedContribution.status === 122
