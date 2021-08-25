@@ -20,7 +20,6 @@
       margin-top: 192px;
       background-color: $white;
       position: relative;
-      // min-height: 140px;
       min-height: 120px;
       border: 1px solid $border;
       border-radius: 24px 24px 0 0;
@@ -34,7 +33,6 @@
 
       .headerleft {
         padding-top: 24px;
-      //  border:1px solid red;
 
         @include mobile-only() {
           padding-top: 20px;
@@ -65,10 +63,8 @@
 
           @include mobile-only() {
             @include text-style-18;
-            margin-bottom: 0px;
+            margin-bottom: 0;
             padding-right: 20px;
-            // border: 1px solid red;
-            // height: $line-height-18 * 2;
           }
         }
 
@@ -92,21 +88,12 @@
       }
 
       .datawrapper {
-     
         position: absolute;
-        // width: 170px;
-        // height: 14px;
-        // top: 0;
         right: 23px;
-        // display: inline-block;
-        // text-align: left;
-        // border:1px solid red;
 
         @include mobile-only() {
           position: static;
           margin-top: 4px;
-          // text-align: left;
-          // border:1px solid red;
         }
 
         @include text-style-14;
@@ -122,14 +109,10 @@
 
         @include mobile-only() {
           clear: both;
-          // text-align: right;
           text-align: left;
           line-height: 18px;
           height: 18px;
           width: 100%;
-          // border:1px solid red;
-          // padding-left: 43px;
-          // padding-top: 10px;
         }
      
       }
@@ -175,8 +158,6 @@
         );
         border-radius: 24px 24px 0px 0px;
         transform: rotate(180deg);
-        // border:1px solid red;
-
 
         @include mobile-only() {
           min-height: 400px;
@@ -214,11 +195,6 @@
   padding-right: 5px;
   display: inline-block;
   margin-bottom: 20px;
-
-//   &:nth-child(1n) {
-//     display: inline-block;
-//     margin-bottom: 20px;
-//   }
 }
 
 
