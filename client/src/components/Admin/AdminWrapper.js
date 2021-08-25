@@ -6,8 +6,8 @@ import { searchAppData } from '../../_actions/admin_actions';
 import RequestTable from './RequestTable';
 import ApprovalTable from './ApprovalTable';
 import AdminSignInModal from '../Common/AdminModal/AdminSignInModal';
-import store from '../../store/store';
 import AlertModal from '../Common/AlertModal/AlertModal';
+import Auth from '../../hoc/auth';
 
 function AdminWrapper() {
   const dispatch = useDispatch();
@@ -34,22 +34,24 @@ function AdminWrapper() {
     ['삭제요청', 'deleteRequest'],
   ];
 
+  // admin 로그인 여부 확인
   useEffect(() => {
-    if (store.getState().admin.adminSigninSuccess) {
-      if (store.getState().admin.adminSigninSuccess === 'Login success') {
-        setModalOpen(false);
-        setAdmin(true);
-      } else {
-        setModalOpen(true);
-        setAdmin(false);
-      }
+    const requrest = Auth(true);
+
+    if (requrest === 'Login need') {
+      setAllData(true);
+      setAdmin(false);
+      setModalOpen(true);
+    } else {
+      setAdmin(true);
+      setModalOpen(false);
     }
   });
 
+  // 기고현황 정보
   useEffect(() => {
     dispatch(getContributionAdmin())
       .then(res => {
-        // console.log(res.payload.data.accepted);
         setRequested([
           ...res.payload.data.requested.postRequest,
           ...res.payload.data.requested.patchRequest,
@@ -59,8 +61,7 @@ function AdminWrapper() {
         setAllData(true);
       })
       .catch(err => {
-        // alert('관리데이터 받아오는데 실패하였습니다.');
-        setAlertOpen(true);
+        setAllData(false);
       });
   }, []);
 
@@ -76,27 +77,26 @@ function AdminWrapper() {
     setAppText(e.currentTarget.value);
   }
 
+  // 검색된 요청
   function onSubmitHandler(e) {
     e.preventDefault();
 
     dispatch(searchData(Select, Text))
       .then(res => setRequested(res.payload))
       .catch(err => {
-        // alert('검색한 결과를 받아오는데 실패하였습니다.');
         setAlertOpen(true);
       });
   }
 
+  // 검색된 승인
   function onApprovalHandler(e) {
     e.preventDefault();
 
     dispatch(searchAppData(AppText))
       .then(res => {
-        console.log(res.payload);
         setAccepted(res.payload);
       })
       .catch(err => {
-        // alert('검색한 결과를 받아오는데 실패하였습니다.');
         setAlertOpen(true);
       });
   }
@@ -192,7 +192,12 @@ function AdminWrapper() {
           />
         </div>
         {ModalOpen ? (
-          <AdminSignInModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
+          <>
+            <AdminSignInModal
+              ModalOpen={ModalOpen}
+              setModalOpen={setModalOpen}
+            />
+          </>
         ) : null}
       </div>
     </>

@@ -73,7 +73,7 @@ function Header() {
         if (res.payload === 'Logout success') {
           setAdmin(false);
           dispatch(deleteAdminData());
-          window.location.href = '/';
+          window.location.reload();
         } else {
           // alert('로그아웃 실패하였습니다.');
           setAlertOpen(true);
