@@ -2467,7 +2467,7 @@ label {
               font-size: 18px;
               line-height: 28px;
               letter-spacing: -0.02em;
-              margin-bottom: 0px;
+              margin-bottom: 0;
               padding-right: 20px; } }
         .articlecontainer .articleviewwrapper .header .headerleft .username {
           font-size: 14px;

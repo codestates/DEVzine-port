@@ -1,7 +1,10 @@
 const { User } = require('../Models/Users');
 const { VerifiedEmail } = require('../Models/Verifiedemails');
 const { Contribution } = require('../Models/Contributions');
-const { setNewCacheForContributions, getAllConfirmedContributions } = require('./cachefunction/contributionsCache');
+const {
+  setNewCacheForContributions,
+  getAllConfirmedContributions,
+} = require('./cachefunction/contributionsCache');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -70,7 +73,6 @@ module.exports = {
   },
 
   signIn: async (req, res) => {
-    
     jwt.sign(
       { user: req.user },
       process.env.JWT_SECRET,
@@ -123,7 +125,7 @@ module.exports = {
           return res.status(404).send({ message: 'Not found' });
         }
       });
-      
+
       const cacheToUpdate = getAllConfirmedContributions();
       await setNewCacheForContributions(cacheToUpdate);
 
