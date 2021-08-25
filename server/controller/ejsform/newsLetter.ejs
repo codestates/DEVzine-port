@@ -24,25 +24,27 @@
 				</div>
 				<div style="background-color: #ffdd14; border-radius:24px;  padding:30px; cursor:pointer;">
 					오늘의 추천 기고글<br/>
-					<span style="font-weight: bold; font-size:20px;"><%= contribution.contribution_title %></span>
+					<span style="font-weight: bold; font-size:20px;"><%= contribution ? contribution.contribution_title : '여러분의 기고글을 기다리고 있습니다' %></span>
 				</div>
 			</article>
-
-	  	<article style="width:100%; max-width:860px; margin:0 auto; margin-bottom:30px;">
-				<h3 style="font-size: 18px; text-align: center;">추천 기고글</h3>
-				<a href="<%= contribution.contribution_url %>" style="display: block; text-decoration: none; color: black; background-color:white; cursor:pointer; border-radius:8px;">
-					<div style="padding: 20px;">
-						<p style="font-weight: bold; line-height:24px;">
-							<%= contribution.contribution_title %><br/>
-							<span style="font-weight: normal; color:#999;">by <%= contributionUserName %></span>
-						</p>
-						
-						<p style="">
-							[본문 미리보기] <%= contributionContent %>
-						</p>
-					</div>
-				</a>
-			</article>
+			<% if (contribution) {%>
+				<article style="width:100%; max-width:860px; margin:0 auto; margin-bottom:30px;">
+					<h3 style="font-size: 18px; text-align: center;">추천 기고글</h3>
+					<a href="<%= contribution.contribution_url %>" style="display: block; text-decoration: none; color: black; background-color:white; cursor:pointer; border-radius:8px;">
+						<div style="padding: 20px;">
+							<p style="font-weight: bold; line-height:24px;">
+								<%= contribution.contribution_title %><br/>
+								<span style="font-weight: normal; color:#999;">by <%= contributionUserName %></span>
+							</p>
+							
+							<p>
+								[본문 미리보기] <%= contribution.contribution_content.substring(0, 100) %>...
+							</p>
+						</div>
+					</a>
+				</article>
+			<%}%>
+			
 
 			<article style="width:100%; max-width:860px; margin:0 auto; margin-bottom:30px; word-break:break-all;">
 				<h3 style="font-size: 18px; text-align: center;">최신 기사</h3>
@@ -57,7 +59,7 @@
 							</p>
 							
 							<p>
-								[본문 미리보기] <%= articleList[i].article_content %>
+								[본문 미리보기] <%= articleList[i].article_content.substring(0, 50) %>...
 							</p>
 						</div>
 					</a>
