@@ -43,6 +43,7 @@ app.use(
     origin: true,
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'OPTIONS', 'DELETE'],
+    https: true,
   }),
 );
 app.use(
