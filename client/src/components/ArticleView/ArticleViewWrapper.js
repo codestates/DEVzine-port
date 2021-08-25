@@ -25,24 +25,26 @@ function ArticleViewWrapper({ id }) {
         .catch(err => {
           window.location.href = '/error';
         });
+    } else if (indicator === 'con') {
+      await customAxios
+        .get(`/magazine/contribution/${pathParameter}`)
+        .then(res => {
+          return setContribution(res.data.data);
+        })
+        .catch(err => {
+          window.location.href = '/error';
+        });
+    } else {
+      await customAxios
+        .get(`/magazine/article/${pathParameter}`)
+        .then(res => {
+          return setArticle(res.data.data);
+        })
+        .catch(err => {
+          window.location.href = '/error';
+        });
     }
-    indicator === 'con'
-      ? await customAxios
-          .get(`/magazine/contribution/${pathParameter}`)
-          .then(res => {
-            return setContribution(res.data.data);
-          })
-          .catch(err => {
-            window.location.href = '/error';
-          })
-      : await customAxios
-          .get(`/magazine/article/${pathParameter}`)
-          .then(res => {
-            return setArticle(res.data.data);
-          })
-          .catch(err => {
-            window.location.href = '/error';
-          });
+
     setAlldata(true);
   }, []);
 
@@ -56,19 +58,49 @@ function ArticleViewWrapper({ id }) {
                 <div className="header">
                   <div className="headerleft">
                     <span className="keyword stopdragging">
-                      {indicator === 'con'
+                      {indicator === 'con' || indicator === 'pre'
                         ? Contribution.contribution_keyword
                         : Article.article_keyword}
                     </span>
                     <div className="title">
-                      {indicator === 'con'
+                      {indicator === 'con' || indicator === 'pre'
                         ? Contribution.contribution_title
                         : Article.article_title}
                     </div>
                     <div className="username">
-                      {indicator === 'con'
+                      {indicator === 'con' || indicator === 'pre'
                         ? Contribution.user_name
                         : Article.article_publisher}
+
+                      <span className="datawrapper sm-hidden">
+                        게시{' '}
+                        <span className="data">
+                          {indicator === 'con' || indicator === 'pre'
+                            ? Contribution.contribution_date.slice(0, 10)
+                            : Article.article_date.slice(0, 10)}
+                        </span>
+                        조회{' '}
+                        <span className="data">
+                          {indicator === 'con' || indicator === 'pre'
+                            ? Contribution.hit
+                            : Article.hit}
+                        </span>
+                      </span>
+
+                      <div className="datawrapper sm-only">
+                        게시{' '}
+                        <span className="data">
+                          {indicator === 'con' || indicator === 'pre'
+                            ? Contribution.contribution_date.slice(0, 10)
+                            : Article.article_date.slice(0, 10)}
+                        </span>
+                        조회{' '}
+                        <span className="data">
+                          {indicator === 'con' || indicator === 'pre'
+                            ? Contribution.hit
+                            : Article.hit}
+                        </span>
+                      </div>
                     </div>
                   </div>
                   <svg
@@ -93,22 +125,24 @@ function ArticleViewWrapper({ id }) {
                     />
                   </svg>
 
-                  <div className="datawrapper">
+                  {/* <div className="datawrapper">
                     게시{' '}
                     <span className="data">
-                      {indicator === 'con'
+                      {indicator === 'con' || indicator === 'pre'
                         ? Contribution.contribution_date.slice(0, 10)
                         : Article.article_date.slice(0, 10)}
                     </span>
                     조회{' '}
                     <span className="data">
-                      {indicator === 'con' ? Contribution.hit : Article.hit}
+                      {indicator === 'con' || indicator === 'pre'
+                        ? Contribution.hit
+                        : Article.hit}
                     </span>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="body">
                   <div className="contents">
-                    {indicator === 'con'
+                    {indicator === 'con' || indicator === 'pre'
                       ? Request === 'Login need'
                         ? Contribution.contribution_content
                             .slice(0, 300)
@@ -131,14 +165,14 @@ function ArticleViewWrapper({ id }) {
                           </div>
                         ))}
                   </div>
-                  {indicator === 'con' ? (
+                  {indicator === 'con' || indicator === 'pre' ? (
                     Request === 'Login need' ? (
                       <div className="layer"></div>
                     ) : null
                   ) : indicator === 'art' ? (
                     <div className="layer"></div>
                   ) : null}
-                  {indicator === 'con' ? (
+                  {indicator === 'con' || indicator === 'pre' ? (
                     Request === 'Login need' ? (
                       <>
                         <div className="invitation">
