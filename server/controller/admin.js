@@ -215,4 +215,9 @@ module.exports = {
       return res.status(500).send(err);
     }
   },
+
+  viewRequestedArticle: async (req, res) => {
+
+  }
+
 };
