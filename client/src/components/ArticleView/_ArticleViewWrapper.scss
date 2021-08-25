@@ -181,13 +181,16 @@
       }
 
       .invitation {
+        width: 240px;
         @include pos-center-x;
-        bottom: 180px;
+        bottom: 170px;
         font-weight: $normal;
-        @include text-style(18, $dark);
+        @include text-style(14, $dark);
+        text-align: center;
         @include mobile-only() {
-          bottom: 160px;
-          @include text-style(16, $dark);
+          bottom: 140px;
+          @include text-style(13, $dark);
+          text-align: center;
         }
       }
 
