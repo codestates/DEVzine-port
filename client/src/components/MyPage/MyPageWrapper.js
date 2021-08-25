@@ -16,6 +16,7 @@ import WithdrawalModal from './WithdrawalModal';
 import TextInputGenderRequired from './TextInputGenderRequired';
 import OptContents from './OptContents';
 import Button from '../Common/Button/Button';
+import { customAxios } from '../../utils/customAxios';
 
 const END_POINT = process.env.REACT_APP_API_URL;
 
@@ -101,10 +102,8 @@ function MyPageWrapper() {
     } else {
       setEmail_isValid(true);
       setPw_isValid(true);
-      await axios
-        .get(`${END_POINT}/mypage/`, {
-          withCredentials: true,
-        })
+      await customAxios
+        .get(`/mypage`)
         .then(res => {
           setEmail(res.data.data.user.user_email);
           setPassword('defaultpassword');
