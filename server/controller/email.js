@@ -83,6 +83,11 @@ module.exports = {
     // let decryptEmail = JSON.parse(bytes.toString(CryptoJS.enc.Utf8)).email;
     // console.log('Decrypt : ', decryptEmail);
 
+    const user = await VerifiedEmail.findOne({ temp_email: decryptEmail });
+    if (user) {
+      return res.status(400).send({ message: 'Email already verified' });
+    }
+
     const tempEmail = new VerifiedEmail({
       temp_email: decryptEmail,
     });
