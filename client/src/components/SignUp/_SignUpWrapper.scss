@@ -26,9 +26,7 @@
     }
     .signupbtn {
       margin-top: 34px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flexbox;
       width: 264px;
       height: 54px;
       background: #191a20;
@@ -56,9 +54,8 @@
       .yesornobtn{
         background-color: $border;
         border-radius: 8px;
-        color: $dark;
         cursor: pointer;
-        font-size: 18px;
+        @include text-style(18, $dark);
         font-weight: $bold;
         height: 55px;
         margin-top: 16px;
