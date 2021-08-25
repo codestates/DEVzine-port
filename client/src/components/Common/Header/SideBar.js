@@ -7,6 +7,7 @@ import SignInModal from '../SignInModal/SignInModal';
 import store from '../../../store/store';
 import close from '../../../assets/images/close.svg';
 import AlertModal from '../AlertModal/AlertModal';
+import Auth from '../../../hoc/auth';
 
 function SideBar(props) {
   const dispatch = useDispatch();
@@ -14,17 +15,20 @@ function SideBar(props) {
   const [ModalOpen, setModalOpen] = useState(false);
   const [AlertOpen, setAlertOpen] = useState(false);
 
+  // 로그인 확인
   useEffect(() => {
-    if (store.getState().user.signinSuccess) {
-      if (store.getState().user.signinSuccess[0] === 'Login success') {
-        props.setSignIn(true);
-        props.setUserName(store.getState().user.signinSuccess[1]);
-      } else {
-        props.setSignIn(false);
-      }
+    const request = Auth(true);
+    console.log(request);
+
+    if (request !== 'Login need' && request !== 'Admin login success') {
+      props.setSignIn(true);
+      props.setUserName(store.getState().user.signinSuccess[1]);
+    } else {
+      props.setSignIn(false);
     }
   }, []);
 
+  // 로그아웃 클릭
   function signOutHandler() {
     dispatch(signoutUser()).then(res => {
       if (res.payload === 'Logout success') {
@@ -33,15 +37,15 @@ function SideBar(props) {
         dispatch(deleteData());
         window.location.reload();
       } else {
-        // alert('로그아웃 실패하였습니다.');
         setAlertOpen(true);
       }
     });
   }
 
-  const closeModal = () => {
+  // 모달 닫기
+  function closeModal() {
     setAlertOpen(false);
-  };
+  }
 
   return (
     <>

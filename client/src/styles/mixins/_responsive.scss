@@ -1,4 +1,4 @@
-// @include responsive(D);
+// 사용예시 : @include responsive(D);
 
 @mixin responsive($screen) {
   @if ($screen == 'T') {

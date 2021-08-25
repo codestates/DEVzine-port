@@ -4,6 +4,7 @@ import Auth from '../../hoc/auth';
 import AlertModal from '../Common/AlertModal/AlertModal';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import { customAxios } from '../../utils/customAxios';
+import { SelectOptions } from '../../assets/datas/ContributionData/data';
 import Button from '../Common/Button/Button';
 
 function ContributionWrapper() {
@@ -19,35 +20,24 @@ function ContributionWrapper() {
   const [AllSelect, setAllSelect] = useState(false);
   const [PostSuc, setPostSuc] = useState(false);
 
-  let selectOptions = [
-    '게임',
-    '머신러닝',
-    '모바일',
-    '보안',
-    '블록체인',
-    '빅 데이터',
-    '코딩',
-    '클라우드',
-    '퍼스널 컴퓨팅',
-    'AI/로봇',
-    '기타',
-  ];
-
+  // 로그인 확인
   useEffect(() => {
-    const requrest = Auth(true);
+    const request = Auth(true);
 
-    if (requrest === 'Login need') {
+    if (request === 'Login need') {
       setModalOpen(true);
-    } else {
+    } else if (request !== 'Admin login success') {
       setSignIn(true);
       setUserName(store.getState().user.signinSuccess[1]);
     }
   });
 
+  // 키워드 선택
   function onKeywordHandler(e) {
     setKeyword(e.currentTarget.value);
   }
 
+  // 제목 입력
   function onTitleHandler(e) {
     setTitle(e.currentTarget.value);
 
@@ -58,6 +48,7 @@ function ContributionWrapper() {
     }
   }
 
+  // 내용 입력
   function onContentHandler(e) {
     setContent(e.currentTarget.value);
 
@@ -68,6 +59,7 @@ function ContributionWrapper() {
     }
   }
 
+  // 기고 신청
   function onSubmitHandler(e) {
     e.preventDefault();
 
@@ -85,11 +77,9 @@ function ContributionWrapper() {
 
       return customAxios.post('/contribution', body).then(res => {
         if (res.status === 200) {
-          // alert('기고신청이 완료되었습니다.');
           setPostSuc(true);
           setAlertOpen(true);
         } else {
-          // alert('기고신청이 실패하였습니다.');
           setPostSuc(false);
           setAlertOpen(true);
         }
@@ -97,13 +87,14 @@ function ContributionWrapper() {
     }
   }
 
-  const closeModal = () => {
+  // 모달 닫기
+  function closeModal() {
     setAlertOpen(false);
 
     if (PostSuc) {
       window.location.href = '/';
     }
-  };
+  }
 
   return (
     <>
@@ -136,7 +127,7 @@ function ContributionWrapper() {
                       id="conselect"
                     >
                       <option value="">선택</option>
-                      {selectOptions.map((option, idx) => (
+                      {SelectOptions.map((option, idx) => (
                         <option key={idx} value={option}>
                           {option}
                         </option>

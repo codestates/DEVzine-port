@@ -12,6 +12,7 @@ import logo from '../../../assets/images/DEVzine.svg';
 import menu from '../../../assets/images/menu_b.svg';
 import SideBar from './SideBar';
 import AlertModal from '../AlertModal/AlertModal';
+import Auth from '../../../hoc/auth';
 
 function Header() {
   const dispatch = useDispatch();
@@ -24,36 +25,31 @@ function Header() {
   const [Date, setDate] = useState('');
   const [AlertOpen, setAlertOpen] = useState(false);
 
+  // 관리자인지 회원인지 확인
   useEffect(() => {
-    if (store.getState().user.signinSuccess) {
-      if (store.getState().user.signinSuccess[0] === 'Login success') {
-        setSignIn(true);
-        setUserName(store.getState().user.signinSuccess[1]);
-      }
-    } else {
-      setSignIn(false);
-    }
+    const request = Auth(true);
 
-    if (store.getState().admin.adminSigninSuccess) {
-      if (store.getState().admin.adminSigninSuccess === 'Login success') {
-        setAdmin(true);
-      }
+    if (request === 'Admin login success') {
+      setAdmin(true);
+      setSignIn(false);
+    } else if (request !== 'Login need') {
+      setSignIn(true);
+      setUserName(store.getState().user.signinSuccess[1]);
+      setAdmin(false);
     } else {
       setAdmin(false);
+      setSignIn(false);
     }
   }, []);
 
+  // 요일 확인
   useEffect(() => {
     const week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const nowDate = week[new window.Date().getDay()];
     setDate(nowDate);
-    // console.log('요일', nowDate);
   }, []);
 
-  function signInHandler() {
-    setModalOpen(true);
-  }
-
+  // 로그아웃 클릭
   function signOutHandler() {
     if (SignIn) {
       dispatch(signoutUser()).then(res => {
@@ -62,7 +58,6 @@ function Header() {
           dispatch(deleteData());
           window.location.reload();
         } else {
-          // alert('로그아웃 실패하였습니다.');
           setAlertOpen(true);
         }
       });
@@ -75,16 +70,16 @@ function Header() {
           dispatch(deleteAdminData());
           window.location.reload();
         } else {
-          // alert('로그아웃 실패하였습니다.');
           setAlertOpen(true);
         }
       });
     }
   }
 
-  const closeModal = () => {
+  // 모달 닫기
+  function closeModal() {
     setAlertOpen(false);
-  };
+  }
 
   return Date ? (
     <>
@@ -182,7 +177,7 @@ function Header() {
                       </button>
                     ) : (
                       <button
-                        onClick={signInHandler}
+                        onClick={() => setModalOpen(true)}
                         className="rightbox-button"
                       >
                         로그인

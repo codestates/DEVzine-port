@@ -8,6 +8,7 @@ import Button from '../Common/Button/Button';
 import eye from '../../assets/images/eye.svg';
 import search from '../../assets/images/search.svg';
 import AlertModal from '../Common/AlertModal/AlertModal';
+import { SelectOptions } from '../../assets/datas/ContributionData/data';
 
 function ContributionListWrapper() {
   const dispatch = useDispatch();
@@ -23,30 +24,16 @@ function ContributionListWrapper() {
   const [ArchiveTitle, setArchiveTitle] = useState('');
   const [AlertOpen, setAlertOpen] = useState(false);
 
-  let selectOptions = [
-    '전체',
-    '게임',
-    '머신러닝',
-    '모바일',
-    '보안',
-    '블록체인',
-    '빅 데이터',
-    '코딩',
-    '클라우드',
-    '퍼스널 컴퓨팅',
-    'AI/로봇',
-    '기타',
-  ];
-
+  // 기고 정보
   useEffect(() => {
     dispatch(getContributionData())
       .then(res => setContributionData(res.payload))
       .catch(err => {
-        // alert('최신순 받아오는데 실패하였습니다.');
         setAlertOpen(true);
       });
   }, []);
 
+  // 검색된 기고
   useEffect(() => {
     let body = {
       CurrentKeyword,
@@ -60,34 +47,39 @@ function ContributionListWrapper() {
         setContributionData(res.payload);
       })
       .catch(err => {
-        // alert('검색한 결과를 받아오는데 실패하였습니다.');
         setAlertOpen(true);
       });
   }, [CurrentKeyword, CurrentOrder]);
 
+  // 최신순 버튼
   function latestBtn() {
     setCurrentOrder('최신순');
     setConPlus(12);
   }
 
+  // 조회순 버튼
   function viewBtn() {
     setCurrentOrder('조회순');
     setConPlus(12);
   }
 
+  // 더보기 버튼
   function conPlusHandler() {
     setConPlus(ConPlus + 12);
   }
 
+  // 키워드 선택
   function onKeywordHandler(e) {
     setCurrentKeyword(e.currentTarget.value);
     setSelected(e.currentTarget.value);
   }
 
+  // 제목 입력
   function onTitleHandler(e) {
     setCurrentTitle(e.currentTarget.value);
   }
 
+  // 제목 검색
   function onTitleSubmit() {
     let body = {
       CurrentKeyword,
@@ -111,11 +103,11 @@ function ContributionListWrapper() {
         setCurrentTitle('');
       })
       .catch(err => {
-        // alert('검색한 결과를 받아오는데 실패하였습니다.');
         setAlertOpen(true);
       });
   }
 
+  // 초기화 버튼
   function initialBtn() {
     setCurrentKeyword('');
     setCurrentTitle('');
@@ -130,14 +122,14 @@ function ContributionListWrapper() {
         setContributionData(res.payload);
       })
       .catch(err => {
-        // alert('최신순 받아오는데 실패하였습니다.');
         setAlertOpen(true);
       });
   }
 
-  const closeModal = () => {
+  // 모달 닫기
+  function closeModal() {
     setAlertOpen(false);
-  };
+  }
 
   return ContributionData ? (
     <>
@@ -160,7 +152,7 @@ function ContributionListWrapper() {
                         id="articlebox-select"
                       >
                         <option value="">{Selected}</option>
-                        {selectOptions.map((el, idx) => (
+                        {SelectOptions.map((el, idx) => (
                           <option key={idx} value={el}>
                             {el}
                           </option>

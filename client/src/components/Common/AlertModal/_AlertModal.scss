@@ -1,7 +1,7 @@
 .modalcontainer {
-  position:fixed;
   height: 15rem;
   margin: 120px auto;
+  position: fixed;
   text-align: center;
   z-index: 720;
 
@@ -23,10 +23,9 @@
       width: 360px;
 
       @include mobile-only() {
-        // margin-top: 162px;
+        height: 200px;
         max-width: 360px;
         width: 92.5%;
-        height: 200px;
       }
     }
   }

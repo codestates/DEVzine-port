@@ -1,11 +1,11 @@
 .footercontainer {
   background-color: $white;
+  border-top: 1px solid $background;
   clear: both;
   color: $dark;
   height: 220px;
   margin-top: -220px;
   position: relative;
-  border-top: 1px solid $background;
 
   .footerinner {
     margin: 0 auto;
@@ -114,6 +114,5 @@
 
 .line-height {
   display: inline-block;
-  // border:1px solid red;
   padding-top: 6px;
 }

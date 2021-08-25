@@ -159,10 +159,10 @@
 
   &-keyword-con {
     @include text-style(13, $yellow-light);
-    font-weight: $bold;
-    border: 1px solid $dark;
     background-color: $dark;
+    border: 1px solid $dark;
     border-radius: 20px;
+    font-weight: $bold;
     padding: 0 12px 2px 12px;
   }
 
@@ -180,25 +180,24 @@
     }
 
     img {
-      opacity: 0.15;
-      margin-right: 5px;
       height: 16px;
+      margin-right: 5px;
+      opacity: 0.15;
       width: auto;
     }
 
     span {
-      margin: 0 0 3px 0;
+      margin-bottom: 3px;
     }
   }
 }
 
 .ell-18-2 {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  height: $line-height-18 * 2;
+  -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
   word-wrap: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-
-  height: $line-height-18 * 2;
 }

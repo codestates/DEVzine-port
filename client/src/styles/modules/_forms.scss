@@ -1,4 +1,4 @@
-// @extend %form-base;
+// 사용예시 : @extend %form-base;
 
 %form-base {
   @include text-style(16, $primary);

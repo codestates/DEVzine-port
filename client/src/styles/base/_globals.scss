@@ -1,4 +1,6 @@
 // scss-lint:disable all
+// className으로 반응형 제작
+
 .sm-only {
   @media screen and (min-width: $md-breakpoint) {
     display: none !important;

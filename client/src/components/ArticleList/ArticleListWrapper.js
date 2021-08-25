@@ -5,10 +5,11 @@ import { getArticleData } from '../../_actions/article_actions';
 import { filterArticleData } from '../../_actions/article_actions';
 import ArticleView from '../../pages/ArticleView';
 import ArticelCarousel from './ArticleCarousel';
+import AlertModal from '../Common/AlertModal/AlertModal';
 import Button from '../Common/Button/Button';
+import { SelectOptions } from '../../assets/datas/ContributionData/data';
 import eye from '../../assets/images/eye.svg';
 import search from '../../assets/images/search.svg';
-import AlertModal from '../Common/AlertModal/AlertModal';
 
 function ArticleListWrapper() {
   const dispatch = useDispatch();
@@ -25,21 +26,7 @@ function ArticleListWrapper() {
   const [ArchiveTitle, setArchiveTitle] = useState('');
   const [AlertOpen, setAlertOpen] = useState(false);
 
-  let selectOptions = [
-    '전체',
-    '게임',
-    '머신러닝',
-    '모바일',
-    '보안',
-    '블록체인',
-    '빅 데이터',
-    '코딩',
-    '클라우드',
-    '퍼스널 컴퓨팅',
-    'AI/로봇',
-    '기타',
-  ];
-
+  // 기사 정보
   useEffect(() => {
     dispatch(getArticleData())
       .then(res => {
@@ -47,11 +34,11 @@ function ArticleListWrapper() {
         setContributionData(res.payload[1]);
       })
       .catch(err => {
-        // alert('최신순 받아오는데 실패하였습니다.');
         setAlertOpen(true);
       });
   }, []);
 
+  // 검색된 기사
   useEffect(() => {
     let body = {
       CurrentKeyword,
@@ -65,34 +52,39 @@ function ArticleListWrapper() {
         setArticleData(res.payload);
       })
       .catch(err => {
-        // alert('검색한 결과를 받아오는데 실패하였습니다.');
         setAlertOpen(true);
       });
   }, [CurrentKeyword, CurrentOrder]);
 
+  // 최신순 버튼
   function latestBtn() {
     setCurrentOrder('최신순');
     setArticlePlus(12);
   }
 
+  // 조회순 버튼
   function viewBtn() {
     setCurrentOrder('조회순');
     setArticlePlus(12);
   }
 
+  // 더보기 버튼
   function articlePlusHandler() {
     setArticlePlus(ArticlePlus + 12);
   }
 
+  // 키워드 선택
   function onKeywordHandler(e) {
     setCurrentKeyword(e.currentTarget.value);
     setSelected(e.currentTarget.value);
   }
 
+  // 제목 입력
   function onTitleHandler(e) {
     setCurrentTitle(e.currentTarget.value);
   }
 
+  // 제목 검색
   function onTitleSubmit() {
     let body = {
       CurrentKeyword,
@@ -116,11 +108,11 @@ function ArticleListWrapper() {
         setCurrentTitle('');
       })
       .catch(err => {
-        // alert('검색한 결과를 받아오는데 실패하였습니다.');
         setAlertOpen(true);
       });
   }
 
+  // 초기화 버튼
   function initialBtn() {
     setCurrentKeyword('');
     setCurrentTitle('');
@@ -136,14 +128,14 @@ function ArticleListWrapper() {
         setArticleData(res.payload[0]);
       })
       .catch(err => {
-        // alert('최신순 받아오는데 실패하였습니다.');
         setAlertOpen(true);
       });
   }
 
-  const closeModal = () => {
+  // 모달 닫기
+  function closeModal() {
     setAlertOpen(false);
-  };
+  }
 
   return ArticleData ? (
     <>
@@ -152,7 +144,6 @@ function ArticleListWrapper() {
           <div className="row">
             <div className="col-sm-4">
               <div className="carousel">
-                {/* <h2>DEVzine이 추천하는 소식</h2> */}
                 <h2>DEVzine 회원이 전달하는 소식</h2>
                 <div className="sm-only">
                   <Link to="/contributionlist">
@@ -176,7 +167,7 @@ function ArticleListWrapper() {
                         id="articlebox-select"
                       >
                         <option value="">{Selected}</option>
-                        {selectOptions.map((el, idx) => (
+                        {SelectOptions.map((el, idx) => (
                           <option key={idx} value={el}>
                             {el}
                           </option>
@@ -223,7 +214,6 @@ function ArticleListWrapper() {
                     </span>
                   </div>
                 </div>
-
                 {ArticleData.length === 0 ? (
                   <p className="noissue stopdragging">소식이 없습니다.</p>
                 ) : (

@@ -1,39 +1,31 @@
 .contributionlistwrapper {
   background-color: $background;
-  // background-color: $border;
   min-height: 100vh;
   position: relative;
   width: 100%;
 
   .articlebox {
-    margin-top: 192px; //header 120px 포함
+    margin-top: 192px;
 
     @include mobile-only() {
-      // margin-top: 162px; //header 90px 포함
-      margin-top: 120px; //header 90px 포함
+      margin-top: 120px;
     }
 
-    .prebox{
-      // border:1px solid red;
-      height:30px;
+    .prebox {
+      height: 30px;
     }
 
     .prebtn {
-      float: right;
-      margin: 0;
       color: $border;
+      float: right;
       font-weight: $bold;
-      // border:1px solid red;
-      margin-bottom:10px;
+      margin: 0;
+      margin-bottom: 10px;
 
       &:hover {
         color: $yellow-dark;
       }
     }
-
-    // .selectionbox{
-    //   margin-top: 10px;
-    // }
 
     &-listbox {
       background-color: $yellow-light;

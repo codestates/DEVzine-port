@@ -23,11 +23,12 @@ function AdminWrapper() {
   const [AlertOpen, setAlertOpen] = useState(false);
 
   /*
-승인요청 - 게시대기(100), 게시승인(110), 게시거부(120)
-수정요청 - 수정대기(101), 수정승인(111), 수정거부(121)
-삭제요청 - 삭제대기(102), 삭제승인(112), 삭제거부(122)
-*/
+  승인요청 - 게시대기(100), 게시승인(110), 게시거부(120)
+  수정요청 - 수정대기(101), 수정승인(111), 수정거부(121)
+  삭제요청 - 삭제대기(102), 삭제승인(112), 삭제거부(122)
+  */
 
+  // 옵션들
   let selectOptions = [
     ['게시요청', 'postRequest'],
     ['수정요청', 'patchRequest'],
@@ -36,9 +37,9 @@ function AdminWrapper() {
 
   // admin 로그인 여부 확인
   useEffect(() => {
-    const requrest = Auth(true);
+    const request = Auth(true);
 
-    if (requrest === 'Login need') {
+    if (request === 'Login need') {
       setAllData(true);
       setAdmin(false);
       setModalOpen(true);
@@ -65,14 +66,17 @@ function AdminWrapper() {
       });
   }, []);
 
+  // 옵션 선택
   function onSelectHandler(e) {
     setSelect(e.currentTarget.value);
   }
 
+  // 요청 닉네임 검색
   function onTextHandler(e) {
     setText(e.currentTarget.value);
   }
 
+  // 승인 닉네임 검색
   function onAppTextHandler(e) {
     setAppText(e.currentTarget.value);
   }
@@ -101,9 +105,10 @@ function AdminWrapper() {
       });
   }
 
-  const closeModal = () => {
+  // 모달 닫기
+  function closeModal() {
     setAlertOpen(false);
-  };
+  }
 
   return AllData ? (
     <>

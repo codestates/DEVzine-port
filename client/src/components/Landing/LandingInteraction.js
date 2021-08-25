@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import React, { Suspense, useState, useMemo, useRef } from 'react';
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { animated, useSpring } from '@react-spring/three';
-import data from './data';
+import data from '../../assets/datas/LandingData/data';
 import BlinkText from './BlinkText';
 
 function Image({ url, index, camera }) {
