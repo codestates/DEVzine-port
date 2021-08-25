@@ -186,7 +186,6 @@ function MyPageWrapper() {
       .then(res => {
         if (res.payload[2] === 'Patch success') {
           setIsEditedSuccess(true);
-          window.location.href = '/';
         }
       })
       .catch(err => {
