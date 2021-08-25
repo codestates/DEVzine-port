@@ -11,7 +11,8 @@ function ContributionUpdateWrapper({ id }) {
   const [Title, setTitle] = useState('nothing');
   const [Content, setContent] = useState('nothing');
   const [ModalOpen, setModalOpen] = useState(false);
-  const [ColorChange, setColorChange] = useState(false);
+  const [ColorChange, setColorChange] = useState(true);
+  const [TColorChange, setTColorChange] = useState(true);
   const [AllDate, setAllDate] = useState(false);
   const [AlertOpen, setAlertOpen] = useState(false);
   const [AllSelect, setAllSelect] = useState(false);
@@ -66,6 +67,12 @@ function ContributionUpdateWrapper({ id }) {
 
   function onTitleHandler(e) {
     setTitle(e.currentTarget.value);
+
+    if (e.currentTarget.value.length >= 8) {
+      setTColorChange(true);
+    } else {
+      setTColorChange(false);
+    }
   }
 
   function onContentHandler(e) {
@@ -149,6 +156,13 @@ function ContributionUpdateWrapper({ id }) {
                     <br />
                     <label htmlFor="contitle">
                       제목 <span>(필수)</span>
+                      <p
+                        className={
+                          TColorChange ? 'textlength active' : 'textlength'
+                        }
+                      >
+                        ( {Title.length} / 8 이상 )
+                      </p>
                     </label>
                     <input
                       type="text"

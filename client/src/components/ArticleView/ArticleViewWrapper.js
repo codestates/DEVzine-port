@@ -16,6 +16,19 @@ function ArticleViewWrapper({ id }) {
   const Request = Auth(true);
 
   useEffect(async () => {
+    // if (indicator === 'pre') {
+    //   await customAxios
+    //     .get(`/admin/contribution/preview/${pathParameter}`)
+    //     .then(res => {
+    //       console.log('preview으로 요청', res);
+    //       return setContribution(res.data.data);
+    //     })
+    //     .catch(err => {
+    //       window.location.href = '/error';
+    //       // console.log(err);
+    //     });
+    // }
+
     indicator === 'con'
       ? await customAxios
           .get(`/magazine/contribution/${pathParameter}`)
@@ -103,17 +116,17 @@ function ArticleViewWrapper({ id }) {
                       ? Request === 'Login need'
                         ? Contribution.contribution_content
                             .slice(0, 300)
-                            .split(/!|\.\s|\✨/)
+                            .split(/\.\s|\✨/)
                             .map(line => (
                               <div key={line} className="line-spacing">
-                                {line}.
+                                {line}.<br />
                               </div>
                             ))
                         : Contribution.contribution_content
                             .split(/!|\.\s|\✨/)
                             .map(line => (
                               <div key={line} className="line-spacing">
-                                {line}.
+                                {line}.<br />
                               </div>
                             ))
                       : Article.article_content.split(/!|\.\s/).map(line => (

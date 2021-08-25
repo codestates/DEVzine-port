@@ -2064,7 +2064,9 @@ label {
         bottom: 12px; } }
     .articlebox-hit img {
       opacity: 0.15;
-      margin-right: 5px; }
+      margin-right: 5px;
+      height: 16px;
+      width: auto; }
     .articlebox-hit span {
       margin: 0 0 3px 0; }
 
@@ -2390,7 +2392,9 @@ label {
       right: 24px; } }
   .articlebox-hit-con img {
     opacity: 0.15;
-    margin-right: 5px; }
+    margin-right: 5px;
+    height: 16px;
+    width: auto; }
   .articlebox-hit-con span {
     margin: 0 0 3px 0; }
 

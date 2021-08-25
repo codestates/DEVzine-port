@@ -152,7 +152,8 @@ function ArticleListWrapper() {
           <div className="row">
             <div className="col-sm-4">
               <div className="carousel">
-                <h2>DEVzine이 추천하는 소식</h2>
+                {/* <h2>DEVzine이 추천하는 소식</h2> */}
+                <h2>DEVzine 회원이 전달하는 소식</h2>
                 <div className="sm-only">
                   <Link to="/contributionlist">
                     <span className="allviewbtn">모두 보기</span>
