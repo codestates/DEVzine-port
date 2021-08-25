@@ -11,6 +11,7 @@ require('dotenv').config();
 
 module.exports = {
   adminSignIn: async (req, res) => {
+
     jwt.sign(
       { admin_id: req.user.admin_id },
       process.env.JWT_SECRET,
@@ -45,6 +46,7 @@ module.exports = {
   },
 
   getAllUsersContribution: async (req, res) => {
+
     try {
       const postRequest = await findContributionsWithStatus(100);
       const patchRequest = await findContributionsForUpdate();
