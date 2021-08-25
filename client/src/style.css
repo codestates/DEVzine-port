@@ -2472,7 +2472,9 @@ label {
           line-height: 24px;
           letter-spacing: -0.01em;
           font-weight: 700; }
-      .articlecontainer .articleviewwrapper .header .hamburger {
+      .articlecontainer .articleviewwrapper .header .backbtn {
+        width: 37px;
+        height: 37px;
         position: absolute;
         top: 11px;
         right: 23px;
@@ -2537,6 +2539,23 @@ label {
         @media screen and (max-width: 767px) {
           .articlecontainer .articleviewwrapper .body .layer {
             min-height: 400px; } }
+      .articlecontainer .articleviewwrapper .body .invitation {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 180px;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 28px;
+        letter-spacing: -0.02em;
+        color: #191a20; }
+        @media screen and (max-width: 767px) {
+          .articlecontainer .articleviewwrapper .body .invitation {
+            bottom: 160px;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: -0.01em;
+            color: #191a20; } }
       .articlecontainer .articleviewwrapper .body .commonbutton {
         position: absolute;
         left: 50%;
