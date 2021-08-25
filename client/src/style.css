@@ -2540,22 +2540,25 @@ label {
           .articlecontainer .articleviewwrapper .body .layer {
             min-height: 400px; } }
       .articlecontainer .articleviewwrapper .body .invitation {
+        width: 240px;
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        bottom: 180px;
+        bottom: 170px;
         font-weight: 400;
-        font-size: 18px;
-        line-height: 28px;
-        letter-spacing: -0.02em;
-        color: #191a20; }
+        font-size: 14px;
+        line-height: 24px;
+        letter-spacing: -0.01em;
+        color: #191a20;
+        text-align: center; }
         @media screen and (max-width: 767px) {
           .articlecontainer .articleviewwrapper .body .invitation {
-            bottom: 160px;
-            font-size: 16px;
-            line-height: 24px;
+            bottom: 140px;
+            font-size: 13px;
+            line-height: 20px;
             letter-spacing: -0.01em;
-            color: #191a20; } }
+            color: #191a20;
+            text-align: center; } }
       .articlecontainer .articleviewwrapper .body .commonbutton {
         position: absolute;
         left: 50%;
