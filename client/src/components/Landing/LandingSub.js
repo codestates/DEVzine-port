@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../Common/Button/Button';
 import { customAxios } from '../../utils/customAxios';
-import store from '../../store/store';
+import Auth from '../../hoc/auth';
 
 function LandingSub() {
   const [Subscribers, setSubscribers] = useState('0');
@@ -13,19 +13,18 @@ function LandingSub() {
   const [Admin, setAdmin] = useState(false);
   const [ScrollPosition, setScrollPosition] = useState(0);
 
-  // console.log(ScrollPosition);
+  // 관리자 확인
+  useEffect(() => {
+    const request = Auth(true);
 
-  const onScroll = () => {
-    setScrollPosition(window.pageYOffset);
-    if (ScrollPosition > 1000) {
-      setScrollActive(true);
+    if (request === 'Admin login success') {
+      setAdmin(true);
+    } else {
+      setAdmin(false);
     }
+  }, []);
 
-    if (ScrollPosition > 1300) {
-      setMScrollActive(true);
-    }
-  };
-
+  // 숫자 카운트 (데스크탑)
   useEffect(() => {
     let start = 0;
     const end = parseInt(Subscribers.toString().substring(0, 3));
@@ -52,6 +51,7 @@ function LandingSub() {
     return () => setScrollActive(false);
   }, [ScrollActive]);
 
+  // 숫자 카운트 (모바일)
   useEffect(() => {
     let start = 0;
     const end = parseInt(Subscribers.toString().substring(0, 3));
@@ -78,6 +78,7 @@ function LandingSub() {
     return () => setScrollActive(false);
   }, [MScrollActive]);
 
+  // 숫자 정보
   useEffect(async () => {
     await customAxios
       .get('/landing')
@@ -87,21 +88,23 @@ function LandingSub() {
       });
   }, []);
 
-  useEffect(() => {
-    if (store.getState().admin.adminSigninSuccess) {
-      if (store.getState().admin.adminSigninSuccess === 'Login success') {
-        setAdmin(true);
-      }
-    } else {
-      setAdmin(false);
-    }
-  }, []);
-
+  // 스크롤 확인
   useEffect(() => {
     window.addEventListener('scroll', onScroll);
-    // 컴포넌트가 언마운트 되기 직전에 이벤트를 끝낸다. 메모리 누수 방지
     return () => window.removeEventListener('scroll', onScroll);
   }, [ScrollPosition]);
+
+  // 스크롤 위치
+  function onScroll() {
+    setScrollPosition(window.pageYOffset);
+    if (ScrollPosition > 1000) {
+      setScrollActive(true);
+    }
+
+    if (ScrollPosition > 1300) {
+      setMScrollActive(true);
+    }
+  }
 
   return (
     <>

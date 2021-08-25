@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 function ErrorText() {
   const [ErrorSecs, setErrorSecs] = useState(3);
 
+  // 메인으로 이동하기까지 카운트 다운
   setTimeout(function () {
     setErrorSecs(ErrorSecs - 1);
   }, 1000);
 
+  // 메인으로 이동
   setTimeout(function () {
     window.location.href = '/';
   }, 3500);

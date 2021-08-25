@@ -3,25 +3,22 @@ import { Link } from 'react-router-dom';
 import arrow from '../../../assets/images/arrow_right_b.svg';
 import footerArrow from '../../../assets/images/footerArrow.svg';
 import AdminSignInModal from '../AdminModal/AdminSignInModal';
-import store from '../../../store/store';
+import Auth from '../../../hoc/auth';
 
 function Footer() {
   const [ModalOpen, setModalOpen] = useState(false);
   const [Admin, setAdmin] = useState(false);
 
+  // 관리자 확인
   useEffect(() => {
-    if (store.getState().admin.adminSigninSuccess) {
-      if (store.getState().admin.adminSigninSuccess === 'Login success') {
-        setAdmin(true);
-      }
+    let request = Auth(true);
+
+    if (request === 'Admin login success') {
+      setAdmin(true);
     } else {
       setAdmin(false);
     }
   }, []);
-
-  function signInHandler() {
-    setModalOpen(true);
-  }
 
   return (
     <>
@@ -56,7 +53,10 @@ function Footer() {
                       <span className="sm-only">
                         <br />
                       </span>
-                      <span className="lg-only" onClick={() => signInHandler()}>
+                      <span
+                        className="lg-only"
+                        onClick={() => setModalOpen(true)}
+                      >
                         관리자 로그인
                       </span>
                     </div>

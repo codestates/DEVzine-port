@@ -7,12 +7,11 @@
 
 .carousel {
   height: 267px;
-  margin-top: 192px; //header 120px 포함
   margin-bottom: 5px;
+  margin-top: 192px;
 
   @include mobile-only() {
-    // margin-top: 162px; //header 90px 포함
-    margin-top: 110px; //header 90px 포함
+    margin-top: 110px;
   }
 
   .react-multi-carousel-list {
@@ -20,10 +19,10 @@
   }
 
   h2 {
-    display: inline-block;
-    padding-right: 20px;
     color: $dark;
-    font-size:20px;
+    display: inline-block;
+    font-size: 20px;
+    padding-right: 20px;
 
     @include mobile-only() {
       margin-bottom: 8px;
@@ -31,16 +30,16 @@
   }
 
   .allviewbtn {
-    float: right;
-    padding-top: 10px;
-    padding-right: 20px;
-    cursor: pointer;
     color: $border;
+    cursor: pointer;
+    float: right;
     font-weight: $bold;
+    padding-right: 20px;
+    padding-top: 10px;
 
     @include mobile-only() {
-      padding-top: 5px;
       float: left;
+      padding-top: 5px;
     }
 
     &:hover {
@@ -80,9 +79,9 @@
     margin-bottom: 20px;
     margin-right: 20px;
     padding: 20px;
+    position: relative;
     transition: all 0.5s;
     width: 100%;
-    position: relative;
 
     ul {
       height: 100%;
@@ -101,8 +100,8 @@
     }
 
     @include responsive(D) {
-      width: 23.6%;
       margin-right: 20px;
+      width: 23.6%;
 
       &:nth-child(3n + 1) {
         margin-right: 20px;
@@ -144,34 +143,33 @@
 
   &-keyword {
     @include text-style(13, $dark);
-    font-weight: $bold;
     border: 1px solid $dark;
     border-radius: 20px;
+    font-weight: $bold;
     padding: 0 12px 2px 12px;
   }
 
   &-hit {
     @include text-style-24;
+    bottom: 20px;
     color: rgba(25, 26, 32, 0.15);
+    margin: 0;
     position: absolute;
     right: 24px;
-    bottom: 20px;
-    margin: 0;
 
     @include mobile-only() {
       bottom: 12px;
     }
 
     img {
-      opacity: 0.15;
-      // border:1px solid red;
-      margin-right: 5px;
       height: 16px;
+      margin-right: 5px;
+      opacity: 0.15;
       width: auto;
     }
 
     span {
-      margin: 0 0 3px 0;
+      margin-bottom: 3px;
     }
   }
 }
@@ -182,7 +180,7 @@
 
 .plusbtn {
   height: 55px;
-  margin-bottom: 300px; // footer 200px 포함
+  margin-bottom: 300px;
   position: relative;
 
   @include mobile-only() {
@@ -195,44 +193,40 @@
 }
 
 .ell-24 {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  height: $line-height-24 * 2;
+  -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
   word-wrap: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-
-  height: $line-height-24 * 2;
 }
 
 .ell-18 {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  height: $line-height-18;
+  -webkit-line-clamp: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   word-wrap: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-
-  height: $line-height-18;
 }
 
 .ell-12 {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  height: $line-height-12 * 3;
+  -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
   word-wrap: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-
-  height: $line-height-12 * 3;
 }
 
 .selectionbox {
-  border-top: 1px solid $border;
   border-bottom: 1px solid $border;
-  position: relative;
+  border-top: 1px solid $border;
   height: 60px;
-  // border:1px solid red;
+  position: relative;
 
   @include mobile-only() {
     height: 160px;
@@ -240,58 +234,49 @@
 
   .articlebox-select {
     @extend %form-base;
-    padding: 0;
     background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.64645 4.14645C2.84171 3.95118 3.15829 3.95118 3.35355 4.14645L6 6.79289L8.64645 4.14645C8.84171 3.95118 9.15829 3.95118 9.35355 4.14645C9.54882 4.34171 9.54882 4.65829 9.35355 4.85355L6.35355 7.85355C6.15829 8.04882 5.84171 8.04882 5.64645 7.85355L2.64645 4.85355C2.45118 4.65829 2.45118 4.34171 2.64645 4.14645Z' fill='%23b2b3b9'/%3E%3C/svg%3E%0A")
-      no-repeat 97% 50%;
+    no-repeat 97% 50%;
     background-color: $white;
     border: 1px solid $border;
-    width: 100%;
-    height: 36px;
-    position: absolute;
-    left: 0;
-    top: 10px;
     border-radius: 16px;
-    text-indent: 1.2em;
-    // color: $border;
-    // border:1px solid red;
-    // padding: 8px -14px;
+    height: 36px;
+    left: 0;
+    padding: 0;
     padding-left: 10px;
+    position: absolute;
+    text-indent: 1.2em;
+    top: 10px;
+    width: 100%;
 
     option {
       color: $dark;
-      // padding-left: 10px;
     }
 
     @include responsive(T) {
-      // width: 130px;
       width: 18%;
     }
   
     @include responsive(D) {
       width: 180px;
     }
-   
   }
 
   input {
     @extend %form-base;
-    padding: 0;
     border: 1px solid $border;
-    width: 100%;
-    height: 36px;
-    position: absolute;
-    left: 0;
-    top: 60px;
     border-radius: 16px;
+    height: 36px;
+    left: 0;
+    padding: 0;
+    position: absolute;
     text-indent: 1.2em;
-    // border:1px solid red;
+    top: 60px;
+    width: 100%;
 
     @include responsive(T) {
-      // left: 140px;
       left: 20%;
-      // width: 280px;
-      width: 41%;
       top: 10px;
+      width: 41%;
     }
   
     @include responsive(D) {
@@ -301,17 +286,14 @@
   }
 
   img {
-    // border: 1px solid $green;
-    width: auto;
     height: 30px;
     position: absolute;
     right: 5px;
     top: 77px;
     transform: translateY(-50%);
-    // border:1px solid red;
+    width: auto;
 
     @include responsive(T) {
-      // left: 380px;
       left: 55%;
       top: 30px;
     }
@@ -322,22 +304,18 @@
   }
 
   .ordergroup {
-    position: absolute;
+    color: $secondary;
     left: 0;
-    top: 100px;
-    color: #999;
-    // border:1px solid red;
+    position: absolute;
     text-align: left;
-    // border:1px solid red;
-
+    top: 100px;
 
     @include responsive(T) {
-      // left: 420px;
       left: 60%;
       margin-right: 0;
-      width: 20%;
       text-align: center;
-      top: 0px;
+      top: 0;
+      width: 20%;
     }
   
     @include responsive(D) {
@@ -347,50 +325,47 @@
 
     .first {
       @include responsive(T) {
-        margin-right:15px;
+        margin-right: 15px;
       }
     
       @include responsive(D) {
-        margin-right:20px;
+        margin-right: 20px;
       }
     } 
 
-    .second{
+    .second {
       margin-right: 0;
 
       @include responsive(T) {
-        margin-left:15px;
+        margin-left: 15px;
       }
     
       @include responsive(D) {
-        margin-left:20px;
+        margin-left: 20px;
       }
     }
   }
 
   .initialbtn {
-    position: absolute;
-    right: -20px;
-    top: 90px;
     border: 1px solid $border;
+    border-radius: 16px;
+    color: $secondary;
     height: 36px;
     line-height: 36px;
-    width: 100px;
+    position: absolute;
+    right: -20px;
     text-align: center;
-    border-radius: 16px;
-    color: #999;
-    // border:1px solid red;
+    top: 90px;
+    width: 100px;
 
     @include responsive(T) {
-      // left: 380px;
-      left:82%;
-      width: 15%;
+      left: 82%;
       top: -8px;
+      width: 15%;
     }
   
     @include responsive(D) {
-      // right: 0;
-      left:1000px;
+      left: 1000px;
       width: 100px;
     }
 

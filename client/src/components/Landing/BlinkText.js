@@ -8,6 +8,7 @@ function BlinkText() {
     from: { opacity: 0.2 },
     config: { duration: 1200 },
   });
+
   return (
     <>
       <div

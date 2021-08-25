@@ -4,6 +4,7 @@ import { checkEmail } from '../../utils/validation';
 import AlertModal from '../Common/AlertModal/AlertModal';
 import Button from '../Common/Button/Button';
 import { customAxios } from '../../utils/customAxios';
+import Auth from '../../hoc/auth';
 
 function SubscriptionWrapper() {
   const [SignIn, setSignIn] = useState(false);
@@ -15,19 +16,19 @@ function SubscriptionWrapper() {
   const [EmailSubSuc, setEmailSubSuc] = useState(false);
   const [Subscribed, setSubscribed] = useState(false);
 
+  // 로그인 여부
   useEffect(() => {
-    if (store.getState().user.signinSuccess) {
-      if (store.getState().user.signinSuccess[0] === 'Login success') {
-        setSignIn(true);
-        setUserEmail(store.getState().user.signinSuccess[2]);
-      } else {
-        setSignIn(false);
-      }
+    const request = Auth(true);
+
+    if (request !== 'Login need' && request !== 'Admin login success') {
+      setSignIn(true);
+      setUserEmail(store.getState().user.signinSuccess[2]);
     } else {
       setSignIn(false);
     }
   }, []);
 
+  // 이메일 입력
   function onEmailHandler(e) {
     setEmail(e.currentTarget.value);
 
@@ -38,6 +39,7 @@ function SubscriptionWrapper() {
     }
   }
 
+  // 비회원 구독 신청
   function onSubmitHandler(e) {
     e.preventDefault();
 
@@ -64,6 +66,7 @@ function SubscriptionWrapper() {
       .catch(err => setAlertOpen(true));
   }
 
+  // 회원 구독 신청
   function subscriptionHandler() {
     let body = { user_email: UserEmail };
 
@@ -84,13 +87,14 @@ function SubscriptionWrapper() {
       });
   }
 
-  const closeModal = () => {
+  // 모달 닫기
+  function closeModal() {
     setAlertOpen(false);
 
     if (BlackInput === false && EmailSubSuc === true) {
       window.location.href = '/';
     }
-  };
+  }
 
   return (
     <>

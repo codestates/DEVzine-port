@@ -24,8 +24,8 @@
     }
 
     li {
-      font-weight: $bold;
       cursor: pointer;
+      font-weight: $bold;
 
       &:first-child {
         border-bottom: 1px solid $border;

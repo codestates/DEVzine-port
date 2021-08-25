@@ -5,6 +5,7 @@ import AlertModal from '../Common/AlertModal/AlertModal';
 import { customAxios } from '../../utils/customAxios';
 import SigninModal from '../Common/SignInModal/SignInModal';
 import Button from '../Common/Button/Button';
+import { SelectOptions } from '../../assets/datas/ContributionData/data';
 
 function ContributionUpdateWrapper({ id }) {
   const [Keyword, setKeyword] = useState('게임');
@@ -18,32 +19,25 @@ function ContributionUpdateWrapper({ id }) {
   const [AllSelect, setAllSelect] = useState(false);
   const [PostSuc, setPostSuc] = useState(false);
 
-  let requrest = Auth(true);
-  let selectOptions = [
-    '게임',
-    '머신러닝',
-    '모바일',
-    '보안',
-    '블록체인',
-    '빅 데이터',
-    '코딩',
-    '클라우드',
-    '퍼스널 컴퓨팅',
-    'AI/로봇',
-    '기타',
-  ];
+  const request = Auth(true);
 
-  // TODO: 안된다. 확인필요
+  // 로그인 확인
+  useEffect(() => {
+    if (request === 'Login need') {
+      setModalOpen(true);
+    }
+  });
+
+  // 등록된 기고 정보
   useEffect(async () => {
     const requestGet = await customAxios
       .get(`/contribution/update/${id}`)
       .then(res => res.data.data)
       .catch(err => {
-        // alert('기고 정보를 받아오는데 실패하였습니다.');
-        requrest = Auth(true);
-
-        // window.location.href = '/error';
+        // request = Auth(true);
+        setAllDate(false);
       });
+
     if (requestGet !== undefined) {
       setKeyword(requestGet.contribution_keyword);
       setTitle(requestGet.contribution_title);
@@ -55,16 +49,12 @@ function ContributionUpdateWrapper({ id }) {
     }
   }, []);
 
-  useEffect(() => {
-    if (requrest === 'Login need') {
-      setModalOpen(true);
-    }
-  });
-
+  // 키워드 선택
   function onKeywordHandler(e) {
     setKeyword(e.currentTarget.value);
   }
 
+  // 제목 입력
   function onTitleHandler(e) {
     setTitle(e.currentTarget.value);
 
@@ -75,6 +65,7 @@ function ContributionUpdateWrapper({ id }) {
     }
   }
 
+  // 내용 입력
   function onContentHandler(e) {
     setContent(e.currentTarget.value);
 
@@ -85,6 +76,7 @@ function ContributionUpdateWrapper({ id }) {
     }
   }
 
+  // 기고 수정
   function onSubmitHandler(e) {
     e.preventDefault();
 
@@ -102,11 +94,9 @@ function ContributionUpdateWrapper({ id }) {
 
       return customAxios.patch(`/contribution/${id}`, body).then(res => {
         if (res.status === 200) {
-          // alert('기고수정요청이 완료되었습니다.');
           setPostSuc(true);
           setAlertOpen(true);
         } else {
-          // alert('기고수정요청이 실패하였습니다.');
           setPostSuc(false);
           setAlertOpen(true);
         }
@@ -114,20 +104,21 @@ function ContributionUpdateWrapper({ id }) {
     }
   }
 
-  const closeModal = () => {
+  // 모달 닫기
+  function closeModal() {
     setAlertOpen(false);
 
     if (PostSuc) {
       window.history.back();
     }
-  };
+  }
 
   return AllDate ? (
     <>
       <div className="contributioncontainer stopdragging">
         <div className="container">
           <div className="row">
-            {requrest === 'Login need' ? null : (
+            {request === 'Login need' ? null : (
               <div className="col-sm-4">
                 <div className="continner">
                   <form
@@ -146,7 +137,7 @@ function ContributionUpdateWrapper({ id }) {
                       <option value="" className="optionslect">
                         선택
                       </option>
-                      {selectOptions.map((option, idx) => (
+                      {SelectOptions.map((option, idx) => (
                         <option key={idx} value={option}>
                           {option}
                         </option>

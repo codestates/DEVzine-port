@@ -1,4 +1,4 @@
-// @include text-style(16, $dark);
+// 사용예시 : @include text-style(16, $dark);
 
 @mixin text-style-12() {
   font-size: $font-size-12;

@@ -11,6 +11,8 @@ function RequestTable({ Requested }) {
   const [PostSuc, setPostSuc] = useState(false);
 
   const columns = ['닉네임', '제목', '현황', '변경'];
+
+  // 요청에 따른 라디오 버튼들
   const radioInputData = {
     100: [
       ['승인', '110'],
@@ -28,6 +30,7 @@ function RequestTable({ Requested }) {
     ],
   };
 
+  // 선택한 라디오 버튼
   function onValueChange(e) {
     setStatusNumber(e.currentTarget.value);
   }
@@ -68,13 +71,14 @@ function RequestTable({ Requested }) {
     }
   }
 
-  const closeModal = () => {
+  // 모달 닫기
+  function closeModal() {
     setAlertOpen(false);
 
     if (PostSuc) {
       window.location.reload();
     }
-  };
+  }
 
   return Requested ? (
     <table>

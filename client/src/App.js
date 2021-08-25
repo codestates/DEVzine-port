@@ -29,7 +29,6 @@ const ContributionList = lazy(
 import MyPage from './pages/MyPage';
 import Subscription from './pages/Subscription';
 
-// import Visual from './pages/Visual';
 const Visual = lazy(
   () =>
     new Promise((resolve, reject) =>

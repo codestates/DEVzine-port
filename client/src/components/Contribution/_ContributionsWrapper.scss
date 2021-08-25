@@ -8,12 +8,10 @@
   .continner {
     margin: 0 auto;
     margin-top: 192px;
-    // margin-top: 20%;
     width: 360px;
 
     @include mobile-only() {
-      // margin-top: 162px;
-      margin-top: 110px; //header 90px 포함
+      margin-top: 110px; 
       max-width: 360px;
       width: 95%;
     }
