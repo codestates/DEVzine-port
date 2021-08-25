@@ -176,8 +176,7 @@ function ArticleViewWrapper({ id }) {
                     Request === 'Login need' ? (
                       <>
                         <div className="invitation">
-                          로그인을 하면 내용을
-                          <br /> 이어 볼 수 있습니다.
+                          로그인을 하면 내용을 이어 볼 수 있습니다.
                         </div>
                         <Button
                           subject={'로그인/회원가입 하기'}
