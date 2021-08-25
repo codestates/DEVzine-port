@@ -16,6 +16,19 @@ function ArticleViewWrapper({ id }) {
   const Request = Auth(true);
 
   useEffect(async () => {
+    // if (indicator === 'pre') {
+    //   await customAxios
+    //     .get(`/admin/contribution/preview/${pathParameter}`)
+    //     .then(res => {
+    //       console.log('preview으로 요청', res);
+    //       return setContribution(res.data.data);
+    //     })
+    //     .catch(err => {
+    //       window.location.href = '/error';
+    //       // console.log(err);
+    //     });
+    // }
+
     indicator === 'con'
       ? await customAxios
           .get(`/magazine/contribution/${pathParameter}`)

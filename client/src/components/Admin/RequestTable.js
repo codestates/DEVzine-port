@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { customAxios } from '../../utils/customAxios';
 import AlertModal from '../Common/AlertModal/AlertModal';
+import ArticleView from '../../pages/ArticleView';
 
 function RequestTable({ Requested }) {
   const [StatusNumber, setStatusNumber] = useState(null);
@@ -92,7 +93,10 @@ function RequestTable({ Requested }) {
             <tr key={idx}>
               <td>{el.user_name}</td>
               <td>
-                <Link to={`/article/con-${el.contribution_id}`}>
+                <Link
+                  to={`/article/pre-${el.contribution_id}`}
+                  children={<ArticleView />}
+                >
                   {el.contribution_title}
                 </Link>
               </td>
