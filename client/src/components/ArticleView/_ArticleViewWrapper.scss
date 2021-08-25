@@ -76,7 +76,9 @@
         }
       }
 
-      .hamburger {
+      .backbtn {
+        width: 37px;
+        height: 37px;
         position: absolute;
         top: 11px;
         right: 23px;
@@ -164,6 +166,18 @@
           min-height: 400px;
         }
       }
+
+      .invitation {
+        @include pos-center-x;
+        bottom: 180px;
+        font-weight: $normal;
+        @include text-style(18, $dark);
+        @include mobile-only() {
+          bottom: 160px;
+          @include text-style(16, $dark);
+        }
+      }
+
       .commonbutton {
         @include pos-center-x;
         bottom: 100px;

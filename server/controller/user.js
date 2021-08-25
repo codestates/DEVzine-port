@@ -69,6 +69,7 @@ module.exports = {
   },
 
   signIn: async (req, res) => {
+    
     jwt.sign(
       { user: req.user },
       process.env.JWT_SECRET,
