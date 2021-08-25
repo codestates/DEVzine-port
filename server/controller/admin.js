@@ -110,6 +110,13 @@ module.exports = {
         });
       }
 
+      if (
+        rejectedContribution.status === 121 ||
+        rejectedContribution.status === 122
+      ) {
+        await insertCacheForOneContribution(contribution_id, data);
+      }
+
       return res.status(200).json({
         message: 'Reject success',
       });
@@ -195,7 +202,11 @@ module.exports = {
       );
 
       const { user_email, ...temp } = acceptedContribution._doc;
-      const { user_name } = user;
+      let user_name = 'anonymous';
+      if (user) {
+        user_name = user.user_name;
+      }
+      
       const data = { user_name, ...temp };
 
       if (
