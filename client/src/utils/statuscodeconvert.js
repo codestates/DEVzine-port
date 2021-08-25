@@ -1,5 +1,4 @@
 export function statuscodeconvert(code) {
-  // console.log(code);
   const status = {
     100: '게시 대기',
     101: '수정 대기',

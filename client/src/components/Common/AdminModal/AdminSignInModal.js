@@ -27,23 +27,19 @@ function AdminSignInModal({ ModalOpen, setModalOpen }) {
         admin_password: Password,
       };
 
-      // console.log('SignInModal :', body);
-
       dispatch(signinAdmin(body)).then(res => {
-        console.log(res.payload);
         if (res.payload === 'Login success') {
           window.location.href = '/admin';
         } else {
-          // alert('로그인 실패하였습니다.');
           setAlertOpen(true);
         }
       });
     }
   }
 
-  const closeModal = () => {
+  function closeModal() {
     setAlertOpen(false);
-  };
+  }
 
   return ModalOpen ? (
     <div className="signincontainer">

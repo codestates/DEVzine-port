@@ -48,7 +48,6 @@ function SignUpWrapper() {
     } else {
       setPw_confirm(false);
     }
-    // console.log(AllChecked);
   }, [Email, Password, ConfirmPassword, AllChecked]);
 
   useEffect(() => {
@@ -161,7 +160,7 @@ function SignUpWrapper() {
       });
   }
 
-  const closeModal = () => {
+  function closeModal() {
     setAlertOpen(false);
     setSignUpFail(false);
     setSignUpSuccess(false);
@@ -169,7 +168,7 @@ function SignUpWrapper() {
     setEmailNotVerified(false);
     setAlreadyExist(false);
     setEmailUnverified(false);
-  };
+  }
   return (
     <>
       <div className="signupcontainer">

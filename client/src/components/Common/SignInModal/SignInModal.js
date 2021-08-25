@@ -23,8 +23,6 @@ function SigninModal({ ModalOpen, setModalOpen }) {
       user_password: Password,
     };
 
-    console.log('SignInModal :', body);
-
     dispatch(signinUser(body))
       .then(res => {
         if (res.payload[0] === 'Login success') {
@@ -34,14 +32,13 @@ function SigninModal({ ModalOpen, setModalOpen }) {
         }
       })
       .catch(err => {
-        // alert('아이디 혹은 비밀번호가 일치하지 않습니다.');
         setAlertOpen(true);
       });
   }
 
-  const closeModal = () => {
+  function closeModal() {
     setAlertOpen(false);
-  };
+  }
 
   return ModalOpen ? (
     <div className="signincontainer">

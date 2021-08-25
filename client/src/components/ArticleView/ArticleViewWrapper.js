@@ -6,8 +6,8 @@ import Auth from '../../hoc/auth';
 
 function ArticleViewWrapper({ id }) {
   const paramsArr = id.split('-');
-  const indicator = paramsArr[0]; // /article/art
-  const pathParameter = paramsArr[1]; // number
+  const indicator = paramsArr[0];
+  const pathParameter = paramsArr[1];
   const [Contribution, setContribution] = useState({});
   const [Article, setArticle] = useState({});
   const [Alldata, setAlldata] = useState(false);

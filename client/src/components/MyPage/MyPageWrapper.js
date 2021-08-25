@@ -106,7 +106,6 @@ function MyPageWrapper() {
           withCredentials: true,
         })
         .then(res => {
-          console.log(res.data.data);
           setEmail(res.data.data.user.user_email);
           setPassword('defaultpassword');
           setName(res.data.data.user.user_name);
@@ -179,8 +178,6 @@ function MyPageWrapper() {
       },
       subscribed: Scribed,
     };
-
-    // console.log('MyPageWrapper :', body);
 
     dispatch(mypageUser(body))
       .then(res => {
