@@ -13,7 +13,13 @@ const passportConfig = {
 };
 
 const passportVerify = async (user_email, user_password, done) => {
-  User.findOne({ user_email }, async (err, user) => {
+  await User.findOne({ user_email }, 
+    {
+      user_name: 1,
+      user_email: 1,
+      user_password: 1,
+      subscribed:1,
+    }, async (err, user) => {
     if (err) {
       return done(err);
     }
@@ -23,11 +29,13 @@ const passportVerify = async (user_email, user_password, done) => {
     const isValidPassword = await bcrypt.compare(
       user_password,
       user.user_password,
-    );
-    if (!isValidPassword) {
-      return done(null, false, { message: 'Invalid password' });
-    }
-    return done(null, user);
+      );
+      if (!isValidPassword) {
+        return done(null, false, { message: 'Invalid password' });
+      }
+      
+      delete user._doc.user_password;
+      return done(null, user);
   });
 };
 
@@ -46,7 +54,11 @@ const JWTConfig = {
 
 const JWTVerify = async (jwtPayload, done) => {
   try {
-    const user = await User.findOne({ _id: jwtPayload.user._id });
+    const user = await User.findOne({ _id: jwtPayload.user._id }, {
+      user_name: 1,
+      user_email: 1,
+      subscribed: 1
+    });
     if (user) {
       return done(null, user);
     }
@@ -77,6 +89,7 @@ const passportVerifyAdmin = async (admin_id, admin_password, done) => {
     if (!isValidPassword) {
       return done(null, false, { message: 'Invalid password' });
     }
+    delete admin._doc.admin_password;
     return done(null, admin);
   });
 };
