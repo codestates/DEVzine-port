@@ -1,7 +1,10 @@
 const { User } = require('../Models/Users');
 const { VerifiedEmail } = require('../Models/Verifiedemails');
 const { Contribution } = require('../Models/Contributions');
-const { setNewCacheForContributions, getAllConfirmedContributions } = require('./cachefunction/contributionsCache');
+const {
+  setNewCacheForContributions,
+  getAllConfirmedContributions,
+} = require('./cachefunction/contributionsCache');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -70,7 +73,6 @@ module.exports = {
   },
 
   signIn: async (req, res) => {
-    
     jwt.sign(
       { user: req.user },
       process.env.JWT_SECRET,
@@ -81,7 +83,7 @@ module.exports = {
         }
         res.cookie('jwt', token, {
           httpOnly: true,
-          sameSite: 'None',
+          sameSite: 'lax',
           secure: true,
           // maxAge: 24 * 60 * 60 * 1000, // 있든 말든 상관 없는듯
           // domain: 'devzine-port.com', path: '/' // 이건 넣으면 걍 안됨;;
@@ -123,7 +125,7 @@ module.exports = {
           return res.status(404).send({ message: 'Not found' });
         }
       });
-      
+
       const cacheToUpdate = getAllConfirmedContributions();
       await setNewCacheForContributions(cacheToUpdate);
 
