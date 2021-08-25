@@ -1399,7 +1399,7 @@ label {
     line-height: 24px;
     letter-spacing: -0.01em;
     color: #999;
-    margin-bottom: 28px; }
+    margin-bottom: 8px; }
     @media screen and (max-width: 767px) {
       .subscriptioncontainer .subtextsmall {
         margin-bottom: 8px; } }
@@ -1417,6 +1417,7 @@ label {
   width: 296px; }
   @media screen and (max-width: 767px) {
     .nonesubinner .emailinput {
+      max-width: 296px;
       width: 100%; } }
 
 .nonesubinner .emailalerttext {
@@ -1429,6 +1430,7 @@ label {
 
 .nonesubinner .subemailbtn {
   background-color: transparent;
+  max-width: 296px;
   width: 100%;
   padding: 0; }
 
@@ -1440,7 +1442,7 @@ label {
       width: 100%; } }
 
 .nonesubinner .subjoinbox {
-  margin-top: 48px;
+  margin-top: 24px;
   position: relative; }
   @media screen and (max-width: 767px) {
     .nonesubinner .subjoinbox {
@@ -2424,7 +2426,7 @@ label {
       margin-top: 192px;
       background-color: #fff;
       position: relative;
-      height: 140px;
+      min-height: 120px;
       border: 1px solid #d9d9d9;
       border-radius: 24px 24px 0 0;
       padding-left: 20px;
@@ -2458,20 +2460,22 @@ label {
           line-height: 34px;
           letter-spacing: -0.01em;
           font-weight: 700;
-          margin-bottom: 8px; }
+          margin-bottom: 8px;
+          padding-right: 20px; }
           @media screen and (max-width: 767px) {
             .articlecontainer .articleviewwrapper .header .headerleft .title {
               font-size: 18px;
               line-height: 28px;
               letter-spacing: -0.02em;
               margin-bottom: 0px;
-              padding-right: 20px;
-              height: 56px; } }
+              padding-right: 20px; } }
         .articlecontainer .articleviewwrapper .header .headerleft .username {
           font-size: 14px;
           line-height: 24px;
           letter-spacing: -0.01em;
-          font-weight: 700; }
+          font-weight: 700;
+          margin-bottom: 18px;
+          position: relative; }
       .articlecontainer .articleviewwrapper .header .backbtn {
         width: 37px;
         height: 37px;
@@ -2481,9 +2485,6 @@ label {
         cursor: pointer; }
       .articlecontainer .articleviewwrapper .header .datawrapper {
         position: absolute;
-        width: 170px;
-        height: 14px;
-        top: 95px;
         right: 23px;
         font-size: 14px;
         line-height: 24px;
@@ -2492,18 +2493,19 @@ label {
         color: #b2b3b9;
         text-align: right;
         padding-right: 1px; }
+        @media screen and (max-width: 767px) {
+          .articlecontainer .articleviewwrapper .header .datawrapper {
+            position: static; } }
         .articlecontainer .articleviewwrapper .header .datawrapper .data {
           font-weight: 400;
           margin: 0 4px; }
         @media screen and (max-width: 767px) {
           .articlecontainer .articleviewwrapper .header .datawrapper {
             clear: both;
-            text-align: right;
+            text-align: left;
             line-height: 18px;
             height: 18px;
-            width: 100%;
-            padding-left: 43px;
-            padding-top: 10px; } }
+            width: 100%; } }
     .articlecontainer .articleviewwrapper .body {
       background-color: #fff;
       position: relative;
