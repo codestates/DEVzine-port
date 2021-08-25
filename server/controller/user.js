@@ -1,6 +1,7 @@
 const { User } = require('../Models/Users');
 const { VerifiedEmail } = require('../Models/Verifiedemails');
 const { Contribution } = require('../Models/Contributions');
+const { setNewCacheForContributions, getAllConfirmedContributions } = require('./cachefunction/contributionsCache');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -122,6 +123,10 @@ module.exports = {
           return res.status(404).send({ message: 'Not found' });
         }
       });
+      
+      const cacheToUpdate = getAllConfirmedContributions();
+      await setNewCacheForContributions(cacheToUpdate);
+
       res.status(200).send({ message: 'User deleted' });
     } catch (err) {
       res.status(500).send(err);
