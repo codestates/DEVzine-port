@@ -124,21 +124,6 @@ function ArticleViewWrapper({ id }) {
                       strokeMiterlimit="10"
                     />
                   </svg>
-
-                  {/* <div className="datawrapper">
-                    게시{' '}
-                    <span className="data">
-                      {indicator === 'con' || indicator === 'pre'
-                        ? Contribution.contribution_date.slice(0, 10)
-                        : Article.article_date.slice(0, 10)}
-                    </span>
-                    조회{' '}
-                    <span className="data">
-                      {indicator === 'con' || indicator === 'pre'
-                        ? Contribution.hit
-                        : Article.hit}
-                    </span>
-                  </div> */}
                 </div>
                 <div className="body">
                   <div className="contents">
@@ -153,7 +138,7 @@ function ArticleViewWrapper({ id }) {
                               </div>
                             ))
                         : Contribution.contribution_content
-                            .split(/!|\.\s|\✨/)
+                            .split(/\.\s|\✨/)
                             .map(line => (
                               <div key={line} className="line-spacing">
                                 {line}.<br />
@@ -176,8 +161,7 @@ function ArticleViewWrapper({ id }) {
                     Request === 'Login need' ? (
                       <>
                         <div className="invitation">
-                          로그인을 하면 내용을
-                          <br /> 이어 볼 수 있습니다.
+                          로그인을 하면 내용을 이어 볼 수 있습니다.
                         </div>
                         <Button
                           subject={'로그인/회원가입 하기'}
