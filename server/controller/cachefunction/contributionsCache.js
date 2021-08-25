@@ -6,7 +6,7 @@ const getAllConfirmedContributions = async () => {
     {
       $match: {
         status: {
-          $in: [110, 111],
+          $in: [110, 111, 121, 122],
         },
       },
     },
@@ -50,6 +50,7 @@ const getAllConfirmedContributions = async () => {
 };
 
 const setNewCacheForContributions = async contributions => {
+  await redisClient.del('allContributions');
   for (let i = 0; i < contributions.length; i++) {
     let id = contributions[i].contribution_id;
     await redisClient.hset(
@@ -199,6 +200,7 @@ const updateContributionHit = async id => {
 
 module.exports = {
   getAllConfirmedContributions,
+  setNewCacheForContributions,
   checkCacheForContributions,
   checkCacheForOneContribution,
   updateContributionHit,
