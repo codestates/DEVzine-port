@@ -83,7 +83,7 @@ module.exports = {
         }
         res.cookie('jwt', token, {
           httpOnly: true,
-          sameSite: 'lax',
+          sameSite: 'None',
           secure: true,
           // maxAge: 24 * 60 * 60 * 1000, // 있든 말든 상관 없는듯
           // domain: 'devzine-port.com', path: '/' // 이건 넣으면 걍 안됨;;
