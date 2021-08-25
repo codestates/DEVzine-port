@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 module.exports = {
   getUserInfo: async (req, res) => {
     try {
+      
       let userID = req.user._id;
       let user = await User.findOne({
         _id: userID,

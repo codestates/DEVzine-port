@@ -11,6 +11,7 @@ require('dotenv').config();
 
 module.exports = {
   adminSignIn: async (req, res) => {
+
     jwt.sign(
       { admin_id: req.user.admin_id },
       process.env.JWT_SECRET,
@@ -45,6 +46,7 @@ module.exports = {
   },
 
   getAllUsersContribution: async (req, res) => {
+
     try {
       const postRequest = await findContributionsWithStatus(100);
       const patchRequest = await findContributionsForUpdate();
@@ -106,6 +108,13 @@ module.exports = {
         return res.status(404).json({
           message: 'Not found',
         });
+      }
+
+      if (
+        rejectedContribution.status === 121 ||
+        rejectedContribution.status === 122
+      ) {
+        await insertCacheForOneContribution(contribution_id, data);
       }
 
       return res.status(200).json({
@@ -193,7 +202,11 @@ module.exports = {
       );
 
       const { user_email, ...temp } = acceptedContribution._doc;
-      const { user_name } = user;
+      let user_name = 'anonymous';
+      if (user) {
+        user_name = user.user_name;
+      }
+      
       const data = { user_name, ...temp };
 
       if (
@@ -215,4 +228,90 @@ module.exports = {
       return res.status(500).send(err);
     }
   },
+
+  viewRequestedArticle: async (req, res) => {
+
+    const contributionid = Number(req.params.contributionid);
+
+    try {
+
+      const contribData = await Contribution.findOne(
+        {
+          contribution_id: contributionid,
+        },
+        {
+          _id: 0,
+          contribution_date: 1,
+          hit: 1,
+          status: 1,
+          user_email: 1,
+          contribution_content: {
+            $cond: { 
+              if: {
+                '$eq': [ '$status', 101 ] 
+              }, then: {
+                $ifNull: [ '$temp_content', '$contribution_content' ]
+              }, else: '$contribution_content' 
+            }
+          },
+          contribution_title: {
+            $cond: { 
+              if: {
+                '$eq': [ '$status', 101] 
+              }, then: {
+                $ifNull: [ '$temp_title', '$contribution_title' ]
+              }, else: '$contribution_title' 
+            }
+          },
+          contribution_keyword: {
+            $cond: { 
+              if: {
+                '$eq': [ '$status', 101 ] 
+              }, then: {
+                $ifNull: [ '$temp_keyword', '$contribution_keyword' ]
+              }, else: '$contribution_keyword' 
+            }
+          },
+        },
+      );
+
+      if (!contribData) {
+        return res.status(404).json({
+          message: 'Not found',
+        });
+      }
+
+      const user = await User.findOne(
+        {
+          user_email: contribData.user_email,
+        },
+        {
+          _id: 0,
+          user_name: 1,
+        },
+      );
+      
+      let user_name;
+      if (user) {
+        user_name = user.user_name;
+      } else {
+        user_name = 'anonymous';
+      }
+
+      const { user_email, ...data } = contribData._doc;
+      
+      return res.status(200).json({
+        data: { user_name, ...data },
+        message: 'Contribution successfully found',
+      });
+
+    } catch (err) {
+
+      console.log(err)
+      return res.status(500).send(err)
+
+    }
+
+  }
+
 };

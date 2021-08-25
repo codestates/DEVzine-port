@@ -6,8 +6,8 @@ import Auth from '../../hoc/auth';
 
 function ArticleViewWrapper({ id }) {
   const paramsArr = id.split('-');
-  const indicator = paramsArr[0];
-  const pathParameter = paramsArr[1];
+  const indicator = paramsArr[0]; // /article/art
+  const pathParameter = paramsArr[1]; // number
   const [Contribution, setContribution] = useState({});
   const [Article, setArticle] = useState({});
   const [Alldata, setAlldata] = useState(false);
@@ -16,44 +16,35 @@ function ArticleViewWrapper({ id }) {
   const Request = Auth(true);
 
   useEffect(async () => {
-    // if (indicator === 'pre') {
-    //   await customAxios
-    //     .get(`/admin/contribution/preview/${pathParameter}`)
-    //     .then(res => {
-    //       console.log('preview으로 요청', res);
-    //       return setContribution(res.data.data);
-    //     })
-    //     .catch(err => {
-    //       window.location.href = '/error';
-    //       // console.log(err);
-    //     });
-    // }
-
+    if (indicator === 'pre') {
+      await customAxios
+        .get(`/admin/contribution/preview/${pathParameter}`)
+        .then(res => {
+          return setContribution(res.data.data);
+        })
+        .catch(err => {
+          window.location.href = '/error';
+        });
+    }
     indicator === 'con'
       ? await customAxios
           .get(`/magazine/contribution/${pathParameter}`)
           .then(res => {
-            console.log('contribution으로 요청', res);
             return setContribution(res.data.data);
           })
           .catch(err => {
             window.location.href = '/error';
-            // console.log(err);
           })
       : await customAxios
           .get(`/magazine/article/${pathParameter}`)
           .then(res => {
-            // console.log('Article로 요청', res);
             return setArticle(res.data.data);
           })
           .catch(err => {
             window.location.href = '/error';
-            // console.log(err);
           });
     setAlldata(true);
   }, []);
-
-  // console.log(Request);
 
   return Alldata ? (
     <>
@@ -81,22 +72,27 @@ function ArticleViewWrapper({ id }) {
                     </div>
                   </div>
                   <svg
-                    className="hamburger"
+                    className="backbtn"
                     onClick={() => window.history.back()}
-                    width="37"
-                    height="37"
-                    viewBox="0 0 37 37"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      d="M5.78125 25.4375H31.2188M5.78125 11.5625H31.2188H5.78125ZM5.78125 18.5H31.2188H5.78125Z"
-                      stroke="#999999"
-                      strokeWidth="2"
-                      strokeMiterlimit="10"
+                      d="M7.79313 10.5L5.3125 8L7.79313 5.5M5.65719 8H10.6875"
+                      stroke="#b2b3b9"
                       strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M14 8C14 4.6875 11.3125 2 8 2C4.6875 2 2 4.6875 2 8C2 11.3125 4.6875 14 8 14C11.3125 14 14 11.3125 14 8Z"
+                      stroke="#b2b3b9"
+                      strokeMiterlimit="10"
                     />
                   </svg>
+
                   <div className="datawrapper">
                     게시{' '}
                     <span className="data">
@@ -139,26 +135,32 @@ function ArticleViewWrapper({ id }) {
                     Request === 'Login need' ? (
                       <div className="layer"></div>
                     ) : null
-                  ) : (
+                  ) : indicator === 'art' ? (
                     <div className="layer"></div>
-                  )}
+                  ) : null}
                   {indicator === 'con' ? (
                     Request === 'Login need' ? (
-                      <Button
-                        subject={'로그인/회원가입 하기'}
-                        color={`#191A20`}
-                        backgroundColor={`#FFDD14`}
-                        onClickHandle={() => setModalOpen(true)}
-                      />
+                      <>
+                        <div className="invitation">
+                          로그인을 하면 내용을
+                          <br /> 이어 볼 수 있습니다.
+                        </div>
+                        <Button
+                          subject={'로그인/회원가입 하기'}
+                          color={`#191A20`}
+                          backgroundColor={`#FFDD14`}
+                          onClickHandle={() => setModalOpen(true)}
+                        />
+                      </>
                     ) : null
-                  ) : (
+                  ) : indicator === 'art' ? (
                     <Button
                       subject={'전체 게시글 보기'}
                       color={`#191A20`}
                       backgroundColor={`#FFDD14`}
                       onClickHandle={() => window.open(Article.article_url)}
                     />
-                  )}
+                  ) : null}
                 </div>
                 <div className="articlecontainer-footer" />
               </div>
