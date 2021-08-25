@@ -36,9 +36,9 @@ function Image({ url, index, camera }) {
 
         if (chkNumAbs > 100) {
           if (chkNum < 0) {
-            speed = speed + -0.4;
+            speed = speed + -0.2;
           } else {
-            speed = speed + 0.4;
+            speed = speed + 0.2;
           }
         }
         break;
