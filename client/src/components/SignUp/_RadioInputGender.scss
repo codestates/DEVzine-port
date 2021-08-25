@@ -21,9 +21,7 @@
     width: 263px;
     display: flex;
     .radiocontent {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flexbox;
       margin-right: 26px;
       @include mobile-only() {
         margin-right: 6px;
@@ -33,12 +31,12 @@
       }
       .radioinput:checked + label {
         font-weight: bold;
-        color: #191a20;
+        color: $dark;
       }
       .radiorabel {
         margin: 0;
         font-weight: bold;
-        color: #9b9b9c;
+        color: $secondary;
       }
     }
   }
