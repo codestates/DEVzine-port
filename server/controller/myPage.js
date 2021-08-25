@@ -1,6 +1,7 @@
 const { User } = require('../Models/Users');
 const { Contribution } = require('../Models/Contributions');
 const { Subscriber } = require('../Models/Subscribers');
+const { getAllConfirmedContributions, setNewCacheForContributions } = require('./cachefunction/contributionsCache');
 const bcrypt = require('bcryptjs');
 
 module.exports = {
@@ -75,6 +76,7 @@ module.exports = {
 
   patchUserInfo: async (req, res) => {
     try {
+      console.log(req.body)
       const { user_email, user_name } = req.body;
 
       let overlapUser = await User.findOne({
@@ -89,21 +91,10 @@ module.exports = {
         req.body.user_info;
 
       const user_password = await bcrypt.hashSync(req.body.user_password, 10);
-
+      
       let subscribed;
       if (req.body.subscribed === '구독') {
         subscribed = true;
-        await Subscriber.updateOne(
-          {
-            subscriber_email: user_email,
-          },
-          {
-            subscriber_email: user_email,
-          },
-          {
-            upsert: true,
-          },
-        );
       } else {
         subscribed = false;
       }
@@ -117,7 +108,7 @@ module.exports = {
         user_language,
         subscribed,
       };
-
+      
       let user = await User.findOneAndUpdate(
         {
           user_email,
@@ -127,11 +118,28 @@ module.exports = {
           new: true,
         },
       );
-
+        
       if (!user) {
         return res.status(404).json({
           message: 'Invalid user',
         });
+      }
+      
+      await Subscriber.updateOne(
+        {
+          subscriber_email: user_email,
+        },
+        {
+          subscriber_email: user_email,
+        },
+        {
+          upsert: true,
+        },
+      );
+
+      if ((overlapUser && req.body.user_name !== overlapUser.user_name) || !overlapUser) {
+        let dataForCache = await getAllConfirmedContributions();
+        await setNewCacheForContributions(dataForCache);
       }
 
       return res.status(200).json({
