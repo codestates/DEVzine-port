@@ -22,16 +22,18 @@ function AuthMail({}) {
     const body = {
       temp_email: email,
     };
-    customAxios.post('/email/verify', body).then(res => {
-      console.log(res);
-      if (res.status === 400) {
-        setAlertMessage(`이미 인증된 이메일입니다`);
-      } else {
+    customAxios
+      .post('/email/verify', body)
+      .then(res => {
         setAlertMessage(`${email} 인증 확인되었습니다.`);
-      }
-      setAlertOpen(true);
-      return;
-    });
+        setAlertOpen(true);
+        return;
+      })
+      .catch(err => {
+        setAlertMessage(`이미 인증된 이메일입니다`);
+        setAlertOpen(true);
+        return;
+      });
   }, []);
 
   return (
