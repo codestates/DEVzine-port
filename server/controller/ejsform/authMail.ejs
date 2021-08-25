@@ -13,13 +13,19 @@
 		</header>
 		<section style="background-color:#f2f2f2; padding:30px;">
 			<div>
-				<div>
-					<h2>안녕하세요, <%= user_email %>님 DEVzine입니다.</h2>
+				<div style="text-align: center;">
+					<h2>
+						안녕하세요,
+						<br>
+						<%= user_email %>님
+						<br>
+						DEVzine입니다.
+					</h2>
 					<br>
-					회원님께서 입력하신 이메일의 소유 확인을 위해 아래 이메일 인증 링크를 클릭하신 뒤 회원가입을 계속 진행해 주세요.
+					<p style="text-align: center;">회원님께서 입력하신 이메일의 소유 확인을 위해 아래 이메일 인증 링크를 클릭하신 뒤 회원가입을 계속 진행해 주세요.</p>
 				</div>
-				<a href="<%= CLIENT_ENDPOINT %>/authmail/<%= encryptEmail %>">이메일 인증하기</a>
-				<p style="color:gray">이 링크는 발송 후 30분 후 만료됩니다.</p>
+				<p style="text-align: center;"><a href="<%= CLIENT_ENDPOINT %>/authmail/<%= encryptEmail %>">이메일 인증하기</a></p>
+				<p style="color:gray; text-align: center;">이 링크는 발송 후 30분 후 만료됩니다.</p>
 			</div>
 		</section>
 		<footer style="font-size:14px; padding:20px; background-color:#191a20; color:#999; text-align:center;">
