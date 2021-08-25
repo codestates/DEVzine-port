@@ -13,6 +13,7 @@ function AuthMail({}) {
     window.open('', '_self');
     window.close();
   }
+
   const closeModal = () => {
     setAlertOpen(false);
     customClose();
