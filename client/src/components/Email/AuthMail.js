@@ -25,12 +25,12 @@ function AuthMail({}) {
     customAxios
       .post('/email/verify', body)
       .then(res => {
-        setAlertMessage(`${email} 인증 확인되었습니다.`);
+        setAlertMessage('인증 확인되었습니다.');
         setAlertOpen(true);
         return;
       })
       .catch(err => {
-        setAlertMessage(`이미 인증된 이메일입니다`);
+        setAlertMessage('이미 인증된 이메일입니다.');
         setAlertOpen(true);
         return;
       });
