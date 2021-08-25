@@ -4,6 +4,7 @@ const {
   adminSignOut,
   acceptContribRequest,
   rejectContribRequest,
+  viewRequestedArticle
 } = require('../controller/admin');
 const express = require('express');
 const router = express.Router();
@@ -13,6 +14,11 @@ router.get(
   '/contributionlist',
   passport.authenticate('adminJWT', { session: false }),
   getAllUsersContribution,
+);
+router.get(
+  '/contribution/preview/:contributionid',
+  passport.authenticate('adminJWT', { session: false }),
+  viewRequestedArticle,
 );
 router.post('/signout', adminSignOut);
 router.post(

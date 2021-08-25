@@ -50,7 +50,7 @@ function Accordion({ radioInputHandler, selectInputHandler }) {
         <div
           className="singleselectwrapper"
           style={{
-            opacity: isOn ? 1 : 0,
+            display: isOn ? 'block' : 'none',
           }}
         >
           <div className="singleselectcontents">
@@ -69,7 +69,7 @@ function Accordion({ radioInputHandler, selectInputHandler }) {
         <div
           className="multiselectwrapper"
           style={{
-            opacity: isOn ? 1 : 0,
+            display: isOn ? 'block' : 'none',
           }}
         >
           <div className="multiselectcontents">
