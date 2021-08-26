@@ -45,6 +45,7 @@
       margin-top: 12px;
 
       @include mobile-only() {
+        height: 50px;
         font-size: 40px;
         margin-top: 0;
       }

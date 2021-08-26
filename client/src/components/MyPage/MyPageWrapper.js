@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { mypageUser } from '../../_actions/user_actions';
 import { deleteUser } from '../../_actions/user_actions';
@@ -17,8 +16,6 @@ import TextInputGenderRequired from './TextInputGenderRequired';
 import OptContents from './OptContents';
 import Button from '../Common/Button/Button';
 import { customAxios } from '../../utils/customAxios';
-
-const END_POINT = process.env.REACT_APP_API_URL;
 
 function MyPageWrapper() {
   const dispatch = useDispatch();
@@ -239,11 +236,14 @@ function MyPageWrapper() {
     setAlertOpen(false);
     setAlreadyExist(false);
     setAllVerified(false);
-    setIsEditedSuccess(false);
     setIsEditedFail(false);
     setSuccessWithdrawal(false);
     setFailWithdrawal(false);
     setWithdrawalQuestion(false);
+    if (IsEditedSuccess) {
+      setIsEditedSuccess(false);
+      window.location.reload();
+    }
   }
 
   return allData ? (

@@ -13,17 +13,14 @@ function AcessTerms({ setAllChecked }) {
   }
 
   useEffect(() => {
-    // console.log(checkedInputs);
     setAllChecked(checkedInputs.length === 3);
   }, [checkedInputs]);
 
   const changeHandler = (checked, id) => {
     if (checked) {
       setCheckedInputs([...checkedInputs, id]);
-      // console.log('체크 반영 완료');
     } else {
       setCheckedInputs(checkedInputs.filter(el => el !== id));
-      // console.log('체크 해제 반영 완료');
     }
   };
 

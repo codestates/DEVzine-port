@@ -104,8 +104,7 @@ function SubscriptionWrapper() {
             <div className="col-sm-4">
               <div className="subinnner">
                 <div className="subtext">
-                  개발하는 당신을 위한 얕고 넓은 지식을 <br />
-                  메일로 받아보세요.
+                  트렌디한 IT 지식을 메일로 받아보세요
                 </div>
                 <div className="subtextsmall">월~토요일 오전 7시 발송</div>
                 {SignIn ? (
