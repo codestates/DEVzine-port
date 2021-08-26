@@ -7,7 +7,6 @@ const CryptoJS = require('crypto-js');
 require('dotenv').config();
 
 const CLIENT_ENDPOINT = process.env.DEVZINE_CLIENT_ENDPOINT;
-const cryptoKey = '111';
 // const cryptoKey = process.env.CRYPTO_KEY;
 
 const transporter = nodemailer.createTransport(
