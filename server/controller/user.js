@@ -85,11 +85,6 @@ module.exports = {
           httpOnly: true,
           sameSite: 'None',
           secure: true,
-          domain: 'https://devzine-port.com',
-          path: '/',
-          // maxAge: 24 * 60 * 60 * 1000, // 있든 말든 상관 없는듯
-          // domain: '.com',
-          // path: '/',
         });
         res.status(200).send({
           data: {
