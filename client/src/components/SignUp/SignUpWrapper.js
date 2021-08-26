@@ -1,106 +1,261 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { signupUser } from '../../_actions/user_actions';
+import React, { useState, useEffect } from 'react';
+import { checkEmail, checkPassword } from '../../utils/validation';
+import { customAxios } from '../../utils/customAxios';
+import Auth from '../../hoc/auth';
+import TextInputGenderRequired from './TextInputGenderRequired';
+import Accordion from './Accordion';
+import SigninModal from '../Common/SignInModal/SignInModal';
+import AlertModal from '../Common/AlertModal/AlertModal';
+import AcessTerms from './AccessTerms';
 
 function SignUpWrapper() {
-  const dispatch = useDispatch();
+  const [Email_isValid, setEmail_isValid] = useState(false);
+  const [Pw_isValid, setPw_isValid] = useState(false);
+  const [Pw_confirm, setPw_confirm] = useState(false);
 
   const [Email, setEmail] = useState('');
   const [Name, setName] = useState('');
   const [Password, setPassword] = useState('');
   const [ConfirmPassword, setConfirmPassword] = useState('');
+  const [Gender, setGender] = useState('');
+  const [Age, setAge] = useState('');
+  const [Position, setPosition] = useState('');
+  const [Language, setLanguage] = useState([]);
+  const [ModalOpen, setModalOpen] = useState(false);
+  const [AlertOpen, setAlertOpen] = useState(false);
+  const [SignUpFail, setSignUpFail] = useState(false);
+  const [SignUpSuccess, setSignUpSuccess] = useState(false);
+  const [AllVerified, setAllVerified] = useState(false);
+  const [EmailNotVerified, setEmailNotVerified] = useState(false);
+  const [AlreadyExist, setAlreadyExist] = useState(false);
+  const [EmailUnverified, setEmailUnverified] = useState(false);
+  const [AllChecked, setAllChecked] = useState(false);
 
-  function onEmailHandler(e) {
-    setEmail(e.currentTarget.value);
-  }
-
-  function onNameHandler(e) {
-    setName(e.currentTarget.value);
-  }
-
-  function onPasswordHandler(e) {
-    setPassword(e.currentTarget.value);
-  }
-
-  function onConfirmPasswordHandler(e) {
-    setConfirmPassword(e.currentTarget.value);
-  }
-
-  function onSubmitHandler(e) {
-    e.preventDefault();
-
-    if (Password !== ConfirmPassword) {
-      return alert('비밀번호와 비밀번호 확인은 같아야 합니다.');
+  useEffect(() => {
+    if (checkEmail(Email)) {
+      setEmail_isValid(true);
+    } else {
+      setEmail_isValid(false);
     }
+
+    if (checkPassword(Password)) {
+      setPw_isValid(true);
+    } else {
+      setPw_isValid(false);
+    }
+    if (Password === ConfirmPassword) {
+      setPw_confirm(true);
+    } else {
+      setPw_confirm(false);
+    }
+  }, [Email, Password, ConfirmPassword, AllChecked]);
+
+  useEffect(() => {
+    Auth(false);
+    setEmail_isValid(true);
+    setPw_isValid(true);
+  }, []);
+
+  const requiredTextInputData = [
+    [
+      '이메일',
+      'user_email',
+      Email,
+      setEmail,
+      '이메일',
+      'email',
+      Email_isValid,
+      '30',
+    ],
+    [
+      '비밀번호',
+      'user_password',
+      Password,
+      setPassword,
+      '8자 이상 입력해주세요',
+      'password',
+      Pw_isValid,
+      '20',
+    ],
+    [
+      '비밀번호 확인',
+      'password_confirm',
+      ConfirmPassword,
+      setConfirmPassword,
+      '비밀번호 확인',
+      'password',
+      Pw_confirm,
+      '20',
+    ],
+    ['닉네임', 'user_name', Name, setName, '유저 이름', 'text', '', '15'],
+  ];
+
+  async function postHandler() {
+    selectInputHandler();
 
     let body = {
       user_email: Email,
       user_password: Password,
       user_name: Name,
       user_info: {
-        user_gender: 'female',
-        user_age: '20대',
-        user_position: '프론트엔드',
-        user_language: 'javascript',
+        user_gender: Gender,
+        user_age: Age,
+        user_position: Position,
+        user_language: Language,
       },
     };
 
-    console.log('SignUpWrapper :', body);
-
-    dispatch(signupUser(body)).then(res => {
-      if (res.payload === 'User created') {
-        window.location.href = '/signin';
-      } else {
-        alert('회원가입 실패하였습니다.');
-      }
-    });
+    return await customAxios
+      .post(`/user/signup`, body)
+      .then(res => {
+        setSignUpSuccess(true);
+        setModalOpen(true);
+      })
+      .catch(err => {
+        if (err.message.includes(401)) {
+          setEmailUnverified(true);
+        } else if (err.message.includes(404)) {
+          setSignUpFail(true);
+        } else if (err.message.includes(409)) {
+          setAlreadyExist(true);
+        }
+      });
   }
 
+  function radioInputHandler() {
+    let checkGender = document.querySelectorAll('.radioinput');
+    for (let el of checkGender) {
+      if (el.checked === true) {
+        setGender(el.value);
+      }
+    }
+  }
+
+  function selectInputHandler(e, name) {
+    if (name === '나이') {
+      setAge(e.value);
+    } else if (name === '직무') {
+      setPosition(e.value);
+    } else if (name === '언어') {
+      const languageArr = e.map(el => {
+        return el.value;
+      });
+      setLanguage(languageArr);
+    }
+  }
+
+  async function emailVerify() {
+    let body = {
+      user_email: Email,
+    };
+    await customAxios
+      .post(`/email/req`, body)
+      .then(res => {
+        setAlertOpen(true);
+      })
+      .catch(err => {
+        if (err.message.includes(400)) {
+          setAlreadyExist(true);
+        }
+      });
+  }
+
+  function closeModal() {
+    setAlertOpen(false);
+    setSignUpFail(false);
+    setSignUpSuccess(false);
+    setAllVerified(false);
+    setEmailNotVerified(false);
+    setAlreadyExist(false);
+    setEmailUnverified(false);
+  }
   return (
     <>
-      <form onSubmit={e => onSubmitHandler(e)} className="signupform">
-        <label htmlFor="email">이메일</label>
-        <input
-          type="email"
-          id="email"
-          value={Email}
-          onChange={e => onEmailHandler(e)}
-          placeholder="이메일"
-        />
-
-        <br />
-        <label htmlFor="password">비밀번호</label>
-        <input
-          type="password"
-          id="password"
-          value={Password}
-          onChange={e => onPasswordHandler(e)}
-          placeholder="비밀번호"
-        />
-
-        <br />
-        <label htmlFor="confirmpassword">비밀번호 확인</label>
-        <input
-          type="password"
-          id="confirmpassword"
-          value={ConfirmPassword}
-          onChange={e => onConfirmPasswordHandler(e)}
-          placeholder="비밀번호 확인"
-        />
-
-        <br />
-        <label htmlFor="username">닉네임</label>
-        <input
-          type="text"
-          id="username"
-          value={Name}
-          onChange={e => onNameHandler(e)}
-          placeholder="닉네임"
-        />
-
-        <br />
-        <button type="submit">회원가입</button>
-      </form>
+      <div className="signupcontainer">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-4 col-md-12 col-lg-12">
+              <div className="signupwrapper">
+                {requiredTextInputData.map((el, idx) => {
+                  return (
+                    <TextInputGenderRequired
+                      key={`TextInputGenderRequired${idx}`}
+                      inputname={el[0]}
+                      detailString={el[1]}
+                      stateName={el[2]}
+                      stateFunc={el[3]}
+                      placeholder={el[4]}
+                      type={el[5]}
+                      isValid={el[6]}
+                      maxLength={el[7]}
+                      Email={Email}
+                      Email_isValid={Email_isValid}
+                      emailVerify={emailVerify}
+                      setEmailNotVerified={setEmailNotVerified}
+                    />
+                  );
+                })}
+                <Accordion
+                  radioInputHandler={radioInputHandler}
+                  selectInputHandler={selectInputHandler}
+                />
+                <AcessTerms setAllChecked={setAllChecked} />
+                <div
+                  className="signupbtn"
+                  onClick={e =>
+                    Email &&
+                    Password &&
+                    ConfirmPassword &&
+                    Name &&
+                    Email_isValid &&
+                    Pw_isValid &&
+                    Pw_confirm &&
+                    AllChecked
+                      ? postHandler()
+                      : setAllVerified(true)
+                  }
+                >
+                  회원가입
+                </div>
+                <AlertModal
+                  open={
+                    AlertOpen ||
+                    SignUpFail ||
+                    SignUpSuccess ||
+                    AllVerified ||
+                    EmailNotVerified ||
+                    AlreadyExist ||
+                    EmailUnverified
+                  }
+                  close={closeModal}
+                  alertString={
+                    AlertOpen
+                      ? '30분 이내로 확인해주세요.'
+                      : SignUpFail
+                      ? '회원가입에 실패하였습니다.'
+                      : SignUpSuccess
+                      ? '회원가입에 성공하였습니다.'
+                      : AllVerified
+                      ? '모든 것을 만족해야 합니다.'
+                      : EmailNotVerified
+                      ? '이메일 형식을 확인해주세요.'
+                      : AlreadyExist
+                      ? '이미 존재하는 회원입니다.'
+                      : EmailUnverified
+                      ? '이메일 인증이 필요합니다.'
+                      : ''
+                  }
+                  alertBtn="확인"
+                />
+                <div className="signupcontainer-footer" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {ModalOpen ? (
+        <SigninModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
+      ) : null}
     </>
   );
 }

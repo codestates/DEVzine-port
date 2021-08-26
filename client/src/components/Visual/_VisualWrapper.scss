@@ -1,0 +1,72 @@
+.visualcontainer {
+  background-color: $background;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+
+  &-footer {
+    height: 100px;
+    margin-bottom: 220px;
+  }
+
+
+      .visualwrapper {
+        margin: 0 auto;
+        @include column-flexbox;
+        margin-top: 192px;
+
+        @include mobile-only() {
+          margin-top: 110px;
+          width: 95%;
+        }
+        .chartcontainer{
+          @include column-flexbox;
+          @include responsive(D){
+            @include flexbox;
+            flex-direction: row;
+          }
+          .chartdesc{
+            position: relative;
+            margin-bottom: 40px;
+            width: 100%;
+            height: auto;
+            @include responsive(D){
+              margin: 0 20px;
+              width: 360px;
+            }
+            .chartsubject{
+              font-weight: $bold;
+              @include text-style(24, $dark);
+              margin-bottom: 10px;
+              @include responsive(D){
+                @include text-style(36, $dark);
+                margin-bottom: 20px;
+              }
+            }
+            .chartdetail{
+              @include text-style(12, $dark);
+              font-weight: normal;
+
+              @include responsive(D){
+                @include text-style(18, $dark);
+              }
+            }
+          } 
+          .chartwrapper {
+            @include flexbox;
+            background-color: $white;
+            position: relative;
+            border: 1px solid $border;
+            border-radius: 24px;
+            @include responsive(D){
+              background-color: $white;
+              position: relative;
+              border: 1px solid $border;
+              border-radius: 24px;
+            }
+          }
+        }
+      }
+
+}

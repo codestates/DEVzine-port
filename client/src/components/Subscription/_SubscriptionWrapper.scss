@@ -1,0 +1,119 @@
+.subscriptioncontainer {
+  background-color: $background;
+  min-height: 100vh;
+  position: relative;
+  text-align: center;
+  width: 100%;
+
+  @include mobile-only() {
+    height: 745px;
+    margin-bottom: 50px;
+  }
+
+  .subinnner {
+    @include pos-center;
+    margin-left: auto;
+    margin-right: auto;
+    top: 45%;
+    width: 100%;
+
+
+    @include mobile-only() {
+      max-width: 360px;
+      width: 86%;
+    }
+  }
+
+  .subtext {
+    @include text-style(24, $dark);
+    font-weight: $bold;
+    margin-bottom: 6px;
+
+    @include mobile-only() {
+      @include text-style(18, $dark);
+      font-size: 17px;
+    }
+  }
+
+  .subtextsmall {
+    @include text-style(16, $secondary);
+    margin-bottom: 8px;
+
+    @include mobile-only() {
+      margin-bottom: 8px;
+    }
+  }
+
+  .subtextsmall2 {
+    @include text-style(16, $secondary);
+    margin-top: 10px;
+  }
+}
+
+.nonesubinner {
+
+  .emailinput {
+    @extend %form-base;
+    height: 55px;
+    margin: 0 auto;
+    text-align: center;
+    width: 296px;
+
+    @include mobile-only() {
+      max-width: 296px;
+      width: 100%;
+    }
+  }
+
+  .emailalerttext {
+    color: $red;
+    height: 20px;
+    margin-bottom: 5px;
+
+    @include mobile-only() {
+      margin-bottom: 0;
+    }
+  }
+
+  .subemailbtn {
+    background-color: transparent;
+    max-width: 296px;
+    padding: 0;
+    width: 100%;
+  }
+
+  .commonbutton {
+    width: 296px;
+
+    @include mobile-only() {
+      max-width: 296px;
+      width: 100%;
+    }
+  }
+
+  .subjoinbox {
+    margin-top: 24px;
+    position: relative;
+
+    @include mobile-only() {
+      margin-top: 24px;
+    }
+
+    .subjoinbtn {
+      @include pos-center;
+      margin-top: 24px;
+      width: 100%;
+    }
+
+    .subtextsmall1 {
+      @include text-style(16, $dark);
+      font-weight: $bold;
+    }
+
+    .subtextsmall2 {
+      @include text-style(16, $dark);
+      margin-top: 5px;
+      padding-bottom: 70px;
+    }
+  }
+}

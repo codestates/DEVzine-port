@@ -1,0 +1,40 @@
+.contributionlistwrapper {
+  background-color: $background;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+
+  .articlebox {
+    margin-top: 192px;
+
+    @include mobile-only() {
+      margin-top: 120px;
+    }
+
+    .prebox {
+      height: 30px;
+    }
+
+    .prebtn {
+      color: $border;
+      float: right;
+      font-weight: $bold;
+      margin: 0;
+      margin-bottom: 10px;
+
+      &:hover {
+        color: $yellow-dark;
+      }
+    }
+
+    &-listbox {
+      background-color: $yellow-light;
+      border: 0;
+    }
+
+    &-keyword {
+      @include text-style(13, $yellow-light);
+      background-color: $dark;
+    }
+  }
+}

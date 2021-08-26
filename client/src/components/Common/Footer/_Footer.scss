@@ -1,0 +1,118 @@
+.footercontainer {
+  background-color: $white;
+  border-top: 1px solid $background;
+  clear: both;
+  color: $dark;
+  height: 220px;
+  margin-top: -220px;
+  position: relative;
+
+  .footerinner {
+    margin: 0 auto;
+    padding-top: 36px;
+    position: relative;
+
+    @include responsive(D) {
+      width: 1120px;
+    }
+  }
+}
+
+.footerright {
+  text-align: center;
+
+  @include responsive(T) {
+    left: 0;
+    position: absolute;
+    text-align: left;
+    width: 510px;
+  }
+
+  .cstitle {
+    font-size: 14px;
+    font-weight: $bold;
+    margin-bottom: 6px;
+
+    img {
+      margin-left: 2px;
+    }
+  }
+
+  .cscontact {
+    font-size: 24px;
+    font-weight: $bold;
+    margin-bottom: 6px;
+
+    @include mobile-only() {
+      font-size: 20px;
+    }
+  }
+
+  .csworktime {
+    font-size: 14px;
+    font-weight: $normal;
+
+    @include mobile-only() {
+      font-size: 12px;
+    }
+  }
+
+  .okteam1 {
+    color: $secondary;
+    font-size: 14px;
+    padding-top: 24px;
+
+    @include mobile-only() {
+      font-size: 12px;
+    }
+
+    a {
+      margin: 3px;
+    }
+
+    span {
+      cursor: pointer;
+      margin: 3px;
+    }
+  }
+
+  .okteam2 {
+    color: $secondary;
+    font-size: 14px;
+    padding-top: 6px;
+
+    @include mobile-only() {
+      font-size: 12px;
+    }
+
+    a {
+      margin: 3px;
+    }
+  }
+}
+
+.footerleft {
+  font-size: 18px;
+  font-weight: $bold;
+  position: absolute;
+  right: 0;
+  width: 265px;
+
+  div {
+    cursor: pointer;
+    height: 35px;
+    margin-bottom: 12px;
+    position: relative;
+
+    img {
+      bottom: 0;
+      left: 0;
+      position: absolute;
+    }
+  }
+}
+
+.line-height {
+  display: inline-block;
+  padding-top: 6px;
+}

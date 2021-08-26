@@ -1,0 +1,14 @@
+.inputlarge {
+  width: 296px;
+  height: 55px;
+  background: $white;
+  border: 1px solid $border;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.inputlarge::placeholder {
+  font-weight: normal;
+  @include text-style-16;
+  color: $border;
+}

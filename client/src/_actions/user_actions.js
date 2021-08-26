@@ -1,15 +1,15 @@
-import axios from 'axios';
-import { SIGNIN_USER, SIGNUP_USER, SIGNOUT_USER } from './types';
+import { SIGNIN_USER, SIGNOUT_USER, MYPAGE_USER, DELETE_USER } from './types';
+import { customAxios } from '../utils/customAxios';
 
-const END_POINT = process.env.REACT_APP_API_URL;
-
-export function signinUser(dataToSubmit) {
-  const request = axios
-    .post(`${END_POINT}/signin`, dataToSubmit)
-    .then(res => [res.data.message, dataToSubmit.user_email]);
-  //! axios
-  // .then(res => [res.data.message, dataToSubmit.user_email]);
-  // .then(res => ['Login success', dataToSubmit.user_email]);
+// 로그인
+export async function signinUser(dataToSubmit) {
+  const request = await customAxios
+    .post(`/user/signin`, dataToSubmit)
+    .then(res => [
+      res.data.message,
+      res.data.data.user_name,
+      res.data.data.user_email,
+    ]);
 
   return {
     type: SIGNIN_USER,
@@ -17,27 +17,35 @@ export function signinUser(dataToSubmit) {
   };
 }
 
-export function signupUser(dataToSubmit) {
-  const request = axios
-    .post(`${END_POINT}/signup`, dataToSubmit)
+// 로그아웃(state 초기화)
+export async function signoutUser() {
+  const request = await customAxios
+    .post(`/user/signout`)
     .then(res => res.data.message);
-  //! axios
-  // .then(res => res.data.message);
-  // .then(res => 'User created');
 
   return {
-    type: SIGNUP_USER,
+    type: SIGNOUT_USER,
     payload: request,
   };
 }
 
-export function signoutUser() {
-  const request = axios
-    .post(`${END_POINT}/signout`)
+// 마이페이지
+export async function mypageUser(dataToSubmit) {
+  const request = await customAxios
+    .patch(`/mypage`, dataToSubmit)
+    .then(res => ['Login success', res.data.data.user_name, res.data.message]);
+
+  return {
+    type: SIGNIN_USER,
+    payload: request,
+  };
+}
+
+// 회원탈퇴(state 초기화)
+export async function deleteUser() {
+  const request = await customAxios
+    .delete(`/user/delete`)
     .then(res => res.data.message);
-  //! axios
-  // .then(res => res.data.message);
-  // .then(res => 'Logout success');
 
   return {
     type: SIGNOUT_USER,

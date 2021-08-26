@@ -1,0 +1,200 @@
+.common-footer {
+  height: 100px;
+  margin-bottom: 220px; 
+
+  @include mobile-only() {
+    margin-bottom: 154px;
+  }
+}
+
+.admin {
+  background-color: $yellow;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+
+  &-footer {
+    height: 100px;
+    margin-bottom: 220px;
+
+    @include mobile-only() {
+      margin-bottom: 40px;
+    }
+  }
+}
+
+.request {
+  margin-top: 192px;
+
+  &-form {
+    border-bottom: 1px solid $yellow-dark;
+    border-top: 1px solid $yellow-dark;
+    height: 60px;
+    margin-top: 10px;
+    padding-top: 8px;
+    position: relative;
+    width: 100%;
+  }
+
+  &-select {
+    @extend %form-base;
+    background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.64645 4.14645C2.84171 3.95118 3.15829 3.95118 3.35355 4.14645L6 6.79289L8.64645 4.14645C8.84171 3.95118 9.15829 3.95118 9.35355 4.14645C9.54882 4.34171 9.54882 4.65829 9.35355 4.85355L6.35355 7.85355C6.15829 8.04882 5.84171 8.04882 5.64645 7.85355L2.64645 4.85355C2.45118 4.65829 2.45118 4.34171 2.64645 4.14645Z' fill='%23b2b3b9'/%3E%3C/svg%3E%0A")
+      no-repeat 97% 50%;
+    background-color: $white;
+    border-color: $yellow-dark;
+    color: $dark;
+    left: 0;
+    position: absolute;
+    width: 15%;
+
+    option {
+      color: $dark;
+    }
+  }
+
+  &-text {
+    @extend %form-base;
+    border-color: $yellow-dark;
+    color: $dark;
+    left: 16%;
+    position: absolute;
+    width: 70%;
+  }
+
+  &-search {
+    @extend %form-base;
+    background-color: $yellow-dark;
+    border-color: $yellow-dark;
+    color: $dark;
+    left: 87%;
+    line-height: 21px;
+    position: absolute;
+    width: 13%;
+
+    &:hover {
+      background-color: #FFBB34;
+      font-weight: $bold;
+    }
+  }
+}
+
+
+.approval {
+  margin-top: 60px;
+
+  &-form {
+    border-bottom: 1px solid $yellow-dark;
+    border-top: 1px solid $yellow-dark;
+    height: 60px;
+    margin-top: 10px;
+    padding-top: 8px;
+    position: relative;
+    width: 100%;
+  }
+
+  &-text {
+    @extend %form-base;
+    border-color: $yellow-dark;
+    color: $dark;
+    left: 0;
+    position: absolute;
+    width: 85%;
+  }
+
+  &-search {
+    @extend %form-base;
+    background-color: $yellow-dark;
+    border-color: $yellow-dark;
+    color: $dark;
+    left: 87%;
+    line-height: 21px;
+    position: absolute;
+    width: 13%;
+
+    &:hover {
+      background-color: #FFBB34;
+      font-weight: $bold;
+    }
+  }
+
+  &-title {
+    cursor: pointer;
+  }
+}
+
+.request-sub,
+.approval-sub {
+  @include text-style(16, $dark);
+  font-weight: $normal;
+  margin-left: 12px;
+}
+
+table {
+  border-collapse: collapse;
+  margin-top: 12px;
+  width: 100%;
+}
+
+th,
+td {
+  background-color: $white;
+  border: 1px solid $dark;
+  height: 20px;
+  padding: 0.5rem;
+}
+
+th {
+  &:first-child {
+    text-align: left;
+    width: 10%;
+  }
+
+  &:nth-child(2) {
+    text-align: left;
+  }
+
+  &:nth-child(3) {
+    width: 80px;
+  }
+
+  &:nth-child(4) {
+    padding-left: 16px;
+    text-align: left;
+    width: 250px;
+  }
+}
+
+td {
+  &:nth-child(2) {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.adminform {
+  &-check {
+    display: inline-block;
+    margin-left: 16px;
+
+    &-label {
+      display: inline-block;
+      margin-left: 8px;
+      margin-top: 8px;
+    }
+  }
+
+  &-btn {
+    @include text-style(16, $dark);
+    background-color: $background;
+    border: 1px solid $border;
+    border-radius: 24px;
+    height: 30px;
+    margin-left: 16px;
+    width: 70px;
+
+    &:hover {
+      background-color: $border;
+    }
+  }
+}

@@ -1,0 +1,145 @@
+.optcontentswrapper {
+  padding: 2px;
+  margin-top: 0 auto;
+  width: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+
+  .radiowrapper {
+    margin-top: 0px;
+  }
+
+  .contributionstatuscontainer {
+    margin: 24px 0;
+    width: 100%;
+    height: auto;
+    min-height: 115px;
+    .subject {
+      display: flex;
+      .subjectwrapper {
+        font-weight: bold;
+        @include text-style(16, $dark);
+        width: 95.89px;
+        margin-bottom: 8px;
+      }
+      .btndesc {
+        width: 254.11px;
+        @include text-style-12;
+        font-weight: $lighter;
+        @include flexbox;
+        margin-bottom: 8px;
+      }
+    }
+    .contributionstatustable {
+      width: 100%;
+      overflow: hidden;
+      height: auto;
+      background: $white;
+      border: 1px solid $border;
+      border-right: 1px solid $border;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      @include mobile-only() {
+        max-width: 320px;
+        width:100%;
+      }
+      .contributionstatuslist {
+        // width: 360px;
+        width: 100%;
+        height: auto;
+        background: $white;
+        display: flex;
+        
+        .tableheader {
+          @include flexbox;
+          width: 15%;
+          height: 40px;
+          border-right: 1px solid $border;
+          border-bottom: 1px solid $border;
+
+
+
+          .updatebtn {
+            width: 20px;
+            height: 20px;
+          }
+          .deletebtn {
+            width: 20px;
+            height: 20px;
+          }
+        }
+        .tableheader.first {
+          padding-left: 8px;
+          width: 55%;
+          justify-content: flex-start;
+
+
+        }
+        .tableheader.last {
+          border-right: 0px solid;
+          width: 15%;
+
+
+         
+        }
+        .tablecontent {
+          @include flexbox;
+          width: 15%;
+          height: 30px;
+          border-right: 1px solid $border;
+          border-bottom: 1px solid $border;
+          font-weight: normal;
+
+
+
+          @include text-style(14, $dark);
+          .updatebtn {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+          }
+          .deletebtn {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+          }
+        }
+        .tablecontent.first {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          word-break: break-all;
+          display: -webkit-box;
+          // height: $line-height-13;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+
+          overflow: hidden;
+          text-overflow: ellipsis;
+          padding-left: 8px;
+          width: 55%;
+          justify-content: flex-start;
+
+          a{
+            text-decoration: underline;
+          }
+        }
+
+        .tablecontent.last {
+          border-right: 0px solid;
+          @include column-flexbox; 
+          font-size: 10px;
+          line-height: 14px;
+          width: 15%;
+
+        }
+      }
+    }
+    .contributionstatustable > li:last-child {
+      .tablecontent {
+        border-bottom: 0px solid;
+      }
+    }
+  }
+}

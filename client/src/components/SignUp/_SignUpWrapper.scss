@@ -1,0 +1,66 @@
+.signupcontainer {
+  background-color: $background;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+
+  &-footer {
+    height: 100px;
+    margin-bottom: 220px;
+
+    @include mobile-only() {
+      margin-bottom: 160px;
+    }
+  }
+
+  .signupwrapper {
+    margin: 0 auto;
+    @include column-flexbox;
+    margin-top: 192px;
+    width: 360px;
+
+    @include mobile-only() {
+      margin-top: 110px;
+      max-width: 360px;
+      width: 95%;
+    }
+    .signupbtn {
+      margin-top: 34px;
+      @include flexbox;
+      width: 264px;
+      height: 54px;
+      background: #191a20;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 28px;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .commonbutton {
+      font-weight: $normal;
+      margin-top: 24px;
+    }
+    .btnwrapper{
+      padding: 0 40px;  
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+
+      @include mobile-only() {
+        padding: 0 20px;  
+      }
+      .yesornobtn{
+        background-color: $border;
+        border-radius: 8px;
+        cursor: pointer;
+        @include text-style(18, $dark);
+        font-weight: $bold;
+        height: 55px;
+        margin-top: 16px;
+        width: 100px;
+      }
+    }
+  }
+}

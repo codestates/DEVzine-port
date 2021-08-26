@@ -1,0 +1,218 @@
+.articlecontainer {
+  background-color: $background;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+
+  &-footer {
+    height: 100px;
+    margin-bottom: 220px;
+
+    @include mobile-only() {
+      margin-bottom: 160px;
+    }
+  }
+
+  .articleviewwrapper {
+    color: $dark;
+
+    .header {
+      margin-top: 192px;
+      background-color: $white;
+      position: relative;
+      min-height: 120px;
+      border: 1px solid $border;
+      border-radius: 24px 24px 0 0;
+      padding-left:20px;
+      width:100%;
+
+      @include mobile-only() {
+        margin-top: 120px;
+      }
+   
+
+      .headerleft {
+        padding-top: 24px;
+
+        @include mobile-only() {
+          padding-top: 20px;
+        }
+
+        .keyword {
+          @include text-style-12;
+          display: inline-block;
+          padding: 0 12px 0px 12px;
+          line-height: 18px;
+          height: 22px;
+          border: 1px solid $dark;
+          margin-bottom: 8px;
+          border-radius: 70px;
+          font-weight: $bold;
+
+          @include mobile-only() {
+            margin-bottom: 4px;
+            line-height: 20px;
+          }
+        }
+
+        .title {
+          @include text-style-24;
+          font-weight: $bold;
+          margin-bottom: 8px;
+          padding-right: 20px;
+
+          @include mobile-only() {
+            @include text-style-18;
+            margin-bottom: 0;
+            padding-right: 20px;
+          }
+        }
+
+        .username {
+          @include text-style-14;
+          font-weight: $bold;
+          margin-bottom: 18px;
+          position: relative;
+
+       
+        }
+      }
+
+      .backbtn {
+        width: 37px;
+        height: 37px;
+        position: absolute;
+        top: 11px;
+        right: 23px;
+        cursor: pointer;
+      }
+
+      .datawrapper {
+        position: absolute;
+        right: 23px;
+
+        @include mobile-only() {
+          position: static;
+          margin-top: 4px;
+        }
+
+        @include text-style-14;
+        font-weight: $bold;
+        color: $tertiary;
+        text-align: right;
+        padding-right: 1px;
+
+        .data {
+          font-weight: $normal;
+          margin: 0 4px;
+        }
+
+        @include mobile-only() {
+          clear: both;
+          text-align: left;
+          line-height: 18px;
+          height: 18px;
+          width: 100%;
+        }
+     
+      }
+    }
+
+    .body {
+      background-color: $white;
+      position: relative;
+      padding: 24px;
+      width: 100%;
+      min-height: 500px;
+      height: auto;
+      border: 1px solid $border;
+      border-top: 0 solid;
+      border-radius: 0 0 24px 24px;
+
+      @include mobile-only() {
+        min-height: 400px;
+      }
+
+      .contents {
+        @include text-style-18;
+        word-break: break-all;
+
+        @include mobile-only() {
+          @include text-style-16;
+        }
+      }
+
+      .layer {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        min-height: 423px;
+        background: linear-gradient(
+          -360deg,
+          rgba(242, 242, 242, 0) 0%,
+          rgba(242, 242, 242, 0.7) 20%,
+          rgba(242, 242, 242, 0.9) 50%,
+          rgba(242, 242, 242, 0.95) 70%,
+          rgba(242, 242, 242, 1) 100%
+        );
+        border-radius: 24px 24px 0px 0px;
+        transform: rotate(180deg);
+
+        @include mobile-only() {
+          min-height: 400px;
+        }
+      }
+
+      .invitation {
+        width: 240px;
+        @include pos-center-x;
+        bottom: 170px;
+        font-weight: $normal;
+        @include text-style(14, $dark);
+        text-align: center;
+        @include mobile-only() {
+          bottom: 140px;
+          @include text-style(13, $dark);
+          text-align: center;
+        }
+      }
+
+      .commonbutton {
+        @include pos-center-x;
+        bottom: 100px;
+
+        @include mobile-only() {
+          width:85%;
+          bottom: 70px;
+        }
+      }
+    }
+  }
+}
+
+.line-spacing{
+  padding-right: 5px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+
+
+.ell-24-view {
+  width:100%;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   word-wrap: break-word;
+   display: -webkit-box;
+   -webkit-line-clamp: 1;
+   -webkit-box-orient: vertical;
+ 
+   height: $line-height-24;
+
+   @include mobile-only() {
+    height: $line-height-18;
+  }
+   
+ }
+ 

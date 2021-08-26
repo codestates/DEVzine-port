@@ -1,5 +1,5 @@
 # 📰 DEVzine:port
-> 개발하는 당신을 위한 얕고 넓은 지식, DEVzine:port 입니다.
+> IT 트렌드를 찾는 당신을 위한 매거진, DEVzine
 
 >client : https://www.devzine-port.com/  
 >server : https://devzine-port-server.com/

@@ -1,0 +1,101 @@
+.contributioncontainer {
+  background-color: $background;
+  min-height: 100vh;
+  position: relative;
+  text-align: center;
+  width: 100%;
+
+  .continner {
+    margin: 0 auto;
+    margin-top: 192px;
+    width: 360px;
+
+    @include mobile-only() {
+      margin-top: 110px;
+      max-width: 360px;
+      width: 95%;
+    }
+  }
+}
+
+.context {
+  @include text-style(24, $dark);
+  font-size: 23px;
+  font-weight: $bold;
+
+  @include mobile-only() {
+    @include text-style(18, $dark);
+    font-size: 17px;
+  }
+}
+
+.contextsmall {
+  @include text-style(16, $secondary);
+  margin-bottom: 28px;
+  margin-top: 6px;
+}
+
+label {
+  @include text-style(16, $dark);
+  display: block;
+  font-weight: $bold;
+  margin-bottom: 8px;
+  margin-top: 24px;
+  text-align: left;
+
+  @include mobile-only() {
+    width: 100%;
+  }
+
+  span {
+    color: $yellow-dark;
+  }
+}
+
+.signinform {
+  .conselect {
+    @extend %form-base;
+    background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.64645 4.14645C2.84171 3.95118 3.15829 3.95118 3.35355 4.14645L6 6.79289L8.64645 4.14645C8.84171 3.95118 9.15829 3.95118 9.35355 4.14645C9.54882 4.34171 9.54882 4.65829 9.35355 4.85355L6.35355 7.85355C6.15829 8.04882 5.84171 8.04882 5.64645 7.85355L2.64645 4.85355C2.45118 4.65829 2.45118 4.34171 2.64645 4.14645Z' fill='%23b2b3b9'/%3E%3C/svg%3E%0A")
+      no-repeat 97% 50%;
+    background-color: $white;
+
+    option {
+      color: $dark;
+    }
+  }
+
+  .contitle {
+    @extend %form-base;
+  }
+
+  .contextarea {
+    @extend %form-base;
+    height: 200px;
+    margin-bottom: 24px;
+    resize: none;
+
+    @include mobile-only() {
+      margin-bottom: 16px;
+    }
+  }
+
+  .contributionbtn {
+    background-color: transparent;
+  }
+}
+
+.textlength {
+  color: $border;
+  float: right;
+  text-align: right;
+}
+
+.active {
+  color: $yellow-dark;
+}
+
+.linefeed {
+  @include text-style(14, $tertiary);
+  font-weight: normal;
+  margin-top: 4px;
+}

@@ -1,0 +1,61 @@
+.inputsmallcontainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: inherit;
+  width: 100%;
+  height: 72px;
+  margin-bottom: 24px;
+
+  .subjectwrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    color: #191a20;
+    margin-bottom: 8px;
+
+    .required {
+      color: #ffc803;
+    }
+
+    .emailverifybtn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      border-radius: 2px;
+      color: $border;
+      font-weight: $bold;
+      cursor: pointer;
+
+      &:hover {
+        color: $yellow-dark;
+        font-weight: $bold;
+      }
+    }
+  }
+
+  .inputsmall {
+    @extend %form-base;
+    width: 100%;
+    height: 40px;
+    background: $white;
+    border: 1px solid $border;
+    border-radius: 8px;
+  }
+
+  .isvalidindicator {
+    color: red;
+    position: absolute;
+    left: 0;
+    margin-top: 80px;
+    margin-left: 5px;
+    font-size: 12px;
+    @include mobile-only() {
+      font-size: 10px;
+    }
+  }
+}

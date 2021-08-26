@@ -1,0 +1,42 @@
+// scss-lint:disable all
+// className으로 반응형 제작
+
+.sm-only {
+  @media screen and (min-width: $md-breakpoint) {
+    display: none !important;
+  }
+}
+
+.md-only {
+  @media screen and (max-width: $md-breakpoint - 1) {
+    display: none !important;
+  }
+
+  @media screen and (min-width: $lg-breakpoint) {
+    display: none !important;
+  }
+}
+
+.lg-only {
+  @media screen and (max-width: $lg-breakpoint - 1) {
+    display: none !important;
+  }
+}
+
+.sm-hidden {
+  @media screen and (max-width: $md-breakpoint - 1) {
+    display: none !important;
+  }
+}
+
+.md-hidden {
+  @media screen and (min-width: $md-breakpoint) and(max-width: $lg-breakpoint - 1) {
+    display: none !important;
+  }
+}
+
+.lg-hidden {
+  @media screen and (min-width: $lg-breakpoint) {
+    display: none !important;
+  }
+}

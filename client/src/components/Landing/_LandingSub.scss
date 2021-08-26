@@ -1,0 +1,84 @@
+.landinglast {
+  background-color: $dark;
+  height: 570px;
+  position: relative;
+  top: 0;
+  width: 100%;
+}
+
+.withuscontainer {
+  color: $white;
+  font-size: 20px;
+  margin-top: 50px;
+  text-align: center;
+  width: 100%;
+
+  @include mobile-only() {
+    font-size: 14px;
+    margin-top: 40px;
+  }
+
+  h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+
+    @include mobile-only() {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+  }
+
+  p {
+    font-size: 20px;
+    margin-top: 50px;
+
+    @include mobile-only() {
+      font-size: 14px;
+      margin-top: 30px;
+    }
+  }
+}
+
+.landingbottombtn {
+  display: block;
+  margin: 0 auto;
+  position: relative;
+
+  @include responsive(T) {
+    display: block;
+    position: relative;
+    width: 550px;
+
+    div {
+      width: 265px;
+    }
+
+    div:nth-child(1) {
+      width: 265px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    div:nth-child(2) {
+      width: 265px;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  div {
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  .commonbutton {
+    margin-top: 0;
+  }
+}
+
+.adminbottombtn {
+  margin-top: 12px;
+  cursor: pointer;
+}

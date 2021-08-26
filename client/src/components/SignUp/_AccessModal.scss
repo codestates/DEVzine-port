@@ -1,0 +1,80 @@
+.acc-modalcontainer {
+  position:fixed;
+  height: 15rem;
+  margin: 120px auto;
+  // text-align: center;
+  z-index: 720;
+
+  .modalbackdrop {
+    @include flexbox;
+    background-color: rgba(0, 0, 0, 0.4);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 200;
+
+    .modalview {
+      background-color: $white;
+      border-radius: 20px;
+      height: 600px;
+      position: relative;
+      width: 600px;
+      padding:20px;
+      // border:1px solid red;
+
+      @include mobile-only() {
+        // margin-top: 162px;
+        // max-width: 360px;
+        border-radius: 0;
+        height: 100%;
+        width: 100%;
+        padding: 30px;
+      }
+    }
+  }
+
+  .desc {
+    @include pos-center;
+    @include text-style(14, $dark);
+    // font-weight: $bold;
+    width: 95%;
+    position:absolute;
+    top:260px;
+    left: 310px;
+    // bottom: 0;
+    // border: 1px solid red;
+    overflow-y: scroll;
+    height:80%;    
+
+    @include mobile-only() {
+      top:45%;
+      left:50%;
+      height:70%;
+      // width:100%;
+    }
+  }
+
+  .closebtn {
+    @include pos-center;
+    background-color: $border;
+    border-radius: 8px;
+    color: $dark;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: $bold;
+    height: 55px;
+    // margin-top: 16px;
+    width: 265px;
+    // border: 1px solid red;
+    top: 550px;
+
+    @include mobile-only() {
+      max-width: 265px;
+      width: 90%;
+      top: 90%;
+    }
+  }
+}
+

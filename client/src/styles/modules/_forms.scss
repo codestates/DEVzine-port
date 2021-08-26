@@ -1,0 +1,23 @@
+// 사용예시 : @extend %form-base;
+
+%form-base {
+  @include text-style(16, $primary);
+  appearance: none;
+  background-color: $white;
+  border: 1px solid $border;
+  border-radius: 8px;
+  color: $secondary;
+  display: block;
+  height: 40px;
+  padding: 8px 14px;
+  text-overflow: ellipsis;
+  width: 100%;
+
+  &::placeholder {
+    color: $secondary;
+  }
+}
+
+select::-ms-expand {
+  display: none;
+}

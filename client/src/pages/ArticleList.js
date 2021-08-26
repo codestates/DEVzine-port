@@ -1,11 +1,10 @@
 import React from 'react';
-import ArticleViewWrapper from '../components/ArticleList/ArticleListWrapper';
+import ArticleListWrapper from '../components/ArticleList/ArticleListWrapper';
 
 function ArticleList() {
   return (
     <>
-      ArticleList
-      <ArticleViewWrapper />
+      <ArticleListWrapper />
     </>
   );
 }
