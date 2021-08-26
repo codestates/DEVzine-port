@@ -18,7 +18,6 @@ function SideBar(props) {
   // 로그인 확인
   useEffect(() => {
     const request = Auth(true);
-    console.log(request);
 
     if (request !== 'Login need' && request !== 'Admin login success') {
       props.setSignIn(true);

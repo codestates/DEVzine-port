@@ -161,6 +161,10 @@ function ContributionWrapper() {
                       >
                         ( {Content.length} / 200 이상 )
                       </p>
+                      <div className="linefeed">
+                        줄바꿈은 '\n'과 '. '을 넣으면 할 수 있습니다.
+                        <br /> 단, '. '넣을 경우 '.사라지고 줄바꿈'됩니다.
+                      </div>
                     </label>
 
                     <textarea
