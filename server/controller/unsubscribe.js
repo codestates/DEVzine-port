@@ -1,5 +1,5 @@
 const { Subscriber } = require('../Models/Subscribers');
-const { User } = require('../Models/User');
+const { User } = require('../Models/Users');
 
 module.exports = {
   unsubscribe: async (req, res) => {
@@ -16,13 +16,16 @@ module.exports = {
         });
       }
 
-      const user = await User.findOneAndUpdate({
-        user_email: subscriber_email
-      }, {
-        $set: {
-          subscribed: false
-        }
-      });
+      const user = await User.findOneAndUpdate(
+        {
+          user_email: subscriber_email,
+        },
+        {
+          $set: {
+            subscribed: false,
+          },
+        },
+      );
 
       if (!user) {
         return res.status(400).json({
