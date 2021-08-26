@@ -3,6 +3,10 @@
 ![main_land](https://user-images.githubusercontent.com/40759230/130906658-8e8f7b6a-4c71-4041-82ad-f11cb56f4f56.gif)
 >client : https://www.devzine-port.com/  
 >server : https://devzine-port-server.com/
+
+# 🛠 Flow Chart
+<center><img src="https://user-images.githubusercontent.com/81145387/130911258-e46f5b97-59e1-472a-9182-feedddf81c1f.jpg" width="700"></center>
+
 # 👤 Team
 <table>
     <tr>
