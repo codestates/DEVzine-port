@@ -1,4 +1,5 @@
 const { Subscriber } = require('../Models/Subscribers');
+const { User } = require('../Models/User');
 
 module.exports = {
   unsubscribe: async (req, res) => {
@@ -10,6 +11,20 @@ module.exports = {
       });
 
       if (!unsubcriber) {
+        return res.status(400).json({
+          message: 'User does not exist',
+        });
+      }
+
+      const user = await User.findOneAndUpdate({
+        user_email: subscriber_email
+      }, {
+        $set: {
+          subscribed: false
+        }
+      });
+
+      if (!user) {
         return res.status(400).json({
           message: 'User does not exist',
         });

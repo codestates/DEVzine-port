@@ -23,7 +23,7 @@ function AdminWrapper() {
   const [AlertOpen, setAlertOpen] = useState(false);
 
   /*
-  승인요청 - 게시대기(100), 게시승인(110), 게시거부(120)
+  게시요청 - 게시대기(100), 게시승인(110), 게시거부(120)
   수정요청 - 수정대기(101), 수정승인(111), 수정거부(121)
   삭제요청 - 삭제대기(102), 삭제승인(112), 삭제거부(122)
   */
@@ -121,7 +121,7 @@ function AdminWrapper() {
                   <h2>
                     요청
                     <span className="request-sub">
-                      승인, 수정, 삭제 요청을 확인할 수 있고, 승인하거나 거부할
+                      게시, 수정, 삭제 요청을 확인할 수 있고, 승인하거나 거부할
                       수 있습니다.
                     </span>
                   </h2>
@@ -159,9 +159,9 @@ function AdminWrapper() {
                 </div>
                 <div className="approval">
                   <h2>
-                    승인
+                    게시
                     <span className="approval-sub">
-                      승인 처리된 소식을 볼 수 있으며, 이 소식들은 추천 소식으로
+                      게시된 소식을 볼 수 있으며, 이 소식들은 추천 소식으로
                       보여집니다.
                     </span>
                   </h2>
