@@ -11,16 +11,24 @@
 <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
 <img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white">
 <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
-<img src="https://img.shields.io/badge/redux-61DAFB?style=for-the-badge&logo=redux&logoColor=white">
+<img src="https://img.shields.io/badge/redux-4169E1?style=for-the-badge&logo=redux&logoColor=white">
 <img src="https://img.shields.io/badge/sass-FA8072?style=for-the-badge&logo=sass&logoColor=white">
-<img src="https://img.shields.io/badge/threejs-000000?style=for-the-badge&logo=threejs&logoColor=white">
-<img src="https://img.shields.io/badge/apexchart-4682B4?style=for-the-badge&logo=apexchart&logoColor=white">  
+<img src="https://img.shields.io/badge/three.js-000000?style=for-the-badge&logo=three.js&logoColor=white">
+<img src="https://img.shields.io/badge/apexchart-4682B4?style=for-the-badge&logo=apex%20chart&logoColor=white">  
   
 ### Backend
 <img src="https://img.shields.io/badge/passport-232F3E?style=for-the-badge&logo=passport&logoColor=white"> <img src="https://img.shields.io/badge/redis-800000?style=for-the-badge&logo=redis&logoColor=white">
+<img src="https://img.shields.io/badge/node.js-228B22?style=for-the-badge&logo=node.js&logoColor=white">
+<img src="https://img.shields.io/badge/express-006400?style=for-the-badge&logo=express&logoColor=white">
+<img src="https://img.shields.io/badge/json%20web%20tokens-8A2BE2?style=for-the-badge&logo=json%20web%20tokens&logoColor=white">
+<img src="https://img.shields.io/badge/mongodb-32CD32?style=for-the-badge&logo=mongodb&logoColor=white">
+<img src="https://img.shields.io/badge/nodemailer-1E90FF?style=for-the-badge&logo=nodemailer&logoColor=white">
+<img src="https://img.shields.io/badge/nodeschedule-C71585?style=for-the-badge&logo=nodeschedule&logoColor=white">
+<img src="https://img.shields.io/badge/cheerio-4682B4?style=for-the-badge&logo=cheerio&logoColor=white">
+
 
 ### Deploy
-<img src="https://img.shields.io/badge/aws-232F3E?style=for-the-badge&logo=aws&logoColor=white"> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> 
+<img src="https://img.shields.io/badge/amazon%20AWS-232F3E?style=for-the-badge&logo=amazon%20AWS&logoColor=white"> <img src="https://img.shields.io/badge/mongodb%20atlas-32CD32?style=for-the-badge&logo=mongodb&logoColor=white">
 
 # 👤 Team
 <table>
