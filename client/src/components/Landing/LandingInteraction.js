@@ -112,14 +112,7 @@ function LandingInteraction() {
     <div className="landinginteractioncontainer">
       <div className="textwrapper stopdragging">
         <div className="description">
-          <div className="sm-only">
-            개발하는 당신을 위한
-            <br />
-            얕고 넓은 지식을 담은 매거진
-          </div>
-          <div className="sm-hidden">
-            개발하는 당신을 위한 얕고 넓은 지식을 담은 매거진
-          </div>
+          <div>IT 트렌드를 찾는 당신을 위한 매거진</div>
         </div>
         <div className="subject">DEVzine</div>
       </div>
