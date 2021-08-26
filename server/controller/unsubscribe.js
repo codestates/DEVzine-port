@@ -6,11 +6,11 @@ module.exports = {
     try {
       const { subscriber_email } = req.body;
 
-      const unsubcriber = await Subscriber.findOneAndDelete({
+      const unsubscriber = await Subscriber.findOneAndDelete({
         subscriber_email,
       });
 
-      if (!unsubcriber) {
+      if (!unsubscriber) {
         return res.status(400).json({
           message: 'User does not exist',
         });
