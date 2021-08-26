@@ -101,7 +101,7 @@ mongoose
   .then(() => console.log(`mongoDB connected`))
   .catch(err => console.error(err));
 
-const HTTPS_PORT = process.env.HTTPS_PORT || 8080;
+const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 let server;
 if (fs.existsSync('./key.pem') && fs.existsSync('./cert.pem')) {
   const privateKey = fs.readFileSync(__dirname + '/key.pem', 'utf8');
