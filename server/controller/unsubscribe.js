@@ -26,13 +26,7 @@ module.exports = {
           },
         },
       );
-
-      if (!user) {
-        return res.status(400).json({
-          message: 'User does not exist',
-        });
-      }
-
+      
       res.status(200).send({ message: 'unsubscription success' });
     } catch (error) {
       console.log(error);
