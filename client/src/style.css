@@ -1190,6 +1190,7 @@ td:nth-child(2):hover {
       margin-top: 12px; }
       @media screen and (max-width: 767px) {
         .landinginteractioncontainer .textwrapper .subject {
+          height: 50px;
           font-size: 40px;
           margin-top: 0; } }
 

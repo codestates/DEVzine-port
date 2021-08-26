@@ -107,10 +107,10 @@ function ContributionWrapper() {
                   <div className="context">
                     {UserName}님의
                     <br />
-                    얕고 넓은 지식을 기고해보세요.
+                    IT 지식을 기고해보세요.
                   </div>
                   <div className="contextsmall">
-                    심사 후에 기고되며,
+                    심사 후에 게시되며,
                     <br />
                     기고 관리는 마이페이지에 할 수 있어요.
                   </div>
