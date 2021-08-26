@@ -152,7 +152,7 @@ export function ArticlesKeyword({ data }) {
           무엇일까?
         </div>
         <div className="chartdetail">
-          전월 한 달의 핵심 키워드를 <br />
+          최근 한 달의 핵심 키워드를 <br />
           알아볼 수 있어요.
         </div>
       </div>

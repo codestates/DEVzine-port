@@ -139,8 +139,7 @@ export function ArticlesTopHit({ data }) {
           <br /> 무엇일까?
         </div>
         <div className="chartdetail">
-          DEVzine이 시작한 날부터 <br />
-          바로 전일까지 기준으로 <br />
+          최근 한 달 기준으로 <br />
           가장 많이 본 소식을 알아볼 수 있어요.
         </div>
       </div>
