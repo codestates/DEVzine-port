@@ -1,5 +1,5 @@
 const { Subscriber } = require('../Models/Subscribers');
-const { User } = require('../Models/User');
+const { User } = require('../Models/Users');
 
 module.exports = {
   unsubscribe: async (req, res) => {
