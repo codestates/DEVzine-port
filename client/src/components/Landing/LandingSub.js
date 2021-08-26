@@ -115,7 +115,7 @@ function LandingSub() {
               <div className="withuscontainer">
                 <h2 className="sm-hidden">{Count}명</h2>
                 <h2 className="sm-only">{MCount}명</h2>
-                구독하고 있어요.
+                이용하고 있어요.
                 <p>많은 분들이 찾는 DEVzine과 함께 해요!</p>
                 {Admin ? (
                   <div className="adminbottombtn">
