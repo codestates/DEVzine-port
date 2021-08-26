@@ -78,7 +78,10 @@ const sendMailToSubscribers = async () => {
           status: 111,
         },
         {
-          status: 112,
+          status: 121,
+        },
+        {
+          status: 122,
         },
       ],
     },
