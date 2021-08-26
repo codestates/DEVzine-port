@@ -92,3 +92,9 @@ label {
 .active {
   color: $yellow-dark;
 }
+
+.linefeed {
+  @include text-style(14, $tertiary);
+  font-weight: normal;
+  margin-top: 4px;
+}

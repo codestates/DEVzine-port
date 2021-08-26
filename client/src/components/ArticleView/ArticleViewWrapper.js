@@ -131,22 +131,23 @@ function ArticleViewWrapper({ id }) {
                       ? Request === 'Login need'
                         ? Contribution.contribution_content
                             .slice(0, 300)
-                            .split(/\.\s|\✨/)
+                            .split(/\n|\.\s/)
                             .map(line => (
                               <div key={line} className="line-spacing">
                                 {line}.<br />
                               </div>
                             ))
                         : Contribution.contribution_content
-                            .split(/\.\s|\✨/)
+                            .split(/\n|\.\s/)
                             .map(line => (
                               <div key={line} className="line-spacing">
-                                {line}.<br />
+                                {line}
+                                <br />
                               </div>
                             ))
-                      : Article.article_content.split(/!|\.\s/).map(line => (
+                      : Article.article_content.split(/\n|\.\s/).map(line => (
                           <div key={line} className="line-spacing">
-                            {line}.
+                            {line}
                           </div>
                         ))}
                   </div>
