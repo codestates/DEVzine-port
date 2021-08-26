@@ -30,12 +30,12 @@ const visualRouter = require('./router/visualRouter');
 const app = express();
 
 require('dotenv').config();
-passportConfig();
 
 app.set('trust proxy', 1);
 app.use(express.json());
 app.use(cookieParser());
 app.use(passport.initialize());
+passportConfig();
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan('combined', { stream }));
 app.use(
