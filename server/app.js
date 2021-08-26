@@ -40,7 +40,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan('combined', { stream }));
 app.use(
   cors({
-    origin: true,
+    origin: ['https://devzine-port.com', 'https://localhost:3000'],
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'OPTIONS', 'DELETE'],
   }),
