@@ -156,6 +156,7 @@
     margin: 0;
     position: absolute;
     right: 24px;
+    margin: 0 !important;
 
     @include mobile-only() {
       bottom: 12px;
@@ -169,13 +170,10 @@
     }
 
     span {
+      margin: 0 !important;
       margin-bottom: 3px;
     }
   }
-}
-
-.articlebox-hit {
-  margin: 0 !important;
 }
 
 .plusbtn {
