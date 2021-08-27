@@ -8,16 +8,16 @@
 
 # ✨ Feature
 - 매일 아침에 추가되는 최신 IT 뉴스를 볼 수 있습니다.  
-You can see the latest IT news to be added every morning.  
+Read the latest IT news, updated every morning.  
   
 - 구독 신청을 하여 이메일로 받아볼 수 있습니다.  
-You can subscribe to receive it by email.  
+Subscribe and receive our contents via email.  
   
 - DEVzine에 기고하여 당신만의 IT 글을 사람들과 공유할 수 있습니다.  
-You can share your own IT articles with people by contributing to DEVzine.  
+Contribute to DEVzine by sharing your IT knowledge with others.  
   
 - 차트를 통해 IT 키워드와 이용자들의 통계를 시각적으로 확인할 수 있습니다.  
-You can visually see the statistics of IT keywords and users through charts.  
+Enjoy our visuals page containing statistics of DEVzine's main IT keywords and user data.  
 
 # 🌐 Browsers Support
 
