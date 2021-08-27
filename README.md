@@ -17,7 +17,7 @@ Subscribe and receive our contents via email.
 Contribute to DEVzine by sharing your IT knowledge with others.  
   
 - 차트를 통해 IT 키워드와 이용자들의 통계를 시각적으로 확인할 수 있습니다.  
-Enjoy our visuals page containing statistics of DEVzine's main IT keywords and user data.  
+Enjoy the visuals page containing statistics of DEVzine's main IT keywords and user data.  
 
 # 🌐 Browsers Support
 
