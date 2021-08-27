@@ -16,7 +16,7 @@ You can subscribe to receive it by email.
 - DEVzine에 기고하여 당신만의 IT 글을 사람들과 공유할 수 있습니다.  
 You can share your own IT articles with people by contributing to DEVzine.  
   
-- 당신은 차트를 통해 IT 키워드와 이용자들의 통계를 시각적으로 확인할 수 있습니다.  
+- 차트를 통해 IT 키워드와 이용자들의 통계를 시각적으로 확인할 수 있습니다.  
 You can visually see the statistics of IT keywords and users through charts.  
 
 # 🌐 Browsers Support
