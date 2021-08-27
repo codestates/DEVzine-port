@@ -2085,7 +2085,8 @@ label {
     color: rgba(25, 26, 32, 0.15);
     margin: 0;
     position: absolute;
-    right: 24px; }
+    right: 24px;
+    margin: 0 !important; }
     @media screen and (max-width: 767px) {
       .articlebox-hit {
         bottom: 12px; } }
@@ -2095,10 +2096,8 @@ label {
       opacity: 0.15;
       width: auto; }
     .articlebox-hit span {
+      margin: 0 !important;
       margin-bottom: 3px; }
-
-.articlebox-hit {
-  margin: 0 !important; }
 
 .plusbtn {
   height: 55px;
