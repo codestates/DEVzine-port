@@ -203,7 +203,7 @@ function ContributionListWrapper() {
                 {ContributionData.length === 0 ? (
                   <p className="noissue stopdragging">소식이 없습니다.</p>
                 ) : (
-                  ContributionData.map(el => {
+                  ContributionData.slice(0, ConPlus).map(el => {
                     return (
                       <div
                         className="articlebox-listbox"
