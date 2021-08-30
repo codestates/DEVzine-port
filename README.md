@@ -4,7 +4,7 @@
 
 ![main_land](https://user-images.githubusercontent.com/40759230/130906658-8e8f7b6a-4c71-4041-82ad-f11cb56f4f56.gif)
 
-<a href="https://www.devzine-port.com/" target="_blank">🏠 <span>DEVzine Homepage</span></a>
+<a href="https://www.devzine-port.com/" target="_blank">🏠 <span> DEVzine Homepage</span></a>
 
 # ✨ Feature
 - 매일 아침에 추가되는 최신 IT 뉴스를 볼 수 있습니다.  
