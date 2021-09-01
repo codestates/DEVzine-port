@@ -98,6 +98,12 @@ module.exports = {
       } else {
         subscribed = false;
       }
+      
+      if (!subscribed) {
+        await Subscriber.findOneAndRemove({
+          subscriber_email: user_email
+        })
+      }
 
       const update = {
         user_password,
