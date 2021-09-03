@@ -99,6 +99,7 @@ const sendMailToSubscribers = async () => {
   console.log(contribution);
 
   const date = new Date();
+  date.setHours(date.getHours() + 9);
   const week = ['일', '월', '화', '수', '목', '금', '토'];
   const formatDate = `${date.getFullYear()}/${
     date.getMonth() + 1
