@@ -9,6 +9,7 @@ module.exports = {
     let codingWorldData = await scrapeCodingWorld();
 
     let data = [...boanNewsData, ...ITWorldData, ...codingWorldData];
+    console.log(data)
     return data;
   },
 
