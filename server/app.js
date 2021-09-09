@@ -71,6 +71,7 @@ app.use('/visual', visualRouter);
 // 화-토 오전 6시 크롤링 (24시간 이내 업데이트된 기사 불러오기)
 const automatedCrawlerForWeekday = schedule.scheduleJob(
   '00 21 * * 1-5',
+  // '30 * * * * 1-5',
   async () => {
     crawlerFor24H();
   },
