@@ -10,7 +10,7 @@ module.exports = {
     let codingWorldData = await scrapeCodingWorld(1000 * 60 * 60 * hours);
 
     let data = [...boanNewsData, ...ITWorldData, ...codingWorldData];
-    console.log(data)
+
     return data;
   }
 };
