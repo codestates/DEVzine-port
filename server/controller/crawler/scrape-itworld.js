@@ -2,7 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 module.exports = {
-  scrapeITWorld: async (compareDate = null) => {
+  scrapeITWorld: async (compareDate) => {
     try {
       const getArticlesFromURL = async url => {
         let articles = [];
@@ -21,15 +21,11 @@ module.exports = {
             .replace(/\n/g, '');
           let keyword = $(curArticle).find('.news_list_source').text().trim();
           let date = $(curArticle).find('.news_list_time').text();
-
-          if (date.includes('1일')) {
+          
+          if (date.includes(`${compareDate/24}일`)) {
             date = new Date(Date.now());
             date.setHours(date.getHours() + 9); // 한국 표준시간으로 변환
-            date.setDate(date.getDate() - 1);
-          } else if (compareDate && date.includes(compareDate)) {
-            date = new Date(Date.now());
-            date.setHours(date.getHours() + 9); // 한국 표준시간으로 변환
-            date.setDate(date.getDate() - 2);
+            date.setDate(date.getDate() - (compareDate/24));
           } else {
             continue;
           }

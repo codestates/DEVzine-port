@@ -4,7 +4,7 @@ const iconv = require('iconv-lite');
 iconv.skipDecodeWarning = true;
 
 module.exports = {
-  scrapeBoanNews: async (compareDate = 86400000) => {
+  scrapeBoanNews: async (compareDate) => {
     try {
       const parseDate = date => {
         // 입력 형식: 2021년 08월 10일 12:23
@@ -37,7 +37,7 @@ module.exports = {
         curDate.setHours(curDate.getHours() + 9); // 한국 시간으로 변환
 
         if (curDate - date > compareDate) {
-          // 1일 이상 차이날 경우, skip
+          // 1일 or 2일 이상 차이날 경우, skip
           continue;
         }
 

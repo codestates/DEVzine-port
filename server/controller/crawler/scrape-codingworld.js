@@ -2,7 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 module.exports = {
-  scrapeCodingWorld: async (compareDate = 86400000) => {
+  scrapeCodingWorld: async (compareDate) => {
     try {
       const getArticlesFromURL = async url => {
         const articleKeywords = {
@@ -33,7 +33,7 @@ module.exports = {
           curDate.setHours(curDate.getHours() + 9); // 한국 시간으로 변환
 
           if (curDate - date > compareDate) {
-            // 1일 이상 차이날 경우, skip
+            // 1일 or 2일 이상 차이날 경우, skip
             continue;
           }
 
