@@ -150,8 +150,9 @@ module.exports = {
         },
         update
       );
-
-      if ((overlapUser && req.body.user_name !== overlapUser.user_name) || !overlapUser) {
+      
+      // 유저 아이디가 바뀐 경우, 바뀐 아이디 반영하여 cache update 
+      if (user.user_name !== user_name) {
         let dataForCache = await getAllConfirmedContributions();
         await setNewCacheForContributions(dataForCache);
       }
