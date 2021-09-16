@@ -36,7 +36,10 @@ export async function filterArticleData(body) {
         return res;
       } else {
         return res.filter(
-          el => el.article_title.indexOf(body.CurrentTitle) !== -1,
+          el =>
+            el.article_title
+              .toLowerCase()
+              .indexOf(body.CurrentTitle.toLowerCase()) !== -1,
         );
       }
     })
@@ -85,7 +88,10 @@ export async function filterContributionData(body) {
         return res;
       } else {
         return res.filter(
-          el => el.contribution_title.indexOf(body.CurrentTitle) !== -1,
+          el =>
+            el.contribution_title
+              .toLowerCase()
+              .indexOf(body.CurrentTitle.toLowerCase()) !== -1,
         );
       }
     })
