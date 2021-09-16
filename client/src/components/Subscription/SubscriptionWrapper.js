@@ -71,8 +71,8 @@ function SubscriptionWrapper() {
   function subscriptionHandler() {
     // TODO: body 내용 수정
     // let body = { user_email: UserEmail };
-    let body = { user_name: store.getState().user.signinSuccess[1]}
-    console.log(body)
+    let body = { user_name: store.getState().user.signinSuccess[2] };
+    console.log(body);
 
     return customAxios
       .post('/subscribe', body)
