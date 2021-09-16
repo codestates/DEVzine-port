@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { signinUser } from '../../../_actions/user_actions';
 import TextInputGenderRequired from './TextInputGenderRequired';
@@ -16,6 +16,20 @@ function SigninModal({ ModalOpen, setModalOpen }) {
     [Email, setEmail, '이메일 입력', 'email', '30'],
     [Password, setPassword, '비밀번호 입력', 'password', '20'],
   ];
+
+  // 모달 오버레이에서 스크롤 방지
+  useEffect(() => {
+    document.body.style.cssText = `
+      position: fixed; 
+      top: -${window.scrollY}px;
+      overflow-y: scroll;
+      width: 100%;`;
+    return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = '';
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+    };
+  }, []);
 
   async function postHandler(e) {
     let body = {
