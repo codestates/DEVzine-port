@@ -177,7 +177,7 @@ function MyPageWrapper() {
 
     dispatch(mypageUser(body))
       .then(res => {
-        if (res.payload[2] === 'Patch success') {
+        if (res.payload[0] === 'Patch success') {
           setIsEditedSuccess(true);
         }
       })

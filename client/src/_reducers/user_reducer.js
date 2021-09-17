@@ -14,7 +14,8 @@ export default function (state = {}, action) {
       return (state = {});
       break;
     case MYPAGE_USER:
-      return { ...state, signinSuccess: action.payload };
+      // return { ...state, signinSuccess: action.payload };
+      return { ...state, patchSuccess: action.payload };
       break;
     case DELETE_USER:
       return (state = {});
