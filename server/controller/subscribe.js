@@ -4,15 +4,7 @@ const { Subscriber } = require('../Models/Subscribers');
 module.exports = {
   addSubscriber: async (req, res) => {
 
-    let subscriber_email;
-
-    if (req.body.user_name){
-      const user = await User.findOne({ user_name: req.body.user_name });
-      subscriber_email = user.user_email;
-    } else {
-      subscriber_email = req.body.user_email;
-    }
-    
+    const { user_email: subscriber_email } = req.body;
     const subscriber = await Subscriber.findOne({ subscriber_email });
 
     if (subscriber) {
