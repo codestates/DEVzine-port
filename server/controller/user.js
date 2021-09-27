@@ -1,5 +1,6 @@
 const { User } = require('../Models/Users');
 const { VerifiedEmail } = require('../Models/Verifiedemails');
+const { Subscriber } = require('../Models/Subscribers');
 const { Contribution } = require('../Models/Contributions');
 const {
   setNewCacheForContributions,
@@ -30,6 +31,12 @@ module.exports = {
     if (!tempUser) {
       return res.status(401).send({ message: 'Email unverified' });
     }
+
+    await Subscriber.findOne({ subscriber_email: user_email }).then(data => {
+      if (data) {
+        user_info.subscribed = true;
+      }
+    });
 
     try {
       const user_password = await bcrypt.hash(req.body.user_password, 10);

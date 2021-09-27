@@ -1,7 +1,5 @@
 const { stream } = require('./config/winston');
-const {
-  crawlerForHours
-} = require('./controller/crawler/automateCrawler');
+const { crawlerForHours } = require('./controller/crawler/automateCrawler');
 const {
   sendMailToSubscribers,
 } = require('./controller/emailfunction/subscriberEmail');
