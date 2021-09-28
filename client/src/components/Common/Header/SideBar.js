@@ -14,6 +14,8 @@ function SideBar(props) {
 
   const [ModalOpen, setModalOpen] = useState(false);
   const [AlertOpen, setAlertOpen] = useState(false);
+  const [CloseView, setCloseView] = useState(false);
+  const [SidebarOut, setSidebarOut] = useState(false);
 
   // 로그인 확인
   useEffect(() => {
@@ -26,6 +28,11 @@ function SideBar(props) {
       props.setSignIn(false);
     }
   }, []);
+
+  // 취소버튼 나오기
+  setTimeout(function () {
+    setCloseView(true);
+  }, 350);
 
   // 로그아웃 클릭
   function signOutHandler() {
@@ -49,16 +56,23 @@ function SideBar(props) {
   return (
     <>
       <nav className="sidebar">
-        <div className="sidebar-nav">
+        <div
+          className={SidebarOut ? 'sidebar-nav' : 'sidebar-nav closeanimation'}
+        >
           <div className="container">
             <div className="row">
               <div className="col-sm-4">
-                <img
-                  src={close}
-                  alt="close"
-                  className="closebtn"
-                  onClick={() => props.setOpenSidebar(false)}
-                />
+                {CloseView ? (
+                  <img
+                    src={close}
+                    alt="close"
+                    className="closebtn"
+                    onClick={() => {
+                      props.setOpenSidebar(false);
+                      setSidebarOut(false);
+                    }}
+                  />
+                ) : null}
                 <ul>
                   {props.UserName ? (
                     <li className="usename">{props.UserName}</li>
@@ -79,6 +93,9 @@ function SideBar(props) {
                   </li>
                   <li onClick={() => props.setOpenSidebar(false)}>
                     <Link to="/subscribe">구독하기</Link>
+                  </li>
+                  <li onClick={() => props.setOpenSidebar(false)}>
+                    <Link to="/FAQ">자주 묻는 질문</Link>
                   </li>
                   {props.SignIn ? (
                     <li className="signout" onClick={signOutHandler}>

@@ -33,10 +33,11 @@ export async function signoutUser() {
 export async function mypageUser(dataToSubmit) {
   const request = await customAxios
     .patch(`/mypage`, dataToSubmit)
-    .then(res => ['Login success', res.data.data.user_name, res.data.message]);
+    // .then(res => ['Login success', res.data.data.user_name, res.data.message]);
+    .then(res => [res.data.message]);
 
   return {
-    type: SIGNIN_USER,
+    type: MYPAGE_USER,
     payload: request,
   };
 }

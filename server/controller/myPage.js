@@ -7,11 +7,11 @@ const bcrypt = require('bcryptjs');
 module.exports = {
   getUserInfo: async (req, res) => {
     try {
-      
       let userID = req.user._id;
       let user = await User.findOne({
         _id: userID,
       });
+
       if (!user) {
         return res.status(404).json({
           message: 'Invalid user',
@@ -46,8 +46,8 @@ module.exports = {
           },
           contribution_url: 1,
           status: 1,
-          _id: 0,
-        },
+          _id: 0
+        }
       );
 
       return res.status(200).json({
@@ -76,19 +76,38 @@ module.exports = {
 
   patchUserInfo: async (req, res) => {
     try {
-      console.log(req.body)
-      const { user_email, user_name } = req.body;
 
-      let overlapUser = await User.findOne({
-        user_name,
+      const { user_email, user_name } = req.body;
+      
+      let user = User.findOne({
+        user_email
       });
 
-      if (overlapUser && overlapUser.user_email !== user_email) {
-        return res.status(409).send({ message: `${user_name} already exists` });
+      if (!user) {
+        return res.status(404).json({
+          message: 'Invalid user',
+        });
       }
 
-      const { user_gender, user_age, user_position, user_language } =
-        req.body.user_info;
+      const overlapUser = await User.findOne({
+        user_name,
+        user_email: {
+          $nin: [ user_email ]
+        }
+      });
+
+      if (overlapUser) {
+        return res.status(409).send({ 
+          message: `${user_name} already exists` 
+        });
+      } 
+
+      const { 
+        user_gender, 
+        user_age, 
+        user_position, 
+        user_language 
+      } = req.body.user_info;
 
       const user_password = await bcrypt.hashSync(req.body.user_password, 10);
       
@@ -98,6 +117,23 @@ module.exports = {
       } else {
         subscribed = false;
       }
+      if (subscribed) {
+        await Subscriber.updateOne(
+          {
+            subscriber_email: user_email,
+          },
+          {
+            subscriber_email: user_email,
+          },
+          {
+            upsert: true,
+          },
+        );
+      } else {
+        let temp = await Subscriber.findOneAndRemove({
+          subscriber_email: user_email
+        })
+      };
 
       const update = {
         user_password,
@@ -108,36 +144,15 @@ module.exports = {
         user_language,
         subscribed,
       };
-      
-      let user = await User.findOneAndUpdate(
+      await User.findOneAndUpdate(
         {
           user_email,
         },
-        update,
-        {
-          new: true,
-        },
+        update
       );
-        
-      if (!user) {
-        return res.status(404).json({
-          message: 'Invalid user',
-        });
-      }
       
-      await Subscriber.updateOne(
-        {
-          subscriber_email: user_email,
-        },
-        {
-          subscriber_email: user_email,
-        },
-        {
-          upsert: true,
-        },
-      );
-
-      if ((overlapUser && req.body.user_name !== overlapUser.user_name) || !overlapUser) {
+      // 유저 아이디가 바뀐 경우, 바뀐 아이디 반영하여 cache update 
+      if (user.user_name !== user_name) {
         let dataForCache = await getAllConfirmedContributions();
         await setNewCacheForContributions(dataForCache);
       }

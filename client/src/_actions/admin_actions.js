@@ -62,7 +62,9 @@ export async function searchData(Select, Text) {
       if (Text === '') {
         return res;
       } else {
-        return res.filter(el => el.user_name.indexOf(Text) !== -1);
+        return res.filter(
+          el => el.user_name.toLowerCase().indexOf(Text.toLowerCase()) !== -1,
+        );
       }
     });
 
@@ -82,7 +84,10 @@ export async function searchAppData(AppText) {
       if (AppText === '') {
         return res;
       } else {
-        return res.filter(el => el.user_name.indexOf(AppText) !== -1);
+        return res.filter(
+          el =>
+            el.user_name.toLowerCase().indexOf(AppText.toLowerCase()) !== -1,
+        );
       }
     });
 

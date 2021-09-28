@@ -3,8 +3,10 @@ const { Subscriber } = require('../Models/Subscribers');
 
 module.exports = {
   addSubscriber: async (req, res) => {
+
     const { user_email: subscriber_email } = req.body;
     const subscriber = await Subscriber.findOne({ subscriber_email });
+
     if (subscriber) {
       return res.status(400).send({ message: 'User already exists' });
     }

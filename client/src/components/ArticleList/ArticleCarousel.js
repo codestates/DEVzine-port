@@ -42,7 +42,7 @@ function ArticelCarousel({ ContributionData }) {
           },
           tablet: {
             breakpoint: {
-              max: 199,
+              max: 1199,
               min: 768,
             },
             items: 3,

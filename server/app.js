@@ -1,8 +1,5 @@
 const { stream } = require('./config/winston');
-const {
-  crawlerFor24H,
-  crawlerFor48H,
-} = require('./controller/crawler/automateCrawler');
+const { crawlerForHours } = require('./controller/crawler/automateCrawler');
 const {
   sendMailToSubscribers,
 } = require('./controller/emailfunction/subscriberEmail');
@@ -72,14 +69,14 @@ app.use('/visual', visualRouter);
 const automatedCrawlerForWeekday = schedule.scheduleJob(
   '00 21 * * 1-5',
   async () => {
-    crawlerFor24H();
+    crawlerForHours(24);
   },
 );
 // 월요일 오전 6시 크롤링 (48시간 이내 업데이트된 기사 불러오기)
 const automatedCrawlerForWeekend = schedule.scheduleJob(
   '00 21 * * 7',
   async () => {
-    crawlerFor48H();
+    crawlerForHours(48);
   },
 );
 // 구독자 이메일 자동 발송 (오전 7시)

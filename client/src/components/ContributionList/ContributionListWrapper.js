@@ -23,11 +23,15 @@ function ContributionListWrapper() {
   const [Selected, setSelected] = useState('키워드선택');
   const [ArchiveTitle, setArchiveTitle] = useState('');
   const [AlertOpen, setAlertOpen] = useState(false);
+  const [ContributionDataLen, setContributionDataLen] = useState(null);
 
   // 기고 정보
   useEffect(() => {
     dispatch(getContributionData())
-      .then(res => setContributionData(res.payload))
+      .then(res => {
+        setContributionData(res.payload);
+        setContributionDataLen(res.payload.length);
+      })
       .catch(err => {
         setAlertOpen(true);
       });
@@ -203,7 +207,7 @@ function ContributionListWrapper() {
                 {ContributionData.length === 0 ? (
                   <p className="noissue stopdragging">소식이 없습니다.</p>
                 ) : (
-                  ContributionData.map(el => {
+                  ContributionData.slice(0, ConPlus).map(el => {
                     return (
                       <div
                         className="articlebox-listbox"
@@ -251,7 +255,8 @@ function ContributionListWrapper() {
           <div className="row">
             <div className="col-sm-4">
               <div className="plusbtn">
-                {ContributionData.length <= 12 ? null : (
+                {ContributionData.length <= 12 ||
+                ContributionData.length <= ConPlus ? null : (
                   <Button
                     subject={`더보기`}
                     color={`#999999`}

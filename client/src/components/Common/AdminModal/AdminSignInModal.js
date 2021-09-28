@@ -37,6 +37,12 @@ function AdminSignInModal({ ModalOpen, setModalOpen }) {
     }
   }
 
+  const onKeyPress = e => {
+    if (e.key === 'Enter') {
+      postHandler();
+    }
+  };
+
   function closeModal() {
     setAlertOpen(false);
   }
@@ -72,6 +78,7 @@ function AdminSignInModal({ ModalOpen, setModalOpen }) {
               placeholder={el[2]}
               type={el[3]}
               maxLength={el[4]}
+              onKeyPress={onKeyPress}
             />
           );
         })}

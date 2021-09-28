@@ -143,3 +143,9 @@
     }
   }
 }
+
+.pluscheck{
+  @include text-style(14, $tertiary);
+  font-weight: $normal;
+  padding-top: 24px;
+}

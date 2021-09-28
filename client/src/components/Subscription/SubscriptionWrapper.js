@@ -22,7 +22,9 @@ function SubscriptionWrapper() {
 
     if (request !== 'Login need' && request !== 'Admin login success') {
       setSignIn(true);
-      setUserEmail(store.getState().user.signinSuccess[2]);
+      // TODO: store.getState().user.signinSuccess[2] === 'Patch success' 여서 서버 쪽에 계속 Patch Success 로 들어옴, store 에는 현재 이메일이 보관되어 있지 않은듯
+      // TODO: setUserEmail(store.getState().user.signinSuccess[2]);
+      console.log(store.getState().user.signinSuccess[2]);
     } else {
       setSignIn(false);
     }
@@ -68,7 +70,10 @@ function SubscriptionWrapper() {
 
   // 회원 구독 신청
   function subscriptionHandler() {
-    let body = { user_email: UserEmail };
+    // TODO: body 내용 수정
+    // let body = { user_email: UserEmail };
+    let body = { user_email: store.getState().user.signinSuccess[2] };
+    console.log(body);
 
     return customAxios
       .post('/subscribe', body)

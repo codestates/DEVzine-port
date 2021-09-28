@@ -6,6 +6,7 @@ function TextInputGenderRequired({
   placeholder,
   type,
   maxLength,
+  onKeyPress,
 }) {
   return (
     <input
@@ -15,6 +16,7 @@ function TextInputGenderRequired({
       value={stateName}
       onChange={e => stateFunc(e.target.value)}
       maxLength={maxLength}
+      onKeyPress={e => onKeyPress(e)}
     />
   );
 }
