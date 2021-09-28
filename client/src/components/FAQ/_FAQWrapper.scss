@@ -1,0 +1,79 @@
+.faqwrapper {
+  background-color: $background;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+
+  &-title {
+    margin-top: 192px;
+
+    @include mobile-only() {
+      margin-top: 110px;
+    }
+
+    h2 {
+      @include text-style(24, $dark);
+      line-height: 24px;
+      margin-bottom: 24px;
+
+      span {
+        @include text-style(16, $secondary);
+        font-weight: $normal;
+        line-height: 12px;
+        margin-left: 16px;
+      }
+    }
+  }
+
+
+  &-inner {
+    background-color: $white;
+    border: 1px solid $border;
+    border-radius: 24px;
+    height: 450px;
+    margin-bottom: 24px;
+    padding: 24px;
+    position: relative;
+
+    &-question {
+      @include text-style(18, $dark);
+      font-weight: $bold;
+    }
+
+    &-answer {
+      @include text-style(16, $primary);
+      padding-right: 24px;
+      position: absolute;
+      top: 30%;
+
+      .double {
+        display: block;
+        height: 20px;
+      }
+
+      .sub {
+        color: $tertiary;
+      }
+
+      .mouseover {
+        color: $tertiary;
+        font-weight: $bold;
+        text-decoration: underline;
+        text-underline-position: under;
+
+        &:hover {
+          color: $yellow-dark;
+        }
+      }
+    }
+  }
+
+  &-footer {
+    height: 100px;
+    margin-bottom: 220px;
+
+    @include mobile-only() {
+      margin-bottom: 160px;
+    }
+  }
+}

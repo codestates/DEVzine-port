@@ -265,7 +265,8 @@ function ArticleListWrapper() {
           <div className="row">
             <div className="col-sm-4">
               <div className="plusbtn stopdragging">
-                {ArticleData.length <= 12 ? null : (
+                {ArticleData.length <= 12 ||
+                ArticleData.length <= ArticlePlus ? null : (
                   <Button
                     subject={`더보기`}
                     color={`#999999`}
