@@ -677,6 +677,18 @@ select::-ms-expand {
       content: '';
       margin-left: 0; }
 
+@keyframes slide {
+  from {
+    right: -50%; }
+  to {
+    right: 0; } }
+
+@keyframes outslide {
+  from {
+    right: 0; }
+  to {
+    right: -50%; } }
+
 .sidebar {
   background-color: rgba(0, 0, 0, 0.4);
   bottom: 0;
@@ -692,7 +704,11 @@ select::-ms-expand {
     padding-top: 35px;
     position: absolute;
     right: 0;
-    width: 50%; }
+    width: 50%;
+    transition: 1s ease;
+    animation: slide 1s; }
+    .sidebar-nav .closeanimation {
+      animation: outslide 1s; }
     .sidebar-nav .closebtn {
       cursor: pointer;
       position: fixed;
