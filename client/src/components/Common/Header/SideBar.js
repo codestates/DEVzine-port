@@ -80,6 +80,9 @@ function SideBar(props) {
                   <li onClick={() => props.setOpenSidebar(false)}>
                     <Link to="/subscribe">구독하기</Link>
                   </li>
+                  <li onClick={() => props.setOpenSidebar(false)}>
+                    <Link to="/FAQ">자주 묻는 질문</Link>
+                  </li>
                   {props.SignIn ? (
                     <li className="signout" onClick={signOutHandler}>
                       로그아웃

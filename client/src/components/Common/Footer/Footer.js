@@ -118,6 +118,12 @@ function Footer() {
                           <img src={footerArrow} alt="footerArrow" />
                         </Link>
                       </div>
+                      <div className="footefaqbtn">
+                        <Link to="/FAQ">
+                          자주 묻는 질문 (FAQ)
+                          <img src={footerArrow} alt="footerArrow" />
+                        </Link>
+                      </div>
                     </div>
                   )}
                 </div>
