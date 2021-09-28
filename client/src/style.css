@@ -1957,6 +1957,14 @@ label {
     .optcontentswrapper .contributionstatuscontainer .contributionstatustable > li:last-child .tablecontent {
       border-bottom: 0px solid; }
 
+.pluscheck {
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: #b2b3b9;
+  font-weight: 400;
+  padding-top: 24px; }
+
 .artilistwrapper {
   background-color: #f2f2f2;
   min-height: 100vh;
@@ -2694,6 +2702,72 @@ label {
             position: relative;
             border: 1px solid #d9d9d9;
             border-radius: 24px; } }
+
+.faqwrapper {
+  background-color: #f2f2f2;
+  min-height: 100vh;
+  position: relative;
+  width: 100%; }
+  .faqwrapper-title {
+    margin-top: 192px; }
+    @media screen and (max-width: 767px) {
+      .faqwrapper-title {
+        margin-top: 110px; } }
+    .faqwrapper-title h2 {
+      font-size: 24px;
+      line-height: 34px;
+      letter-spacing: -0.01em;
+      color: #191a20;
+      line-height: 24px;
+      margin-bottom: 24px; }
+      .faqwrapper-title h2 span {
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: -0.01em;
+        color: #999;
+        font-weight: 400;
+        line-height: 12px;
+        margin-left: 16px; }
+  .faqwrapper-inner {
+    background-color: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 24px;
+    height: 450px;
+    margin-bottom: 24px;
+    padding: 24px;
+    position: relative; }
+    .faqwrapper-inner-question {
+      font-size: 18px;
+      line-height: 28px;
+      letter-spacing: -0.02em;
+      color: #191a20;
+      font-weight: 700; }
+    .faqwrapper-inner-answer {
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.01em;
+      color: #535353;
+      padding-right: 24px;
+      position: absolute;
+      top: 30%; }
+      .faqwrapper-inner-answer .double {
+        display: block;
+        height: 20px; }
+      .faqwrapper-inner-answer .sub {
+        color: #b2b3b9; }
+      .faqwrapper-inner-answer .mouseover {
+        color: #b2b3b9;
+        font-weight: 700;
+        text-decoration: underline;
+        text-underline-position: under; }
+        .faqwrapper-inner-answer .mouseover:hover {
+          color: #ffc803; }
+  .faqwrapper-footer {
+    height: 100px;
+    margin-bottom: 220px; }
+    @media screen and (max-width: 767px) {
+      .faqwrapper-footer {
+        margin-bottom: 160px; } }
 
 .container {
   width: 100%;

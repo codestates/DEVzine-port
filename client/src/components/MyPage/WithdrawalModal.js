@@ -31,6 +31,11 @@ function WithdrawalModal(props) {
                     {noBtn}
                   </button>
                 </div>
+                <div className="pluscheck">
+                  탈퇴 시, 작성하신 기고글 외의
+                  <br />
+                  개인 정보(이메일, 아이디, 비번 등) 삭제
+                </div>
               </div>
             </div>
           </div>
