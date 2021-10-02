@@ -5,6 +5,8 @@ key.pem
 /uploads
 .eslinrc.json
 .prettierrc.json
+/controller/emailfunction/emailLog.txt
+dump.rdb
 
 # Logs
 logs
