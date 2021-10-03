@@ -28,6 +28,7 @@ const userSchema = mongoose.Schema(
       type: Array,
       default: [],
     },
+    authcode: String
   },
   { versionKey: false },
 );
