@@ -15,7 +15,7 @@ function SideBar(props) {
   const [ModalOpen, setModalOpen] = useState(false);
   const [AlertOpen, setAlertOpen] = useState(false);
   const [CloseView, setCloseView] = useState(false);
-  const [SidebarOut, setSidebarOut] = useState(false);
+  const [SidebarOut, setSidebarOut] = useState(true);
 
   // 로그인 확인
   useEffect(() => {
@@ -56,9 +56,7 @@ function SideBar(props) {
   return (
     <>
       <nav className="sidebar">
-        <div
-          className={SidebarOut ? 'sidebar-nav' : 'sidebar-nav closeanimation'}
-        >
+        <div className={SidebarOut ? 'sidebar-nav-open' : 'sidebar-nav-close'}>
           <div className="container">
             <div className="row">
               <div className="col-sm-4">
@@ -68,8 +66,11 @@ function SideBar(props) {
                     alt="close"
                     className="closebtn"
                     onClick={() => {
-                      props.setOpenSidebar(false);
                       setSidebarOut(false);
+
+                      setTimeout(function () {
+                        props.setOpenSidebar(false);
+                      }, 1000);
                     }}
                   />
                 ) : null}

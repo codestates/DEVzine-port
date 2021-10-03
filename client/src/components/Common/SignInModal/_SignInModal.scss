@@ -43,6 +43,10 @@
       cursor: pointer;
     }
 
+    .blank {
+      margin-top: 24px;
+    }
+
     .leadsignup {
       z-index: 710;
       width: 296px;
@@ -57,6 +61,22 @@
     .commonbutton {
       z-index: 710;
       width: 296px;
+    }
+
+    .passwordbtn {
+      @include text-style(16, $tertiary);
+      font-weight: $bold;
+      margin-top: 16px;
+      text-align: center;
+
+      span {
+        margin-top: 8px;
+        text-decoration: underline;
+
+        &:hover {
+          color: $dark;
+        }
+      }
     }
   }
 }
