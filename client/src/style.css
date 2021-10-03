@@ -862,6 +862,8 @@ select::-ms-expand {
       top: 10px;
       right: 14px;
       cursor: pointer; }
+    .signincontainer .signinwrapper .blank {
+      margin-top: 24px; }
     .signincontainer .signinwrapper .leadsignup {
       z-index: 710;
       width: 296px;
@@ -879,6 +881,19 @@ select::-ms-expand {
     .signincontainer .signinwrapper .commonbutton {
       z-index: 710;
       width: 296px; }
+    .signincontainer .signinwrapper .passwordbtn {
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.01em;
+      color: #b2b3b9;
+      font-weight: 700;
+      margin-top: 16px;
+      text-align: center; }
+      .signincontainer .signinwrapper .passwordbtn span {
+        margin-top: 8px;
+        text-decoration: underline; }
+        .signincontainer .signinwrapper .passwordbtn span:hover {
+          color: #191a20; }
 
 .inputlarge {
   width: 296px;
