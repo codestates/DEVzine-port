@@ -1,4 +1,4 @@
-const { signUp, signIn, signOut, deleteUser } = require('../controller/user');
+const { signUp, signIn, signOut, deleteUser, updatePassword } = require('../controller/user');
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
@@ -15,5 +15,6 @@ router.delete(
   passport.authenticate('jwt', { session: false }),
   deleteUser,
 );
+router.post('/password', updatePassword);
 
 module.exports = router;
