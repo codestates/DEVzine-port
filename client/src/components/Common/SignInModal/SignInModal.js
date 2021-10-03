@@ -108,10 +108,7 @@ function SigninModal({ ModalOpen, setModalOpen }) {
             subject={`회원가입`}
             color={`#191A20`}
             backgroundColor={`#FFDD14`}
-            onClickHandle={() => {
-              setModalOpen(false);
-              window.location.href = '/signup';
-            }}
+            onClickHandle={() => (window.location.href = '/signup')}
           />
         </span>
         <span className="sm-hidden">
@@ -127,9 +124,16 @@ function SigninModal({ ModalOpen, setModalOpen }) {
         <div className="passwordbtn">
           비밀번호를 잊어버리셨나요?
           <br />
-          <Link to="/password">
-            <span onClick={() => setModalOpen(false)}>비밀번호 찾기</span>
-          </Link>
+          <span className="sm-only">
+            <span onClick={() => (window.location.href = '/password')}>
+              비밀번호 찾기
+            </span>
+          </span>
+          <span className="sm-hidden">
+            <Link to="/password">
+              <span onClick={() => setModalOpen(false)}>비밀번호 찾기</span>
+            </Link>
+          </span>
         </div>
       </div>
       <AlertModal
