@@ -82,6 +82,7 @@ function SigninModal({ ModalOpen, setModalOpen }) {
             />
           </svg>
         </Link>
+        <span className="blank sm-hidden" />
         {requiredTextInputData.map((el, idx) => {
           return (
             <TextInputGenderRequired
@@ -123,6 +124,13 @@ function SigninModal({ ModalOpen, setModalOpen }) {
             />
           </Link>
         </span>
+        <div className="passwordbtn">
+          비밀번호를 잊어버리셨나요?
+          <br />
+          <Link to="/password">
+            <span onClick={() => setModalOpen(false)}>비밀번호 찾기</span>
+          </Link>
+        </div>
       </div>
       <AlertModal
         open={AlertOpen}
