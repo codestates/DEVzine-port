@@ -98,8 +98,6 @@ function PasswordWrapper() {
       authcode: Name,
     };
 
-    console.log(body);
-
     return await customAxios
       .post(`/user/password`, body)
       .then(res => {
@@ -119,8 +117,6 @@ function PasswordWrapper() {
     let body = {
       user_email: Email,
     };
-
-    console.log(body);
 
     await customAxios
       .post(`/email/password`, body)
