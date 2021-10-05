@@ -131,7 +131,7 @@ function SigninModal({ ModalOpen, setModalOpen }) {
           </span>
           <span className="sm-hidden">
             <Link to="/password">
-              <span onClick={() => setModalOpen(false)}>비밀번호 찾기</span>
+              <span onClick={() => setModalOpen(false)}>비밀번호 재설정</span>
             </Link>
           </span>
         </div>
