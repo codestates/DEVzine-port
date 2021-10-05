@@ -17,7 +17,7 @@ function SigninModal({ ModalOpen, setModalOpen }) {
     [Password, setPassword, '비밀번호 입력', 'password', '20'],
   ];
 
-  // 모달 오버레이에서 스크롤 방지
+  // 모달오버레이에서 스크롤 방지
   useEffect(() => {
     document.body.style.cssText = `
       position: fixed; 
