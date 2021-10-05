@@ -141,7 +141,7 @@ module.exports = {
   },
 
   updatePassword: async (req, res) => {
-
+    
     let { user_email, user_password, authcode } = req.body;
 
     try {

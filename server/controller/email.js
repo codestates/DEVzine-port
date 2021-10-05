@@ -113,7 +113,7 @@ module.exports = {
           message: 'Invalid email',
         });
       }
-      const authcode = Math.random().toString(36).substr(2, 11);
+      const authcode = Math.random().toString(36).substring(2, 12);
 
       let authMailForm;
       ejs.renderFile(
