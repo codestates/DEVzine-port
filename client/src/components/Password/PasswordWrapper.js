@@ -23,8 +23,6 @@ function PasswordWrapper() {
   const [EmailNotVerified, setEmailNotVerified] = useState(false);
   const [AlreadyExist, setAlreadyExist] = useState(false);
   const [EmailUnverified, setEmailUnverified] = useState(false);
-  const [AllChecked, setAllChecked] = useState(false);
-
   useEffect(() => {
     if (checkEmail(Email)) {
       setEmail_isValid(true);
@@ -42,7 +40,7 @@ function PasswordWrapper() {
     } else {
       setPw_confirm(false);
     }
-  }, [Email, Password, ConfirmPassword, AllChecked]);
+  }, [Email, Password, ConfirmPassword]);
 
   useEffect(() => {
     Auth(false);
@@ -171,7 +169,20 @@ function PasswordWrapper() {
                   />
                 );
               })}
-              <div className="signupbtn" onClick={e => postHandler()}>
+              <div
+                className="signupbtn"
+                onClick={e =>
+                  Email &&
+                  Password &&
+                  ConfirmPassword &&
+                  Name &&
+                  Email_isValid &&
+                  Pw_isValid &&
+                  Pw_confirm
+                    ? postHandler()
+                    : setAllVerified(true)
+                }
+              >
                 비밀번호 재설정
               </div>
               <AlertModal
@@ -179,6 +190,7 @@ function PasswordWrapper() {
                   AlertOpen ||
                   SignUpFail ||
                   SignUpSuccess ||
+                  AllVerified ||
                   EmailNotVerified ||
                   AlreadyExist ||
                   EmailUnverified
@@ -191,6 +203,8 @@ function PasswordWrapper() {
                     ? '인증코드 확인해주세요.'
                     : SignUpSuccess
                     ? '비밀번호 변경하였습니다.'
+                    : AllVerified
+                    ? '모든 것을 만족해야 합니다.'
                     : EmailNotVerified
                     ? '이메일 형식을 확인해주세요.'
                     : AlreadyExist
