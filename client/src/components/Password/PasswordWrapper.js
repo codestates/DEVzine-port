@@ -100,6 +100,8 @@ function PasswordWrapper() {
       authcode: Name,
     };
 
+    console.log(body);
+
     return await customAxios
       .post(`/user/password`, body)
       .then(res => {
@@ -119,6 +121,9 @@ function PasswordWrapper() {
     let body = {
       user_email: Email,
     };
+
+    console.log(body);
+
     await customAxios
       .post(`/email/password`, body)
       .then(res => {
@@ -166,29 +171,14 @@ function PasswordWrapper() {
                   />
                 );
               })}
-              <div
-                className="signupbtn"
-                onClick={e =>
-                  Email &&
-                  Password &&
-                  ConfirmPassword &&
-                  Name &&
-                  Email_isValid &&
-                  Pw_isValid &&
-                  Pw_confirm &&
-                  AllChecked
-                    ? postHandler()
-                    : setAllVerified(true)
-                }
-              >
-                비밀번호 변경
+              <div className="signupbtn" onClick={e => postHandler()}>
+                비밀번호 재설정
               </div>
               <AlertModal
                 open={
                   AlertOpen ||
                   SignUpFail ||
                   SignUpSuccess ||
-                  AllVerified ||
                   EmailNotVerified ||
                   AlreadyExist ||
                   EmailUnverified
@@ -196,13 +186,11 @@ function PasswordWrapper() {
                 close={closeModal}
                 alertString={
                   AlertOpen
-                    ? '30분 이내로 확인해주세요.'
+                    ? '10분 이내로 확인해주세요.'
                     : SignUpFail
                     ? '인증코드 확인해주세요.'
                     : SignUpSuccess
                     ? '비밀번호 변경하였습니다.'
-                    : AllVerified
-                    ? '모든 것을 만족해야 합니다.'
                     : EmailNotVerified
                     ? '이메일 형식을 확인해주세요.'
                     : AlreadyExist

@@ -17,7 +17,7 @@ function SigninModal({ ModalOpen, setModalOpen }) {
     [Password, setPassword, '비밀번호 입력', 'password', '20'],
   ];
 
-  // 모달 오버레이에서 스크롤 방지
+  // 모달오버레이에서 스크롤 방지
   useEffect(() => {
     document.body.style.cssText = `
       position: fixed; 
@@ -126,12 +126,12 @@ function SigninModal({ ModalOpen, setModalOpen }) {
           <br />
           <span className="sm-only">
             <span onClick={() => (window.location.href = '/password')}>
-              비밀번호 찾기
+              비밀번호 재설정
             </span>
           </span>
           <span className="sm-hidden">
             <Link to="/password">
-              <span onClick={() => setModalOpen(false)}>비밀번호 찾기</span>
+              <span onClick={() => setModalOpen(false)}>비밀번호 재설정</span>
             </Link>
           </span>
         </div>
