@@ -126,7 +126,7 @@ function SigninModal({ ModalOpen, setModalOpen }) {
           <br />
           <span className="sm-only">
             <span onClick={() => (window.location.href = '/password')}>
-              비밀번호 찾기
+              비밀번호 재설정
             </span>
           </span>
           <span className="sm-hidden">
