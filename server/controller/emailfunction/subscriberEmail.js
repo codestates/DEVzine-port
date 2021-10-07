@@ -113,7 +113,7 @@ const sendMailToSubscribers = async () => {
     ? contributionUserInfo.user_name
     : 'anonymous';
 
-  subscribers.map(async subscriber => {
+  subscribers.map(async (subscriber, index) => {
     const userEmail = subscriber.subscriber_email;
     const user = await User.findOne({
       user_email: userEmail,
@@ -164,7 +164,7 @@ const sendMailToSubscribers = async () => {
           }
         },
       );
-    }, 500);
+    }, 500 * index);
   });
 };
 
