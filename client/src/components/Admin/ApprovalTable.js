@@ -5,7 +5,7 @@ function ApprovalTable({ data }) {
   const columns = ['닉네임', '제목'];
 
   return (
-    <table>
+    <table className="approval-table">
       <thead>
         <tr>
           {columns.map(column => (

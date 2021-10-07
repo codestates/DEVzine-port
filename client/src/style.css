@@ -1049,43 +1049,50 @@ td {
 
 th:first-child {
   text-align: left;
-  width: 10%; }
+  width: 16px; }
 
 th:nth-child(2) {
-  text-align: left; }
+  text-align: left;
+  width: 80px; }
 
 th:nth-child(3) {
-  width: 80px; }
+  text-align: left;
+  width: 10%; }
 
 th:nth-child(4) {
   padding-left: 16px;
-  text-align: left;
-  width: 250px; }
+  text-align: left; }
 
-td:nth-child(2):hover {
+td:nth-child(4):hover {
   text-decoration: underline; }
 
-.adminform-check {
-  display: inline-block;
-  margin-left: 16px; }
-  .adminform-check-label {
-    display: inline-block;
-    margin-left: 8px;
-    margin-top: 8px; }
+.approval-table th:first-child {
+  text-align: left;
+  width: 10%; }
 
-.adminform-btn {
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
+.approval-table th:nth-child(2) {
+  text-align: left; }
+
+.approval-table td:nth-child(2):hover {
+  text-decoration: underline; }
+
+.chk-post {
+  margin-top: 8px; }
+  .chk-post button {
+    background-color: #d9d9d9;
+    border: 1px solid #ffc803;
+    border-radius: 16px;
+    color: #b2b3b9;
+    height: 30px;
+    margin-right: 8px;
+    width: 100px; }
+
+.active button {
+  background-color: #fff;
   color: #191a20;
-  background-color: #f2f2f2;
-  border: 1px solid #d9d9d9;
-  border-radius: 24px;
-  height: 30px;
-  margin-left: 16px;
-  width: 70px; }
-  .adminform-btn:hover {
-    background-color: #d9d9d9; }
+  cursor: pointer; }
+  .active button:hover {
+    background-color: #ffc803; }
 
 .landingimg {
   background-color: #fff;
