@@ -86,10 +86,11 @@ module.exports = {
       for (let contrib of req.body){
 
         const { contribution_id, status } = contrib;
-        if (![120, 121, 122].includes(status)) {
-          return res.status(400).json({
-            message: 'Invalid status',
-          });
+        if (![100, 101, 102].includes(status)) {
+          // return res.status(400).json({
+          //   message: 'Invalid status',
+          // });
+          continue;
         }
   
         const rejectedContribution = await Contribution.findOneAndUpdate(
@@ -98,7 +99,7 @@ module.exports = {
           },
           {
             $set: {
-              status,
+              status: status + 20,
             },
           },
           {
@@ -107,9 +108,10 @@ module.exports = {
         );
   
         if (!rejectedContribution) {
-          return res.status(404).json({
-            message: 'Not found',
-          });
+          // return res.status(404).json({
+          //   message: 'Not found',
+          // });
+          continue;
         }
   
         const user = await User.findOne(
@@ -153,7 +155,7 @@ module.exports = {
 
       for (let contrib of req.body) {
         const { contribution_id, status } = contrib;
-        if (![110, 111, 112].includes(status)) {
+        if (![100, 101, 102].includes(status)) {
           // return res.status(400).json({
             //   message: 'Invalid status',
             // });
@@ -165,14 +167,12 @@ module.exports = {
             contribution_id,
           }, {
             $set: {
-              status,
+              status: status + 10,
             },
           }, {
             new: true,
           },
         );
-
-        console.log(acceptedContribution);
             
         if (!acceptedContribution) {
           // return res.status(404).json({
@@ -227,7 +227,7 @@ module.exports = {
             _id: 0,
           },
         );
-        console.log(acceptedContribution)
+
         const { user_email, ...temp } = acceptedContribution._doc;
         let user_name = 'anonymous';
         if (user) {
