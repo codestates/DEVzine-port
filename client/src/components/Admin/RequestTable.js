@@ -12,26 +12,7 @@ function RequestTable({ Requested }) {
   const [PostBody, setPostBody] = useState([]);
   const [checkItems, setCheckItems] = useState([]);
 
-  // const columns = ['닉네임', '제목', '현황', '변경'];
   const columns = ['현황', '닉네임', '제목'];
-
-  // 요청에 따른 라디오 버튼들
-  const radioInputData = {
-    100: [
-      ['승인', '110'],
-      ['거부', '120'],
-    ],
-
-    101: [
-      ['승인', '111'],
-      ['거부', '121'],
-    ],
-
-    102: [
-      ['승인', '112'],
-      ['거부', '122'],
-    ],
-  };
 
   useEffect(() => {
     if (PostBody.length !== 0) {
@@ -71,14 +52,11 @@ function RequestTable({ Requested }) {
   }
 
   function onAcceptBtn() {
-    console.log(PostBody.length);
     if (PostBody.length === 0) {
       setAllSelect(false);
       return setAlertOpen(true);
     } else {
       setAllSelect(true);
-
-      console.log(PostBody);
 
       return customAxios
         .post(`/admin/contribution/accept`, PostBody)
@@ -100,8 +78,6 @@ function RequestTable({ Requested }) {
       return setAlertOpen(true);
     } else {
       setAllSelect(true);
-
-      console.log(PostBody);
 
       return customAxios
         .post(`/admin/contribution/reject`, PostBody)
