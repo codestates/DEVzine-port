@@ -6,7 +6,8 @@ const smtpTransport = require('nodemailer-smtp-transport');
 const inlineCss = require('nodemailer-juice');
 const nodemailer = require('nodemailer');
 const ejs = require('ejs');
-const fs = require('fs')
+const fs = require('fs');
+
 require('dotenv').config();
 
 const transporter = nodemailer.createTransport(
@@ -112,7 +113,7 @@ const sendMailToSubscribers = async () => {
     ? contributionUserInfo.user_name
     : 'anonymous';
 
-  subscribers.map(async subscriber => {
+  subscribers.map(async (subscriber, index) => {
     const userEmail = subscriber.subscriber_email;
     const user = await User.findOne({
       user_email: userEmail,
@@ -143,25 +144,27 @@ const sendMailToSubscribers = async () => {
       fs.writeFileSync(logDir, 'EMAIL LOGGER\n\n');
     }
 
-    await transporter.sendMail(
-      {
-        from: 'DEVzine:port <devzineport@gmail.com>',
-        to: userEmail,
-        subject: `🗞${formatDate} 최신 IT 소식`,
-        html: newsLetter,
-      },
-      (err, info) => {
-        if (err) {
-          // console.log(err);
-          fs.appendFileSync(logDir, `${err} \nUser Email: ${userEmail}\n\n`)
-        } else {
-          // console.log('Email send: ' + info.response);
-          // console.log('Email send: ' + userEmail);
-          fs.appendFileSync(logDir, `Email sent: ${info.response} \nUser Email: ${userEmail}\n\n`)
-          transporter.close();
-        }
-      },
-    );
+    setTimeout(async() => {
+      await transporter.sendMail(
+        {
+          from: 'DEVzine:port <devzineport@gmail.com>',
+          to: userEmail,
+          subject: `🗞${formatDate} 최신 IT 소식`,
+          html: newsLetter,
+        },
+        (err, info) => {
+          if (err) {
+            // console.log(err);
+            fs.appendFileSync(logDir, `${err} \nUser Email: ${userEmail}\n\n`)
+          } else {
+            // console.log('Email send: ' + info.response);
+            // console.log('Email send: ' + userEmail);
+            fs.appendFileSync(logDir, `Email sent: ${info.response} \nUser Email: ${userEmail}\n\n`)
+            transporter.close();
+          }
+        },
+      );
+    }, 500 * index);
   });
 };
 

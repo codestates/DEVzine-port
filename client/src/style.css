@@ -696,7 +696,7 @@ select::-ms-expand {
   position: fixed;
   right: 0;
   top: 0; }
-  .sidebar-nav {
+  .sidebar-nav-open {
     background-color: #fff;
     height: 100vh;
     min-width: 200px;
@@ -705,26 +705,54 @@ select::-ms-expand {
     position: absolute;
     right: 0;
     width: 50%;
-    transition: 1s ease;
-    animation: slide 1s; }
-    .sidebar-nav .closeanimation {
-      animation: outslide 1s; }
-    .sidebar-nav .closebtn {
+    animation: slide 1s;
+    transition: 1s ease; }
+    .sidebar-nav-open .closebtn {
       cursor: pointer;
       position: fixed;
       right: 10px;
       top: 10px; }
-    .sidebar-nav li {
+    .sidebar-nav-open li {
       cursor: pointer;
       font-weight: 700; }
-      .sidebar-nav li:first-child {
+      .sidebar-nav-open li:first-child {
         border-bottom: 1px solid #d9d9d9; }
-    .sidebar-nav .usename {
+    .sidebar-nav-open .usename {
       cursor: none;
       line-height: 28px;
       padding-bottom: 12px;
       padding-top: 4px; }
-    .sidebar-nav .signout {
+    .sidebar-nav-open .signout {
+      border-top: 1px solid #d9d9d9;
+      color: #d9d9d9; }
+  .sidebar-nav-close {
+    background-color: #fff;
+    height: 100vh;
+    min-width: 200px;
+    padding-left: 15px;
+    padding-top: 35px;
+    position: absolute;
+    right: 0;
+    width: 50%;
+    animation: outslide 1s;
+    transition: 1s ease; }
+    .sidebar-nav-close .closebtn {
+      display: none;
+      cursor: pointer;
+      position: fixed;
+      right: 10px;
+      top: 10px; }
+    .sidebar-nav-close li {
+      cursor: pointer;
+      font-weight: 700; }
+      .sidebar-nav-close li:first-child {
+        border-bottom: 1px solid #d9d9d9; }
+    .sidebar-nav-close .usename {
+      cursor: none;
+      line-height: 28px;
+      padding-bottom: 12px;
+      padding-top: 4px; }
+    .sidebar-nav-close .signout {
       border-top: 1px solid #d9d9d9;
       color: #d9d9d9; }
 
@@ -862,6 +890,8 @@ select::-ms-expand {
       top: 10px;
       right: 14px;
       cursor: pointer; }
+    .signincontainer .signinwrapper .blank {
+      margin-top: 24px; }
     .signincontainer .signinwrapper .leadsignup {
       z-index: 710;
       width: 296px;
@@ -879,6 +909,19 @@ select::-ms-expand {
     .signincontainer .signinwrapper .commonbutton {
       z-index: 710;
       width: 296px; }
+    .signincontainer .signinwrapper .passwordbtn {
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: -0.01em;
+      color: #b2b3b9;
+      font-weight: 700;
+      margin-top: 16px;
+      text-align: center; }
+      .signincontainer .signinwrapper .passwordbtn span {
+        margin-top: 8px;
+        text-decoration: underline; }
+        .signincontainer .signinwrapper .passwordbtn span:hover {
+          color: #191a20; }
 
 .inputlarge {
   width: 296px;
@@ -1006,43 +1049,50 @@ td {
 
 th:first-child {
   text-align: left;
-  width: 10%; }
+  width: 16px; }
 
 th:nth-child(2) {
-  text-align: left; }
+  text-align: left;
+  width: 80px; }
 
 th:nth-child(3) {
-  width: 80px; }
+  text-align: left;
+  width: 10%; }
 
 th:nth-child(4) {
   padding-left: 16px;
-  text-align: left;
-  width: 250px; }
+  text-align: left; }
 
-td:nth-child(2):hover {
+td:nth-child(4):hover {
   text-decoration: underline; }
 
-.adminform-check {
-  display: inline-block;
-  margin-left: 16px; }
-  .adminform-check-label {
-    display: inline-block;
-    margin-left: 8px;
-    margin-top: 8px; }
+.approval-table th:first-child {
+  text-align: left;
+  width: 10%; }
 
-.adminform-btn {
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
+.approval-table th:nth-child(2) {
+  text-align: left; }
+
+.approval-table td:nth-child(2):hover {
+  text-decoration: underline; }
+
+.chk-post {
+  margin-top: 8px; }
+  .chk-post button {
+    background-color: #d9d9d9;
+    border: 1px solid #ffc803;
+    border-radius: 16px;
+    color: #b2b3b9;
+    height: 30px;
+    margin-right: 8px;
+    width: 100px; }
+
+.active button {
+  background-color: #fff;
   color: #191a20;
-  background-color: #f2f2f2;
-  border: 1px solid #d9d9d9;
-  border-radius: 24px;
-  height: 30px;
-  margin-left: 16px;
-  width: 70px; }
-  .adminform-btn:hover {
-    background-color: #d9d9d9; }
+  cursor: pointer; }
+  .active button:hover {
+    background-color: #ffc803; }
 
 .landingimg {
   background-color: #fff;
@@ -1537,7 +1587,7 @@ label {
       border-radius: 8px;
       font-weight: bold;
       font-size: 18px;
-      line-height: 28px;
+      line-height: 54px;
       color: #ffffff;
       cursor: pointer; }
     .signupcontainer .signupwrapper .commonbutton {

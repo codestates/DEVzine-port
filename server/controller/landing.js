@@ -4,24 +4,21 @@ const user = require('./user');
 
 module.exports = {
   getAllUsers: async (req, res) => {
-
     try {
       const subscriberCount = await Subscriber.find({}).countDocuments();
-      console.log(subscriberCount);
       const userCount = await User.find({
-        subscribed: false
+        subscribed: false,
       }).countDocuments();
-      console.log(userCount);
       const totalCount = subscriberCount + userCount;
 
       return res.status(200).json({
         data: {
           total_subscribers: String(totalCount + 5959000),
         },
-        message: 'Subscribers successfully found'
-      })
+        message: 'Subscribers successfully found',
+      });
     } catch (err) {
       return res.status(500).send(err);
     }
-  }
+  },
 };

@@ -17,7 +17,7 @@
   top: 0;
 
 
-  &-nav {
+  &-nav-open {
     background-color: $white;
     height: 100vh;
     min-width: 200px;
@@ -26,12 +26,8 @@
     position: absolute;
     right: 0;
     width: 50%;
-    transition: 1s ease;
     animation: slide 1s;
-
-    .closeanimation {
-      animation: outslide 1s;
-    }
+    transition: 1s ease;
 
     .closebtn {
       cursor: pointer;
@@ -61,4 +57,48 @@
       color: $border;
     }
   }
+
+  &-nav-close {
+    background-color: $white;
+    height: 100vh;
+    min-width: 200px;
+    padding-left: 15px;
+    padding-top: 35px;
+    position: absolute;
+    right: 0;
+    width: 50%;
+    animation: outslide 1s;
+    transition: 1s ease;
+
+    .closebtn {
+      display: none;
+      cursor: pointer;
+      position: fixed;
+      right: 10px;
+      top: 10px;
+    }
+
+    li {
+      cursor: pointer;
+      font-weight: $bold;
+
+      &:first-child {
+        border-bottom: 1px solid $border;
+      }
+    }
+
+    .usename {
+      cursor: none;
+      line-height: 28px;
+      padding-bottom: 12px;
+      padding-top: 4px;
+    }
+
+    .signout {
+      border-top: 1px solid $border;
+      color: $border;
+    }
+  }
+
+ 
 }

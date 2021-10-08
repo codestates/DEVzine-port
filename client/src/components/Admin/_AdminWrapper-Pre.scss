@@ -143,80 +143,58 @@ td {
   padding: 0.5rem;
 }
 
-
 th {
   &:first-child {
     text-align: left;
-    width: 16px;
+    width: 10%;
   }
 
   &:nth-child(2) {
     text-align: left;
-    width: 80px;
   }
 
   &:nth-child(3) {
-    text-align: left;
-    width: 10%;
+    width: 80px;
   }
 
   &:nth-child(4) {
     padding-left: 16px;
     text-align: left;
+    width: 250px;
   }
 }
 
 td {
-  &:nth-child(4) {
+  &:nth-child(2) {
     &:hover {
       text-decoration: underline;
     }
   }
 }
 
-.approval-table {
-  th {
-    &:first-child {
-      text-align: left;
-      width: 10%;
-    }
-  
-    &:nth-child(2) {
-      text-align: left;
-    }
-  }
+.adminform {
+  &-check {
+    display: inline-block;
+    margin-left: 16px;
 
-  td {
-    &:nth-child(2) {
-      &:hover {
-        text-decoration: underline;
-      }
+    &-label {
+      display: inline-block;
+      margin-left: 8px;
+      margin-top: 8px;
     }
   }
-}
 
-.chk-post {
-  margin-top: 8px;
-
-  button {
-    background-color: $border;
-    border: 1px solid $yellow-dark;
-    border-radius: 16px;
-    color: $tertiary;
+  &-btn {
+    @include text-style(16, $dark);
+    background-color: $background;
+    border: 1px solid $border;
+    border-radius: 24px;
     height: 30px;
-    margin-right: 8px;
-    width: 100px;
+    margin-left: 16px;
+    width: 70px;
 
- 
-  }
-}
-
-.active button {
-  background-color: $white;
-  color: $dark;
-  cursor: pointer;
-
-  &:hover {
-    background-color: $yellow-dark;
+    &:hover {
+      background-color: $border;
+    }
   }
 }

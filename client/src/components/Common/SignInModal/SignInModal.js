@@ -17,7 +17,7 @@ function SigninModal({ ModalOpen, setModalOpen }) {
     [Password, setPassword, '비밀번호 입력', 'password', '20'],
   ];
 
-  // 모달 오버레이에서 스크롤 방지
+  // 모달오버레이에서 스크롤 방지
   useEffect(() => {
     document.body.style.cssText = `
       position: fixed; 
@@ -82,6 +82,7 @@ function SigninModal({ ModalOpen, setModalOpen }) {
             />
           </svg>
         </Link>
+        <span className="blank sm-hidden" />
         {requiredTextInputData.map((el, idx) => {
           return (
             <TextInputGenderRequired
@@ -107,10 +108,7 @@ function SigninModal({ ModalOpen, setModalOpen }) {
             subject={`회원가입`}
             color={`#191A20`}
             backgroundColor={`#FFDD14`}
-            onClickHandle={() => {
-              setModalOpen(false);
-              window.location.href = '/signup';
-            }}
+            onClickHandle={() => (window.location.href = '/signup')}
           />
         </span>
         <span className="sm-hidden">
@@ -123,6 +121,20 @@ function SigninModal({ ModalOpen, setModalOpen }) {
             />
           </Link>
         </span>
+        <div className="passwordbtn">
+          비밀번호를 잊어버리셨나요?
+          <br />
+          <span className="sm-only">
+            <span onClick={() => (window.location.href = '/password')}>
+              비밀번호 재설정
+            </span>
+          </span>
+          <span className="sm-hidden">
+            <Link to="/password">
+              <span onClick={() => setModalOpen(false)}>비밀번호 재설정</span>
+            </Link>
+          </span>
+        </div>
       </div>
       <AlertModal
         open={AlertOpen}

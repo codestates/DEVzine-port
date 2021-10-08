@@ -81,62 +81,68 @@ module.exports = {
   },
 
   rejectContribRequest: async (req, res) => {
-    const { contribution_id, status } = req.body;
-
+    
     try {
-      if (![120, 121, 122].includes(status)) {
-        return res.status(400).json({
-          message: 'Invalid status',
-        });
-      }
+      for (let contrib of req.body){
 
-      const rejectedContribution = await Contribution.findOneAndUpdate(
-        {
-          contribution_id,
-        },
-        {
-          $set: {
-            status,
+        const { contribution_id, status } = contrib;
+        if (![100, 101, 102].includes(status)) {
+          // return res.status(400).json({
+          //   message: 'Invalid status',
+          // });
+          continue;
+        }
+  
+        const rejectedContribution = await Contribution.findOneAndUpdate(
+          {
+            contribution_id,
           },
-        },
-        {
-          new: true,
-        },
-      );
-
-      if (!rejectedContribution) {
-        return res.status(404).json({
-          message: 'Not found',
+          {
+            $set: {
+              status: status + 20,
+            },
+          },
+          {
+            new: true,
+          },
+        );
+  
+        if (!rejectedContribution) {
+          // return res.status(404).json({
+          //   message: 'Not found',
+          // });
+          continue;
+        }
+  
+        const user = await User.findOne(
+          {
+            user_email: rejectedContribution.user_email,
+          },
+          {
+            user_name: 1,
+          },
+        );
+  
+        const { user_email, ...temp } = rejectedContribution._doc;
+        let user_name = 'anonymous';
+        if (user) {
+          user_name = user.user_name;
+        }
+        
+        const data = { user_name, ...temp };
+  
+        if (
+          rejectedContribution.status === 121 ||
+          rejectedContribution.status === 122
+        ) {
+          await insertCacheForOneContribution(contribution_id, data);
+        }
+  
+        return res.status(200).json({
+          message: 'Reject success',
         });
-      }
-
-      const user = await User.findOne(
-        {
-          user_email: rejectedContribution.user_email,
-        },
-        {
-          user_name: 1,
-        },
-      );
-
-      const { user_email, ...temp } = rejectedContribution._doc;
-      let user_name = 'anonymous';
-      if (user) {
-        user_name = user.user_name;
       }
       
-      const data = { user_name, ...temp };
-
-      if (
-        rejectedContribution.status === 121 ||
-        rejectedContribution.status === 122
-      ) {
-        await insertCacheForOneContribution(contribution_id, data);
-      }
-
-      return res.status(200).json({
-        message: 'Reject success',
-      });
     } catch (err) {
       console.log(err);
       return res.status(500).send(err);
@@ -144,97 +150,102 @@ module.exports = {
   },
 
   acceptContribRequest: async (req, res) => {
-    const { contribution_id, status } = req.body;
 
     try {
-      if (![110, 111, 112].includes(status)) {
-        return res.status(400).json({
-          message: 'Invalid status',
-        });
-      }
 
-      let acceptedContribution = await Contribution.findOneAndUpdate(
-        {
-          contribution_id,
-        }, {
-          $set: {
-            status,
-          },
-        }, {
-          new: true,
-        },
-      );
-
-      if (!acceptedContribution) {
-        return res.status(404).json({
-          message: 'Not found',
-        });
-      }
-
-      if (status === 111) {
-        const updatedContribution = await Contribution.findOneAndUpdate(
+      for (let contrib of req.body) {
+        const { contribution_id, status } = contrib;
+        if (![100, 101, 102].includes(status)) {
+          // return res.status(400).json({
+            //   message: 'Invalid status',
+            // });
+            continue;
+        }
+          
+        let acceptedContribution = await Contribution.findOneAndUpdate(
           {
             contribution_id,
           }, {
             $set: {
-              contribution_content: acceptedContribution.temp_content,
-              contribution_title: acceptedContribution.temp_title,
-              contribution_keyword: acceptedContribution.temp_keyword,
-              temp_title: null,
-              temp_content: null,
-              temp_keyword: null
-            }
-          }
+              status: status + 10,
+            },
+          }, {
+            new: true,
+          },
         );
-      }
-      
-      if (status === 112) {
-        const deletedContribution = await Contribution.findOneAndUpdate(
+            
+        if (!acceptedContribution) {
+          // return res.status(404).json({
+          //   message: 'Not found',
+          // });
+          continue;
+        }
+
+        if (status === 111) {
+          const updatedContribution = await Contribution.findOneAndUpdate(
+            {
+              contribution_id,
+            }, {
+              $set: {
+                contribution_content: acceptedContribution.temp_content,
+                contribution_title: acceptedContribution.temp_title,
+                contribution_keyword: acceptedContribution.temp_keyword,
+                temp_title: null,
+                temp_content: null,
+                temp_keyword: null
+              }
+            }
+          );
+        }
+        
+        if (status === 112) {
+          const deletedContribution = await Contribution.findOneAndUpdate(
+            {
+              contribution_id,
+            },
+            {
+              $set: {
+                deletedAt: new Date(),
+              },
+            },
+          )
+        }
+
+        const user = await User.findOne(
+          {
+            user_email: acceptedContribution.user_email,
+          },
+          {
+            user_name: 1,
+          },
+        );
+
+        acceptedContribution = await Contribution.findOne(
           {
             contribution_id,
+          },{
+            _id: 0,
           },
-          {
-            $set: {
-              deletedAt: new Date(),
-            },
-          },
-        )
-      }
+        );
 
-      const user = await User.findOne(
-        {
-          user_email: acceptedContribution.user_email,
-        },
-        {
-          user_name: 1,
-        },
-      );
+        const { user_email, ...temp } = acceptedContribution._doc;
+        let user_name = 'anonymous';
+        if (user) {
+          user_name = user.user_name;
+        }
+        
+        const data = { user_name, ...temp };
 
-      acceptedContribution = await Contribution.findOne(
-        {
-          contribution_id,
-        },{
-          _id: 0,
-        },
-      );
+        if (
+          acceptedContribution.status === 110 ||
+          acceptedContribution.status === 111
+        ) {
+          await insertCacheForOneContribution(contribution_id, data);
+        }
 
-      const { user_email, ...temp } = acceptedContribution._doc;
-      let user_name = 'anonymous';
-      if (user) {
-        user_name = user.user_name;
-      }
-      
-      const data = { user_name, ...temp };
-
-      if (
-        acceptedContribution.status === 110 ||
-        acceptedContribution.status === 111
-      ) {
-        await insertCacheForOneContribution(contribution_id, data);
-      }
-
-      if (acceptedContribution.status === 112) {
-        await deleteCacheForOneContribution(contribution_id);
+        if (acceptedContribution.status === 112) {
+          await deleteCacheForOneContribution(contribution_id);
+        }
       }
 
       return res.status(200).json({

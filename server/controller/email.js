@@ -101,4 +101,54 @@ module.exports = {
       tempEmail.remove();
     }, 30 * 60 * 1000);
   },
+
+  updatePasswordEmail: async (req, res) => {
+    const { user_email } = req.body;
+
+    try {
+      const user = await User.findOne({ user_email });
+
+      if (!user) {
+        return res.status(404).json({
+          message: 'Invalid email',
+        });
+      }
+      const authcode = Math.random().toString(36).substring(2, 12);
+
+      let authMailForm;
+      ejs.renderFile(
+        __dirname + '/ejsform/updatePasswordMail.ejs',
+        { user_email, authcode },
+        (err, data) => {
+          if (err) console.log(err);
+          authMailForm = data;
+        },
+      );
+
+      transporter.sendMail(
+        {
+          from: 'DEVzine:port <devzineport@gmail.com>',
+          to: user_email,
+          subject: 'DEVzine 인증 코드',
+          html: authMailForm,
+        },
+        (err, info) => {
+          if (err) {
+            return res.status(404).send({ message: 'Not found' });
+          } else {
+            console.log('Email sent: ' + info.response);
+            transporter.close();
+          }
+        },
+      );
+
+      await User.updateOne({ user_email }, { authcode });
+
+      return res.status(200).json({
+        message: 'Authcode mail success',
+      });
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  },
 };
