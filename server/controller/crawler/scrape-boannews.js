@@ -10,7 +10,7 @@ const parseDate = date => {
   const day = date.substring(10, 12);
   const hour = date.substring(14, 16);
   const minute = date.substring(17, 19);
-  return new Date(year, month - 1, day, hour, minute); // 기사 게시일자
+  return new Date(year, month - 1, day-1, hour, minute); // 기사 게시일자
 };
 
 const getArticlesFromURL = async (compareDate, requestURL) => {
