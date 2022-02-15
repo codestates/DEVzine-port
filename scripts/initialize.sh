@@ -5,7 +5,11 @@ npm install
 npm install pm2@latest -g
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt install redis-server
+wget https://download.redis.io/releases/redis-6.2.6.tar.gz
+tar xzf redis-6.2.6.tar.gz
+cd redis-6.2.6
+make
+apt-install redis-server
 sudo mkdir -p /var/log/redis/ 
 sudo touch /var/log/redis/redis-server.log 
 sudo chown redis:redis /var/log/redis/redis-server.log
