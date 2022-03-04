@@ -6,8 +6,9 @@ npm install pm2@latest -g
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt install redis-server
-sudo chown -R redis:redis /etc/redis/redis.conf
-sudo systemctl restart redis
+sudo rm /etc/redis/redis.conf
+sudo touch /etc/redis/redis.conf
+sudo echo "bind 127.0.0.1" > /etc/redis/redis.conf
 sudo apt-get install authbind
 sudo touch /etc/authbind/byport/80
 sudo chown ubuntu /etc/authbind/byport/80
