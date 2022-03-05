@@ -15,10 +15,11 @@ module.exports = {
   getAllArticlesAndRecentContributions: async (req, res) => {
     try {
       const { articleData, articleSource } = await checkCacheForArticles();
+
       let { contributionData, contributionSource } =
         await checkCacheForContributions();
 
-      if (!articleData || !contributionData) {
+        if (!articleData || !contributionData) {
         return res.status(404).json({
           message: 'Not found',
         });
